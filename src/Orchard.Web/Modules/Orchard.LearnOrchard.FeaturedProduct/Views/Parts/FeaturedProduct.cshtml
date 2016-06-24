@@ -1,0 +1,18 @@
+﻿@{
+    Style.Require("FeaturedProduct");
+}
+
+@if (Model.ContentPart.IsOnSale)
+{
+    <p class="sale-red">ON SALE!</p>
+}
+<p>@T("Today's featured product is the Sprocket 9000.")</p>
+<p>
+    @if (!Model.IsOnFeaturedProductPage) {
+    <p>
+        <a href="~/sprocket-9000" class="btn-green">@T("Click here to view it.")</a>
+    </p>
+    } else {
+        <p class="box-purple">@T("Read more about it on this page.")</p>
+    }
+</p>
