@@ -280,6 +280,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.Azure.Tests", "Orch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.LearnOrchard.FeaturedProduct", "Orchard.Web\Modules\Orchard.LearnOrchard.FeaturedProduct\Orchard.LearnOrchard.FeaturedProduct.csproj", "{4D4583CE-FEDB-41C8-A63F-821FFCB07083}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.WijDelen", "Orchard.Web\Modules\Orchard.WijDelen\Orchard.WijDelen.csproj", "{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1123,6 +1125,10 @@ Global
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1212,6 +1218,7 @@ Global
 		{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{1CC62F45-E6FF-43D5-84BF-509A1085D994} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

@@ -1,0 +1,10 @@
+﻿Name: Orchard.WijDelen
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Orchard module for WijDelen groups.
+Features:
+    Orchard.WijDelen:
+        Description: Allows WijDelen/Peerby functionality by groups instead of location (default Peerby functionality now).
