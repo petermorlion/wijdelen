@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.UserImport.Controllers;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
@@ -30,6 +31,18 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var result = controller.Index();
 
             Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
+        }
+
+        [Test]
+        public void TestIndexWithAuthorization() {
+            var authorizer = new Mock<IAuthorizer>();
+            authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+            var controller = new AdminController(authorizer.Object);
+
+            var result = controller.Index();
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.IsInstanceOf<AdminIndexViewModel>(((ViewResult)result).Model);
         }
     }
 }
