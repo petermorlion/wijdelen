@@ -282,6 +282,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.LearnOrchard.Featur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchard.WijDelen", "Orchard.Web\Modules\Orchard.WijDelen\Orchard.WijDelen.csproj", "{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webstation.Module.UserImport", "Orchard.Web\Modules\Webstation.Module.UserImport\Webstation.Module.UserImport.csproj", "{96F3129F-61A0-4EB2-9897-606963B7ADDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1125,10 +1127,23 @@ Global
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
 		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Coverage|Any CPU.Build.0 = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.FxCop|Any CPU.Build.0 = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1219,6 +1234,7 @@ Global
 		{1CC62F45-E6FF-43D5-84BF-509A1085D994} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{4D4583CE-FEDB-41C8-A63F-821FFCB07083} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{DA0B15F1-F9A6-4F05-A2FA-DBAFDB7D4474} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
+		{96F3129F-61A0-4EB2-9897-606963B7ADDD} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

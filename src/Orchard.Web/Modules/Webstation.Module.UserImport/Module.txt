@@ -1,0 +1,13 @@
+Name: Webstation.Module.UserImport
+AntiForgery: enabled
+Author: Web Station, Inc
+Website: http://orcharduserimport.codeplex.com/
+Version: 1.0
+OrchardVersion: 1.1
+Description: Import users with a csv template
+Dependencies: Orchard.Users, Orchard.Roles
+Features:
+    Webstation.Module.UserImport:
+		Name: User Import
+		Category: Users
+        Description: Import users with a csv template.

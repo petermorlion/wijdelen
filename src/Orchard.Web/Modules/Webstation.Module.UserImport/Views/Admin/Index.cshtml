@@ -1,0 +1,56 @@
+﻿@model Webstation.Module.UserImport.ViewModels.AdminIndexViewModel
+@{
+    Style.Require("Admin");
+}
+<h1>@Html.TitleForPage(T("Import Users"))</h1>
+
+<div>
+
+    @using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Admin", new { Area = "Webstation.Module.UserImport" }), 
+        FormMethod.Post, new { enctype = "multipart/form-data" })) { 
+        <fieldset>
+            <legend>@T("User File")</legend>
+            <span class="hint">Please use the <a href="@Url.Content("~/Modules/Webstation.Module.UserImport/Content/UserFile.csv")" target="_blank">user file template</a></span>
+            <input type="file" name="UsersFile" />
+        </fieldset>
+        
+        <fieldset>
+            <legend>@T("Roles")</legend>
+            <span class="hint">@T("Roles will be assigned to ALL users imported")</span>
+            @{var index = 0;}
+            @foreach (var role in Model.Roles){
+                @Html.Hidden("Roles[" + index + "].RoleId", role.RoleId)
+                @Html.Hidden("Roles[" + index + "].Name", role.Name)
+                <div>
+                    @Html.CheckBox("Roles[" + index + "].Granted")
+                    <label class="forcheckbox" for="@Html.FieldIdFor(m => m.Roles[index].Granted)">@role.Name</label>
+                </div>
+                
+                index++;
+            }
+        </fieldset>
+        
+        <fieldset>
+            <legend>@T("Approve Imported Users")</legend>
+            @Html.DropDownListFor(m => m.Approve,
+                new SelectList(new[] {
+                    new SelectListItem { Text = T("Use file values").ToString(), Value = "" },
+                    new SelectListItem { Text = T("Approve all").ToString(), Value = "True" },
+                    new SelectListItem { Text = T("Deny all").ToString(), Value = "False" }
+                }, "Value", "Text"))
+        </fieldset>
+        
+        
+        <fieldset>
+            <legend>@T("Existing Users")</legend>
+            @Html.DropDownListFor(m => m.UpdateExisting,
+                new SelectList(new[] {
+                    new SelectListItem { Text = T("Ignore Existing").ToString(), Value = Webstation.Module.UserImport.ViewModels.UpdateExistingTypes.Ignore },
+                    new SelectListItem { Text = T("Add Roles").ToString(), Value = Webstation.Module.UserImport.ViewModels.UpdateExistingTypes.AddRoles }
+                }, "Value", "Text"))
+        </fieldset>
+        
+        <button class="primaryAction">Submit</button>
+    }
+
+</div>
