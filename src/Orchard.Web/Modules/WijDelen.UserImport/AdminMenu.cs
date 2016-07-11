@@ -1,0 +1,26 @@
+﻿using Orchard.Localization;
+using Orchard.Security;
+using Orchard.UI.Navigation;
+
+namespace WijDelen.UserImport {
+    public class AdminMenu : INavigationProvider {
+        public AdminMenu() {
+            T = NullLocalizer.Instance;
+        }
+
+        public Localizer T { get; set; }
+
+        public string MenuName {
+            get { return "admin"; }
+        }
+
+        public void GetNavigation(NavigationBuilder builder) {
+            builder.Add(item => item
+                .Caption(T("User Import"))
+                .Position("12")
+                .Action("Index", "Admin", new {area = "WijDelen.UserImport"})
+                .LocalNav()
+                .Permission(StandardPermissions.SiteOwner));
+        }
+    }
+}

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,9 +18,6 @@ using Orchard.Users.Models;
 using Orchard.Data;
 using Orchard.Roles.Models;
 using Orchard.Users.Services;
-using System.Text;
-using System.Xml;
-using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 
 namespace Webstation.Module.UserImport.Controllers
 {
