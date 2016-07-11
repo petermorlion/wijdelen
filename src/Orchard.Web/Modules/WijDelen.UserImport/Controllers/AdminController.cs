@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.UserImport.Models;
@@ -21,6 +22,11 @@ namespace WijDelen.UserImport.Controllers {
             }
 
             return View(new AdminIndexViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase usersFile) {
+            return View("ImportComplete", new ImportCompleteViewModel());
         }
     }
 }
