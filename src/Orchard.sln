@@ -282,6 +282,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.UserImport", "Orch
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules.WijDelen", "Modules.WijDelen", "{E8A69B2D-3B71-4669-80A1-98F00D937EE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.UserImport.Tests", "Orchard.Web\Modules\WijDelen.UserImport\WijDelen.UserImport.Tests\WijDelen.UserImport.Tests.csproj", "{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1125,6 +1127,13 @@ Global
 		{93D162A5-1383-450D-9CAE-189607E7A285}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{93D162A5-1383-450D-9CAE-189607E7A285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D162A5-1383-450D-9CAE-189607E7A285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1214,6 +1223,7 @@ Global
 		{D4E8F7C8-2DB2-4C50-A422-DA1DF1E3CC73} = {E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}
 		{1CC62F45-E6FF-43D5-84BF-509A1085D994} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{93D162A5-1383-450D-9CAE-189607E7A285} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
+		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4
