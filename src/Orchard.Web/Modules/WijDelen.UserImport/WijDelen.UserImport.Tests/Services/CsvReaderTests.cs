@@ -23,5 +23,22 @@ namespace WijDelen.UserImport.Tests.Services {
             Assert.AreEqual("jane.doe", result[1].UserName);
             Assert.AreEqual("jane.doe@example.com", result[1].Email);
         }
+
+        [Test]
+        public void TestWithEmptyLine()
+        {
+            var reader = new CsvReader();
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("username;email");
+            stringBuilder.AppendLine("");
+            stringBuilder.AppendLine("jane.doe;jane.doe@example.com");
+            var stringInMemoryStream = new MemoryStream(Encoding.Default.GetBytes(stringBuilder.ToString()));
+            var result = reader.ReadUsers(stringInMemoryStream);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("jane.doe", result[0].UserName);
+            Assert.AreEqual("jane.doe@example.com", result[0].Email);
+        }
     }
 }

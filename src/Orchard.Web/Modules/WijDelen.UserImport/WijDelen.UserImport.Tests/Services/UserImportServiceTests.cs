@@ -22,7 +22,10 @@ namespace WijDelen.UserImport.Tests.Services {
                 .Setup(x => x.CreateUser(It.IsAny<CreateUserParams>()))
                 .Callback((CreateUserParams x) => createUserParams = x);
 
-            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
+            var userService = new Mock<IUserService>();
+            userService.Setup(x => x.VerifyUserUnicity("john.doe", "john.doe@example.com")).Returns(true);
+
+            var service = new UserImportService(memberShipService.Object, userService.Object);
 
             var result = service.ImportUsers(users);
 
@@ -43,8 +46,11 @@ namespace WijDelen.UserImport.Tests.Services {
             };
 
             var memberShipService = new Mock<IMembershipService>();
-            
-            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
+
+            var userService = new Mock<IUserService>();
+            userService.Setup(x => x.VerifyUserUnicity("john.doe", "john.doe")).Returns(true);
+
+            var service = new UserImportService(memberShipService.Object, userService.Object);
 
             var result = service.ImportUsers(users);
 
@@ -78,6 +84,48 @@ namespace WijDelen.UserImport.Tests.Services {
             Assert.IsTrue(!result[0].WasImported);
             Assert.AreEqual("john.doe", result[0].UserName);
             Assert.AreEqual("There is already a user with username john.doe and/or email john.doe@example.com.", result[0].ErrorMessages.Single());
+        }
+
+        [Test]
+        public void TestWithEmptyUserName()
+        {
+            var users = new List<User> {
+                new User { UserName = "", Email = "john.doe@example.com" }
+            };
+
+            var memberShipService = new Mock<IMembershipService>();
+
+            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
+
+            var result = service.ImportUsers(users);
+
+            memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.IsTrue(!result[0].WasImported);
+            Assert.AreEqual("", result[0].UserName);
+            Assert.AreEqual("User with email john.doe@example.com has no username.", result[0].ErrorMessages.Single());
+        }
+
+        [Test]
+        public void TestWithEmptyEmail()
+        {
+            var users = new List<User> {
+                new User { UserName = "john.doe", Email = "" }
+            };
+
+            var memberShipService = new Mock<IMembershipService>();
+
+            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
+
+            var result = service.ImportUsers(users);
+
+            memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.IsTrue(!result[0].WasImported);
+            Assert.AreEqual("john.doe", result[0].UserName);
+            Assert.AreEqual("User john.doe has no email.", result[0].ErrorMessages.Single());
         }
     }
 }

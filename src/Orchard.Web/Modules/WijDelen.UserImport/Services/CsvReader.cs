@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
@@ -12,6 +13,11 @@ namespace WijDelen.UserImport.Services {
                     var parts = line.Split(';');
 
                     if (parts[0] == "username") {
+                        line = reader.ReadLine();
+                        continue;
+                    }
+
+                    if (parts.Length != 2) {
                         line = reader.ReadLine();
                         continue;
                     }

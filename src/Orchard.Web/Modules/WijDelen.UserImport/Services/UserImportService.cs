@@ -27,12 +27,23 @@ namespace WijDelen.UserImport.Services {
                 var userImportResult = new UserImportResult(user.UserName);
                 var isValid = true;
 
-                if (!Regex.IsMatch(user.Email, UserPart.EmailPattern)) {
+                if (string.IsNullOrEmpty(user.UserName)) {
+                    userImportResult.AddErrorMessage(T("User with email {0} has no username.", user.Email).ToString());
+                    isValid = false;
+                }
+
+                if (string.IsNullOrEmpty(user.Email))
+                {
+                    userImportResult.AddErrorMessage(T("User {0} has no email.", user.UserName).ToString());
+                    isValid = false;
+                }
+
+                if (!string.IsNullOrEmpty(user.Email) && !Regex.IsMatch(user.Email, UserPart.EmailPattern)) {
                     userImportResult.AddErrorMessage(T("User {0} has an invalid email address.", user.UserName).ToString());
                     isValid = false;
                 }
 
-                if (!_userService.VerifyUserUnicity(user.UserName, user.Email)) {
+                if (!string.IsNullOrEmpty(user.UserName) && ! string.IsNullOrEmpty(user.Email) && !_userService.VerifyUserUnicity(user.UserName, user.Email)) {
                     userImportResult.AddErrorMessage(T("There is already a user with username {0} and/or email {1}.", user.UserName, user.Email).ToString());
                     isValid = false;
                 }
