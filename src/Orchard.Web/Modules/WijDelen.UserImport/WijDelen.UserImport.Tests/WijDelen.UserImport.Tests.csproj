@@ -107,6 +107,10 @@
       <Name>Orchard.Core</Name>
       <Private>false</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WijDelen.UserImport.csproj">
       <Project>{93D162A5-1383-450D-9CAE-189607E7A285}</Project>
       <Name>WijDelen.UserImport</Name>
