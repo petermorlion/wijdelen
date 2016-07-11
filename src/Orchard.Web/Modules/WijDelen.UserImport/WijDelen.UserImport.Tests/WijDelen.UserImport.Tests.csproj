@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Services\CsvReaderTests.cs" />
+    <Compile Include="Services\UserImportServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
