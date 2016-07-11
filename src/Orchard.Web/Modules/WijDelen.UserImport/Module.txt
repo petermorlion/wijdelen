@@ -1,10 +1,10 @@
 ﻿Name: WijDelen.UserImport
 AntiForgery: enabled
-Author: The Orchard Team
-Website: http://orchardproject.net
+Author: Peter Morlion
+Website: http://www.redstar.be
 Version: 1.0
 OrchardVersion: 1.0
-Description: Description for the module
+Description: User import for WijDelen
 Features:
     WijDelen.UserImport:
-        Description: Description for feature WijDelen.UserImport.
+        Description: Allows importing users to WijDelen
