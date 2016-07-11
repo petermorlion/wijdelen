@@ -117,12 +117,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMenuTests.cs" />
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Services\CsvReaderTests.cs" />
     <Compile Include="Services\UserImportServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Content Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
