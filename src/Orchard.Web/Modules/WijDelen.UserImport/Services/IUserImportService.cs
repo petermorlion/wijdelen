@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Orchard;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
-    public interface ICsvReader : IDependency {
-        IList<User> ReadUsers(Stream stream);
+    public interface IUserImportService : IDependency {
+        IList<UserImportResult> ImportUsers(IList<User> users);
     }
 }

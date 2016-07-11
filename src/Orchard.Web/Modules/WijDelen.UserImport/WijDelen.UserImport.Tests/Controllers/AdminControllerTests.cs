@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -16,7 +18,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new AdminController(Mock.Of<IAuthorizer>(), Mock.Of<ICsvReader>());
+            var controller = new AdminController(Mock.Of<IAuthorizer>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -28,7 +30,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexWithoutAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
 
             var result = controller.Index();
 
@@ -39,7 +41,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexWithAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
 
             var result = controller.Index();
 
@@ -52,7 +54,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexPostWithoutAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
 
             var result = controller.Index(null);
 
@@ -61,15 +63,28 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexPostWithAuthorization() {
-            var authorizer = new Mock<IAuthorizer>();
-            authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>());
+            using (var memoryStream = new MemoryStream()) {
+                var authorizer = new Mock<IAuthorizer>();
+                authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
 
-            var result = controller.Index(null);
+                var users = new List<User>();
+                var csvReader = new Mock<ICsvReader>();
+                csvReader.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
 
-            Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsInstanceOf<ImportCompleteViewModel>(((ViewResult)result).Model);
-            Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
+                var userImportResults = new List<UserImportResult>();
+                var userImportService = new Mock<IUserImportService>();
+                userImportService.Setup(x => x.ImportUsers(users)).Returns(userImportResults);
+                
+                var controller = new AdminController(authorizer.Object, csvReader.Object, userImportService.Object);
+                var usersFile = new Mock<HttpPostedFileBase>();
+                usersFile.Setup(x => x.InputStream).Returns(memoryStream);
+
+                var result = controller.Index(usersFile.Object);
+
+                Assert.IsInstanceOf<ViewResult>(result);
+                Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);
+                Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
+            }
         }
     }
 }

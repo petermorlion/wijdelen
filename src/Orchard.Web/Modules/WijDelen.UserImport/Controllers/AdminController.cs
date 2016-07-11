@@ -9,10 +9,12 @@ namespace WijDelen.UserImport.Controllers {
     public class AdminController : Controller {
         private readonly IAuthorizer _authorizer;
         private readonly ICsvReader _csvReader;
+        private readonly IUserImportService _userImportService;
 
-        public AdminController(IAuthorizer authorizer, ICsvReader csvReader) {
+        public AdminController(IAuthorizer authorizer, ICsvReader csvReader, IUserImportService userImportService) {
             _authorizer = authorizer;
             _csvReader = csvReader;
+            _userImportService = userImportService;
 
             T = NullLocalizer.Instance;
         }
@@ -32,8 +34,11 @@ namespace WijDelen.UserImport.Controllers {
             if (!_authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }
+
+            var users = _csvReader.ReadUsers(usersFile.InputStream);
+            var userImportResults = _userImportService.ImportUsers(users);
             
-            return View("ImportComplete", new ImportCompleteViewModel());
+            return View("ImportComplete", userImportResults);
         }
     }
 }

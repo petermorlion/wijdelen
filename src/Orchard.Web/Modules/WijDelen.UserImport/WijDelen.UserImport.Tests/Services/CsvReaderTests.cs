@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using WijDelen.UserImport.Services;
@@ -16,7 +15,7 @@ namespace WijDelen.UserImport.Tests.Services {
             stringBuilder.AppendLine("john.doe;john.doe@example.com");
             stringBuilder.AppendLine("jane.doe;jane.doe@example.com");
             var stringInMemoryStream = new MemoryStream(Encoding.Default.GetBytes(stringBuilder.ToString()));
-            var result = reader.ReadUsers(stringInMemoryStream).ToList();
+            var result = reader.ReadUsers(stringInMemoryStream);
 
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual("john.doe", result[0].UserName);

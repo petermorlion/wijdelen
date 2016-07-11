@@ -4,7 +4,7 @@ using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public class CsvReader : ICsvReader {
-        public IEnumerable<User> ReadUsers(Stream stream) {
+        public IList<User> ReadUsers(Stream stream) {
             var result = new List<User>();
             using (var reader = new StreamReader(stream)) {
                 var line = reader.ReadLine();

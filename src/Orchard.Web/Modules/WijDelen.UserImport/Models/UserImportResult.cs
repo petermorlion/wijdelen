@@ -1,5 +1,5 @@
 ﻿namespace WijDelen.UserImport.Models {
-    public class ImportCompleteViewModel {
+    public class UserImportResult {
         
     }
 }
