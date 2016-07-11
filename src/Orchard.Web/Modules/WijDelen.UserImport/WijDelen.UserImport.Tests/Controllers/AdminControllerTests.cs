@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
 using Orchard.Localization;
@@ -43,6 +44,31 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<AdminIndexViewModel>(((ViewResult)result).Model);
+            Assert.AreEqual("", ((ViewResult)result).ViewName);
+        }
+
+        [Test]
+        public void TestIndexPostWithoutAuthorization() {
+            var authorizer = new Mock<IAuthorizer>();
+            authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
+            var controller = new AdminController(authorizer.Object);
+
+            var result = controller.Index(null);
+
+            Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
+        }
+
+        [Test]
+        public void TestIndexPostWithAuthorization() {
+            var authorizer = new Mock<IAuthorizer>();
+            authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+            var controller = new AdminController(authorizer.Object);
+
+            var result = controller.Index(null);
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.IsInstanceOf<ImportCompleteViewModel>(((ViewResult)result).Model);
+            Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
         }
     }
 }

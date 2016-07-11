@@ -26,6 +26,10 @@ namespace WijDelen.UserImport.Controllers {
 
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase usersFile) {
+            if (!_authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
+                return new HttpUnauthorizedResult();
+            }
+
             return View("ImportComplete", new ImportCompleteViewModel());
         }
     }
