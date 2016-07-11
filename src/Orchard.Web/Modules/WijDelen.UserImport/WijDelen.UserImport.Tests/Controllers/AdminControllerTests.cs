@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
-using Orchard;
 using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.UserImport.Controllers;
