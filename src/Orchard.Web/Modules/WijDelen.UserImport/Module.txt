@@ -8,3 +8,5 @@ Description: User import for WijDelen
 Features:
     WijDelen.UserImport:
         Description: Allows importing users to WijDelen
+		Category: WijDelen
+		Dependencies: Orchard.Users, Orchard.Roles
