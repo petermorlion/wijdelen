@@ -3,13 +3,16 @@ using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.UserImport.Models;
+using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Controllers {
     public class AdminController : Controller {
         private readonly IAuthorizer _authorizer;
+        private readonly ICsvReader _csvReader;
 
-        public AdminController(IAuthorizer authorizer) {
+        public AdminController(IAuthorizer authorizer, ICsvReader csvReader) {
             _authorizer = authorizer;
+            _csvReader = csvReader;
 
             T = NullLocalizer.Instance;
         }
