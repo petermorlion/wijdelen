@@ -4,6 +4,36 @@
     Layout.Title = T("Import Complete").ToString();
 }
 
+<h2>@T("Summary")</h2>
 <div>
-    Import is complete
+    @T("Users in file: {0}", Model.Count)
 </div>
+<div>
+    @T("Imported: {0}", Model.Count(x => x.WasImported))
+</div>
+<div>
+    @T("Failed to import: {0}", Model.Count(x => !x.WasImported))
+</div>
+
+<h2>@T("Details")</h2>
+
+<h3>@T("The following users were imported:")</h3>
+<ul>
+    @foreach (var result in Model.Where(x => x.WasImported)) {
+        <li>@result.UserName</li>
+    }
+</ul>
+
+<h3>@T("The following users were not imported:")</h3>
+<ul>
+    @foreach (var result in Model.Where(x => !x.WasImported)) {
+        <li>
+            @result.UserName
+            <ul>
+                @foreach (var message in result.ErrorMessages) {
+                    <li>@message</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
