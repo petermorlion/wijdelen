@@ -61,12 +61,12 @@ msgstr "Welkom bij WijDelen Groups"
 #: wijdelen.userimport.services.mailgunservice
 #| msgid "user-verification-mail-text"
 msgid "user-verification-mail-text"
-msgstr "Hallo %recipient.username%!\r\n\r\nWelkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door naar deze link te surfen:\r\n\r\n%recipient.loginlink%\r\n\r\nBedankt en to binnenkort!"
+msgstr "Hallo %recipient.username%!\r\n\r\nWelkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door naar deze link te surfen:\r\n\r\n%recipient.loginlink%\r\n\r\nBedankt en tot binnenkort!"
 
 #: wijdelen.userimport.services.mailgunservice
 #| msgid "user-verification-mail-html"
 msgid "user-verification-mail-html"
-msgstr "<p>Hallo %recipient.username%!</p><p>nWelkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:</p><p><a href='%recipient.loginlink%'>Starten met WijDelen Groups</a></p><p>Bedankt en to binnenkort!</p>"
+msgstr "<p>Hallo %recipient.username%!</p><p>Welkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:</p><p><a href='%recipient.loginlink%'>Starten met WijDelen Groups</a></p><p>Bedankt en tot binnenkort!</p>"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
 #| msgid "Import Complete"
