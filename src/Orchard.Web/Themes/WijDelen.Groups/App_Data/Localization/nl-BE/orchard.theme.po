@@ -1,0 +1,24 @@
+﻿#: ~/Themes/WijDelen.Groups/Theme.txt
+#| msgid "Name"
+msgid "WijDelen.Groups"
+msgstr "WijDelen.Groups"
+
+#: ~/Themes/WijDelen.Groups/Theme.txt
+#| msgid "Author"
+msgid "Peter Morlion"
+msgstr "Peter Morlion"
+
+#: ~/Themes/WijDelen.Groups/Theme.txt
+#| msgid "Website"
+msgid "http://www.redstar.be"
+msgstr "http://www.redstar.be"
+
+#: ~/Themes/WijDelen.Groups/Theme.txt
+#| msgid "Description"
+msgid "Theme for WijDelen Groups"
+msgstr "Thema voor WijDelen Groups"
+
+#: ~/Themes/WijDelen.Groups/Views/User.cshtml
+#| msgid "Change Password"
+msgid "Change Password"
+msgstr "Paswoord wijzigen"
