@@ -24,7 +24,7 @@ namespace WijDelen.UserImport.Services {
             var result = new List<UserImportResult>();
 
             foreach (var user in users) {
-                var userImportResult = new UserImportResult(user.UserName);
+                var userImportResult = new UserImportResult(user.UserName, user.Email);
                 var isValid = true;
 
                 if (string.IsNullOrEmpty(user.UserName)) {

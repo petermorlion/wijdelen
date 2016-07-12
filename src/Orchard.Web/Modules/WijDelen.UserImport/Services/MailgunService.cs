@@ -1,21 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Orchard.Localization;
 using RestSharp;
 using RestSharp.Authenticators;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public class MailgunService : IMailService {
-        public void SendUserVerificationMail(string userName) {
-            var client = new RestClient();
-            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
-            client.Authenticator = new HttpBasicAuthenticator("api", "key-");
+        public MailgunService() {
+            T = NullLocalizer.Instance;
+        }
+
+        public Localizer T { get; set; }
+
+        public void SendUserVerificationMails(IEnumerable<UserImportResult> userImportResults) {
+            var client = new RestClient {
+                BaseUrl = new Uri("https://api.mailgun.net/v3"),
+                Authenticator = new HttpBasicAuthenticator("api", "key-9b8b2053d33de2583bfd3afb604dd820")
+            };
 
             var request = new RestRequest();
-            request.AddParameter("domain", ".mailgun.org", ParameterType.UrlSegment);
+            request.AddParameter("domain", "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org", ParameterType.UrlSegment);
             request.Resource = "{domain}/messages";
-            request.AddParameter("from", "Mailgun Sandbox <postmaster@.mailgun.org>");
-            request.AddParameter("to", "Peter Morlion <peter.morlion@gmail.com>");
-            request.AddParameter("subject", "Hello Peter Morlion");
-            request.AddParameter("text", "Congratulations " + userName + ", you just sent an email with Mailgun!  You are truly awesome!  You can see a record of this email in your logs: https://mailgun.com/cp/log .  You can send up to 300 emails/day from this sandbox server.  Next, you should add your own domain so you can send 10,000 emails/month for free.");
+            request.AddParameter("from", "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>");
+
+            var recipientVariables = new List<string>();
+            
+            foreach (var userImportResult in userImportResults) {
+                request.AddParameter("to", $"{userImportResult.UserName} <{userImportResult.Email}>");
+                recipientVariables.Add($"\"{userImportResult.Email}\": {{\"username\":\"{userImportResult.UserName}\", \"loginlink\":\"{userImportResult.LoginLink}\"}}");
+            }
+            
+            request.AddParameter("recipient-variables", $"{{{string.Join(",", recipientVariables)}}}");
+
+            request.AddParameter("subject", T("Welcome to WijDelen Groups").ToString());
+            request.AddParameter("text", T("user-verification-mail-text").ToString());
+            request.AddParameter("html", T("user-verification-mail-html").ToString());
             request.Method = Method.POST;
 
             client.Execute(request);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Moq;
@@ -72,13 +73,15 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 csvReader.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
 
                 var userImportResults = new List<UserImportResult> {
-                    new UserImportResult("john") { WasImported = true },
-                    new UserImportResult("jane") { WasImported = false }
+                    new UserImportResult("john", "john.doe@example.com") { WasImported = true },
+                    new UserImportResult("jane", "jane.doe@example.com") { WasImported = false }
                 };
                 var userImportService = new Mock<IUserImportService>();
                 userImportService.Setup(x => x.ImportUsers(users)).Returns(userImportResults);
 
+                IList<UserImportResult> importedUsers = null;
                 var mailService = new Mock<IMailService>();
+                mailService.Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<UserImportResult>>())).Callback((IEnumerable<UserImportResult> r) => importedUsers = r.ToList());
                 
                 var controller = new AdminController(authorizer.Object, csvReader.Object, userImportService.Object, mailService.Object);
                 var usersFile = new Mock<HttpPostedFileBase>();
@@ -89,8 +92,9 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 Assert.IsInstanceOf<ViewResult>(result);
                 Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);
                 Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
-                mailService.Verify(x => x.SendUserVerificationMail("john"), Times.Once);
-                mailService.Verify(x => x.SendUserVerificationMail("jane"), Times.Never);
+                Assert.AreEqual(1, importedUsers.Count);
+                Assert.AreEqual("john", importedUsers.Single().UserName);
+                Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
             }
         }
     }

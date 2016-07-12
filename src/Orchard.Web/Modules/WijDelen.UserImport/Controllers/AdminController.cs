@@ -40,9 +40,7 @@ namespace WijDelen.UserImport.Controllers {
 
             var users = _csvReader.ReadUsers(usersFile.InputStream);
             var userImportResults = _userImportService.ImportUsers(users);
-            foreach (var userImportResult in userImportResults.Where(x => x.WasImported)) {
-                _mailService.SendUserVerificationMail(userImportResult.UserName);
-            }
+            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported));
             
             return View("ImportComplete", userImportResults);
         }
