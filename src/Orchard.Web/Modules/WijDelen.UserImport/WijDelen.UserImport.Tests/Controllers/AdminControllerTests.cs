@@ -18,7 +18,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new AdminController(Mock.Of<IAuthorizer>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
+            var controller = new AdminController(Mock.Of<IAuthorizer>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -30,7 +30,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexWithoutAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index();
 
@@ -41,7 +41,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexWithAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index();
 
@@ -54,7 +54,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestIndexPostWithoutAuthorization() {
             var authorizer = new Mock<IAuthorizer>();
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>());
+            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index(null);
 
@@ -71,11 +71,16 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 var csvReader = new Mock<ICsvReader>();
                 csvReader.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
 
-                var userImportResults = new List<UserImportResult>();
+                var userImportResults = new List<UserImportResult> {
+                    new UserImportResult("john") { WasImported = true },
+                    new UserImportResult("jane") { WasImported = false }
+                };
                 var userImportService = new Mock<IUserImportService>();
                 userImportService.Setup(x => x.ImportUsers(users)).Returns(userImportResults);
+
+                var mailService = new Mock<IMailService>();
                 
-                var controller = new AdminController(authorizer.Object, csvReader.Object, userImportService.Object);
+                var controller = new AdminController(authorizer.Object, csvReader.Object, userImportService.Object, mailService.Object);
                 var usersFile = new Mock<HttpPostedFileBase>();
                 usersFile.Setup(x => x.InputStream).Returns(memoryStream);
 
@@ -84,6 +89,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 Assert.IsInstanceOf<ViewResult>(result);
                 Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);
                 Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
+                mailService.Verify(x => x.SendUserVerificationMail("john"), Times.Once);
+                mailService.Verify(x => x.SendUserVerificationMail("jane"), Times.Never);
             }
         }
     }

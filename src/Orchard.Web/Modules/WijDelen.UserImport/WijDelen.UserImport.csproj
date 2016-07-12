@@ -53,6 +53,10 @@
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -103,7 +107,9 @@
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Services\CsvReader.cs" />
     <Compile Include="Services\ICsvReader.cs" />
+    <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\IUserImportService.cs" />
+    <Compile Include="Services\MailgunService.cs" />
     <Compile Include="Services\UserImportService.cs" />
   </ItemGroup>
   <ItemGroup>

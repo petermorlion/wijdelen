@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Security;
@@ -10,11 +11,13 @@ namespace WijDelen.UserImport.Controllers {
         private readonly IAuthorizer _authorizer;
         private readonly ICsvReader _csvReader;
         private readonly IUserImportService _userImportService;
+        private readonly IMailService _mailService;
 
-        public AdminController(IAuthorizer authorizer, ICsvReader csvReader, IUserImportService userImportService) {
+        public AdminController(IAuthorizer authorizer, ICsvReader csvReader, IUserImportService userImportService, IMailService mailService) {
             _authorizer = authorizer;
             _csvReader = csvReader;
             _userImportService = userImportService;
+            _mailService = mailService;
 
             T = NullLocalizer.Instance;
         }
@@ -37,6 +40,9 @@ namespace WijDelen.UserImport.Controllers {
 
             var users = _csvReader.ReadUsers(usersFile.InputStream);
             var userImportResults = _userImportService.ImportUsers(users);
+            foreach (var userImportResult in userImportResults.Where(x => x.WasImported)) {
+                _mailService.SendUserVerificationMail(userImportResult.UserName);
+            }
             
             return View("ImportComplete", userImportResults);
         }
