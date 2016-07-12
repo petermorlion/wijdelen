@@ -45,22 +45,14 @@ a:hover {
 .navigation a {
     color: #fff;
     line-height: 5.2rem;
-    display: inline;
     padding: 1rem;
 }
 
 .navigation ul {
-    float: right;
     list-style-type: none;
 }
 
 .menu li {
-    float: left;
     margin-left: 2.5rem;
     margin-right: 2.5rem;
-    position: relative;
-}
-
-.zone-navigation {
-    float: right;
 }

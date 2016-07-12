@@ -33,19 +33,23 @@
     if (HasText(asideClass)) {
         Model.Classes.Add(asideClass);
     }
-
-    /* Inserting some ad hoc shapes
-    ***************************************************************/
-
-    WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
 }
 
 <div class="navigation">
     <div class="container">
-        <a href="@Href("~/")">
-            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))" />
-        </a>
-        @Zone(Model.Navigation)
+        <div class="row">
+            <div class="column">
+                <a href="@Href("~/")">
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))"/>
+                </a>
+            </div>
+            <div class="column column-10">
+                @Display(Model.Navigation)
+            </div>
+            <div class="column column-10">
+                @Display(New.User())
+            </div>
+        </div>
     </div>
 </div>
 
@@ -54,7 +58,7 @@
     @if (Model.Messages != null) {
         <div class="row">
             <div class="column">
-                @Zone(Model.Messages)
+                @Display(Model.Messages)
             </div>
         </div>
     }
@@ -62,13 +66,13 @@
     <div class="row">
         <div class="column">
             @if (Model.Content != null) {
-                @Zone(Model.Content)
+                @Display(Model.Content)
             }
         </div>
 
         @if (Model.AsideFirst != null) {
             <div class="column column-25">
-                @Zone(Model.AsideFirst)
+                @Display(Model.AsideFirst)
             </div>
         }
 
@@ -77,7 +81,7 @@
     @if (Model.Footer != null) {
         <div class="row">
             <div class="column">
-                @Zone(Model.Footer)
+                @Display(Model.Footer)
             </div>
         </div>
     }

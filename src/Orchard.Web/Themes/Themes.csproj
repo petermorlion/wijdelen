@@ -224,7 +224,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Views\User.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Layout.cshtml" />
   </ItemGroup>
