@@ -1,0 +1,83 @@
+﻿@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => {
+            ++zoneCounter;
+            return Model[zoneName] != null ? zoneCounter.ToString() : "";
+        }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+
+    SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
+    //Style.Include("//fonts.googleapis.com/css?family=Lobster&subset=latin");
+    Style.Include("milligram.min.css");
+    Style.Include("Styles.css");
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+    /* Layout classification based on filled zones
+    ***************************************************************/
+
+    //Add classes to the wrapper div to toggle aside widget zones on and off
+    var asideClass = CalcuClassify(new[] {"AsideFirst", "AsideSecond"}, "aside-"); // for aside-1, aside-2 or aside-12 if any of the aside zones are filled
+    if (HasText(asideClass)) {
+        Model.Classes.Add(asideClass);
+    }
+
+    /* Inserting some ad hoc shapes
+    ***************************************************************/
+
+    //WorkContext.Layout.Header.Add(New.Branding(), "5"); // Site name and link to the home page
+    //WorkContext.Layout.Footer.Add(New.BadgeOfHonor(), "5"); // Powered by Orchard
+    WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="column">
+            @Zone(Model.Navigation)
+        </div>
+    </div>
+
+    @if (Model.Messages != null) {
+        <div class="row">
+            <div class="column">
+                @Zone(Model.Messages)
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="column">
+            @if (Model.Content != null) {
+                @Zone(Model.Content)
+            }
+        </div>
+
+        @if (Model.AsideFirst != null) {
+            <div class="column column-25">
+                @Zone(Model.AsideFirst)
+            </div>
+        }
+
+    </div>
+
+    @if (Model.Footer != null) {
+        <div class="row">
+            <div class="column">
+                @Zone(Model.Footer)
+            </div>
+        </div>
+    }
+
+</div>
