@@ -2,6 +2,7 @@
 
 @{
     Layout.Title = T("Import Complete").ToString();
+    Style.Include("Styles.css").AtFoot();
 }
 
 <h2>@T("Summary")</h2>
@@ -18,18 +19,18 @@
 <h2>@T("Details")</h2>
 
 <h3>@T("The following users were imported:")</h3>
-<ul>
+<ul class="userimport-results">
     @foreach (var result in Model.Where(x => x.WasImported)) {
         <li>@result.UserName</li>
     }
 </ul>
 
 <h3>@T("The following users were not imported:")</h3>
-<ul class="disc">
+<ul class="userimport-results">
     @foreach (var result in Model.Where(x => !x.WasImported)) {
         <li>
-            @result.UserName
-            <ul class="disc">
+            @result.UserName &nbsp;
+            <ul class="userimport-results-messages">
                 @foreach (var message in result.ErrorMessages) {
                     <li>@message</li>
                 }
