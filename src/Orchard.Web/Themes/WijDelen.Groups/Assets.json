@@ -1,6 +1,10 @@
 [
     {
-        "inputs": [ "Assets/Styles.less" ],
+      "inputs": [
+        "Styles/reset.css",
+        "Styles/milligram.min.css",
+        "Assets/Styles.less"
+      ],
         "output": "Styles/Styles.css"
     }
 ]
