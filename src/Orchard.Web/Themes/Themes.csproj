@@ -89,6 +89,7 @@
     <Content Include="WijDelen.Groups\Assets.json" />
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
+    <Content Include="WijDelen.Groups\Scripts\script.js" />
     <Content Include="WijDelen.Groups\Styles\milligram.min.css" />
     <Content Include="WijDelen.Groups\Styles\reset.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.css" />
