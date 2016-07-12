@@ -88,6 +88,7 @@
   <ItemGroup>
     <Content Include="WijDelen.Groups\Assets.json" />
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
+    <Content Include="WijDelen.Groups\Content\favicon.ico" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
     <Content Include="WijDelen.Groups\Scripts\script.js" />
     <Content Include="WijDelen.Groups\Styles\milligram.min.css" />
@@ -230,6 +231,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\App_Data\Localization\nl-BE\orchard.theme.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Views\Document.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
