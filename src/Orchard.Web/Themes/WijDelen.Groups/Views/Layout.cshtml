@@ -16,6 +16,7 @@
 
     SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
     //Style.Include("//fonts.googleapis.com/css?family=Lobster&subset=latin");
+    Style.Include("reset.css");
     Style.Include("milligram.min.css");
     Style.Include("Styles.css");
 
@@ -41,13 +42,11 @@
     WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
 }
 
-<div class="container">
+<div class="navigation">
+    @Zone(Model.Navigation)
+</div>
 
-    <div class="row">
-        <div class="column">
-            @Zone(Model.Navigation)
-        </div>
-    </div>
+<div class="container">
 
     @if (Model.Messages != null) {
         <div class="row">
