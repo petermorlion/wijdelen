@@ -1,0 +1,58 @@
+/*
+Theme: WijDelen.Groups
+Author: Peter Morlion – http://www.redstar.be
+Copyright: 2016, WijDelen. All Rights Reserved
+*/
+
+/*  Color Palette
+**************************************************************
+
+Background: #f5f5f5
+Borders: #c3c2c2
+Text: #5d5d5d
+Secondary Text: #5d5d5d
+Main Accent: #04b17b
+Links: #04b17b
+*/
+
+/* 
+This theme takes a different approach than the usual way of styling Orchard themes. 
+It does a reset first, then uses Milligram (https://milligram.github.io) as foundation 
+and builds from there.
+*/
+
+body {
+    background-color: #f5f5f5;
+    color: #5d5d5d;
+}
+
+a {
+    color: #04b17b;
+}
+
+a:hover {
+    color: #53caa3;
+}
+
+/*  Navigation
+***************************************************************/
+.navigation {
+    background-color: #04b17b;
+    color: #fff;
+    height: 5.2rem;
+}
+
+.navigation a {
+    color: #fff;
+    line-height: 5.2rem;
+    padding: 1rem;
+}
+
+.navigation ul {
+    list-style-type: none;
+}
+
+.menu li {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+}
