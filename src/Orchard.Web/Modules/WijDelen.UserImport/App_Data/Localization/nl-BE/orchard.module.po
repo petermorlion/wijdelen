@@ -1,0 +1,110 @@
+﻿#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "Name"
+msgid "WijDelen.UserImport"
+msgstr "WijDelen.UserImport"
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "Author"
+msgid "Peter Morlion"
+msgstr "Peter Morlion"
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "Website"
+msgid "http://www.redstar.be"
+msgstr "http://www.redstar.be"
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "Description"
+msgid "User import for WijDelen"
+msgstr "Gebruikers importeren voor WijDelen"
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "WijDelen.UserImport.Description"
+msgid "Allows importing users to WijDelen"
+msgstr "Biedt de mogelijkheid om gebruikers te importeren"
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "WijDelen.UserImport.Category"
+msgid "WijDelen"
+msgstr "WijDelen"
+
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "You are not authorized to import users."
+msgid "You are not authorized to import users."
+msgstr "Je hebt onvoldoende rechten om gebruikers te importeren."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "User with email {0} has no username."
+msgid "User with email {0} has no username."
+msgstr "Gebruiker met email {0} heeft geen gebruikersnaam."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "User {0} has no email."
+msgid "User {0} has no email."
+msgstr "Gebruiker {0} heeft geen email."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "User {0} has an invalid email address."
+msgid "User {0} has an invalid email address."
+msgstr "Gebruiker {0} heeft een ongeldig email adres."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "There is already a user with username {0} and/or email {1}."
+msgid "There is already a user with username {0} and/or email {1}."
+msgstr "Er is al een gebruiker met gebruikersnaam {0} en/of email {1}."
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Import Complete"
+msgid "Import Complete"
+msgstr "Import klaar"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Users in file: {0}"
+msgid "Users in file: {0}"
+msgstr "Gebruikers in bestand: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Users in file: {0}"
+msgid "Imported: {0}"
+msgstr "Geïmporteerd: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Failed to import: {0}"
+msgid "Failed to import: {0}"
+msgstr "Niet geïmporteerd: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Details"
+msgid "Details"
+msgstr "Details"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "The following users were imported:"
+msgid "The following users were imported:"
+msgstr "Onderstaande gebruikers werden geïmporteerd:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "The following users were not imported:"
+msgid "The following users were not imported:"
+msgstr "Onderstaande gebruikers werden niet geïmporteerd:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Import Users"
+msgid "Import Users"
+msgstr "Importeer gebruikers"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "User File"
+msgid "User File"
+msgstr "Bestand"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Please use a CSV file with two columns: username and email"
+msgid "Please use a CSV file with two columns: username and email"
+msgstr "Gebruik een CSV bestand met twee kolommen: gebruikersnaam en email"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Submit"
+msgid "Submit"
+msgstr "Verzenden"
+

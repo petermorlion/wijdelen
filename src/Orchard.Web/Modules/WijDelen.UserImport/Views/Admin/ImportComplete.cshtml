@@ -25,11 +25,11 @@
 </ul>
 
 <h3>@T("The following users were not imported:")</h3>
-<ul>
+<ul class="disc">
     @foreach (var result in Model.Where(x => !x.WasImported)) {
         <li>
             @result.UserName
-            <ul>
+            <ul class="disc">
                 @foreach (var message in result.ErrorMessages) {
                     <li>@message</li>
                 }
