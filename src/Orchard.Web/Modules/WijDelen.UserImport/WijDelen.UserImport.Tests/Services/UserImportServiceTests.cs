@@ -20,7 +20,8 @@ namespace WijDelen.UserImport.Tests.Services {
             var memberShipService = new Mock<IMembershipService>();
             memberShipService
                 .Setup(x => x.CreateUser(It.IsAny<CreateUserParams>()))
-                .Callback((CreateUserParams x) => createUserParams = x);
+                .Callback((CreateUserParams x) => createUserParams = x)
+                .Returns(Mock.Of<IUser>());
 
             var userService = new Mock<IUserService>();
             userService.Setup(x => x.VerifyUserUnicity("john.doe", "john.doe@example.com")).Returns(true);

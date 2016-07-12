@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Orchard.Localization;
+using Orchard.Users.Services;
 using RestSharp;
 using RestSharp.Authenticators;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public class MailgunService : IMailService {
-        public MailgunService() {
+        private readonly IUserService _userService;
+
+        public MailgunService(IUserService userService) {
+            _userService = userService;
             T = NullLocalizer.Instance;
         }
 
         public Localizer T { get; set; }
 
-        public void SendUserVerificationMails(IEnumerable<UserImportResult> userImportResults) {
+        public void SendUserVerificationMails(IEnumerable<UserImportResult> userImportResults, Func<string, string> createUrl) {
             var client = new RestClient {
                 BaseUrl = new Uri("https://api.mailgun.net/v3"),
                 Authenticator = new HttpBasicAuthenticator("api", "key-9b8b2053d33de2583bfd3afb604dd820")
@@ -28,8 +31,11 @@ namespace WijDelen.UserImport.Services {
             var recipientVariables = new List<string>();
             
             foreach (var userImportResult in userImportResults) {
+                var nonce = _userService.CreateNonce(userImportResult.User, TimeSpan.FromMinutes(20));
+                var url = createUrl(nonce);
+
                 request.AddParameter("to", $"{userImportResult.UserName} <{userImportResult.Email}>");
-                recipientVariables.Add($"\"{userImportResult.Email}\": {{\"username\":\"{userImportResult.UserName}\", \"loginlink\":\"{userImportResult.LoginLink}\"}}");
+                recipientVariables.Add($"\"{userImportResult.Email}\": {{\"username\":\"{userImportResult.UserName}\", \"loginlink\":\"{url}\"}}");
             }
             
             request.AddParameter("recipient-variables", $"{{{string.Join(",", recipientVariables)}}}");

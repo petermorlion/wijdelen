@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
+using Orchard;
 using Orchard.Localization;
 using Orchard.Security;
+using Orchard.Settings;
 using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
+using WijDelen.UserImport.Tests.Mocks;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
@@ -19,7 +23,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new AdminController(Mock.Of<IAuthorizer>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(Mock.Of<IOrchardServices>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -29,9 +33,11 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexWithoutAuthorization() {
+            var orchardServices = new Mock<IOrchardServices>();
             var authorizer = new Mock<IAuthorizer>();
+            orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index();
 
@@ -40,9 +46,11 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexWithAuthorization() {
+            var orchardServices = new Mock<IOrchardServices>();
             var authorizer = new Mock<IAuthorizer>();
+            orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index();
 
@@ -53,9 +61,11 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexPostWithoutAuthorization() {
+            var orchardServices = new Mock<IOrchardServices>();
             var authorizer = new Mock<IAuthorizer>();
+            orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(authorizer.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
             var result = controller.Index(null);
 
@@ -65,25 +75,35 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestIndexPostWithAuthorization() {
             using (var memoryStream = new MemoryStream()) {
+                var orchardServices = new Mock<IOrchardServices>();
                 var authorizer = new Mock<IAuthorizer>();
+
+                orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
                 authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+
+                var site = new Mock<ISite>();
+                var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
+                orchardServices.Setup(x => x.WorkContext).Returns(mockWorkContext);
+                site.Setup(x => x.BaseUrl).Returns("baseUrl");
 
                 var users = new List<User>();
                 var csvReader = new Mock<ICsvReader>();
                 csvReader.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
 
                 var userImportResults = new List<UserImportResult> {
-                    new UserImportResult("john", "john.doe@example.com") { WasImported = true },
-                    new UserImportResult("jane", "jane.doe@example.com") { WasImported = false }
+                    new UserImportResult("john", "john.doe@example.com") { User = Mock.Of<IUser>() },
+                    new UserImportResult("jane", "jane.doe@example.com")
                 };
                 var userImportService = new Mock<IUserImportService>();
                 userImportService.Setup(x => x.ImportUsers(users)).Returns(userImportResults);
 
                 IList<UserImportResult> importedUsers = null;
                 var mailService = new Mock<IMailService>();
-                mailService.Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<UserImportResult>>())).Callback((IEnumerable<UserImportResult> r) => importedUsers = r.ToList());
+                mailService
+                    .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<UserImportResult>>(), It.IsAny<Func<string, string>>()))
+                    .Callback((IEnumerable<UserImportResult> r, Func<string, string> f) => importedUsers = r.ToList());
                 
-                var controller = new AdminController(authorizer.Object, csvReader.Object, userImportService.Object, mailService.Object);
+                var controller = new AdminController(orchardServices.Object, csvReader.Object, userImportService.Object, mailService.Object);
                 var usersFile = new Mock<HttpPostedFileBase>();
                 usersFile.Setup(x => x.InputStream).Returns(memoryStream);
 

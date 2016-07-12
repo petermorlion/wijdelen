@@ -49,16 +49,17 @@ namespace WijDelen.UserImport.Services {
                 }
 
                 if (isValid) {
-                    _membershipService.CreateUser(new CreateUserParams(
-                    user.UserName,
-                    "",
-                    user.Email,
-                    "",
-                    "",
-                    true));
+                    var newUser = _membershipService.CreateUser(new CreateUserParams(
+                        user.UserName,
+                        "",
+                        user.Email,
+                        "",
+                        "",
+                        true));
+
+                    userImportResult.User = newUser;
                 }
 
-                userImportResult.WasImported = isValid;
                 result.Add(userImportResult);
             }
 
