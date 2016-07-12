@@ -24,7 +24,7 @@ namespace WijDelen.UserImport.Services {
             var result = new List<UserImportResult>();
 
             foreach (var user in users) {
-                var userImportResult = new UserImportResult(user.UserName);
+                var userImportResult = new UserImportResult(user.UserName, user.Email);
                 var isValid = true;
 
                 if (string.IsNullOrEmpty(user.UserName)) {
@@ -49,16 +49,17 @@ namespace WijDelen.UserImport.Services {
                 }
 
                 if (isValid) {
-                    _membershipService.CreateUser(new CreateUserParams(
-                    user.UserName,
-                    "",
-                    user.Email,
-                    "",
-                    "",
-                    true));
+                    var newUser = _membershipService.CreateUser(new CreateUserParams(
+                        user.UserName,
+                        "",
+                        user.Email,
+                        "",
+                        "",
+                        true));
+
+                    userImportResult.User = newUser;
                 }
 
-                userImportResult.WasImported = isValid;
                 result.Add(userImportResult);
             }
 
