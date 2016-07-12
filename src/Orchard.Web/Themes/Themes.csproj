@@ -88,7 +88,7 @@
   <ItemGroup>
     <Content Include="WijDelen.Groups\Assets.json" />
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
-    <Content Include="WijDelen.Groups\Content\Images\navigation-top-logo-belgium.png" />
+    <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
     <Content Include="WijDelen.Groups\Styles\milligram.min.css" />
     <Content Include="WijDelen.Groups\Styles\reset.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.css" />
@@ -225,9 +225,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="WijDelen.Groups\Content\Images\Web.config" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Layout.cshtml" />
   </ItemGroup>

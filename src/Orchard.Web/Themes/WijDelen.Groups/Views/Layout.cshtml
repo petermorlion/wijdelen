@@ -43,7 +43,12 @@
 }
 
 <div class="navigation">
-    @Zone(Model.Navigation)
+    <div class="container">
+        <a href="@Href("~/")">
+            <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))" />
+        </a>
+        @Zone(Model.Navigation)
+    </div>
 </div>
 
 <div class="container">

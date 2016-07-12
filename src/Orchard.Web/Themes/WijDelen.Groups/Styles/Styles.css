@@ -60,3 +60,7 @@ a:hover {
     margin-right: 2.5rem;
     position: relative;
 }
+
+.zone-navigation {
+    float: right;
+}
