@@ -45,6 +45,7 @@ namespace WijDelen.UserImport.Services {
             request.AddParameter("subject", T("Welcome to WijDelen Groups").ToString());
             request.AddParameter("text", T("user-verification-mail-text").ToString());
             request.AddParameter("html", T("user-verification-mail-html").ToString());
+
             request.Method = Method.POST;
 
             client.Execute(request);
