@@ -8,6 +8,8 @@ using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public class MailgunService : IMailService {
+        private static readonly TimeSpan DelayToSetPassword = TimeSpan.FromDays(7);
+
         private readonly IUserService _userService;
 
         public MailgunService(IUserService userService) {
@@ -31,7 +33,7 @@ namespace WijDelen.UserImport.Services {
             var recipientVariables = new List<string>();
             
             foreach (var userImportResult in userImportResults) {
-                var nonce = _userService.CreateNonce(userImportResult.User, TimeSpan.FromMinutes(20));
+                var nonce = _userService.CreateNonce(userImportResult.User, DelayToSetPassword);
                 var url = createUrl(nonce);
 
                 request.AddParameter("to", $"{userImportResult.UserName} <{userImportResult.Email}>");
