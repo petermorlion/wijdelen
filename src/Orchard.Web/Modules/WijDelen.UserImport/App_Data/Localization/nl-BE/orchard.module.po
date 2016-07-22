@@ -123,3 +123,7 @@ msgstr "Gebruik een CSV bestand met twee kolommen: gebruikersnaam en email"
 msgid "Submit"
 msgstr "Verzenden"
 
+#: ~/Modules/WijDelen.UserImport/Views/Accounts/SetPassword.cshtml
+#| msgid "Set Password"
+msgid "Set Password"
+msgstr "Paswoord instellen"

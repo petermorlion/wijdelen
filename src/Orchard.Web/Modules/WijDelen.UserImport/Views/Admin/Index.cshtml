@@ -4,7 +4,7 @@
     Layout.Title = T("Import Users").ToString();
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Admin", new {Area = "WijDelen.Orchard.UserImport"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Admin", new {Area = "WijDelen.UserImport"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
     <fieldset>
         <legend>@T("User File")</legend>
         <span class="hint">@T("Please use a CSV file with two columns: username and email")</span>
