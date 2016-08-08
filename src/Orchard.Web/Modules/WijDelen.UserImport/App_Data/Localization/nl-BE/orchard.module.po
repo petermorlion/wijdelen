@@ -123,7 +123,22 @@ msgstr "Gebruik een CSV bestand met twee kolommen: gebruikersnaam en email"
 msgid "Submit"
 msgstr "Verzenden"
 
-#: ~/Modules/WijDelen.UserImport/Views/Accounts/SetPassword.cshtml
-#| msgid "Set Password"
-msgid "Set Password"
-msgstr "Paswoord instellen"
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groep"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Specify a new group or choose an existing one."
+msgid "Specify a new group or choose an existing one."
+msgstr "Specifieer een nieuwe groep of kies een bestaande."
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "New"
+msgid "New"
+msgstr "Nieuw"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Existing"
+msgid "Existing"
+msgstr "Bestaande"

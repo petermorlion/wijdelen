@@ -36,7 +36,7 @@ namespace WijDelen.UserImport.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase usersFile) {
+        public ActionResult Index(HttpPostedFileBase usersFile, string group, string groupName) {
             if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }

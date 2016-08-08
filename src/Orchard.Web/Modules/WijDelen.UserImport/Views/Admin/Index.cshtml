@@ -8,7 +8,14 @@
     <fieldset>
         <legend>@T("User File")</legend>
         <span class="hint">@T("Please use a CSV file with two columns: username and email")</span>
-        <input type="file" name="UsersFile"/>
+        <input type="file" name="usersFile"/>
+    </fieldset>
+
+    <fieldset>
+        <legend>@T("Group")</legend>
+        <span class="hint">@T("Specify a new group or choose an existing one.")</span>
+        <input type="radio" name="group" value="new"/> @T("New") <input type="text" name="groupName"/> <br/>
+        <input type="radio" name="group" value="existing" /> @T("Existing") (Coming soon)
     </fieldset>
 
     <button class="primaryAction">@T("Submit")</button>
