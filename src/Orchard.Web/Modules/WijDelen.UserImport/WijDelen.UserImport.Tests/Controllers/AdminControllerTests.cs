@@ -67,7 +67,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
             var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
 
-            var result = controller.Index(null);
+            var result = controller.Index(null, "", "");
 
             Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
         }
@@ -107,7 +107,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 var usersFile = new Mock<HttpPostedFileBase>();
                 usersFile.Setup(x => x.InputStream).Returns(memoryStream);
 
-                var result = controller.Index(usersFile.Object);
+                var result = controller.Index(usersFile.Object, "", "");
 
                 Assert.IsInstanceOf<ViewResult>(result);
                 Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);

@@ -36,7 +36,7 @@ namespace WijDelen.UserImport.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase usersFile) {
+        public ActionResult Index(HttpPostedFileBase usersFile, string group, string groupName) {
             if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }
@@ -50,7 +50,7 @@ namespace WijDelen.UserImport.Controllers {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
-            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported), nonce => Url.MakeAbsolute(Url.Action("SetPassword", "Account", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl));
+            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported), nonce => Url.MakeAbsolute(Url.Action("LostPassword", "Account", new { Area = "Orchard.Users", nonce = nonce }), siteUrl));
             
             return View("ImportComplete", userImportResults);
         }
