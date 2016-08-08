@@ -50,7 +50,7 @@ namespace WijDelen.UserImport.Controllers {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
-            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported), nonce => Url.MakeAbsolute(Url.Action("SetPassword", "Account", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl));
+            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported), nonce => Url.MakeAbsolute(Url.Action("LostPassword", "Account", new { Area = "Orchard.Users", nonce = nonce }), siteUrl));
             
             return View("ImportComplete", userImportResults);
         }
