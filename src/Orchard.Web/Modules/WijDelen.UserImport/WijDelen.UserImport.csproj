@@ -100,7 +100,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Drivers\NamePartDriver.cs" />
+    <Compile Include="Handlers\NamePartHandler.cs" />
     <Compile Include="Models\AdminIndexViewModel.cs" />
+    <Compile Include="Models\NamePart.cs" />
+    <Compile Include="Models\NamePartRecord.cs" />
     <Compile Include="Models\UserImportResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +114,7 @@
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\IUserImportService.cs" />
     <Compile Include="Services\MailgunService.cs" />
+    <Compile Include="Migrations.cs" />
     <Compile Include="Services\UserImportService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +158,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\NamePart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\NamePart.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
