@@ -10,9 +10,9 @@ namespace WijDelen.UserImport.Drivers {
         }
 
         protected override DriverResult Editor(NamePart part, dynamic shapeHelper) {
-            return ContentShape("Parts_NamePart_Edit",
+            return ContentShape("Parts_Name_Edit",
                 () => shapeHelper.EditorTemplate(
-                    TemplateName: "Parts/NamePart",
+                    TemplateName: "Parts/Name",
                     Model: part,
                     Prefix: Prefix));
         }

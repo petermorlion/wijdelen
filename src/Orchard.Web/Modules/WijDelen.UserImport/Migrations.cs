@@ -17,5 +17,16 @@ namespace WijDelen.UserImport {
 
             return 1;
         }
+
+        public int UpdateFrom1() {
+            ContentDefinitionManager.AlterTypeDefinition("Group", builder =>
+                builder
+                    .WithPart("CommonPart")
+                    .WithPart("NamePart")
+                    .Creatable()
+                    .Draftable());
+
+            return 2;
+        }
     }
 }

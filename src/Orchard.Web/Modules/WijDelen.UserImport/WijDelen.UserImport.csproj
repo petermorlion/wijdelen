@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
+    <None Include="placement.info" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
@@ -160,10 +161,10 @@
     <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Parts\NamePart.cshtml" />
+    <Content Include="Views\Parts\Name.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\NamePart.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Name.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

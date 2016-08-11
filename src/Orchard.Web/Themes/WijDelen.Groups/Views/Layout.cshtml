@@ -60,9 +60,20 @@
 
     <div class="row">
         <div class="column">
-            @if (Model.Content != null) {
-                @Display(Model.Content)
-            }
+            <div class="row">
+                <div class="column">
+                    @if (Model.Content != null) {
+                        @Display(Model.Content)
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    @if (Model.Header != null) {
+                        @Display(Model.Header)
+                    }
+                </div>
+            </div>
         </div>
 
         @if (Model.AsideFirst != null) {
