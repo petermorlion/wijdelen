@@ -13,7 +13,8 @@ namespace WijDelen.UserImport {
             );
 
             ContentDefinitionManager.AlterPartDefinition(
-                typeof(NamePartRecord).Name, cfg => cfg.Attachable());
+                typeof(NamePartRecord).Name, cfg => cfg
+                    .Attachable());
 
             return 1;
         }
@@ -27,6 +28,15 @@ namespace WijDelen.UserImport {
                     .Draftable());
 
             return 2;
+        }
+
+        public int UpdateFrom2() {
+            ContentDefinitionManager.AlterPartDefinition(
+                typeof(NamePartRecord).Name, cfg => cfg
+                    .Attachable()
+                    .WithDescription("Provides a name."));
+
+            return 3;
         }
     }
 }
