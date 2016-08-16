@@ -100,9 +100,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Drivers\GroupMembershipPartDriver.cs" />
     <Compile Include="Drivers\NamePartDriver.cs" />
+    <Compile Include="Handlers\GroupMembershipPartHandler.cs" />
     <Compile Include="Handlers\NamePartHandler.cs" />
-    <Compile Include="Models\AdminIndexViewModel.cs" />
+    <Compile Include="ViewModels\AdminIndexViewModel.cs" />
+    <Compile Include="Models\GroupMembershipPart.cs" />
+    <Compile Include="Models\GroupMembershipPartRecord.cs" />
     <Compile Include="Models\NamePart.cs" />
     <Compile Include="Models\NamePartRecord.cs" />
     <Compile Include="Models\UserImportResult.cs" />
@@ -118,6 +122,8 @@
     <Compile Include="Services\MailgunService.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Services\UserImportService.cs" />
+    <Compile Include="ViewModels\EditGroupMembershipViewModel.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
@@ -129,6 +135,8 @@
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
     <Content Include="Module.txt" />
+    <Content Include="Views\EditorTemplates\Parts\GroupMembership.cshtml" />
+    <None Include="Views\Parts\GroupMembership.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

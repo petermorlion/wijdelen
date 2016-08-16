@@ -14,6 +14,7 @@ using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
+using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]

@@ -1,4 +1,6 @@
 ﻿<Placement>
 	<Place Parts_Name="Header:1"/>
 	<Place Parts_Name_Edit="Content:1"/>
+	<Place Parts_GroupMembership="Content:2"/>
+	<Place Parts_GroupMembership_Edit="Content:2"/>
 </Placement>

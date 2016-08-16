@@ -8,6 +8,7 @@ using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using Orchard;
+using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
     public class AdminController : Controller {

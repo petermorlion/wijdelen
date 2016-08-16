@@ -38,5 +38,25 @@ namespace WijDelen.UserImport {
 
             return 3;
         }
+
+        public int UpdateFrom3() {
+            SchemaBuilder.CreateTable("GroupMembershipPartRecord",
+                table => table
+                    .ContentPartRecord()
+                    .Column<int>("Group_Id")
+                );
+
+            ContentDefinitionManager.AlterPartDefinition(
+                "GroupMembershipPart", builder => builder.Attachable());
+
+            return 4;
+        }
+
+        public int UpdateFrom4() {
+            ContentDefinitionManager.AlterTypeDefinition("User", cfg => cfg
+                .WithPart("GroupMembershipPart"));
+
+            return 5;
+        }
     }
 }
