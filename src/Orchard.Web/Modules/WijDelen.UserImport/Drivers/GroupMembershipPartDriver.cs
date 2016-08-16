@@ -8,7 +8,7 @@ namespace WijDelen.UserImport.Drivers {
     public class GroupMembershipPartDriver : ContentPartDriver<GroupMembershipPart> {
         private readonly IGroupService _groupService;
 
-        private const string TemplateName = "Parts/Sponsor";
+        private const string TemplateName = "Parts/GroupMembership";
 
         public GroupMembershipPartDriver(IGroupService groupService)
         {
@@ -52,7 +52,7 @@ namespace WijDelen.UserImport.Drivers {
 
         private EditGroupMembershipViewModel BuildEditorViewModel(GroupMembershipPart part)
         {
-            var itemSponsor = new EditGroupMembershipViewModel
+            var viewModel = new EditGroupMembershipViewModel
             {
                 UserId = part.ContentItem.Id,
                 Groups = _groupService.GetGroups()
@@ -60,10 +60,10 @@ namespace WijDelen.UserImport.Drivers {
 
             if (part.Group != null)
             {
-                itemSponsor.GroupId = part.Group.Id;
+                viewModel.GroupId = part.Group.Id;
             }
 
-            return itemSponsor;
+            return viewModel;
         }
     }
 }

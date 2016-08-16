@@ -23,7 +23,10 @@ namespace WijDelen.UserImport.Services {
 
         public IEnumerable<GroupViewModel> GetGroups() {
             return new GroupViewModel[] {
-                
+                new GroupViewModel {
+                    Id = 1,
+                    Name = "Test"
+                }
             };
         }
 
