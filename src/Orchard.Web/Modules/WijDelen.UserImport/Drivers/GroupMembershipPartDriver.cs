@@ -43,8 +43,7 @@ namespace WijDelen.UserImport.Drivers {
 
             if (part.ContentItem.Id != 0)
             {
-                _groupService.UpdateGroupMembershipForContentItem(
-                    part.ContentItem, model);
+                _groupService.UpdateGroupMembershipForContentItem(part.ContentItem, model);
             }
 
             return Editor(part, shapeHelper);

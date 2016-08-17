@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
 using Orchard.Roles.ViewModels;
 
 namespace WijDelen.UserImport.ViewModels {
     public class AdminIndexViewModel {
-        public bool? Approve { get; set; }
-        public string UpdateExisting { get; set; }
-        public List<UserRoleEntry> Roles { get; set; }
+        public string NewGroupName { get; set; }
+        public int SelectedGroupId { get; set; }
+        public IEnumerable<GroupViewModel> Groups { get; set; }
+        public UserImportLinkMode UserImportLinkMode { get; set; }
+
+        [Required, FileExtensions(Extensions = "csv")]
+        public HttpPostedFileBase File { get; set; }
     }
 }

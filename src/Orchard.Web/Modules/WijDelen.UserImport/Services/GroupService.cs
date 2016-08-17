@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Security;
@@ -15,8 +16,17 @@ namespace WijDelen.UserImport.Services {
         }
 
         public void AddUsersToGroup(string groupName, IEnumerable<IUser> users) {
-            var group = _contentManager.New("Group");
-            group.As<NamePart>().Name = groupName;
+            var group = _contentManager.Query().ForType("Group").Where<NamePartRecord>(x => x.Name == groupName).List().FirstOrDefault();
+            if (group == null) {
+                group = _contentManager.New("Group");
+                group.As<NamePart>().Name = groupName;
+                _contentManager.Create(group);
+                _contentManager.Publish(group);
+            }
+
+            foreach (var user in users) {
+                user.As<GroupMembershipPart>().Group = group;
+            }
         }
 
         public string GetGroupName(IContent group) {

@@ -124,6 +124,7 @@
     <Compile Include="Services\UserImportService.cs" />
     <Compile Include="ViewModels\EditGroupMembershipViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
+    <Compile Include="ViewModels\UserImportLinkMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
