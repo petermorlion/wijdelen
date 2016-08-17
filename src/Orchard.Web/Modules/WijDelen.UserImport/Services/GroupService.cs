@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Orchard.ContentManagement;
+using Orchard.Data;
 using Orchard.Security;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;
@@ -18,16 +20,14 @@ namespace WijDelen.UserImport.Services {
         }
 
         public string GetGroupName(IContent group) {
-            return "TESTING";
+            return group.As<NamePart>().Name;
         }
 
         public IEnumerable<GroupViewModel> GetGroups() {
-            return new GroupViewModel[] {
-                new GroupViewModel {
-                    Id = 1,
-                    Name = "Test"
-                }
-            };
+            return _contentManager.Query().ForType("Group").List().Select(x => new GroupViewModel {
+                Id = x.Id,
+                Name = x.As<NamePart>().Name
+            });
         }
 
         public void UpdateGroupMembershipForContentItem(ContentItem item, EditGroupMembershipViewModel model) {
