@@ -129,7 +129,7 @@
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
-    <None Include="placement.info" />
+    <Content Include="placement.info" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
@@ -137,7 +137,7 @@
     <Content Include="Styles\Web.config" />
     <Content Include="Module.txt" />
     <Content Include="Views\EditorTemplates\Parts\GroupMembership.cshtml" />
-    <None Include="Views\Parts\GroupMembership.cshtml" />
+    <Content Include="Views\Parts\GroupMembership.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
