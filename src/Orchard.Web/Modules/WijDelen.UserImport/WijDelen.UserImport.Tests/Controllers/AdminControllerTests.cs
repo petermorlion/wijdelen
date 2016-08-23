@@ -14,6 +14,7 @@ using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
+using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
@@ -23,7 +24,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new AdminController(Mock.Of<IOrchardServices>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(Mock.Of<IOrchardServices>(), Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>(), Mock.Of<IGroupService>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -37,7 +38,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var authorizer = new Mock<IAuthorizer>();
             orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>(), Mock.Of<IGroupService>());
 
             var result = controller.Index();
 
@@ -50,7 +51,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var authorizer = new Mock<IAuthorizer>();
             orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>(), Mock.Of<IGroupService>());
 
             var result = controller.Index();
 
@@ -65,9 +66,9 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var authorizer = new Mock<IAuthorizer>();
             orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
             authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
-            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>());
+            var controller = new AdminController(orchardServices.Object, Mock.Of<ICsvReader>(), Mock.Of<IUserImportService>(), Mock.Of<IMailService>(), Mock.Of<IGroupService>());
 
-            var result = controller.Index(null, "", "");
+            var result = controller.Index(null);
 
             Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
         }
@@ -102,12 +103,18 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 mailService
                     .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<UserImportResult>>(), It.IsAny<Func<string, string>>()))
                     .Callback((IEnumerable<UserImportResult> r, Func<string, string> f) => importedUsers = r.ToList());
+
+                var groupService = new Mock<IGroupService>();
                 
-                var controller = new AdminController(orchardServices.Object, csvReader.Object, userImportService.Object, mailService.Object);
+                var controller = new AdminController(orchardServices.Object, csvReader.Object, userImportService.Object, mailService.Object, groupService.Object);
                 var usersFile = new Mock<HttpPostedFileBase>();
                 usersFile.Setup(x => x.InputStream).Returns(memoryStream);
 
-                var result = controller.Index(usersFile.Object, "", "");
+                var viewModel = new AdminIndexViewModel();
+                viewModel.File = usersFile.Object;
+                viewModel.NewGroupName = "New Group";
+
+                var result = controller.Index(viewModel);
 
                 Assert.IsInstanceOf<ViewResult>(result);
                 Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);
@@ -115,6 +122,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 Assert.AreEqual(1, importedUsers.Count);
                 Assert.AreEqual("john", importedUsers.Single().UserName);
                 Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
+
+                groupService.Verify(x => x.AddUsersToGroup("New Group", It.IsAny<IEnumerable<IUser>>()));
             }
         }
     }

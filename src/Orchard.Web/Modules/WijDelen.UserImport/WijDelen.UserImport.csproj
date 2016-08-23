@@ -100,27 +100,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Models\AdminIndexViewModel.cs" />
+    <Compile Include="Drivers\GroupMembershipPartDriver.cs" />
+    <Compile Include="Drivers\NamePartDriver.cs" />
+    <Compile Include="Handlers\GroupMembershipPartHandler.cs" />
+    <Compile Include="Handlers\NamePartHandler.cs" />
+    <Compile Include="ViewModels\AdminIndexViewModel.cs" />
+    <Compile Include="Models\GroupMembershipPart.cs" />
+    <Compile Include="Models\GroupMembershipPartRecord.cs" />
+    <Compile Include="Models\NamePart.cs" />
+    <Compile Include="Models\NamePartRecord.cs" />
     <Compile Include="Models\UserImportResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Services\CsvReader.cs" />
+    <Compile Include="Services\GroupService.cs" />
     <Compile Include="Services\ICsvReader.cs" />
+    <Compile Include="Services\IGroupService.cs" />
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\IUserImportService.cs" />
     <Compile Include="Services\MailgunService.cs" />
+    <Compile Include="Migrations.cs" />
     <Compile Include="Services\UserImportService.cs" />
+    <Compile Include="ViewModels\EditGroupMembershipViewModel.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
+    <Compile Include="ViewModels\UserImportLinkMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
+    <Content Include="placement.info" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
     <Content Include="Module.txt" />
+    <Content Include="Views\EditorTemplates\Parts\GroupMembership.cshtml" />
+    <Content Include="Views\Parts\GroupMembership.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -153,6 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\Name.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\Name.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

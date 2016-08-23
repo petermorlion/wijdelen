@@ -8,6 +8,7 @@ using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using Orchard;
+using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
     public class AdminController : Controller {
@@ -15,12 +16,19 @@ namespace WijDelen.UserImport.Controllers {
         private readonly ICsvReader _csvReader;
         private readonly IUserImportService _userImportService;
         private readonly IMailService _mailService;
+        private readonly IGroupService _groupService;
 
-        public AdminController(IOrchardServices orchardServices, ICsvReader csvReader, IUserImportService userImportService, IMailService mailService) {
+        public AdminController(
+            IOrchardServices orchardServices, 
+            ICsvReader csvReader, 
+            IUserImportService userImportService, 
+            IMailService mailService,
+            IGroupService groupService) {
             _orchardServices = orchardServices;
             _csvReader = csvReader;
             _userImportService = userImportService;
             _mailService = mailService;
+            _groupService = groupService;
 
             T = NullLocalizer.Instance;
         }
@@ -32,17 +40,28 @@ namespace WijDelen.UserImport.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
-            return View(new AdminIndexViewModel());
+            var groups = _groupService.GetGroups();
+            return View(new AdminIndexViewModel { Groups = groups });
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase usersFile, string group, string groupName) {
+        public ActionResult Index(AdminIndexViewModel viewModel) {
             if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }
 
-            var users = _csvReader.ReadUsers(usersFile.InputStream);
+            var users = _csvReader.ReadUsers(viewModel.File.InputStream);
             var userImportResults = _userImportService.ImportUsers(users);
+
+            string groupName;
+            if (viewModel.UserImportLinkMode == UserImportLinkMode.New) {
+                groupName = viewModel.NewGroupName;
+            }
+            else {
+                groupName = _groupService.GetGroups().Single(g => g.Id == viewModel.SelectedGroupId).Name;
+            }
+
+            _groupService.AddUsersToGroup(groupName, userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User));
 
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
