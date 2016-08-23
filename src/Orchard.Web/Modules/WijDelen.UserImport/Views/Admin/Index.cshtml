@@ -17,11 +17,11 @@
         <span class="hint">@T("Specify a new group or choose an existing one.")</span>
         
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.New, new {id="newGroup", name="group"})
-        <label for="newGroup">@T("New")</label>
-        @Html.TextBoxFor(m => m.NewGroupName)<br/>
+        <label for="newGroup" class="forcheckbox">@T("New")</label>
+        @Html.TextBoxFor(m => m.NewGroupName, new {})<br/>
 
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.Existing, new {id="existingGroup", name="group"})
-        <label for="existingGroup">@T("Existing")</label> 
+        <label for="existingGroup" class="forcheckbox">@T("Existing")</label> 
         @Html.DropDownListFor(m => m.SelectedGroupId, new SelectList(Model.Groups, "Id", "Name"))
     </fieldset>
 
