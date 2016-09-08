@@ -71,6 +71,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\EventSourcing\EventSourced.cs" />
+    <Compile Include="Domain\EventSourcing\IEvent.cs" />
+    <Compile Include="Domain\EventSourcing\IEventSourced.cs" />
+    <Compile Include="Domain\EventSourcing\IVersionedEvent.cs" />
+    <Compile Include="Domain\EventSourcing\VersionedEvent.cs" />
+    <Compile Include="Domain\Events\ObjectRequestInfoUpdated.cs" />
+    <Compile Include="Domain\ObjectRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
