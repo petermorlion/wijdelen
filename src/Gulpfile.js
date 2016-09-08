@@ -1,3 +1,4 @@
+/// <binding BeforeBuild='build' />
 var fs = require("fs"),
     glob = require("glob"),
     path = require("path-posix"),
@@ -80,6 +81,8 @@ gulp.task("watch", function () {
 
 function getAssetGroups() {
     var assetManifestPaths = glob.sync("Orchard.Web/{Core,Modules,Themes}/*/Assets.json");
+    var customThemePaths = glob.sync("AnotherLocation/MyCompanyThemes/*/Assets.json");
+    assetManifestPaths = assetManifestPaths.concat(customThemePaths);
     var assetGroups = [];
     assetManifestPaths.forEach(function (assetManifestPath) {
         var assetManifest = require("./" + assetManifestPath);

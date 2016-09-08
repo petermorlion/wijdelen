@@ -90,9 +90,10 @@
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
     <Content Include="WijDelen.Groups\Content\favicon.ico" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\demo\index.html" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\normalize.css" />
     <Content Include="WijDelen.Groups\Scripts\script.js" />
-    <Content Include="WijDelen.Groups\Styles\milligram.min.css" />
-    <Content Include="WijDelen.Groups\Styles\reset.css" />
+    <Content Include="WijDelen.Groups\Assets\reset.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.min.css" />
     <Content Include="WijDelen.Groups\ThemeZonePreview.png" />
@@ -237,6 +238,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Document.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\milligram.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Base.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Blockquote.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Button.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Code.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Color.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Form.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Grid.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Link.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_List.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Misc.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Spacing.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Table.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Typography.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Utility.less" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\license" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\CHANGELOG.md" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\LICENSE.md" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\package.json" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\README.md" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\package.json" />
+    <Content Include="WijDelen.Groups\node_modules\milligram-less\readme.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

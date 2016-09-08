@@ -1,8 +1,8 @@
 [
     {
       "inputs": [
-        "Styles/reset.css",
-        "Styles/milligram.min.css",
+        "Assets/reset.css",
+        "node_modules/milligram-less/dist/milligram.less",
         "Assets/Styles.less"
       ],
         "output": "Styles/Styles.css"

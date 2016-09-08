@@ -1,0 +1,14 @@
+{
+  "name": "wijdelen-groups-theme",
+  "version": "1.0.0",
+  "description": "Theme for WijDelen Groups on Orchard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Morlion",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "milligram-less": "^1.0.0"
+  }
+}

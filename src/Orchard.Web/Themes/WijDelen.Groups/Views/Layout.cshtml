@@ -15,9 +15,13 @@
     ***************************************************************/
 
     SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
-    Style.Include("reset.css");
-    Style.Include("milligram.min.css");
+
+#if DEBUG
     Style.Include("Styles.css");
+#else
+    Style.Include("Styles.min.css");
+#endif
+
     Script.Include("script.js");
 
     /* Layout classification based on filled zones
