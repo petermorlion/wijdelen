@@ -189,3 +189,9 @@ src/Orchard.Azure/Orchard.Azure.CloudService/Staging/
 !lib/**/*.*
 */.vs/*
 src/Rebracer.xml
+
+# =========================
+# WijDelen specifics
+# =========================
+
+src/Orchard.Web/Themes/WijDelen.Groups/node_modules
