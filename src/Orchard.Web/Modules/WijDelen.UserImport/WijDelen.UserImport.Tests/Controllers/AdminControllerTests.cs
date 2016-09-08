@@ -126,5 +126,26 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 groupService.Verify(x => x.AddUsersToGroup("New Group", It.IsAny<IEnumerable<IUser>>()));
             }
         }
+
+        [Test]
+        public void TestIndexPostWithoutNewGroupName() {
+            var orchardServices = new Mock<IOrchardServices>();
+            var authorizer = new Mock<IAuthorizer>();
+
+            orchardServices.Setup(x => x.Authorizer).Returns(authorizer.Object);
+            authorizer.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+
+            var controller = new AdminController(orchardServices.Object, null, null, null, null);
+            var viewModel = new AdminIndexViewModel {
+                NewGroupName = "",
+                UserImportLinkMode = UserImportLinkMode.New
+            };
+
+            var result = controller.Index(viewModel);
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult)result).ViewName);
+            Assert.AreEqual("Please provide a group name to create a new group.", ((ViewResult)result).ViewData.ModelState["NewGroupName"].Errors.Single().ErrorMessage);
+        }
     }
 }

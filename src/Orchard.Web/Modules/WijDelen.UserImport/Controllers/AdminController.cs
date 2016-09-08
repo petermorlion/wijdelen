@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Utility.Extensions;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using Orchard;
 using WijDelen.UserImport.ViewModels;
@@ -48,6 +46,11 @@ namespace WijDelen.UserImport.Controllers {
         public ActionResult Index(AdminIndexViewModel viewModel) {
             if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
+            }
+
+            if (viewModel.UserImportLinkMode == UserImportLinkMode.New && string.IsNullOrEmpty(viewModel.NewGroupName)) {
+                ModelState.AddModelError("NewGroupName", T("Please provide a group name to create a new group."));
+                return View();
             }
 
             var users = _csvReader.ReadUsers(viewModel.File.InputStream);

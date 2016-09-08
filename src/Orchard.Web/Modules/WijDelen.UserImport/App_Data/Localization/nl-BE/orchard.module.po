@@ -142,3 +142,8 @@ msgstr "Nieuw"
 #| msgid "Existing"
 msgid "Existing"
 msgstr "Bestaande"
+
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "Please provide a group name to create a new group."
+msgid "Please provide a group name to create a new group."
+msgstr "Gelieve de groep een naam te geven om een nieuwe groep te creëren."
