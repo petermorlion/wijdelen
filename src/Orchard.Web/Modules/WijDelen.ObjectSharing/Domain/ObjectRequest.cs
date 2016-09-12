@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 
@@ -8,22 +8,17 @@ namespace WijDelen.ObjectSharing.Domain {
     /// </summary>
     public class ObjectRequest : EventSourced
     {
-        public ObjectRequest(int id) : base(id) {
-            Handles<ObjectRequestInfoUpdated>(OnInfoUpdated);
+        public ObjectRequest(Guid id) : base(id) {
+            Handles<ObjectRequested>(OnObjectRequested);
         }
 
-        private void OnInfoUpdated(ObjectRequestInfoUpdated infoUpdated) {
+        public ObjectRequest(Guid id, string description, string extraInfo) : this(id) {
+            Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo });
+        }
+
+        private void OnObjectRequested(ObjectRequested infoUpdated) {
             Description = infoUpdated.Description;
             ExtraInfo = infoUpdated.ExtraInfo;
-        }
-
-        /// <summary>
-        /// Sets the (shorter) description and the (longer) extra info.
-        /// </summary>
-        /// <param name="description">A short description of the object</param>
-        /// <param name="extraInfo">Extra info as to why the user needs it, what he/she plans to do with it, etc.</param>
-        public void UpdateInfo(string description, string extraInfo) {
-            Update(new ObjectRequestInfoUpdated { Description = description, ExtraInfo = extraInfo });
         }
 
         /// <summary>

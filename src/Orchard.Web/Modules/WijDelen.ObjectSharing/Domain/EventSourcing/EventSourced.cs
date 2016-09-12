@@ -14,12 +14,12 @@ namespace WijDelen.ObjectSharing.Domain.EventSourcing {
         private readonly Dictionary<Type, Action<IVersionedEvent>> _handlers = new Dictionary<Type, Action<IVersionedEvent>>();
         private readonly List<IVersionedEvent> _pendingEvents = new List<IVersionedEvent>();
 
-        protected EventSourced(int id)
+        protected EventSourced(Guid id)
         {
             Id = id;
         }
 
-        public int Id { get; }
+        public Guid Id { get; }
 
         /// <summary>
         /// Gets the entity's version. As the entity is being updated and events being generated, the _version is incremented.

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WijDelen.ObjectSharing.Domain.EventSourcing {
     /// <summary>
@@ -9,7 +10,7 @@ namespace WijDelen.ObjectSharing.Domain.EventSourcing {
         /// <summary>
         /// Gets the entity identifier.
         /// </summary>
-        int Id { get; }
+        Guid Id { get; }
 
         /// <summary>
         /// Gets the entity's version. As the entity is being updated and events being generated, the version is incremented.

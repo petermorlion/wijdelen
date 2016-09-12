@@ -71,13 +71,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
+    <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\EventSourcing\IEvent.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourced.cs" />
+    <Compile Include="Domain\EventSourcing\IEventSourcedRepository.cs" />
     <Compile Include="Domain\EventSourcing\IVersionedEvent.cs" />
     <Compile Include="Domain\EventSourcing\VersionedEvent.cs" />
-    <Compile Include="Domain\Events\ObjectRequestInfoUpdated.cs" />
+    <Compile Include="Domain\Events\ObjectRequested.cs" />
+    <Compile Include="Domain\Messaging\ICommand.cs" />
+    <Compile Include="Domain\Messaging\ICommandHandler.cs" />
     <Compile Include="Domain\ObjectRequest.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\VersionedEventRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +109,6 @@
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
