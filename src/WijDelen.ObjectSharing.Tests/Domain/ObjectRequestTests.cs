@@ -24,5 +24,21 @@ namespace WijDelen.ObjectSharing.Tests.Domain {
 
             objectRequest.Version.Should().Be(0);
         }
+
+        [Test]
+        public void WhenConstructingFromHistory() {
+            var id = Guid.NewGuid();
+            var previousEvent = new ObjectRequested {
+                Description = "Sneakers",
+                ExtraInfo = "For sneaking"
+            };
+
+            var objectRequest = new ObjectRequest(id, new [] {previousEvent});
+
+            objectRequest.Events.Should().BeEmpty();
+            objectRequest.Version.Should().Be(0);
+            objectRequest.Description.Should().Be("Sneakers");
+            objectRequest.ExtraInfo.Should().Be("For sneaking");
+        }
     }
 }

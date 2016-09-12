@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 
@@ -14,6 +15,12 @@ namespace WijDelen.ObjectSharing.Domain {
 
         public ObjectRequest(Guid id, string description, string extraInfo) : this(id) {
             Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo });
+        }
+
+        public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history)
+            : this(id)
+        {
+            LoadFrom(history);
         }
 
         private void OnObjectRequested(ObjectRequested infoUpdated) {
