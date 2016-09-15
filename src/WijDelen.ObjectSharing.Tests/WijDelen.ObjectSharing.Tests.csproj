@@ -39,6 +39,10 @@
       <HintPath>..\packages\FluentAssertions.4.14.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -67,6 +71,11 @@
   <ItemGroup>
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
     <Compile Include="Domain\ObjectRequestTests.cs" />
+    <Compile Include="Infrastructure\Fakes\Created.cs" />
+    <Compile Include="Infrastructure\Fakes\EventSourcedAggregate.cs" />
+    <Compile Include="Infrastructure\JsonTextSerializer.cs" />
+    <Compile Include="Infrastructure\Fakes\Modified.cs" />
+    <Compile Include="Infrastructure\OrchardEventSourcedRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +87,12 @@
       <Project>{b9dc31d9-3069-4bda-9601-4db74950c281}</Project>
       <Name>WijDelen.ObjectSharing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,4 @@
 ﻿using System;
-using Orchard.Commands;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
