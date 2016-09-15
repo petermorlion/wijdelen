@@ -18,7 +18,7 @@
         
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.New, new {id="newGroup", name="group"})
         <label for="newGroup" class="forcheckbox">@T("New")</label>
-        @Html.TextBoxFor(m => m.NewGroupName, new {class="text"})<br/>
+        @Html.TextBoxFor(m => m.NewGroupName, new {@class="text"})<br/>
 
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.Existing, new {id="existingGroup", name="group"})
         <label for="existingGroup" class="forcheckbox">@T("Existing")</label> 
