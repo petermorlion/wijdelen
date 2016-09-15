@@ -56,7 +56,11 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         public ActionResult Index(Guid id) {
-            var record = _repository.Fetch(x => x.AggregateId == id).Single();
+            var record = _repository.Fetch(x => x.AggregateId == id).SingleOrDefault();
+
+            if (record == null) {
+                return new HttpNotFoundResult();
+            }
 
             if (record.UserId != _orchardServices.WorkContext.CurrentUser.Id) {
                 return new HttpUnauthorizedResult();

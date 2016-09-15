@@ -124,5 +124,22 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             ((ViewResult) actionResult).Model.Should().Be(persistentRecords[0]);
         }
+
+        [Test]
+        public void WhenGettingIndexForUnknownId_ShouldReturnUnauthorized()
+        {
+            var id = Guid.NewGuid();
+
+            var persistentRecords = new ObjectRequestRecord[0];
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null);
+
+            var actionResult = controller.Index(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
     }
 }
