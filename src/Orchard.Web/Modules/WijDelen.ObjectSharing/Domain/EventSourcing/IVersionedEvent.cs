@@ -1,4 +1,6 @@
-﻿namespace WijDelen.ObjectSharing.Domain.EventSourcing {
+﻿using WijDelen.ObjectSharing.Domain.Messaging;
+
+namespace WijDelen.ObjectSharing.Domain.EventSourcing {
     /// <summary>
     /// Represents an event message that belongs to an ordered event stream.
     /// </summary>

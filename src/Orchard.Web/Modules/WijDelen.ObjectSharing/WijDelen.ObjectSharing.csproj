@@ -108,10 +108,13 @@
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
-    <Compile Include="Domain\EventSourcing\IEvent.cs" />
+    <Compile Include="Domain\Messaging\EventBus.cs" />
+    <Compile Include="Domain\Messaging\IEvent.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourced.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourcedRepository.cs" />
     <Compile Include="Domain\EventSourcing\IVersionedEvent.cs" />
+    <Compile Include="Domain\Messaging\IEventBus.cs" />
+    <Compile Include="Domain\Messaging\IEventHandler.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepository.cs" />
     <Compile Include="Domain\EventSourcing\VersionedEvent.cs" />
     <Compile Include="Domain\Events\ObjectRequested.cs" />
@@ -145,6 +148,7 @@
   <ItemGroup>
     <Folder Include="App_Data\Localization\nl-BE\" />
     <Folder Include="Assets\" />
+    <Folder Include="Domain\EventHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

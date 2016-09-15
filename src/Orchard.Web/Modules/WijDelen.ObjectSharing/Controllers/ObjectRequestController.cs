@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Themes;
@@ -42,6 +43,10 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             return View(viewModel);
         }
+
+        //public ActionResult Index(Guid id) {
+
+        //}
 
         public Localizer T { get; set; }
     }

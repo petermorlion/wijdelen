@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WijDelen.ObjectSharing.Domain.Messaging;
 
 namespace WijDelen.ObjectSharing.Domain.EventSourcing {
     /// <summary>

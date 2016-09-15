@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WijDelen.ObjectSharing.Domain.EventSourcing {
+namespace WijDelen.ObjectSharing.Domain.Messaging {
     /// <summary>
     /// Represents an event message.
     /// </summary>
