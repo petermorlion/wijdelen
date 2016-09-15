@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
