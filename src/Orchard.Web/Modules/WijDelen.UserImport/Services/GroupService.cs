@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Orchard.ContentManagement;
-using Orchard.Data;
 using Orchard.Security;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;

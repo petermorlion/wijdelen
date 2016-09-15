@@ -6,9 +6,10 @@ namespace WijDelen.ObjectSharing {
     public class Migrations : DataMigrationImpl {
 
         public int Create() {
-            SchemaBuilder.CreateTable(typeof(VersionedEventRecord).Name, table => table
+            SchemaBuilder.CreateTable(typeof(EventRecord).Name, table => table
+                .Column<int>("Id", column => column.PrimaryKey().Identity())
                 .Column<DateTime>("Timestamp", column => column.NotNull())
-                .Column<int>("AggregateId", column => column.NotNull())
+                .Column<Guid>("AggregateId", column => column.NotNull())
                 .Column<string>("AggregateType", column => column.NotNull())
                 .Column<int>("Version", column => column.NotNull())
                 .Column<string>("Payload", column => column.NotNull())

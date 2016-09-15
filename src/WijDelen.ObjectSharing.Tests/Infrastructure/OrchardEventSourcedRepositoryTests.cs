@@ -22,15 +22,15 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure {
             var aggregate = new EventSourcedAggregate(id);
             aggregate.Modify();
 
-            var persistentRecords = new List<VersionedEventRecord>();
+            var persistentRecords = new List<EventRecord>();
             
-            var repositoryMock = new Mock<IRepository<VersionedEventRecord>>();
+            var repositoryMock = new Mock<IRepository<EventRecord>>();
             repositoryMock
-                .Setup(x => x.Update(It.IsAny<VersionedEventRecord>()))
-                .Callback((VersionedEventRecord e) => { persistentRecords.Add(e); });
+                .Setup(x => x.Update(It.IsAny<EventRecord>()))
+                .Callback((EventRecord e) => { persistentRecords.Add(e); });
             repositoryMock
-                .Setup(x => x.Fetch(It.IsAny<Expression<Func<VersionedEventRecord, bool>>>()))
-                .Returns((Expression<Func<VersionedEventRecord, bool>> expression) => {
+                .Setup(x => x.Fetch(It.IsAny<Expression<Func<EventRecord, bool>>>()))
+                .Returns((Expression<Func<EventRecord, bool>> expression) => {
                     var func = expression.Compile();
                     return persistentRecords.Where(func).ToList();
                 });

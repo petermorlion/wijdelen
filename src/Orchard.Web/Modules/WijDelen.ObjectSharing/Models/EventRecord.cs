@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace WijDelen.ObjectSharing.Models {
-    public class VersionedEventRecord {
+    public class EventRecord {
+        public virtual int Id { get; set; }
         public virtual DateTime Timestamp { get; set; }
         public virtual Guid AggregateId { get; set; }
         public virtual string AggregateType { get; set; }

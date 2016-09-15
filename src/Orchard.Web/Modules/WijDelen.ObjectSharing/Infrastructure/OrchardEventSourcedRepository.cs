@@ -9,11 +9,11 @@ using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class OrchardEventSourcedRepository<T> : IEventSourcedRepository<T> where T : class, IEventSourced {
-        private readonly IRepository<VersionedEventRecord> _orchardRepository;
+        private readonly IRepository<EventRecord> _orchardRepository;
         private readonly Func<Guid, IEnumerable<IVersionedEvent>, T> _entityFactory;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
-        public OrchardEventSourcedRepository(IRepository<VersionedEventRecord> orchardRepository) {
+        public OrchardEventSourcedRepository(IRepository<EventRecord> orchardRepository) {
             _jsonSerializerSettings = new JsonSerializerSettings {
                 TypeNameHandling = TypeNameHandling.All,
                 TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
@@ -44,7 +44,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             return null;
         }
 
-        private IVersionedEvent Deserialize(VersionedEventRecord e) {
+        private IVersionedEvent Deserialize(EventRecord e) {
             var deserializeObject = JsonConvert.DeserializeObject(e.Payload, _jsonSerializerSettings);
             return (IVersionedEvent)deserializeObject;
         }
@@ -58,13 +58,14 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             // TODO: publish on eventbus
         }
 
-        private VersionedEventRecord Serialize(IVersionedEvent e, string correlationId) {
-            var versionedEventRecord = new VersionedEventRecord {
+        private EventRecord Serialize(IVersionedEvent e, string correlationId) {
+            var versionedEventRecord = new EventRecord {
                 AggregateId = e.SourceId,
                 AggregateType = typeof(T).Name,
                 Version = e.Version,
                 Payload = JsonConvert.SerializeObject(e, _jsonSerializerSettings),
-                CorrelationId = correlationId
+                CorrelationId = correlationId,
+                Timestamp = DateTime.UtcNow
             };
 
             return versionedEventRecord;
