@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
+    <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\EventBusTests.cs" />
     <Compile Include="Domain\Messaging\Fakes\FakeEvent.cs" />
     <Compile Include="Domain\Messaging\Fakes\FakeEventHandler.cs" />

@@ -107,6 +107,7 @@
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />
     <Compile Include="Domain\Messaging\IEvent.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Domain\ObjectRequest.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />
+    <Compile Include="Models\ObjectRequestRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
   </ItemGroup>
@@ -148,7 +150,6 @@
   <ItemGroup>
     <Folder Include="App_Data\Localization\nl-BE\" />
     <Folder Include="Assets\" />
-    <Folder Include="Domain\EventHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

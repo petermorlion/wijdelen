@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace WijDelen.ObjectSharing.Models {
+    /// <summary>
+    /// Represents the events as used in event sourcing to rehydrate our aggregate roots.
+    /// </summary>
     public class EventRecord {
         public virtual int Id { get; set; }
         public virtual DateTime Timestamp { get; set; }
