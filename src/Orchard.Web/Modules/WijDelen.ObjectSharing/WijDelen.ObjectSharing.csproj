@@ -138,6 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Localization\nl-BE\" />
     <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
