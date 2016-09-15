@@ -1,0 +1,24 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel
+
+@{
+    Layout.Title = T("Request object").ToString();
+}
+
+<h1>@T("Request object")</h1>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("ObjectRequest", "New", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <legend>@T("Description")</legend>
+        @Html.LabelFor(m => m.Description, T("Please provide a short description of the item"))
+        @Html.TextBoxFor(m => m.Description)
+    </fieldset>
+
+    <fieldset>
+        <legend>@T("Extra info")</legend>
+        @Html.LabelFor(m => m.Description, T("Here you can provide extra info on what you need the item for, how long you need it, etc."))
+        @Html.TextAreaFor(m => m.Description)
+    </fieldset>
+
+    <button class="primaryAction">@T("Submit")</button>
+}
