@@ -12,12 +12,14 @@
         <legend>@T("Description")</legend>
         @Html.LabelFor(m => m.Description, T("Please provide a short description of the item"))
         @Html.TextBoxFor(m => m.Description)
+        @Html.ValidationMessageFor(m => m.Description)
     </fieldset>
 
     <fieldset>
         <legend>@T("Extra info")</legend>
-        @Html.LabelFor(m => m.Description, T("Here you can provide extra info on what you need the item for, how long you need it, etc."))
-        @Html.TextAreaFor(m => m.Description)
+        @Html.LabelFor(m => m.ExtraInfo, T("Here you can provide extra info on what you need the item for, how long you need it, etc."))
+        @Html.TextAreaFor(m => m.ExtraInfo)
+        @Html.ValidationMessageFor(m => m.ExtraInfo)
     </fieldset>
 
     <button class="primaryAction">@T("Submit")</button>
