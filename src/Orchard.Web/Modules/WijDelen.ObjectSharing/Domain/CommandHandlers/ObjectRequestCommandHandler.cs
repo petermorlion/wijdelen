@@ -11,7 +11,7 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
             _repository = repository;
         }
         public void Handle(RequestObject command) {
-            var objectRequest = new ObjectRequest(Guid.NewGuid(), command.Description, command.ExtraInfo);
+            var objectRequest = new ObjectRequest(command.ObjectRequestId, command.Description, command.ExtraInfo);
             _repository.Save(objectRequest, command.Id.ToString());
         }
     }

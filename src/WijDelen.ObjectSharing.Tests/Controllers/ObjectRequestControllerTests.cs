@@ -19,7 +19,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new ObjectRequestController(null);
+            var controller = new ObjectRequestController(null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -29,7 +29,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void ShouldValidateNewObjectRequest() {
-            var controller = new ObjectRequestController(null);
+            var controller = new ObjectRequestController(null, null);
             var viewModel = new NewObjectRequestViewModel();
 
             var viewResult = controller.New(viewModel);
@@ -39,22 +39,23 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenPosting_ShouldCallCommandHandler()
+        public void WhenPosting_ShouldCallCommandHandlerAndRedirect()
         {
             var commandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
             RequestObject command = null;
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
 
-            var controller = new ObjectRequestController(commandHandlerMock.Object);
+            var controller = new ObjectRequestController(commandHandlerMock.Object, null);
             var viewModel = new NewObjectRequestViewModel
             {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking"
             };
 
-            var viewResult = controller.New(viewModel);
+            var actionResult = controller.New(viewModel);
 
-            ((ViewResult)viewResult).ViewData.ModelState.IsValid.Should().BeTrue();
+            ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult)actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
 
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking");

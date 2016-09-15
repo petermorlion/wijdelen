@@ -21,6 +21,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
 
             commandHandler.Handle(command);
 
+            objectRequest.Id.Should().Be(command.ObjectRequestId);
             objectRequest.ExtraInfo.Should().Be("extraInfo");
             objectRequest.Description.Should().Be("description");
             objectRequest.Events.Single().ShouldBeEquivalentTo(new ObjectRequested {

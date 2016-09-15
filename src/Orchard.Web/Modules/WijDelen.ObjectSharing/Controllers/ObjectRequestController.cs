@@ -1,20 +1,25 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Themes;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     public class ObjectRequestController : Controller {
         private readonly ICommandHandler<RequestObject> _requestObjectCommandHandler;
+        private readonly IRepository<ObjectRequestRecord> _repository;
 
-        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler)
+        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler, IRepository<ObjectRequestRecord> repository)
         {
             _requestObjectCommandHandler = requestObjectCommandHandler;
+            _repository = repository;
             T = NullLocalizer.Instance;
         }
 
@@ -41,12 +46,13 @@ namespace WijDelen.ObjectSharing.Controllers {
             var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo);
             _requestObjectCommandHandler.Handle(command);
 
-            return View(viewModel);
+            return RedirectToAction("Index", new {id = command.ObjectRequestId});
         }
 
-        //public ActionResult Index(Guid id) {
-
-        //}
+        public ActionResult Index(Guid id) {
+            var record = _repository.Fetch(x => x.AggregateId == id).Single();
+            return View(record);
+        }
 
         public Localizer T { get; set; }
     }
