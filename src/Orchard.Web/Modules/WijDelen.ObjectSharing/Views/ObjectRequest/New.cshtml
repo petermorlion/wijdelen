@@ -6,7 +6,7 @@
 
 <h1>@T("Request object")</h1>
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("ObjectRequest", "New", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <fieldset>
         <legend>@T("Description")</legend>
