@@ -16,10 +16,6 @@ namespace WijDelen.ObjectSharing {
                 .Column<string>("CorrelationId", column => column.NotNull())
             );
 
-            return 1;
-        }
-
-        public int UpdateFrom1() {
             SchemaBuilder.CreateTable(typeof(ObjectRequestRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("AggregateId", column => column.Unique().NotNull())
@@ -28,7 +24,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<int>("Version", column => column.NotNull())
             );
 
-            return 2;
+            return 1;
         }
     }
 }
