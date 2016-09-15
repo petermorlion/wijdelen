@@ -5,21 +5,24 @@ using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
 using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class OrchardEventSourcedRepository<T> : IEventSourcedRepository<T> where T : class, IEventSourced {
         private readonly IRepository<EventRecord> _orchardRepository;
+        private readonly IEventBus _eventBus;
         private readonly Func<Guid, IEnumerable<IVersionedEvent>, T> _entityFactory;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
-        public OrchardEventSourcedRepository(IRepository<EventRecord> orchardRepository) {
+        public OrchardEventSourcedRepository(IRepository<EventRecord> orchardRepository, IEventBus eventBus) {
             _jsonSerializerSettings = new JsonSerializerSettings {
                 TypeNameHandling = TypeNameHandling.All,
                 TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
             };
 
             _orchardRepository = orchardRepository;
+            _eventBus = eventBus;
 
             var constructor = typeof(T).GetConstructor(new[] { typeof(Guid), typeof(IEnumerable<IVersionedEvent>) });
             if (constructor == null)
@@ -55,7 +58,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 _orchardRepository.Update(e);
             });
 
-            // TODO: publish on eventbus
+            eventSourced.Events.ToList().ForEach(e => {
+                _eventBus.Publish(e);
+            });
         }
 
         private EventRecord Serialize(IVersionedEvent e, string correlationId) {
