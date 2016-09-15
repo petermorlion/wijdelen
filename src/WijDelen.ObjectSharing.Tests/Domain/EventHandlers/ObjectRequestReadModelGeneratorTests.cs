@@ -8,6 +8,7 @@ using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
@@ -19,13 +20,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             };
 
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock
-                .Setup(x => x.Fetch(It.IsAny<Expression<Func<ObjectRequestRecord, bool>>>()))
-                .Returns((Expression<Func<ObjectRequestRecord, bool>> expression) => {
-                    var func = expression.Compile();
-                    return persistentRecords.Where(func).ToList();
-                });
-
+            repositoryMock.SetRecords(persistentRecords);
+            
             ObjectRequestRecord newRecord = null;
             repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => newRecord = r);
 
@@ -35,7 +31,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 SourceId = aggregateId,
                 Version = 0,
                 Description = "Sneakers",
-                ExtraInfo = "For sneaking"
+                ExtraInfo = "For sneaking",
+                UserId = 22
             };
 
             handler.Handle(e);
@@ -44,6 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             newRecord.Version.Should().Be(0);
             newRecord.Description.Should().Be("Sneakers");
             newRecord.ExtraInfo.Should().Be("For sneaking");
+            newRecord.UserId.Should().Be(22);
         }
     }
 }

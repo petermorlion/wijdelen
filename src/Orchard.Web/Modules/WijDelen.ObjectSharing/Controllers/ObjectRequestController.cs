@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
@@ -15,11 +16,14 @@ namespace WijDelen.ObjectSharing.Controllers {
     public class ObjectRequestController : Controller {
         private readonly ICommandHandler<RequestObject> _requestObjectCommandHandler;
         private readonly IRepository<ObjectRequestRecord> _repository;
+        private readonly IOrchardServices _orchardServices;
 
-        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler, IRepository<ObjectRequestRecord> repository)
+        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler, IRepository<ObjectRequestRecord> repository, IOrchardServices orchardServices)
         {
             _requestObjectCommandHandler = requestObjectCommandHandler;
             _repository = repository;
+            _orchardServices = orchardServices;
+
             T = NullLocalizer.Instance;
         }
 
@@ -43,7 +47,9 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return View(viewModel);
             }
 
-            var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo);
+            var currentUser = _orchardServices.WorkContext.CurrentUser;
+
+            var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo, currentUser.Id);
             _requestObjectCommandHandler.Handle(command);
 
             return RedirectToAction("Index", new {id = command.ObjectRequestId});
@@ -51,6 +57,11 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public ActionResult Index(Guid id) {
             var record = _repository.Fetch(x => x.AggregateId == id).Single();
+
+            if (record.UserId != _orchardServices.WorkContext.CurrentUser.Id) {
+                return new HttpUnauthorizedResult();
+            }
+
             return View(record);
         }
 

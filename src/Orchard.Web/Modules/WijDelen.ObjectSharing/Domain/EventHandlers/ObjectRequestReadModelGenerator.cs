@@ -23,7 +23,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     AggregateId = e.SourceId,
                     Description = e.Description,
                     ExtraInfo = e.ExtraInfo,
-                    Version = e.Version
+                    Version = e.Version,
+                    UserId = e.UserId
                 };
 
                 _repository.Update(newRecord);

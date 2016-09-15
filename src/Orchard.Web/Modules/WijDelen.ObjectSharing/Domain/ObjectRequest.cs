@@ -13,8 +13,8 @@ namespace WijDelen.ObjectSharing.Domain {
             Handles<ObjectRequested>(OnObjectRequested);
         }
 
-        public ObjectRequest(Guid id, string description, string extraInfo) : this(id) {
-            Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo });
+        public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
+            Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo, UserId = userId });
         }
 
         public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history)
@@ -23,9 +23,10 @@ namespace WijDelen.ObjectSharing.Domain {
             LoadFrom(history);
         }
 
-        private void OnObjectRequested(ObjectRequested infoUpdated) {
-            Description = infoUpdated.Description;
-            ExtraInfo = infoUpdated.ExtraInfo;
+        private void OnObjectRequested(ObjectRequested objectRequested) {
+            Description = objectRequested.Description;
+            ExtraInfo = objectRequested.ExtraInfo;
+            UserId = objectRequested.UserId;
         }
 
         /// <summary>
@@ -37,5 +38,10 @@ namespace WijDelen.ObjectSharing.Domain {
         /// Extra info as to why the user needs it, what he/she plans to do with it, etc.
         /// </summary>
         public string ExtraInfo { get; private set; }
+
+        /// <summary>
+        /// The id of the user that requested the object.
+        /// </summary>
+        public int UserId { get; private set; }
     }
 }

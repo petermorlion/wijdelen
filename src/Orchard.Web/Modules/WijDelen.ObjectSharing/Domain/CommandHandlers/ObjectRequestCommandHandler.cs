@@ -1,5 +1,4 @@
-﻿using System;
-using WijDelen.ObjectSharing.Domain.Commands;
+﻿using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 
@@ -11,7 +10,7 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
             _repository = repository;
         }
         public void Handle(RequestObject command) {
-            var objectRequest = new ObjectRequest(command.ObjectRequestId, command.Description, command.ExtraInfo);
+            var objectRequest = new ObjectRequest(command.ObjectRequestId, command.Description, command.ExtraInfo, command.UserId);
             _repository.Save(objectRequest, command.Id.ToString());
         }
     }

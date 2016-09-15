@@ -14,7 +14,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
         [Test]
         public void WhenHandlingRequestObjectCommand_ShouldCreateNewObjectRequest() {
             ObjectRequest objectRequest = null;
-            var command = new RequestObject("description", "extraInfo");
+            var command = new RequestObject("description", "extraInfo", 22);
             var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
             repositoryMock.Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString())).Callback((ObjectRequest o, string correlationId) => objectRequest = o);
             var commandHandler = new ObjectRequestCommandHandler(repositoryMock.Object);
@@ -22,6 +22,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
             commandHandler.Handle(command);
 
             objectRequest.Id.Should().Be(command.ObjectRequestId);
+            objectRequest.UserId.Should().Be(22);
             objectRequest.ExtraInfo.Should().Be("extraInfo");
             objectRequest.Description.Should().Be("description");
             objectRequest.Events.Single().ShouldBeEquivalentTo(new ObjectRequested {

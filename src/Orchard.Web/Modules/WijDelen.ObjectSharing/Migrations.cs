@@ -22,6 +22,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("Description", column => column.NotNull())
                     .Column<string>("ExtraInfo", column => column.NotNull())
                     .Column<int>("Version", column => column.NotNull())
+                    .Column<int>("UserId", column => column.NotNull())
             );
 
             return 1;

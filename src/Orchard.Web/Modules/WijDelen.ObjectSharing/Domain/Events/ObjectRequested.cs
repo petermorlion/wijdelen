@@ -11,5 +11,10 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// Extra info as to why the user needs it, what he/she plans to do with it, etc.
         /// </summary>
         public string ExtraInfo { get; set; }
+
+        /// <summary>
+        /// The id of the user that requested the object.
+        /// </summary>
+        public int UserId { get; set; }
     }
 }

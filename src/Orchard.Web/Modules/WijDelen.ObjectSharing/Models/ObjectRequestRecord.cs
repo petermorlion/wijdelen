@@ -10,5 +10,6 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual string Description { get; set; }
         public virtual string ExtraInfo { get; set; }
         public virtual int Version { get; set; }
+        public virtual int UserId { get; set; }
     }
 }

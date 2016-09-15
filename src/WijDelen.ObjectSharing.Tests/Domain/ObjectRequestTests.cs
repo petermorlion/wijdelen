@@ -11,7 +11,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain {
         [Test]
         public void WhenCreatingObjectRequest() {
             var id = Guid.NewGuid();
-            var objectRequest = new ObjectRequest(id, "Sneakers", "for sneaking");
+            var objectRequest = new ObjectRequest(id, "Sneakers", "for sneaking", 22);
 
             objectRequest.Description.Should().Be("Sneakers");
             objectRequest.ExtraInfo.Should().Be("for sneaking");
@@ -19,7 +19,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain {
             objectRequest.Events.Single().ShouldBeEquivalentTo(new ObjectRequested {
                 SourceId = id,
                 Description = "Sneakers",
-                ExtraInfo = "for sneaking"
+                ExtraInfo = "for sneaking",
+                UserId = 22
             });
 
             objectRequest.Version.Should().Be(0);
@@ -30,7 +31,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain {
             var id = Guid.NewGuid();
             var previousEvent = new ObjectRequested {
                 Description = "Sneakers",
-                ExtraInfo = "For sneaking"
+                ExtraInfo = "For sneaking",
+                UserId = 22
             };
 
             var objectRequest = new ObjectRequest(id, new [] {previousEvent});
@@ -39,6 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain {
             objectRequest.Version.Should().Be(0);
             objectRequest.Description.Should().Be("Sneakers");
             objectRequest.ExtraInfo.Should().Be("For sneaking");
+            objectRequest.UserId.Should().Be(22);
         }
     }
 }

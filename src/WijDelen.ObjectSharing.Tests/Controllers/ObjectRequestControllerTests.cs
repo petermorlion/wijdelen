@@ -1,13 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Orchard;
+using Orchard.Data;
 using Orchard.Localization;
+using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.Controllers.Fakes;
+using WijDelen.ObjectSharing.Tests.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
@@ -19,7 +25,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new ObjectRequestController(null, null);
+            var controller = new ObjectRequestController(null, null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -29,7 +35,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void ShouldValidateNewObjectRequest() {
-            var controller = new ObjectRequestController(null, null);
+            var controller = new ObjectRequestController(null, null, null);
             var viewModel = new NewObjectRequestViewModel();
 
             var viewResult = controller.New(viewModel);
@@ -45,7 +51,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             RequestObject command = null;
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
 
-            var controller = new ObjectRequestController(commandHandlerMock.Object, null);
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var controller = new ObjectRequestController(commandHandlerMock.Object, null, services);
             var viewModel = new NewObjectRequestViewModel
             {
                 Description = "Sneakers",
@@ -59,6 +70,59 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking");
+            command.UserId.Should().Be(22);
+        }
+
+        [Test]
+        public void WhenGettingIndexForWrongUser_ShouldReturnUnauthorized() {
+            var id = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = id,
+                    UserId = 10
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+
+            var actionResult = controller.Index(id);
+
+            actionResult.Should().BeOfType<HttpUnauthorizedResult>();
+        }
+
+        [Test]
+        public void WhenGettingIndex_ShouldReturnView() {
+            var id = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = id,
+                    UserId = 22
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+
+            var actionResult = controller.Index(id);
+
+            ((ViewResult) actionResult).Model.Should().Be(persistentRecords[0]);
         }
     }
 }
