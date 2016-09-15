@@ -6,6 +6,8 @@
 }
 
 @using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Admin", new {Area = "WijDelen.UserImport"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+    @Html.ValidationSummary()
+
     <fieldset>
         <legend>@T("User File")</legend>
         @Html.LabelFor(m => m.File, T("Please use a CSV file with two columns: username and email"))
