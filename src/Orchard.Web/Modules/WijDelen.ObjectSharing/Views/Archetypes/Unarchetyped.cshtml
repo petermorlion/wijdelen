@@ -1,7 +1,23 @@
-﻿@{
+﻿@model IEnumerable<WijDelen.ObjectSharing.Models.UnarchetypedSynonymRecord>
+
+@{
     Layout.Title = T("Synonyms without archetype").ToString();
 }
 
-<h1>@T("Synonyms without archetype")</h1>
-
-<span>bla bla bla</span>
+<table>
+    <thead>
+    <tr>
+        <th>@T("Synonym")</th>
+        <th>@T("Archetype")</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Synonym</td>
+            <td></td>
+        </tr>
+    }
+    </tbody>
+</table>
