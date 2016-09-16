@@ -15,6 +15,8 @@ Main Accent: #04b17b
 Links: #04b17b
 */
 
+@import '../node_modules/milligram-less/dist/_Color.less';
+
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
 It does a reset first, then uses Milligram (https://milligram.github.io) as foundation 
@@ -27,17 +29,17 @@ body {
 }
 
 a {
-    color: #04b17b;
+    color: @color-primary;
 }
 
 a:hover {
-    color: #53caa3;
+    color: @color-secondary;
 }
 
 /*  Navigation
 ***************************************************************/
 .navigation {
-    background-color: #04b17b;
+    background-color: @color-primary;
     color: #fff;
     height: 5.2rem;
 }
@@ -55,4 +57,19 @@ a:hover {
 .menu li {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
+}
+
+/* Forms
+***************************************************************/
+
+.field-validation-error {
+    color: @color-invalid;
+}
+
+.input-validation-error {
+    border-color: @color-invalid;
+}
+
+input[type='text'].input-validation-error {
+    border-color: @color-invalid;
 }

@@ -6,6 +6,7 @@ using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Themes;
+using WijDelen.ObjectSharing;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -34,12 +35,11 @@ namespace WijDelen.ObjectSharing.Controllers {
         [HttpPost]
         public ActionResult New(NewObjectRequestViewModel viewModel) {
             if (string.IsNullOrWhiteSpace(viewModel.Description)) {
-                ModelState.AddModelError("Description", T("Please provide a description of the item you need."));
+                ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.Description, T("Please provide a description of the item you need."));
             }
 
-            if (string.IsNullOrWhiteSpace(viewModel.ExtraInfo))
-            {
-                ModelState.AddModelError("ExtraInfo", T("Please provide some extra info."));
+            if (string.IsNullOrWhiteSpace(viewModel.ExtraInfo)) {
+                ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some extra info."));
             }
 
             if (!ModelState.IsValid)
