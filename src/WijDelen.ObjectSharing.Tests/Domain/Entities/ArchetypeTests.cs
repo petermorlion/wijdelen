@@ -88,7 +88,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             itemArchetype.Events.ToList()[1].Should().BeOfType<ArchetypeSynonymAdded>();
             itemArchetype.Events.ToList()[2].As<ArchetypeSynonymRemoved>().Synonym.Should().Be("Sport shoes");
             itemArchetype.Version.Should().Be(2);
-            itemArchetype.Synonyms.Single().Should().BeEmpty();
+            itemArchetype.Synonyms.Should().BeEmpty();
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             itemArchetype.Events.ToList()[1].Should().BeOfType<ArchetypeSynonymAdded>();
             itemArchetype.Events.ToList()[2].As<ArchetypeSynonymRemoved>().Synonym.Should().Be("Sport shoes");
             itemArchetype.Version.Should().Be(2);
-            itemArchetype.Synonyms.Single().Should().BeEmpty();
+            itemArchetype.Synonyms.Should().BeEmpty();
         }
     }
 }

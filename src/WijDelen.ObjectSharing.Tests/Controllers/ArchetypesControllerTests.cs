@@ -52,7 +52,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void SynonmysShouldShowSynonyms() {
             var synonyms = new[] {
                 new ArchetypedSynonymRecord {
-                    Archetype = "Sneakers"
+                    Archetype = "Sneakers",
+                    Synonym = "Sporting shoes"
                 }
             };
 
@@ -60,8 +61,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             synonymsRepositoryMock.SetRecords(synonyms);
 
             var archetypes = new[] {
-                new ArchetypeRecord { Id = 30, Name = "Ladder" },
-                new ArchetypeRecord { Name= "Sneakers" }
+                new ArchetypeRecord { AggregateId = Guid.NewGuid(), Name = "Ladder" },
+                new ArchetypeRecord { AggregateId = Guid.NewGuid(), Name = "Sneakers" }
             };
 
             var archetypesRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
@@ -71,9 +72,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var result = controller.Synonyms();
 
-            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Synonym.Should().Be("Sneakers");
-            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetypeId.Should().Be("30");
-            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Should().BeEquivalentTo(archetypes);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Synonym.Should().Be("Sporting shoes");
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetypeId.Should().Be(archetypes[1].AggregateId.ToString());
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Count.Should().Be(2);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[0].Id.Should().Be(archetypes[0].AggregateId);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[0].Name.Should().Be(archetypes[0].Name);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[1].Id.Should().Be(archetypes[1].AggregateId);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[1].Name.Should().Be(archetypes[1].Name);
         }
 
         [Test]
