@@ -114,7 +114,7 @@
     <Compile Include="Domain\Entities\Archetype.cs" />
     <Compile Include="Domain\EventHandlers\ArchetypeReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
-    <Compile Include="Domain\EventHandlers\UnarchetypedSynonymGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\ArchetypedSynonymGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ArchetypeCreated.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />

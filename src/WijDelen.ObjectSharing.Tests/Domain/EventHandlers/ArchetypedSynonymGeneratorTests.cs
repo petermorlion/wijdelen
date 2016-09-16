@@ -10,9 +10,9 @@ using WijDelen.ObjectSharing.Tests.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
-    public class UnarchetypedSynonymGeneratorTests {
+    public class ArchetypedSynonymGeneratorTests {
         [Test]
-        public void WhenHandlingObjectRequested_ShouldSaveNewUnarchetypedSynonymRecord() {
+        public void WhenHandlingObjectRequested_ShouldSaveNewArchetypedSynonymRecord() {
             var persistentRecords = new[] {
                 new ArchetypedSynonymRecord { Synonym = "Sneakers" }
             };
@@ -24,7 +24,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             repositoryMock.Setup(x => x.Update(It.IsAny<ArchetypedSynonymRecord>())).Callback((ArchetypedSynonymRecord r) => newRecord = r);
 
             var aggregateId = Guid.NewGuid();
-            var handler = new UnarchetypedSynonymGenerator(repositoryMock.Object);
+            var handler = new ArchetypedSynonymGenerator(repositoryMock.Object);
             var e = new ObjectRequested {
                 SourceId = aggregateId,
                 Version = 0,
@@ -39,7 +39,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
-        public void WhenHandlingObjectRequestedWithExistingUnarchetypedSynonym_ShouldNotSaveNewUnarchetypedSynonymRecord()
+        public void WhenHandlingObjectRequestedWithExistingArchetypedSynonym_ShouldNotSaveNewArchetypedSynonymRecord()
         {
             var persistentRecords = new[] {
                 new ArchetypedSynonymRecord { Synonym = "Sneakers" }
@@ -49,7 +49,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             repositoryMock.SetRecords(persistentRecords);
 
             var aggregateId = Guid.NewGuid();
-            var handler = new UnarchetypedSynonymGenerator(repositoryMock.Object);
+            var handler = new ArchetypedSynonymGenerator(repositoryMock.Object);
             var e = new ObjectRequested
             {
                 SourceId = aggregateId,

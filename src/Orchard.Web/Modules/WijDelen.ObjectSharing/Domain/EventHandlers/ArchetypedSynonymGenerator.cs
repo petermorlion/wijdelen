@@ -8,10 +8,10 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     /// <summary>
     /// Creates the read model for synonyms that haven't been assigned to an archetype yet.
     /// </summary>
-    public class UnarchetypedSynonymGenerator : IEventHandler<ObjectRequested> {
+    public class ArchetypedSynonymGenerator : IEventHandler<ObjectRequested> {
         private readonly IRepository<ArchetypedSynonymRecord> _repository;
 
-        public UnarchetypedSynonymGenerator(IRepository<ArchetypedSynonymRecord> repository) {
+        public ArchetypedSynonymGenerator(IRepository<ArchetypedSynonymRecord> repository) {
             _repository = repository;
         }
 
