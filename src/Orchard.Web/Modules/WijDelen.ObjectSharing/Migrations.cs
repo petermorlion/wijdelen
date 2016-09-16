@@ -35,7 +35,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("Archetype")
             );
 
-            SchemaBuilder.CreateTable(typeof(ItemArchetypeRecord).Name, table => table
+            SchemaBuilder.CreateTable(typeof(ArchetypeRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<string>("Name", column => column.Unique().NotNull())
             );

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WijDelen.ObjectSharing.Models.ItemArchetypeRecord>
+﻿@model IEnumerable<WijDelen.ObjectSharing.Models.ArchetypeRecord>
 
 @{
     Layout.Title = T("Archetypes").ToString();
 }
 
-<h1>@T("Archetypes")</h1>
+@Html.ActionLink(T("Create archetype"), "Create", "Archetypes", new {}, new {@class="button primary-action"})
 
 <ul>
     @foreach (var item in Model)

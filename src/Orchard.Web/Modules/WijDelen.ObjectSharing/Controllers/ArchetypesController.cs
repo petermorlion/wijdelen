@@ -2,19 +2,27 @@
 using System.Web.Mvc;
 using Orchard.Data;
 using Orchard.Localization;
+using Orchard.Mvc.Extensions;
 using Orchard.UI.Admin;
+using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ArchetypesController : Controller {
-        private readonly IRepository<ItemArchetypeRecord> _archetypeRepository;
+        private readonly IRepository<ArchetypeRecord> _archetypeRepository;
         private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
+        private readonly ICommandHandler<CreateArchetype> _createArchetypeCommandHandler;
 
-        public ArchetypesController(IRepository<ItemArchetypeRecord> archetypeRepository, IRepository<ArchetypedSynonymRecord> synonymsRepository) {
+        public ArchetypesController(
+            IRepository<ArchetypeRecord> archetypeRepository, 
+            IRepository<ArchetypedSynonymRecord> synonymsRepository,
+            ICommandHandler<CreateArchetype> createArchetypeCommandHandler) {
             _archetypeRepository = archetypeRepository;
             _synonymsRepository = synonymsRepository;
+            _createArchetypeCommandHandler = createArchetypeCommandHandler;
 
             T = NullLocalizer.Instance;
         }
@@ -29,6 +37,22 @@ namespace WijDelen.ObjectSharing.Controllers {
             var archetypeRecords = _archetypeRepository.Table.ToList();
             var viewModel = new SynonymsViewModel(synonymRecords, archetypeRecords);
             return View(viewModel);
+        }
+
+        public ActionResult Create() {
+            return View(new CreateArchetypeViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Create(CreateArchetypeViewModel viewModel) {
+            if (string.IsNullOrWhiteSpace(viewModel.Name)) {
+                ModelState.AddModelError<CreateArchetypeViewModel, string>(m => m.Name, T("Please provide a name for the archetype."));
+                return View(viewModel);
+            }
+
+            var command = new CreateArchetype(viewModel.Name);
+            _createArchetypeCommandHandler.Handle(command);
+            return RedirectToAction("Index");
         }
 
         public Localizer T { get; set; }

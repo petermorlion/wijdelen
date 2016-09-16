@@ -7,6 +7,8 @@ using NUnit.Framework;
 using Orchard.Data;
 using Orchard.Localization;
 using WijDelen.ObjectSharing.Controllers;
+using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
@@ -20,7 +22,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new ArchetypesController(null, null);
+            var controller = new ArchetypesController(null, null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -31,14 +33,14 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void IndexShouldShowArchetypes() {
             var records = new[] {
-                new ItemArchetypeRecord(),
-                new ItemArchetypeRecord()
+                new ArchetypeRecord(),
+                new ArchetypeRecord()
             };
 
-            var repositoryMock = new Mock<IRepository<ItemArchetypeRecord>>();
+            var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object, null);
+            var controller = new ArchetypesController(repositoryMock.Object, null, null);
 
             var result = controller.Index();
 
@@ -46,7 +48,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void UnarchetypedShouldShowUnarchetypedSynonyms() {
+        public void SynonmysShouldShowSynonyms() {
             var synonyms = new[] {
                 new ArchetypedSynonymRecord {
                     Archetype = "Sneakers"
@@ -57,20 +59,48 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             synonymsRepositoryMock.SetRecords(synonyms);
 
             var archetypes = new[] {
-                new ItemArchetypeRecord { Name = "Ladder" },
-                new ItemArchetypeRecord { Name= "Sneakers" }
+                new ArchetypeRecord { Name = "Ladder" },
+                new ArchetypeRecord { Name= "Sneakers" }
             };
 
-            var archetypesRepositoryMock = new Mock<IRepository<ItemArchetypeRecord>>();
+            var archetypesRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             archetypesRepositoryMock.SetRecords(archetypes);
 
-            var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object);
+            var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object, null);
 
             var result = controller.Synonyms();
 
             ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Record.Should().Be(synonyms[0]);
             ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetype.Should().Be(archetypes[1]);
             ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Should().BeEquivalentTo(archetypes);
+        }
+
+        [Test]
+        public void WhenPostingNewArchetype() {
+            var viewModel = new CreateArchetypeViewModel { Name = "Sneakers" };
+            
+            var commandHandlerMock = new Mock<ICommandHandler<CreateArchetype>>();
+            CreateArchetype command = null;
+            commandHandlerMock.Setup(x => x.Handle(It.IsAny<CreateArchetype>())).Callback((CreateArchetype c) => command = c);
+
+            var controller = new ArchetypesController(null, null, commandHandlerMock.Object);
+
+            var result = controller.Create(viewModel);
+
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
+
+            command.Name.Should().Be("Sneakers");
+        }
+
+        [Test]
+        public void WhenPostingNewArchetypeWithoutName_ShouldReturnError() {
+            var viewModel = new CreateArchetypeViewModel();
+            
+            var controller = new ArchetypesController(null, null, null);
+
+            var result = controller.Create(viewModel);
+
+            ((ViewResult)result).ViewData.ModelState["Name"].Errors.Single().ErrorMessage.Should().Be("Please provide a name for the archetype.");
         }
     }
 }
