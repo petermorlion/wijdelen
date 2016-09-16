@@ -31,7 +31,12 @@ namespace WijDelen.ObjectSharing {
         public int UpdateFrom2() {
             SchemaBuilder.CreateTable(typeof(UnarchetypedSynonymRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
-                    .Column<Guid>("Synonym", column => column.Unique().NotNull())
+                    .Column<string>("Synonym", column => column.Unique().NotNull())
+            );
+
+            SchemaBuilder.CreateTable(typeof(ItemArchetypeRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<string>("Name", column => column.Unique().NotNull())
             );
 
             return 2;

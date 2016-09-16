@@ -108,6 +108,7 @@
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\Entities\ItemArchetype.cs" />
+    <Compile Include="Domain\EventHandlers\ItemArchetypeReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\UnarchetypedSynonymGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="LoggedInRedirect.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />
+    <Compile Include="Models\ItemArchetypeRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
     <Compile Include="Models\UnarchetypedSynonymRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
