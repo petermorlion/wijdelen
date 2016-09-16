@@ -1,0 +1,25 @@
+@model WijDelen.ObjectSharing.ViewModels.SynonymsViewModel
+
+@{
+    Layout.Title = T("Synonyms without archetype").ToString();
+}
+
+<table>
+    <thead>
+    <tr>
+        <th>@T("Synonym")</th>
+        <th>@T("Archetype")</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Synonyms)
+    {
+        <tr>
+            <td>@item.Record.Synonym</td>
+            <td>
+                @Html.DropDownListFor(m => item.SelectedArchetype, item.Archetypes.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }), "")
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
