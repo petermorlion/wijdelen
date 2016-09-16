@@ -4,9 +4,7 @@ using System.Web.Mvc;
 using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
-using Orchard.Mvc.Extensions;
 using Orchard.Themes;
-using WijDelen.ObjectSharing;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -28,10 +26,12 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
+        [Authorize]
         public ActionResult New() {
             return View(new NewObjectRequestViewModel());
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult New(NewObjectRequestViewModel viewModel) {
             if (string.IsNullOrWhiteSpace(viewModel.Description)) {
@@ -55,6 +55,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             return RedirectToAction("Index", new {id = command.ObjectRequestId});
         }
 
+        [Authorize]
         public ActionResult Index(Guid id) {
             var record = _repository.Fetch(x => x.AggregateId == id).SingleOrDefault();
 
