@@ -109,6 +109,7 @@
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ArchetypeCommandHandler.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
+    <Compile Include="Domain\Commands\SetSynonymArchetypes.cs" />
     <Compile Include="Domain\Commands\CreateArchetype.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\Entities\Archetype.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Domain\EventHandlers\ArchetypedSynonymGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ArchetypeCreated.cs" />
+    <Compile Include="Domain\Events\ArchetypeSynonymAdded.cs" />
+    <Compile Include="Domain\Events\ArchetypeSynonymRemoved.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />
     <Compile Include="Domain\Messaging\IEvent.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourced.cs" />

@@ -14,6 +14,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         private Archetype(Guid id) : base(id) {
             Handles<ArchetypeCreated>(OnCreated);
             Handles<ArchetypeSynonymAdded>(OnSynonymAdded);
+            Handles<ArchetypeSynonymRemoved>(OnSynonymRemoved);
         }
 
         private void OnCreated(ArchetypeCreated e) {
@@ -22,6 +23,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         private void OnSynonymAdded(ArchetypeSynonymAdded e) {
             _synonyms.Add(e.Synonym);
+        }
+
+        private void OnSynonymRemoved(ArchetypeSynonymRemoved e) {
+            _synonyms.Remove(e.Synonym);
         }
 
         public Archetype(Guid id, string name) : this(id) {
@@ -35,6 +40,12 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         public void AddSynonym(string synonym) {
             if (!_synonyms.Contains(synonym)) {
                 Update(new ArchetypeSynonymAdded { Synonym = synonym });
+            }
+        }
+
+        public void RemoveSynonym(string synonym) {
+            if (_synonyms.Contains(synonym)) {
+                Update(new ArchetypeSynonymRemoved { Synonym = synonym });
             }
         }
 
