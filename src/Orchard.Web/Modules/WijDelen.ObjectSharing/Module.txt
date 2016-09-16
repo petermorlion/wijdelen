@@ -9,4 +9,4 @@ Features:
     WijDelen.ObjectSharing:
         Description: Allows users to request and share objects in their groups.
 		Category: WijDelen
-		Dependencies: WijDelen.UserImport
+		Dependencies: WijDelen.UserImport, Orchard.Users

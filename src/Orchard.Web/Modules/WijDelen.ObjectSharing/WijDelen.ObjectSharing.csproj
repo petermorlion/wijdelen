@@ -122,6 +122,7 @@
     <Compile Include="Domain\Messaging\ICommand.cs" />
     <Compile Include="Domain\Messaging\ICommandHandler.cs" />
     <Compile Include="Domain\ObjectRequest.cs" />
+    <Compile Include="LoggedInRedirect.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
@@ -146,6 +147,10 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
       <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
