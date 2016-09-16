@@ -1,4 +1,5 @@
 ﻿using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 

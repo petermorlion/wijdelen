@@ -121,7 +121,7 @@
     <Compile Include="Domain\Events\ObjectRequested.cs" />
     <Compile Include="Domain\Messaging\ICommand.cs" />
     <Compile Include="Domain\Messaging\ICommandHandler.cs" />
-    <Compile Include="Domain\ObjectRequest.cs" />
+    <Compile Include="Domain\Entities\ObjectRequest.cs" />
     <Compile Include="LoggedInRedirect.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />

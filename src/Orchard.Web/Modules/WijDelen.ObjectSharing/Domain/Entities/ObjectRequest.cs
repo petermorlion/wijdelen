@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 
-namespace WijDelen.ObjectSharing.Domain {
+namespace WijDelen.ObjectSharing.Domain.Entities {
     /// <summary>
     /// Represents a request for an object by a user.
     /// </summary>

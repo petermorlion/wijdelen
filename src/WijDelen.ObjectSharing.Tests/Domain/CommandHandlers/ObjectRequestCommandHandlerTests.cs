@@ -5,6 +5,7 @@ using NUnit.Framework;
 using WijDelen.ObjectSharing.Domain;
 using WijDelen.ObjectSharing.Domain.CommandHandlers;
 using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 
