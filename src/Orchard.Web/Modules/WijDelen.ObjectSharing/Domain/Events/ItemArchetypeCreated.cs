@@ -4,4 +4,8 @@ namespace WijDelen.ObjectSharing.Domain.Events {
     public class ItemArchetypeCreated : VersionedEvent {
         public string Name { get; set; }
     }
+
+    public class ItemArchetypeSynonymAdded : VersionedEvent {
+        public string Synonym { get; set; }
+    }
 }
