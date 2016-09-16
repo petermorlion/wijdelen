@@ -27,5 +27,14 @@ namespace WijDelen.ObjectSharing {
 
             return 1;
         }
+
+        public int UpdateFrom2() {
+            SchemaBuilder.CreateTable(typeof(UnarchetypedSynonymRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<Guid>("Synonym", column => column.Unique().NotNull())
+            );
+
+            return 2;
+        }
     }
 }

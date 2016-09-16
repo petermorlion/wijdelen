@@ -7,7 +7,7 @@ using WijDelen.ObjectSharing.Infrastructure;
 
 namespace WijDelen.ObjectSharing {
     /// <summary>
-    /// Registers our dependencies manually, instead of letting them implement IDependency. This is necessary because we're using generics 
+    /// Registers certain dependencies manually, instead of letting them implement IDependency. This is necessary because we're using generics 
     /// (see http://orchard.codeplex.com/discussions/280097).
     /// </summary>
     public class AutofacModule : Module {

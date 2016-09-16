@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Moq;
 using Orchard.Data;
-using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Tests.Fakes {
     public static class MockRepositoryExtensions {
