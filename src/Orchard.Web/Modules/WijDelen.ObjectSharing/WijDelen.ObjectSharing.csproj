@@ -107,8 +107,10 @@
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\Entities\ItemArchetype.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
+    <Compile Include="Domain\Events\ItemArchetypeCreated.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />
     <Compile Include="Domain\Messaging\IEvent.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourced.cs" />

@@ -2,11 +2,10 @@
 using FluentAssertions;
 using NUnit.Framework;
 using System.Linq;
-using WijDelen.ObjectSharing.Domain;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 
-namespace WijDelen.ObjectSharing.Tests.Domain {
+namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
     [TestFixture]
     public class ObjectRequestTests {
         [Test]

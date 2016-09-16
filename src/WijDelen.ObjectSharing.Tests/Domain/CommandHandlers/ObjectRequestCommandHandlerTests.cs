@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using WijDelen.ObjectSharing.Domain;
 using WijDelen.ObjectSharing.Domain.CommandHandlers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;

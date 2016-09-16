@@ -102,11 +102,12 @@
     <Compile Include="Controllers\Fakes\FakeWorkContext.cs" />
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
+    <Compile Include="Domain\Entities\ItemArchetypeTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\EventBusTests.cs" />
     <Compile Include="Domain\Messaging\Fakes\FakeEvent.cs" />
     <Compile Include="Domain\Messaging\Fakes\FakeEventHandler.cs" />
-    <Compile Include="Domain\ObjectRequestTests.cs" />
+    <Compile Include="Domain\Entities\ObjectRequestTests.cs" />
     <Compile Include="Fakes\MockRepositoryExtensions.cs" />
     <Compile Include="Infrastructure\Fakes\Created.cs" />
     <Compile Include="Infrastructure\Fakes\EventSourcedAggregate.cs" />

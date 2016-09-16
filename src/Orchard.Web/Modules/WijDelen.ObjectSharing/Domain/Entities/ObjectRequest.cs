@@ -9,7 +9,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
     /// </summary>
     public class ObjectRequest : EventSourced
     {
-        public ObjectRequest(Guid id) : base(id) {
+        private ObjectRequest(Guid id) : base(id) {
             Handles<ObjectRequested>(OnObjectRequested);
         }
 
@@ -17,9 +17,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo, UserId = userId });
         }
 
-        public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history)
-            : this(id)
-        {
+        public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
             LoadFrom(history);
         }
 
