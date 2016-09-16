@@ -19,7 +19,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new ArchetypesController(null);
+            var controller = new ArchetypesController(null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -37,9 +37,26 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ItemArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object);
+            var controller = new ArchetypesController(repositoryMock.Object, null);
 
             var result = controller.Index();
+
+            ((ViewResult)result).Model.ShouldBeEquivalentTo(records);
+        }
+
+        [Test]
+        public void UnarchetypedShouldShowUnarchetypedSynonyms() {
+            var records = new[] {
+                new UnarchetypedSynonymRecord(), 
+                new UnarchetypedSynonymRecord()
+            };
+
+            var repositoryMock = new Mock<IRepository<UnarchetypedSynonymRecord>>();
+            repositoryMock.SetRecords(records);
+
+            var controller = new ArchetypesController(null, repositoryMock.Object);
+
+            var result = controller.Unarchetyped();
 
             ((ViewResult)result).Model.ShouldBeEquivalentTo(records);
         }

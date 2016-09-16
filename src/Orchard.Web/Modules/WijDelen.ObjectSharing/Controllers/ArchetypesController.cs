@@ -8,21 +8,24 @@ using WijDelen.ObjectSharing.Models;
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ArchetypesController : Controller {
-        private readonly IRepository<ItemArchetypeRecord> _repository;
+        private readonly IRepository<ItemArchetypeRecord> _archetypeRepository;
+        private readonly IRepository<UnarchetypedSynonymRecord> _synonymsRepository;
 
-        public ArchetypesController(IRepository<ItemArchetypeRecord> repository) {
-            _repository = repository;
+        public ArchetypesController(IRepository<ItemArchetypeRecord> archetypeRepository, IRepository<UnarchetypedSynonymRecord> synonymsRepository) {
+            _archetypeRepository = archetypeRepository;
+            _synonymsRepository = synonymsRepository;
 
             T = NullLocalizer.Instance;
         }
 
         public ActionResult Index() {
-            var records = _repository.Table.ToList();
+            var records = _archetypeRepository.Table.ToList();
             return View(records);
         }
 
         public ActionResult Unarchetyped() {
-            return View();
+            var records = _synonymsRepository.Table.ToList();
+            return View(records);
         }
 
         public Localizer T { get; set; }
