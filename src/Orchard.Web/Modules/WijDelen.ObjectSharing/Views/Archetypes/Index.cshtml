@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WijDelen.ObjectSharing.Models.ItemArchetypeRecord>
+
+@{
+    Layout.Title = T("Archetypes").ToString();
+}
+
+<h1>@T("Archetypes")</h1>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>item.Name</li>
+    }
+</ul>

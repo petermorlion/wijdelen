@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Fakes\FakeOrchardServices.cs" />
     <Compile Include="Controllers\Fakes\FakeWorkContext.cs" />
+    <Compile Include="Controllers\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
     <Compile Include="Domain\Entities\ItemArchetypeTests.cs" />

@@ -103,7 +103,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
     <Compile Include="AutofacModule.cs" />
+    <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
@@ -173,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Archetypes\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Archetypes\Unarchetyped.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

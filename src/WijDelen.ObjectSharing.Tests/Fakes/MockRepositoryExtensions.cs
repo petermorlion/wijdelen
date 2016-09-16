@@ -18,6 +18,10 @@ namespace WijDelen.ObjectSharing.Tests.Fakes {
                     var func = expression.Compile();
                     return records.Where(func).ToList();
                 });
+
+            repositoryMock
+                .Setup(x => x.Table)
+                .Returns(records.AsQueryable());
         }
     }
 }
