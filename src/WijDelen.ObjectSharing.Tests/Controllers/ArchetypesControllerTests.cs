@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
@@ -9,6 +9,7 @@ using Orchard.Localization;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.Fakes;
+using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
@@ -46,19 +47,30 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void UnarchetypedShouldShowUnarchetypedSynonyms() {
-            var records = new[] {
-                new UnarchetypedSynonymRecord(), 
-                new UnarchetypedSynonymRecord()
+            var synonyms = new[] {
+                new ArchetypedSynonymRecord {
+                    Archetype = "Sneakers"
+                }
             };
 
-            var repositoryMock = new Mock<IRepository<UnarchetypedSynonymRecord>>();
-            repositoryMock.SetRecords(records);
+            var synonymsRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
+            synonymsRepositoryMock.SetRecords(synonyms);
 
-            var controller = new ArchetypesController(null, repositoryMock.Object);
+            var archetypes = new[] {
+                new ItemArchetypeRecord { Name = "Ladder" },
+                new ItemArchetypeRecord { Name= "Sneakers" }
+            };
 
-            var result = controller.Unarchetyped();
+            var archetypesRepositoryMock = new Mock<IRepository<ItemArchetypeRecord>>();
+            archetypesRepositoryMock.SetRecords(archetypes);
 
-            ((ViewResult)result).Model.ShouldBeEquivalentTo(records);
+            var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object);
+
+            var result = controller.Synonyms();
+
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Record.Should().Be(synonyms[0]);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetype.Should().Be(archetypes[1]);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Should().BeEquivalentTo(archetypes);
         }
     }
 }

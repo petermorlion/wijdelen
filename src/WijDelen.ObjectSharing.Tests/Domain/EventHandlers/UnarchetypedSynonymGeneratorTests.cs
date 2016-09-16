@@ -14,14 +14,14 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         [Test]
         public void WhenHandlingObjectRequested_ShouldSaveNewUnarchetypedSynonymRecord() {
             var persistentRecords = new[] {
-                new UnarchetypedSynonymRecord { Synonym = "Sneakers" }
+                new ArchetypedSynonymRecord { Synonym = "Sneakers" }
             };
 
-            var repositoryMock = new Mock<IRepository<UnarchetypedSynonymRecord>>();
+            var repositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            UnarchetypedSynonymRecord newRecord = null;
-            repositoryMock.Setup(x => x.Update(It.IsAny<UnarchetypedSynonymRecord>())).Callback((UnarchetypedSynonymRecord r) => newRecord = r);
+            ArchetypedSynonymRecord newRecord = null;
+            repositoryMock.Setup(x => x.Update(It.IsAny<ArchetypedSynonymRecord>())).Callback((ArchetypedSynonymRecord r) => newRecord = r);
 
             var aggregateId = Guid.NewGuid();
             var handler = new UnarchetypedSynonymGenerator(repositoryMock.Object);
@@ -42,10 +42,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         public void WhenHandlingObjectRequestedWithExistingUnarchetypedSynonym_ShouldNotSaveNewUnarchetypedSynonymRecord()
         {
             var persistentRecords = new[] {
-                new UnarchetypedSynonymRecord { Synonym = "Sneakers" }
+                new ArchetypedSynonymRecord { Synonym = "Sneakers" }
             };
 
-            var repositoryMock = new Mock<IRepository<UnarchetypedSynonymRecord>>();
+            var repositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
             var aggregateId = Guid.NewGuid();
@@ -61,7 +61,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             handler.Handle(e);
 
-            repositoryMock.Verify(x => x.Update(It.IsAny<UnarchetypedSynonymRecord>()), Times.Never);
+            repositoryMock.Verify(x => x.Update(It.IsAny<ArchetypedSynonymRecord>()), Times.Never);
         }
     }
 }

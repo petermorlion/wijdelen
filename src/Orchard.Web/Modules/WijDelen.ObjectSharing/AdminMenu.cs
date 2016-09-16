@@ -28,9 +28,9 @@ namespace WijDelen.ObjectSharing {
                         .LocalNav());
 
                     menu.Add(item => item
-                        .Caption(T("Synonyms without archetype"))
+                        .Caption(T("Synonyms"))
                         .Position("1")
-                        .Action("Unarchetyped", "Archetypes", new { area = "WijDelen.ObjectSharing" })
+                        .Action("Synonyms", "Archetypes", new { area = "WijDelen.ObjectSharing" })
                         .Permission(StandardPermissions.SiteOwner)
                         .LocalNav());
                 });

@@ -133,10 +133,12 @@
     <Compile Include="Models\EventRecord.cs" />
     <Compile Include="Models\ItemArchetypeRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
-    <Compile Include="Models\UnarchetypedSynonymRecord.cs" />
+    <Compile Include="Models\ArchetypedSynonymRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
+    <Compile Include="ViewModels\SynonymsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
@@ -180,7 +182,7 @@
     <Content Include="Views\Archetypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Archetypes\Unarchetyped.cshtml" />
+    <Content Include="Views\Archetypes\Synonyms.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
