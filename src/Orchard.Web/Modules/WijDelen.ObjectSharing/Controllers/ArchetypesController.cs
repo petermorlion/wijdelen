@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Orchard.Data;
 using Orchard.Localization;
-using Orchard.Mvc.Extensions;
 using Orchard.UI.Admin;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
@@ -35,8 +34,21 @@ namespace WijDelen.ObjectSharing.Controllers {
         public ActionResult Synonyms() {
             var synonymRecords = _synonymsRepository.Table.ToList();
             var archetypeRecords = _archetypeRepository.Table.ToList();
-            var viewModel = new SynonymsViewModel(synonymRecords, archetypeRecords);
+            var orderedArchetypes = archetypeRecords.OrderBy(x => x.Name).ToList();
+            var viewModel = new SynonymsViewModel {
+                Synonyms = synonymRecords.OrderBy(x => x.Synonym).Select(x => new EditArchetypedSynonymViewModel {
+                    Synonym = x.Synonym,
+                    Archetypes = orderedArchetypes.Select(a => new ArchetypeViewModel { Id = a.AggregateId, Name = a.Name }).ToList(),
+                    SelectedArchetypeId = orderedArchetypes.SingleOrDefault(a => a.Name == x.Archetype)?.AggregateId.ToString()
+                }).ToList()
+            };
+
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Synonyms(SynonymsViewModel viewModel) {
+            return RedirectToAction("Synonyms");
         }
 
         public ActionResult Create() {

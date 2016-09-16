@@ -21,9 +21,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         private void OnSynonymAdded(ArchetypeSynonymAdded e) {
-            if (!_synonyms.Contains(e.Synonym)) {
-                _synonyms.Add(e.Synonym);
-            }
+            _synonyms.Add(e.Synonym);
         }
 
         public Archetype(Guid id, string name) : this(id) {
@@ -34,11 +32,14 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             LoadFrom(history);
         }
 
-        public string Name { get; private set; }
-        public IEnumerable<string> Synonyms => _synonyms;
-
         public void AddSynonym(string synonym) {
-            Update(new ArchetypeSynonymAdded { Synonym = synonym });
+            if (!_synonyms.Contains(synonym)) {
+                Update(new ArchetypeSynonymAdded { Synonym = synonym });
+            }
         }
+
+        public string Name { get; private set; }
+
+        public IEnumerable<string> Synonyms => _synonyms;
     }
 }

@@ -37,6 +37,7 @@ namespace WijDelen.ObjectSharing {
 
             SchemaBuilder.CreateTable(typeof(ArchetypeRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<Guid>("AggregateId", column => column.NotNull())
                     .Column<string>("Name", column => column.Unique().NotNull())
             );
 

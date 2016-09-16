@@ -12,7 +12,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         }
 
         public void Handle(ArchetypeCreated e) {
-            var record = new ArchetypeRecord { Name = e.Name };
+            var record = new ArchetypeRecord { AggregateId = e.SourceId, Name = e.Name };
             _repository.Update(record);
         }
     }

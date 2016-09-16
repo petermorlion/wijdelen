@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Data;
@@ -11,16 +12,18 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     public class ArchetypeReadModelGeneratorTests {
         [Test]
         public void WhenArchetypeCreated_ShouldSaveReadModel() {
+            var id = Guid.NewGuid();
             var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             ArchetypeRecord newRecord = null;
             repositoryMock.Setup(x => x.Update(It.IsAny<ArchetypeRecord>())).Callback((ArchetypeRecord r) => newRecord = r);
             var generator = new ArchetypeReadModelGenerator(repositoryMock.Object);
-            var e = new ArchetypeCreated { Name = "Sneakers" };
+            var e = new ArchetypeCreated { SourceId = id, Name = "Sneakers" };
 
             generator.Handle(e);
 
             newRecord.Should().NotBeNull();
             newRecord.Name.Should().Be("Sneakers");
+            newRecord.AggregateId.Should().Be(id);
         }
     }
 }

@@ -4,22 +4,27 @@
     Layout.Title = T("Synonyms without archetype").ToString();
 }
 
-<table>
-    <thead>
-    <tr>
-        <th>@T("Synonym")</th>
-        <th>@T("Archetype")</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Synonyms)
-    {
-        <tr>
-            <td>@item.Record.Synonym</td>
-            <td>
-                @Html.DropDownListFor(m => item.SelectedArchetype, item.Archetypes.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }), "")
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Synonyms", "Archetypes", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <button class="primaryAction">@T("Submit")</button>
+    </fieldset>
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>@T("Synonym")</th>
+                    <th>@T("Archetype")</th>
+                </tr>
+            </thead>
+            <tbody>
+            @Html.EditorFor(m => m.Synonyms)
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <button class="primaryAction">@T("Submit")</button>
+    </fieldset>
+}

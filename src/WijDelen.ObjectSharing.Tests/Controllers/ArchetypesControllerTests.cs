@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -59,7 +60,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             synonymsRepositoryMock.SetRecords(synonyms);
 
             var archetypes = new[] {
-                new ArchetypeRecord { Name = "Ladder" },
+                new ArchetypeRecord { Id = 30, Name = "Ladder" },
                 new ArchetypeRecord { Name= "Sneakers" }
             };
 
@@ -70,8 +71,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var result = controller.Synonyms();
 
-            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Record.Should().Be(synonyms[0]);
-            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetype.Should().Be(archetypes[1]);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Synonym.Should().Be("Sneakers");
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetypeId.Should().Be("30");
             ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Should().BeEquivalentTo(archetypes);
         }
 
@@ -101,6 +102,23 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = controller.Create(viewModel);
 
             ((ViewResult)result).ViewData.ModelState["Name"].Errors.Single().ErrorMessage.Should().Be("Please provide a name for the archetype.");
+        }
+
+        [Test]
+        public void WhenPostingArchetypesAndSynonyms() {
+            var controller = new ArchetypesController(null, null, null);
+            var viewModel = new SynonymsViewModel {
+                Synonyms = new List<EditArchetypedSynonymViewModel> {
+                    new EditArchetypedSynonymViewModel {
+                        Synonym = "Sporting shoes",
+                        SelectedArchetypeId = Guid.NewGuid().ToString()
+                    }
+                }
+            }; 
+
+            var result = controller.Synonyms(viewModel);
+
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Synonyms");
         }
     }
 }

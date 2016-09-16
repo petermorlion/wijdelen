@@ -68,10 +68,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             itemArchetype.AddSynonym("Sport shoes");
             itemArchetype.AddSynonym("Sport shoes");
 
-            itemArchetype.Events.Count().Should().Be(3);
+            itemArchetype.Events.Count().Should().Be(2);
             itemArchetype.Events.ToList()[0].Should().BeOfType<ArchetypeCreated>();
             itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().Synonym.Should().Be("Sport shoes");
-            itemArchetype.Version.Should().Be(2);
+            itemArchetype.Version.Should().Be(1);
             itemArchetype.Synonyms.Single().Should().Be("Sport shoes");
         }
     }
