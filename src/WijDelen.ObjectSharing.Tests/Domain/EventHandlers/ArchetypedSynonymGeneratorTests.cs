@@ -63,5 +63,44 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             repositoryMock.Verify(x => x.Update(It.IsAny<ArchetypedSynonymRecord>()), Times.Never);
         }
+
+        [Test]
+        public void WhenHandlingArchetypeSynonymAdded() {
+            var archetypedSynonymRecords = new[] {
+                new ArchetypedSynonymRecord {
+                    Synonym = "Sporting shoes"
+                }
+            };
+
+            var archetypeSynonymRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
+            archetypeSynonymRepositoryMock.SetRecords(archetypedSynonymRecords);
+
+            var archetypeRecords = new[] {
+                new ArchetypeRecord {
+                    Name = "Sneakers",
+                    AggregateId = Guid.NewGuid()
+                }
+            };
+
+            var archetypeRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
+            archetypeRepositoryMock.SetRecords(archetypeRecords);
+
+            var handler = new ArchetypedSynonymGenerator(archetypeSynonymRepositoryMock.Object);
+
+            var e = new ArchetypeSynonymAdded {
+                SourceId = archetypeRecords[0].AggregateId,
+                Synonym = "Sporting shoes",
+                Archetype = "Sneakers"
+            };
+
+            ArchetypedSynonymRecord record = null;
+            archetypeSynonymRepositoryMock.Setup(x => x.Update(It.IsAny<ArchetypedSynonymRecord>())).Callback((ArchetypedSynonymRecord r) => record = r);
+
+            handler.Handle(e);
+
+            record.Archetype.Should().Be("Sneakers");
+            record.ArchetypeId.Should().Be(archetypeRecords[0].AggregateId);
+            record.Synonym.Should().Be("Sporting shoes");
+        }
     }
 }

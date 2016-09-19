@@ -39,7 +39,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         public void AddSynonym(string synonym) {
             if (!_synonyms.Contains(synonym)) {
-                Update(new ArchetypeSynonymAdded { Synonym = synonym });
+                Update(new ArchetypeSynonymAdded { Synonym = synonym, Archetype = Name });
             }
         }
 

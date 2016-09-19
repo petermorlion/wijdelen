@@ -25,13 +25,10 @@ namespace WijDelen.ObjectSharing {
                     .Column<int>("UserId", column => column.NotNull())
             );
 
-            return 1;
-        }
-
-        public int UpdateFrom1() {
             SchemaBuilder.CreateTable(typeof(ArchetypedSynonymRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<string>("Synonym", column => column.Unique().NotNull())
+                    .Column<Guid>("ArchetypeId")
                     .Column<string>("Archetype")
             );
 
@@ -41,7 +38,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("Name", column => column.Unique().NotNull())
             );
 
-            return 2;
+            return 1;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new ArchetypesController(null, null, null);
+            var controller = new ArchetypesController(null, null, null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -41,7 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object, null, null);
+            var controller = new ArchetypesController(repositoryMock.Object, null, null, null);
 
             var result = controller.Index();
 
@@ -68,7 +68,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var archetypesRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             archetypesRepositoryMock.SetRecords(archetypes);
 
-            var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object, null);
+            var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object, null, null);
 
             var result = controller.Synonyms();
 
@@ -89,7 +89,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             CreateArchetype command = null;
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<CreateArchetype>())).Callback((CreateArchetype c) => command = c);
 
-            var controller = new ArchetypesController(null, null, commandHandlerMock.Object);
+            var controller = new ArchetypesController(null, null, commandHandlerMock.Object, null);
 
             var result = controller.Create(viewModel);
 
@@ -102,7 +102,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenPostingNewArchetypeWithoutName_ShouldReturnError() {
             var viewModel = new CreateArchetypeViewModel();
             
-            var controller = new ArchetypesController(null, null, null);
+            var controller = new ArchetypesController(null, null, null, null);
 
             var result = controller.Create(viewModel);
 
@@ -111,12 +111,19 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void WhenPostingArchetypesAndSynonyms() {
-            var controller = new ArchetypesController(null, null, null);
+            SetSynonymArchetypes command = null;
+            var commandHandlerMock = new Mock<ICommandHandler<SetSynonymArchetypes>>();
+            commandHandlerMock
+                .Setup(x => x.Handle(It.IsAny<SetSynonymArchetypes>()))
+                .Callback((SetSynonymArchetypes c) => command = c);
+
+            var controller = new ArchetypesController(null, null, null, commandHandlerMock.Object);
+            var selectedArchetypeId = Guid.NewGuid();
             var viewModel = new SynonymsViewModel {
                 Synonyms = new List<EditArchetypedSynonymViewModel> {
                     new EditArchetypedSynonymViewModel {
                         Synonym = "Sporting shoes",
-                        SelectedArchetypeId = Guid.NewGuid().ToString()
+                        SelectedArchetypeId = selectedArchetypeId.ToString()
                     }
                 }
             }; 
@@ -124,6 +131,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = controller.Synonyms(viewModel);
 
             ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Synonyms");
+
+            command.ArchetypeSynonyms[selectedArchetypeId].Single().Should().Be("Sporting shoes");
         }
     }
 }

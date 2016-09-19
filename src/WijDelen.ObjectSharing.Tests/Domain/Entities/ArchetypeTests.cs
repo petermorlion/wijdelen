@@ -57,6 +57,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             itemArchetype.Events.Count().Should().Be(2);
             itemArchetype.Events.ToList()[0].Should().BeOfType<ArchetypeCreated>();
             itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().Synonym.Should().Be("Sport shoes");
+            itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().Archetype.Should().Be("Sneakers");
+            itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().SourceId.Should().Be(itemArchetype.Id);
             itemArchetype.Version.Should().Be(1);
             itemArchetype.Synonyms.Single().Should().Be("Sport shoes");
         }
@@ -71,6 +73,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             itemArchetype.Events.Count().Should().Be(2);
             itemArchetype.Events.ToList()[0].Should().BeOfType<ArchetypeCreated>();
             itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().Synonym.Should().Be("Sport shoes");
+            itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().Archetype.Should().Be("Sneakers");
+            itemArchetype.Events.ToList()[1].As<ArchetypeSynonymAdded>().SourceId.Should().Be(itemArchetype.Id);
             itemArchetype.Version.Should().Be(1);
             itemArchetype.Synonyms.Single().Should().Be("Sport shoes");
         }

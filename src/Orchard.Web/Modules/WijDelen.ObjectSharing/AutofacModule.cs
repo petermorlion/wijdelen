@@ -15,7 +15,11 @@ namespace WijDelen.ObjectSharing {
             builder.RegisterGeneric(typeof(OrchardEventSourcedRepository<>)).As(typeof(IEventSourcedRepository<>)).InstancePerLifetimeScope();
 
             builder.RegisterType<ObjectRequestCommandHandler>().As<ICommandHandler<RequestObject>>().InstancePerLifetimeScope();
-            builder.RegisterType<ArchetypeCommandHandler>().As<ICommandHandler<CreateArchetype>>().InstancePerLifetimeScope();
+
+            builder.RegisterType<ArchetypeCommandHandler>()
+                .As<ICommandHandler<CreateArchetype>>()
+                .As<ICommandHandler<SetSynonymArchetypes>>()
+                .InstancePerLifetimeScope();
         }
     }
 }

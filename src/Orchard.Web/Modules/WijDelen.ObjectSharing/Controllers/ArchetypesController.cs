@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.Data;
 using Orchard.Localization;
@@ -14,14 +16,17 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly IRepository<ArchetypeRecord> _archetypeRepository;
         private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
         private readonly ICommandHandler<CreateArchetype> _createArchetypeCommandHandler;
+        private readonly ICommandHandler<SetSynonymArchetypes> _setSynonymArchetypesCommandHandler;
 
         public ArchetypesController(
             IRepository<ArchetypeRecord> archetypeRepository, 
             IRepository<ArchetypedSynonymRecord> synonymsRepository,
-            ICommandHandler<CreateArchetype> createArchetypeCommandHandler) {
+            ICommandHandler<CreateArchetype> createArchetypeCommandHandler,
+            ICommandHandler<SetSynonymArchetypes> setSynonymArchetypesCommandHandler) {
             _archetypeRepository = archetypeRepository;
             _synonymsRepository = synonymsRepository;
             _createArchetypeCommandHandler = createArchetypeCommandHandler;
+            _setSynonymArchetypesCommandHandler = setSynonymArchetypesCommandHandler;
 
             T = NullLocalizer.Instance;
         }
@@ -48,6 +53,24 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [HttpPost]
         public ActionResult Synonyms(SynonymsViewModel viewModel) {
+            var archetypeSynonyms = new Dictionary<Guid, IList<string>>();
+
+            foreach (var editArchetypedSynonymViewModel in viewModel.Synonyms) {
+                Guid archetypeId;
+                if (!Guid.TryParse(editArchetypedSynonymViewModel.SelectedArchetypeId, out archetypeId)) {
+                    continue;
+                }
+
+                if (!archetypeSynonyms.ContainsKey(archetypeId)) {
+                    archetypeSynonyms[archetypeId] = new List<string>();
+                }
+
+                archetypeSynonyms[archetypeId].Add(editArchetypedSynonymViewModel.Synonym);
+            }
+
+            var command = new SetSynonymArchetypes(archetypeSynonyms);
+            _setSynonymArchetypesCommandHandler.Handle(command);
+
             return RedirectToAction("Synonyms");
         }
 
