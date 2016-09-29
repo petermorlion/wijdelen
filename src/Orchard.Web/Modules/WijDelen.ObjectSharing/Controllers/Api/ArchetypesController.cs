@@ -16,10 +16,10 @@ namespace WijDelen.ObjectSharing.Controllers.Api {
         }
         
         public IHttpActionResult Get(string input) {
-            var exactMatch = _archetypeRepository.Fetch(x => string.Equals(x.Name, input, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            var matches = _archetypeRepository.Fetch(x => x.Name.ToLowerInvariant().Contains(input.ToLowerInvariant())).ToList();
 
-            if (exactMatch.Any()) {
-                var result = exactMatch.Select(x => x.Name).ToList();
+            if (matches.Any()) {
+                var result = matches.Select(x => x.Name).ToList();
                 return Ok(result);
             }
 
