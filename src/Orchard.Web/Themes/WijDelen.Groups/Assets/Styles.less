@@ -73,3 +73,31 @@ a:hover {
 input[type='text'].input-validation-error {
     border-color: @color-invalid;
 }
+
+/*  Popovers 
+***************************************************************/ 
+.popover { 
+    display: none; 
+    border: 1px solid #787a7a; 
+    background-color: #f5f5f5; 
+    position: absolute; 
+    right: 0; 
+    z-index: 100; 
+    border-radius: 5px; 
+} 
+ 
+.popover-open { 
+    display: block; 
+} 
+ 
+.popover a { 
+    color: #787a7a; 
+    display: block; 
+    white-space: nowrap; 
+    padding: 0 1.0rem; 
+} 
+ 
+.popover a:hover { 
+    color: #fff; 
+    background-color: #83bef0; 
+}
