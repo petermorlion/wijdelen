@@ -1,4 +1,7 @@
 using System;
+using Orchard.ContentManagement.MetaData;
+using Orchard.ContentManagement.Records;
+using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
 using WijDelen.ObjectSharing.Models;
 
@@ -25,18 +28,39 @@ namespace WijDelen.ObjectSharing {
                     .Column<int>("UserId", column => column.NotNull())
             );
 
-            SchemaBuilder.CreateTable(typeof(ArchetypedSynonymRecord).Name, table => table
-                    .Column<int>("Id", column => column.PrimaryKey().Identity())
-                    .Column<string>("Synonym", column => column.Unique().NotNull())
-                    .Column<Guid>("ArchetypeId")
-                    .Column<string>("Archetype")
+            ContentDefinitionManager.AlterPartDefinition("Archetype", builder => 
+                builder
+                    .Attachable()
+                    .WithField("Name", cfg => cfg.OfType("TextField").WithDisplayName("Name"))
             );
 
-            SchemaBuilder.CreateTable(typeof(ArchetypeRecord).Name, table => table
-                    .Column<int>("Id", column => column.PrimaryKey().Identity())
-                    .Column<Guid>("AggregateId", column => column.NotNull())
-                    .Column<string>("Name", column => column.Unique().NotNull())
+            ContentDefinitionManager.AlterTypeDefinition("Archetype", builder =>
+                builder
+                    .WithPart("CommonPart")
+                    .WithPart("TitlePart")
+                    .Creatable()
+                    .Listable());
+
+            ContentDefinitionManager.AlterPartDefinition("Synonym", builder =>
+                builder
+                    .Attachable()
+                    .WithField("Archetype", cfg => cfg
+                        .OfType("ContentPickerField")
+                        .WithDisplayName("Archetype")
+                        .WithSetting("ContentPickerFieldSettings.DisplayedContentType", "Archetype")
+                        .WithSetting("ContentPickerFieldSettings.Required", "False")
+                        .WithSetting("ContentPickerFieldSettings.Multiple", "False")
+                        .WithSetting("ContentPickerFieldSettings.ShowContentTab", "True")
+                        .WithSetting("ContentPickerFieldSettings.DisplayedContentTypes", "Archetype"))
             );
+
+            ContentDefinitionManager.AlterTypeDefinition("Synonym", builder =>
+                builder
+                    .WithPart("CommonPart")
+                    .WithPart("TitlePart")
+                    .WithPart("Synonym")
+                    .Creatable()
+                    .Listable());
 
             return 1;
         }

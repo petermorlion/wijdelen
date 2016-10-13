@@ -13,83 +13,83 @@ using WijDelen.ObjectSharing.ViewModels;
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ArchetypesController : Controller {
-        private readonly IRepository<ArchetypeRecord> _archetypeRepository;
-        private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
-        private readonly ICommandHandler<CreateArchetype> _createArchetypeCommandHandler;
-        private readonly ICommandHandler<SetSynonymArchetypes> _setSynonymArchetypesCommandHandler;
+        //private readonly IRepository<ArchetypePartRecord> _archetypeRepository;
+        //private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
+        //private readonly ICommandHandler<CreateArchetype> _createArchetypeCommandHandler;
+        //private readonly ICommandHandler<SetSynonymArchetypes> _setSynonymArchetypesCommandHandler;
 
-        public ArchetypesController(
-            IRepository<ArchetypeRecord> archetypeRepository, 
-            IRepository<ArchetypedSynonymRecord> synonymsRepository,
-            ICommandHandler<CreateArchetype> createArchetypeCommandHandler,
-            ICommandHandler<SetSynonymArchetypes> setSynonymArchetypesCommandHandler) {
-            _archetypeRepository = archetypeRepository;
-            _synonymsRepository = synonymsRepository;
-            _createArchetypeCommandHandler = createArchetypeCommandHandler;
-            _setSynonymArchetypesCommandHandler = setSynonymArchetypesCommandHandler;
+        //public ArchetypesController(
+        //    IRepository<ArchetypePartRecord> archetypeRepository, 
+        //    IRepository<ArchetypedSynonymRecord> synonymsRepository,
+        //    ICommandHandler<CreateArchetype> createArchetypeCommandHandler,
+        //    ICommandHandler<SetSynonymArchetypes> setSynonymArchetypesCommandHandler) {
+        //    _archetypeRepository = archetypeRepository;
+        //    _synonymsRepository = synonymsRepository;
+        //    _createArchetypeCommandHandler = createArchetypeCommandHandler;
+        //    _setSynonymArchetypesCommandHandler = setSynonymArchetypesCommandHandler;
 
-            T = NullLocalizer.Instance;
-        }
+        //    T = NullLocalizer.Instance;
+        //}
 
-        public ActionResult Index() {
-            var records = _archetypeRepository.Table.ToList();
-            return View(records);
-        }
+        //public ActionResult Index() {
+        //    var records = _archetypeRepository.Table.ToList();
+        //    return View(records);
+        //}
 
-        public ActionResult Synonyms() {
-            var synonymRecords = _synonymsRepository.Table.ToList();
-            var archetypeRecords = _archetypeRepository.Table.ToList();
-            var orderedArchetypes = archetypeRecords.OrderBy(x => x.Name).ToList();
-            var viewModel = new SynonymsViewModel {
-                Synonyms = synonymRecords.OrderBy(x => x.Synonym).Select(x => new EditArchetypedSynonymViewModel {
-                    Synonym = x.Synonym,
-                    Archetypes = orderedArchetypes.Select(a => new ArchetypeViewModel { Id = a.AggregateId, Name = a.Name }).ToList(),
-                    SelectedArchetypeId = orderedArchetypes.SingleOrDefault(a => a.Name == x.Archetype)?.AggregateId.ToString()
-                }).ToList()
-            };
+        //public ActionResult Synonyms() {
+        //    var synonymRecords = _synonymsRepository.Table.ToList();
+        //    var archetypeRecords = _archetypeRepository.Table.ToList();
+        //    var orderedArchetypes = archetypeRecords.OrderBy(x => x.Name).ToList();
+        //    var viewModel = new SynonymsViewModel {
+        //        Synonyms = synonymRecords.OrderBy(x => x.Synonym).Select(x => new EditArchetypedSynonymViewModel {
+        //            Synonym = x.Synonym,
+        //            Archetypes = orderedArchetypes.Select(a => new ArchetypeViewModel { Id = a.AggregateId, Name = a.Name }).ToList(),
+        //            SelectedArchetypeId = orderedArchetypes.SingleOrDefault(a => a.Name == x.Archetype)?.AggregateId.ToString()
+        //        }).ToList()
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
-        [HttpPost]
-        public ActionResult Synonyms(SynonymsViewModel viewModel) {
-            var archetypeSynonyms = new Dictionary<Guid, IList<string>>();
+        //[HttpPost]
+        //public ActionResult Synonyms(SynonymsViewModel viewModel) {
+        //    var archetypeSynonyms = new Dictionary<Guid, IList<string>>();
 
-            foreach (var editArchetypedSynonymViewModel in viewModel.Synonyms) {
-                Guid archetypeId;
-                if (!Guid.TryParse(editArchetypedSynonymViewModel.SelectedArchetypeId, out archetypeId)) {
-                    continue;
-                }
+        //    foreach (var editArchetypedSynonymViewModel in viewModel.Synonyms) {
+        //        Guid archetypeId;
+        //        if (!Guid.TryParse(editArchetypedSynonymViewModel.SelectedArchetypeId, out archetypeId)) {
+        //            continue;
+        //        }
 
-                if (!archetypeSynonyms.ContainsKey(archetypeId)) {
-                    archetypeSynonyms[archetypeId] = new List<string>();
-                }
+        //        if (!archetypeSynonyms.ContainsKey(archetypeId)) {
+        //            archetypeSynonyms[archetypeId] = new List<string>();
+        //        }
 
-                archetypeSynonyms[archetypeId].Add(editArchetypedSynonymViewModel.Synonym);
-            }
+        //        archetypeSynonyms[archetypeId].Add(editArchetypedSynonymViewModel.Synonym);
+        //    }
 
-            var command = new SetSynonymArchetypes(archetypeSynonyms);
-            _setSynonymArchetypesCommandHandler.Handle(command);
+        //    var command = new SetSynonymArchetypes(archetypeSynonyms);
+        //    _setSynonymArchetypesCommandHandler.Handle(command);
 
-            return RedirectToAction("Synonyms");
-        }
+        //    return RedirectToAction("Synonyms");
+        //}
 
-        public ActionResult Create() {
-            return View(new CreateArchetypeViewModel());
-        }
+        //public ActionResult Create() {
+        //    return View(new CreateArchetypeViewModel());
+        //}
 
-        [HttpPost]
-        public ActionResult Create(CreateArchetypeViewModel viewModel) {
-            if (string.IsNullOrWhiteSpace(viewModel.Name)) {
-                ModelState.AddModelError<CreateArchetypeViewModel, string>(m => m.Name, T("Please provide a name for the archetype."));
-                return View(viewModel);
-            }
+        //[HttpPost]
+        //public ActionResult Create(CreateArchetypeViewModel viewModel) {
+        //    if (string.IsNullOrWhiteSpace(viewModel.Name)) {
+        //        ModelState.AddModelError<CreateArchetypeViewModel, string>(m => m.Name, T("Please provide a name for the archetype."));
+        //        return View(viewModel);
+        //    }
 
-            var command = new CreateArchetype(viewModel.Name);
-            _createArchetypeCommandHandler.Handle(command);
-            return RedirectToAction("Index");
-        }
+        //    var command = new CreateArchetype(viewModel.Name);
+        //    _createArchetypeCommandHandler.Handle(command);
+        //    return RedirectToAction("Index");
+        //}
 
-        public Localizer T { get; set; }
+        //public Localizer T { get; set; }
     }
 }

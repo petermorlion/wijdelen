@@ -115,11 +115,7 @@
     <Compile Include="Controllers\Fakes\FakeWorkContext.cs" />
     <Compile Include="Controllers\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
-    <Compile Include="Domain\CommandHandlers\ArchetypeCommandHandlerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
-    <Compile Include="Domain\Entities\ArchetypeTests.cs" />
-    <Compile Include="Domain\EventHandlers\ArchetypeReadModelGeneratorTests.cs" />
-    <Compile Include="Domain\EventHandlers\ArchetypedSynonymGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\EventBusTests.cs" />
     <Compile Include="Domain\Messaging\Fakes\FakeEvent.cs" />
