@@ -2,6 +2,9 @@
 
 @{
     Layout.Title = T("Request object").ToString();
+    Style.Include("auto-complete.css");
+    Script.Include("auto-complete.js").AtFoot();
+    Script.Include("ObjectRequest/new.js").AtFoot();
 }
 
 <h1>@T("Request object")</h1>
@@ -10,7 +13,7 @@
 {
     <fieldset>
         <legend>@T("I would like to borrow the following item")</legend>
-        @Html.TextBoxFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { data_auto_complete = "true" })
         @Html.ValidationMessageFor(m => m.Description)
     </fieldset>
 

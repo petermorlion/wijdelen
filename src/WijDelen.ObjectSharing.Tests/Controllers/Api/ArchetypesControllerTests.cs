@@ -47,5 +47,24 @@ namespace WijDelen.ObjectSharing.Tests.Controllers.Api {
 
             result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers", "Sneaky snake" });
         }
+
+        [Test]
+        public void GetShouldReturnNothingIfNoMatches()
+        {
+            var records = new[] {
+                new ArchetypeRecord { Name = "Sneakers" },
+                new ArchetypeRecord { Name = "Flaming Moe" },
+                new ArchetypeRecord { Name = "Sneaky snake" }
+            };
+
+            var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
+            repositoryMock.SetRecords(records);
+
+            var controller = new ArchetypesController(repositoryMock.Object, null);
+
+            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("ladder");
+
+            result.Content.ShouldBeEquivalentTo(new List<string>());
+        }
     }
 }

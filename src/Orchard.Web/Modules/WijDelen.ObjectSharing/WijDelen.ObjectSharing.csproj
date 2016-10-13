@@ -159,6 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
+    <Content Include="Scripts\auto-complete.js" />
+    <Content Include="Scripts\auto-complete.min.js" />
+    <Content Include="Scripts\ObjectRequest\new.js" />
+    <Content Include="Styles\auto-complete.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
