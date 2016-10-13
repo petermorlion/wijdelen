@@ -14,9 +14,10 @@ namespace WijDelen.ObjectSharing.Controllers.Api {
         }
         
         public IHttpActionResult Get(string input) {
-            var matches = _archetypeRepository.Fetch(x => x.Name.ToLowerInvariant().Contains(input.ToLowerInvariant())).ToList();
+            var archetypeMatches = _archetypeRepository.Fetch(x => x.Name.ToLowerInvariant().Contains(input.ToLowerInvariant())).Select(x => x.Name);
+            var synonymMatches = _synonymsRepository.Fetch(x => x.Synonym.ToLowerInvariant().Contains(input.ToLowerInvariant())).Select(x => x.Archetype);
 
-            var result = matches.Select(x => x.Name).ToList();
+            var result = archetypeMatches.Union(synonymMatches).ToList();
             return Ok(result);
         }
     }

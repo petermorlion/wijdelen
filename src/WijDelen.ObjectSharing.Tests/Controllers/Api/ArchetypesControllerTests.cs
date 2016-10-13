@@ -22,7 +22,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers.Api {
             var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object, null);
+            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
 
             var result = (OkNegotiatedContentResult<List<string>>)controller.Get("sneakers");
 
@@ -41,7 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers.Api {
             var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object, null);
+            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
 
             var result = (OkNegotiatedContentResult<List<string>>)controller.Get("snea");
 
@@ -60,11 +60,63 @@ namespace WijDelen.ObjectSharing.Tests.Controllers.Api {
             var repositoryMock = new Mock<IRepository<ArchetypeRecord>>();
             repositoryMock.SetRecords(records);
 
-            var controller = new ArchetypesController(repositoryMock.Object, null);
+            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
 
             var result = (OkNegotiatedContentResult<List<string>>)controller.Get("ladder");
 
             result.Content.ShouldBeEquivalentTo(new List<string>());
+        }
+        
+        [Test]
+        public void GetShouldReturnSynonymMatches()
+        {
+            var archetypes = new[] {
+                new ArchetypeRecord { Name = "Sneakers" },
+                new ArchetypeRecord { Name = "Flaming Moe" },
+                new ArchetypeRecord { Name = "Sneaky snake" }
+            };
+
+            var archetypeRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
+            archetypeRepositoryMock.SetRecords(archetypes);
+
+            var synonyms = new[] {
+                new ArchetypedSynonymRecord {Archetype = "Sneakers", Synonym = "Sporting shoes"}
+            };
+
+            var synonymRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
+            synonymRepositoryMock.SetRecords(synonyms);
+
+            var controller = new ArchetypesController(archetypeRepositoryMock.Object, synonymRepositoryMock.Object);
+
+            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("spor");
+
+            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers" });
+        }
+        
+        [Test]
+        public void GetShouldNotReturnDuplicates()
+        {
+            var archetypes = new[] {
+                new ArchetypeRecord { Name = "Sneakers" },
+                new ArchetypeRecord { Name = "Flaming Moe" },
+                new ArchetypeRecord { Name = "Sneaky snake" }
+            };
+
+            var archetypeRepositoryMock = new Mock<IRepository<ArchetypeRecord>>();
+            archetypeRepositoryMock.SetRecords(archetypes);
+
+            var synonyms = new[] {
+                new ArchetypedSynonymRecord {Archetype = "Sneakers", Synonym = "Sneaky sneakers"}
+            };
+
+            var synonymRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
+            synonymRepositoryMock.SetRecords(synonyms);
+
+            var controller = new ArchetypesController(archetypeRepositoryMock.Object, synonymRepositoryMock.Object);
+
+            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("sneake");
+
+            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers" });
         }
     }
 }
