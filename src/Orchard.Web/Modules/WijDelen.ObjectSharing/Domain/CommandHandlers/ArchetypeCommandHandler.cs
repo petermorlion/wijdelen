@@ -25,8 +25,7 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
                 }
 
                 foreach (var synonym in pair.Value) {
-                    if (!archetype.Synonyms.Contains(synonym))
-                    {
+                    if (!archetype.Synonyms.Contains(synonym)) {
                         archetype.AddSynonym(synonym);
                     }
                 }
