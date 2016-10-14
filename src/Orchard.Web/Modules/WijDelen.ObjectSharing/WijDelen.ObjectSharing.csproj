@@ -119,6 +119,7 @@
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Domain\EventSourcing\IVersionedEvent.cs" />
     <Compile Include="Domain\Messaging\IEventBus.cs" />
     <Compile Include="Domain\Messaging\IEventHandler.cs" />
+    <Compile Include="Infrastructure\IMailService.cs" />
+    <Compile Include="Infrastructure\MailgunService.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepository.cs" />
     <Compile Include="Domain\EventSourcing\VersionedEvent.cs" />
     <Compile Include="Domain\Events\ObjectRequested.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Infrastructure\Queries\IFindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindArchetypesByTitleQuery.cs" />
     <Compile Include="LoggedInRedirect.cs" />
+    <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
