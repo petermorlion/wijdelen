@@ -5,7 +5,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class ObjectRequestMailer : IEventHandler<ObjectRequested>
     {
         public void Handle(ObjectRequested e) {
-            throw new System.NotImplementedException();
         }
     }
 }
