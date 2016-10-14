@@ -134,6 +134,10 @@
     <Compile Include="Domain\Messaging\ICommand.cs" />
     <Compile Include="Domain\Messaging\ICommandHandler.cs" />
     <Compile Include="Domain\Entities\ObjectRequest.cs" />
+    <Compile Include="Infrastructure\Queries\FindAllArchetypesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\FindAllSynonymsQuery.cs" />
+    <Compile Include="Infrastructure\Queries\IFindAllArchetypesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\IFindAllSynonymsQuery.cs" />
     <Compile Include="Infrastructure\Queries\ISearchArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\SearchArchetypesByTitleQuery.cs" />
     <Compile Include="LoggedInRedirect.cs" />

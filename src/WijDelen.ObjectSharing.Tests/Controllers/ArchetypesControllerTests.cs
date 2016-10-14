@@ -6,12 +6,15 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.ContentManagement;
+using Orchard.ContentPicker.Fields;
 using Orchard.Data;
 using Orchard.Localization;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.Controllers.Factories;
 using WijDelen.ObjectSharing.Tests.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
 
@@ -23,7 +26,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new ArchetypesController(Mock.Of<IContentManager>());
+            var controller = new ArchetypesController(Mock.Of<IFindAllArchetypesQuery>(), Mock.Of<IFindAllSynonymsQuery>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -31,114 +34,135 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             Assert.AreEqual(localizer, controller.T);
         }
 
-        //[Test]
-        //public void IndexShouldShowArchetypes()
-        //{
-        //    var records = new[] {
-        //        new ArchetypePartRecord(),
-        //        new ArchetypePartRecord()
-        //    };
+        [Test]
+        public void IndexShouldShowArchetypes()
+        {
+            var archetypeFactory = new ArchetypeFactory();
 
-        //    var repositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-        //    repositoryMock.SetRecords(records);
+            var archetypes = new[] {
+                archetypeFactory.Create("Sneakers"),
+                archetypeFactory.Create("Flaming Moe")
+            };
 
-        //    var controller = new ArchetypesController(repositoryMock.Object, null, null, null);
+            var archetypesQueryMock = new Mock<IFindAllArchetypesQuery>();
+            archetypesQueryMock.Setup(x => x.GetResult()).Returns(archetypes);
 
-        //    var result = controller.Index();
+            var controller = new ArchetypesController(archetypesQueryMock.Object, Mock.Of<IFindAllSynonymsQuery>());
+            var result = controller.Index();
 
-        //    ((ViewResult)result).Model.ShouldBeEquivalentTo(records);
-        //}
+            ((ViewResult)result).Model.ShouldBeEquivalentTo(archetypes);
+        }
 
-        //[Test]
-        //public void SynonmysShouldShowSynonyms()
-        //{
-        //    var synonyms = new[] {
-        //        new ArchetypedSynonymRecord {
-        //            Archetype = "Sneakers",
-        //            Synonym = "Sporting shoes"
-        //        }
-        //    };
+        [Test]
+        public void SynonmysShouldShowSynonyms()
+        {
+            var archetypeFactory = new ArchetypeFactory();
 
-        //    var synonymsRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
-        //    synonymsRepositoryMock.SetRecords(synonyms);
+            var archetypes = new[] {
+                archetypeFactory.Create("Sneakers"),
+                archetypeFactory.Create("Ladder")
+            };
 
-        //    var archetypes = new[] {
-        //        new ArchetypePartRecord { AggregateId = Guid.NewGuid(), Name = "Ladder" },
-        //        new ArchetypePartRecord { AggregateId = Guid.NewGuid(), Name = "Sneakers" }
-        //    };
+            var archetypesQueryMock = new Mock<IFindAllArchetypesQuery>();
+            archetypesQueryMock.Setup(x => x.GetResult()).Returns(archetypes);
 
-        //    var archetypesRepositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-        //    archetypesRepositoryMock.SetRecords(archetypes);
+            var synonymFactory = new SynonymFactory();
+            var synonyms = new[] {
+                synonymFactory.Create("Sporting shoes", archetypes[0].Id)
+            };
 
-        //    var controller = new ArchetypesController(archetypesRepositoryMock.Object, synonymsRepositoryMock.Object, null, null);
+            var synonymsQueryMock = new Mock<IFindAllSynonymsQuery>();
+            synonymsQueryMock.Setup(x => x.GetResult()).Returns(synonyms);
 
-        //    var result = controller.Synonyms();
+            var controller = new ArchetypesController(archetypesQueryMock.Object, synonymsQueryMock.Object);
 
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Synonym.Should().Be("Sporting shoes");
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetypeId.Should().Be(archetypes[1].AggregateId.ToString());
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Count.Should().Be(2);
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[0].Id.Should().Be(archetypes[0].AggregateId);
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[0].Name.Should().Be(archetypes[0].Name);
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[1].Id.Should().Be(archetypes[1].AggregateId);
-        //    ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[1].Name.Should().Be(archetypes[1].Name);
-        //}
+            var result = controller.Synonyms();
 
-        //[Test]
-        //public void WhenPostingNewArchetype()
-        //{
-        //    var viewModel = new CreateArchetypeViewModel { Name = "Sneakers" };
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Synonym.Should().Be("Sporting shoes");
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].SelectedArchetypeId.Should().Be(archetypes[0].Id);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes.Count.Should().Be(2);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[0].Should().Be(archetypes[0]);
+            ((ViewResult)result).Model.As<SynonymsViewModel>().Synonyms[0].Archetypes[1].Should().Be(archetypes[1]);
+        }
 
-        //    var commandHandlerMock = new Mock<ICommandHandler<CreateArchetype>>();
-        //    CreateArchetype command = null;
-        //    commandHandlerMock.Setup(x => x.Handle(It.IsAny<CreateArchetype>())).Callback((CreateArchetype c) => command = c);
+        [Test]
+        public void WhenChangingArchetypeForSynonym()
+        {
+            var archetypeFactory = new ArchetypeFactory();
 
-        //    var controller = new ArchetypesController(null, null, commandHandlerMock.Object, null);
+            var archetypes = new[] {
+                archetypeFactory.Create("Sneakers"),
+                archetypeFactory.Create("Ladder")
+            };
 
-        //    var result = controller.Create(viewModel);
+            var archetypesQueryMock = new Mock<IFindAllArchetypesQuery>();
+            archetypesQueryMock.Setup(x => x.GetResult()).Returns(archetypes);
 
-        //    ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
+            var synonymFactory = new SynonymFactory();
+            var synonyms = new[] {
+                synonymFactory.Create("Sporting shoes", archetypes[0].Id)
+            };
 
-        //    command.Name.Should().Be("Sneakers");
-        //}
+            var synonymsQueryMock = new Mock<IFindAllSynonymsQuery>();
+            synonymsQueryMock.Setup(x => x.GetResult()).Returns(synonyms);
 
-        //[Test]
-        //public void WhenPostingNewArchetypeWithoutName_ShouldReturnError()
-        //{
-        //    var viewModel = new CreateArchetypeViewModel();
+            var controller = new ArchetypesController(archetypesQueryMock.Object, synonymsQueryMock.Object);
 
-        //    var controller = new ArchetypesController(null, null, null, null);
+            var viewModel = new SynonymsViewModel
+            {
+                Synonyms = new List<EditArchetypedSynonymViewModel> {
+                    new EditArchetypedSynonymViewModel {
+                        Synonym = "Sporting shoes",
+                        SelectedArchetypeId = archetypes[1].Id
+                    }
+                }
+            };
 
-        //    var result = controller.Create(viewModel);
+            var result = controller.Synonyms(viewModel);
 
-        //    ((ViewResult)result).ViewData.ModelState["Name"].Errors.Single().ErrorMessage.Should().Be("Please provide a name for the archetype.");
-        //}
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Synonyms");
 
-        //[Test]
-        //public void WhenPostingArchetypesAndSynonyms()
-        //{
-        //    SetSynonymArchetypes command = null;
-        //    var commandHandlerMock = new Mock<ICommandHandler<SetSynonymArchetypes>>();
-        //    commandHandlerMock
-        //        .Setup(x => x.Handle(It.IsAny<SetSynonymArchetypes>()))
-        //        .Callback((SetSynonymArchetypes c) => command = c);
+            ((ContentPickerField)((ContentPart)synonyms[0].Content.Synonym).Get(typeof(ContentPickerField), "Archetype")).Ids.ShouldBeEquivalentTo(new[] { archetypes[1].Id });
+        }
 
-        //    var controller = new ArchetypesController(null, null, null, commandHandlerMock.Object);
-        //    var selectedArchetypeId = Guid.NewGuid();
-        //    var viewModel = new SynonymsViewModel
-        //    {
-        //        Synonyms = new List<EditArchetypedSynonymViewModel> {
-        //            new EditArchetypedSynonymViewModel {
-        //                Synonym = "Sporting shoes",
-        //                SelectedArchetypeId = selectedArchetypeId.ToString()
-        //            }
-        //        }
-        //    };
+        [Test]
+        public void WhenRemovingArchetypeForSynonym()
+        {
+            var archetypeFactory = new ArchetypeFactory();
 
-        //    var result = controller.Synonyms(viewModel);
+            var archetypes = new[] {
+                archetypeFactory.Create("Sneakers"),
+                archetypeFactory.Create("Ladder")
+            };
 
-        //    ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Synonyms");
+            var archetypesQueryMock = new Mock<IFindAllArchetypesQuery>();
+            archetypesQueryMock.Setup(x => x.GetResult()).Returns(archetypes);
 
-        //    command.ArchetypeSynonyms[selectedArchetypeId].Single().Should().Be("Sporting shoes");
-        //}
+            var synonymFactory = new SynonymFactory();
+            var synonyms = new[] {
+                synonymFactory.Create("Sporting shoes", archetypes[0].Id)
+            };
+
+            var synonymsQueryMock = new Mock<IFindAllSynonymsQuery>();
+            synonymsQueryMock.Setup(x => x.GetResult()).Returns(synonyms);
+
+            var controller = new ArchetypesController(archetypesQueryMock.Object, synonymsQueryMock.Object);
+
+            var viewModel = new SynonymsViewModel
+            {
+                Synonyms = new List<EditArchetypedSynonymViewModel> {
+                    new EditArchetypedSynonymViewModel {
+                        Synonym = "Sporting shoes",
+                        SelectedArchetypeId = null
+                    }
+                }
+            };
+
+            var result = controller.Synonyms(viewModel);
+
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Synonyms");
+
+            ((ContentPickerField)((ContentPart)synonyms[0].Content.Synonym).Get(typeof(ContentPickerField), "Archetype")).Ids.ShouldBeEquivalentTo(new int[0]);
+        }
     }
 }

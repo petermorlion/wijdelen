@@ -1,50 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Orchard.ContentManagement;
-using Orchard.ContentManagement.Records;
 using Orchard.ContentPicker.Fields;
 using Orchard.Core.Title.Models;
-using Orchard.Data;
 using Orchard.Localization;
 using Orchard.UI.Admin;
-using WijDelen.ObjectSharing.Domain.Commands;
-using WijDelen.ObjectSharing.Domain.Messaging;
-using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ArchetypesController : Controller {
-        private readonly IContentManager _contentManager;
-        //private readonly IRepository<ArchetypePartRecord> _archetypeRepository;
-        //private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
-        //private readonly ICommandHandler<CreateArchetype> _createArchetypeCommandHandler;
-        //private readonly ICommandHandler<SetSynonymArchetypes> _setSynonymArchetypesCommandHandler;
+        private readonly IFindAllArchetypesQuery _findAllArchetypesQuery;
+        private readonly IFindAllSynonymsQuery _findAllSynonymsQuery;
 
-        public ArchetypesController(
-            IContentManager contentManager) {
-            _contentManager = contentManager;
+        public ArchetypesController(IFindAllArchetypesQuery findAllArchetypesQuery, IFindAllSynonymsQuery findAllSynonymsQuery) {
+            _findAllArchetypesQuery = findAllArchetypesQuery;
+            _findAllSynonymsQuery = findAllSynonymsQuery;
             T = NullLocalizer.Instance;
         }
 
         public ActionResult Index() {
-            var records = _contentManager.Query("Archetype").List();
+            var records = _findAllArchetypesQuery.GetResult();
             return View(records);
         }
 
         public ActionResult Synonyms()
         {
-            var synonyms = _contentManager
-                .Query("Synonym")
-                .List();
+            var synonyms = _findAllSynonymsQuery.GetResult();
 
-            var archetypes = _contentManager
-                .Query("Archetype")
-                .List()
-                .ToList();
+            var archetypes = _findAllArchetypesQuery.GetResult().ToList();
 
             var viewModel = new SynonymsViewModel {
                 Synonyms = synonyms.OrderBy(x => x.As<TitlePart>().Title).Select(x => new EditArchetypedSynonymViewModel {
@@ -59,9 +44,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [HttpPost]
         public ActionResult Synonyms(SynonymsViewModel viewModel) {
-            var synonyms = _contentManager
-                .Query("Synonym")
-                .List();
+            var synonyms = _findAllSynonymsQuery.GetResult();
 
             foreach (var editArchetypedSynonymViewModel in viewModel.Synonyms) {
                 var synonym = synonyms.FirstOrDefault(x => x.As<TitlePart>().Title == editArchetypedSynonymViewModel.Synonym);
@@ -72,8 +55,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 var field = (ContentPickerField)((ContentPart)synonym.Content.Synonym).Get(typeof(ContentPickerField), "Archetype");
                 if (editArchetypedSynonymViewModel.SelectedArchetypeId.HasValue) {
                     field.Ids = new[] {editArchetypedSynonymViewModel.SelectedArchetypeId.Value};
-                }
-                else {
+                } else {
                     field.Ids = new int[0];
                 }
             }

@@ -5,7 +5,7 @@ using Moq;
 using NUnit.Framework;
 using WijDelen.ObjectSharing.Controllers.Api;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
-using WijDelen.ObjectSharing.Tests.Controllers.Builders;
+using WijDelen.ObjectSharing.Tests.Controllers.Factories;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers.Api
 {

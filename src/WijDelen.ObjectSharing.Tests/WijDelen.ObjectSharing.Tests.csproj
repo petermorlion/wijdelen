@@ -111,7 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
-    <Compile Include="Controllers\Builders\ArchetypeFactory.cs" />
+    <Compile Include="Controllers\Factories\ArchetypeFactory.cs" />
+    <Compile Include="Controllers\Factories\SynonymFactory.cs" />
+    <Compile Include="Controllers\Fakes\FakeFieldStorage.cs" />
     <Compile Include="Controllers\Fakes\FakeOrchardServices.cs" />
     <Compile Include="Controllers\Fakes\FakeWorkContext.cs" />
     <Compile Include="Controllers\ArchetypesControllerTests.cs" />
@@ -138,6 +140,10 @@
     <ProjectReference Include="..\Orchard.Web\Core\Orchard.Core.csproj">
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Web\Modules\Orchard.ContentPicker\Orchard.ContentPicker.csproj">
+      <Project>{F301EF7D-F19C-4D83-AA94-CB64F29C037D}</Project>
+      <Name>Orchard.ContentPicker</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orchard.Web\Modules\WijDelen.ObjectSharing\WijDelen.ObjectSharing.csproj">
       <Project>{b9dc31d9-3069-4bda-9601-4db74950c281}</Project>
