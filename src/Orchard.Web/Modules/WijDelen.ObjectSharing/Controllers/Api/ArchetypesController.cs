@@ -1,24 +1,24 @@
 ﻿using System.Linq;
 using System.Web.Http;
-using Orchard.Data;
-using WijDelen.ObjectSharing.Models;
+using Orchard.Core.Title.Models;
+using WijDelen.ObjectSharing.Infrastructure.Queries;
 
 namespace WijDelen.ObjectSharing.Controllers.Api {
     public class ArchetypesController : ApiController {
-        //private readonly IRepository<ArchetypePartRecord> _archetypeRepository;
-        //private readonly IRepository<ArchetypedSynonymRecord> _synonymsRepository;
+        private readonly ISearchArchetypesByTitleQuery _query;
 
-        //public ArchetypesController(IRepository<ArchetypePartRecord> archetypeRepository, IRepository<ArchetypedSynonymRecord> synonymsRepository) {
-        //    _archetypeRepository = archetypeRepository;
-        //    _synonymsRepository = synonymsRepository;
-        //}
-        
-        //public IHttpActionResult Get(string input) {
-        //    var archetypeMatches = _archetypeRepository.Fetch(x => x.Name.ToLowerInvariant().Contains(input.ToLowerInvariant())).Select(x => x.Name);
-        //    var synonymMatches = _synonymsRepository.Fetch(x => x.Synonym.ToLowerInvariant().Contains(input.ToLowerInvariant())).Select(x => x.Archetype);
+        public ArchetypesController(ISearchArchetypesByTitleQuery query) {
+            _query = query;
+        }
 
-        //    var result = archetypeMatches.Union(synonymMatches).ToList();
-        //    return Ok(result);
-        //}
+        public IHttpActionResult Get(string input) {
+            var archetypes = _query.GetResult(input);
+            
+            var archetypeMatches = archetypes
+                .Select(x => x.Parts.OfType<TitlePart>().Single().Title)
+                .ToList();
+
+            return Ok(archetypeMatches);
+        }
     }
 }

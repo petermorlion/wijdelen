@@ -1,122 +1,34 @@
-﻿//using System.Collections.Generic;
-//using System.Web.Http.Results;
-//using FluentAssertions;
-//using Moq;
-//using NUnit.Framework;
-//using Orchard.Data;
-//using WijDelen.ObjectSharing.Controllers.Api;
-//using WijDelen.ObjectSharing.Models;
-//using WijDelen.ObjectSharing.Tests.Fakes;
+﻿using System.Collections.Generic;
+using System.Web.Http.Results;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using WijDelen.ObjectSharing.Controllers.Api;
+using WijDelen.ObjectSharing.Infrastructure.Queries;
+using WijDelen.ObjectSharing.Tests.Controllers.Builders;
 
-//namespace WijDelen.ObjectSharing.Tests.Controllers.Api {
-//    [TestFixture]
-//    public class ArchetypesControllerTests {
-//        [Test]
-//        public void GetShouldReturnExactMatch()
-//        {
-//            var records = new[] {
-//                new ArchetypePartRecord { Name = "Sneakers" },
-//                new ArchetypePartRecord { Name = "Flaming Moe" }
-//            };
+namespace WijDelen.ObjectSharing.Tests.Controllers.Api
+{
+    [TestFixture]
+    public class ArchetypesControllerTests
+    {
+        [Test]
+        public void GetShouldReturnMatches()
+        {
+            var archetypeFactory = new ArchetypeFactory();
+            var archetypes = new[] {
+                archetypeFactory.Create("Sneakers"),
+                archetypeFactory.Create("Sneaky snakes")
+            };
 
-//            var repositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-//            repositoryMock.SetRecords(records);
+            var queryMock = new Mock<ISearchArchetypesByTitleQuery>();
+            queryMock.Setup(x => x.GetResult("sneakers")).Returns(archetypes);
 
-//            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
+            var controller = new ArchetypesController(queryMock.Object);
 
-//            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("sneakers");
+            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("sneakers");
 
-//            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers" });
-//        }
-
-//        [Test]
-//        public void GetShouldReturnPartialMatches()
-//        {
-//            var records = new[] {
-//                new ArchetypePartRecord { Name = "Sneakers" },
-//                new ArchetypePartRecord { Name = "Flaming Moe" },
-//                new ArchetypePartRecord { Name = "Sneaky snake" }
-//            };
-
-//            var repositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-//            repositoryMock.SetRecords(records);
-
-//            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
-
-//            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("snea");
-
-//            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers", "Sneaky snake" });
-//        }
-
-//        [Test]
-//        public void GetShouldReturnNothingIfNoMatches()
-//        {
-//            var records = new[] {
-//                new ArchetypePartRecord { Name = "Sneakers" },
-//                new ArchetypePartRecord { Name = "Flaming Moe" },
-//                new ArchetypePartRecord { Name = "Sneaky snake" }
-//            };
-
-//            var repositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-//            repositoryMock.SetRecords(records);
-
-//            var controller = new ArchetypesController(repositoryMock.Object, Mock.Of<IRepository<ArchetypedSynonymRecord>>());
-
-//            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("ladder");
-
-//            result.Content.ShouldBeEquivalentTo(new List<string>());
-//        }
-        
-//        [Test]
-//        public void GetShouldReturnSynonymMatches()
-//        {
-//            var archetypes = new[] {
-//                new ArchetypePartRecord { Name = "Sneakers" },
-//                new ArchetypePartRecord { Name = "Flaming Moe" },
-//                new ArchetypePartRecord { Name = "Sneaky snake" }
-//            };
-
-//            var archetypeRepositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-//            archetypeRepositoryMock.SetRecords(archetypes);
-
-//            var synonyms = new[] {
-//                new ArchetypedSynonymRecord {Archetype = "Sneakers", Synonym = "Sporting shoes"}
-//            };
-
-//            var synonymRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
-//            synonymRepositoryMock.SetRecords(synonyms);
-
-//            var controller = new ArchetypesController(archetypeRepositoryMock.Object, synonymRepositoryMock.Object);
-
-//            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("spor");
-
-//            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers" });
-//        }
-        
-//        [Test]
-//        public void GetShouldNotReturnDuplicates()
-//        {
-//            var archetypes = new[] {
-//                new ArchetypePartRecord { Name = "Sneakers" },
-//                new ArchetypePartRecord { Name = "Flaming Moe" },
-//                new ArchetypePartRecord { Name = "Sneaky snake" }
-//            };
-
-//            var archetypeRepositoryMock = new Mock<IRepository<ArchetypePartRecord>>();
-//            archetypeRepositoryMock.SetRecords(archetypes);
-
-//            var synonyms = new[] {
-//                new ArchetypedSynonymRecord {Archetype = "Sneakers", Synonym = "Sneaky sneakers"}
-//            };
-
-//            var synonymRepositoryMock = new Mock<IRepository<ArchetypedSynonymRecord>>();
-//            synonymRepositoryMock.SetRecords(synonyms);
-
-//            var controller = new ArchetypesController(archetypeRepositoryMock.Object, synonymRepositoryMock.Object);
-
-//            var result = (OkNegotiatedContentResult<List<string>>)controller.Get("sneake");
-
-//            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers" });
-//        }
-//    }
-//}
+            result.Content.ShouldBeEquivalentTo(new List<string> { "Sneakers", "Sneaky snakes" });
+        }
+    }
+}

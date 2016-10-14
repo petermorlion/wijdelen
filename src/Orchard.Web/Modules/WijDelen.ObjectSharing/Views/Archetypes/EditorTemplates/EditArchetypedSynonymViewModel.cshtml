@@ -3,6 +3,6 @@
 <tr>
     <td>@Html.DisplayFor(m => m.Synonym) @Html.HiddenFor(m => m.Synonym)</td>
     <td>
-        @Html.DropDownListFor(m => Model.SelectedArchetypeId, Model.Archetypes.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }), "")
+        @Html.DropDownListFor(m => Model.SelectedArchetypeId, Model.Archetypes.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Content.TitlePart.Title }), "")
     </td>
 </tr>
