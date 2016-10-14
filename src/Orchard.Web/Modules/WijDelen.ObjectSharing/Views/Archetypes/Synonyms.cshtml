@@ -7,7 +7,7 @@
 @using (Html.BeginFormAntiForgeryPost(Url.Action("Synonyms", "Archetypes", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <fieldset>
-        <button class="primaryAction">@T("Submit")</button>
+        <button class="primaryAction">@T("Save")</button>
     </fieldset>
 
     <fieldset>
@@ -25,6 +25,6 @@
     </fieldset>
 
     <fieldset>
-        <button class="primaryAction">@T("Submit")</button>
+        <button class="primaryAction">@T("Save")</button>
     </fieldset>
 }
