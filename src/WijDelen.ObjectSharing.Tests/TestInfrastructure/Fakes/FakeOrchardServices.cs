@@ -4,7 +4,7 @@ using Orchard.Data;
 using Orchard.Security;
 using Orchard.UI.Notify;
 
-namespace WijDelen.ObjectSharing.Tests.Controllers.Fakes {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public class FakeOrchardServices : IOrchardServices {
         public IContentManager ContentManager { get; }
         public ITransactionManager TransactionManager { get; }

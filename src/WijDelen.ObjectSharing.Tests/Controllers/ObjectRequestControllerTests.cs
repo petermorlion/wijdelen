@@ -12,8 +12,7 @@ using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
-using WijDelen.ObjectSharing.Tests.Controllers.Fakes;
-using WijDelen.ObjectSharing.Tests.Fakes;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {

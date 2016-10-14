@@ -6,7 +6,7 @@ using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Models;
-using WijDelen.ObjectSharing.Tests.Fakes;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]

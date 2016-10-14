@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Moq;
 using Orchard.Data;
 
-namespace WijDelen.ObjectSharing.Tests.Fakes {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public static class MockRepositoryExtensions {
         /// <summary>
         /// Sets up the mock repository to behave as though the given records are the records in the database.

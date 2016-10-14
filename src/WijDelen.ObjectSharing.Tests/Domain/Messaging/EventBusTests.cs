@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using WijDelen.ObjectSharing.Domain.Messaging;
-using WijDelen.ObjectSharing.Tests.Domain.Messaging.Fakes;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.Messaging {
     [TestFixture]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Orchard.ContentManagement.FieldStorage;
 
-namespace WijDelen.ObjectSharing.Tests.Controllers.Fakes {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public class FakeFieldStorage : IFieldStorage {
         private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
 

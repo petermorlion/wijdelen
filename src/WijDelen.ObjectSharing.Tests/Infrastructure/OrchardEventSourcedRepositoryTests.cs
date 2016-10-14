@@ -10,7 +10,7 @@ using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure;
 using WijDelen.ObjectSharing.Models;
-using WijDelen.ObjectSharing.Tests.Infrastructure.Fakes;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Infrastructure {
     [TestFixture]

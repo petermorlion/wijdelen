@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 
-namespace WijDelen.ObjectSharing.Tests.Infrastructure.Fakes {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public class EventSourcedAggregate : EventSourced {
         public EventSourcedAggregate(Guid id) : base(id) {
             Handles<Created>(OnCreated);

@@ -111,24 +111,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
-    <Compile Include="Controllers\Factories\ArchetypeFactory.cs" />
-    <Compile Include="Controllers\Factories\SynonymFactory.cs" />
-    <Compile Include="Controllers\Fakes\FakeFieldStorage.cs" />
-    <Compile Include="Controllers\Fakes\FakeOrchardServices.cs" />
-    <Compile Include="Controllers\Fakes\FakeWorkContext.cs" />
+    <Compile Include="TestInfrastructure\Factories\ArchetypeFactory.cs" />
+    <Compile Include="TestInfrastructure\Factories\SynonymFactory.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeFieldStorage.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeOrchardServices.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeWorkContext.cs" />
     <Compile Include="Controllers\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandlerTests.cs" />
+    <Compile Include="Domain\EventHandlers\SynonymGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\EventBusTests.cs" />
-    <Compile Include="Domain\Messaging\Fakes\FakeEvent.cs" />
-    <Compile Include="Domain\Messaging\Fakes\FakeEventHandler.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeEvent.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeEventHandler.cs" />
     <Compile Include="Domain\Entities\ObjectRequestTests.cs" />
-    <Compile Include="Fakes\MockRepositoryExtensions.cs" />
-    <Compile Include="Infrastructure\Fakes\Created.cs" />
-    <Compile Include="Infrastructure\Fakes\EventSourcedAggregate.cs" />
+    <Compile Include="TestInfrastructure\Fakes\MockRepositoryExtensions.cs" />
+    <Compile Include="TestInfrastructure\Fakes\Created.cs" />
+    <Compile Include="TestInfrastructure\Fakes\EventSourcedAggregate.cs" />
     <Compile Include="Infrastructure\JsonTextSerializer.cs" />
-    <Compile Include="Infrastructure\Fakes\Modified.cs" />
+    <Compile Include="TestInfrastructure\Fakes\Modified.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

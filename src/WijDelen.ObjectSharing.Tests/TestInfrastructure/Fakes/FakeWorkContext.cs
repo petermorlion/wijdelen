@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Orchard;
 
-namespace WijDelen.ObjectSharing.Tests.Controllers.Fakes {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public class FakeWorkContext : WorkContext {
         private readonly IDictionary<string, object> _state = new Dictionary<string, object>();
 

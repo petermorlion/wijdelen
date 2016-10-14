@@ -1,9 +1,9 @@
-﻿using Orchard.ContentManagement;
+using Orchard.ContentManagement;
 using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 using Orchard.ContentManagement.Records;
 using Orchard.Core.Title.Models;
 
-namespace WijDelen.ObjectSharing.Tests.Controllers.Factories {
+namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories {
     public class ArchetypeFactory {
         private int _nextId = 1;
 
