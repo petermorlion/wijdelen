@@ -93,7 +93,7 @@
     <Content Include="WijDelen.Groups\node_modules\milligram-less\demo\index.html" />
     <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\normalize.css" />
     <Content Include="WijDelen.Groups\Scripts\script.js" />
-    <Content Include="WijDelen.Groups\Assets\reset.css" />
+    <Content Include="WijDelen.Groups\Assets\normalize.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.css" />
     <Content Include="WijDelen.Groups\Styles\Styles.min.css" />
     <Content Include="WijDelen.Groups\ThemeZonePreview.png" />

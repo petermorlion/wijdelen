@@ -4,7 +4,7 @@ using Orchard;
 
 namespace WijDelen.UserImport.Tests.Mocks {
     public class MockWorkContext : WorkContext {
-        private IDictionary<string, object> _state = new Dictionary<string, object>();
+        private readonly IDictionary<string, object> _state = new Dictionary<string, object>();
 
         public override T Resolve<T>() {
             throw new NotImplementedException();

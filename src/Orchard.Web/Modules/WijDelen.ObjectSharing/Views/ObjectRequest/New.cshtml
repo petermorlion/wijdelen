@@ -1,0 +1,27 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel
+
+@{
+    Layout.Title = T("Request object").ToString();
+    Style.Include("auto-complete.css");
+    Script.Include("auto-complete.js").AtFoot();
+    Script.Include("ObjectRequest/new.js").AtFoot();
+}
+
+<h1>@T("Request object")</h1>
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <legend>@T("I would like to borrow the following item")</legend>
+        @Html.TextBoxFor(m => m.Description, new { data_auto_complete = "true" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </fieldset>
+
+    <fieldset>
+        <legend>@T("A nice story to convince the group members")</legend>
+        @Html.TextAreaFor(m => m.ExtraInfo)
+        @Html.ValidationMessageFor(m => m.ExtraInfo)
+    </fieldset>
+
+    <button class="primaryAction">@T("Submit")</button>
+}

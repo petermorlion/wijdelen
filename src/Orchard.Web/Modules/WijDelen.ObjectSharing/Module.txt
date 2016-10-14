@@ -1,0 +1,12 @@
+﻿Name: WijDelen.ObjectSharing
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0
+OrchardVersion: 1.0
+Description: The core of WijDelen Groups, allowing users to request and share objects in their groups.
+Features:
+    WijDelen.ObjectSharing:
+        Description: Allows users to request and share objects in their groups.
+		Category: WijDelen
+		Dependencies: WijDelen.UserImport, Orchard.Users, Orchard.ContentPicker

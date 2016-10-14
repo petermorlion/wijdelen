@@ -6,6 +6,8 @@
 }
 
 @using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Admin", new {Area = "WijDelen.UserImport"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+    @Html.ValidationSummary()
+
     <fieldset>
         <legend>@T("User File")</legend>
         @Html.LabelFor(m => m.File, T("Please use a CSV file with two columns: username and email"))
@@ -18,7 +20,7 @@
         
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.New, new {id="newGroup", name="group"})
         <label for="newGroup" class="forcheckbox">@T("New")</label>
-        @Html.TextBoxFor(m => m.NewGroupName, new {class="text"})<br/>
+        @Html.TextBoxFor(m => m.NewGroupName, new {@class="text"})<br/>
 
         @Html.RadioButtonFor(m => m.UserImportLinkMode, UserImportLinkMode.Existing, new {id="existingGroup", name="group"})
         <label for="existingGroup" class="forcheckbox">@T("Existing")</label> 

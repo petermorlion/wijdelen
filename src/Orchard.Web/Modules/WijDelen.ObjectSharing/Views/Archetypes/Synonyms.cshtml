@@ -1,0 +1,30 @@
+@model WijDelen.ObjectSharing.ViewModels.SynonymsViewModel
+
+@{
+    Layout.Title = T("Synonyms").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Synonyms", "Archetypes", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <button class="primaryAction">@T("Save")</button>
+    </fieldset>
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>@T("Synonym")</th>
+                    <th>@T("Archetype")</th>
+                </tr>
+            </thead>
+            <tbody>
+            @Html.EditorFor(m => m.Synonyms)
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <button class="primaryAction">@T("Save")</button>
+    </fieldset>
+}
