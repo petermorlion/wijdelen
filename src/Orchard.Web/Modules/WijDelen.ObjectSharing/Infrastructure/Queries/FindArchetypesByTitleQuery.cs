@@ -4,10 +4,10 @@ using Orchard.Core.Title.Models;
 using System.Linq;
 
 namespace WijDelen.ObjectSharing.Infrastructure.Queries {
-    public class SearchArchetypesByTitleQuery : ISearchArchetypesByTitleQuery {
+    public class FindArchetypesByTitleQuery : IFindArchetypesByTitleQuery {
         private readonly IContentManager _contentManager;
 
-        public SearchArchetypesByTitleQuery(IContentManager contentManager) {
+        public FindArchetypesByTitleQuery(IContentManager contentManager) {
             _contentManager = contentManager;
         }
 

@@ -21,7 +21,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers.Api
                 archetypeFactory.Create("Sneaky snakes")
             };
 
-            var queryMock = new Mock<ISearchArchetypesByTitleQuery>();
+            var queryMock = new Mock<IFindArchetypesByTitleQuery>();
             queryMock.Setup(x => x.GetResult("sneakers")).Returns(archetypes);
 
             var controller = new ArchetypesController(queryMock.Object);

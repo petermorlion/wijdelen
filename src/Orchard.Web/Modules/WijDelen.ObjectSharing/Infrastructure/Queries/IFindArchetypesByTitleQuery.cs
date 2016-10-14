@@ -3,7 +3,7 @@ using Orchard;
 using Orchard.ContentManagement;
 
 namespace WijDelen.ObjectSharing.Infrastructure.Queries {
-    public interface ISearchArchetypesByTitleQuery : IDependency {
+    public interface IFindArchetypesByTitleQuery : IDependency {
         /// <summary>
         /// Returns al "Archetype" content items where the Title contains the given search term, ignoring case.
         /// </summary>

@@ -1,19 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.ContentManagement;
 using Orchard.ContentPicker.Fields;
-using Orchard.Data;
 using Orchard.Localization;
 using WijDelen.ObjectSharing.Controllers;
-using WijDelen.ObjectSharing.Domain.Commands;
-using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
-using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.ViewModels;
 

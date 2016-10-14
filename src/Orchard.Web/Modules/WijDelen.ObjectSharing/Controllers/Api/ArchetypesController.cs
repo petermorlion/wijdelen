@@ -5,9 +5,9 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 
 namespace WijDelen.ObjectSharing.Controllers.Api {
     public class ArchetypesController : ApiController {
-        private readonly ISearchArchetypesByTitleQuery _query;
+        private readonly IFindArchetypesByTitleQuery _query;
 
-        public ArchetypesController(ISearchArchetypesByTitleQuery query) {
+        public ArchetypesController(IFindArchetypesByTitleQuery query) {
             _query = query;
         }
 
