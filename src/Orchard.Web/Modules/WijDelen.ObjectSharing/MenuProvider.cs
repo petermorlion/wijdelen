@@ -13,7 +13,7 @@ namespace WijDelen.ObjectSharing {
 
         public void GetMenu(IContent menu, NavigationBuilder builder) {
             if (menu.As<TitlePart>().Title == "Main Menu") {
-                builder.Add(T("New Request"), "10", item => item.Action("New", "ObjectRequest"));
+                builder.Add(T("New Request"), "10", item => item.Action("New", "ObjectRequest", new { area = "WijDelen.ObjectSharing" }));
             }
         }
     }
