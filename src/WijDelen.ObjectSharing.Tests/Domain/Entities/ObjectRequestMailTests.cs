@@ -7,17 +7,17 @@ using WijDelen.ObjectSharing.Domain.Events;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
     [TestFixture]
-    public class MailCampaignTests {
+    public class ObjectRequestMailTests {
         [Test]
         public void WhenCreatingMailCampaign() {
             var id = Guid.NewGuid();
-            var mailCampaign = new MailCampaign(id, 22, new[] {"peter.morlion@gmail.com", "peter.morlion@telenet.be"});
+            var mailCampaign = new ObjectRequestMail(id, 22, new[] {"peter.morlion@gmail.com", "peter.morlion@telenet.be"});
 
             mailCampaign.Id.Should().Be(id);
             mailCampaign.UserId.Should().Be(22);
             mailCampaign.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
 
-            mailCampaign.Events.Single().ShouldBeEquivalentTo(new MailCampaignCreated {
+            mailCampaign.Events.Single().ShouldBeEquivalentTo(new ObjectRequestMailCreated {
                 SourceId = id,
                 UserId = 22,
                 EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }
@@ -29,12 +29,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
         [Test]
         public void WhenConstructingFromHistory() {
             var id = Guid.NewGuid();
-            var previousEvent = new MailCampaignCreated {
+            var previousEvent = new ObjectRequestMailCreated {
                 UserId = 22,
                 EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }
             };
 
-            var mailCampaign = new MailCampaign(id, new [] {previousEvent});
+            var mailCampaign = new ObjectRequestMail(id, new [] {previousEvent});
 
             mailCampaign.Events.Should().BeEmpty();
             mailCampaign.Version.Should().Be(0);

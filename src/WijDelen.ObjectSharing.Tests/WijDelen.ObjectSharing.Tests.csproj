@@ -111,7 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
-    <Compile Include="Domain\Entities\MailCampaignTests.cs" />
+    <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
     <Compile Include="TestInfrastructure\Factories\ArchetypeFactory.cs" />
     <Compile Include="TestInfrastructure\Factories\SynonymFactory.cs" />
     <Compile Include="TestInfrastructure\Fakes\FakeFieldStorage.cs" />
