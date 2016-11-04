@@ -10,8 +10,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             Handles<MailCampaignCreated>(OnMailCampaignCreated);
         }
 
-        public MailCampaign(Guid id, int userId) : this(id) {
-            Update(new MailCampaignCreated { UserId = userId });
+        public MailCampaign(Guid id, int userId, IEnumerable<string> emailAddresses) : this(id) {
+            Update(new MailCampaignCreated { UserId = userId, EmailAddresses = emailAddresses });
         }
 
         public MailCampaign(Guid id, IEnumerable<VersionedEvent> history) : this(id) {
@@ -20,11 +20,17 @@ namespace WijDelen.ObjectSharing.Domain.Entities
 
         private void OnMailCampaignCreated(MailCampaignCreated mailCampaignCreated) {
             UserId = mailCampaignCreated.UserId;
+            EmailAddresses = mailCampaignCreated.EmailAddresses;
         }
 
         /// <summary>
         /// The id of the user that requested the object to start this mail campaign.
         /// </summary>
         public int UserId { get; private set; }
+
+        /// <summary>
+        /// The email addresses to send this email campaign to.
+        /// </summary>
+        public IEnumerable<string> EmailAddresses { get; set; }
     }
 }
