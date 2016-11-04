@@ -1,6 +1,6 @@
 using System;
+using System.Data;
 using Orchard.ContentManagement.MetaData;
-using Orchard.ContentManagement.Records;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
 using WijDelen.ObjectSharing.Models;
@@ -63,6 +63,16 @@ namespace WijDelen.ObjectSharing {
                     .Listable());
 
             return 1;
+        }
+
+        public int UpdateFrom1() {
+            SchemaBuilder.AlterTable(typeof(EventRecord).Name, table => table
+                .AlterColumn("Payload", column => column
+                    .WithType(DbType.String)
+                    .WithLength(8000))
+            );
+
+            return 2;
         }
     }
 }
