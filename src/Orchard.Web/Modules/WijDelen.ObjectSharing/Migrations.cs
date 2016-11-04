@@ -69,7 +69,7 @@ namespace WijDelen.ObjectSharing {
             SchemaBuilder.AlterTable(typeof(EventRecord).Name, table => table
                 .AlterColumn("Payload", column => column
                     .WithType(DbType.String)
-                    .WithLength(8000))
+                    .Unlimited())
             );
 
             return 2;
