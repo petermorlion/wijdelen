@@ -12,6 +12,5 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual int Version { get; set; }
         public virtual string Payload { get; set; }
         public virtual string CorrelationId { get; set; }
-
     }
 }
