@@ -1,10 +1,13 @@
-﻿using Orchard.ContentManagement;
+﻿using System.Web;
+using Orchard.ContentManagement;
 using Orchard.Core.Title.Models;
 using Orchard.Localization;
+using Orchard.Security;
 using Orchard.UI.Navigation;
 
 namespace WijDelen.ObjectSharing {
     public class MenuProvider : IMenuProvider {
+
         public MenuProvider() {
             T = NullLocalizer.Instance;
         }
@@ -12,8 +15,15 @@ namespace WijDelen.ObjectSharing {
         public Localizer T { get; set; }
 
         public void GetMenu(IContent menu, NavigationBuilder builder) {
+            if (!HttpContext.Current.User.Identity.IsAuthenticated) {
+                return;
+            }
+
             if (menu.As<TitlePart>().Title == "Main Menu") {
-                builder.Add(T("New Request"), "10", item => item.Action("New", "ObjectRequest", new { area = "WijDelen.ObjectSharing" }));
+                builder.Add(
+                    T("New Request"), 
+                    "10", 
+                    item => item.Action("New", "ObjectRequest", new {area = "WijDelen.ObjectSharing"}));
             }
         }
     }
