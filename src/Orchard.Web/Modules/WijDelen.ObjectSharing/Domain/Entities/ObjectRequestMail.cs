@@ -13,8 +13,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             Handles<ObjectRequestMailCreated>(OnMailCampaignCreated);
         }
 
-        public ObjectRequestMail(Guid id, int userId, IEnumerable<string> emailAddresses) : this(id) {
-            Update(new ObjectRequestMailCreated { UserId = userId, EmailAddresses = emailAddresses });
+        public ObjectRequestMail(Guid id, int userId, IEnumerable<string> emailAddresses, string description, string extraInfo) : this(id) {
+            Update(new ObjectRequestMailCreated { UserId = userId, EmailAddresses = emailAddresses, Description = description, ExtraInfo = extraInfo });
         }
 
         public ObjectRequestMail(Guid id, IEnumerable<VersionedEvent> history) : this(id) {
@@ -24,6 +24,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities
         private void OnMailCampaignCreated(ObjectRequestMailCreated objectRequestMailCreated) {
             UserId = objectRequestMailCreated.UserId;
             EmailAddresses = objectRequestMailCreated.EmailAddresses;
+            Description = objectRequestMailCreated.Description;
+            ExtraInfo = objectRequestMailCreated.ExtraInfo;
         }
 
         /// <summary>
@@ -35,5 +37,15 @@ namespace WijDelen.ObjectSharing.Domain.Entities
         /// The email addresses to send this email campaign to.
         /// </summary>
         public IEnumerable<string> EmailAddresses { get; set; }
+
+        /// <summary>
+        /// A short description of the object
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Extra info as to why the user needs it, what he/she plans to do with it, etc.
+        /// </summary>
+        public string ExtraInfo { get; set; }
     }
 }

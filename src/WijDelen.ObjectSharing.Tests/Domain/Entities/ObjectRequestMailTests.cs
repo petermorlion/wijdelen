@@ -9,21 +9,28 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
     [TestFixture]
     public class ObjectRequestMailTests {
         [Test]
-        public void WhenCreatingMailCampaign() {
+        public void WhenCreatingObjectRequestMail() {
             var id = Guid.NewGuid();
-            var mailCampaign = new ObjectRequestMail(id, 22, new[] {"peter.morlion@gmail.com", "peter.morlion@telenet.be"});
+            var objectRequestMail = new ObjectRequestMail(
+                id, 
+                22, 
+                new[] {"peter.morlion@gmail.com", "peter.morlion@telenet.be"},
+                "Sneakers",
+                "For sneaking");
 
-            mailCampaign.Id.Should().Be(id);
-            mailCampaign.UserId.Should().Be(22);
-            mailCampaign.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
+            objectRequestMail.Id.Should().Be(id);
+            objectRequestMail.UserId.Should().Be(22);
+            objectRequestMail.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
+            objectRequestMail.Description.Should().Be("Sneakers");
+            objectRequestMail.ExtraInfo.Should().Be("For sneaking");
 
-            mailCampaign.Events.Single().ShouldBeEquivalentTo(new ObjectRequestMailCreated {
+            objectRequestMail.Events.Single().ShouldBeEquivalentTo(new ObjectRequestMailCreated {
                 SourceId = id,
                 UserId = 22,
                 EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }
             });
 
-            mailCampaign.Version.Should().Be(0);
+            objectRequestMail.Version.Should().Be(0);
         }
 
         [Test]
@@ -31,16 +38,20 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             var id = Guid.NewGuid();
             var previousEvent = new ObjectRequestMailCreated {
                 UserId = 22,
-                EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }
+                EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" },
+                Description = "Sneakers",
+                ExtraInfo = "For sneaking"
             };
 
-            var mailCampaign = new ObjectRequestMail(id, new [] {previousEvent});
+            var objectRequestMail = new ObjectRequestMail(id, new [] {previousEvent});
 
-            mailCampaign.Events.Should().BeEmpty();
-            mailCampaign.Version.Should().Be(0);
-            mailCampaign.Id.Should().Be(id);
-            mailCampaign.UserId.Should().Be(22);
-            mailCampaign.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
+            objectRequestMail.Events.Should().BeEmpty();
+            objectRequestMail.Version.Should().Be(0);
+            objectRequestMail.Id.Should().Be(id);
+            objectRequestMail.UserId.Should().Be(22);
+            objectRequestMail.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
+            objectRequestMail.Description.Should().Be("Sneakers");
+            objectRequestMail.ExtraInfo.Should().Be("For sneaking");
         }
     }
 }
