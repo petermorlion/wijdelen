@@ -11,5 +11,9 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// The recipients of the mail.
         /// </summary>
         public IEnumerable<string> Recipients { get; set; }
+
+        public string EmailHtml { get; set; }
+
+        public int RequestingUserId { get; set; }
     }
 }

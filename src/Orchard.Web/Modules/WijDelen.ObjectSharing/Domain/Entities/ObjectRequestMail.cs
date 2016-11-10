@@ -23,8 +23,12 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             LoadFrom(history);
         }
 
-        public void MarkAsSent(IEnumerable<string> recipients) {
-            Update(new ObjectRequestMailSent { Recipients = recipients });
+        public void MarkAsSent(IEnumerable<string> recipients, string emailHtml) {
+            Update(new ObjectRequestMailSent {
+                Recipients = recipients,
+                EmailHtml = emailHtml,
+                RequestingUserId = UserId
+            });
         }
 
         private void OnMailCampaignCreated(ObjectRequestMailCreated objectRequestMailCreated) {

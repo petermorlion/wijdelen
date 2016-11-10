@@ -43,7 +43,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 emailAddresses);
 
             var objectRequestMail = _repository.Find(objectRequestMailCreated.SourceId);
-            objectRequestMail.MarkAsSent(emailAddresses);
+            objectRequestMail.MarkAsSent(emailAddresses, "HTML");
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
     }

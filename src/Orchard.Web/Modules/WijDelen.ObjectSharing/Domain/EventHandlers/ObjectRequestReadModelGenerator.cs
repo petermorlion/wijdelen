@@ -8,8 +8,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     /// <summary>
     /// Generates the read model of an object request.
     /// </summary>
-    public class ObjectRequestReadModelGenerator :
-        IEventHandler<ObjectRequested> {
+    public class ObjectRequestReadModelGenerator : IEventHandler<ObjectRequested> {
         private readonly IRepository<ObjectRequestRecord> _repository;
 
         public ObjectRequestReadModelGenerator(IRepository<ObjectRequestRecord> repository) {

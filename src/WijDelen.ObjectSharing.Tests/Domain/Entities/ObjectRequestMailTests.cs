@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 "Sneakers",
                 "For sneaking");
 
-            objectRequestMail.MarkAsSent(new [] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" });
+            objectRequestMail.MarkAsSent(new [] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }, "HTML");
 
             objectRequestMail.Status.Should().Be(ObjectRequestMailStatus.Sent);
             objectRequestMail.Recipients.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
@@ -70,7 +71,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequestMail.Events.Last().ShouldBeEquivalentTo(new ObjectRequestMailSent
             {
                 SourceId = id,
-                Version = 1
+                Version = 1,
+                Recipients = new List<string> { "peter.morlion@gmail.com", "peter.morlion@telenet.be" },
+                EmailHtml = "HTML",
+                RequestingUserId = 22
             });
 
             objectRequestMail.Version.Should().Be(1);
