@@ -15,26 +15,26 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             Handles<ObjectRequestMailSent>(OnObjectRequestMailSent);
         }
 
-        public ObjectRequestMail(Guid id, int userId, IEnumerable<string> emailAddresses, string description, string extraInfo) : this(id) {
-            Update(new ObjectRequestMailCreated { UserId = userId, EmailAddresses = emailAddresses, Description = description, ExtraInfo = extraInfo });
+        public ObjectRequestMail(Guid id, int userId, string description, string extraInfo) : this(id) {
+            Update(new ObjectRequestMailCreated { UserId = userId, Description = description, ExtraInfo = extraInfo });
         }
 
         public ObjectRequestMail(Guid id, IEnumerable<VersionedEvent> history) : this(id) {
             LoadFrom(history);
         }
 
-        public void MarkAsSent() {
-            Update(new ObjectRequestMailSent());
+        public void MarkAsSent(IEnumerable<string> recipients) {
+            Update(new ObjectRequestMailSent { Recipients = recipients });
         }
 
         private void OnMailCampaignCreated(ObjectRequestMailCreated objectRequestMailCreated) {
             UserId = objectRequestMailCreated.UserId;
-            EmailAddresses = objectRequestMailCreated.EmailAddresses;
             Description = objectRequestMailCreated.Description;
             ExtraInfo = objectRequestMailCreated.ExtraInfo;
         }
 
         private void OnObjectRequestMailSent(ObjectRequestMailSent objectRequestMailSent) {
+            Recipients = objectRequestMailSent.Recipients;
             Status = ObjectRequestMailStatus.Sent;
         }
 
@@ -44,9 +44,9 @@ namespace WijDelen.ObjectSharing.Domain.Entities
         public int UserId { get; private set; }
 
         /// <summary>
-        /// The email addresses to send this email campaign to.
+        /// The recipients of this mail.
         /// </summary>
-        public IEnumerable<string> EmailAddresses { get; private set; }
+        public IEnumerable<string> Recipients { get; private set; }
 
         /// <summary>
         /// A short description of the object

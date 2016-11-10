@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
+using Orchard.Core.Containers.Extensions;
 using Orchard.Security;
+using Orchard.Users.Models;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;
 
@@ -41,6 +43,20 @@ namespace WijDelen.UserImport.Services {
         public void UpdateGroupMembershipForContentItem(ContentItem item, EditGroupMembershipViewModel model) {
             var groupMembershipPart = item.As<GroupMembershipPart>();
             groupMembershipPart.Group = _contentManager.Get(model.GroupId);
+        }
+
+        public IEnumerable<IUser> GetOtherUsersInGroup(int userId) {
+            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
+            var group = user.As<GroupMembershipPart>().Group;
+            var result = _contentManager
+                .Query<UserPart, UserPartRecord>()
+                .Where<GroupMembershipPartRecord>(x => x.Group.Id == group.Id)
+                .List()
+                .Select(x => x.ContentItem.As<IUser>())
+                .Where(x => x.Id != userId)
+                .ToList();
+
+            return result;
         }
     }
 }

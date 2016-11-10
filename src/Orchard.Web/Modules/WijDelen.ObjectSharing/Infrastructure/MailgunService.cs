@@ -8,5 +8,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         }
 
         public Localizer T { get; set; }
+        public void SendObjectRequestMail(string description, string extraInfo, params string[] emailAddresses) {
+            throw new System.NotImplementedException();
+        }
     }
 }

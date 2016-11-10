@@ -152,6 +152,10 @@
       <Project>{b9dc31d9-3069-4bda-9601-4db74950c281}</Project>
       <Name>WijDelen.ObjectSharing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Web\Modules\WijDelen.UserImport\WijDelen.UserImport.csproj">
+      <Project>{93D162A5-1383-450D-9CAE-189607E7A285}</Project>
+      <Name>WijDelen.UserImport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard\Orchard.Framework.csproj">
       <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
       <Name>Orchard.Framework</Name>

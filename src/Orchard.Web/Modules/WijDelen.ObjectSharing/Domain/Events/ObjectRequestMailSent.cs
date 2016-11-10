@@ -1,4 +1,5 @@
-﻿using WijDelen.ObjectSharing.Domain.EventSourcing;
+﻿using System.Collections.Generic;
+using WijDelen.ObjectSharing.Domain.EventSourcing;
 
 namespace WijDelen.ObjectSharing.Domain.Events {
     /// <summary>
@@ -6,6 +7,9 @@ namespace WijDelen.ObjectSharing.Domain.Events {
     /// the mails have been sent yet (because the mail service might be down for example).
     /// </summary>
     public class ObjectRequestMailSent : VersionedEvent {
-        
+        /// <summary>
+        /// The recipients of the mail.
+        /// </summary>
+        public IEnumerable<string> Recipients { get; set; }
     }
 }

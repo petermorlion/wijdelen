@@ -15,20 +15,17 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             var objectRequestMail = new ObjectRequestMail(
                 id, 
                 22, 
-                new[] {"peter.morlion@gmail.com", "peter.morlion@telenet.be"},
                 "Sneakers",
                 "For sneaking");
 
             objectRequestMail.Id.Should().Be(id);
             objectRequestMail.UserId.Should().Be(22);
-            objectRequestMail.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
             objectRequestMail.Description.Should().Be("Sneakers");
             objectRequestMail.ExtraInfo.Should().Be("For sneaking");
 
             objectRequestMail.Events.Single().ShouldBeEquivalentTo(new ObjectRequestMailCreated {
                 SourceId = id,
-                UserId = 22,
-                EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" }
+                UserId = 22
             });
 
             objectRequestMail.Version.Should().Be(0);
@@ -40,7 +37,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             var id = Guid.NewGuid();
             var previousEvent = new ObjectRequestMailCreated {
                 UserId = 22,
-                EmailAddresses = new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" },
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking"
             };
@@ -51,7 +47,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequestMail.Version.Should().Be(0);
             objectRequestMail.Id.Should().Be(id);
             objectRequestMail.UserId.Should().Be(22);
-            objectRequestMail.EmailAddresses.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
             objectRequestMail.Description.Should().Be("Sneakers");
             objectRequestMail.ExtraInfo.Should().Be("For sneaking");
             objectRequestMail.Status.Should().Be(ObjectRequestMailStatus.Created);
@@ -63,13 +58,13 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             var objectRequestMail = new ObjectRequestMail(
                 id,
                 22,
-                new[] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" },
                 "Sneakers",
                 "For sneaking");
 
-            objectRequestMail.MarkAsSent();
+            objectRequestMail.MarkAsSent(new [] { "peter.morlion@gmail.com", "peter.morlion@telenet.be" });
 
             objectRequestMail.Status.Should().Be(ObjectRequestMailStatus.Sent);
+            objectRequestMail.Recipients.Should().BeEquivalentTo("peter.morlion@gmail.com", "peter.morlion@telenet.be");
             objectRequestMail.Version.Should().Be(1);
             objectRequestMail.Events.Count().Should().Be(2);
             objectRequestMail.Events.Last().ShouldBeEquivalentTo(new ObjectRequestMailSent
