@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Orchard.ContentManagement;
 using Orchard.Localization;
-using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
