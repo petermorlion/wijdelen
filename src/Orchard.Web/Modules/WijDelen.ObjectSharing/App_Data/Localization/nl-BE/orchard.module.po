@@ -1,0 +1,94 @@
+﻿#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "Description"
+msgid "The core of WijDelen Groups, allowing users to request and share objects in their groups."
+msgstr "De kern van WijDelen Groups, waarmee gebruikers items kunnen aanvragen en delen binnen hun groepen."
+
+#: ~/Modules/WijDelen.UserImport/Module.txt
+#| msgid "WijDelen.UserImport.Description"
+msgid "Allows users to request and share objects in their groups."
+msgstr "Biedt de mogelijkheid aan gebruikers om items aan te vragen en te delen binnen hun groepen."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "Request object"
+msgid "Request object"
+msgstr "Een oproep doen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "I would like to borrow the following item"
+msgid "I would like to borrow the following item"
+msgstr "Ik wil graag het volgende lenen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "A nice story to convince the group members"
+msgid "A nice story to convince the group members"
+msgstr "Een tof verhaal om je groepsleden te overtuigen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "Submit"
+msgid "Submit"
+msgstr "Versturen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+#| msgid "Save"
+msgid "Save"
+msgstr "Opslaan"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+#| msgid "Synonym"
+msgid "Synonym"
+msgstr "Synoniem"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+#| msgid "Synonyms"
+msgid "Synonyms"
+msgstr "Synoniemen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Index.cshtml
+#| msgid "Create archetype"
+msgid "Create archetype"
+msgstr "Maak nieuw archetype"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Create.cshtml
+#| msgid "New archetype"
+msgid "New archetype"
+msgstr "Nieuw archetype"
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Please provide a description of the item you need."
+msgid "Please provide a description of the item you need."
+msgstr "Gelieve op te geven wat je wil lenen."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Please provide some extra info."
+msgid "Please provide some extra info."
+msgstr "Gelieve een beetje extra informatie te geven."
+
+#: wijdelen.objectsharing.adminmenu
+#| msgid "Synonyms"
+msgid "Synonyms"
+msgstr "Synoniemen"
+
+#: wijdelen.objectsharing.controllers.archetypescontroller
+#| msgid "Please provide a name for the archetype."
+msgid "Please provide a name for the archetype."
+msgstr "Gelieve een naam voor dit archetype op te geven."
+
+#: wijdelen.objectsharing.menuprovider
+#| msgid "New Request"
+msgid "New Request"
+msgstr "Nieuwe oproep"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "Do you have a {0}??"
+msgid "Do you have a {0}?"
+msgstr "Heb jij een {0}?"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "object-request-mail-text"
+msgid "object-request-mail-text"
+msgstr "Hallo,\r\n\r\nIemand uit je groep stuurde je een bericht:\r\n\r\nIk zoek (een) {0}.\r\n\r\nWaar heb ik het voor nodig?\r\n\{1}\r\n\r\nKan ik die van je lenen?\r\n\r\nJa, dat heb ik: %recipient.yesLink%\r\nNu even niet: %recipient.notNowLink%\r\nNee, dat heb ik niet: %recipient.noLink%"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "object-request-mail-html"
+msgid "object-request-mail-html"
+msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"http://wijdelen.redstar.be/Themes/WijDelen.Groups/Content/navigation-top-logo-belgium.png\"></div><div style=\"margin-top:10px;\"><p>Hallo!</p><p>Iemand uit je groep stuurde je een bericht:</p></div><div style=\"background-color:f5f5f5; padding: 10px; border-radius: 5px; border: 1px solid #bbb\"><p>Ik zoek (een) {0}.</p><p>Waar heb ik het voor nodig?</p><p>{1}</p><p>Kan ik die van je lenen?</p></div><div><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"%recipient.yesLink%\" style=\"background-color: #46d100;color: #fff;text-decoration: none;padding: 10px; margin-right: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Ja, dat heb ik</a><a href=\"%recipient.notNowLink%\" style=\"background-color: #a0a0a0;color: #fff;text-decoration: none;padding: 10px; border-radius: 5px; border-right: 1px solid #646464; border-bottom: 1px solid #646464;\">Nu even niet</a><a href=\"%recipient.noLink%\" style=\"background-color: #df0000;color: #fff;text-decoration: none;padding: 10px; margin-left: 10px; border-radius: 5px; border-right: 1px solid #630000; border-bottom: 1px solid #630000;\">Nee, dat heb ik niet</a></p></div></body></html>"
