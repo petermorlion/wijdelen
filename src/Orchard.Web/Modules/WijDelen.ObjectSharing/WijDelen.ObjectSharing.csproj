@@ -139,6 +139,12 @@
     <Compile Include="Domain\EventSourcing\IVersionedEvent.cs" />
     <Compile Include="Domain\Messaging\IEventBus.cs" />
     <Compile Include="Domain\Messaging\IEventHandler.cs" />
+    <Compile Include="Domain\Messaging\IMessageReceiver.cs" />
+    <Compile Include="Domain\Messaging\IMessageSender.cs" />
+    <Compile Include="Domain\Messaging\Message.cs" />
+    <Compile Include="Domain\Messaging\SqlMessageReceiver.cs" />
+    <Compile Include="Domain\Messaging\SqlMessageSender.cs" />
+    <Compile Include="Domain\Messaging\SendingMessageEventArgs.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />
     <Compile Include="Infrastructure\MailgunService.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepository.cs" />
@@ -161,8 +167,10 @@
     <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\EventRecord.cs" />
+    <Compile Include="Models\MessageRecord.cs" />
     <Compile Include="Models\ObjectRequestMailRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
+    <Compile Include="OrchardShellEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />

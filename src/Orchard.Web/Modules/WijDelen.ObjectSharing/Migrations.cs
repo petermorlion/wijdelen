@@ -86,5 +86,16 @@ namespace WijDelen.ObjectSharing {
 
             return 3;
         }
+
+        public int UpdateFrom3() {
+            SchemaBuilder.CreateTable(typeof(MessageRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<string>("Body", column => column.Unlimited())
+                    .Column<string>("CorrelationId", column => column.Nullable())
+                    .Column<DateTime>("DeliveryDate", column => column.Nullable())
+            );
+
+            return 4;
+        }
     }
 }

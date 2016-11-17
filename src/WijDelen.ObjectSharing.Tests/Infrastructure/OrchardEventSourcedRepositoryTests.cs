@@ -58,7 +58,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure {
 
             orchardEventSourcedRepository.Save(aggregate, correlationId);
 
-            eventBusMock.Verify(x => x.Publish(aggregate.Events.Single()));
+            eventBusMock.Verify(x => x.Publish(aggregate.Events.Single(), "abcd"));
         }
     }
 }

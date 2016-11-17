@@ -27,7 +27,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var constructor = typeof(T).GetConstructor(new[] { typeof(Guid), typeof(IEnumerable<IVersionedEvent>) });
             if (constructor == null)
             {
-                throw new InvalidCastException("Type T must have a constructor with the following signature: .ctor(Guid, IEnumerable<IVersionedEvent>)");
+                throw new InvalidCastException($"Type {typeof(T)} must have a constructor with the following signature: .ctor(Guid, IEnumerable<IVersionedEvent>)");
             }
 
             _entityFactory = (id, events) => (T)constructor.Invoke(new object[] { id, events });
@@ -59,7 +59,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             });
 
             eventSourced.Events.ToList().ForEach(e => {
-                _eventBus.Publish(e);
+                _eventBus.Publish(e, correlationId);
             });
         }
 

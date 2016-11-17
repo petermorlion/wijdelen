@@ -19,7 +19,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             Update(new ObjectRequestMailCreated { UserId = userId, Description = description, ExtraInfo = extraInfo });
         }
 
-        public ObjectRequestMail(Guid id, IEnumerable<VersionedEvent> history) : this(id) {
+        public ObjectRequestMail(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
             LoadFrom(history);
         }
 
