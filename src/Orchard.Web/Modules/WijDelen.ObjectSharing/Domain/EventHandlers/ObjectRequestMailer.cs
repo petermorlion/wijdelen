@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
+using Orchard.ContentManagement;
 using Orchard.Localization;
+using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
@@ -14,14 +17,17 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         private readonly IEventSourcedRepository<ObjectRequestMail> _repository;
         private readonly IGroupService _groupService;
         private readonly IMailService _mailService;
+        private readonly IGetUserByIdQuery _getUserByIdQuery;
 
         public ObjectRequestMailer(
             IEventSourcedRepository<ObjectRequestMail> repository, 
             IGroupService groupService,
-            IMailService mailService) {
+            IMailService mailService,
+            IGetUserByIdQuery getUserByIdQuery) {
             _repository = repository;
             _groupService = groupService;
             _mailService = mailService;
+            _getUserByIdQuery = getUserByIdQuery;
 
             T = NullLocalizer.Instance;
         }
@@ -39,10 +45,13 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         }
 
         public void Handle(ObjectRequestMailCreated objectRequestMailCreated) {
+
+            var requestingUserName = _getUserByIdQuery.GetResult(objectRequestMailCreated.UserId).UserName;
             var otherUsers = _groupService.GetOtherUsersInGroup(objectRequestMailCreated.UserId);
             var emailAddresses = otherUsers.Select(x => x.Email).ToArray();
 
             _mailService.SendObjectRequestMail(
+                requestingUserName,
                 objectRequestMailCreated.Description, 
                 objectRequestMailCreated.ExtraInfo,
                 emailAddresses);
