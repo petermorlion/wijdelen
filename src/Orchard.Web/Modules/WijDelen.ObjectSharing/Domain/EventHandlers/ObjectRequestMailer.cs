@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Orchard.Localization;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
@@ -21,7 +22,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository = repository;
             _groupService = groupService;
             _mailService = mailService;
+
+            T = NullLocalizer.Instance;
         }
+
+        public Localizer T { get; set; }
 
         public void Handle(ObjectRequested objectRequested) {
             var objectRequestMail = new ObjectRequestMail(
@@ -43,7 +48,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 emailAddresses);
 
             var objectRequestMail = _repository.Find(objectRequestMailCreated.SourceId);
-            objectRequestMail.MarkAsSent(emailAddresses, "HTML");
+            objectRequestMail.MarkAsSent(emailAddresses, T("object-request-mail-html", objectRequestMailCreated.Description, objectRequestMailCreated.ExtraInfo).ToString());
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
     }

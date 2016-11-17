@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -75,6 +76,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             mailServiceMock.Verify(x => x.SendObjectRequestMail("Sneakers", "For sneaking", "peter.morlion@gmail.com"));
             entity.Status.Should().Be(ObjectRequestMailStatus.Sent);
+            entity.Events.Last().As<ObjectRequestMailSent>().EmailHtml.Should().Be("object-request-mail-html");
             repositoryMock.Verify(x => x.Save(entity, It.IsAny<string>()));
         }
     }
