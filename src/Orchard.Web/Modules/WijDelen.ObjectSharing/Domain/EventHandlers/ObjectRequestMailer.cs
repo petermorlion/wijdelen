@@ -47,17 +47,19 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public void Handle(ObjectRequestMailCreated objectRequestMailCreated) {
 
             var requestingUserName = _getUserByIdQuery.GetResult(objectRequestMailCreated.UserId).UserName;
+            var groupName = _groupService.GetGroupNameForUser(objectRequestMailCreated.UserId);
             var otherUsers = _groupService.GetOtherUsersInGroup(objectRequestMailCreated.UserId);
             var emailAddresses = otherUsers.Select(x => x.Email).ToArray();
 
             _mailService.SendObjectRequestMail(
                 requestingUserName,
+                groupName,
                 objectRequestMailCreated.Description, 
                 objectRequestMailCreated.ExtraInfo,
                 emailAddresses);
 
             var objectRequestMail = _repository.Find(objectRequestMailCreated.SourceId);
-            objectRequestMail.MarkAsSent(emailAddresses, T("object-request-mail-html", objectRequestMailCreated.Description, objectRequestMailCreated.ExtraInfo).ToString());
+            objectRequestMail.MarkAsSent(emailAddresses, T("object-request-mail-html", requestingUserName, groupName, objectRequestMailCreated.Description, objectRequestMailCreated.ExtraInfo).ToString());
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
     }

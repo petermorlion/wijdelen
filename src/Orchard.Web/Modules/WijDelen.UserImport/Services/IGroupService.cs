@@ -15,5 +15,7 @@ namespace WijDelen.UserImport.Services {
         /// Gets all users in the group of the given user, excluding the given user.
         /// </summary>
         IEnumerable<IUser> GetOtherUsersInGroup(int userId);
+
+        string GetGroupNameForUser(int userId);
     }
 }

@@ -57,5 +57,11 @@ namespace WijDelen.UserImport.Services {
 
             return result;
         }
+
+        public string GetGroupNameForUser(int userId) {
+            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
+            var group = user.As<GroupMembershipPart>().Group;
+            return group.As<NamePart>().Name;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         }
 
         public Localizer T { get; set; }
-        public void SendObjectRequestMail(string requestingUserName, string description, string extraInfo, params string[] emailAddresses) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, string description, string extraInfo, params string[] emailAddresses) {
             var client = new RestClient
             {
                 BaseUrl = new Uri("https://api.mailgun.net/v3"),
@@ -38,8 +38,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             request.AddParameter("recipient-variables", $"{{{string.Join(",", recipientVariables)}}}");
 
             request.AddParameter("subject", T("Do you have a {0}?", description).ToString());
-            request.AddParameter("text", T("object-request-mail-text", requestingUserName, description, extraInfo).ToString());
-            request.AddParameter("html", T("object-request-mail-html", requestingUserName, description, extraInfo).ToString());
+            request.AddParameter("text", T("object-request-mail-text", requestingUserName, groupName, description, extraInfo).ToString());
+            request.AddParameter("html", T("object-request-mail-html", requestingUserName, groupName,description, extraInfo).ToString());
 
             request.Method = Method.POST;
 

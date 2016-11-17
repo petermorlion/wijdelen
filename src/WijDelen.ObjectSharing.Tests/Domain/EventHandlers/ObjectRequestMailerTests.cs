@@ -3,7 +3,6 @@ using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Orchard.ContentManagement;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Enums;
@@ -76,13 +75,15 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 .Setup(x => x.GetOtherUsersInGroup(22))
                 .Returns(new[] { otherUserMock.Object});
 
+            groupServiceMock.Setup(x => x.GetGroupNameForUser(22)).Returns("Group");
+
             var mailServiceMock = new Mock<IMailService>();
 
             var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object);
 
             handler.Handle(objectRequestMailCreated);
 
-            mailServiceMock.Verify(x => x.SendObjectRequestMail("Jos", "Sneakers", "For sneaking", "peter.morlion@gmail.com"));
+            mailServiceMock.Verify(x => x.SendObjectRequestMail("Jos", "Group", "Sneakers", "For sneaking", "peter.morlion@gmail.com"));
             entity.Status.Should().Be(ObjectRequestMailStatus.Sent);
             entity.Events.Last().As<ObjectRequestMailSent>().EmailHtml.Should().Be("object-request-mail-html");
             repositoryMock.Verify(x => x.Save(entity, It.IsAny<string>()));
