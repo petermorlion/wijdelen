@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -20,7 +21,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var objectRequested = new ObjectRequested {
                 UserId = 3,
                 Description = "Sneakers",
-                ExtraInfo = "For sneaking"
+                ExtraInfo = "For sneaking",
+                SourceId = Guid.NewGuid()
             };
 
             ObjectRequestMail persistedMail = null;
@@ -57,9 +59,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             persistedMail.Description.Should().Be("Sneakers");
             persistedMail.ExtraInfo.Should().Be("For sneaking");
 
-            mailServiceMock.Verify(x => x.SendObjectRequestMail("Jos", "Group", "Sneakers", "For sneaking", "peter.morlion@gmail.com"));
-            persistedMail.Status.Should().Be(ObjectRequestMailStatus.Sent);
-            persistedMail.Events.Last().As<ObjectRequestMailSent>().EmailHtml.Should().Be("object-request-mail-html");
+            mailServiceMock.Verify(x => x.SendObjectRequestMail("Jos", "Group", objectRequested.SourceId, "Sneakers", "For sneaking", persistedMail, "peter.morlion@gmail.com"));
             repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
         }
     }

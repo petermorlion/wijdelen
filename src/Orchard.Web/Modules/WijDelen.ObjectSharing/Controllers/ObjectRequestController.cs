@@ -16,8 +16,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly IRepository<ObjectRequestRecord> _repository;
         private readonly IOrchardServices _orchardServices;
 
-        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler, IRepository<ObjectRequestRecord> repository, IOrchardServices orchardServices)
-        {
+        public ObjectRequestController(ICommandHandler<RequestObject> requestObjectCommandHandler, IRepository<ObjectRequestRecord> repository, IOrchardServices orchardServices) {
             _requestObjectCommandHandler = requestObjectCommandHandler;
             _repository = repository;
             _orchardServices = orchardServices;
@@ -41,8 +40,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some extra info."));
             }
 
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) {
                 return View(viewModel);
             }
 
@@ -62,11 +60,17 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpNotFoundResult();
             }
 
-            if (record.UserId != _orchardServices.WorkContext.CurrentUser.Id) {
-                return new HttpUnauthorizedResult();
+            return View(record);
+        }
+
+        public ActionResult NoFor(Guid id) {
+            var record = _repository.Get(x => x.AggregateId == id);
+
+            if (record == null) {
+                return new HttpNotFoundResult();
             }
 
-            return View(record);
+            return View();
         }
 
         public Localizer T { get; set; }

@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using Orchard;
 using Orchard.Localization;
 using RestSharp;
 using RestSharp.Authenticators;
+using WijDelen.ObjectSharing.Domain.Entities;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class MailgunService : IMailService {
-        public MailgunService()
-        {
+        private readonly IOrchardServices _orchardServices;
+
+        public MailgunService(IOrchardServices orchardServices) {
+            _orchardServices = orchardServices;
+
             T = NullLocalizer.Instance;
         }
 
         public Localizer T { get; set; }
-        public void SendObjectRequestMail(string requestingUserName, string groupName, string description, string extraInfo, params string[] emailAddresses) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params string[] emailAddresses) {
             var client = new RestClient
             {
                 BaseUrl = new Uri("https://api.mailgun.net/v3"),
@@ -24,26 +29,26 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             request.Resource = "{domain}/messages";
             request.AddParameter("from", "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>");
 
-            var recipientVariables = new List<string>();
-
             foreach (var emailAddress in emailAddresses) {
-                var yesLink = "http://www.google.be";
-                var notNowLink = "http://www.bing.be";
-                var noLink = "http://www.yahoo.com";
-
                 request.AddParameter("to", $"{emailAddress}");
-                recipientVariables.Add($"\"{emailAddress}\": {{\"yesLink\":\"{yesLink}\", \"notNowLink\":\"{notNowLink}\", \"noLink\":\"{noLink}\"}}");
             }
 
-            request.AddParameter("recipient-variables", $"{{{string.Join(",", recipientVariables)}}}");
-
             request.AddParameter("subject", T("Do you have a {0}?", description).ToString());
-            request.AddParameter("text", T("object-request-mail-text", requestingUserName, groupName, description, extraInfo).ToString());
-            request.AddParameter("html", T("object-request-mail-html", requestingUserName, groupName, description, extraInfo).ToString());
+
+            var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+            var yesLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/YesFor/" + objectRequestId;
+            var notNowLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/NotNowFor/" + objectRequestId;
+            var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/NoFor/" + objectRequestId;
+
+            var htmlBody = T("object-request-mail-html", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
+            request.AddParameter("text", T("object-request-mail-text", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString());
+            request.AddParameter("html", htmlBody);
 
             request.Method = Method.POST;
 
             client.Execute(request);
+
+            objectRequestMail.MarkAsSent(emailAddresses, htmlBody);
         }
     }
 }

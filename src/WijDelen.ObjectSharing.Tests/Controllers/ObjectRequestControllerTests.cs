@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
@@ -125,7 +124,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingIndexForUnknownId_ShouldReturnUnauthorized()
+        public void WhenGettingIndexForUnknownId_ShouldReturnNotFound()
         {
             var id = Guid.NewGuid();
 
@@ -139,6 +138,50 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var actionResult = controller.Index(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingNoForForUnknownId_ShouldReturnNotFound()
+        {
+            var id = Guid.NewGuid();
+
+            var persistentRecords = new ObjectRequestRecord[0];
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null);
+
+            var actionResult = controller.NoFor(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingNoFor_ShouldPersistNoAndReturnView()
+        {
+            var id = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = id,
+                    UserId = 22
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+
+            var actionResult = controller.Index(id);
+
+            ((ViewResult)actionResult).Model.Should().Be(persistentRecords[0]);
         }
     }
 }

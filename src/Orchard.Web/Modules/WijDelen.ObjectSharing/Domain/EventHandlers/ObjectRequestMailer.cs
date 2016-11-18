@@ -47,11 +47,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _mailService.SendObjectRequestMail(
                 requestingUserName,
                 groupName,
+                objectRequested.SourceId,
                 objectRequested.Description,
                 objectRequested.ExtraInfo,
+                objectRequestMail,
                 emailAddresses);
-
-            objectRequestMail.MarkAsSent(emailAddresses, T("object-request-mail-html", requestingUserName, groupName, objectRequested.Description, objectRequested.ExtraInfo).ToString());
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
