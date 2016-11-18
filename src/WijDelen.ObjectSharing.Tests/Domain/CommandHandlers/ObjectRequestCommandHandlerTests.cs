@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -29,6 +31,26 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
                 Description = "description",
                 ExtraInfo = "extraInfo"
             }, options => options.Excluding(o => o.SourceId));
+        }
+
+        [Test]
+        public void WhenConfirmingObjectRequest() {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(objectRequestId, "Sneakers", "For sneaking", 1);
+            var command = new ConfirmObjectRequest(22, objectRequestId);
+
+            ObjectRequest persistedObjectRequest = null;
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId)).Returns(objectRequest);
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString()))
+                .Callback((ObjectRequest or, string correlationId) => persistedObjectRequest = or);
+
+            var handler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            handler.Handle(command);
+
+            persistedObjectRequest.ConfirmingUserIds.ShouldBeEquivalentTo(new List<int> { 22 });
         }
     }
 }
