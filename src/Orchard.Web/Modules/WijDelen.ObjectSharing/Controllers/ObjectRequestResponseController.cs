@@ -5,12 +5,14 @@ using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Core.Title.Models;
 using Orchard.Data;
+using Orchard.Themes;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Controllers {
+    [Themed]
     public class ObjectRequestResponseController : Controller {
         private readonly IRepository<ObjectRequestRecord> _repository;
         private readonly IFindSynonymsByExactMatchQuery _findSynonymsByExactMatchQuery;

@@ -246,13 +246,13 @@
     <Content Include="Views\Archetypes\EditorTemplates\EditArchetypedSynonymViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequest\NoFor.cshtml" />
+    <Content Include="Views\ObjectRequestResponse\NoFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequest\YesFor.cshtml" />
+    <Content Include="Views\ObjectRequestResponse\YesFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequest\NotNowFor.cshtml" />
+    <Content Include="Views\ObjectRequestResponse\NotNowFor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

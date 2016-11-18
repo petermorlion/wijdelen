@@ -14,7 +14,10 @@ namespace WijDelen.ObjectSharing {
         protected override void Load(ContainerBuilder builder) {
             builder.RegisterGeneric(typeof(OrchardEventSourcedRepository<>)).As(typeof(IEventSourcedRepository<>)).InstancePerLifetimeScope();
 
-            builder.RegisterType<ObjectRequestCommandHandler>().As<ICommandHandler<RequestObject>>().InstancePerLifetimeScope();
+            builder.RegisterType<ObjectRequestCommandHandler>()
+                .As<ICommandHandler<RequestObject>>()
+                .As<ICommandHandler<MarkSynonymAsOwned>>()
+                .InstancePerLifetimeScope();
         }
     }
 }
