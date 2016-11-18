@@ -11,16 +11,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
         [Test]
         public void WhenCreatingUserInventory() {
             var id = Guid.NewGuid();
-            var objectRequest = new UserInventory(id, 22);
+            var userInventory = new UserInventory(id, 22);
 
-            objectRequest.UserId.Should().Be(22);
+            userInventory.UserId.Should().Be(22);
 
-            objectRequest.Events.Single().ShouldBeEquivalentTo(new UserInventoryCreated {
+            userInventory.Events.Single().ShouldBeEquivalentTo(new UserInventoryCreated {
                 SourceId = id,
                 UserId = 22
             });
 
-            objectRequest.Version.Should().Be(0);
+            userInventory.Version.Should().Be(0);
         }
 
         [Test]
@@ -30,11 +30,51 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 UserId = 22
             };
 
-            var objectRequest = new UserInventory(id, new [] {previousEvent});
+            var userInventory = new UserInventory(id, new [] {previousEvent});
 
-            objectRequest.Events.Should().BeEmpty();
-            objectRequest.Version.Should().Be(0);
-            objectRequest.UserId.Should().Be(22);
+            userInventory.Events.Should().BeEmpty();
+            userInventory.Version.Should().Be(0);
+            userInventory.UserId.Should().Be(22);
+        }
+
+        [Test]
+        public void WhenMarkingAsOwned() {
+            var userInventory = new UserInventory(Guid.NewGuid(), 22);
+
+            userInventory.MarkAsOwned(1, "Sneakers");
+
+            userInventory.Version.Should().Be(1);
+            userInventory.Events.OfType<ArchetypeMarkedAsOwned>().Single().UserId.Should().Be(22);
+            userInventory.Events.OfType<ArchetypeMarkedAsOwned>().Single().ArchetypeId.Should().Be(1);
+            userInventory.Events.OfType<ArchetypeMarkedAsOwned>().Single().ArchetypeTitle.Should().Be("Sneakers");
+            userInventory.OwnedArchetypeIds.ShouldBeEquivalentTo(new[] {1});
+        }
+
+        [Test]
+        public void WhenMarkingAsNotOwned() {
+            var userInventory = new UserInventory(Guid.NewGuid(), 22);
+
+            userInventory.MarkAsNotOwned(1, "Sneakers");
+
+            userInventory.Version.Should().Be(1);
+            userInventory.Events.OfType<ArchetypeMarkedAsNotOwned>().Single().UserId.Should().Be(22);
+            userInventory.Events.OfType<ArchetypeMarkedAsNotOwned>().Single().ArchetypeId.Should().Be(1);
+            userInventory.Events.OfType<ArchetypeMarkedAsNotOwned>().Single().ArchetypeTitle.Should().Be("Sneakers");
+            userInventory.NotOwnedArchetypeIds.ShouldBeEquivalentTo(new[] {1});
+        }
+
+        [Test]
+        public void WhenMarkingAsOwnedAndNotOwned() {
+            var userInventory = new UserInventory(Guid.NewGuid(), 22);
+
+            userInventory.MarkAsOwned(2, "Reebok pumps");
+            userInventory.MarkAsNotOwned(1, "Sneakers");
+            userInventory.MarkAsNotOwned(2, "Reebok pumps");
+            userInventory.MarkAsOwned(1, "Sneakers");
+
+            userInventory.Version.Should().Be(4);
+            userInventory.NotOwnedArchetypeIds.ShouldBeEquivalentTo(new[] {2});
+            userInventory.OwnedArchetypeIds.ShouldBeEquivalentTo(new[] {1});
         }
     }
 }
