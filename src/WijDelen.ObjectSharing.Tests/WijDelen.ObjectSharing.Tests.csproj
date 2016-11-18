@@ -114,9 +114,9 @@
     <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailerTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGeneratorTests.cs" />
-    <Compile Include="Domain\Messaging\SqlMessageReceiverTests.cs" />
-    <Compile Include="Domain\Messaging\SqlMessageSenderTests.cs" />
-    <Compile Include="OrchardShellEventsTests.cs" />
+    <Compile Include="Domain\Messaging\InMemoryMessageReceiverTests.cs" />
+    <Compile Include="Domain\Messaging\InMemoryMessageSenderTests.cs" />
+    <Compile Include="MessageReceiverFilterTests.cs" />
     <Compile Include="TestInfrastructure\Factories\ArchetypeFactory.cs" />
     <Compile Include="TestInfrastructure\Factories\SynonymFactory.cs" />
     <Compile Include="TestInfrastructure\Fakes\FakeFieldStorage.cs" />

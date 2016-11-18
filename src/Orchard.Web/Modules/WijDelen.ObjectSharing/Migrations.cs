@@ -78,24 +78,13 @@ namespace WijDelen.ObjectSharing {
         public int UpdateFrom2() {
             SchemaBuilder.CreateTable(typeof(ObjectRequestMailRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
-                    .Column<Guid>("AggregateId", column => column.Unique().NotNull())
+                    .Column<Guid>("AggregateId", column => column.NotNull())
                     .Column<string>("EmailAddress", column => column.NotNull().WithLength(255))
                     .Column<string>("EmailHtml", column => column.NotNull().Unlimited())
                     .Column<int>("RequestingUserId", column => column.NotNull())
             );
 
             return 3;
-        }
-
-        public int UpdateFrom3() {
-            SchemaBuilder.CreateTable(typeof(MessageRecord).Name, table => table
-                    .Column<int>("Id", column => column.PrimaryKey().Identity())
-                    .Column<string>("Body", column => column.Unlimited())
-                    .Column<string>("CorrelationId", column => column.Nullable())
-                    .Column<DateTime>("DeliveryDate", column => column.Nullable())
-            );
-
-            return 4;
         }
     }
 }

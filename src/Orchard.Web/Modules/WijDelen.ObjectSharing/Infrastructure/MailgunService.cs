@@ -27,9 +27,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var recipientVariables = new List<string>();
 
             foreach (var emailAddress in emailAddresses) {
-                var yesLink = "";
-                var notNowLink = "";
-                var noLink = "";
+                var yesLink = "http://www.google.be";
+                var notNowLink = "http://www.bing.be";
+                var noLink = "http://www.yahoo.com";
 
                 request.AddParameter("to", $"{emailAddress}");
                 recipientVariables.Add($"\"{emailAddress}\": {{\"yesLink\":\"{yesLink}\", \"notNowLink\":\"{notNowLink}\", \"noLink\":\"{noLink}\"}}");

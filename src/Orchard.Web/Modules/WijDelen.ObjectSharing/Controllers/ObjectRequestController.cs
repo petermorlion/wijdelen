@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Orchard;
 using Orchard.Data;
@@ -57,7 +56,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [Authorize]
         public ActionResult Index(Guid id) {
-            var record = _repository.Fetch(x => x.AggregateId == id).SingleOrDefault();
+            var record = _repository.Get(x => x.AggregateId == id);
 
             if (record == null) {
                 return new HttpNotFoundResult();

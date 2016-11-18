@@ -16,7 +16,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         }
 
         public void Handle(ObjectRequested e) {
-            var existingRecord = _repository.Fetch(x => x.AggregateId == e.SourceId).SingleOrDefault();
+            var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
             if (existingRecord == null) {
                 var newRecord = new ObjectRequestRecord {
                     AggregateId = e.SourceId,
@@ -26,7 +26,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     UserId = e.UserId
                 };
 
-                _repository.Update(newRecord);
+                _repository.Create(newRecord);
             }
         }
     }

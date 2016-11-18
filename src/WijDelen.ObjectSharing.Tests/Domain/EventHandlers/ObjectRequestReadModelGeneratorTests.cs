@@ -21,7 +21,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             repositoryMock.SetRecords(persistentRecords);
             
             ObjectRequestRecord newRecord = null;
-            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => newRecord = r);
+            repositoryMock.Setup(x => x.Create(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => newRecord = r);
 
             var aggregateId = Guid.NewGuid();
             var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object);

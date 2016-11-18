@@ -20,6 +20,13 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
                 });
 
             repositoryMock
+                .Setup(x => x.Get(It.IsAny<Expression<Func<T, bool>>>()))
+                .Returns((Expression<Func<T, bool>> expression) => {
+                    var func = expression.Compile();
+                    return records.Where(func).SingleOrDefault();
+                });
+
+            repositoryMock
                 .Setup(x => x.Table)
                 .Returns(records.AsQueryable());
         }
