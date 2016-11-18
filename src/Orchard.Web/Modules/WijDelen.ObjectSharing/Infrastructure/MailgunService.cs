@@ -39,7 +39,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
             request.AddParameter("subject", T("Do you have a {0}?", description).ToString());
             request.AddParameter("text", T("object-request-mail-text", requestingUserName, groupName, description, extraInfo).ToString());
-            request.AddParameter("html", T("object-request-mail-html", requestingUserName, groupName,description, extraInfo).ToString());
+            request.AddParameter("html", T("object-request-mail-html", requestingUserName, groupName, description, extraInfo).ToString());
 
             request.Method = Method.POST;
 
