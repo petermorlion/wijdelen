@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\Entities\UserInventory.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />
+    <Compile Include="Domain\Events\UserInventoryCreated.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />
     <Compile Include="Domain\Messaging\IEvent.cs" />
     <Compile Include="Domain\EventSourcing\IEventSourced.cs" />
