@@ -60,10 +60,34 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpNotFoundResult();
             }
 
+            if (record.UserId != _orchardServices.WorkContext.CurrentUser.Id) {
+                return new HttpUnauthorizedResult();
+            }
+
             return View(record);
         }
 
         public ActionResult NoFor(Guid id) {
+            var record = _repository.Get(x => x.AggregateId == id);
+
+            if (record == null) {
+                return new HttpNotFoundResult();
+            }
+
+            return View();
+        }
+
+        public ActionResult YesFor(Guid id) {
+            var record = _repository.Get(x => x.AggregateId == id);
+
+            if (record == null) {
+                return new HttpNotFoundResult();
+            }
+
+            return View();
+        }
+
+        public ActionResult NotNowFor(Guid id) {
             var record = _repository.Get(x => x.AggregateId == id);
 
             if (record == null) {

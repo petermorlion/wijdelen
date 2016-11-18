@@ -21,8 +21,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
         /// </summary>
         [Test]
-        public void TestT()
-        {
+        public void TestT() {
             var controller = new ObjectRequestController(null, null, null);
             var localizer = NullLocalizer.Instance;
 
@@ -43,8 +42,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenPosting_ShouldCallCommandHandlerAndRedirect()
-        {
+        public void WhenPosting_ShouldCallCommandHandlerAndRedirect() {
             var commandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
             RequestObject command = null;
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
@@ -55,16 +53,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             services.WorkContext.CurrentUser = userMock.Object;
 
             var controller = new ObjectRequestController(commandHandlerMock.Object, null, services);
-            var viewModel = new NewObjectRequestViewModel
-            {
+            var viewModel = new NewObjectRequestViewModel {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking"
             };
 
             var actionResult = controller.New(viewModel);
 
-            ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("Index");
-            ((RedirectToRouteResult)actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
+            ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
 
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking");
@@ -124,8 +121,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingIndexForUnknownId_ShouldReturnNotFound()
-        {
+        public void WhenGettingIndexForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -141,8 +137,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingNoForForUnknownId_ShouldReturnNotFound()
-        {
+        public void WhenGettingNoForForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -158,8 +153,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingNoFor_ShouldPersistNoAndReturnView()
-        {
+        public void WhenGettingNoFor_ShouldPersistNoAndReturnView() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -181,7 +175,39 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var actionResult = controller.Index(id);
 
-            ((ViewResult)actionResult).Model.Should().Be(persistentRecords[0]);
+            ((ViewResult) actionResult).Model.Should().Be(persistentRecords[0]);
+        }
+
+        [Test]
+        public void WhenGettingYesForForUnknownId_ShouldReturnNotFound() {
+            var id = Guid.NewGuid();
+
+            var persistentRecords = new ObjectRequestRecord[0];
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null);
+
+            var actionResult = controller.NoFor(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingNotNowForForUnknownId_ShouldReturnNotFound() {
+            var id = Guid.NewGuid();
+
+            var persistentRecords = new ObjectRequestRecord[0];
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null);
+
+            var actionResult = controller.NoFor(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
         }
     }
 }

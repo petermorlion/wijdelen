@@ -242,6 +242,12 @@
   <ItemGroup>
     <Content Include="Views\ObjectRequest\NoFor.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ObjectRequest\YesFor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ObjectRequest\NotNowFor.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

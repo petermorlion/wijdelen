@@ -107,3 +107,13 @@ msgstr "Bedankt!"
 #| msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
 msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
 msgstr "Bedankt voor je antwoord. We zullen het noteren en in proberen je in de toekomst geen gelijkaardige aanvragen meer door te sturen."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/YesFor.cshtml
+#| msgid "Nice!"
+msgid "Nice!"
+msgstr "Leuk!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NotNowFor.cshtml
+#| msgid "No problem!"
+msgid "No problem!"
+msgstr "Geen probleem!"
