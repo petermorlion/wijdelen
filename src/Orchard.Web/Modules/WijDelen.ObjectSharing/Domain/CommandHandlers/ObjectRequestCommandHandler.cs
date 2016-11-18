@@ -6,7 +6,6 @@ using WijDelen.ObjectSharing.Domain.Messaging;
 namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
     public class ObjectRequestCommandHandler : 
         ICommandHandler<RequestObject>, 
-        ICommandHandler<MarkSynonymAsOwned>,
         ICommandHandler<ConfirmObjectRequest> {
         private readonly IEventSourcedRepository<ObjectRequest> _repository;
 
@@ -16,10 +15,6 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
         public void Handle(RequestObject command) {
             var objectRequest = new ObjectRequest(command.ObjectRequestId, command.Description, command.ExtraInfo, command.UserId);
             _repository.Save(objectRequest, command.Id.ToString());
-        }
-
-        public void Handle(MarkSynonymAsOwned command) {
-            // TODO: either continue this flow or implement differently
         }
 
         public void Handle(ConfirmObjectRequest command) {

@@ -128,9 +128,7 @@
     <Compile Include="Controllers\ObjectRequestResponseController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\ConfirmObjectRequest.cs" />
-    <Compile Include="Domain\Commands\MarkSynonymAsOwned.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
-    <Compile Include="Domain\Entities\UserInventory.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
@@ -138,11 +136,9 @@
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
-    <Compile Include="Domain\Events\ArchetypeMarkedAsNotOwned.cs" />
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />
-    <Compile Include="Domain\Events\ArchetypeMarkedAsOwned.cs" />
     <Compile Include="Domain\Events\UserInventoryCreated.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />
     <Compile Include="Domain\Messaging\IEvent.cs" />

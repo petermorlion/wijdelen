@@ -113,7 +113,6 @@
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestResponseControllerTests.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
-    <Compile Include="Domain\Entities\UserInventoryTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailerTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageReceiverTests.cs" />

@@ -16,7 +16,7 @@ namespace WijDelen.ObjectSharing {
 
             builder.RegisterType<ObjectRequestCommandHandler>()
                 .As<ICommandHandler<RequestObject>>()
-                .As<ICommandHandler<MarkSynonymAsOwned>>()
+                .As<ICommandHandler<ConfirmObjectRequest>>()
                 .InstancePerLifetimeScope();
         }
     }
