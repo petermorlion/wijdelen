@@ -136,6 +136,7 @@
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
+    <Compile Include="Domain\Events\ObjectRequestDenied.cs" />
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />

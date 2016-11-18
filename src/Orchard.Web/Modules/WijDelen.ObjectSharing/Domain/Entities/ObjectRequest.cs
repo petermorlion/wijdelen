@@ -9,10 +9,12 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
     /// </summary>
     public class ObjectRequest : EventSourced {
         private readonly IList<int> _confirmingUserIds = new List<int>();
+        private readonly IList<int> _denyingUserIds = new List<int>();
 
         private ObjectRequest(Guid id) : base(id) {
             Handles<ObjectRequested>(OnObjectRequested);
             Handles<ObjectRequestConfirmed>(OnObjectRequestConfirmed);
+            Handles<ObjectRequestDenied>(OnObjectRequestDenied);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
@@ -24,7 +26,11 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Confirm(int confirmingUserId) {
-            Update(new ObjectRequestConfirmed { ConfirmingUserId = confirmingUserId });
+            Update(new ObjectRequestConfirmed {ConfirmingUserId = confirmingUserId});
+        }
+
+        public void Deny(int denyingUserId) {
+            Update(new ObjectRequestDenied {DenyingUserId = denyingUserId});
         }
 
         private void OnObjectRequested(ObjectRequested objectRequested) {
@@ -35,6 +41,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         private void OnObjectRequestConfirmed(ObjectRequestConfirmed objectRequestConfirmed) {
             _confirmingUserIds.Add(objectRequestConfirmed.ConfirmingUserId);
+        }
+
+        private void OnObjectRequestDenied(ObjectRequestDenied objectRequestDenied) {
+            _denyingUserIds.Add(objectRequestDenied.DenyingUserId);
         }
 
         /// <summary>
@@ -53,5 +63,6 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         public int UserId { get; private set; }
 
         public IEnumerable<int> ConfirmingUserIds => _confirmingUserIds;
+        public IEnumerable<int> DenyingUserIds => _denyingUserIds;
     }
 }
