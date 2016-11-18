@@ -125,7 +125,9 @@
     <Compile Include="Controllers\Api\ArchetypesController.cs" />
     <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ObjectRequestController.cs" />
+    <Compile Include="Controllers\ObjectRequestResponseController.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
+    <Compile Include="Domain\Commands\MarkSynonymAsOwned.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\Entities\UserInventory.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />

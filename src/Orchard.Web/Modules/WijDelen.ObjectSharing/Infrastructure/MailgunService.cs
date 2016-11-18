@@ -36,9 +36,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             request.AddParameter("subject", T("Do you have a {0}?", description).ToString());
 
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
-            var yesLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/YesFor/" + objectRequestId;
-            var notNowLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/NotNowFor/" + objectRequestId;
-            var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/NoFor/" + objectRequestId;
+            var yesLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/YesFor/" + objectRequestId;
+            var notNowLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/NotNowFor/" + objectRequestId;
+            var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/NoFor/" + objectRequestId;
 
             var htmlBody = T("object-request-mail-html", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
             request.AddParameter("text", T("object-request-mail-text", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString());
