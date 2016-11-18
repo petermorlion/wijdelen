@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using System.Linq;
@@ -42,6 +43,17 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Description.Should().Be("Sneakers");
             objectRequest.ExtraInfo.Should().Be("For sneaking");
             objectRequest.UserId.Should().Be(22);
+        }
+
+        [Test]
+        public void WhenConfirming() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "For sneaking", 22);
+
+            objectRequest.Confirm(3);
+
+            objectRequest.Events.Last().As<ObjectRequestConfirmed>().ConfirmingUserId.Should().Be(3);
+            objectRequest.Version.Should().Be(1);
+            objectRequest.ConfirmingUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
     }
 }

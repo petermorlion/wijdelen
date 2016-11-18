@@ -7,24 +7,34 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
     /// <summary>
     /// Represents a request for an object by a user.
     /// </summary>
-    public class ObjectRequest : EventSourced
-    {
+    public class ObjectRequest : EventSourced {
+        private readonly IList<int> _confirmingUserIds = new List<int>();
+
         private ObjectRequest(Guid id) : base(id) {
             Handles<ObjectRequested>(OnObjectRequested);
+            Handles<ObjectRequestConfirmed>(OnObjectRequestConfirmed);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
-            Update(new ObjectRequested { Description = description, ExtraInfo = extraInfo, UserId = userId });
+            Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId});
         }
 
         public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
             LoadFrom(history);
         }
 
+        public void Confirm(int confirmingUserId) {
+            Update(new ObjectRequestConfirmed { ConfirmingUserId = confirmingUserId });
+        }
+
         private void OnObjectRequested(ObjectRequested objectRequested) {
             Description = objectRequested.Description;
             ExtraInfo = objectRequested.ExtraInfo;
             UserId = objectRequested.UserId;
+        }
+
+        private void OnObjectRequestConfirmed(ObjectRequestConfirmed objectRequestConfirmed) {
+            _confirmingUserIds.Add(objectRequestConfirmed.ConfirmingUserId);
         }
 
         /// <summary>
@@ -41,5 +51,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         /// The id of the user that requested the object.
         /// </summary>
         public int UserId { get; private set; }
+
+        public IEnumerable<int> ConfirmingUserIds => _confirmingUserIds;
     }
 }
