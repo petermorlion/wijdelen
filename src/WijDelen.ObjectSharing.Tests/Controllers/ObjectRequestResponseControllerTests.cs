@@ -8,9 +8,7 @@ using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
-using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
-using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
@@ -25,7 +23,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
 
             var actionResult = controller.NoFor(id);
 
@@ -51,7 +49,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null);
 
             var actionResult = controller.NoFor(id);
 
@@ -67,7 +65,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
 
             var actionResult = controller.NoFor(id);
 
@@ -75,8 +73,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingYesFor_ShouldPersistNoAndReturnView()
-        {
+        public void WhenGettingYesFor_ShouldCallCommandHandlerAndReturnView() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -95,22 +92,17 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var sneakers = new SynonymFactory().Create("Sneakers");
-            var queryMock = new Mock<IFindSynonymsByExactMatchQuery>();
-            queryMock.Setup(x => x.GetResults("Sneakers")).Returns(new[] { sneakers });
+            ConfirmObjectRequest confirmObjectRequest = null;
+            var commandHandlerMock = new Mock<ICommandHandler<ConfirmObjectRequest>>();
+            commandHandlerMock.Setup(x => x.Handle(It.IsAny<ConfirmObjectRequest>())).Callback((ConfirmObjectRequest e) => confirmObjectRequest = e);
 
-            MarkSynonymAsOwned markSynonymAsOwned = null;
-            var commandHandlerMock = new Mock<ICommandHandler<MarkSynonymAsOwned>>();
-            commandHandlerMock.Setup(x => x.Handle(It.IsAny<MarkSynonymAsOwned>())).Callback((MarkSynonymAsOwned e) => markSynonymAsOwned = e);
-
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, queryMock.Object, commandHandlerMock.Object);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, commandHandlerMock.Object);
 
             var actionResult = controller.YesFor(id);
 
             actionResult.Should().BeOfType<ViewResult>();
-            markSynonymAsOwned.UserId.Should().Be(22);
-            markSynonymAsOwned.SynonymId.Should().Be(sneakers.Id);
-            markSynonymAsOwned.SynonymTitle.Should().Be("Sneakers");
+            confirmObjectRequest.ConfirmingUserId.Should().Be(22);
+            confirmObjectRequest.ObjectRequestId.Should().Be(id);
         }
 
         [Test]
@@ -122,7 +114,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
 
             var actionResult = controller.NoFor(id);
 

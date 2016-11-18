@@ -15,19 +15,16 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     public class ObjectRequestResponseController : Controller {
         private readonly IRepository<ObjectRequestRecord> _repository;
-        private readonly IFindSynonymsByExactMatchQuery _findSynonymsByExactMatchQuery;
         private readonly IOrchardServices _orchardServices;
-        private readonly ICommandHandler<MarkSynonymAsOwned> _markSynonymAsOwnedCommandHandler;
+        private readonly ICommandHandler<ConfirmObjectRequest> _confirmObjectRequestCommandHandler;
 
         public ObjectRequestResponseController(
             IRepository<ObjectRequestRecord> repository,
             IOrchardServices orchardServices,
-            IFindSynonymsByExactMatchQuery findSynonymsByExactMatchQuery,
-            ICommandHandler<MarkSynonymAsOwned> markSynonymAsOwnedCommandHandler) {
+            ICommandHandler<ConfirmObjectRequest> confirmObjectRequestCommandHandler) {
             _repository = repository;
             _orchardServices = orchardServices;
-            _findSynonymsByExactMatchQuery = findSynonymsByExactMatchQuery;
-            _markSynonymAsOwnedCommandHandler = markSynonymAsOwnedCommandHandler;
+            _confirmObjectRequestCommandHandler = confirmObjectRequestCommandHandler;
         }
 
         public ActionResult NoFor(Guid id) {
@@ -48,12 +45,9 @@ namespace WijDelen.ObjectSharing.Controllers {
             }
 
             var currentUser = _orchardServices.WorkContext.CurrentUser;
-            var synonym = _findSynonymsByExactMatchQuery.GetResults(record.Description).FirstOrDefault();
 
-            if (synonym != null) {
-                var command = new MarkSynonymAsOwned(currentUser.Id, synonym.Id, synonym.As<TitlePart>().Title);
-                _markSynonymAsOwnedCommandHandler.Handle(command);
-            }
+            var command = new ConfirmObjectRequest(currentUser.Id, id);
+            _confirmObjectRequestCommandHandler.Handle(command);
 
             return View();
         }
