@@ -52,5 +52,45 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
 
             persistedObjectRequest.ConfirmingUserIds.ShouldBeEquivalentTo(new List<int> { 22 });
         }
+
+        [Test]
+        public void WhenDenyingObjectRequest() {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(objectRequestId, "Sneakers", "For sneaking", 1);
+            var command = new DenyObjectRequest(22, objectRequestId);
+
+            ObjectRequest persistedObjectRequest = null;
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId)).Returns(objectRequest);
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString()))
+                .Callback((ObjectRequest or, string correlationId) => persistedObjectRequest = or);
+
+            var handler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            handler.Handle(command);
+
+            persistedObjectRequest.DenyingUserIds.ShouldBeEquivalentTo(new List<int> { 22 });
+        }
+
+        [Test]
+        public void WhenDenyingObjectRequestForNow() {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(objectRequestId, "Sneakers", "For sneaking", 1);
+            var command = new DenyObjectRequestForNow(22, objectRequestId);
+
+            ObjectRequest persistedObjectRequest = null;
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId)).Returns(objectRequest);
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString()))
+                .Callback((ObjectRequest or, string correlationId) => persistedObjectRequest = or);
+
+            var handler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            handler.Handle(command);
+
+            persistedObjectRequest.DenyingForNowUserIds.ShouldBeEquivalentTo(new List<int> { 22 });
+        }
     }
 }

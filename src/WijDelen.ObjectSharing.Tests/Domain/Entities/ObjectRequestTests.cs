@@ -66,5 +66,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Version.Should().Be(1);
             objectRequest.DenyingUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
+
+        [Test]
+        public void WhenDenyingForNow() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "For sneaking", 22);
+
+            objectRequest.DenyForNow(3);
+
+            objectRequest.Events.Last().As<ObjectRequestDeniedForNow>().DenyingUserId.Should().Be(3);
+            objectRequest.Version.Should().Be(1);
+            objectRequest.DenyingForNowUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
+        }
     }
 }

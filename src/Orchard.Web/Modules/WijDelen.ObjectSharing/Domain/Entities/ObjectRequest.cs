@@ -10,11 +10,13 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
     public class ObjectRequest : EventSourced {
         private readonly IList<int> _confirmingUserIds = new List<int>();
         private readonly IList<int> _denyingUserIds = new List<int>();
+        private readonly IList<int> _denyingForNowUserIds = new List<int>();
 
         private ObjectRequest(Guid id) : base(id) {
             Handles<ObjectRequested>(OnObjectRequested);
             Handles<ObjectRequestConfirmed>(OnObjectRequestConfirmed);
             Handles<ObjectRequestDenied>(OnObjectRequestDenied);
+            Handles<ObjectRequestDeniedForNow>(OnObjectRequestDeniedForNow);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
@@ -33,6 +35,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Update(new ObjectRequestDenied {DenyingUserId = denyingUserId});
         }
 
+        public void DenyForNow(int denyingUserId) {
+            Update(new ObjectRequestDeniedForNow { DenyingUserId = denyingUserId });
+        }
+
         private void OnObjectRequested(ObjectRequested objectRequested) {
             Description = objectRequested.Description;
             ExtraInfo = objectRequested.ExtraInfo;
@@ -45,6 +51,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         private void OnObjectRequestDenied(ObjectRequestDenied objectRequestDenied) {
             _denyingUserIds.Add(objectRequestDenied.DenyingUserId);
+        }
+
+        private void OnObjectRequestDeniedForNow(ObjectRequestDeniedForNow objectRequestDeniedForNow) {
+            _denyingForNowUserIds.Add(objectRequestDeniedForNow.DenyingUserId);
         }
 
         /// <summary>
@@ -64,5 +74,6 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         public IEnumerable<int> ConfirmingUserIds => _confirmingUserIds;
         public IEnumerable<int> DenyingUserIds => _denyingUserIds;
+        public IEnumerable<int> DenyingForNowUserIds => _denyingForNowUserIds;
     }
 }
