@@ -15,7 +15,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ObjectRequestResponseControllerTests {
         [Test]
-        public void WhenGettingNoForForUnknownId_ShouldReturnNotFound() {
+        public void WhenGettingDenyForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -23,15 +23,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
 
-            var actionResult = controller.NoFor(id);
+            var actionResult = controller.Deny(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
         }
 
         [Test]
-        public void WhenGettingNoFor_ShouldPersistNoAndReturnView() {
+        public void WhenGettingDeny_ShouldPersistNoAndReturnView() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -49,15 +49,21 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null);
+            DenyObjectRequest denyObjectRequest = null;
+            var commandHandlerMock = new Mock<ICommandHandler<DenyObjectRequest>>();
+            commandHandlerMock.Setup(x => x.Handle(It.IsAny<DenyObjectRequest>())).Callback((DenyObjectRequest e) => denyObjectRequest = e);
 
-            var actionResult = controller.NoFor(id);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null, commandHandlerMock.Object, null);
+
+            var actionResult = controller.Deny(id);
 
             actionResult.Should().BeOfType<ViewResult>();
+            denyObjectRequest.DenyingUserId.Should().Be(22);
+            denyObjectRequest.ObjectRequestId.Should().Be(id);
         }
 
         [Test]
-        public void WhenGettingYesForForUnknownId_ShouldReturnNotFound() {
+        public void WhenGettingConfirmForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -65,15 +71,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
 
-            var actionResult = controller.NoFor(id);
+            var actionResult = controller.Deny(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
         }
 
         [Test]
-        public void WhenGettingYesFor_ShouldCallCommandHandlerAndReturnView() {
+        public void WhenGettingConfirm_ShouldCallCommandHandlerAndReturnView() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -96,9 +102,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var commandHandlerMock = new Mock<ICommandHandler<ConfirmObjectRequest>>();
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<ConfirmObjectRequest>())).Callback((ConfirmObjectRequest e) => confirmObjectRequest = e);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, commandHandlerMock.Object);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, commandHandlerMock.Object, null, null);
 
-            var actionResult = controller.YesFor(id);
+            var actionResult = controller.Confirm(id);
 
             actionResult.Should().BeOfType<ViewResult>();
             confirmObjectRequest.ConfirmingUserId.Should().Be(22);
@@ -106,7 +112,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingNotNowForForUnknownId_ShouldReturnNotFound() {
+        public void WhenGettingDenyForNowForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -114,11 +120,43 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
 
-            var actionResult = controller.NoFor(id);
+            var actionResult = controller.DenyForNow(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingDenyForNow_ShouldPersistNoAndReturnView() {
+            var id = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = id,
+                    UserId = 22
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            DenyObjectRequestForNow denyObjectRequestForNow = null;
+            var commandHandlerMock = new Mock<ICommandHandler<DenyObjectRequestForNow>>();
+            commandHandlerMock.Setup(x => x.Handle(It.IsAny<DenyObjectRequestForNow>())).Callback((DenyObjectRequestForNow e) => denyObjectRequestForNow = e);
+
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null, null, commandHandlerMock.Object);
+
+            var actionResult = controller.DenyForNow(id);
+
+            actionResult.Should().BeOfType<ViewResult>();
+            denyObjectRequestForNow.DenyingUserId.Should().Be(22);
+            denyObjectRequestForNow.ObjectRequestId.Should().Be(id);
         }
     }
 }
