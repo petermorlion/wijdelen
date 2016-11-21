@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
+    <Compile Include="Controllers\ChatControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestResponseControllerTests.cs" />
     <Compile Include="Domain\Entities\ChatTests.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
