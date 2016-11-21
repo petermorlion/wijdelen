@@ -114,6 +114,7 @@
     <Compile Include="Controllers\ObjectRequestResponseControllerTests.cs" />
     <Compile Include="Domain\Entities\ChatTests.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
+    <Compile Include="Domain\EventHandlers\ChatReadModelGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarterTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailerTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGeneratorTests.cs" />

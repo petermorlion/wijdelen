@@ -86,5 +86,18 @@ namespace WijDelen.ObjectSharing {
 
             return 3;
         }
+
+        public int UpdateFrom3() {
+            SchemaBuilder.CreateTable(typeof(ChatMessageRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<Guid>("ChatId", column => column.NotNull())
+                    .Column<DateTime>("DateTime", column => column.NotNull())
+                    .Column<int>("UserId", column => column.NotNull())
+                    .Column<string>("UserName", column => column.NotNull())
+                    .Column<string>("Message", column => column.NotNull().Unlimited())
+            );
+
+            return 4;
+        }
     }
 }
