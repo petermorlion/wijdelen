@@ -132,6 +132,7 @@
     <Compile Include="Domain\Commands\DenyObjectRequestForNow.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
     <Compile Include="Domain\Entities\Chat.cs" />
+    <Compile Include="Domain\Entities\ChatMessage.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
+    <Compile Include="Domain\Events\ChatMessageAdded.cs" />
     <Compile Include="Domain\Events\ObjectRequestDeniedForNow.cs" />
     <Compile Include="Domain\Events\ObjectRequestDenied.cs" />
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
