@@ -143,6 +143,7 @@
     <Compile Include="Domain\Events\ObjectRequestDeniedForNow.cs" />
     <Compile Include="Domain\Events\ObjectRequestDenied.cs" />
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
+    <Compile Include="Domain\Events\ChatStarted.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />
     <Compile Include="Domain\Events\UserInventoryCreated.cs" />
