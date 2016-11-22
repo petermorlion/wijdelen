@@ -5,11 +5,11 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class ChatReadModelGenerator : IEventHandler<ChatMessageAdded> {
+    public class ChatMessageReadModelGenerator : IEventHandler<ChatMessageAdded> {
         private readonly IRepository<ChatMessageRecord> _repository;
         private readonly IGetUserByIdQuery _userQuery;
 
-        public ChatReadModelGenerator(IRepository<ChatMessageRecord> repository, IGetUserByIdQuery userQuery) {
+        public ChatMessageReadModelGenerator(IRepository<ChatMessageRecord> repository, IGetUserByIdQuery userQuery) {
             _repository = repository;
             _userQuery = userQuery;
         }

@@ -11,7 +11,7 @@ using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
-    public class ChatReadModelGeneratorTests {
+    public class ChatMessageReadModelGeneratorTests {
         [Test]
         public void WhenChatMessageAdded() {
             var chatMessageAdded = new ChatMessageAdded {
@@ -32,7 +32,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var userQueryMock = new Mock<IGetUserByIdQuery>();
             userQueryMock.Setup(x => x.GetResult(22)).Returns(userMock.Object);
 
-            var handler = new ChatReadModelGenerator(repositoryMock.Object, userQueryMock.Object);
+            var handler = new ChatMessageReadModelGenerator(repositoryMock.Object, userQueryMock.Object);
 
             handler.Handle(chatMessageAdded);
 

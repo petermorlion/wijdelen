@@ -139,7 +139,7 @@
     <Compile Include="Domain\Entities\ChatMessage.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
-    <Compile Include="Domain\EventHandlers\ChatReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\ChatMessageReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
