@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WijDelen.ObjectSharing.ViewModels {
+﻿namespace WijDelen.ObjectSharing.ViewModels {
     public class NewObjectRequestViewModel {
         public string Description { get; set; }
 

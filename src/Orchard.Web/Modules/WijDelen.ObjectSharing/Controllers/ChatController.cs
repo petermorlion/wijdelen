@@ -71,17 +71,17 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [Authorize]
         [HttpPost]
-        public ActionResult AddMessage(Guid chatId, string message) {
+        public ActionResult AddMessage(ChatViewModel chatViewModel) {
             var userId = _orchardServices.WorkContext.CurrentUser.Id;
-            var chat = _chatRepository.Find(chatId);
+            var chat = _chatRepository.Find(chatViewModel.ChatId);
 
             if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) {
                 return new HttpUnauthorizedResult();
             }
 
-            var addChatMessage = new AddChatMessage(chatId, userId, message, DateTime.UtcNow);
+            var addChatMessage = new AddChatMessage(chatViewModel.ChatId, userId, chatViewModel.NewMessage, DateTime.UtcNow);
             _addChatMessageCommandHandler.Handle(addChatMessage);
-            return RedirectToAction("Index", new {chatId});
+            return RedirectToAction("Index", new {chatId = chatViewModel.ChatId});
         }
     }
 }

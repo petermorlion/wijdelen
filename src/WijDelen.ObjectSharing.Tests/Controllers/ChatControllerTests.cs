@@ -189,8 +189,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 chatRepositoryMock.Object,
                 services);
 
-            controller.AddMessage(chatId, "Hello");
+            var result = controller.AddMessage(new ChatViewModel { ChatId = chatId, NewMessage = "Hello"});
 
+            result.Should().BeOfType<RedirectToRouteResult>();
+            result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
+            result.As<RedirectToRouteResult>().RouteValues["chatId"].Should().Be(chatId);
             command.ChatId.Should().Be(chatId);
             command.UserId.Should().Be(23);
             command.Message.Should().Be("Hello");
@@ -217,7 +220,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 chatRepositoryMock.Object,
                 services);
 
-            var result = controller.AddMessage(chatId, "Hello");
+            var result = controller.AddMessage(new ChatViewModel { ChatId = chatId, NewMessage = "Hello" });
 
             result.Should().BeOfType<HttpUnauthorizedResult>();
         }

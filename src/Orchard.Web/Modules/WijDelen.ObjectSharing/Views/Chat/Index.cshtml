@@ -12,3 +12,14 @@
         @chatMessageViewModel.Message
     </p>
 }
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("AddMessage", "Chat", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.ChatId)
+    <fieldset>
+        @Html.TextBoxFor(m => m.NewMessage)
+        @Html.ValidationMessageFor(m => m.NewMessage)
+    </fieldset>
+
+    <button class="primaryAction">@T("Submit")</button>
+}
