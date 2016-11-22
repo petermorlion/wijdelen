@@ -132,6 +132,7 @@
     <Compile Include="Domain\Commands\DenyObjectRequest.cs" />
     <Compile Include="Domain\Commands\DenyObjectRequestForNow.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\Commands\StartChat.cs" />
     <Compile Include="Domain\Entities\Chat.cs" />
     <Compile Include="Domain\Entities\ChatMessage.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
