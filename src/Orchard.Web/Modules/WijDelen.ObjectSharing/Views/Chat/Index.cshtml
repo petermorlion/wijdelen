@@ -1,10 +1,10 @@
 ﻿@model WijDelen.ObjectSharing.ViewModels.ChatViewModel
 
 @{
-//Layout.Title = Model.Description;
+    Layout.Title = T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription);
 }
 
-<h1>@*@Model.Description*@</h1>
+<h1>@T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription)</h1>
 
 @foreach (var chatMessageViewModel in Model.Messages) {
     <p>

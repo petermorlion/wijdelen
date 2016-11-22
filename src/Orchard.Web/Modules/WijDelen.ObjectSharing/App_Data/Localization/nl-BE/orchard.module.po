@@ -122,3 +122,8 @@ msgstr "Geen probleem!"
 #| msgid "Please provide a message."
 msgid "Please provide a message."
 msgstr "Gelieve een boodschap op te geven."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+#| msgid "{0} is looking for (a) {1}."
+msgid "{0} is looking for (a) {1}."
+msgstr "{0} zoekt (een) {1}."

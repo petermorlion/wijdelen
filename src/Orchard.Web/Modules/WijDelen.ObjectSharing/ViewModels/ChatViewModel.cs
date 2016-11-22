@@ -8,5 +8,9 @@ namespace WijDelen.ObjectSharing.ViewModels {
         public string NewMessage { get; set; }
 
         public Guid ChatId { get; set; }
+
+        public string RequestingUserName { get; set; }
+
+        public string ObjectDescription { get; set; }
     }
 }
