@@ -72,13 +72,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenStartingNewChat() {
             var objectRequestId = Guid.NewGuid();
 
-            var chatMessageRepositoryMock = new Mock<IRepository<ChatMessageRecord>>();
-            chatMessageRepositoryMock.SetRecords(new[] {
-                new ChatMessageRecord {
-                    ChatId = Guid.NewGuid()
-                }
-            });
-
             var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             objectRequestRepositoryMock.SetRecords(new[] {
                 new ObjectRequestRecord {
@@ -101,28 +94,53 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Setup(x => x.Handle(It.IsAny<StartChat>()))
                 .Callback((StartChat c) => command = c);
 
-            var controller = new ChatController(chatMessageRepositoryMock.Object, objectRequestRepositoryMock.Object, commandHandlerMock.Object, services);
+            var controller = new ChatController(default(IRepository<ChatMessageRecord>), objectRequestRepositoryMock.Object, commandHandlerMock.Object, services);
             var result = controller.Start(objectRequestId);
 
-            result.Should().BeOfType<ViewResult>();
-            command.ObjectRequestId.Should().Be(objectRequestId);
-            command.RequestingUserId.Should().Be(22);
-            command.ConfirmingUserId.Should().Be(23);
+            result.Should().BeOfType<RedirectToRouteResult>();
+            result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
+            result.As<RedirectToRouteResult>().RouteValues["chatId"].Should().Be(command.ChatId);
         }
 
         [Test]
-        public void WhenGettingNewChatForUnknownObjectRequest() {
-            // TODO
-        }
+        public void WhenStartingNewChatForUnknownObjectRequest() {
+            var objectRequestId = Guid.NewGuid();
 
-        [Test]
-        public void WhenGettingNewChatForOtherUser() {
-            // TODO
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(new[] {
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid()
+                }
+            });
+
+            var controller = new ChatController(default(IRepository<ChatMessageRecord>), objectRequestRepositoryMock.Object, default(ICommandHandler<StartChat>), default(IOrchardServices));
+            var result = controller.Start(objectRequestId);
+
+            result.Should().BeOfType<HttpNotFoundResult>();
         }
 
         [Test]
         public void WhenGettingUnknownChat() {
-            // TODO
+            var chatId = Guid.NewGuid();
+            var repositoryMock = new Mock<IRepository<ChatMessageRecord>>();
+            repositoryMock.SetRecords(new[] {
+                new ChatMessageRecord {
+                    ChatId = Guid.NewGuid(),
+                    DateTime = new DateTime(2016, 11, 22),
+                    UserName = "Moe",
+                    Message = "Hello"
+                }
+            });
+
+            var controller = new ChatController(
+                repositoryMock.Object,
+                default(IRepository<ObjectRequestRecord>),
+                default(ICommandHandler<StartChat>),
+                default(IOrchardServices));
+
+            var result = controller.Index(chatId);
+
+            result.Should().BeOfType<HttpNotFoundResult>();
         }
 
         [Test]

@@ -1,0 +1,14 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.ChatViewModel
+
+@{
+//Layout.Title = Model.Description;
+}
+
+<h1>@*@Model.Description*@</h1>
+
+@foreach (var chatMessageViewModel in Model.Messages) {
+    <p>
+        <span>@chatMessageViewModel.DateTime</span> - @chatMessageViewModel.UserName<br/>
+        @chatMessageViewModel.Message
+    </p>
+}

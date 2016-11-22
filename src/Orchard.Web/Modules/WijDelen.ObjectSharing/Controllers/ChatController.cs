@@ -33,21 +33,25 @@ namespace WijDelen.ObjectSharing.Controllers {
         [Authorize]
         public ActionResult Start(Guid objectRequestId) {
             var objectRequestRecord = _objectRequestRepository.Fetch(x => x.AggregateId == objectRequestId).SingleOrDefault();
-            
-            var startChat = new StartChat {
-                ObjectRequestId = objectRequestId,
-                ConfirmingUserId = _orchardServices.WorkContext.CurrentUser.Id,
-                RequestingUserId = objectRequestRecord.UserId
-            };
+
+            if (objectRequestRecord == null) {
+                return new HttpNotFoundResult();
+            }
+
+            var startChat = new StartChat(objectRequestId, objectRequestRecord.UserId, _orchardServices.WorkContext.CurrentUser.Id);
 
             _startChatCommandHandler.Handle(startChat);
 
-            return View();
+            return RedirectToAction("Index", new {chatId = startChat.ChatId});
         }
 
         [Authorize]
         public ActionResult Index(Guid chatId) {
             var chatMessages = _chatMessageRepository.Fetch(x => x.ChatId == chatId).OrderBy(x => x.DateTime).ToList();
+            if (!chatMessages.Any()) {
+                return new HttpNotFoundResult();
+            }
+
             var chatMessageViewModels = chatMessages.Select(x => new ChatMessageViewModel {
                 DateTime = x.DateTime,
                 UserName = x.UserName,
