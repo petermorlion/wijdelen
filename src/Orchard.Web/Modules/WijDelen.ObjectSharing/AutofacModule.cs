@@ -20,6 +20,10 @@ namespace WijDelen.ObjectSharing {
                 .As<ICommandHandler<DenyObjectRequest>>()
                 .As<ICommandHandler<DenyObjectRequestForNow>>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<ChatCommandHandler>()
+                .As<ICommandHandler<StartChat>>()
+                .InstancePerLifetimeScope();
         }
     }
 }

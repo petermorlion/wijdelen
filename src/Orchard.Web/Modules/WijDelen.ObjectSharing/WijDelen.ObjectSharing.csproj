@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Controllers\ObjectRequestResponseController.cs" />
+    <Compile Include="Domain\CommandHandlers\ChatCommandHandler.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\ConfirmObjectRequest.cs" />
     <Compile Include="Domain\Commands\DenyObjectRequest.cs" />
@@ -265,6 +266,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ObjectRequestResponse\NotNowFor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Chat\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
