@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard;
 using Orchard.Data;
+using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
@@ -50,8 +52,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             });
 
             var controller = new ChatController(
-                repositoryMock.Object, 
-                default(IRepository<ObjectRequestRecord>), 
+                repositoryMock.Object,
+                default(IRepository<ObjectRequestRecord>),
                 default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 default(IEventSourcedRepository<Chat>),
@@ -99,9 +101,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Callback((StartChat c) => command = c);
 
             var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>), 
-                objectRequestRepositoryMock.Object, 
-                commandHandlerMock.Object, 
+                default(IRepository<ChatMessageRecord>),
+                objectRequestRepositoryMock.Object,
+                commandHandlerMock.Object,
                 default(ICommandHandler<AddChatMessage>),
                 default(IEventSourcedRepository<Chat>),
                 services);
@@ -125,9 +127,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             });
 
             var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>), 
-                objectRequestRepositoryMock.Object, 
-                default(ICommandHandler<StartChat>), 
+                default(IRepository<ChatMessageRecord>),
+                objectRequestRepositoryMock.Object,
+                default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 default(IEventSourcedRepository<Chat>),
                 default(IOrchardServices));
@@ -189,7 +191,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 chatRepositoryMock.Object,
                 services);
 
-            var result = controller.AddMessage(new ChatViewModel { ChatId = chatId, NewMessage = "Hello"});
+            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = "Hello"});
 
             result.Should().BeOfType<RedirectToRouteResult>();
             result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
@@ -220,9 +222,40 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 chatRepositoryMock.Object,
                 services);
 
-            var result = controller.AddMessage(new ChatViewModel { ChatId = chatId, NewMessage = "Hello" });
+            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = "Hello"});
 
             result.Should().BeOfType<HttpUnauthorizedResult>();
+        }
+
+        [Test]
+        public void WhenAddingEmptyChatMessage() {
+            var chatId = Guid.NewGuid();
+
+            var controller = new ChatController(
+                default(IRepository<ChatMessageRecord>),
+                default(IRepository<ObjectRequestRecord>),
+                default(ICommandHandler<StartChat>),
+                default(ICommandHandler<AddChatMessage>),
+                default(IEventSourcedRepository<Chat>),
+                default(IOrchardServices));
+
+            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = ""});
+
+            result.Should().BeOfType<ViewResult>();
+            result.As<ViewResult>().ViewData.ModelState.Values.ToList()[0].Errors.ToList()[0].ErrorMessage.Should().Be("Please provide a message.");
+        }
+
+        /// <summary>
+        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
+        /// </summary>
+        [Test]
+        public void TestT() {
+            var controller = new ObjectRequestController(null, null, null);
+            var localizer = NullLocalizer.Instance;
+
+            controller.T = localizer;
+
+            Assert.AreEqual(localizer, controller.T);
         }
     }
 }

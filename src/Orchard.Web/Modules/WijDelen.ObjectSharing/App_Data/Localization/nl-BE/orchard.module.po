@@ -117,3 +117,8 @@ msgstr "Leuk!"
 #| msgid "No problem!"
 msgid "No problem!"
 msgstr "Geen probleem!"
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+#| msgid "Please provide a message."
+msgid "Please provide a message."
+msgstr "Gelieve een boodschap op te geven."

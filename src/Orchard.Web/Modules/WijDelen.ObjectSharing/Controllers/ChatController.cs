@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Orchard;
 using Orchard.Data;
+using Orchard.Localization;
 using Orchard.Themes;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;
@@ -34,6 +35,8 @@ namespace WijDelen.ObjectSharing.Controllers {
             _addChatMessageCommandHandler = addChatMessageCommandHandler;
             _chatRepository = chatRepository;
             _orchardServices = orchardServices;
+
+            T = NullLocalizer.Instance;
         }
 
         [Authorize]
@@ -71,17 +74,29 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [Authorize]
         [HttpPost]
-        public ActionResult AddMessage(ChatViewModel chatViewModel) {
+        public ActionResult AddMessage(ChatViewModel viewModel) {
+            if (string.IsNullOrWhiteSpace(viewModel.NewMessage))
+            {
+                ModelState.AddModelError<ChatViewModel, string>(m => m.NewMessage, T("Please provide a message."));
+            }
+            
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             var userId = _orchardServices.WorkContext.CurrentUser.Id;
-            var chat = _chatRepository.Find(chatViewModel.ChatId);
+            var chat = _chatRepository.Find(viewModel.ChatId);
 
             if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) {
                 return new HttpUnauthorizedResult();
             }
 
-            var addChatMessage = new AddChatMessage(chatViewModel.ChatId, userId, chatViewModel.NewMessage, DateTime.UtcNow);
+            var addChatMessage = new AddChatMessage(viewModel.ChatId, userId, viewModel.NewMessage, DateTime.UtcNow);
             _addChatMessageCommandHandler.Handle(addChatMessage);
-            return RedirectToAction("Index", new {chatId = chatViewModel.ChatId});
+            return RedirectToAction("Index", new {chatId = viewModel.ChatId});
         }
+
+        public Localizer T { get; set; }
     }
 }
