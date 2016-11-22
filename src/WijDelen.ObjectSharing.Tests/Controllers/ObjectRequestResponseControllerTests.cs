@@ -23,7 +23,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null, null);
 
             var actionResult = controller.Deny(id);
 
@@ -53,7 +53,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var commandHandlerMock = new Mock<ICommandHandler<DenyObjectRequest>>();
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<DenyObjectRequest>())).Callback((DenyObjectRequest e) => denyObjectRequest = e);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null, commandHandlerMock.Object, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, services, null, commandHandlerMock.Object, null);
 
             var actionResult = controller.Deny(id);
 
@@ -71,7 +71,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null, null);
 
             var actionResult = controller.Deny(id);
 
@@ -102,11 +102,32 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var commandHandlerMock = new Mock<ICommandHandler<ConfirmObjectRequest>>();
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<ConfirmObjectRequest>())).Callback((ConfirmObjectRequest e) => confirmObjectRequest = e);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, commandHandlerMock.Object, null, null);
+            var chatId = Guid.NewGuid();
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+            chatRepositoryMock.SetRecords(new [] {
+                new ChatRecord {
+                    ObjectRequestId = id,
+                    ConfirmingUserId = 1
+                },
+                new ChatRecord {
+                    ObjectRequestId = Guid.NewGuid(),
+                    ConfirmingUserId = 22
+                },
+                new ChatRecord {
+                    ObjectRequestId = id,
+                    ConfirmingUserId = 22,
+                    ChatId = chatId
+                }
+            });
+
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, chatRepositoryMock.Object, services, commandHandlerMock.Object, null, null);
 
             var actionResult = controller.Confirm(id);
 
-            actionResult.Should().BeOfType<ViewResult>();
+            actionResult.Should().BeOfType<RedirectToRouteResult>();
+            actionResult.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
+            actionResult.As<RedirectToRouteResult>().RouteValues["controller"].Should().Be("Chat");
+            actionResult.As<RedirectToRouteResult>().RouteValues["chatId"].Should().Be(chatId);
             confirmObjectRequest.ConfirmingUserId.Should().Be(22);
             confirmObjectRequest.ObjectRequestId.Should().Be(id);
         }
@@ -120,7 +141,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, null, null, null, null);
 
             var actionResult = controller.DenyForNow(id);
 
@@ -150,7 +171,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var commandHandlerMock = new Mock<ICommandHandler<DenyObjectRequestForNow>>();
             commandHandlerMock.Setup(x => x.Handle(It.IsAny<DenyObjectRequestForNow>())).Callback((DenyObjectRequestForNow e) => denyObjectRequestForNow = e);
 
-            var controller = new ObjectRequestResponseController(repositoryMock.Object, services, null, null, commandHandlerMock.Object);
+            var controller = new ObjectRequestResponseController(repositoryMock.Object, null, services, null, null, commandHandlerMock.Object);
 
             var actionResult = controller.DenyForNow(id);
 

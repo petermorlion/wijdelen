@@ -10,8 +10,6 @@ using Orchard.Localization;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
-using WijDelen.ObjectSharing.Domain.Entities;
-using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
@@ -71,7 +69,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ChatController(
                 chatMessageRepositoryMock.Object,
                 objectRequestRepositoryMock.Object,
-                default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 chatRepositoryMock.Object,
                 default(IOrchardServices));
@@ -94,71 +91,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenStartingNewChat() {
-            var objectRequestId = Guid.NewGuid();
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(new[] {
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid()
-                },
-                new ObjectRequestRecord {
-                    AggregateId = objectRequestId,
-                    UserId = 22
-                }
-            });
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(23);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            StartChat command = null;
-            var commandHandlerMock = new Mock<ICommandHandler<StartChat>>();
-            commandHandlerMock
-                .Setup(x => x.Handle(It.IsAny<StartChat>()))
-                .Callback((StartChat c) => command = c);
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                objectRequestRepositoryMock.Object,
-                commandHandlerMock.Object,
-                default(ICommandHandler<AddChatMessage>),
-                default(IRepository<ChatRecord>),
-                services);
-
-            var result = controller.Start(objectRequestId);
-
-            result.Should().BeOfType<RedirectToRouteResult>();
-            result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
-            result.As<RedirectToRouteResult>().RouteValues["chatId"].Should().Be(command.ChatId);
-        }
-
-        [Test]
-        public void WhenStartingNewChatForUnknownObjectRequest() {
-            var objectRequestId = Guid.NewGuid();
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(new[] {
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid()
-                }
-            });
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                objectRequestRepositoryMock.Object,
-                default(ICommandHandler<StartChat>),
-                default(ICommandHandler<AddChatMessage>),
-                default(IRepository<ChatRecord>),
-                default(IOrchardServices));
-
-            var result = controller.Start(objectRequestId);
-
-            result.Should().BeOfType<HttpNotFoundResult>();
-        }
-
-        [Test]
         public void WhenGettingUnknownChat() {
             var chatId = Guid.NewGuid();
             var repositoryMock = new Mock<IRepository<ChatMessageRecord>>();
@@ -174,7 +106,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ChatController(
                 repositoryMock.Object,
                 default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 default(IRepository<ChatRecord>),
                 default(IOrchardServices));
@@ -211,7 +142,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ChatController(
                 default(IRepository<ChatMessageRecord>),
                 default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<StartChat>),
                 commandHandlerMock.Object,
                 chatRepositoryMock.Object,
                 services);
@@ -248,7 +178,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ChatController(
                 default(IRepository<ChatMessageRecord>),
                 default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 chatRepositoryMock.Object,
                 services);
@@ -265,7 +194,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ChatController(
                 default(IRepository<ChatMessageRecord>),
                 default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<StartChat>),
                 default(ICommandHandler<AddChatMessage>),
                 default(IRepository<ChatRecord>),
                 default(IOrchardServices));

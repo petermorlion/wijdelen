@@ -12,24 +12,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
     [TestFixture]
     public class ChatCommandHandlerTests {
         [Test]
-        public void WhenHandlingStartChat_ShouldCreateNewChat() {
-            Chat chat = null;
-            var startChat = new StartChat(Guid.NewGuid(), 1, 2);
-            var repositoryMock = new Mock<IEventSourcedRepository<Chat>>();
-            repositoryMock
-                .Setup(x => x.Save(It.IsAny<Chat>(), startChat.Id.ToString()))
-                .Callback((Chat c, string ci) => chat = c);
-
-            var handler = new ChatCommandHandler(repositoryMock.Object);
-
-            handler.Handle(startChat);
-
-            chat.ConfirmingUserId.Should().Be(2);
-            chat.ObjectRequestId.Should().Be(startChat.ObjectRequestId);
-            chat.RequestingUserId.Should().Be(1);
-        }
-
-        [Test]
         public void WhenAddingChatMessage() {
             var chat = new Chat(Guid.NewGuid(), Guid.NewGuid(), 1, 2);
             var command = new AddChatMessage(chat.Id, 2, "Hello", new DateTime(2016, 11, 22));

@@ -23,7 +23,6 @@ namespace WijDelen.ObjectSharing {
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ChatCommandHandler>()
-                .As<ICommandHandler<StartChat>>()
                 .As<ICommandHandler<AddChatMessage>>()
                 .InstancePerLifetimeScope();
         }
