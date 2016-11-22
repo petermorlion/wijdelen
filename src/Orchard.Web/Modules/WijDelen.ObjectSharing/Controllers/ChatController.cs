@@ -17,16 +17,22 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly IRepository<ChatMessageRecord> _chatMessageRepository;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly ICommandHandler<StartChat> _startChatCommandHandler;
+        private readonly ICommandHandler<AddChatMessage> _addChatMessageCommandHandler;
+        private readonly IEventSourcedRepository<Chat> _chatRepository;
         private readonly IOrchardServices _orchardServices;
 
         public ChatController(
             IRepository<ChatMessageRecord> chatMessageRepository, 
             IRepository<ObjectRequestRecord> objectRequestRepository,
             ICommandHandler<StartChat> startChatCommandHandler,
+            ICommandHandler<AddChatMessage> addChatMessageCommandHandler,
+            IEventSourcedRepository<Chat> chatRepository,
             IOrchardServices orchardServices) {
             _chatMessageRepository = chatMessageRepository;
             _objectRequestRepository = objectRequestRepository;
             _startChatCommandHandler = startChatCommandHandler;
+            _addChatMessageCommandHandler = addChatMessageCommandHandler;
+            _chatRepository = chatRepository;
             _orchardServices = orchardServices;
         }
 
@@ -61,6 +67,21 @@ namespace WijDelen.ObjectSharing.Controllers {
             return View(new ChatViewModel {
                 Messages = chatMessageViewModels
             });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddMessage(Guid chatId, string message) {
+            var userId = _orchardServices.WorkContext.CurrentUser.Id;
+            var chat = _chatRepository.Find(chatId);
+
+            if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) {
+                return new HttpUnauthorizedResult();
+            }
+
+            var addChatMessage = new AddChatMessage(chatId, userId, message, DateTime.UtcNow);
+            _addChatMessageCommandHandler.Handle(addChatMessage);
+            return RedirectToAction("Index", new {chatId});
         }
     }
 }

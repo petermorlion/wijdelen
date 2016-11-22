@@ -8,6 +8,8 @@ using Orchard.Data;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Entities;
+using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
@@ -51,6 +53,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 repositoryMock.Object, 
                 default(IRepository<ObjectRequestRecord>), 
                 default(ICommandHandler<StartChat>),
+                default(ICommandHandler<AddChatMessage>),
+                default(IEventSourcedRepository<Chat>),
                 default(IOrchardServices));
 
             var result = controller.Index(chatId);
@@ -94,7 +98,14 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Setup(x => x.Handle(It.IsAny<StartChat>()))
                 .Callback((StartChat c) => command = c);
 
-            var controller = new ChatController(default(IRepository<ChatMessageRecord>), objectRequestRepositoryMock.Object, commandHandlerMock.Object, services);
+            var controller = new ChatController(
+                default(IRepository<ChatMessageRecord>), 
+                objectRequestRepositoryMock.Object, 
+                commandHandlerMock.Object, 
+                default(ICommandHandler<AddChatMessage>),
+                default(IEventSourcedRepository<Chat>),
+                services);
+
             var result = controller.Start(objectRequestId);
 
             result.Should().BeOfType<RedirectToRouteResult>();
@@ -113,7 +124,14 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 }
             });
 
-            var controller = new ChatController(default(IRepository<ChatMessageRecord>), objectRequestRepositoryMock.Object, default(ICommandHandler<StartChat>), default(IOrchardServices));
+            var controller = new ChatController(
+                default(IRepository<ChatMessageRecord>), 
+                objectRequestRepositoryMock.Object, 
+                default(ICommandHandler<StartChat>), 
+                default(ICommandHandler<AddChatMessage>),
+                default(IEventSourcedRepository<Chat>),
+                default(IOrchardServices));
+
             var result = controller.Start(objectRequestId);
 
             result.Should().BeOfType<HttpNotFoundResult>();
@@ -136,6 +154,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 repositoryMock.Object,
                 default(IRepository<ObjectRequestRecord>),
                 default(ICommandHandler<StartChat>),
+                default(ICommandHandler<AddChatMessage>),
+                default(IEventSourcedRepository<Chat>),
                 default(IOrchardServices));
 
             var result = controller.Index(chatId);
@@ -145,12 +165,61 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void WhenAddingChatMessage() {
-            // TODO
+            var chatId = Guid.NewGuid();
+            var commandHandlerMock = new Mock<ICommandHandler<AddChatMessage>>();
+            AddChatMessage command = null;
+
+            commandHandlerMock
+                .Setup(x => x.Handle(It.IsAny<AddChatMessage>()))
+                .Callback((AddChatMessage c) => command = c);
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(23);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var chatRepositoryMock = new Mock<IEventSourcedRepository<Chat>>();
+            chatRepositoryMock.Setup(x => x.Find(chatId)).Returns(new Chat(chatId, Guid.NewGuid(), 1, 23));
+
+            var controller = new ChatController(
+                default(IRepository<ChatMessageRecord>),
+                default(IRepository<ObjectRequestRecord>),
+                default(ICommandHandler<StartChat>),
+                commandHandlerMock.Object,
+                chatRepositoryMock.Object,
+                services);
+
+            controller.AddMessage(chatId, "Hello");
+
+            command.ChatId.Should().Be(chatId);
+            command.UserId.Should().Be(23);
+            command.Message.Should().Be("Hello");
+            command.DateTime.Kind.Should().Be(DateTimeKind.Utc);
         }
 
         [Test]
         public void WhenAddingChatMessageForOtherUser() {
-            // TODO
+            var chatId = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(23);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var chatRepositoryMock = new Mock<IEventSourcedRepository<Chat>>();
+            chatRepositoryMock.Setup(x => x.Find(chatId)).Returns(new Chat(chatId, Guid.NewGuid(), 1, 2));
+
+            var controller = new ChatController(
+                default(IRepository<ChatMessageRecord>),
+                default(IRepository<ObjectRequestRecord>),
+                default(ICommandHandler<StartChat>),
+                default(ICommandHandler<AddChatMessage>),
+                chatRepositoryMock.Object,
+                services);
+
+            var result = controller.AddMessage(chatId, "Hello");
+
+            result.Should().BeOfType<HttpUnauthorizedResult>();
         }
     }
 }

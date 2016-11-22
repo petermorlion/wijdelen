@@ -11,6 +11,7 @@ namespace WijDelen.ObjectSharing.Domain.Commands {
         public DateTime DateTime { get; set; }
 
         public AddChatMessage(Guid chatId, int userId, string message, DateTime dateTime) {
+            Id = Guid.NewGuid();
             ChatId = chatId;
             UserId = userId;
             Message = message;
