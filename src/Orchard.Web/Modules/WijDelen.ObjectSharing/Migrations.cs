@@ -99,5 +99,19 @@ namespace WijDelen.ObjectSharing {
 
             return 4;
         }
+
+        public int UpdateFrom4() {
+            SchemaBuilder.CreateTable(typeof(ChatRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<Guid>("ChatId", column => column.NotNull())
+                    .Column<Guid>("ObjectRequestId", column => column.NotNull())
+                    .Column<int>("RequestingUserId", column => column.NotNull())
+                    .Column<int>("ConfirmingUserId", column => column.NotNull())
+                    .Column<string>("RequestingUserName", column => column.NotNull())
+                    .Column<string>("ConfirmingUserName", column => column.NotNull())
+            );
+
+            return 5;
+        }
     }
 }

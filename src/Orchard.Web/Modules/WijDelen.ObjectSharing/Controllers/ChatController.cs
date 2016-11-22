@@ -19,7 +19,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly ICommandHandler<StartChat> _startChatCommandHandler;
         private readonly ICommandHandler<AddChatMessage> _addChatMessageCommandHandler;
-        private readonly IEventSourcedRepository<Chat> _chatRepository;
+        private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IOrchardServices _orchardServices;
 
         public ChatController(
@@ -27,7 +27,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             IRepository<ObjectRequestRecord> objectRequestRepository,
             ICommandHandler<StartChat> startChatCommandHandler,
             ICommandHandler<AddChatMessage> addChatMessageCommandHandler,
-            IEventSourcedRepository<Chat> chatRepository,
+            IRepository<ChatRecord> chatRepository,
             IOrchardServices orchardServices) {
             _chatMessageRepository = chatMessageRepository;
             _objectRequestRepository = objectRequestRepository;
@@ -61,6 +61,9 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpNotFoundResult();
             }
 
+            var chat = _chatRepository.Fetch(x => x.ChatId == chatId).Single();
+            var objectRequest = _objectRequestRepository.Fetch(x => x.AggregateId == chat.ObjectRequestId).Single();
+
             var chatMessageViewModels = chatMessages.Select(x => new ChatMessageViewModel {
                 DateTime = x.DateTime,
                 UserName = x.UserName,
@@ -68,7 +71,9 @@ namespace WijDelen.ObjectSharing.Controllers {
             }).ToList();
 
             return View(new ChatViewModel {
-                Messages = chatMessageViewModels
+                Messages = chatMessageViewModels,
+                ChatId = chatId,
+                ObjectDescription = objectRequest.Description
             });
         }
 
@@ -86,7 +91,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             }
 
             var userId = _orchardServices.WorkContext.CurrentUser.Id;
-            var chat = _chatRepository.Find(viewModel.ChatId);
+            var chat = _chatRepository.Fetch(x => x.ChatId == viewModel.ChatId).Single();
 
             if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) {
                 return new HttpUnauthorizedResult();

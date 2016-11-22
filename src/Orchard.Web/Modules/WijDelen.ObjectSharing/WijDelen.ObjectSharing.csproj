@@ -140,6 +140,7 @@
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\ChatReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ChatMessageRecord.cs" />
+    <Compile Include="Models\ChatRecord.cs" />
     <Compile Include="Models\EventRecord.cs" />
     <Compile Include="Models\ObjectRequestMailRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />

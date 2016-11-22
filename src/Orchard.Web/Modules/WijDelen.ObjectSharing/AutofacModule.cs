@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using WijDelen.ObjectSharing.Domain.CommandHandlers;
 using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure;
@@ -23,6 +24,7 @@ namespace WijDelen.ObjectSharing {
 
             builder.RegisterType<ChatCommandHandler>()
                 .As<ICommandHandler<StartChat>>()
+                .As<ICommandHandler<AddChatMessage>>()
                 .InstancePerLifetimeScope();
         }
     }
