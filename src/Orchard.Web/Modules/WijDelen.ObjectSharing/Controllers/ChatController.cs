@@ -54,7 +54,8 @@ namespace WijDelen.ObjectSharing.Controllers {
             return View(new ChatViewModel {
                 Messages = chatMessageViewModels,
                 ChatId = chatId,
-                ObjectDescription = objectRequest.Description
+                ObjectDescription = objectRequest.Description,
+                RequestingUserName = chat.RequestingUserName
             });
         }
 

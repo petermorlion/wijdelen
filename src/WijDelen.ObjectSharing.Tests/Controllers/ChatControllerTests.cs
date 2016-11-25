@@ -60,7 +60,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var chatRecord = new ChatRecord {
                 ObjectRequestId = objectRequestId,
-                ChatId = chatId
+                ChatId = chatId,
+                RequestingUserName = "Carl"
             };
 
             var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
@@ -78,6 +79,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.Should().BeOfType<ViewResult>();
             result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(chatId);
             result.As<ViewResult>().Model.As<ChatViewModel>().ObjectDescription.Should().Be("Sneakers");
+            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserName.Should().Be("Carl");
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages.Count.Should().Be(3);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].DateTime.Should().Be(new DateTime(2016, 11, 21));
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].UserName.Should().Be("Lenny");
