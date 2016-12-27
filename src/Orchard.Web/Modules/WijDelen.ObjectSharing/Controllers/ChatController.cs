@@ -81,7 +81,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var addChatMessage = new AddChatMessage(viewModel.ChatId, userId, viewModel.NewMessage, DateTime.UtcNow);
             _addChatMessageCommandHandler.Handle(addChatMessage);
-            return RedirectToAction("Index", new {chatId = viewModel.ChatId});
+            return RedirectToAction("Index", new {id = viewModel.ChatId});
         }
 
         public Localizer T { get; set; }

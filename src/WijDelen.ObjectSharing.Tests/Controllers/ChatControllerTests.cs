@@ -95,21 +95,18 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void WhenGettingUnknownChat() {
             var chatId = Guid.NewGuid();
-            var repositoryMock = new Mock<IRepository<ChatMessageRecord>>();
+            var repositoryMock = new Mock<IRepository<ChatRecord>>();
             repositoryMock.SetRecords(new[] {
-                new ChatMessageRecord {
+                new ChatRecord {
                     ChatId = Guid.NewGuid(),
-                    DateTime = new DateTime(2016, 11, 22),
-                    UserName = "Moe",
-                    Message = "Hello"
                 }
             });
 
             var controller = new ChatController(
-                repositoryMock.Object,
+                default(IRepository<ChatMessageRecord>),
                 default(IRepository<ObjectRequestRecord>),
                 default(ICommandHandler<AddChatMessage>),
-                default(IRepository<ChatRecord>),
+                repositoryMock.Object,
                 default(IOrchardServices));
 
             var result = controller.Index(chatId);

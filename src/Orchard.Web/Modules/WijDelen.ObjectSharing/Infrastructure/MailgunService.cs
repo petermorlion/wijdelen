@@ -50,5 +50,30 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
             objectRequestMail.MarkAsSent(emailAddresses, htmlBody);
         }
+
+        public void SendChatMessageAddedMail(string fromUserName, string toUserName, string description, string toEmailAddress, Guid chatId, string message) {
+            var client = new RestClient
+            {
+                BaseUrl = new Uri("https://api.mailgun.net/v3"),
+                Authenticator = new HttpBasicAuthenticator("api", "key-9b8b2053d33de2583bfd3afb604dd820")
+            };
+
+            var request = new RestRequest();
+            request.AddParameter("domain", "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org", ParameterType.UrlSegment);
+            request.Resource = "{domain}/messages";
+            request.AddParameter("from", "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>");
+            request.AddParameter("to", $"{toEmailAddress}");
+            request.AddParameter("subject", T("{0} reacted on your request for a {1}.", fromUserName, description).ToString());
+
+            var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
+            
+            var htmlBody = T("chat-message-added-mail-html", fromUserName, description, message, chatUrl).ToString();
+            request.AddParameter("text", T("chat-message-added-mail-text", fromUserName, description, message, chatUrl).ToString());
+            request.AddParameter("html", htmlBody);
+
+            request.Method = Method.POST;
+
+            client.Execute(request);
+        }
     }
 }

@@ -7,6 +7,7 @@ using WijDelen.ObjectSharing.Domain.CommandHandlers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Infrastructure;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
     [TestFixture]
@@ -23,6 +24,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
             repositoryMock
                 .Setup(x => x.Find(chat.Id))
                 .Returns(chat);
+
+            var mailServiceMock = new Mock<IMailService>();
 
             var handler = new ChatCommandHandler(repositoryMock.Object);
 
