@@ -62,7 +62,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var chatRecord = _chatRepository.Fetch(x => x.ObjectRequestId == id && x.ConfirmingUserId == currentUser.Id).Single();
             
-            return RedirectToAction("Index", "Chat", new {chatId = chatRecord.ChatId});
+            return RedirectToAction("Index", "Chat", new {id = chatRecord.ChatId});
         }
 
         public ActionResult DenyForNow(Guid id) {

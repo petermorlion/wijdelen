@@ -200,6 +200,7 @@
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
+    <Compile Include="ViewModels\ObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\SynonymsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,27 @@
-﻿@model WijDelen.ObjectSharing.Models.ObjectRequestRecord
+﻿@model WijDelen.ObjectSharing.ViewModels.ObjectRequestViewModel
 
 @{
-    Layout.Title = Model.Description;
+    Layout.Title = Model.ObjectRequestRecord.Description;
 }
 
-<h1>@Model.Description</h1>
+<h1>@Model.ObjectRequestRecord.Description</h1>
 
-@Model.ExtraInfo
+@Model.ObjectRequestRecord.ExtraInfo
 
-<p>
-    Dit is een item die je hebt aangevraagd. Hier komt later een overzicht van antwoorden van mensen binnen je groep, enz.
-</p>
+<h2>@T("Reactions")</h2>
+
+<ul class="objectrequestlist">
+    @if (Model.ChatRecords.Any()) {
+        foreach (var chatRecord in @Model.ChatRecords) {
+            <li class="objectrequestlist-item">
+                @Html.ActionLink(chatRecord.ConfirmingUserName,
+                    "Index",
+                    new {controller = "Chat", area = "WijDelen.ObjectSharing", id = chatRecord.ChatId},
+                    new {@class = "objectrequestlist-link"})
+            </li>
+        }
+    }
+    else {
+        @T("There are no reactions yet.")
+    }
+</ul>

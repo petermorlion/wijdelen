@@ -14,15 +14,18 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     public class ObjectRequestController : Controller {
         private readonly ICommandHandler<RequestObject> _requestObjectCommandHandler;
-        private readonly IRepository<ObjectRequestRecord> _repository;
+        private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
+        private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IOrchardServices _orchardServices;
 
         public ObjectRequestController(
             ICommandHandler<RequestObject> requestObjectCommandHandler,
-            IRepository<ObjectRequestRecord> repository,
+            IRepository<ObjectRequestRecord> objectRequestRepository,
+            IRepository<ChatRecord> chatRepository,
             IOrchardServices orchardServices) {
             _requestObjectCommandHandler = requestObjectCommandHandler;
-            _repository = repository;
+            _objectRequestRepository = objectRequestRepository;
+            _chatRepository = chatRepository;
             _orchardServices = orchardServices;
 
             T = NullLocalizer.Instance;
@@ -58,7 +61,8 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [Authorize]
         public ActionResult Item(Guid id) {
-            var record = _repository.Get(x => x.AggregateId == id);
+            var record = _objectRequestRepository.Get(x => x.AggregateId == id);
+            var chatRecords = _chatRepository.Fetch(x => x.ObjectRequestId == id).ToList();
 
             if (record == null) {
                 return new HttpNotFoundResult();
@@ -68,12 +72,17 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
-            return View(record);
+            var viewModel = new ObjectRequestViewModel {
+                ObjectRequestRecord = record,
+                ChatRecords = chatRecords
+            };
+
+            return View(viewModel);
         }
 
         [Authorize]
         public ActionResult Index() {
-            var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
+            var records = _objectRequestRepository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(records);
         }
 

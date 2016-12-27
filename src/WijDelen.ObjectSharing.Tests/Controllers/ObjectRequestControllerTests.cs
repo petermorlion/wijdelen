@@ -23,7 +23,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new ObjectRequestController(null, null, null);
+            var controller = new ObjectRequestController(null, null, null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -33,7 +33,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void ShouldValidateNewObjectRequest() {
-            var controller = new ObjectRequestController(null, null, null);
+            var controller = new ObjectRequestController(null, null, null, null);
             var viewModel = new NewObjectRequestViewModel();
 
             var viewResult = controller.New(viewModel);
@@ -53,7 +53,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
 
-            var controller = new ObjectRequestController(commandHandlerMock.Object, null, services);
+            var controller = new ObjectRequestController(commandHandlerMock.Object, null, null, services);
             var viewModel = new NewObjectRequestViewModel {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking"
@@ -61,7 +61,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var actionResult = controller.New(viewModel);
 
-            ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Item");
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
 
             command.Description.Should().Be("Sneakers");
@@ -85,10 +85,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 }
             };
 
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+
+            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
 
             var actionResult = controller.Item(id);
 
@@ -104,21 +106,40 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
 
-            var persistentRecords = new[] {
+            var objectRequestRecords = new[] {
                 new ObjectRequestRecord {
                     AggregateId = id,
+                    UserId = 22
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
                     UserId = 22
                 }
             };
 
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(objectRequestRecords);
 
-            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+            var chatRecords = new[] {
+                new ChatRecord {
+                    ObjectRequestId = id
+                },
+                new ChatRecord {
+                    ObjectRequestId = Guid.NewGuid()
+                }
+            };
+
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+            chatRepositoryMock.SetRecords(chatRecords);
+
+            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
 
             var actionResult = controller.Item(id);
 
-            ((ViewResult) actionResult).Model.Should().Be(persistentRecords[0]);
+            ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
+                ObjectRequestRecord = objectRequestRecords[0],
+                ChatRecords = new List<ChatRecord> { chatRecords[0] }
+            });
         }
 
         [Test]
@@ -127,10 +148,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var persistentRecords = new ObjectRequestRecord[0];
 
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestController(null, repositoryMock.Object, null);
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+
+            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, null);
 
             var actionResult = controller.Item(id);
 
@@ -164,7 +187,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null, services);
 
             var actionResult = controller.Index();
 

@@ -8,11 +8,11 @@
 
 <ul class="objectrequestlist">
     @foreach (var objectRequestRecord in Model) {
-        <li class="objectrequestlist-objectrequest">
+        <li class="objectrequestlist-item">
             @Html.ActionLink(objectRequestRecord.Description, 
                              "Item", 
                              new { controller= "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId}, 
-                             new { @class = "objectrequestlist-objectrequestlink" })
+                             new { @class = "objectrequestlist-link" })
         </li>
     }
 </ul>

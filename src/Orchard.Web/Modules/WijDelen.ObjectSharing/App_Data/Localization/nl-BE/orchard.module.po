@@ -137,3 +137,13 @@ msgstr "Jouw aanvragen"
 #| msgid "Your Requests"
 msgid "Your Requests"
 msgstr "Jouw aanvragen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+#| msgid "Reactions"
+msgid "Reactions"
+msgstr "Reacties"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+#| msgid "There are no reactions yet."
+msgid "There are no reactions yet."
+msgstr "Er izjn nog geen reacties."

@@ -211,7 +211,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new ObjectRequestController(null, null, null);
+            var controller = new ChatController(null, null, null, null, null);
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;

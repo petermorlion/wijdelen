@@ -35,14 +35,14 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         [Authorize]
-        public ActionResult Index(Guid chatId) {
-            var chat = _chatRepository.Fetch(x => x.ChatId == chatId).SingleOrDefault();
+        public ActionResult Index(Guid id) {
+            var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
             if (chat == null)
             {
                 return new HttpNotFoundResult();
             }
 
-            var chatMessages = _chatMessageRepository.Fetch(x => x.ChatId == chatId).OrderBy(x => x.DateTime).ToList();
+            var chatMessages = _chatMessageRepository.Fetch(x => x.ChatId == id).OrderBy(x => x.DateTime).ToList();
             var objectRequest = _objectRequestRepository.Fetch(x => x.AggregateId == chat.ObjectRequestId).Single();
 
             var chatMessageViewModels = chatMessages.Select(x => new ChatMessageViewModel {
@@ -53,7 +53,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             return View(new ChatViewModel {
                 Messages = chatMessageViewModels,
-                ChatId = chatId,
+                ChatId = id,
                 ObjectDescription = objectRequest.Description,
                 RequestingUserName = chat.RequestingUserName
             });
