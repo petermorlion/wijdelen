@@ -21,7 +21,10 @@
         <legend>@T("A nice story to convince the group members")</legend>
         @Html.TextAreaFor(m => m.ExtraInfo)
         @Html.ValidationMessageFor(m => m.ExtraInfo)
-        <small id="remainCharacterText">@T("Just {0} more characters!", new HtmlString("<span id=\"remainingCharacterCount\">30</span>"))</small>
+        <div class="objectrequest-progressbar">
+            <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
+            <small id="remainCharacterText" class="objectrequest-progressbar-text">@T("Just {0} more characters!", new HtmlString("<span id=\"remainingCharacterCount\">30</span>"))</small>
+        </div>
     </fieldset>
 
     <button class="primaryAction">@T("Submit")</button>
