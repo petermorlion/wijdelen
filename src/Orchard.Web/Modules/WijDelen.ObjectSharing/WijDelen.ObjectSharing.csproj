@@ -144,6 +144,7 @@
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\ObjectRequestMailRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
     <Compile Include="MessageReceiverFilter.cs" />
+    <Compile Include="Models\ObjectRequestResponseRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ChatMessageViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />

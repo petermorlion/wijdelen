@@ -122,6 +122,7 @@
     <Compile Include="Domain\EventHandlers\ChatStarterTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailerTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGeneratorTests.cs" />
+    <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageReceiverTests.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageSenderTests.cs" />
     <Compile Include="MessageReceiverFilterTests.cs" />

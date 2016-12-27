@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Orchard.Data;
+﻿using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
