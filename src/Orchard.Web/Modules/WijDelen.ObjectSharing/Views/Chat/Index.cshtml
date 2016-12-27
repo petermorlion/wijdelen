@@ -4,7 +4,12 @@
     Layout.Title = T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription);
 }
 
-<h1>@T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription)</h1>
+@if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
+    <h1>@T("Your request for (a) {0}.", Model.ObjectDescription)</h1>
+}
+else {
+    <h1>@T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription)</h1>
+}
 
 <p>
     @T("Write a message here.")
@@ -17,13 +22,13 @@
     </p>
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("AddMessage", "Chat", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+@using (Html.BeginFormAntiForgeryPost(Url.Action("AddMessage", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
     @Html.HiddenFor(m => m.ChatId)
     <fieldset>
         @Html.TextBoxFor(m => m.NewMessage)
         @Html.ValidationMessageFor(m => m.NewMessage)
     </fieldset>
 
-    <button class="primaryAction">@T("Submit")</button>
+    <button>@T("Submit")</button>
+    <button class="button-outline">@T("We have a deal")</button>
 }

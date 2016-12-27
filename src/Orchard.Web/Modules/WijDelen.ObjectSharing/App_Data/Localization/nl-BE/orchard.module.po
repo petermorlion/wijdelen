@@ -124,6 +124,11 @@ msgid "{0} is looking for (a) {1}."
 msgstr "{0} zoekt (een) {1}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+#| msgid "Your request for (a) {0}."
+msgid "Your request for (a) {0}."
+msgstr "Jouw oproep voor (een) {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
 #| msgid "Write a message here."
 msgid "Write a message here."
 msgstr "Laat hier een boodschap achter."
@@ -132,6 +137,11 @@ msgstr "Laat hier een boodschap achter."
 #| msgid "Submit"
 msgid "Submit"
 msgstr "Versturen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+#| msgid "We have a deal"
+msgid "We have a deal"
+msgstr "We hebben een afspraak"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "Your Requests"
