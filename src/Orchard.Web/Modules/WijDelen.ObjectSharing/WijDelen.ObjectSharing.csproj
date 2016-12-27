@@ -269,7 +269,7 @@
     <Content Include="Views\ObjectRequestResponse\NoFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequestResponse\NotNowFor.cshtml" />
+    <Content Include="Views\ObjectRequestResponse\DenyForNow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Chat\Index.cshtml" />

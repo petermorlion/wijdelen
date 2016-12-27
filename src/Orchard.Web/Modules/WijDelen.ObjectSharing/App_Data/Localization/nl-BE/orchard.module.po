@@ -162,3 +162,23 @@ msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div styl
 #| msgid "chat-message-added-mail-text"
 msgid "chat-message-added-mail-text"
 msgstr "Hallo,\r\n\r\n{0} reageerde op je aanvraag voor (een) {1}:\r\n\r\n{2}\r\n\r\nReageren: {3}"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/DenyForNow.cshtml
+#| msgid "Thank you"
+msgid "Thank you"
+msgstr "Bedankt"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/DenyForNow.cshtml
+#| msgid "Thanks for answering"
+msgid "Thanks for answering"
+msgstr "Bedankt voor je antwoord"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
+#| msgid "Thank you"
+msgid "Thank you"
+msgstr "Bedankt"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
+#| msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
+msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
+msgstr "Bedankt voor je antwoord. We zullen je antwoord noteren en proberen dergelijke vragen niet langer te stellen in de toekomst."
