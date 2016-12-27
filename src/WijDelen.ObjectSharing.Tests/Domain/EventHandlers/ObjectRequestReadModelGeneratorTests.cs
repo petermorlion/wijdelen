@@ -30,7 +30,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Version = 0,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
-                UserId = 22
+                UserId = 22,
+                CreatedDateTime = new DateTime(2016, 12, 27)
             };
 
             handler.Handle(e);
@@ -40,6 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             newRecord.Description.Should().Be("Sneakers");
             newRecord.ExtraInfo.Should().Be("For sneaking");
             newRecord.UserId.Should().Be(22);
+            newRecord.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
         }
     }
 }

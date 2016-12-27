@@ -23,7 +23,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     Description = e.Description,
                     ExtraInfo = e.ExtraInfo,
                     Version = e.Version,
-                    UserId = e.UserId
+                    UserId = e.UserId,
+                    CreatedDateTime = e.CreatedDateTime
                 };
 
                 _repository.Create(newRecord);

@@ -24,6 +24,9 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 UserId = 22
             });
 
+            ((ObjectRequested) objectRequest.Events.Single()).CreatedDateTime.Should().NotBe(default(DateTime));
+            ((ObjectRequested) objectRequest.Events.Single()).CreatedDateTime.Kind.Should().Be(DateTimeKind.Utc);
+
             objectRequest.Version.Should().Be(0);
         }
 
@@ -33,7 +36,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             var previousEvent = new ObjectRequested {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
-                UserId = 22
+                UserId = 22,
+                CreatedDateTime = new DateTime(2016, 12, 27)
             };
 
             var objectRequest = new ObjectRequest(id, new [] {previousEvent});
@@ -43,6 +47,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Description.Should().Be("Sneakers");
             objectRequest.ExtraInfo.Should().Be("For sneaking");
             objectRequest.UserId.Should().Be(22);
+            objectRequest.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
         }
 
         [Test]

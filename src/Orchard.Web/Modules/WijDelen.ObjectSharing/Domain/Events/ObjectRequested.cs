@@ -1,4 +1,5 @@
-﻿using WijDelen.ObjectSharing.Domain.EventSourcing;
+﻿using System;
+using WijDelen.ObjectSharing.Domain.EventSourcing;
 
 namespace WijDelen.ObjectSharing.Domain.Events {
     public class ObjectRequested : VersionedEvent {
@@ -16,5 +17,10 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// The id of the user that requested the object.
         /// </summary>
         public int UserId { get; set; }
+        
+        /// <summary>
+        /// The DateTime when the object request was made.
+        /// </summary>
+        public DateTime CreatedDateTime { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard;
 using Orchard.Data;
@@ -72,7 +73,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [Authorize]
         public ActionResult Index() {
-            var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id);
+            var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(records);
         }
 

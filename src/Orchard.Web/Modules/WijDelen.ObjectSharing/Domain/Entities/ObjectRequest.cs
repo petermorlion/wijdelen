@@ -20,7 +20,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
-            Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId});
+            Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId, CreatedDateTime = DateTime.UtcNow});
         }
 
         public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
@@ -43,6 +43,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Description = objectRequested.Description;
             ExtraInfo = objectRequested.ExtraInfo;
             UserId = objectRequested.UserId;
+            CreatedDateTime = objectRequested.CreatedDateTime;
         }
 
         private void OnObjectRequestConfirmed(ObjectRequestConfirmed objectRequestConfirmed) {
@@ -71,6 +72,11 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         /// The id of the user that requested the object.
         /// </summary>
         public int UserId { get; private set; }
+
+        /// <summary>
+        /// The DateTime when the object request was made.
+        /// </summary>
+        public DateTime CreatedDateTime { get; private set; }
 
         public IEnumerable<int> ConfirmingUserIds => _confirmingUserIds;
         public IEnumerable<int> DenyingUserIds => _denyingUserIds;

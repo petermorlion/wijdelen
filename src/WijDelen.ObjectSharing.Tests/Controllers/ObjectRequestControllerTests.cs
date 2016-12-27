@@ -147,11 +147,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var persistentRecords = new[] {
                 new ObjectRequestRecord {
                     AggregateId = Guid.NewGuid(),
-                    UserId = 22
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2016, 11, 27)
                 },
                 new ObjectRequestRecord {
                     AggregateId = Guid.NewGuid(),
-                    UserId = 22
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2016, 12, 27)
                 },
                 new ObjectRequestRecord {
                     AggregateId = Guid.NewGuid(),
@@ -169,8 +171,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
             model.Should().NotBeNull();
             model.Count().Should().Be(2);
-            model.ToList()[0].Should().Be(persistentRecords[0]);
-            model.ToList()[1].Should().Be(persistentRecords[1]);
+            model.ToList()[0].Should().Be(persistentRecords[1]);
+            model.ToList()[1].Should().Be(persistentRecords[0]);
         }
     }
 }
