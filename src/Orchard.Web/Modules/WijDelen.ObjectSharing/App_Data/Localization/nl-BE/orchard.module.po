@@ -128,6 +128,11 @@ msgstr "{0} zoekt (een) {1}."
 msgid "Write a message here."
 msgstr "Laat hier een boodschap achter."
 
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+#| msgid "Submit"
+msgid "Submit"
+msgstr "Versturen"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "Your Requests"
 msgid "Your Requests"
