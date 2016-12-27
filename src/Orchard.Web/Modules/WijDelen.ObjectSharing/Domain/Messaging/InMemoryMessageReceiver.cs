@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace WijDelen.ObjectSharing.Domain.Messaging {
     /// <summary>
-    /// Message receiver that receives (i.e. reads) messages from the Orchard SQL database. Goes hand in hand with the InMemoryMessageSender.
+    /// Message receiver that receives messages. Goes hand in hand with the InMemoryMessageSender. Uses .NET events.
     /// </summary>
     public class InMemoryMessageReceiver : IMessageReceiver, IDisposable {
         private readonly InMemoryMessageSender _messageSender;
