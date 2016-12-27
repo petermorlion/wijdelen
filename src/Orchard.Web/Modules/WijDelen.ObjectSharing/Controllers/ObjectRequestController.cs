@@ -47,6 +47,10 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some extra info."));
             }
 
+            if (!string.IsNullOrWhiteSpace(viewModel.ExtraInfo) && viewModel.ExtraInfo.Length < 30) {
+                ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some more extra info (at least 30 characters)."));
+            }
+
             if (!ModelState.IsValid) {
                 return View(viewModel);
             }

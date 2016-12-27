@@ -21,3 +21,14 @@ new autoComplete({
         xhr.send();
     }
 });
+
+var element = document.getElementById('ExtraInfo');
+element.oninput = function() {
+    var remainingCharacterCountElement = document.getElementById('remainingCharacterCount');
+    var remainCharacterTextElement = document.getElementById('remainCharacterText');
+
+    var remainingCharacters = 30 - element.textLength;
+
+    remainCharacterTextElement.style.visibility = remainingCharacters > 0 ? 'visible' : 'hidden';
+    remainingCharacterCountElement.innerText = remainingCharacters;
+};

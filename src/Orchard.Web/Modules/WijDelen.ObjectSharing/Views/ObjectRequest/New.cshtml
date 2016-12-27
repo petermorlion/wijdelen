@@ -21,6 +21,7 @@
         <legend>@T("A nice story to convince the group members")</legend>
         @Html.TextAreaFor(m => m.ExtraInfo)
         @Html.ValidationMessageFor(m => m.ExtraInfo)
+        <small id="remainCharacterText">@T("Just {0} more characters!", new HtmlString("<span id=\"remainingCharacterCount\">30</span>"))</small>
     </fieldset>
 
     <button class="primaryAction">@T("Submit")</button>

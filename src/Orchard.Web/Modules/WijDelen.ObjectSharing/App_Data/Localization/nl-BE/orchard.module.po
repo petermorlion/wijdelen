@@ -24,6 +24,11 @@ msgid "A nice story to convince the group members"
 msgstr "Een tof verhaal om je groepsleden te overtuigen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "Just {0} more characters!"
+msgid "Just {0} more characters!"
+msgstr "Nog {0} karakters te gaan!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
 #| msgid "Submit"
 msgid "Submit"
 msgstr "Versturen"
@@ -62,6 +67,11 @@ msgstr "Gelieve op te geven wat je wil lenen."
 #| msgid "Please provide some extra info."
 msgid "Please provide some extra info."
 msgstr "Gelieve een beetje extra informatie te geven."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Please provide some more extra info (at least 30 characters)."
+msgid "Please provide some more extra info (at least 30 characters)."
+msgstr "Gelieve een beetje meer extra informatie te geven (ten minste 30 karakters)."
 
 #: wijdelen.objectsharing.adminmenu
 #| msgid "Synonyms"
