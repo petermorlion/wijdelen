@@ -141,7 +141,6 @@ msgstr "Reacties"
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
 #| msgid "There are no reactions yet."
 msgid "There are no reactions yet."
-msgstr "There are no reactions yet."
 msgstr "Er zijn nog geen reacties."
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
