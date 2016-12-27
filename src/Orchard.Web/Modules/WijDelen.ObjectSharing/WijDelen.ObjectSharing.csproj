@@ -187,7 +187,7 @@
     <Compile Include="Infrastructure\Queries\IFindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
-    <Compile Include="LoggedInRedirect.cs" />
+    <Compile Include="LogOutRedirect.cs" />
     <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ChatMessageRecord.cs" />
