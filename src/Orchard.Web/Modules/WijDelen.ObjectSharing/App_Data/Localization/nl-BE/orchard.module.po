@@ -1,7 +1,7 @@
 ﻿#: ~/Modules/WijDelen.UserImport/Module.txt
 #| msgid "Description"
 msgid "The core of WijDelen Groups, allowing users to request and share objects in their groups."
-msgstr "De kern van WijDelen Groups, waarmee gebruikers items kunnen aanvragen en delen binnen hun groepen."
+msgstr "De kern van WijDelen Groups, waarmee gebruikers items kunnen oproepen en delen binnen hun groepen."
 
 #: ~/Modules/WijDelen.UserImport/Module.txt
 #| msgid "WijDelen.UserImport.Description"
@@ -101,7 +101,7 @@ msgstr "Bedankt!"
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #| msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
 msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
-msgstr "Bedankt voor je antwoord. We zullen het noteren en in proberen je in de toekomst geen gelijkaardige aanvragen meer door te sturen."
+msgstr "Bedankt voor je antwoord. We zullen het noteren en in proberen je in de toekomst geen gelijkaardige oproepen meer door te sturen."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/YesFor.cshtml
 #| msgid "Nice!"
@@ -146,12 +146,12 @@ msgstr "We hebben een afspraak"
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "Your Requests"
 msgid "Your Requests"
-msgstr "Jouw aanvragen"
+msgstr "Jouw oproepen"
 
 #: wijdelen.objectsharing.menuprovider
 #| msgid "Your Requests"
 msgid "Your Requests"
-msgstr "Jouw aanvragen"
+msgstr "Jouw oproepen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
 #| msgid "Reactions"
@@ -166,17 +166,17 @@ msgstr "Er zijn nog geen reacties."
 #: wijdelen.objectsharing.infrastructure.mailgunservice
 #| msgid "{0} reacted on your request for a {1}."
 msgid "{0} reacted on your request for a {1}."
-msgstr "{0} heeft gereageerd op je aanvraag voor (een) {1}."
+msgstr "{0} heeft gereageerd op je oproep voor (een) {1}."
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
 #| msgid "chat-message-added-mail-html"
 msgid "chat-message-added-mail-html"
-msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"http://wijdelen.redstar.be/Themes/WijDelen.Groups/Content/navigation-top-logo-belgium.png\"></div><div style=\"margin-top:10px;\"><p>Hallo!</p><p>{0} reageerde op je aanvraag voor (een) {1}:</p></div><div style=\"background-color:f5f5f5; padding: 10px; border-radius: 5px; border: 1px solid #bbb\"><p>{2}</p></div><div><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"{3}\" style=\"background-color: #46d100;color: #fff;text-decoration: none;padding: 10px; margin-right: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Reageren</a></p></div></body></html>"
+msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"http://wijdelen.redstar.be/Themes/WijDelen.Groups/Content/navigation-top-logo-belgium.png\"></div><div style=\"margin-top:10px;\"><p>Hallo!</p><p>{0} reageerde op je oproep voor (een) {1}:</p></div><div style=\"background-color:f5f5f5; padding: 10px; border-radius: 5px; border: 1px solid #bbb\"><p>{2}</p></div><div><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"{3}\" style=\"background-color: #46d100;color: #fff;text-decoration: none;padding: 10px; margin-right: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Reageren</a></p></div></body></html>"
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
 #| msgid "chat-message-added-mail-text"
 msgid "chat-message-added-mail-text"
-msgstr "Hallo,\r\n\r\n{0} reageerde op je aanvraag voor (een) {1}:\r\n\r\n{2}\r\n\r\nReageren: {3}"
+msgstr "Hallo,\r\n\r\n{0} reageerde op je oproep voor (een) {1}:\r\n\r\n{2}\r\n\r\nReageren: {3}"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/DenyForNow.cshtml
 #| msgid "Thank you"
