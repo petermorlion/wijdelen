@@ -269,9 +269,6 @@
     <Content Include="Views\ObjectRequestResponse\NoFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequestResponse\YesFor.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ObjectRequestResponse\NotNowFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
