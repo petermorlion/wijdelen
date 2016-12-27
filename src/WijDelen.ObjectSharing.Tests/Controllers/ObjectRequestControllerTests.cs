@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
@@ -69,7 +70,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingIndexForWrongUser_ShouldReturnUnauthorized() {
+        public void WhenGettingItemForWrongUser_ShouldReturnUnauthorized() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -89,13 +90,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var controller = new ObjectRequestController(null, repositoryMock.Object, services);
 
-            var actionResult = controller.Index(id);
+            var actionResult = controller.Item(id);
 
             actionResult.Should().BeOfType<HttpUnauthorizedResult>();
         }
 
         [Test]
-        public void WhenGettingIndex_ShouldReturnView() {
+        public void WhenGettingItem_ShouldReturnView() {
             var id = Guid.NewGuid();
 
             var userMock = new Mock<IUser>();
@@ -115,13 +116,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var controller = new ObjectRequestController(null, repositoryMock.Object, services);
 
-            var actionResult = controller.Index(id);
+            var actionResult = controller.Item(id);
 
             ((ViewResult) actionResult).Model.Should().Be(persistentRecords[0]);
         }
 
         [Test]
-        public void WhenGettingIndexForUnknownId_ShouldReturnNotFound() {
+        public void WhenGettingItemForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
             var persistentRecords = new ObjectRequestRecord[0];
@@ -131,9 +132,45 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var controller = new ObjectRequestController(null, repositoryMock.Object, null);
 
-            var actionResult = controller.Index(id);
+            var actionResult = controller.Item(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingIndex_ShouldReturnView() {
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 23
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, services);
+
+            var actionResult = controller.Index();
+
+            var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
+            model.Should().NotBeNull();
+            model.Count().Should().Be(2);
+            model.ToList()[0].Should().Be(persistentRecords[0]);
+            model.ToList()[1].Should().Be(persistentRecords[1]);
         }
     }
 }

@@ -70,6 +70,12 @@ namespace WijDelen.ObjectSharing.Controllers {
             return View(record);
         }
 
+        [Authorize]
+        public ActionResult Index() {
+            var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id);
+            return View(records);
+        }
+
         public Localizer T { get; set; }
     }
 }
