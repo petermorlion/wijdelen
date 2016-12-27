@@ -52,11 +52,11 @@ namespace WijDelen.ObjectSharing.Controllers {
             var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo, currentUser.Id);
             _requestObjectCommandHandler.Handle(command);
 
-            return RedirectToAction("Index", new {id = command.ObjectRequestId});
+            return RedirectToAction("Item", new {id = command.ObjectRequestId});
         }
 
         [Authorize]
-        public ActionResult Index(Guid id) {
+        public ActionResult Item(Guid id) {
             var record = _repository.Get(x => x.AggregateId == id);
 
             if (record == null) {
