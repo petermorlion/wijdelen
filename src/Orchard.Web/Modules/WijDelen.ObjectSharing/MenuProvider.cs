@@ -2,7 +2,6 @@
 using Orchard.ContentManagement;
 using Orchard.Core.Title.Models;
 using Orchard.Localization;
-using Orchard.Security;
 using Orchard.UI.Navigation;
 
 namespace WijDelen.ObjectSharing {
@@ -24,6 +23,10 @@ namespace WijDelen.ObjectSharing {
                     T("New Request"), 
                     "10", 
                     item => item.Action("New", "ObjectRequest", new {area = "WijDelen.ObjectSharing"}));
+                builder.Add(
+                    T("Your Requests"),
+                    "20",
+                    item => item.Action("Index", "ObjectRequest", new { area = "WijDelen.ObjectSharing" }));
             }
         }
     }

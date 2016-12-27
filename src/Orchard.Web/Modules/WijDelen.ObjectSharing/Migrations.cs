@@ -113,5 +113,15 @@ namespace WijDelen.ObjectSharing {
 
             return 5;
         }
+
+        public int UpdateFrom5() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AddColumn<DateTime>("CreatedDateTime")
+            );
+
+            SchemaBuilder.ExecuteSql($"UPDATE {string.Concat(SchemaBuilder.FormatPrefix(SchemaBuilder.FeaturePrefix), typeof(ObjectRequestRecord).Name)} SET CreatedDateTime = GETUTCDATE()");
+
+            return 6;
+        }
     }
 }

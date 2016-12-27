@@ -1,13 +1,15 @@
-﻿@model WijDelen.ObjectSharing.Models.ObjectRequestRecord
+﻿@model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
 
 @{
-    Layout.Title = Model.Description;
+    Layout.Title = T("Your Requests");
 }
 
-<h1>@Model.Description</h1>
+<h1>@T("Your Requests")</h1>
 
-@Model.ExtraInfo
-
-<p>
-    Dit is een item die je hebt aangevraagd. Hier komt later een overzicht van antwoorden van mensen binnen je groep, enz.
-</p>
+<ul class="objectrequestlist">
+    @foreach (var objectRequestRecord in Model) {
+        <li class="objectrequestlist-objectrequest">
+            @Html.ActionLink(objectRequestRecord.Description, "Item", new {area = "WijDelen.ObjectRequests", id = objectRequestRecord.AggregateId}, new { @class = "objectrequestlist-objectrequestlink" })
+        </li>
+    }
+</ul>
