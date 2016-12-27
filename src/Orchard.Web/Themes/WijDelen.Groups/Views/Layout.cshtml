@@ -61,31 +61,23 @@
             </div>
         </div>
     }
+    
+    <div class="row">
+        <div class="column">
+            @if (Model.Content != null)
+            {
+                @Display(Model.Content)
+            }
+        </div>
+    </div>
 
     <div class="row">
         <div class="column">
-            <div class="row">
-                <div class="column">
-                    @if (Model.Content != null) {
-                        @Display(Model.Content)
-                    }
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    @if (Model.Header != null) {
-                        @Display(Model.Header)
-                    }
-                </div>
-            </div>
+            @if (Model.Header != null)
+            {
+                @Display(Model.Header)
+            }
         </div>
-
-        @if (Model.AsideFirst != null) {
-            <div class="column column-25">
-                @Display(Model.AsideFirst)
-            </div>
-        }
-
     </div>
 
     @if (Model.Footer != null) {

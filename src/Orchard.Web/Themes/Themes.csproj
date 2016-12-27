@@ -266,6 +266,9 @@
     <Content Include="WijDelen.Groups\node_modules\milligram-less\package.json" />
     <Content Include="WijDelen.Groups\node_modules\milligram-less\readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Views\Content.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
