@@ -159,9 +159,9 @@ msgid "We have a deal"
 msgstr "We hebben een afspraak"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
-#| msgid "Your Requests"
-msgid "Your Requests"
-msgstr "Jouw oproepen"
+#| msgid "My Requests"
+msgid "My Requests"
+msgstr "Mijn oproepen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "You haven't made any requests yet."
@@ -169,9 +169,9 @@ msgid "You haven't made any requests yet."
 msgstr "Je hebt nog geen oproepen gedaan."
 
 #: wijdelen.objectsharing.menuprovider
-#| msgid "Your Requests"
-msgid "Your Requests"
-msgstr "Jouw oproepen"
+#| msgid "My Requests"
+msgid "My Requests"
+msgstr "Mijn oproepen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
 #| msgid "Reactions"
