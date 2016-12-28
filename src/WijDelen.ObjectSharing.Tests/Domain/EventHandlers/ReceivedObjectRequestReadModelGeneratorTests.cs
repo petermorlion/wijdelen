@@ -45,5 +45,30 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             record.ExtraInfo.Should().Be("For sneaking");
             record.ReceivedDateTime.Should().Be(e.SentDateTime);
         }
+
+        [Test]
+        public void WhenObjectRequestConfirmed_RemoveRecord() {
+            var repositoryMock = new Mock<IRepository<ReceivedObjectRequestRecord>>();
+            var objectRequestId = Guid.NewGuid();
+
+            var receivedObjectRequestRecord = new ReceivedObjectRequestRecord {
+                UserId = 22,
+                ObjectRequestId = objectRequestId
+            };
+            repositoryMock.SetRecords(new[] {
+                receivedObjectRequestRecord
+            });
+
+            var e = new ObjectRequestConfirmed {
+                SourceId = objectRequestId,
+                ConfirmingUserId = 22
+            };
+
+            var handler = new ReceivedObjectRequestReadModelGenerator(repositoryMock.Object, null);
+
+            handler.Handle(e);
+
+            repositoryMock.Verify(x => x.Delete(receivedObjectRequestRecord));
+        }
     }
 }

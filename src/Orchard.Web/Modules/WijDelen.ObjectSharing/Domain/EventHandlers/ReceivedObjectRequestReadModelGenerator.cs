@@ -32,7 +32,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         }
 
         public void Handle(ObjectRequestConfirmed e) {
-            throw new System.NotImplementedException();
+            var record = _repository.Get(x => x.UserId == e.ConfirmingUserId && x.ObjectRequestId == e.SourceId);
+            _repository.Delete(record);
         }
 
         public void Handle(ObjectRequestDenied e) {
