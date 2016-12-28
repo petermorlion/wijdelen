@@ -266,9 +266,6 @@
     <Content Include="Views\Archetypes\EditorTemplates\EditArchetypedSynonymViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ObjectRequestResponse\NoFor.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ObjectRequestResponse\DenyForNow.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +273,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ObjectRequest\Item.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ObjectRequestResponse\Deny.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
