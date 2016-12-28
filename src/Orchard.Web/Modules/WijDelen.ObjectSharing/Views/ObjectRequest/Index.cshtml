@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
+﻿@using WijDelen.ObjectSharing.ViewModels
+@model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
 
 @{
     Layout.Title = T("My Requests");
@@ -9,16 +10,22 @@
 <ul class="objectrequestlist">
     @if (Model.Any()) {
         foreach (var objectRequestRecord in Model) {
-             <li class="objectrequestlist-item">
-                 @Html.ActionLink(objectRequestRecord.Description,
-                     "Item",
-                     new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId},
-                     new {@class = "objectrequestlist-link"})
-             </li>
-         }
+            <li class="objectrequestlist-item">
+                @Html.ActionLink(objectRequestRecord.Description,
+                    "Item",
+                    new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId},
+                    new {@class = "objectrequestlist-link"})
+            </li>
+        }
     }
     else {
-        @T("You haven't made any requests yet.")
+        <p>
+            @T("You haven't made any requests yet. Fill in the form below and get started!")
+        </p>
+
+        {
+            Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
+        }
     }
 
 </ul>

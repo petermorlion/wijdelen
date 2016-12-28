@@ -13,27 +13,27 @@ msgstr "Biedt de mogelijkheid aan gebruikers om items aan te vragen en te delen 
 msgid "Request object"
 msgstr "Een oproep doen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "I would like to borrow the following item"
 msgid "I would like to borrow the following item"
 msgstr "Ik wil graag het volgende lenen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "A nice story to convince the group members"
 msgid "A nice story to convince the group members"
 msgstr "Een tof verhaal om je groepsleden te overtuigen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "Just {0} more characters!"
 msgid "Just {0} more characters!"
 msgstr "Nog {0} karakters te gaan!"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "Great story!"
 msgid "Great story!"
 msgstr "Tof verhaal!"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "Submit"
 msgid "Submit"
 msgstr "Versturen"
@@ -164,9 +164,9 @@ msgid "My Requests"
 msgstr "Mijn oproepen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
-#| msgid "You haven't made any requests yet."
-msgid "You haven't made any requests yet."
-msgstr "Je hebt nog geen oproepen gedaan."
+#| msgid "You haven't made any requests yet. Fill in the form below and get started!"
+msgid "You haven't made any requests yet. Fill in the form below and get started!"
+msgstr "Je hebt nog geen oproepen gedaan. Vul de velden hieronder in en ga van start!"
 
 #: wijdelen.objectsharing.menuprovider
 #| msgid "My Requests"

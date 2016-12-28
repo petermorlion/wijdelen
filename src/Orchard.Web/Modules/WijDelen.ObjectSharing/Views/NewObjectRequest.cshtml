@@ -1,0 +1,29 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel
+
+@{
+    Style.Include("auto-complete.css");
+    Script.Include("auto-complete.js").AtFoot();
+    Script.Include("ObjectRequest/new.js").AtFoot();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <legend>@T("I would like to borrow the following item")</legend>
+        @Html.TextBoxFor(m => m.Description, new { data_auto_complete = "true" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </fieldset>
+
+    <fieldset>
+        <legend>@T("A nice story to convince the group members")</legend>
+        @Html.TextAreaFor(m => m.ExtraInfo)
+        @Html.ValidationMessageFor(m => m.ExtraInfo)
+        <div class="objectrequest-progressbar">
+            <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
+            <small id="remainCharacterText" class="objectrequest-progressbar-text objectrequest-progressbar-text-remaining">@T("Just {0} more characters!", new HtmlString("<span id=\"remainingCharacterCount\">30</span>"))</small>
+            <small id="enoughCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-enough">@T("Great story!")</small>
+        </div>
+    </fieldset>
+
+    <button class="primaryAction">@T("Submit")</button>
+}
