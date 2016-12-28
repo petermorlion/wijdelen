@@ -1,4 +1,5 @@
-﻿using WijDelen.ObjectSharing.Domain.EventSourcing;
+﻿using System;
+using WijDelen.ObjectSharing.Domain.EventSourcing;
 
 namespace WijDelen.ObjectSharing.Domain.Events {
     public class ObjectRequestMailCreated : VersionedEvent
@@ -17,5 +18,7 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// Extra info as to why the user needs it, what he/she plans to do with it, etc.
         /// </summary>
         public string ExtraInfo { get; set; }
+
+        public Guid ObjectRequestId { get; set; }
     }
 }

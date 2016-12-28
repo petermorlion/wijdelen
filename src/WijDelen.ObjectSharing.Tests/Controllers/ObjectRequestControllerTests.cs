@@ -56,7 +56,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var controller = new ObjectRequestController(commandHandlerMock.Object, null, null, services);
             var viewModel = new NewObjectRequestViewModel {
                 Description = "Sneakers",
-                ExtraInfo = "For sneaking"
+                ExtraInfo = "For sneaking.........................."
             };
 
             var actionResult = controller.New(viewModel);
@@ -65,7 +65,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
 
             command.Description.Should().Be("Sneakers");
-            command.ExtraInfo.Should().Be("For sneaking");
+            command.ExtraInfo.Should().Be("For sneaking..........................");
             command.UserId.Should().Be(22);
         }
 

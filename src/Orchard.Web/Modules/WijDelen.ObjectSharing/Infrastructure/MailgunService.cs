@@ -5,6 +5,7 @@ using Orchard.Localization;
 using RestSharp;
 using RestSharp.Authenticators;
 using WijDelen.ObjectSharing.Domain.Entities;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class MailgunService : IMailService {
@@ -17,7 +18,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         }
 
         public Localizer T { get; set; }
-        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params string[] emailAddresses) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params UserEmail[] userEmails) {
             var client = new RestClient
             {
                 BaseUrl = new Uri("https://api.mailgun.net/v3"),
@@ -29,8 +30,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             request.Resource = "{domain}/messages";
             request.AddParameter("from", "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>");
 
-            foreach (var emailAddress in emailAddresses) {
-                request.AddParameter("to", $"{emailAddress}");
+            foreach (var userEmail in userEmails) {
+                request.AddParameter("to", $"{userEmail.Email}");
             }
 
             request.AddParameter("subject", T("Do you have a {0}?", description).ToString());
@@ -48,7 +49,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
             client.Execute(request);
 
-            objectRequestMail.MarkAsSent(emailAddresses, htmlBody);
+            objectRequestMail.MarkAsSent(userEmails, htmlBody);
         }
 
         public void SendChatMessageAddedMail(string fromUserName, string toUserName, string description, string toEmailAddress, Guid chatId, string message) {

@@ -169,6 +169,7 @@
     <Compile Include="Domain\Messaging\InMemoryMessageReceiver.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageSender.cs" />
     <Compile Include="Domain\Messaging\SendingMessageEventArgs.cs" />
+    <Compile Include="Domain\ValueTypes\UserEmail.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />
     <Compile Include="Infrastructure\MailgunService.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepository.cs" />

@@ -15,9 +15,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             foreach (var recipient in objectRequestMailSent.Recipients) {
                 var objectRequestMailRecord = new ObjectRequestMailRecord {
                     AggregateId = objectRequestMailSent.SourceId,
-                    EmailAddress = recipient,
+                    EmailAddress = recipient.Email,
                     EmailHtml = objectRequestMailSent.EmailHtml,
-                    RequestingUserId = objectRequestMailSent.RequestingUserId
+                    RequestingUserId = objectRequestMailSent.RequestingUserId,
+                    ReceivingUserId = recipient.UserId,
+                    ObjectRequestId = objectRequestMailSent.ObjectRequestId
                 };
 
                 _repository.Update(objectRequestMailRecord);

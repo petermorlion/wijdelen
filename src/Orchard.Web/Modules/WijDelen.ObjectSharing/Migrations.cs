@@ -136,5 +136,17 @@ namespace WijDelen.ObjectSharing {
 
             return 7;
         }
+
+        public int UpdateFrom7() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
+                .AddColumn<int>("ReceivingUserId")
+            );
+
+            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
+                .AddColumn<Guid>("ObjectRequestId")
+            );
+
+            return 8;
+        }
     }
 }

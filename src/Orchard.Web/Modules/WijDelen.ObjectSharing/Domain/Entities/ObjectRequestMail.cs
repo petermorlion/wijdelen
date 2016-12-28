@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Domain.Entities
 {
@@ -15,19 +16,20 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             Handles<ObjectRequestMailSent>(OnObjectRequestMailSent);
         }
 
-        public ObjectRequestMail(Guid id, int userId, string description, string extraInfo) : this(id) {
-            Update(new ObjectRequestMailCreated { UserId = userId, Description = description, ExtraInfo = extraInfo });
+        public ObjectRequestMail(Guid id, int userId, string description, string extraInfo, Guid objectRequestId) : this(id) {
+            Update(new ObjectRequestMailCreated { UserId = userId, Description = description, ExtraInfo = extraInfo, ObjectRequestId = objectRequestId });
         }
 
         public ObjectRequestMail(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
             LoadFrom(history);
         }
 
-        public void MarkAsSent(IEnumerable<string> recipients, string emailHtml) {
+        public void MarkAsSent(IEnumerable<UserEmail> recipients, string emailHtml) {
             Update(new ObjectRequestMailSent {
                 Recipients = recipients,
                 EmailHtml = emailHtml,
-                RequestingUserId = UserId
+                RequestingUserId = UserId,
+                ObjectRequestId = ObjectRequestId
             });
         }
 
@@ -35,6 +37,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities
             UserId = objectRequestMailCreated.UserId;
             Description = objectRequestMailCreated.Description;
             ExtraInfo = objectRequestMailCreated.ExtraInfo;
+            ObjectRequestId = objectRequestMailCreated.ObjectRequestId;
         }
 
         private void OnObjectRequestMailSent(ObjectRequestMailSent objectRequestMailSent) {
@@ -50,7 +53,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities
         /// <summary>
         /// The recipients of this mail.
         /// </summary>
-        public IEnumerable<string> Recipients { get; private set; }
+        public IEnumerable<UserEmail> Recipients { get; private set; }
 
         /// <summary>
         /// A short description of the object
@@ -63,5 +66,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities
         public string ExtraInfo { get; private set; }
 
         public ObjectRequestMailStatus Status { get; private set; }
+
+        public Guid ObjectRequestId { get; private set; }
     }
 }

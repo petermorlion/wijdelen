@@ -149,7 +149,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             result.Should().BeOfType<RedirectToRouteResult>();
             result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
-            result.As<RedirectToRouteResult>().RouteValues["chatId"].Should().Be(chatId);
+            result.As<RedirectToRouteResult>().RouteValues["id"].Should().Be(chatId);
             command.ChatId.Should().Be(chatId);
             command.UserId.Should().Be(23);
             command.Message.Should().Be("Hello");

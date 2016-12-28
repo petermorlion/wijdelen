@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
-using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -18,16 +17,18 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     public class ObjectRequestMailerTests {
         [Test]
         public void WhenObjectIsRequested() {
+            var objectRequestId = Guid.NewGuid();
             var objectRequested = new ObjectRequested {
                 UserId = 3,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
-                SourceId = Guid.NewGuid()
+                SourceId = objectRequestId
             };
 
             ObjectRequestMail persistedMail = null;
 
             var otherUserMock = new Mock<IUser>();
+            otherUserMock.Setup(x => x.Id).Returns(22);
             otherUserMock.Setup(x => x.Email).Returns("peter.morlion@gmail.com");
 
             var requestingUserMock = new Mock<IUser>();
@@ -58,8 +59,17 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             persistedMail.UserId.Should().Be(3);
             persistedMail.Description.Should().Be("Sneakers");
             persistedMail.ExtraInfo.Should().Be("For sneaking");
+            persistedMail.ObjectRequestId.Should().Be(objectRequestId);
 
-            mailServiceMock.Verify(x => x.SendObjectRequestMail("Jos", "Group", objectRequested.SourceId, "Sneakers", "For sneaking", persistedMail, "peter.morlion@gmail.com"));
+            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                "Jos", 
+                "Group",
+                objectRequestId,
+                "Sneakers", 
+                "For sneaking", 
+                persistedMail, 
+                new UserEmail {UserId = 22, Email = "peter.morlion@gmail.com"}));
+
             repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
         }
     }

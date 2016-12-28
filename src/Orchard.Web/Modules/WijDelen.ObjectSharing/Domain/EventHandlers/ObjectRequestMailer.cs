@@ -5,6 +5,7 @@ using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -37,12 +38,13 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 Guid.NewGuid(),
                 objectRequested.UserId,
                 objectRequested.Description,
-                objectRequested.ExtraInfo);
+                objectRequested.ExtraInfo,
+                objectRequested.SourceId);
 
             var requestingUserName = _getUserByIdQuery.GetResult(objectRequested.UserId).UserName;
             var groupName = _groupService.GetGroupNameForUser(objectRequested.UserId);
             var otherUsers = _groupService.GetOtherUsersInGroup(objectRequested.UserId);
-            var emailAddresses = otherUsers.Select(x => x.Email).ToArray();
+            var userEmails = otherUsers.Select(x => new UserEmail { UserId = x.Id, Email = x.Email }).ToArray();
 
             _mailService.SendObjectRequestMail(
                 requestingUserName,
@@ -51,7 +53,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.Description,
                 objectRequested.ExtraInfo,
                 objectRequestMail,
-                emailAddresses);
+                userEmails);
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
