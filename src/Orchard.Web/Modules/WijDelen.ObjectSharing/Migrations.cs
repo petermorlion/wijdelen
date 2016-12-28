@@ -15,7 +15,7 @@ namespace WijDelen.ObjectSharing {
                 .Column<Guid>("AggregateId", column => column.NotNull())
                 .Column<string>("AggregateType", column => column.NotNull())
                 .Column<int>("Version", column => column.NotNull())
-                .Column<string>("Payload", column => column.NotNull())
+                .Column<string>("Payload", column => column.NotNull().Unlimited())
                 .Column<string>("CorrelationId", column => column.NotNull())
             );
 
@@ -26,6 +26,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("ExtraInfo", column => column.NotNull())
                     .Column<int>("Version", column => column.NotNull())
                     .Column<int>("UserId", column => column.NotNull())
+                    .Column<DateTime>("CreatedDateTime")
             );
 
             ContentDefinitionManager.AlterPartDefinition("Archetype", builder => 
@@ -62,32 +63,17 @@ namespace WijDelen.ObjectSharing {
                     .Creatable()
                     .Listable());
 
-            return 1;
-        }
-
-        public int UpdateFrom1() {
-            SchemaBuilder.AlterTable(typeof(EventRecord).Name, table => table
-                .AlterColumn("Payload", column => column
-                    .WithType(DbType.String)
-                    .Unlimited())
-            );
-
-            return 2;
-        }
-
-        public int UpdateFrom2() {
             SchemaBuilder.CreateTable(typeof(ObjectRequestMailRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("AggregateId", column => column.NotNull())
                     .Column<string>("EmailAddress", column => column.NotNull().WithLength(255))
                     .Column<string>("EmailHtml", column => column.NotNull().Unlimited())
                     .Column<int>("RequestingUserId", column => column.NotNull())
+                    .Column<int>("ReceivingUserId")
+                    .Column<Guid>("ObjectRequestId")
+                    .Column<DateTime>("SentDateTime")
             );
 
-            return 3;
-        }
-
-        public int UpdateFrom3() {
             SchemaBuilder.CreateTable(typeof(ChatMessageRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("ChatId", column => column.NotNull())
@@ -97,10 +83,6 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("Message", column => column.NotNull().Unlimited())
             );
 
-            return 4;
-        }
-
-        public int UpdateFrom4() {
             SchemaBuilder.CreateTable(typeof(ChatRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("ChatId", column => column.NotNull())
@@ -111,52 +93,12 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("ConfirmingUserName", column => column.NotNull())
             );
 
-            return 5;
-        }
-
-        public int UpdateFrom5() {
-            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
-                .AddColumn<DateTime>("CreatedDateTime")
-            );
-
-            SchemaBuilder.ExecuteSql($"UPDATE {string.Concat(SchemaBuilder.FormatPrefix(SchemaBuilder.FeaturePrefix), typeof(ObjectRequestRecord).Name)} " +
-                                     $"SET CreatedDateTime = GETUTCDATE() " +
-                                     $"WHERE CreatedDateTime IS NULL");
-
-            return 6;
-        }
-
-        public int UpdateFrom6() {
             SchemaBuilder.CreateTable(typeof(ObjectRequestResponseRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("ObjectRequestId", column => column.NotNull())
                     .Column<int>("UserId", column => column.NotNull())
                     .Column<string>("Response", column => column.NotNull().WithLength(50))
             );
-
-            return 7;
-        }
-
-        public int UpdateFrom7() {
-            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
-                .AddColumn<int>("ReceivingUserId")
-            );
-
-            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
-                .AddColumn<Guid>("ObjectRequestId")
-            );
-
-            return 8;
-        }
-
-        public int UpdateFrom8() {
-            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
-                .AddColumn<DateTime>("SentDateTime")
-            );
-
-            SchemaBuilder.ExecuteSql($"UPDATE {string.Concat(SchemaBuilder.FormatPrefix(SchemaBuilder.FeaturePrefix), typeof(ObjectRequestMailRecord).Name)} " +
-                                     $"SET SentDateTime = GETUTCDATE() " +
-                                     $"WHERE SentDateTime IS NULL");
 
             SchemaBuilder.CreateTable(typeof(ReceivedObjectRequestRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
