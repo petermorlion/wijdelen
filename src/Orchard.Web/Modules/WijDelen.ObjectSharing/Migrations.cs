@@ -148,5 +148,17 @@ namespace WijDelen.ObjectSharing {
 
             return 8;
         }
+
+        public int UpdateFrom8() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestMailRecord).Name, table => table
+                .AddColumn<DateTime>("SentDateTime")
+            );
+
+            SchemaBuilder.ExecuteSql($"UPDATE {string.Concat(SchemaBuilder.FormatPrefix(SchemaBuilder.FeaturePrefix), typeof(ObjectRequestMailRecord).Name)} " +
+                                     $"SET SentDateTime = GETUTCDATE() " +
+                                     $"WHERE SentDateTime IS NULL");
+
+            return 9;
+        }
     }
 }

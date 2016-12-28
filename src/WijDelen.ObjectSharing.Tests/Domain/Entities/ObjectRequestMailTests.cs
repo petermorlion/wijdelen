@@ -90,8 +90,11 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 Recipients = new List<UserEmail> { userEmail1, userEmail2 },
                 EmailHtml = "HTML",
                 RequestingUserId = 22,
-                ObjectRequestId = objectRequestId
-            });
+                ObjectRequestId = objectRequestId,
+                SentDateTime = DateTime.UtcNow
+            }, options => options
+                .Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation, 1000))
+                .When(info => info.SelectedMemberPath.EndsWith("SentDateTime")));
 
             objectRequestMail.Version.Should().Be(1);
         }

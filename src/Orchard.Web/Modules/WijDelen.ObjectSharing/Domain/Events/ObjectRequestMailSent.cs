@@ -19,5 +19,7 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         public int RequestingUserId { get; set; }
 
         public Guid ObjectRequestId { get; set; }
+
+        public DateTime SentDateTime { get; set; }
     }
 }

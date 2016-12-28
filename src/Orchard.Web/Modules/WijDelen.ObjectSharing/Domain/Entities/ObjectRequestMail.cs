@@ -29,7 +29,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities
                 Recipients = recipients,
                 EmailHtml = emailHtml,
                 RequestingUserId = UserId,
-                ObjectRequestId = ObjectRequestId
+                ObjectRequestId = ObjectRequestId,
+                SentDateTime = DateTime.UtcNow
             });
         }
 

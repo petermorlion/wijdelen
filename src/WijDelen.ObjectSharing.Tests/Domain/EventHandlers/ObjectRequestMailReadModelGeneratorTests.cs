@@ -36,7 +36,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 },
                 EmailHtml = "<html></html>",
                 RequestingUserId = 22,
-                ObjectRequestId = objectRequestId
+                ObjectRequestId = objectRequestId,
+                SentDateTime = new DateTime(2016, 12, 28)
             };
 
             handler.Handle(e);
@@ -48,7 +49,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                     EmailHtml = "<html></html>",
                     RequestingUserId = 22,
                     ReceivingUserId = 1,
-                    ObjectRequestId = objectRequestId
+                    ObjectRequestId = objectRequestId,
+                    SentDateTime = new DateTime(2016, 12, 28)
                 },
                 new ObjectRequestMailRecord {
                     AggregateId = aggregateId,
@@ -56,7 +58,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                     EmailHtml = "<html></html>",
                     RequestingUserId = 22,
                     ReceivingUserId = 2,
-                    ObjectRequestId = objectRequestId
+                    ObjectRequestId = objectRequestId,
+                    SentDateTime = new DateTime(2016, 12, 28)
                 }
             });
         }

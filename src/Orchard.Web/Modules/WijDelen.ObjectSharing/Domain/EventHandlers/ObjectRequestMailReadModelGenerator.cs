@@ -19,7 +19,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     EmailHtml = objectRequestMailSent.EmailHtml,
                     RequestingUserId = objectRequestMailSent.RequestingUserId,
                     ReceivingUserId = recipient.UserId,
-                    ObjectRequestId = objectRequestMailSent.ObjectRequestId
+                    ObjectRequestId = objectRequestMailSent.ObjectRequestId,
+                    SentDateTime = objectRequestMailSent.SentDateTime
                 };
 
                 _repository.Update(objectRequestMailRecord);
