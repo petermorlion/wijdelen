@@ -16,19 +16,16 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly ICommandHandler<RequestObject> _requestObjectCommandHandler;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IRepository<ChatRecord> _chatRepository;
-        private readonly IRepository<ObjectRequestMailRecord> _objectRequestMailRepository;
         private readonly IOrchardServices _orchardServices;
 
         public ObjectRequestController(
             ICommandHandler<RequestObject> requestObjectCommandHandler,
             IRepository<ObjectRequestRecord> objectRequestRepository,
             IRepository<ChatRecord> chatRepository,
-            IRepository<ObjectRequestMailRecord> objectRequestMailRepository,
             IOrchardServices orchardServices) {
             _requestObjectCommandHandler = requestObjectCommandHandler;
             _objectRequestRepository = objectRequestRepository;
             _chatRepository = chatRepository;
-            _objectRequestMailRepository = objectRequestMailRepository;
             _orchardServices = orchardServices;
 
             T = NullLocalizer.Instance;
@@ -90,12 +87,6 @@ namespace WijDelen.ObjectSharing.Controllers {
         [Authorize]
         public ActionResult Index() {
             var records = _objectRequestRepository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
-            return View(records);
-        }
-
-        [Authorize]
-        public ActionResult Received() {
-            var records = _objectRequestMailRepository.Fetch(x => x.ReceivingUserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.SentDateTime).ToList();
             return View(records);
         }
 

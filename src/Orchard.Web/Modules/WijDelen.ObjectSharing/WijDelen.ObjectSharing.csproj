@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Controllers\ObjectRequestResponseController.cs" />
+    <Compile Include="Controllers\ReceivedObjectRequestController.cs" />
     <Compile Include="Domain\CommandHandlers\ChatCommandHandler.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\AddChatMessage.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Infrastructure\Queries\IFindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
+    <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
     <Compile Include="RedirectingUserEventHandler.cs" />
     <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
@@ -280,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\NewObjectRequest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ReceivedObjectRequest\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

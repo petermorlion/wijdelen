@@ -160,5 +160,18 @@ namespace WijDelen.ObjectSharing {
 
             return 9;
         }
+
+        public int UpdateFrom9() {
+            SchemaBuilder.CreateTable(typeof(ReceivedObjectRequestRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<Guid>("ObjectRequestId", column => column.NotNull())
+                    .Column<int>("UserId", column => column.NotNull())
+                    .Column<string>("Description", column => column.NotNull())
+                    .Column<string>("ExtraInfo", column => column.NotNull())
+                    .Column<DateTime>("ReceivedDateTime", column => column.NotNull())
+            );
+
+            return 10;
+        }
     }
 }
