@@ -27,11 +27,13 @@ element.oninput = function() {
     var remainingCharacterCountElement = document.getElementById('remainingCharacterCount');
     var remainCharacterTextElement = document.getElementById('remainCharacterText');
     var progressBar = document.getElementById('objectrequest-progressbar-fill');
+    var enoughCharactersTextElement = document.getElementById('enoughCharactersText');
 
     var remainingCharacters = 30 - element.textLength;
 
-    remainCharacterTextElement.style.visibility = remainingCharacters > 0 ? 'visible' : 'hidden';
+    remainCharacterTextElement.style.display = remainingCharacters > 0 ? 'inline' : 'none';
     remainingCharacterCountElement.innerText = remainingCharacters;
+    enoughCharactersTextElement.style.display = remainingCharacters > 0 ? 'none' : 'inline';
 
     var percentage = Math.min(element.textLength * 100 / 30, 100);
     progressBar.style.width = percentage.toString() + '%';

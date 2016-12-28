@@ -7,12 +7,18 @@
 <h1>@T("Your Requests")</h1>
 
 <ul class="objectrequestlist">
-    @foreach (var objectRequestRecord in Model) {
-        <li class="objectrequestlist-item">
-            @Html.ActionLink(objectRequestRecord.Description, 
-                             "Item", 
-                             new { controller= "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId}, 
-                             new { @class = "objectrequestlist-link" })
-        </li>
+    @if (Model.Any()) {
+        foreach (var objectRequestRecord in Model) {
+             <li class="objectrequestlist-item">
+                 @Html.ActionLink(objectRequestRecord.Description,
+                     "Item",
+                     new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId},
+                     new {@class = "objectrequestlist-link"})
+             </li>
+         }
     }
+    else {
+        @T("You haven't made any requests yet.")
+    }
+
 </ul>

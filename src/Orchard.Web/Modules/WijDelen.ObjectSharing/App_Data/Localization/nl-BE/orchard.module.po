@@ -29,6 +29,11 @@ msgid "Just {0} more characters!"
 msgstr "Nog {0} karakters te gaan!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+#| msgid "Great story!"
+msgid "Great story!"
+msgstr "Tof verhaal!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
 #| msgid "Submit"
 msgid "Submit"
 msgstr "Versturen"
@@ -157,6 +162,11 @@ msgstr "We hebben een afspraak"
 #| msgid "Your Requests"
 msgid "Your Requests"
 msgstr "Jouw oproepen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+#| msgid "You haven't made any requests yet."
+msgid "You haven't made any requests yet."
+msgstr "Je hebt nog geen oproepen gedaan."
 
 #: wijdelen.objectsharing.menuprovider
 #| msgid "Your Requests"
