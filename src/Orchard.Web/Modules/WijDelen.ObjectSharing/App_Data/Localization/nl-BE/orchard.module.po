@@ -218,17 +218,17 @@ msgstr "Bedankt"
 msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
 msgstr "Bedankt voor je antwoord. We zullen je antwoord noteren en proberen dergelijke vragen niet langer te stellen in de toekomst."
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Received.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #| msgid "Received Requests"
 msgid "Received Requests"
 msgstr "Ontvangen oproepen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Received.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
 msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
 msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Received.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #| msgid "{0} is looking for (a)"
 msgid "{0} is looking for (a)"
 msgstr "{0} is op zoek naar (een)"
