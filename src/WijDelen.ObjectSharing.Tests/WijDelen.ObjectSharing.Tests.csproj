@@ -127,6 +127,7 @@
     <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageReceiverTests.cs" />
     <Compile Include="Domain\Messaging\InMemoryMessageSenderTests.cs" />
+    <Compile Include="Domain\Services\RandomSampleServiceTests.cs" />
     <Compile Include="MessageReceiverFilterTests.cs" />
     <Compile Include="TestInfrastructure\Factories\ArchetypeFactory.cs" />
     <Compile Include="TestInfrastructure\Factories\SynonymFactory.cs" />
