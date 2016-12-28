@@ -27,6 +27,10 @@ namespace WijDelen.ObjectSharing {
                     T("My Requests"),
                     "20",
                     item => item.Action("Index", "ObjectRequest", new { area = "WijDelen.ObjectSharing" }));
+                builder.Add(
+                    T("Received Requests"),
+                    "20",
+                    item => item.Action("Index", "ReceivedObjectRequest", new { area = "WijDelen.ObjectSharing" }));
             }
         }
     }

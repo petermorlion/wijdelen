@@ -1,5 +1,5 @@
 ﻿@using WijDelen.ObjectSharing.ViewModels
-@model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestMailRecord>
+@model IEnumerable<ReceivedObjectRequestViewModel>
 
 @{
     Layout.Title = T("Received Requests");
@@ -8,20 +8,26 @@
 <h1>@T("Received Requests")</h1>
 
 @if (Model.Any()) {
-    <ul class="objectrequestlist">
-        @foreach (var objectRequestMailRecord in Model) {
-            <li class="objectrequestlist-item">
-                @Html.ActionLink(objectRequestRecord.Description,
-                    "Item",
-                    new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId},
-                    new {@class = "objectrequestlist-link"})
+    <ul class="receivedobjectrequestlist">
+        @foreach (var viewModel in Model) {
+            <li class="receivedobjectrequestlist-item">
+                <div>
+                    <h4>@T("{0} is looking for (a)", viewModel.UserName)</h4>
+                    <h5>@viewModel.Description</h5>
+                    <p>@viewModel.ExtraInfo</p>
+                    <p>
+                        @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes"})
+                        @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow"})
+                        @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no"})
+                    </p>
+                </div>
             </li>
         }
     </ul>
 }
 else {
     <p>
-        @T("You haven't made any requests yet yourself. Fill in the form below and get started!")
+        @T("You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started.")
     </p>
 
     {

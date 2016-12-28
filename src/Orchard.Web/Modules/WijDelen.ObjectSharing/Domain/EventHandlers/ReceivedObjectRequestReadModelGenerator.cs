@@ -26,7 +26,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     ObjectRequestId = e.ObjectRequestId,
                     Description = objectRequest.Description,
                     ExtraInfo = objectRequest.ExtraInfo,
-                    ReceivedDateTime = e.SentDateTime
+                    ReceivedDateTime = e.SentDateTime,
+                    RequestingUserId = e.RequestingUserId
                 });
             }
         }

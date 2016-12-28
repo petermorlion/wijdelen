@@ -158,10 +158,6 @@ namespace WijDelen.ObjectSharing {
                                      $"SET SentDateTime = GETUTCDATE() " +
                                      $"WHERE SentDateTime IS NULL");
 
-            return 9;
-        }
-
-        public int UpdateFrom9() {
             SchemaBuilder.CreateTable(typeof(ReceivedObjectRequestRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("ObjectRequestId", column => column.NotNull())
@@ -169,9 +165,10 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("Description", column => column.NotNull())
                     .Column<string>("ExtraInfo", column => column.NotNull())
                     .Column<DateTime>("ReceivedDateTime", column => column.NotNull())
+                    .Column<int>("RequestingUserId", column => column.NotNull())
             );
 
-            return 10;
+            return 9;
         }
     }
 }

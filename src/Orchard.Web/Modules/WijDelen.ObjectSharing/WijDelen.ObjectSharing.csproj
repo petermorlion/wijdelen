@@ -183,12 +183,14 @@
     <Compile Include="Infrastructure\Queries\FindAllArchetypesQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindAllSynonymsQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindSynonymsByExactMatchQuery.cs" />
+    <Compile Include="Infrastructure\Queries\FindUsersByIdsQuery.cs" />
     <Compile Include="Infrastructure\Queries\GetUserByIdQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindAllArchetypesQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindAllSynonymsQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindSynonymsByExactMatchQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindArchetypesByTitleQuery.cs" />
+    <Compile Include="Infrastructure\Queries\IFindUsersByIdsQuery.cs" />
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
     <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
     <Compile Include="RedirectingUserEventHandler.cs" />
@@ -208,6 +210,7 @@
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
     <Compile Include="ViewModels\ObjectRequestViewModel.cs" />
+    <Compile Include="ViewModels\ReceivedObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\SynonymsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

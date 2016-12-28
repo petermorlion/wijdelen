@@ -8,5 +8,6 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual string Description { get; set; }
         public virtual string ExtraInfo { get; set; }
         public virtual DateTime ReceivedDateTime { get; set; }
+        public virtual int RequestingUserId { get; set; }
     }
 }

@@ -23,7 +23,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var e = new ObjectRequestMailSent {
                 ObjectRequestId = Guid.NewGuid(),
                 SentDateTime = DateTime.UtcNow,
-                Recipients = new [] { new UserEmail { Email = "peter.morlion@gmail.com", UserId = 22 } }
+                Recipients = new [] { new UserEmail { Email = "peter.morlion@gmail.com", UserId = 22 } },
+                RequestingUserId = 666
             };
 
             var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
@@ -44,6 +45,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             record.Description.Should().Be("Sneakers");
             record.ExtraInfo.Should().Be("For sneaking");
             record.ReceivedDateTime.Should().Be(e.SentDateTime);
+            record.RequestingUserId.Should().Be(666);
         }
 
         [Test]
