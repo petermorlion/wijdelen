@@ -9,18 +9,18 @@ using WijDelen.ObjectSharing.Models;
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     public class ReceivedObjectRequestController : Controller {
-        private readonly IRepository<ObjectRequestMailRecord> _objectRequestMailRepository;
+        private readonly IRepository<ReceivedObjectRequestRecord> _repository;
         private readonly IOrchardServices _orchardServices;
 
-        public ReceivedObjectRequestController(IRepository<ObjectRequestMailRecord> objectRequestMailRepository, IOrchardServices orchardServices) {
-            _objectRequestMailRepository = objectRequestMailRepository;
+        public ReceivedObjectRequestController(IRepository<ReceivedObjectRequestRecord> repository, IOrchardServices orchardServices) {
+            _repository = repository;
             _orchardServices = orchardServices;
         }
 
         [Authorize]
         public ActionResult Index()
         {
-            var records = _objectRequestMailRepository.Fetch(x => x.ReceivingUserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.SentDateTime).ToList();
+            var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.ReceivedDateTime).ToList();
             return View(records);
         }
 

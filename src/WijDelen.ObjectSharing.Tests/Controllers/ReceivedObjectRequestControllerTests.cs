@@ -23,32 +23,27 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             services.WorkContext.CurrentUser = userMock.Object;
 
             var persistentRecords = new[] {
-                new ObjectRequestMailRecord {
-                    AggregateId = Guid.NewGuid(),
-                    ReceivingUserId = 22,
-                    SentDateTime = new DateTime(2016, 11, 27)
+                new ReceivedObjectRequestRecord {
+                    UserId = 22,
+                    ReceivedDateTime = new DateTime(2016, 11, 27)
                 },
-                new ObjectRequestMailRecord {
-                    AggregateId = Guid.NewGuid(),
-                    ReceivingUserId = 22,
-                    SentDateTime = new DateTime(2016, 12, 27)
+                new ReceivedObjectRequestRecord {
+                    UserId = 22,
+                    ReceivedDateTime = new DateTime(2016, 12, 27)
                 },
-                new ObjectRequestMailRecord {
-                    AggregateId = Guid.NewGuid(),
-                    ReceivingUserId = 23
+                new ReceivedObjectRequestRecord {
+                    UserId = 23
                 }
             };
 
-            var mailRepositoryMock = new Mock<IRepository<ObjectRequestMailRecord>>();
-            mailRepositoryMock.SetRecords(persistentRecords);
+            var repositoryMock = new Mock<IRepository<ReceivedObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
 
-
-
-            var controller = new ReceivedObjectRequestController(mailRepositoryMock.Object, services);
+            var controller = new ReceivedObjectRequestController(repositoryMock.Object, services);
 
             var actionResult = controller.Index();
 
-            var model = ((ViewResult)actionResult).Model as IEnumerable<ObjectRequestMailRecord>;
+            var model = ((ViewResult)actionResult).Model as IEnumerable<ReceivedObjectRequestRecord>;
             model.Should().NotBeNull();
             model.Count().Should().Be(2);
             model.ToList()[0].Should().Be(persistentRecords[1]);
