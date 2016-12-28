@@ -70,5 +70,30 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             repositoryMock.Verify(x => x.Delete(receivedObjectRequestRecord));
         }
+
+        [Test]
+        public void WhenObjectRequestDenied_RemoveRecord() {
+            var repositoryMock = new Mock<IRepository<ReceivedObjectRequestRecord>>();
+            var objectRequestId = Guid.NewGuid();
+
+            var receivedObjectRequestRecord = new ReceivedObjectRequestRecord {
+                UserId = 22,
+                ObjectRequestId = objectRequestId
+            };
+            repositoryMock.SetRecords(new[] {
+                receivedObjectRequestRecord
+            });
+
+            var e = new ObjectRequestDenied() {
+                SourceId = objectRequestId,
+                DenyingUserId = 22
+            };
+
+            var handler = new ReceivedObjectRequestReadModelGenerator(repositoryMock.Object, null);
+
+            handler.Handle(e);
+
+            repositoryMock.Verify(x => x.Delete(receivedObjectRequestRecord));
+        }
     }
 }
