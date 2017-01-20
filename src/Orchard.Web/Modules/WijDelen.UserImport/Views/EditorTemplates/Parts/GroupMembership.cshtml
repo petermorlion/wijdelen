@@ -3,14 +3,17 @@
     <legend>Group</legend>
     <div class="editor-field">
         @Html.DropDownListFor(model => model.GroupId,
-        Model.Groups
-            .Select(g => new SelectListItem
-            {
-                Selected = g.Id == Model.GroupId,
-                Text = g.Name,
-                Value = g.Id.ToString()
-            }),
-        T("Choose a group..."))
+            new[] {new SelectListItem {
+                Text = "",
+                Value = 0.ToString()
+            }}.Union(
+            Model.Groups
+                .Select(g => new SelectListItem {
+                    Selected = g.Id == Model.GroupId,
+                    Text = g.Name,
+                    Value = g.Id.ToString()
+                })),
+            T("Choose a group..."))
         @Html.ValidationMessageFor(model => model.GroupId)
     </div>
 </fieldset>
