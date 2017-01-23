@@ -6,6 +6,10 @@
 
 @if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
     <h1>@T("Your request for (a) {0}.", Model.ObjectDescription)</h1>
+
+    <p>
+        @T("{0} has (a) {1} for you.", Model.ConfirmingUserName, Model.ObjectDescription)
+    </p>
 }
 else {
     <h1>@T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription)</h1>

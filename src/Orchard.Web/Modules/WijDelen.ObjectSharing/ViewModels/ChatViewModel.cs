@@ -12,5 +12,7 @@ namespace WijDelen.ObjectSharing.ViewModels {
         public string RequestingUserName { get; set; }
 
         public string ObjectDescription { get; set; }
+
+        public string ConfirmingUserName { get; set; }
     }
 }

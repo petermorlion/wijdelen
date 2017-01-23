@@ -55,7 +55,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                 Messages = chatMessageViewModels,
                 ChatId = id,
                 ObjectDescription = objectRequest.Description,
-                RequestingUserName = chat.RequestingUserName
+                RequestingUserName = chat.RequestingUserName,
+                ConfirmingUserName = chat.ConfirmingUserName
             });
         }
         
