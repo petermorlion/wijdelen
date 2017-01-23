@@ -10,6 +10,7 @@ using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
+    [Authorize]
     public class ObjectRequestResponseController : Controller {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IRepository<ChatRecord> _chatRepository;

@@ -12,6 +12,7 @@ using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
+    [Authorize]
     public class ChatController : Controller {
         private readonly IRepository<ChatMessageRecord> _chatMessageRepository;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
@@ -34,7 +35,6 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
-        [Authorize]
         public ActionResult Index(Guid id) {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
             if (chat == null)
@@ -58,8 +58,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 RequestingUserName = chat.RequestingUserName
             });
         }
-
-        [Authorize]
+        
         [HttpPost]
         public ActionResult AddMessage(ChatViewModel viewModel) {
             if (string.IsNullOrWhiteSpace(viewModel.NewMessage))

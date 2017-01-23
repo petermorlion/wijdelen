@@ -12,6 +12,7 @@ using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
+    [Authorize]
     public class ObjectRequestController : Controller {
         private readonly ICommandHandler<RequestObject> _requestObjectCommandHandler;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
@@ -31,12 +32,10 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
-        [Authorize]
         public ActionResult New() {
             return View(new NewObjectRequestViewModel());
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult New(NewObjectRequestViewModel viewModel) {
             if (string.IsNullOrWhiteSpace(viewModel.Description)) {
@@ -63,7 +62,6 @@ namespace WijDelen.ObjectSharing.Controllers {
             return RedirectToAction("Item", new {id = command.ObjectRequestId});
         }
 
-        [Authorize]
         public ActionResult Item(Guid id) {
             var record = _objectRequestRepository.Get(x => x.AggregateId == id);
             var chatRecords = _chatRepository.Fetch(x => x.ObjectRequestId == id).ToList();
@@ -84,7 +82,6 @@ namespace WijDelen.ObjectSharing.Controllers {
             return View(viewModel);
         }
 
-        [Authorize]
         public ActionResult Index() {
             var records = _objectRequestRepository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(records);

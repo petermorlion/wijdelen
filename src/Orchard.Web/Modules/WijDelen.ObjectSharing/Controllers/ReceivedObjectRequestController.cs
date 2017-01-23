@@ -10,6 +10,7 @@ using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
+    [Authorize]
     public class ReceivedObjectRequestController : Controller {
         private readonly IRepository<ReceivedObjectRequestRecord> _repository;
         private readonly IFindUsersByIdsQuery _usersQuery;
@@ -21,7 +22,6 @@ namespace WijDelen.ObjectSharing.Controllers {
             _orchardServices = orchardServices;
         }
 
-        [Authorize]
         public ActionResult Index()
         {
             var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.ReceivedDateTime).ToList();
