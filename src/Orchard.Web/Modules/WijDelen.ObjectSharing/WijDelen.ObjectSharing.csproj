@@ -138,6 +138,7 @@
     <Compile Include="Domain\Entities\Chat.cs" />
     <Compile Include="Domain\Entities\ChatMessage.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
+    <Compile Include="Domain\Enums\ObjectRequestAnswer.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageMailer.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageReadModelGenerator.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\UserInventoryGenerator.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ChatMessageAdded.cs" />
     <Compile Include="Domain\Events\ObjectRequestDeniedForNow.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="Infrastructure\Queries\IFindUsersByIdsQuery.cs" />
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
     <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
+    <Compile Include="Models\UserInventoryRecord.cs" />
     <Compile Include="RedirectingUserEventHandler.cs" />
     <Compile Include="MenuProvider.cs" />
     <Compile Include="Migrations.cs" />
