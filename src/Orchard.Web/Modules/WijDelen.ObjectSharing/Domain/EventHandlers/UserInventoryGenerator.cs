@@ -8,16 +8,17 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class UserInventoryGenerator : 
+    public class UserInventoryGenerator :
         IEventHandler<ObjectRequestConfirmed>,
-        IEventHandler<ObjectRequestDenied> {
+        IEventHandler<ObjectRequestDenied>,
+        IEventHandler<ObjectRequestDeniedForNow> {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IFindSynonymsByExactMatchQuery _synonymQuery;
         private readonly IRepository<UserInventoryRecord> _userInventoryRepository;
 
         public UserInventoryGenerator(
-            IRepository<ObjectRequestRecord> objectRequestRepository, 
-            IFindSynonymsByExactMatchQuery synonymQuery, 
+            IRepository<ObjectRequestRecord> objectRequestRepository,
+            IFindSynonymsByExactMatchQuery synonymQuery,
             IRepository<UserInventoryRecord> userInventoryRepository) {
             _objectRequestRepository = objectRequestRepository;
             _synonymQuery = synonymQuery;
@@ -48,6 +49,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             _userInventoryRepository.Update(userInventoryItem);
         }
+
         public void Handle(ObjectRequestDenied e) {
             var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == e.SourceId);
             if (objectRequest == null)
@@ -68,6 +70,31 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             userInventoryItem.UserId = userId;
             userInventoryItem.SynonymId = synonym.Id;
             userInventoryItem.Answer = ObjectRequestAnswer.No;
+            userInventoryItem.DateTimeAnswered = DateTime.UtcNow;
+
+            _userInventoryRepository.Update(userInventoryItem);
+        }
+
+        public void Handle(ObjectRequestDeniedForNow e) {
+            var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == e.SourceId);
+            if (objectRequest == null)
+                return;
+
+            var synonyms = _synonymQuery.GetResults(objectRequest.Description).ToList();
+            if (!synonyms.Any())
+                return;
+
+            var synonym = synonyms.First();
+
+            var userId = e.DenyingUserId;
+            var userInventoryItem = _userInventoryRepository.Get(x => x.UserId == userId && x.SynonymId == synonym.Id);
+
+            if (userInventoryItem == null)
+                userInventoryItem = new UserInventoryRecord();
+
+            userInventoryItem.UserId = userId;
+            userInventoryItem.SynonymId = synonym.Id;
+            userInventoryItem.Answer = ObjectRequestAnswer.NotNow;
             userInventoryItem.DateTimeAnswered = DateTime.UtcNow;
 
             _userInventoryRepository.Update(userInventoryItem);
