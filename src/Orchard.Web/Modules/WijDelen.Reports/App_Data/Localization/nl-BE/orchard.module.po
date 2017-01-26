@@ -1,0 +1,24 @@
+﻿#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Reports"
+msgid "Reports"
+msgstr "Rapporten"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Total users"
+msgid "Total users"
+msgstr "Totaal gebruikers"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Total groups"
+msgid "Total groups"
+msgstr "Totaal groepen"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Total requests"
+msgid "Total requests"
+msgstr "Totaal oproepen"
+
+#: wijdelen.objectsharing.adminmenu
+#| msgid "Reports"
+msgid "Reports"
+msgstr "Rapporten"
