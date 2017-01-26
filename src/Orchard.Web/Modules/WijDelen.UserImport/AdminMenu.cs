@@ -16,11 +16,12 @@ namespace WijDelen.UserImport {
 
         public void GetNavigation(NavigationBuilder builder) {
             builder.Add(item => item
-                .Caption(T("User Import"))
-                .Position("12")
-                .Action("Index", "Admin", new {area = "WijDelen.UserImport"})
-                .LocalNav()
-                .Permission(StandardPermissions.SiteOwner));
+                .Caption(T("Peergroups"))
+                .Add(subItem => subItem
+                    .Caption(T("User Import"))
+                    .Position("3")
+                    .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
+                    .Permission(StandardPermissions.SiteOwner)));
         }
     }
 }

@@ -23,8 +23,7 @@ namespace WijDelen.ObjectSharing {
                     .Add(subItem => subItem
                         .Caption(T("Archetypes"))
                         .Position("1")
-                        .LinkToFirstChild(false)
-                        .Action("Index", "Archetypes", new { area = "WijDelen.ObjectSharing" })
+                        .LinkToFirstChild(true)
                         .Add(tab => tab
                             .Caption(T("Archetypes"))
                             .Position("0")
