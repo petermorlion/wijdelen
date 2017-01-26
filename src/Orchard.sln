@@ -288,6 +288,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.ObjectSharing", "O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.ObjectSharing.Tests", "WijDelen.ObjectSharing.Tests\WijDelen.ObjectSharing.Tests.csproj", "{AC1DF641-A10E-4941-92FD-EF19DB1E22EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Reports", "Orchard.Web\Modules\WijDelen.Reports\WijDelen.Reports.csproj", "{D66959A3-64FD-4E92-B5B8-FCC24861C85E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1155,6 +1157,13 @@ Global
 		{AC1DF641-A10E-4941-92FD-EF19DB1E22EA}.FxCop|Any CPU.Build.0 = Release|Any CPU
 		{AC1DF641-A10E-4941-92FD-EF19DB1E22EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1DF641-A10E-4941-92FD-EF19DB1E22EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1247,6 +1256,7 @@ Global
 		{874CCCBA-BE56-4B5E-B371-59B253F2DB9C} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{B9DC31D9-3069-4BDA-9601-4DB74950C281} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{AC1DF641-A10E-4941-92FD-EF19DB1E22EA} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
+		{D66959A3-64FD-4E92-B5B8-FCC24861C85E} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

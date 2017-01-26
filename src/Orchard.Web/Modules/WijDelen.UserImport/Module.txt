@@ -4,9 +4,9 @@ Author: Peter Morlion
 Website: http://www.redstar.be
 Version: 1.0
 OrchardVersion: 1.0
-Description: User import for WijDelen
+Description: User import for Peergroups
 Features:
     WijDelen.UserImport:
-        Description: Allows importing users to WijDelen
-		Category: WijDelen
+        Description: Allows importing users to Peergroups
+		Category: Peergroups
 		Dependencies: Orchard.Users, Orchard.Roles

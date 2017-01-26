@@ -1,0 +1,12 @@
+﻿Name: WijDelen.Reports
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0
+OrchardVersion: 1.0
+Description: Reports for Peergroups
+Features:
+    WijDelen.Reports:
+        Description: Reports for Peergroups
+		Category: Peergroups
+		Dependencies: WijDelen.UserImport, WijDelen.ObjectSharing
