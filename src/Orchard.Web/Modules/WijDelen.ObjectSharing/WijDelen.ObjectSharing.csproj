@@ -223,6 +223,8 @@
     <Content Include="Scripts\auto-complete.js" />
     <Content Include="Scripts\auto-complete.min.js" />
     <Content Include="Scripts\ObjectRequest\new.js" />
+    <Content Include="Styles\images\menu.peergroups.png" />
+    <Content Include="Styles\menu.peergroups-admin.css" />
     <Content Include="Styles\auto-complete.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />

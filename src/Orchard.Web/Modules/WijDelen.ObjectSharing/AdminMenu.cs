@@ -14,26 +14,29 @@ namespace WijDelen.ObjectSharing {
 
         public void GetNavigation(NavigationBuilder builder) {
             builder
-                .Add(menu =>
-                {
-                    menu.LinkToFirstChild(true)
+                .AddImageSet("peergroups")
+                .Add(item => item
+                    .Caption(T("Peergroups"))
+                    .Position("13")
+                    .Action("Index", "Archetypes", new {area = "WijDelen.ObjectSharing"})
+                    .LinkToFirstChild(false)
+                    .Add(subItem => subItem
                         .Caption(T("Archetypes"))
-                        .Position("13");
-
-                    menu.Add(item => item
-                        .Caption(T("Archetypes"))
-                        .Position("0")
-                        .Action("Index", "Archetypes", new { area = "WijDelen.ObjectSharing" })
-                        .Permission(StandardPermissions.SiteOwner)
-                        .LocalNav());
-
-                    menu.Add(item => item
-                        .Caption(T("Synonyms"))
                         .Position("1")
-                        .Action("Synonyms", "Archetypes", new { area = "WijDelen.ObjectSharing" })
-                        .Permission(StandardPermissions.SiteOwner)
-                        .LocalNav());
-                });
+                        .LinkToFirstChild(false)
+                        .Action("Index", "Archetypes", new { area = "WijDelen.ObjectSharing" })
+                        .Add(tab => tab
+                            .Caption(T("Archetypes"))
+                            .Position("0")
+                            .Action("Index", "Archetypes", new {area = "WijDelen.ObjectSharing"})
+                            .Permission(StandardPermissions.SiteOwner)
+                            .LocalNav())
+                        .Add(tab => tab
+                            .Caption(T("Synonyms"))
+                            .Position("1")
+                            .Action("Synonyms", "Archetypes", new {area = "WijDelen.ObjectSharing"})
+                            .Permission(StandardPermissions.SiteOwner)
+                            .LocalNav())));
         }
     }
 }
