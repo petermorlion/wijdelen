@@ -396,6 +396,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Contents\Views\Content.cshtml" />
     <Content Include="Contents\Views\Content.SummaryAdmin.cshtml" />
     <Content Include="Shapes\Views\Document.cshtml" />
