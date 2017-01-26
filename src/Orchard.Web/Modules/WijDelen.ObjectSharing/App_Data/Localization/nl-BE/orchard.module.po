@@ -1,14 +1,4 @@
-﻿#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "Description"
-msgid "The core of WijDelen Groups, allowing users to request and share objects in their groups."
-msgstr "De kern van WijDelen Groups, waarmee gebruikers items kunnen oproepen en delen binnen hun groepen."
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "WijDelen.UserImport.Description"
-msgid "Allows users to request and share objects in their groups."
-msgstr "Biedt de mogelijkheid aan gebruikers om items aan te vragen en te delen binnen hun groepen."
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
+﻿#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
 #| msgid "Request object"
 msgid "Request object"
 msgstr "Een oproep doen"

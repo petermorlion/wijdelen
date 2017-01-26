@@ -1,34 +1,4 @@
-﻿#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "Name"
-msgid "WijDelen.UserImport"
-msgstr "WijDelen.UserImport"
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "Author"
-msgid "Peter Morlion"
-msgstr "Peter Morlion"
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "Website"
-msgid "http://www.redstar.be"
-msgstr "http://www.redstar.be"
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "Description"
-msgid "User import for WijDelen"
-msgstr "Gebruikers importeren voor WijDelen"
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "WijDelen.UserImport.Description"
-msgid "Allows importing users to WijDelen"
-msgstr "Biedt de mogelijkheid om gebruikers te importeren"
-
-#: ~/Modules/WijDelen.UserImport/Module.txt
-#| msgid "WijDelen.UserImport.Category"
-msgid "WijDelen"
-msgstr "WijDelen"
-
-#: wijdelen.userimport.controllers.admincontroller
+﻿#: wijdelen.userimport.controllers.admincontroller
 #| msgid "You are not authorized to import users."
 msgid "You are not authorized to import users."
 msgstr "Je hebt onvoldoende rechten om gebruikers te importeren."
