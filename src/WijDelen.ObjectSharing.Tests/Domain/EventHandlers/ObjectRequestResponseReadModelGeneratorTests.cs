@@ -4,6 +4,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Data;
+using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Models;
@@ -31,7 +32,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
-            record.Response.Should().Be("Yes");
+            record.Response.Should().Be(ObjectRequestAnswer.Yes);
         }
 
         [Test]
@@ -53,7 +54,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
-            record.Response.Should().Be("No");
+            record.Response.Should().Be(ObjectRequestAnswer.No);
         }
 
         [Test]
@@ -75,7 +76,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
-            record.Response.Should().Be("NotNow");
+            record.Response.Should().Be(ObjectRequestAnswer.NotNow);
         }
     }
 }

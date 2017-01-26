@@ -126,7 +126,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminMenuTests.cs" />
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Mocks\MockWorkContext.cs" />
     <Compile Include="Models\UserImportResultTests.cs" />
