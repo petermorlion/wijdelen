@@ -1,7 +1,27 @@
-﻿@{
+﻿@using WijDelen.Reports.ViewModels
+@model DashboardViewModel
+
+@{
     Layout.Title = T("Reports").ToString();
+
+#if DEBUG
+    Style.Include("Styles.css");
+#else
+    Style.Include("Styles.min.css");
+#endif
 }
 
-<p>
-    More to come
-</p>
+<div class="row">
+    <div class="column column-33">
+        <h2>Total users</h2>
+        <strong>@Model.TotalUsers</strong>
+    </div>
+    <div class="column column-33">
+        <h2>Total groups</h2>
+        <strong>@Model.TotalGroups</strong>
+    </div>
+    <div class="column column-34">
+        <h2>Total request</h2>
+        <strong>@Model.TotalObjectRequests</strong>
+    </div>
+</div>

@@ -49,6 +49,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -59,13 +63,33 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
@@ -74,10 +98,13 @@
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
+    <Content Include="node_modules\milligram-less\examples\index.html" />
+    <Content Include="node_modules\normalize.css\normalize.css" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="Web.config" />
@@ -105,6 +132,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="node_modules\milligram-less\changelog.md" />
+    <Content Include="node_modules\milligram-less\dist\milligram.less" />
+    <Content Include="node_modules\milligram-less\dist\_Base.less" />
+    <Content Include="node_modules\milligram-less\dist\_Blockquote.less" />
+    <Content Include="node_modules\milligram-less\dist\_Button.less" />
+    <Content Include="node_modules\milligram-less\dist\_Code.less" />
+    <Content Include="node_modules\milligram-less\dist\_Color.less" />
+    <Content Include="node_modules\milligram-less\dist\_Divider.less" />
+    <Content Include="node_modules\milligram-less\dist\_Form.less" />
+    <Content Include="node_modules\milligram-less\dist\_Grid.less" />
+    <Content Include="node_modules\milligram-less\dist\_Image.less" />
+    <Content Include="node_modules\milligram-less\dist\_Link.less" />
+    <Content Include="node_modules\milligram-less\dist\_List.less" />
+    <Content Include="node_modules\milligram-less\dist\_Spacing.less" />
+    <Content Include="node_modules\milligram-less\dist\_Table.less" />
+    <Content Include="node_modules\milligram-less\dist\_Typography.less" />
+    <Content Include="node_modules\milligram-less\dist\_Utility.less" />
+    <Content Include="node_modules\milligram-less\license" />
+    <Content Include="node_modules\milligram-less\package.json" />
+    <Content Include="node_modules\milligram-less\readme.md" />
+    <Content Include="node_modules\normalize.css\CHANGELOG.md" />
+    <Content Include="node_modules\normalize.css\LICENSE.md" />
+    <Content Include="node_modules\normalize.css\package.json" />
+    <Content Include="node_modules\normalize.css\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
