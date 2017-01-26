@@ -105,11 +105,16 @@
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="DateTimeProvider.cs" />
+    <Compile Include="IDateTimeProvider.cs" />
     <Compile Include="Models\Totals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\IMonthSummaryQuery.cs" />
     <Compile Include="Queries\ITotalsQuery.cs" />
+    <Compile Include="Queries\MonthSummaryQuery.cs" />
     <Compile Include="Queries\TotalsQuery.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\SummaryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />

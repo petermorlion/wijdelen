@@ -27,4 +27,28 @@
 </div>
 
 <div class="row">
+    <div class="column column-50">
+        <h2>@T("This month")</h2>
+    </div>
+    <div class="column column-50">
+        <h2>@T("Previous month")</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="column column-50">
+        <strong>@T("Requests"): </strong>@Model.ThisMonthSummary.ObjectRequestCount
+    </div>
+    <div class="column-50">
+        <strong>@T("Requests"): </strong>@Model.PreviousMonthSummary.ObjectRequestCount
+    </div>
+</div>
+
+<div class="row">
+    <div class="column column-50">
+        <strong>@T("Mails"): </strong>@Model.ThisMonthSummary.MailCount
+    </div>
+    <div class="column column-50">
+        <strong>@T("Mails"): </strong>@Model.PreviousMonthSummary.MailCount
+    </div>
 </div>

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new AdminController(default(ITotalsQuery));
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider));
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -34,7 +35,16 @@ namespace WijDelen.Reports.Tests.Controllers {
                 ObjectRequests = 200
             });
 
-            var controller = new AdminController(totalsQueryMock.Object);
+            var dateTimeProviderMock = new Mock<IDateTimeProvider>();
+            dateTimeProviderMock.Setup(x => x.UtcNow()).Returns(new DateTime(2017, 1, 26, 0, 0, 0, DateTimeKind.Utc));
+
+            var thisMonthSummary = new SummaryViewModel();
+            var previousMonthSummary = new SummaryViewModel();
+            var monthSummaryQueryMock = new Mock<IMonthSummaryQuery>();
+            monthSummaryQueryMock.Setup(x => x.GetResults(1)).Returns(thisMonthSummary);
+            monthSummaryQueryMock.Setup(x => x.GetResults(12)).Returns(previousMonthSummary);
+
+            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object);
 
             var result = controller.Index();
 
@@ -47,6 +57,8 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.TotalGroups.Should().Be(15);
             viewModel.TotalUsers.Should().Be(800);
             viewModel.TotalObjectRequests.Should().Be(200);
+            viewModel.ThisMonthSummary.Should().Be(thisMonthSummary);
+            viewModel.PreviousMonthSummary.Should().Be(previousMonthSummary);
         }
     }
 }

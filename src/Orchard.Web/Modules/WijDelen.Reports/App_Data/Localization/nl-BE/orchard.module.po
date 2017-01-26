@@ -18,6 +18,16 @@ msgstr "Totaal groepen"
 msgid "Total requests"
 msgstr "Totaal oproepen"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "This month"
+msgid "This month"
+msgstr "Deze maand"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Previous month"
+msgid "Previous month"
+msgstr "Vorige maand"
+
 #: wijdelen.objectsharing.adminmenu
 #| msgid "Reports"
 msgid "Reports"
