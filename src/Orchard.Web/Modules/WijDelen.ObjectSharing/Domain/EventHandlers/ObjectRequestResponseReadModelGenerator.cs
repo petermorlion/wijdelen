@@ -1,4 +1,5 @@
 ﻿using Orchard.Data;
+using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -18,7 +19,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.ConfirmingUserId,
-                Response = "Yes"
+                Response = ObjectRequestAnswer.Yes
             });
         }
 
@@ -26,7 +27,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.DenyingUserId,
-                Response = "No"
+                Response = ObjectRequestAnswer.No
             });
         }
 
@@ -34,7 +35,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.DenyingUserId,
-                Response = "NotNow"
+                Response = ObjectRequestAnswer.NotNow
             });
         }
     }
