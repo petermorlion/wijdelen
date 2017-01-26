@@ -8,7 +8,9 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class UserInventoryGenerator : IEventHandler<ObjectRequestConfirmed> {
+    public class UserInventoryGenerator : 
+        IEventHandler<ObjectRequestConfirmed>,
+        IEventHandler<ObjectRequestDenied> {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IFindSynonymsByExactMatchQuery _synonymQuery;
         private readonly IRepository<UserInventoryRecord> _userInventoryRepository;
@@ -42,6 +44,30 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             userInventoryItem.UserId = userId;
             userInventoryItem.SynonymId = synonym.Id;
             userInventoryItem.Answer = ObjectRequestAnswer.Yes;
+            userInventoryItem.DateTimeAnswered = DateTime.UtcNow;
+
+            _userInventoryRepository.Update(userInventoryItem);
+        }
+        public void Handle(ObjectRequestDenied e) {
+            var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == e.SourceId);
+            if (objectRequest == null)
+                return;
+
+            var synonyms = _synonymQuery.GetResults(objectRequest.Description).ToList();
+            if (!synonyms.Any())
+                return;
+
+            var synonym = synonyms.First();
+
+            var userId = e.DenyingUserId;
+            var userInventoryItem = _userInventoryRepository.Get(x => x.UserId == userId && x.SynonymId == synonym.Id);
+
+            if (userInventoryItem == null)
+                userInventoryItem = new UserInventoryRecord();
+
+            userInventoryItem.UserId = userId;
+            userInventoryItem.SynonymId = synonym.Id;
+            userInventoryItem.Answer = ObjectRequestAnswer.No;
             userInventoryItem.DateTimeAnswered = DateTime.UtcNow;
 
             _userInventoryRepository.Update(userInventoryItem);
