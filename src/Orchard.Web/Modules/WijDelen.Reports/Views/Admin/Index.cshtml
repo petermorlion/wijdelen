@@ -27,7 +27,7 @@
 </div>
 
 <div class="row">
-    <div class="column column-40">
+    <div class="column column-50">
         <table class="reports-summary">
             <thead>
             <tr>
@@ -65,5 +65,38 @@
             </tbody>
         </table>
     </div>
-    <div class="column column-60"></div>
+    <div class="column column-50">
+        <h2>@Model.ThisMonth.ToString("MM/yyyy")</h2>
+        @if (Model.GroupMonthSummaries.Any()) {
+            <table class="reports-groupmonth">
+                <thead>
+                <tr>
+                    <th>@T("Group")</th>
+                    <th>@T("Requests")</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    var first = Model.GroupMonthSummaries.First();
+                    <tr>
+                        <td class="reports-groupmonthname">@first.GroupName</td>
+                        <td>
+                            <div class="reports-groupmonthvalue" style="width: 100%;"></div>
+                        </td>
+                    </tr>
+
+                    for (var i = 1; i < Model.GroupMonthSummaries.Count; i++) {
+                        var width = 100 * Model.GroupMonthSummaries[i].ObjectRequestCount/Model.GroupMonthSummaries[0].ObjectRequestCount;
+                        <tr>
+                            <td class="reports-groupmonthname">@Model.GroupMonthSummaries[i].GroupName</td>
+                            <td>
+                                <div class="reports-groupmonthvalue" style="width: @(width)%"></div>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        }
+    </div>
 </div>

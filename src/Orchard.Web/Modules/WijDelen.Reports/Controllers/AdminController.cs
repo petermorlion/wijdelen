@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.Localization;
 using WijDelen.Reports.Queries;
@@ -9,11 +10,13 @@ namespace WijDelen.Reports.Controllers {
         private readonly ITotalsQuery _totalsQuery;
         private readonly IMonthSummaryQuery _monthSummaryQuery;
         private readonly IDateTimeProvider _dateTimeProvider;
+        private IGroupMonthSummaryQuery _groupMonthSummaryQuery;
 
-        public AdminController(ITotalsQuery totalsQuery, IMonthSummaryQuery monthSummaryQuery, IDateTimeProvider dateTimeProvider) {
+        public AdminController(ITotalsQuery totalsQuery, IMonthSummaryQuery monthSummaryQuery, IDateTimeProvider dateTimeProvider, IGroupMonthSummaryQuery groupMonthSummaryQuery) {
             _totalsQuery = totalsQuery;
             _monthSummaryQuery = monthSummaryQuery;
             _dateTimeProvider = dateTimeProvider;
+            _groupMonthSummaryQuery = groupMonthSummaryQuery;
         }
 
         public ActionResult Index() {
@@ -33,6 +36,8 @@ namespace WijDelen.Reports.Controllers {
             var previousMonth = new DateTime(previousMonthYear, previousMonthNumber, 1);
             var previousMonthSummary = _monthSummaryQuery.GetResults(previousMonth.Year, previousMonth.Month);
 
+            var groupMonthSummary = _groupMonthSummaryQuery.GetResults(thisMonth.Year, thisMonth.Month).OrderByDescending(x => x.ObjectRequestCount).Take(10).ToList();
+
             var viewModel = new DashboardViewModel {
                 TotalUsers = totals.Users,
                 TotalGroups = totals.Groups,
@@ -40,7 +45,8 @@ namespace WijDelen.Reports.Controllers {
                 ThisMonthSummary = thisMonthSummary,
                 ThisMonth = thisMonth,
                 PreviousMonthSummary = previousMonthSummary,
-                PreviousMonth = previousMonth
+                PreviousMonth = previousMonth,
+                GroupMonthSummaries = groupMonthSummary
             };
 
             return View(viewModel);

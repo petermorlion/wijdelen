@@ -16,7 +16,7 @@ namespace WijDelen.UserImport.Services {
         /// </summary>
         IEnumerable<IUser> GetOtherUsersInGroup(int userId);
 
-        string GetGroupNameForUser(int userId);
+        GroupViewModel GetGroupForUser(int userId);
 
         bool IsMemberOfGroup(int userId);
     }

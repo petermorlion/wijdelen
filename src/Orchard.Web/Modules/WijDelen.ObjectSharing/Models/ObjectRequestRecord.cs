@@ -12,5 +12,7 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual int Version { get; set; }
         public virtual int UserId { get; set; }
         public virtual DateTime CreatedDateTime { get; set; }
+        public virtual int GroupId { get; set; }
+        public virtual string GroupName { get; set; }
     }
 }

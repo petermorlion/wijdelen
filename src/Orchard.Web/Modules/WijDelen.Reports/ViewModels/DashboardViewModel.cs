@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WijDelen.Reports.ViewModels {
     public class DashboardViewModel {
@@ -9,5 +10,6 @@ namespace WijDelen.Reports.ViewModels {
         public SummaryViewModel PreviousMonthSummary { get; set; }
         public DateTime ThisMonth { get; set; }
         public DateTime PreviousMonth { get; set; }
+        public IList<GroupMonthSummaryViewModel> GroupMonthSummaries { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using FluentAssertions;
 using Moq;
@@ -18,7 +19,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider));
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery));
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -44,7 +45,14 @@ namespace WijDelen.Reports.Tests.Controllers {
             monthSummaryQueryMock.Setup(x => x.GetResults(2017, 1)).Returns(thisMonthSummary);
             monthSummaryQueryMock.Setup(x => x.GetResults(2016, 12)).Returns(previousMonthSummary);
 
-            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object);
+            var groupMonthSummaryQueryMock = new Mock<IGroupMonthSummaryQuery>();
+            var groupMonthSummaries = new List<GroupMonthSummaryViewModel> {
+                new GroupMonthSummaryViewModel { GroupName = "Small", ObjectRequestCount = 2 },
+                new GroupMonthSummaryViewModel { GroupName = "Large", ObjectRequestCount = 200 }
+            };
+            groupMonthSummaryQueryMock.Setup(x => x.GetResults(2017, 1)).Returns(groupMonthSummaries);
+
+            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object, groupMonthSummaryQueryMock.Object);
 
             var result = controller.Index();
 
@@ -61,6 +69,7 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.PreviousMonthSummary.Should().Be(previousMonthSummary);
             viewModel.ThisMonth.Should().Be(new DateTime(2017, 1, 1));
             viewModel.PreviousMonth.Should().Be(new DateTime(2016, 12, 1));
+            viewModel.GroupMonthSummaries.Should().BeEquivalentTo(groupMonthSummaries).And.BeInDescendingOrder(x => x.ObjectRequestCount);
         }
     }
 }

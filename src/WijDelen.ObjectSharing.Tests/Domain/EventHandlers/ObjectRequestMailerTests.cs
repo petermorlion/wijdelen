@@ -11,6 +11,7 @@ using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.UserImport.Services;
+using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
@@ -43,7 +44,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 .Setup(x => x.GetOtherUsersInGroup(3))
                 .Returns(new[] { otherUserMock.Object });
 
-            groupServiceMock.Setup(x => x.GetGroupNameForUser(3)).Returns("Group");
+            groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
 
             var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
             repositoryMock

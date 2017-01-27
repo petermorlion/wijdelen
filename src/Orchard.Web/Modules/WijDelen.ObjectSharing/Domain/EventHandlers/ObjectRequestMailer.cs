@@ -46,7 +46,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.SourceId);
 
             var requestingUserName = _getUserByIdQuery.GetResult(objectRequested.UserId).UserName;
-            var groupName = _groupService.GetGroupNameForUser(objectRequested.UserId);
+            var groupName = _groupService.GetGroupForUser(objectRequested.UserId).Name;
             var otherUsers = _groupService.GetOtherUsersInGroup(objectRequested.UserId).ToList();
 
             var recipients = _randomSampleService.GetRandomSample(otherUsers, 250);

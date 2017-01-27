@@ -43,6 +43,11 @@ msgstr "Nee"
 msgid "Not Now"
 msgstr "Nu niet"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groep"
+
 #: wijdelen.objectsharing.adminmenu
 #| msgid "Reports"
 msgid "Reports"

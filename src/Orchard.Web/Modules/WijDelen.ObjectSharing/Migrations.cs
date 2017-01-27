@@ -132,5 +132,19 @@ namespace WijDelen.ObjectSharing {
 
             return 11;
         }
+
+        public int UpdateFrom11() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AddColumn<int>("GroupId"));
+            SchemaBuilder.ExecuteSql($"UPDATE {SchemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name)} SET GroupId = 0");
+            SchemaBuilder.ExecuteSql($"ALTER TABLE {SchemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name)} ALTER COLUMN GroupId INT NOT NULL");
+
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AddColumn<string>("GroupName"));
+            SchemaBuilder.ExecuteSql($"UPDATE {SchemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name)} SET GroupName = ''");
+            SchemaBuilder.ExecuteSql($"ALTER TABLE {SchemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name)} ALTER COLUMN GroupName NVARCHAR(255) NOT NULL");
+
+            return 12;
+        }
     }
 }
