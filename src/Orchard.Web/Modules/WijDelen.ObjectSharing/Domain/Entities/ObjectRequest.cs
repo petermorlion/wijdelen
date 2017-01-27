@@ -28,15 +28,15 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Confirm(int confirmingUserId) {
-            Update(new ObjectRequestConfirmed {ConfirmingUserId = confirmingUserId});
+            Update(new ObjectRequestConfirmed {ConfirmingUserId = confirmingUserId, DateTimeConfirmed = DateTime.UtcNow});
         }
 
         public void Deny(int denyingUserId) {
-            Update(new ObjectRequestDenied {DenyingUserId = denyingUserId});
+            Update(new ObjectRequestDenied {DenyingUserId = denyingUserId, DateTimeDenied = DateTime.UtcNow});
         }
 
         public void DenyForNow(int denyingUserId) {
-            Update(new ObjectRequestDeniedForNow { DenyingUserId = denyingUserId });
+            Update(new ObjectRequestDeniedForNow { DenyingUserId = denyingUserId, DateTimeDenied = DateTime.UtcNow });
         }
 
         private void OnObjectRequested(ObjectRequested objectRequested) {

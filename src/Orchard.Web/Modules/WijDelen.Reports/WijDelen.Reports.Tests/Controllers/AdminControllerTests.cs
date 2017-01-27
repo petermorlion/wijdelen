@@ -41,8 +41,8 @@ namespace WijDelen.Reports.Tests.Controllers {
             var thisMonthSummary = new SummaryViewModel();
             var previousMonthSummary = new SummaryViewModel();
             var monthSummaryQueryMock = new Mock<IMonthSummaryQuery>();
-            monthSummaryQueryMock.Setup(x => x.GetResults(1)).Returns(thisMonthSummary);
-            monthSummaryQueryMock.Setup(x => x.GetResults(12)).Returns(previousMonthSummary);
+            monthSummaryQueryMock.Setup(x => x.GetResults(2017, 1)).Returns(thisMonthSummary);
+            monthSummaryQueryMock.Setup(x => x.GetResults(2016, 12)).Returns(previousMonthSummary);
 
             var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object);
 
@@ -59,6 +59,8 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.TotalObjectRequests.Should().Be(200);
             viewModel.ThisMonthSummary.Should().Be(thisMonthSummary);
             viewModel.PreviousMonthSummary.Should().Be(previousMonthSummary);
+            viewModel.ThisMonth.Should().Be(new DateTime(2017, 1, 1));
+            viewModel.PreviousMonth.Should().Be(new DateTime(2016, 12, 1));
         }
     }
 }

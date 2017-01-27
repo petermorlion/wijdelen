@@ -7,5 +7,6 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual Guid ObjectRequestId { get; set; }
         public virtual int UserId { get; set; }
         public virtual ObjectRequestAnswer Response { get; set; }
+        public virtual DateTime DateTimeResponded { get; set; }
     }
 }

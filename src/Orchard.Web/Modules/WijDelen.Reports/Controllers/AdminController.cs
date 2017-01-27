@@ -18,20 +18,29 @@ namespace WijDelen.Reports.Controllers {
 
         public ActionResult Index() {
             var totals = _totalsQuery.GetResults();
-            var thisMonthSummary = _monthSummaryQuery.GetResults(_dateTimeProvider.UtcNow().Month);
 
-            var previousMonth = _dateTimeProvider.UtcNow().Month - 1;
-            if (previousMonth <= 0)
-                previousMonth = 12;
+            var utcNow = _dateTimeProvider.UtcNow();
+            var thisMonth = new DateTime(utcNow.Year, utcNow.Month, 1);
+            var thisMonthSummary = _monthSummaryQuery.GetResults(thisMonth.Year, thisMonth.Month);
 
-            var previousMonthSummary = _monthSummaryQuery.GetResults(previousMonth);
+            var previousMonthYear = utcNow.Year;
+            var previousMonthNumber = utcNow.Month - 1;
+            if (previousMonthNumber <= 0) {
+                previousMonthNumber = 12;
+                previousMonthYear -= 1;
+            }
+
+            var previousMonth = new DateTime(previousMonthYear, previousMonthNumber, 1);
+            var previousMonthSummary = _monthSummaryQuery.GetResults(previousMonth.Year, previousMonth.Month);
 
             var viewModel = new DashboardViewModel {
                 TotalUsers = totals.Users,
                 TotalGroups = totals.Groups,
                 TotalObjectRequests = totals.ObjectRequests,
                 ThisMonthSummary = thisMonthSummary,
-                PreviousMonthSummary = previousMonthSummary
+                ThisMonth = thisMonth,
+                PreviousMonthSummary = previousMonthSummary,
+                PreviousMonth = previousMonth
             };
 
             return View(viewModel);

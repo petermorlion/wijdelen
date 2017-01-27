@@ -11,44 +11,59 @@
 #endif
 }
 
-<div class="row">
-    <div class="column column-33">
+<div class="row reports-summarytotals">
+    <div class="column column-33 reports-summarytotal">
         <h2>@T("Total users")</h2>
         <strong>@Model.TotalUsers</strong>
     </div>
-    <div class="column column-33">
+    <div class="column column-33 reports-summarytotal">
         <h2>@T("Total groups")</h2>
         <strong>@Model.TotalGroups</strong>
     </div>
-    <div class="column column-34">
+    <div class="column column-34 reports-summarytotal-last">
         <h2>@T("Total requests")</h2>
         <strong>@Model.TotalObjectRequests</strong>
     </div>
 </div>
 
 <div class="row">
-    <div class="column column-50">
-        <h2>@T("This month")</h2>
+    <div class="column column-40">
+        <table class="reports-summary">
+            <thead>
+            <tr>
+                <th></th>
+                <th>@Model.ThisMonth.ToString("MM/yyyy")</th>
+                <th>@Model.PreviousMonth.ToString("MM/yyyy")</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="reports-summaryitem">@T("Requests"):</td>
+                <td>@Model.ThisMonthSummary.ObjectRequestCount</td>
+                <td>@Model.PreviousMonthSummary.ObjectRequestCount</td>
+            </tr>
+            <tr>
+                <td class="reports-summaryitem">@T("Mails"):</td>
+                <td>@Model.ThisMonthSummary.MailCount</td>
+                <td>@Model.PreviousMonthSummary.MailCount</td>
+            </tr>
+            <tr>
+                <td class="reports-summaryitem">@T("Yes"):</td>
+                <td>@Model.ThisMonthSummary.YesCount</td>
+                <td>@Model.PreviousMonthSummary.YesCount</td>
+            </tr>
+            <tr>
+                <td class="reports-summaryitem">@T("No"):</td>
+                <td>@Model.ThisMonthSummary.NoCount</td>
+                <td>@Model.PreviousMonthSummary.NoCount</td>
+            </tr>
+            <tr>
+                <td class="reports-summaryitem">@T("Not Now"):</td>
+                <td>@Model.ThisMonthSummary.NotNowCount</td>
+                <td>@Model.PreviousMonthSummary.NotNowCount</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="column column-50">
-        <h2>@T("Previous month")</h2>
-    </div>
-</div>
-
-<div class="row">
-    <div class="column column-50">
-        <strong>@T("Requests"): </strong>@Model.ThisMonthSummary.ObjectRequestCount
-    </div>
-    <div class="column-50">
-        <strong>@T("Requests"): </strong>@Model.PreviousMonthSummary.ObjectRequestCount
-    </div>
-</div>
-
-<div class="row">
-    <div class="column column-50">
-        <strong>@T("Mails"): </strong>@Model.ThisMonthSummary.MailCount
-    </div>
-    <div class="column column-50">
-        <strong>@T("Mails"): </strong>@Model.PreviousMonthSummary.MailCount
-    </div>
+    <div class="column column-60"></div>
 </div>

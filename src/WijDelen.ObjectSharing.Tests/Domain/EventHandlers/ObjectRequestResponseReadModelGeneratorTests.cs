@@ -26,13 +26,14 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var handler = new ObjectRequestResponseReadModelGenerator(repositoryMock.Object);
             var objectRequestId = Guid.NewGuid();
 
-            var e = new ObjectRequestConfirmed { ConfirmingUserId = 22, SourceId = objectRequestId };
+            var e = new ObjectRequestConfirmed { ConfirmingUserId = 22, SourceId = objectRequestId, DateTimeConfirmed = new DateTime(2017, 1, 27) };
 
             handler.Handle(e);
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
             record.Response.Should().Be(ObjectRequestAnswer.Yes);
+            record.DateTimeResponded.Should().Be(new DateTime(2017, 1, 27));
         }
 
         [Test]
@@ -48,13 +49,14 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var handler = new ObjectRequestResponseReadModelGenerator(repositoryMock.Object);
             var objectRequestId = Guid.NewGuid();
 
-            var e = new ObjectRequestDenied { DenyingUserId = 22, SourceId = objectRequestId };
+            var e = new ObjectRequestDenied { DenyingUserId = 22, SourceId = objectRequestId, DateTimeDenied = new DateTime(2017, 1, 27) };
 
             handler.Handle(e);
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
             record.Response.Should().Be(ObjectRequestAnswer.No);
+            record.DateTimeResponded.Should().Be(new DateTime(2017, 1, 27));
         }
 
         [Test]
@@ -70,13 +72,14 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var handler = new ObjectRequestResponseReadModelGenerator(repositoryMock.Object);
             var objectRequestId = Guid.NewGuid();
 
-            var e = new ObjectRequestDeniedForNow { DenyingUserId = 22, SourceId = objectRequestId };
+            var e = new ObjectRequestDeniedForNow { DenyingUserId = 22, SourceId = objectRequestId, DateTimeDenied = new DateTime(2017, 1, 27) };
 
             handler.Handle(e);
 
             record.UserId.Should().Be(22);
             record.ObjectRequestId.Should().Be(objectRequestId);
             record.Response.Should().Be(ObjectRequestAnswer.NotNow);
+            record.DateTimeResponded.Should().Be(new DateTime(2017, 1, 27));
         }
     }
 }

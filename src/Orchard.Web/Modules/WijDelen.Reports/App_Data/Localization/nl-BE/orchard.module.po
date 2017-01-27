@@ -19,14 +19,29 @@ msgid "Total requests"
 msgstr "Totaal oproepen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "This month"
-msgid "This month"
-msgstr "Deze maand"
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Previous month"
-msgid "Previous month"
-msgstr "Vorige maand"
+#| msgid "Mails"
+msgid "Mails"
+msgstr "Mails"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Ja"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "No"
+msgid "No"
+msgstr "Nee"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Not Now"
+msgid "Not Now"
+msgstr "Nu niet"
 
 #: wijdelen.objectsharing.adminmenu
 #| msgid "Reports"

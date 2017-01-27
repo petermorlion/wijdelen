@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
@@ -122,6 +121,16 @@ namespace WijDelen.ObjectSharing {
             );
 
             return 10;
+        }
+
+        public int UpdateFrom10() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestResponseRecord).Name, table => table
+                .AddColumn<DateTime>("DateTimeResponded"));
+
+            SchemaBuilder.ExecuteSql($"UPDATE {SchemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name)} SET DateTimeResponded = SYSDATETIME()");
+            SchemaBuilder.ExecuteSql($"ALTER TABLE {SchemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name)} ALTER COLUMN DateTimeResponded DATETIME NOT NULL");
+
+            return 11;
         }
     }
 }

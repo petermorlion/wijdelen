@@ -19,7 +19,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.ConfirmingUserId,
-                Response = ObjectRequestAnswer.Yes
+                Response = ObjectRequestAnswer.Yes,
+                DateTimeResponded = e.DateTimeConfirmed
             });
         }
 
@@ -27,7 +28,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.DenyingUserId,
-                Response = ObjectRequestAnswer.No
+                Response = ObjectRequestAnswer.No,
+                DateTimeResponded = e.DateTimeDenied
             });
         }
 
@@ -35,7 +37,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _repository.Create(new ObjectRequestResponseRecord {
                 ObjectRequestId = e.SourceId,
                 UserId = e.DenyingUserId,
-                Response = ObjectRequestAnswer.NotNow
+                Response = ObjectRequestAnswer.NotNow,
+                DateTimeResponded = e.DateTimeDenied
             });
         }
     }

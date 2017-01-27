@@ -57,6 +57,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Confirm(3);
 
             objectRequest.Events.Last().As<ObjectRequestConfirmed>().ConfirmingUserId.Should().Be(3);
+            objectRequest.Events.Last().As<ObjectRequestConfirmed>().DateTimeConfirmed.Should().NotBe(default(DateTime));
             objectRequest.Version.Should().Be(1);
             objectRequest.ConfirmingUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
@@ -68,6 +69,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Deny(3);
 
             objectRequest.Events.Last().As<ObjectRequestDenied>().DenyingUserId.Should().Be(3);
+            objectRequest.Events.Last().As<ObjectRequestDenied>().DateTimeDenied.Should().NotBe(default(DateTime));
             objectRequest.Version.Should().Be(1);
             objectRequest.DenyingUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
@@ -79,6 +81,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.DenyForNow(3);
 
             objectRequest.Events.Last().As<ObjectRequestDeniedForNow>().DenyingUserId.Should().Be(3);
+            objectRequest.Events.Last().As<ObjectRequestDeniedForNow>().DateTimeDenied.Should().NotBe(default(DateTime));
             objectRequest.Version.Should().Be(1);
             objectRequest.DenyingForNowUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
