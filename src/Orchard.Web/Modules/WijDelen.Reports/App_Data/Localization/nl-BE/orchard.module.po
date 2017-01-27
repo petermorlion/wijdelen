@@ -68,6 +68,36 @@ msgstr "Tot"
 msgid "Apply"
 msgstr "Toepassen"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groep"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Mails"
+msgid "Mails"
+msgstr "Mails"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Ja"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "No"
+msgid "No"
+msgstr "Nee"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Not Now"
+msgid "Not Now"
+msgstr "Nu niet"
+
 #: wijdelen.reports.adminmenu
 #| msgid "Reports"
 msgid "Reports"

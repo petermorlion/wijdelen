@@ -1,3 +1,7 @@
+@import '../node_modules/milligram-less/dist/_Color.less';
+@import '../node_modules/milligram-less/dist/_Grid.less';
+@import '../node_modules/milligram-less/dist/_Table.less';
+
 @gray: #e1e1e1;
 
 div.reports-summarytotals {
@@ -7,24 +11,21 @@ div.reports-summarytotal {
     border-right: 1px solid @gray;
     padding-left: 20px;
 }
-@import '../node_modules/milligram-less/dist/_Color.less';
-@import '../node_modules/milligram-less/dist/_Grid.less';
-@import '../node_modules/milligram-less/dist/_Table.less';
 
 div.reports-summarytotal-last {
     border-right: 0;
 }
 
-table.reports-summary thead tr th { 
+table.reports-numbers thead tr th { 
     font-weight: bold;
 }
 
-table.reports-summary tr td, table.reports-summary tr th {
+table.reports-numbers tr td, table.reports-numbers tr th {
     border-bottom: 1px solid @gray;
     padding: 10px;
 }
 
-table.reports-summary tr td.reports-summaryitem {
+table.reports-numbers tr td.reports-numbersitem {
     font-weight: bold;
 }
 

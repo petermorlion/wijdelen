@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -83,6 +84,25 @@ namespace WijDelen.Reports.Controllers {
             {
                 StartDate = startDateTime.Value,
                 StopDate = stopDateTime.Value
+            };
+
+            viewModel.GroupDetails = new List<GroupDetailsViewModel> {
+                new GroupDetailsViewModel {
+                    GroupName = "Test 1",
+                    MailCount = 1,
+                    NoCount = 2,
+                    NotNowCount = 3,
+                    RequestCount = 4,
+                    YesCount = 5
+                },
+                new GroupDetailsViewModel {
+                    GroupName = "Test 2",
+                    MailCount = 6,
+                    NoCount = 7,
+                    NotNowCount = 8,
+                    RequestCount = 9,
+                    YesCount = 10
+                }
             };
 
             return View(viewModel);

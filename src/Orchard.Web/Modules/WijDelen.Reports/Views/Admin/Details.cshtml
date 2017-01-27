@@ -34,6 +34,37 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="column">
+        <table class="reports-numbers">
+            <thead>
+            <tr>
+                <th>@T("Group")</th>
+                <th>@T("Requests")</th>
+                <th>@T("Mail")</th>
+                <th>@T("Yes")</th>
+                <th>@T("No")</th>
+                <th>@T("Not Now")</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                foreach (var groupDetailsViewModel in Model.GroupDetails) {
+                    <tr>
+                        <td class="reports-numbersitem">@groupDetailsViewModel.GroupName</td>
+                        <td>@groupDetailsViewModel.RequestCount</td>
+                        <td>@groupDetailsViewModel.MailCount</td>
+                        <td>@groupDetailsViewModel.YesCount</td>
+                        <td>@groupDetailsViewModel.NoCount</td>
+                        <td>@groupDetailsViewModel.NotNowCount</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 @using (Script.Foot()) {
     @Display.CalendarsPickerLocalization()
 

@@ -28,7 +28,7 @@
 
 <div class="row">
     <div class="column column-50">
-        <table class="reports-summary">
+        <table class="reports-numbers">
             <thead>
             <tr>
                 <th></th>
@@ -38,34 +38,34 @@
             </thead>
             <tbody>
             <tr>
-                <td class="reports-summaryitem">@T("Requests"):</td>
+                <td class="reports-numbersitem">@T("Requests"):</td>
                 <td>@Model.ThisMonthSummary.ObjectRequestCount</td>
                 <td>@Model.PreviousMonthSummary.ObjectRequestCount</td>
             </tr>
             <tr>
-                <td class="reports-summaryitem">@T("Mails"):</td>
+                <td class="reports-numbersitem">@T("Mails"):</td>
                 <td>@Model.ThisMonthSummary.MailCount</td>
                 <td>@Model.PreviousMonthSummary.MailCount</td>
             </tr>
             <tr>
-                <td class="reports-summaryitem">@T("Yes"):</td>
+                <td class="reports-numbersitem">@T("Yes"):</td>
                 <td>@Model.ThisMonthSummary.YesCount</td>
                 <td>@Model.PreviousMonthSummary.YesCount</td>
             </tr>
             <tr>
-                <td class="reports-summaryitem">@T("No"):</td>
+                <td class="reports-numbersitem">@T("No"):</td>
                 <td>@Model.ThisMonthSummary.NoCount</td>
                 <td>@Model.PreviousMonthSummary.NoCount</td>
             </tr>
             <tr>
-                <td class="reports-summaryitem">@T("Not Now"):</td>
+                <td class="reports-numbersitem">@T("Not Now"):</td>
                 <td>@Model.ThisMonthSummary.NotNowCount</td>
                 <td>@Model.PreviousMonthSummary.NotNowCount</td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div class="column column-50">
+    <div class="column column-40">
         <h2>@Model.ThisMonth.ToString("MM/yyyy")</h2>
         @if (Model.GroupMonthSummaries.Any()) {
             <table class="reports-groupmonth">
