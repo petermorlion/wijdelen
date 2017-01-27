@@ -63,6 +63,11 @@ msgstr "Van"
 msgid "To"
 msgstr "Tot"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Apply"
+msgid "Apply"
+msgstr "Toepassen"
+
 #: wijdelen.reports.adminmenu
 #| msgid "Reports"
 msgid "Reports"
