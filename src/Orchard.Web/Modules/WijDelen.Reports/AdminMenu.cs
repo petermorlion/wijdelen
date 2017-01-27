@@ -24,8 +24,16 @@ namespace WijDelen.Reports {
                 .Add(subItem => subItem
                     .Caption(T("Reports"))
                     .Position("5")
-                    .Action("Index", "Admin", new { area = "WijDelen.Reports" })
-                    .Permission(StandardPermissions.SiteOwner)));
+                    .LinkToFirstChild(true)
+                    .Permission(StandardPermissions.SiteOwner)
+                    .Add(tab => tab
+                        .Caption(T("Overview"))
+                        .Action("Index", "Admin", new { area = "WijDelen.Reports" })
+                        .LocalNav())
+                    .Add(tab => tab
+                        .Caption(T("Details"))
+                        .Action("Details", "Admin", new { area = "WijDelen.Reports" })
+                        .LocalNav())));
         }
     }
 }

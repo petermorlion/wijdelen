@@ -52,6 +52,10 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
+        public ActionResult Details() {
+            return View();
+        }
+
         public Localizer T { get; set; }
     }
 }

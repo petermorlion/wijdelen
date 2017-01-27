@@ -155,7 +155,9 @@
       <Name>WijDelen.UserImport</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Admin\Details.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

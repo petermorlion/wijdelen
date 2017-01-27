@@ -48,7 +48,22 @@ msgstr "Nu niet"
 msgid "Group"
 msgstr "Groep"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Details"
+msgid "Details"
+msgstr "Details"
+
 #: wijdelen.reports.adminmenu
 #| msgid "Reports"
 msgid "Reports"
 msgstr "Rapporten"
+
+#: wijdelen.reports.adminmenu
+#| msgid "Overview"
+msgid "Overview"
+msgstr "Overzicht"
+
+#: wijdelen.reports.adminmenu
+#| msgid "Details"
+msgid "Details"
+msgstr "Details"
