@@ -9,4 +9,4 @@ Features:
     WijDelen.Reports:
         Description: Reports for Peergroups
 		Category: Peergroups
-		Dependencies: Orchard.Users, WijDelen.UserImport, WijDelen.ObjectSharing
+		Dependencies: Orchard.jQuery, Orchard.Users, WijDelen.UserImport, WijDelen.ObjectSharing

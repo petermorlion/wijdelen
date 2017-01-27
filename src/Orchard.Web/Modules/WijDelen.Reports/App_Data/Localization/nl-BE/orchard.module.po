@@ -53,6 +53,16 @@ msgstr "Groep"
 msgid "Details"
 msgstr "Details"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "From"
+msgid "From"
+msgstr "Van"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "To"
+msgid "To"
+msgstr "Tot"
+
 #: wijdelen.reports.adminmenu
 #| msgid "Reports"
 msgid "Reports"

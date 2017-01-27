@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Orchard.Core.Common.ViewModels;
 using Orchard.Localization;
+using Orchard.Localization.Services;
 using WijDelen.Reports.Queries;
 using WijDelen.Reports.ViewModels;
 
@@ -10,13 +13,15 @@ namespace WijDelen.Reports.Controllers {
         private readonly ITotalsQuery _totalsQuery;
         private readonly IMonthSummaryQuery _monthSummaryQuery;
         private readonly IDateTimeProvider _dateTimeProvider;
-        private IGroupMonthSummaryQuery _groupMonthSummaryQuery;
+        private readonly IGroupMonthSummaryQuery _groupMonthSummaryQuery;
+        private readonly IDateLocalizationServices _dateLocalizationServices;
 
-        public AdminController(ITotalsQuery totalsQuery, IMonthSummaryQuery monthSummaryQuery, IDateTimeProvider dateTimeProvider, IGroupMonthSummaryQuery groupMonthSummaryQuery) {
+        public AdminController(ITotalsQuery totalsQuery, IMonthSummaryQuery monthSummaryQuery, IDateTimeProvider dateTimeProvider, IGroupMonthSummaryQuery groupMonthSummaryQuery, IDateLocalizationServices dateLocalizationServices) {
             _totalsQuery = totalsQuery;
             _monthSummaryQuery = monthSummaryQuery;
             _dateTimeProvider = dateTimeProvider;
             _groupMonthSummaryQuery = groupMonthSummaryQuery;
+            _dateLocalizationServices = dateLocalizationServices;
         }
 
         public ActionResult Index() {
@@ -52,8 +57,35 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Details() {
-            return View();
+        public ActionResult Details(string startDate, string stopDate)
+        {
+            var startDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(startDate);
+            var stopDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(stopDate);
+
+            if (!startDateTime.HasValue && !stopDateTime.HasValue)
+            {
+                var utcNow = _dateTimeProvider.UtcNow();
+                startDateTime = new DateTime(utcNow.Year, utcNow.Month, 1);
+                stopDateTime = new DateTime(utcNow.Year, utcNow.Month, DateTime.DaysInMonth(utcNow.Year, utcNow.Month));
+            }
+
+            if (!startDateTime.HasValue && stopDateTime.HasValue)
+            {
+                startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
+            }
+
+            if (!stopDateTime.HasValue && startDateTime.HasValue)
+            {
+                stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
+            }
+
+            var viewModel = new DetailsViewModel
+            {
+                StartDate = startDateTime.Value,
+                StopDate = stopDateTime.Value
+            };
+
+            return View(viewModel);
         }
 
         public Localizer T { get; set; }

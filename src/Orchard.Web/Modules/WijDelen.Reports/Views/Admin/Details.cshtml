@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WijDelen.Reports.ViewModels.DetailsViewModel
+
+@{
     Layout.Title = T("Details").ToString();
 
 #if DEBUG
@@ -6,6 +8,47 @@
 #else
     Style.Include("Styles.min.css");
 #endif
+
+    Style.Require("jQueryCalendars_Picker");
+    Style.Require("jQueryTimeEntry");
+    Style.Require("jQueryDateTimeEditor");
+
+    Script.Require("jQueryCalendars_Picker").AtFoot();
+    Script.Require("jQueryTimeEntry").AtFoot();
 }
 
-<p>Under construction</p>
+<div class="row">
+    <div class="column">
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("Details", "Admin", new {Area = "WijDelen.Reports"}), FormMethod.Get)) {
+            @Html.ValidationSummary()
+
+            @Html.LabelFor(x => x.StartDate, T("From").Text, new { @class= "reportsdetails-startdatelabel reportsdetails-startdatelabel-first" })
+            @Html.TextBoxFor(m => m.StartDate, "{0:d/MM/yyyy}", new { @class = "text", id = "reportsdetails-startdate" })
+
+            @Html.LabelFor(x => x.StopDate, T("To").Text, new { @class = "reportsdetails-stopdatelabel" })
+
+            @Html.TextBoxFor(m => m.StopDate, "{0:d/MM/yyyy}", new {@class= "text", id= "reportsdetails-stopdate" })
+
+            <button type="submit">@T("Submit")</button>
+        }
+    </div>
+</div>
+
+@using (Script.Foot()) {
+    @Display.CalendarsPickerLocalization()
+
+    <script type="text/javascript">
+        $(function () {
+            var calendarPickerOptions = {
+                showAnim: "",
+                renderer: $.extend({}, $.calendarsPicker.themeRollerRenderer, {
+                    picker: "<div {popup:start} id='ui-datepicker-div'{popup:end} class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all{inline:start} ui-datepicker-inline{inline:end}'><div class='ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all'>{link:prev}{link:today}{link:next}</div>{months}{popup:start}{popup:end}<div class='ui-helper-clearfix'></div></div>",
+                    month: "<div class='ui-datepicker-group'><div class='ui-datepicker-month ui-helper-clearfix'>{monthHeader:MM yyyy}</div><table class='ui-datepicker-calendar'><thead>{weekHeader}</thead><tbody>{weeks}</tbody></table></div>"
+                })
+            };
+
+            $("#reportsdetails-startdate").calendarsPicker(calendarPickerOptions);
+            $("#reportsdetails-stopdate").calendarsPicker(calendarPickerOptions);
+        });
+    </script>
+}

@@ -5,6 +5,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Localization;
+using Orchard.Localization.Services;
 using WijDelen.Reports.Controllers;
 using WijDelen.Reports.Models;
 using WijDelen.Reports.Queries;
@@ -19,7 +20,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery));
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), default(IDateLocalizationServices));
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -28,7 +29,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         }
 
         [Test]
-        public void ShouldReturnViewWithViewModel() {
+        public void WhenRequestingOverview_ShouldReturnViewWithViewModel() {
             var totalsQueryMock = new Mock<ITotalsQuery>();
             totalsQueryMock.Setup(x => x.GetResults()).Returns(new Totals {
                 Groups = 15,
@@ -52,7 +53,7 @@ namespace WijDelen.Reports.Tests.Controllers {
             };
             groupMonthSummaryQueryMock.Setup(x => x.GetResults(2017, 1)).Returns(groupMonthSummaries);
 
-            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object, groupMonthSummaryQueryMock.Object);
+            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object, groupMonthSummaryQueryMock.Object, default(IDateLocalizationServices));
 
             var result = controller.Index();
 
@@ -70,6 +71,88 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.ThisMonth.Should().Be(new DateTime(2017, 1, 1));
             viewModel.PreviousMonth.Should().Be(new DateTime(2016, 12, 1));
             viewModel.GroupMonthSummaries.Should().BeEquivalentTo(groupMonthSummaries).And.BeInDescendingOrder(x => x.ObjectRequestCount);
+        }
+
+        [Test]
+        public void WhenRequestingDetails_ShouldReturnDefaultView() {
+            var dateTimeProviderMock = new Mock<IDateTimeProvider>();
+            dateTimeProviderMock.Setup(x => x.UtcNow()).Returns(new DateTime(2017, 1, 26, 0, 0, 0, DateTimeKind.Utc));
+
+            var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns((DateTime?)null);
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns((DateTime?)null);
+
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), dateTimeProviderMock.Object, default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object);
+
+            var result = controller.Details(null, null);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult) result;
+            var viewModel = (DetailsViewModel) viewResult.Model;
+            viewModel.StartDate.Should().Be(new DateTime(2017, 1, 1));
+            viewModel.StopDate.Should().Be(new DateTime(2017, 1, 31));
+        }
+
+        [Test]
+        public void WhenRequestingDetailsForPeriod_ShouldReturnViewForPeriod() {
+            var startDate = new DateTime(2015, 1, 1);
+            var stopDate = new DateTime(2015, 1, 31);
+
+            var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns(startDate);
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns(stopDate);
+
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object);
+
+            var result = controller.Details("startDate", "stopDate");
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult) result;
+            var viewModel = (DetailsViewModel) viewResult.Model;
+            viewModel.StartDate.Should().Be(new DateTime(2015, 1, 1));
+            viewModel.StopDate.Should().Be(new DateTime(2015, 1, 31));
+        }
+
+        [Test]
+        public void WhenRequestingDetailsWithOnlyStartDate_ShouldReturnViewWithStopDate() {
+            var startDate = new DateTime(2015, 1, 15);
+
+            var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns(startDate);
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns((DateTime?)null);
+
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object);
+
+            var result = controller.Details("startDate", "stopDate");
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult) result;
+            var viewModel = (DetailsViewModel) viewResult.Model;
+            viewModel.StartDate.Should().Be(new DateTime(2015, 1, 15));
+            viewModel.StopDate.Should().Be(new DateTime(2015, 1, 31));
+        }
+
+        [Test]
+        public void WhenRequestingDetailsWithOnlyStopDate_ShouldReturnViewWithStartDate() {
+            var stopDate = new DateTime(2015, 1, 15);
+
+            var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns((DateTime?) null);
+            dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns(stopDate);
+
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object);
+
+            var result = controller.Details("startDate", "stopDate");
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult) result;
+            var viewModel = (DetailsViewModel) viewResult.Model;
+            viewModel.StartDate.Should().Be(new DateTime(2015, 1, 1));
+            viewModel.StopDate.Should().Be(new DateTime(2015, 1, 15));
         }
     }
 }
