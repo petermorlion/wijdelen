@@ -48,7 +48,7 @@ msgstr "Nu niet"
 msgid "Group"
 msgstr "Groep"
 
-#: wijdelen.objectsharing.adminmenu
+#: wijdelen.reports.adminmenu
 #| msgid "Reports"
 msgid "Reports"
 msgstr "Rapporten"
