@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using Orchard.Core.Common.ViewModels;
 using Orchard.Localization;
 using Orchard.Localization.Services;
 using WijDelen.Reports.Queries;
@@ -16,8 +14,16 @@ namespace WijDelen.Reports.Controllers {
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IGroupMonthSummaryQuery _groupMonthSummaryQuery;
         private readonly IDateLocalizationServices _dateLocalizationServices;
+        private readonly IGroupDetailsQuery _groupDetailsQuery;
 
-        public AdminController(ITotalsQuery totalsQuery, IMonthSummaryQuery monthSummaryQuery, IDateTimeProvider dateTimeProvider, IGroupMonthSummaryQuery groupMonthSummaryQuery, IDateLocalizationServices dateLocalizationServices) {
+        public AdminController(
+            ITotalsQuery totalsQuery, 
+            IMonthSummaryQuery monthSummaryQuery, 
+            IDateTimeProvider dateTimeProvider,
+            IGroupMonthSummaryQuery groupMonthSummaryQuery, 
+            IDateLocalizationServices dateLocalizationServices,
+            IGroupDetailsQuery groupDetailsQuery) {
+            _groupDetailsQuery = groupDetailsQuery;
             _totalsQuery = totalsQuery;
             _monthSummaryQuery = monthSummaryQuery;
             _dateTimeProvider = dateTimeProvider;
@@ -86,24 +92,7 @@ namespace WijDelen.Reports.Controllers {
                 StopDate = stopDateTime.Value
             };
 
-            viewModel.GroupDetails = new List<GroupDetailsViewModel> {
-                new GroupDetailsViewModel {
-                    GroupName = "Test 1",
-                    MailCount = 1,
-                    NoCount = 2,
-                    NotNowCount = 3,
-                    RequestCount = 4,
-                    YesCount = 5
-                },
-                new GroupDetailsViewModel {
-                    GroupName = "Test 2",
-                    MailCount = 6,
-                    NoCount = 7,
-                    NotNowCount = 8,
-                    RequestCount = 9,
-                    YesCount = 10
-                }
-            };
+            viewModel.GroupDetails = _groupDetailsQuery.GetResults(startDateTime.Value, stopDateTime.Value).OrderBy(x => x.GroupName);
 
             return View(viewModel);
         }
