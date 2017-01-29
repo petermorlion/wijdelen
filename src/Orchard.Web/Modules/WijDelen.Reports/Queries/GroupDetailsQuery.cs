@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Orchard.Data;
+using Orchard.Data.Migration.Interpreters;
+using Orchard.Data.Migration.Schema;
 using WijDelen.ObjectSharing.Domain.Enums;
+using WijDelen.ObjectSharing.Models;
 using WijDelen.Reports.ViewModels;
 using WijDelen.UserImport.Services;
 
@@ -10,10 +13,12 @@ namespace WijDelen.Reports.Queries {
     public class GroupDetailsQuery : IGroupDetailsQuery {
         private readonly IGroupService _groupService;
         private readonly ITransactionManager _transactionManager;
+        private readonly IDataMigrationInterpreter _interpreter;
 
-        public GroupDetailsQuery(IGroupService groupService, ITransactionManager transactionManager) {
+        public GroupDetailsQuery(IGroupService groupService, ITransactionManager transactionManager, IDataMigrationInterpreter interpreter) {
             _groupService = groupService;
             _transactionManager = transactionManager;
+            _interpreter = interpreter;
         }
 
         public IEnumerable<GroupDetailsViewModel> GetResults(DateTime startDate, DateTime stopDate) {
@@ -27,9 +32,13 @@ namespace WijDelen.Reports.Queries {
                 stopDate = new DateTime(stopDate.Year, stopDate.Month, stopDate.Day, 23, 59, 59);
             }
 
-            // TODO: table names
+            var schemaBuilder = new SchemaBuilder(_interpreter, "WijDelen.ObjectSharing", s => s.Replace(".", "_") + "_");
+            var objectRequestRecord = schemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name);
+            var objectRequestMailRecord = schemaBuilder.TableDbName(typeof(ObjectRequestMailRecord).Name);
+            var objectRequestResponseRecord = schemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name);
+
             var requestsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(r.AggregateId) " +
-                                               "FROM WijDelen_ObjectSharing_ObjectRequestRecord r " +
+                                               $"FROM {objectRequestRecord} r " +
                                                "WHERE r.CreatedDateTime >= :startDate AND r.CreatedDateTime <= :stopDate " +
                                                "GROUP BY r.GroupId")
                                 .SetParameter("startDate", startDate)
@@ -38,8 +47,8 @@ namespace WijDelen.Reports.Queries {
             var requests = requestsQuery.List<object[]>();
 
             var mailsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(m.EmailAddress) " +
-                                                    "FROM WijDelen_ObjectSharing_ObjectRequestRecord r " +
-                                                    "    INNER JOIN WijDelen_ObjectSharing_ObjectRequestMailRecord m " +
+                                                    $"FROM {objectRequestRecord} r " +
+                                                    $"    INNER JOIN {objectRequestMailRecord} m " +
                                                     "        ON r.AggregateId = m.ObjectRequestId " +
                                                     "WHERE m.SentDateTime >= :startDate " +
                                                     "    AND m.SentDateTime <= :stopDate " +
@@ -50,8 +59,8 @@ namespace WijDelen.Reports.Queries {
             var mails = mailsQuery.List<object[]>();
 
             var responsesQuery = session.CreateSQLQuery("SELECT r.GroupId, re.Response, COUNT(re.DateTimeResponded) " +
-                                                        "FROM WijDelen_ObjectSharing_ObjectRequestRecord r " +
-                                                        "    INNER JOIN WijDelen_ObjectSharing_ObjectRequestResponseRecord re " +
+                                                        $"FROM {objectRequestRecord} r " +
+                                                        $"    INNER JOIN {objectRequestResponseRecord} re " +
                                                         "        ON r.AggregateId = re.ObjectRequestId " +
                                                         "WHERE re.DateTimeResponded >= :startDate " +
                                                         "    AND re.DateTimeResponded <= :stopDate " +
