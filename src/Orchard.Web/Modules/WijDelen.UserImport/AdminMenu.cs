@@ -17,6 +17,7 @@ namespace WijDelen.UserImport {
         public void GetNavigation(NavigationBuilder builder) {
             builder.Add(item => item
                 .Caption(T("Peergroups"))
+                .Position("0")
                 .Add(subItem => subItem
                     .Caption(T("User Import"))
                     .Position("3")

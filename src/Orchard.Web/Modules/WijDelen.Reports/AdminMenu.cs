@@ -21,6 +21,7 @@ namespace WijDelen.Reports {
         {
             builder.Add(item => item
                 .Caption(T("Peergroups"))
+                .Position("0")
                 .Add(subItem => subItem
                     .Caption(T("Reports"))
                     .Position("5")

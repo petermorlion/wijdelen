@@ -17,7 +17,7 @@ namespace WijDelen.ObjectSharing {
                 .AddImageSet("peergroups")
                 .Add(item => item
                     .Caption(T("Peergroups"))
-                    .Position("13")
+                    .Position("0")
                     .Action("Index", "Archetypes", new {area = "WijDelen.ObjectSharing"})
                     .LinkToFirstChild(false)
                     .Add(subItem => subItem
