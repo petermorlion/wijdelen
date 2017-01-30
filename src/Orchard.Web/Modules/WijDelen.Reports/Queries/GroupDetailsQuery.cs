@@ -4,6 +4,7 @@ using System.Linq;
 using Orchard.Data;
 using Orchard.Data.Migration.Interpreters;
 using Orchard.Data.Migration.Schema;
+using Orchard.Environment.Configuration;
 using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.Reports.ViewModels;
@@ -13,12 +14,22 @@ namespace WijDelen.Reports.Queries {
     public class GroupDetailsQuery : IGroupDetailsQuery {
         private readonly IGroupService _groupService;
         private readonly ITransactionManager _transactionManager;
-        private readonly IDataMigrationInterpreter _interpreter;
+        private readonly ShellSettings _shellSettings;
 
-        public GroupDetailsQuery(IGroupService groupService, ITransactionManager transactionManager, IDataMigrationInterpreter interpreter) {
+        public GroupDetailsQuery(IGroupService groupService, ITransactionManager transactionManager, ShellSettings shellSettings) {
             _groupService = groupService;
             _transactionManager = transactionManager;
-            _interpreter = interpreter;
+            _shellSettings = shellSettings;
+        }
+
+        private string GetFullTableName(Type type) {
+            var tablePrefix = _shellSettings.DataTablePrefix;
+            var featurePrefix = "WijDelen_ObjectSharing";
+            if (string.IsNullOrWhiteSpace(tablePrefix)) {
+                return $"{featurePrefix}_{type.Name}";
+            }
+
+            return $"{tablePrefix}_{featurePrefix}_{type.Name}";
         }
 
         public IEnumerable<GroupDetailsViewModel> GetResults(DateTime startDate, DateTime stopDate) {
@@ -32,10 +43,9 @@ namespace WijDelen.Reports.Queries {
                 stopDate = new DateTime(stopDate.Year, stopDate.Month, stopDate.Day, 23, 59, 59);
             }
 
-            var schemaBuilder = new SchemaBuilder(_interpreter, "WijDelen.ObjectSharing", s => s.Replace(".", "_") + "_");
-            var objectRequestRecord = schemaBuilder.TableDbName(typeof(ObjectRequestRecord).Name);
-            var objectRequestMailRecord = schemaBuilder.TableDbName(typeof(ObjectRequestMailRecord).Name);
-            var objectRequestResponseRecord = schemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name);
+            var objectRequestRecord = GetFullTableName(typeof(ObjectRequestRecord));
+            var objectRequestMailRecord = GetFullTableName(typeof(ObjectRequestMailRecord));
+            var objectRequestResponseRecord = GetFullTableName(typeof(ObjectRequestResponseRecord));
 
             var requestsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(r.AggregateId) " +
                                                $"FROM {objectRequestRecord} r " +
