@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Orchard.Data;
-using Orchard.Data.Migration.Interpreters;
-using Orchard.Data.Migration.Schema;
 using Orchard.Environment.Configuration;
 using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.Reports.ViewModels;
-using WijDelen.UserImport.Services;
 
 namespace WijDelen.Reports.Queries {
     public class GroupDetailsQuery : IGroupDetailsQuery {
-        private readonly IGroupService _groupService;
+        private readonly IGroupsQuery _groupsQuery;
         private readonly ITransactionManager _transactionManager;
         private readonly ShellSettings _shellSettings;
 
-        public GroupDetailsQuery(IGroupService groupService, ITransactionManager transactionManager, ShellSettings shellSettings) {
-            _groupService = groupService;
+        public GroupDetailsQuery(IGroupsQuery groupsQuery, ITransactionManager transactionManager, ShellSettings shellSettings) {
+            _groupsQuery = groupsQuery;
             _transactionManager = transactionManager;
             _shellSettings = shellSettings;
         }
@@ -32,10 +29,14 @@ namespace WijDelen.Reports.Queries {
             return $"{tablePrefix}_{featurePrefix}_{type.Name}";
         }
 
-        public IEnumerable<GroupDetailsViewModel> GetResults(DateTime startDate, DateTime stopDate) {
+        public IEnumerable<GroupDetailsViewModel> GetResults(int? groupId, DateTime startDate, DateTime stopDate) {
             var results = new List<GroupDetailsViewModel>();
 
-            var groups = _groupService.GetGroups();
+            var groups = _groupsQuery.GetResults();
+
+            if (groupId.HasValue) {
+                groups = groups.Where(x => x.Id == groupId.Value);
+            }
 
             var session = _transactionManager.GetSession();
 
@@ -50,9 +51,14 @@ namespace WijDelen.Reports.Queries {
             var requestsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(r.AggregateId) " +
                                                $"FROM {objectRequestRecord} r " +
                                                "WHERE r.CreatedDateTime >= :startDate AND r.CreatedDateTime <= :stopDate " +
+                                               (groupId.HasValue ? "AND r.GroupId = :groupId " : "") +
                                                "GROUP BY r.GroupId")
                                 .SetParameter("startDate", startDate)
                                 .SetParameter("stopDate", stopDate);
+
+            if (groupId.HasValue) {
+                requestsQuery.SetParameter("groupId", groupId.Value);
+            }
 
             var requests = requestsQuery.List<object[]>();
 
@@ -62,9 +68,14 @@ namespace WijDelen.Reports.Queries {
                                                     "        ON r.AggregateId = m.ObjectRequestId " +
                                                     "WHERE m.SentDateTime >= :startDate " +
                                                     "    AND m.SentDateTime <= :stopDate " +
+                                                    (groupId.HasValue ? "AND r.GroupId = :groupId " : "") +
                                                     "GROUP BY r.GroupId")
                                 .SetParameter("startDate", startDate)
                                 .SetParameter("stopDate", stopDate);
+
+            if (groupId.HasValue) {
+                mailsQuery.SetParameter("groupId", groupId.Value);
+            }
 
             var mails = mailsQuery.List<object[]>();
 
@@ -74,9 +85,14 @@ namespace WijDelen.Reports.Queries {
                                                         "        ON r.AggregateId = re.ObjectRequestId " +
                                                         "WHERE re.DateTimeResponded >= :startDate " +
                                                         "    AND re.DateTimeResponded <= :stopDate " +
+                                                        (groupId.HasValue ? "AND r.GroupId = :groupId " : "") +
                                                         "GROUP BY r.GroupId, re.Response")
                                 .SetParameter("startDate", startDate)
                                 .SetParameter("stopDate", stopDate);
+
+            if (groupId.HasValue) {
+                responsesQuery.SetParameter("groupId", groupId.Value);
+            }
 
             var responses = responsesQuery.List<object[]>();
 

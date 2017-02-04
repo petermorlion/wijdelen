@@ -15,15 +15,18 @@ namespace WijDelen.Reports.Controllers {
         private readonly IGroupMonthSummaryQuery _groupMonthSummaryQuery;
         private readonly IDateLocalizationServices _dateLocalizationServices;
         private readonly IGroupDetailsQuery _groupDetailsQuery;
+        private readonly IGroupsQuery _groupsQuery;
 
         public AdminController(
-            ITotalsQuery totalsQuery, 
-            IMonthSummaryQuery monthSummaryQuery, 
+            ITotalsQuery totalsQuery,
+            IMonthSummaryQuery monthSummaryQuery,
             IDateTimeProvider dateTimeProvider,
-            IGroupMonthSummaryQuery groupMonthSummaryQuery, 
+            IGroupMonthSummaryQuery groupMonthSummaryQuery,
             IDateLocalizationServices dateLocalizationServices,
-            IGroupDetailsQuery groupDetailsQuery) {
+            IGroupDetailsQuery groupDetailsQuery,
+            IGroupsQuery groupsQuery) {
             _groupDetailsQuery = groupDetailsQuery;
+            _groupsQuery = groupsQuery;
             _totalsQuery = totalsQuery;
             _monthSummaryQuery = monthSummaryQuery;
             _dateTimeProvider = dateTimeProvider;
@@ -64,35 +67,38 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Details(string startDate, string stopDate)
-        {
+        public ActionResult Details(int? selectedGroupId, string startDate, string stopDate) {
             var startDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(startDate);
             var stopDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(stopDate);
 
-            if (!startDateTime.HasValue && !stopDateTime.HasValue)
-            {
+            if (!startDateTime.HasValue && !stopDateTime.HasValue) {
                 var utcNow = _dateTimeProvider.UtcNow();
                 startDateTime = new DateTime(utcNow.Year, utcNow.Month, 1);
                 stopDateTime = new DateTime(utcNow.Year, utcNow.Month, DateTime.DaysInMonth(utcNow.Year, utcNow.Month));
             }
 
-            if (!startDateTime.HasValue && stopDateTime.HasValue)
-            {
+            if (!startDateTime.HasValue && stopDateTime.HasValue) {
                 startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
             }
 
-            if (!stopDateTime.HasValue && startDateTime.HasValue)
-            {
+            if (!stopDateTime.HasValue && startDateTime.HasValue) {
                 stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
             }
 
-            var viewModel = new DetailsViewModel
-            {
+            var groups = _groupsQuery.GetResults().OrderBy(x => x.Name).ToList();
+            groups.Insert(0, new GroupViewModel { Id = 0, Name = "" });
+
+            var viewModel = new DetailsViewModel {
                 StartDate = startDateTime.Value,
-                StopDate = stopDateTime.Value
+                StopDate = stopDateTime.Value,
+                Groups = groups
             };
 
-            viewModel.GroupDetails = _groupDetailsQuery.GetResults(startDateTime.Value, stopDateTime.Value).OrderBy(x => x.GroupName);
+            if (selectedGroupId.HasValue && selectedGroupId.Value == 0) {
+                selectedGroupId = null;
+            }
+            
+            viewModel.GroupDetails = _groupDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value).OrderBy(x => x.GroupName);
 
             return View(viewModel);
         }

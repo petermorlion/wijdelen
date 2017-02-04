@@ -22,10 +22,13 @@
         @using (Html.BeginFormAntiForgeryPost(Url.Action("Details", "Admin", new {Area = "WijDelen.Reports"}), FormMethod.Get)) {
             @Html.ValidationSummary()
 
-            @Html.LabelFor(x => x.StartDate, T("From").Text, new { @class= "reportsdetails-startdatelabel reportsdetails-startdatelabel-first" })
+            @Html.LabelFor(x => x.StartDate, T("Group").Text, new { @class = "reportsdetails-label reportsdetails-label-first" })
+            @Html.DropDownListFor(x => x.SelectedGroupId, new SelectList(Model.Groups, "Id", "Name"))
+
+            @Html.LabelFor(x => x.StartDate, T("From").Text, new { @class= "reportsdetails-label" })
             @Html.TextBoxFor(m => m.StartDate, "{0:d/MM/yyyy}", new { @class = "text", id = "reportsdetails-startdate" })
 
-            @Html.LabelFor(x => x.StopDate, T("To").Text, new { @class = "reportsdetails-stopdatelabel" })
+            @Html.LabelFor(x => x.StopDate, T("To").Text, new { @class = "reportsdetails-label" })
 
             @Html.TextBoxFor(m => m.StopDate, "{0:d/MM/yyyy}", new {@class= "text", id= "reportsdetails-stopdate" })
 

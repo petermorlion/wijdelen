@@ -20,7 +20,14 @@ namespace WijDelen.Reports.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), default(IDateLocalizationServices), default(IGroupDetailsQuery));
+            var controller = new AdminController(
+                default(ITotalsQuery), 
+                default(IMonthSummaryQuery), 
+                default(IDateTimeProvider), 
+                default(IGroupMonthSummaryQuery), 
+                default(IDateLocalizationServices), 
+                default(IGroupDetailsQuery),
+                default(IGroupsQuery));
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -53,7 +60,7 @@ namespace WijDelen.Reports.Tests.Controllers {
             };
             groupMonthSummaryQueryMock.Setup(x => x.GetResults(2017, 1)).Returns(groupMonthSummaries);
 
-            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object, groupMonthSummaryQueryMock.Object, default(IDateLocalizationServices), default(IGroupDetailsQuery));
+            var controller = new AdminController(totalsQueryMock.Object, monthSummaryQueryMock.Object, dateTimeProviderMock.Object, groupMonthSummaryQueryMock.Object, default(IDateLocalizationServices), default(IGroupDetailsQuery), default(IGroupsQuery));
 
             var result = controller.Index();
 
@@ -82,15 +89,21 @@ namespace WijDelen.Reports.Tests.Controllers {
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns((DateTime?)null);
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns((DateTime?)null);
 
+            var groups = new List<GroupViewModel>();
+            var groupsQueryMock = new Mock<IGroupsQuery>();
+            groupsQueryMock
+                .Setup(x => x.GetResults())
+                .Returns(groups);
+
             var groupDetailsViewModels = new List<GroupDetailsViewModel>();
             var groupDetailsQueryMock = new Mock<IGroupDetailsQuery>();
             groupDetailsQueryMock
-                .Setup(x => x.GetResults(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
+                .Setup(x => x.GetResults(null, new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
                 .Returns(groupDetailsViewModels);
 
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), dateTimeProviderMock.Object, default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object);
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), dateTimeProviderMock.Object, default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details(null, null);
+            var result = controller.Details(null, null, null);
 
             result.Should().BeOfType<ViewResult>();
 
@@ -99,26 +112,39 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.StartDate.Should().Be(new DateTime(2017, 1, 1));
             viewModel.StopDate.Should().Be(new DateTime(2017, 1, 31));
             viewModel.GroupDetails.ShouldBeEquivalentTo(groupDetailsViewModels);
+            viewModel.Groups.ShouldBeEquivalentTo(new List<GroupViewModel> {
+                new GroupViewModel { Id = 0, Name = "" }
+            });
         }
 
         [Test]
-        public void WhenRequestingDetailsForPeriod_ShouldReturnViewForPeriod() {
+        public void WhenRequestingDetailsForPeriodAndGroup_ShouldReturnViewForPeriodAndGroup() {
             var startDate = new DateTime(2015, 1, 1);
             var stopDate = new DateTime(2015, 1, 31);
 
             var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns(startDate);
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns(stopDate);
+            
+            var groups = new List<GroupViewModel> {
+                new GroupViewModel { Id = 1, Name = "Pin Pals" },
+                new GroupViewModel { Id = 2, Name = "Flying Hellfish" }
+            };
+
+            var groupsQueryMock = new Mock<IGroupsQuery>();
+            groupsQueryMock
+                .Setup(x => x.GetResults())
+                .Returns(groups);
 
             var groupDetailsViewModels = new List<GroupDetailsViewModel>();
             var groupDetailsQueryMock = new Mock<IGroupDetailsQuery>();
             groupDetailsQueryMock
-                .Setup(x => x.GetResults(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
+                .Setup(x => x.GetResults(2, new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
                 .Returns(groupDetailsViewModels);
 
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object);
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details("startDate", "stopDate");
+            var result = controller.Details(2, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 
@@ -127,6 +153,11 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.StartDate.Should().Be(new DateTime(2015, 1, 1));
             viewModel.StopDate.Should().Be(new DateTime(2015, 1, 31));
             viewModel.GroupDetails.ShouldBeEquivalentTo(groupDetailsViewModels);
+            viewModel.Groups.ShouldBeEquivalentTo(new List<GroupViewModel> {
+                new GroupViewModel { Id = 0, Name = "" },
+                new GroupViewModel { Id = 2, Name = "Flying Hellfish" },
+                new GroupViewModel { Id = 1, Name = "Pin Pals" }
+            });
         }
 
         [Test]
@@ -137,15 +168,17 @@ namespace WijDelen.Reports.Tests.Controllers {
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns(startDate);
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns((DateTime?)null);
 
+            var groupsQueryMock = new Mock<IGroupsQuery>();
+
             var groupDetailsViewModels = new List<GroupDetailsViewModel>();
             var groupDetailsQueryMock = new Mock<IGroupDetailsQuery>();
             groupDetailsQueryMock
-                .Setup(x => x.GetResults(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
+                .Setup(x => x.GetResults(null, new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
                 .Returns(groupDetailsViewModels);
 
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object);
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details("startDate", "stopDate");
+            var result = controller.Details(null, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 
@@ -164,15 +197,17 @@ namespace WijDelen.Reports.Tests.Controllers {
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns((DateTime?) null);
             dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns(stopDate);
 
+            var groupsQueryMock = new Mock<IGroupsQuery>();
+
             var groupDetailsViewModels = new List<GroupDetailsViewModel>();
             var groupDetailsQueryMock = new Mock<IGroupDetailsQuery>();
             groupDetailsQueryMock
-                .Setup(x => x.GetResults(new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
+                .Setup(x => x.GetResults(null, new DateTime(2017, 1, 1), new DateTime(2017, 1, 31)))
                 .Returns(groupDetailsViewModels);
 
-            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object);
+            var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details("startDate", "stopDate");
+            var result = controller.Details(null, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 
