@@ -4,9 +4,9 @@
 @{
     Layout.Title = T("Reports").ToString();
 
-#if DEBUG
+    #if DEBUG
     Style.Include("Styles.css");
-#else
+    #else
     Style.Include("Styles.min.css");
 #endif
 }
@@ -86,7 +86,7 @@
                     </tr>
 
                     for (var i = 1; i < Model.GroupMonthSummaries.Count; i++) {
-                        var width = 100 * Model.GroupMonthSummaries[i].ObjectRequestCount/Model.GroupMonthSummaries[0].ObjectRequestCount;
+                        var width = 100*Model.GroupMonthSummaries[i].ObjectRequestCount/Model.GroupMonthSummaries[0].ObjectRequestCount;
                         <tr>
                             <td class="reports-groupmonthname">@Model.GroupMonthSummaries[i].GroupName</td>
                             <td>
@@ -97,6 +97,11 @@
                 }
                 </tbody>
             </table>
+        }
+        else {
+            <div class="reports-nodata">
+                @T("Boink! There aren't any groups with valuable data yet.")
+            </div>
         }
     </div>
 </div>

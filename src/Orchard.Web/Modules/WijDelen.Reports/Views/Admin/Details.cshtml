@@ -39,6 +39,12 @@
 
 <div class="row">
     <div class="column">
+        @if (!Model.GroupDetails.Any()) {
+            <div class="reports-nodata">
+                @T("Boink! There aren't any groups with valuable data yet.")
+            </div>
+        }
+        
         <table class="reports-numbers">
             <thead>
             <tr>

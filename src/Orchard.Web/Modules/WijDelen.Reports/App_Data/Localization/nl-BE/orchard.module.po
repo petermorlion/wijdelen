@@ -48,6 +48,11 @@ msgstr "Nu niet"
 msgid "Group"
 msgstr "Groep"
 
+#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
+#| msgid "Boink! There aren't any groups with valuable data yet."
+msgid "Boink! There aren't any groups with valuable data yet."
+msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
+
 #: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
 #| msgid "Details"
 msgid "Details"
@@ -97,6 +102,11 @@ msgstr "Nee"
 #| msgid "Not Now"
 msgid "Not Now"
 msgstr "Nu niet"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#| msgid "Boink! There aren't any groups with valuable data yet."
+msgid "Boink! There aren't any groups with valuable data yet."
+msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
 
 #: wijdelen.reports.adminmenu
 #| msgid "Reports"

@@ -3,6 +3,7 @@
 @import '../node_modules/milligram-less/dist/_Table.less';
 
 @gray: #e1e1e1;
+@light-gray: lighten(@gray, 10%);
 
 div.reports-summarytotals {
 }
@@ -50,4 +51,11 @@ label.reportsdetails-label {
 
 label.reportsdetails-label-first {
     margin-left: 0;
+}
+
+div.reports-nodata {
+    text-align: center;
+    border: 1px solid @gray;
+    background-color: @light-gray;
+    padding: 40px;
 }
