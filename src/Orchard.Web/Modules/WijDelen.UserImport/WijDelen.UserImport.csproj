@@ -102,6 +102,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Drivers\GroupMembershipPartDriver.cs" />
     <Compile Include="Drivers\NamePartDriver.cs" />
+    <Compile Include="Factories\IMailgunClient.cs" />
     <Compile Include="Handlers\GroupMembershipPartHandler.cs" />
     <Compile Include="Handlers\NamePartHandler.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />

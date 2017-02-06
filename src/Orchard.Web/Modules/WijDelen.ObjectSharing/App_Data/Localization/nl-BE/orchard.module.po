@@ -89,9 +89,9 @@ msgid "Received Requests"
 msgstr "Ontvangen oproepen"
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
-#| msgid "Do you have a {0}??"
-msgid "Do you have a {0}?"
-msgstr "Heb jij een {0}?"
+#| msgid "Do you have (a) {0}??"
+msgid "Do you have (a) {0}?"
+msgstr "Heb jij (een) {0}?"
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
 #| msgid "object-request-mail-text"
