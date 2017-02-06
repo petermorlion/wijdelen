@@ -7,6 +7,25 @@ namespace WijDelen.Mailgun {
     public class MailgunClient :
         ObjectSharing.Infrastructure.Factories.IMailgunClient,
         UserImport.Factories.IMailgunClient {
+        private readonly Uri _apiBaseUrl;
+        private readonly string _apiKey;
+        private readonly string _domain;
+        private readonly string _from;
+
+        public MailgunClient() {
+            _apiKey = "key-9b8b2053d33de2583bfd3afb604dd820";
+
+#if DEBUG
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3/sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org");
+            _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
+            _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
+#else
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3/mg.peergroups.be");
+            _domain = "mg.peergroups.be";
+            _from = "Peergroups <no-reply@peergroups.be>";
+#endif
+        }
+
         /// <summary>
         /// Creates an initial authenticated POST request for Mailgun, including the From address. Anything
         /// else should be added (to, subject, text, html).
@@ -18,14 +37,14 @@ namespace WijDelen.Mailgun {
         /// <param name="htmlMail">A html version of the mail.</param>
         public void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string textMail, string htmlMail) {
             var client = new RestClient {
-                BaseUrl = new Uri("https://api.mailgun.net/v3"),
-                Authenticator = new HttpBasicAuthenticator("api", "key-9b8b2053d33de2583bfd3afb604dd820")
+                BaseUrl = _apiBaseUrl,
+                Authenticator = new HttpBasicAuthenticator("api", _apiKey)
             };
 
             var request = new RestRequest();
-            request.AddParameter("domain", "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org", ParameterType.UrlSegment);
+            request.AddParameter("domain", _domain, ParameterType.UrlSegment);
             request.Resource = "{domain}/messages";
-            request.AddParameter("from", "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>");
+            request.AddParameter("from", _from);
             request.AddParameter("subject", subject);
             request.AddParameter("text", textMail);
             request.AddParameter("html", htmlMail);
