@@ -1,0 +1,11 @@
+﻿Name: WijDelen.Mailgun
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0
+OrchardVersion: 1.0
+Description: A module containing code to communicate with Mailgun.
+Features:
+    WijDelen.Mailgun:
+        Description: Code to communicate with Mailgun.
+		Category: Peergroups

@@ -4,9 +4,7 @@ using RestSharp;
 using RestSharp.Authenticators;
 
 namespace WijDelen.Mailgun {
-    public class MailgunClient :
-        ObjectSharing.Infrastructure.Factories.IMailgunClient,
-        UserImport.Factories.IMailgunClient {
+    public class MailgunClient : IMailgunClient {
         private readonly Uri _apiBaseUrl;
         private readonly string _apiKey;
         private readonly string _domain;

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Users.Services;
-using RestSharp;
-using RestSharp.Authenticators;
-using WijDelen.UserImport.Factories;
+using WijDelen.Mailgun;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {

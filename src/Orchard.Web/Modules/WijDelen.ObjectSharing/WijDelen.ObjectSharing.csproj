@@ -174,7 +174,6 @@
     <Compile Include="Domain\Messaging\InMemoryMessageSender.cs" />
     <Compile Include="Domain\Messaging\SendingMessageEventArgs.cs" />
     <Compile Include="Domain\ValueTypes\UserEmail.cs" />
-    <Compile Include="Infrastructure\Factories\IMailgunClient.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />
     <Compile Include="Infrastructure\MailgunService.cs" />
     <Compile Include="Infrastructure\OrchardEventSourcedRepository.cs" />
@@ -250,6 +249,10 @@
     <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
       <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
       <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WijDelen.Mailgun\WijDelen.Mailgun.csproj">
+      <Project>{e18e27ad-bfa5-43e0-8072-898388598751}</Project>
+      <Name>WijDelen.Mailgun</Name>
     </ProjectReference>
     <ProjectReference Include="..\WijDelen.UserImport\WijDelen.UserImport.csproj">
       <Project>{93D162A5-1383-450D-9CAE-189607E7A285}</Project>

@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using WijDelen.ObjectSharing.Domain.CommandHandlers;
 using WijDelen.ObjectSharing.Domain.Commands;
-using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure;

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Orchard;
 
-namespace WijDelen.ObjectSharing.Infrastructure.Factories {
-    public interface IMailgunClient : IDependency {
+namespace WijDelen.Mailgun {
+    public interface IMailgunClient : IDependency
+    {
         /// <summary>
         /// Creates an initial authenticated POST request for Mailgun, including the From address. Anything
         /// else should be added (to, subject, text, html).

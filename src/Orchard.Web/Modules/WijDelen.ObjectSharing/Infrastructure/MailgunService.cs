@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using Orchard;
 using Orchard.Localization;
-using RestSharp;
-using RestSharp.Authenticators;
+using WijDelen.Mailgun;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
-using WijDelen.ObjectSharing.Infrastructure.Factories;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class MailgunService : IMailService {
