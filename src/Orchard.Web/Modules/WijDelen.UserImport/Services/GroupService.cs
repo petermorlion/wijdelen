@@ -44,20 +44,6 @@ namespace WijDelen.UserImport.Services {
             groupMembershipPart.Group = _contentManager.Get(model.GroupId);
         }
 
-        public IEnumerable<IUser> GetOtherUsersInGroup(int userId) {
-            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
-            var group = user.As<GroupMembershipPart>().Group;
-            var result = _contentManager
-                .Query<UserPart, UserPartRecord>()
-                .Where<GroupMembershipPartRecord>(x => x.Group.Id == group.Id)
-                .List()
-                .Select(x => x.ContentItem.As<IUser>())
-                .Where(x => x.Id != userId)
-                .ToList();
-
-            return result;
-        }
-
         public GroupViewModel GetGroupForUser(int userId) {
             var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
             var group = user.As<GroupMembershipPart>().Group;

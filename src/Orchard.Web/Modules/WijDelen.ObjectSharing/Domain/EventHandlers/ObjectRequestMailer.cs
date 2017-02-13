@@ -19,18 +19,21 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         private readonly IMailService _mailService;
         private readonly IGetUserByIdQuery _getUserByIdQuery;
         private readonly IRandomSampleService _randomSampleService;
+        private readonly IFindOtherUsersInGroupThatPossiblyOwnObjectQuery _findOtherUsersQuery;
 
         public ObjectRequestMailer(
             IEventSourcedRepository<ObjectRequestMail> repository, 
             IGroupService groupService,
             IMailService mailService,
             IGetUserByIdQuery getUserByIdQuery,
-            IRandomSampleService randomSampleService) {
+            IRandomSampleService randomSampleService,
+            IFindOtherUsersInGroupThatPossiblyOwnObjectQuery findOtherUsersQuery) {
             _repository = repository;
             _groupService = groupService;
             _mailService = mailService;
             _getUserByIdQuery = getUserByIdQuery;
             _randomSampleService = randomSampleService;
+            _findOtherUsersQuery = findOtherUsersQuery;
 
             T = NullLocalizer.Instance;
         }
@@ -47,7 +50,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             var requestingUserName = _getUserByIdQuery.GetResult(objectRequested.UserId).UserName;
             var groupName = _groupService.GetGroupForUser(objectRequested.UserId).Name;
-            var otherUsers = _groupService.GetOtherUsersInGroup(objectRequested.UserId).ToList();
+            var otherUsers = _findOtherUsersQuery.GetOtherUsersInGroup(objectRequested.UserId).ToList();
 
             var recipients = _randomSampleService.GetRandomSample(otherUsers, 250);
 

@@ -11,11 +11,6 @@ namespace WijDelen.UserImport.Services {
         IEnumerable<GroupViewModel> GetGroups();
         void UpdateGroupMembershipForContentItem(ContentItem contentItem, EditGroupMembershipViewModel model);
 
-        /// <summary>
-        /// Gets all users in the group of the given user, excluding the given user.
-        /// </summary>
-        IEnumerable<IUser> GetOtherUsersInGroup(int userId);
-
         GroupViewModel GetGroupForUser(int userId);
 
         bool IsMemberOfGroup(int userId);

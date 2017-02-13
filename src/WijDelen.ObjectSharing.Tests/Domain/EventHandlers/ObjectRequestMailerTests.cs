@@ -39,11 +39,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
             getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUserMock.Object);
 
-            var groupServiceMock = new Mock<IGroupService>();
-            groupServiceMock
+            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
+            findOtherUsersQueryMock
                 .Setup(x => x.GetOtherUsersInGroup(3))
                 .Returns(new[] { otherUserMock.Object });
 
+            var groupServiceMock = new Mock<IGroupService>();
             groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
 
             var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
@@ -53,7 +54,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             var mailServiceMock = new Mock<IMailService>();
 
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService());
+            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object);
 
             handler.Handle(objectRequested);
 
