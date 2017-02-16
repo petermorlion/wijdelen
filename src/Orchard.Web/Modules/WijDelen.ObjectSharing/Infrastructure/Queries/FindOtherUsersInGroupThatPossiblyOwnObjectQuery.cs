@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
 using Orchard.ContentPicker.Fields;
@@ -50,7 +51,9 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
 
             var userIds = otherUsersInGroup.Select(x => x.Id).ToList();
             var usersThatSaidNo = _userInventoryRepository
-                .Fetch(x => userIds.Contains(x.UserId) && x.Answer == ObjectRequestAnswer.No)
+                .Fetch(x => userIds.Contains(x.UserId) 
+                        && x.Answer == ObjectRequestAnswer.No
+                        && x.DateTimeAnswered >= DateTime.UtcNow.Subtract(TimeSpan.FromDays(150)))
                 .GroupBy(x => x.SynonymId, x => x.UserId);
 
             foreach (var grouping in usersThatSaidNo) {
