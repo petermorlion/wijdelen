@@ -35,7 +35,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
-        public ActionResult Index(Guid id) {
+        public ActionResult Index(Guid id, string messageKey = "") {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
             if (chat == null)
             {
@@ -56,7 +56,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ChatId = id,
                 ObjectDescription = objectRequest.Description,
                 RequestingUserName = chat.RequestingUserName,
-                ConfirmingUserName = chat.ConfirmingUserName
+                ConfirmingUserName = chat.ConfirmingUserName,
+                Message = T(messageKey, chat.RequestingUserName).ToString()
             });
         }
         

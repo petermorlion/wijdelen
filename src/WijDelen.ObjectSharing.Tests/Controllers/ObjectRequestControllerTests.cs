@@ -63,6 +63,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Item");
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
+            ((RedirectToRouteResult) actionResult).RouteValues["messageKey"].Should().Be("Thanks");
 
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking..........................");

@@ -59,10 +59,10 @@ namespace WijDelen.ObjectSharing.Controllers {
             var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo, currentUser.Id);
             _requestObjectCommandHandler.Handle(command);
 
-            return RedirectToAction("Item", new {id = command.ObjectRequestId});
+            return RedirectToAction("Item", new {id = command.ObjectRequestId, messageKey = "Thanks"});
         }
 
-        public ActionResult Item(Guid id) {
+        public ActionResult Item(Guid id, string messageKey = "") {
             var record = _objectRequestRepository.Get(x => x.AggregateId == id);
             var chatRecords = _chatRepository.Fetch(x => x.ObjectRequestId == id).ToList();
 
@@ -76,7 +76,8 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var viewModel = new ObjectRequestViewModel {
                 ObjectRequestRecord = record,
-                ChatRecords = chatRecords
+                ChatRecords = chatRecords,
+                Message = T(messageKey).ToString()
             };
 
             return View(viewModel);

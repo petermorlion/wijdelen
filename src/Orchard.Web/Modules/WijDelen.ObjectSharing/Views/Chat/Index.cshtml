@@ -4,6 +4,12 @@
     Layout.Title = T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription);
 }
 
+@if (Model.Message != "") {
+    <div class="message">
+        @Model.Message
+    </div>
+}
+
 @if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
     <h1>@T("Your request for (a) {0}.", Model.ObjectDescription)</h1>
 

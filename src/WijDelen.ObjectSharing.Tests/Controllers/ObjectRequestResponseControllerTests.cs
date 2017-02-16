@@ -128,6 +128,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             actionResult.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
             actionResult.As<RedirectToRouteResult>().RouteValues["controller"].Should().Be("Chat");
             actionResult.As<RedirectToRouteResult>().RouteValues["id"].Should().Be(chatId);
+            actionResult.As<RedirectToRouteResult>().RouteValues["messageKey"].Should().Be("Thanks");
             confirmObjectRequest.ConfirmingUserId.Should().Be(22);
             confirmObjectRequest.ObjectRequestId.Should().Be(id);
         }

@@ -68,6 +68,11 @@ msgstr "Gelieve een beetje extra informatie te geven."
 msgid "Please provide some more extra info (at least 30 characters)."
 msgstr "Gelieve een beetje meer extra informatie te geven (ten minste 30 karakters)."
 
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Thanks"
+msgid "Thanks"
+msgstr "Bedankt voor je oproep. We hebben je oproep naar de leden van je groep gestuurd."
+
 #: wijdelen.objectsharing.adminmenu
 #| msgid "Synonyms"
 msgid "Synonyms"
@@ -127,6 +132,11 @@ msgstr "Geen probleem!"
 #| msgid "Please provide a message."
 msgid "Please provide a message."
 msgstr "Gelieve een boodschap op te geven."
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+#| msgid "Thanks"
+msgid "Thanks"
+msgstr "Bedankt voor je antwoord. Je kan hieronder berichten sturen naar {0}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
 #| msgid "{0} is looking for (a) {1}."

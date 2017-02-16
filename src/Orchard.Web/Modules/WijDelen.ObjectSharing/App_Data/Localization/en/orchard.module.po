@@ -1,0 +1,9 @@
+﻿#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Thanks"
+msgid "Thanks"
+msgstr "Thank you for your request. We sent your request to the members of your group."
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+#| msgid "Thanks"
+msgid "Thanks"
+msgstr "Thank you for your response. You can now chat with {0}."

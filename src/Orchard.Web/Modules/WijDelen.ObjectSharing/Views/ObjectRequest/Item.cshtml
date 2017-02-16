@@ -4,6 +4,12 @@
     Layout.Title = Model.ObjectRequestRecord.Description;
 }
 
+@if (Model.Message != "") {
+    <div class="message">
+        @Model.Message
+    </div>
+}
+
 <h1>@Model.ObjectRequestRecord.Description</h1>
 
 @Model.ObjectRequestRecord.ExtraInfo

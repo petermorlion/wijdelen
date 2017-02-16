@@ -23,6 +23,8 @@ It does a reset first, then uses Milligram (https://milligram.github.io) as foun
 and builds from there.
 */
 
+@border-radius: 5px;
+
 body {
     background-color: #f5f5f5;
     color: #5d5d5d;
@@ -250,7 +252,7 @@ fieldset.login-form legend {
 }
 
 .chatbubble {
-    border-radius: 5px;
+    border-radius: @border-radius;
     padding: 10px 15px;
 }
 
@@ -283,4 +285,15 @@ fieldset.login-form legend {
     border-color: @color-quaternary @color-quaternary transparent transparent;
     left: -20px;
 	right: auto;
+}
+
+/* Messages
+***************************************************************/
+.message {
+    border: 1px solid @color-primary;
+    background: lighten(@color-secondary, 35%);
+    color: @color-primary;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: @border-radius;
 }
