@@ -41,7 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
             findOtherUsersQueryMock
-                .Setup(x => x.GetOtherUsersInGroup(3))
+                .Setup(x => x.GetResults(3, "Sneakers"))
                 .Returns(new[] { otherUserMock.Object });
 
             var groupServiceMock = new Mock<IGroupService>();

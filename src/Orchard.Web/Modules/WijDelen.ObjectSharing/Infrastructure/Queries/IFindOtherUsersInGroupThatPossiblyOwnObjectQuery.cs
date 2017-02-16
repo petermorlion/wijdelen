@@ -8,6 +8,6 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
     /// users that have indicated they don't own a certain object.
     /// </summary>
     public interface IFindOtherUsersInGroupThatPossiblyOwnObjectQuery : IDependency {
-        IEnumerable<IUser> GetOtherUsersInGroup(int userId);
+        IEnumerable<IUser> GetResults(int userId, string description);
     }
 }
