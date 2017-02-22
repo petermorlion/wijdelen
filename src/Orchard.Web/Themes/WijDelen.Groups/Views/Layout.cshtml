@@ -42,12 +42,13 @@
                     <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))"/>
                 </a>
             </div>
-            <div class="column column-75">
+            <div class="column column-75 navigation-links">
                 @Display(Model.Navigation)
             </div>
-            <div class="column column-10">
+            <div class="column column-10 navigation-user">
                 @Display(New.User())
             </div>
+            <div class="navigation-menu">Menu</div>
         </div>
     </div>
 </div>
