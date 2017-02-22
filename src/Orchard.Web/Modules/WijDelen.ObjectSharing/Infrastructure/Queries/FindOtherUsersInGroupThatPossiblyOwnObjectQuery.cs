@@ -53,7 +53,7 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
             var usersThatSaidNo = _userInventoryRepository
                 .Fetch(x => userIds.Contains(x.UserId) 
                         && x.Answer == ObjectRequestAnswer.No
-                        && x.DateTimeAnswered >= DateTime.UtcNow.Subtract(TimeSpan.FromDays(150)))
+                        && x.DateTimeAnswered >= DateTime.UtcNow.Subtract(TimeSpan.FromDays(365 * 2)))
                 .GroupBy(x => x.SynonymId, x => x.UserId);
 
             foreach (var grouping in usersThatSaidNo) {
