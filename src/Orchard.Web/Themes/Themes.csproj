@@ -89,6 +89,7 @@
     <Content Include="WijDelen.Groups\Assets.json" />
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
     <Content Include="WijDelen.Groups\Content\favicon.ico" />
+    <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium-mobile.png" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
     <Content Include="WijDelen.Groups\node_modules\milligram-less\demo\index.html" />
     <Content Include="WijDelen.Groups\node_modules\milligram-less\node_modules\normalize.css\normalize.css" />
