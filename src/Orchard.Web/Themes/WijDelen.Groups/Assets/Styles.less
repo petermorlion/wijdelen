@@ -26,7 +26,7 @@ and builds from there.
 @border-radius: 5px;
 
 body {
-    background-color: #f5f5f5;
+    background-color: @color-background;
     color: #5d5d5d;
 }
 
@@ -66,21 +66,26 @@ a:hover {
     float: left;
 }
 
-.navigation .navigation-links, .navigation .navigation-user {
+.navigation-large {
     display: none;
 }
 
-.navigation .menu {
-    display: none;
+.navigation-menu {
+    position: relative;
 }
 
+.navigation .popover ul {
+    margin-bottom: 0;
+}
+
+/* Larger than tablet screen */
 @media screen and (min-width: 80.0rem) {
-    .navigation .navigation-links, .navigation .navigation-user {
+    .navigation-large {
         display: block;
     }
 
-    .navigation .menu {
-        display: block;
+    .navigation-mobile {
+        display: none;
     }
 }
 
@@ -122,7 +127,7 @@ fieldset.login-form legend {
     display: none; 
     border: 1px solid @color-primary; 
     border-top-width: 0;
-    background-color: #f5f5f5; 
+    background-color: @color-background; 
     position: absolute; 
     right: 0; 
     z-index: 100; 

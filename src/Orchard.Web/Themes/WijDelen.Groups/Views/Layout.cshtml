@@ -34,21 +34,36 @@
     }
 }
 
-<div class="navigation">
+<div class="navigation navigation-large">
     <div class="container">
         <div class="row">
-            <div class="column">
+            <div class="column column-10">
                 <a href="@Href("~/")">
-                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))"/>
+                    <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium.png"))" />
                 </a>
             </div>
-            <div class="column column-75 navigation-links">
+            <div class="column column-70">
                 @Display(Model.Navigation)
             </div>
-            <div class="column column-10 navigation-user">
+            <div class="column column-10">
                 @Display(New.User())
             </div>
-            <div class="navigation-menu">Menu</div>
+        </div>
+    </div>
+</div>
+
+<div class="navigation navigation-mobile">
+    <div class="container">
+        <div class="float-left">
+            <a href="@Href("~/")">
+                <img src="@Url.Content(Html.ThemePath(WorkContext.CurrentTheme, "/Content/navigation-top-logo-belgium-mobile.png"))" />
+            </a>
+        </div>
+        <div class="float-right navigation-menu">
+            <a href="#popover-navigation-menu" id="navigation-menubutton" data-popover>Menu</a>
+            <div id="popover-navigation-menu" class="popover">
+                @Display(Model.Navigation)
+            </div>
         </div>
     </div>
 </div>
