@@ -62,7 +62,12 @@
         <div class="float-right navigation-menu">
             <a href="#popover-navigation-menu" id="navigation-menubutton" data-popover>Menu</a>
             <div id="popover-navigation-menu" class="popover">
-                @Display(Model.Navigation)
+                <div class="clearfix">
+                    @Display(Model.Navigation)
+                </div>
+                <div class="clearfix">
+                    @Display(New.User())
+                </div>
             </div>
         </div>
     </div>
