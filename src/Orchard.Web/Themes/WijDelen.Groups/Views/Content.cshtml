@@ -1,24 +1,47 @@
-﻿@using Orchard.Utility.Extensions;
+﻿@using Orchard.Utility.Extensions
+@using Orchard.ContentManagement
+@using Orchard.MediaLibrary.Fields
+@using WijDelen.UserImport
+@using WijDelen.UserImport.Models
+
 @{
     if (Model.Title != null) {
         Layout.Title = Model.Title;
     }
 
     Model.Classes.Add("content-item");
-    
-    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+
+    var contentTypeClassName = ((string) Model.ContentItem.ContentType).HtmlClassify();
     Model.Classes.Add(contentTypeClassName);
-    
+
     var tag = Tag(Model, "article");
 }
 @tag.StartElement
-    <header class="row">
+<header class="row">
+    <div class="column column-70">
         @Display(Model.Header)
-    </header>
-    @Display(Model.Content)
-    @if(Model.Footer != null) {
-        <footer>
-            @Display(Model.Footer)
-        </footer>
+    </div>
+    @if (WorkContext.CurrentUser != null) {
+        var user = WorkContext.CurrentUser;
+        var groupMembership = ContentExtensions.As<GroupMembershipPart>(user);
+        var group = groupMembership.Group;
+        var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+        var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+        
+        <div class="column column-30 grouplogo">
+            @groupLogoField.FirstMediaUrl
+        </div>
     }
+    else {
+        <div class="column column-30">
+            
+        </div>
+    }
+</header>
+@Display(Model.Content)
+@if (Model.Footer != null) {
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
 @tag.EndElement
