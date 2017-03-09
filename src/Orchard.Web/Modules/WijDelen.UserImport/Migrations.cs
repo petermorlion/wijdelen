@@ -58,5 +58,21 @@ namespace WijDelen.UserImport {
 
             return 5;
         }
+
+        public int UpdateFrom5()
+        {
+            ContentDefinitionManager.AlterPartDefinition("GroupLogoPart", builder =>
+                builder
+                    .Attachable()
+                    .WithField("Group logo", cfg => cfg
+                        .OfType("MediaLibraryPickerField")
+                        .WithDisplayName("Group logo")));
+
+            ContentDefinitionManager.AlterTypeDefinition("Group", builder =>
+                builder
+                    .WithPart("GroupLogoPart"));
+
+            return 6;
+        }
     }
 }
