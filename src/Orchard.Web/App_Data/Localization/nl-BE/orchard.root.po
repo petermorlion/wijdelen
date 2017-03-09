@@ -1,0 +1,322 @@
+#. "{0} (Retrying...)"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "{0} (Retrying...)"
+msgstr "(Herproberen...)"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Error executing command \"{0}\""
+msgstr "Fout bij het uitvoeren van de opdracht \"{0}\""
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Error starting up Orchard command line host"
+msgstr "Fout bij het opstarten van de Orchard command line host"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Error shutting down Orchard command line host"
+msgstr "Fout bij het afsluiten van de Orchard command line host"
+
+#. "{0}"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "{0}"
+msgstr "{0}"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "--------------------------------------------------------------------------------"
+msgstr "--------------------------------------------------------------------------------"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Exception Details: {0}: {1}"
+msgstr "Fout details: {0}: {1}"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Stack Trace:"
+msgstr "Stack Trace:"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "[{0}: {1}]"
+msgstr "[{0}: {1}]"
+
+#: "Orchard.Commands.CommandHostAgent"
+msgctxt "Orchard.Commands.CommandHostAgent"
+msgid "Tenant {0} does not exist"
+msgstr "Tenant {0} bestaat niet"
+
+#: "Orchard.Commands.CommandHostEnvironment"
+msgctxt "Orchard.Commands.CommandHostEnvironment"
+msgid "A change of configuration requires the session to be restarted."
+msgstr "Een wijziging in de configuratie vereist een herstart van de sessie"
+
+#: "Orchard.Commands.DefaultCommandManager"
+msgctxt "Orchard.Commands.DefaultCommandManager"
+msgid "Multiple commands found matching arguments \"{0}\". Commands available: {1}."
+msgstr "Meerdere commando's gevonden met overeenstemmende argumenten \"{0}\". Aantal commando's: {1}."
+
+#: "Orchard.Commands.DefaultCommandManager"
+msgctxt "Orchard.Commands.DefaultCommandManager"
+msgid "No command found matching arguments \"{0}\". Commands available: {1}."
+msgstr "Geen commando gevonden met overeenstemmende argumenten \"{0}\". Aantal commando's: {1}."
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "Switch \"{0}\" was not found"
+msgstr "Switch \"{0}\" is niet gevonden"
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "A property \"{0}\" exists but is not decorated with \"{1}\""
+msgstr "De eigenschap \"{0}\" bestaat maar is niet aangeduid met \"{1}\""
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "Error converting value \"{0}\" to \"{1}\" for switch \"{2}\""
+msgstr "Fout bij het converteren van \"{0}\" naar \"{1}\" voor parameter \"{2}\""
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "(empty)"
+msgstr "(leeg)"
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "Command arguments \"{0}\" don't match command definition"
+msgstr "Opdrachtargumenten \"{0}\" komen niet overeen met opdracht definitie"
+
+#: "Orchard.Commands.DefaultOrchardCommandHandler"
+msgctxt "Orchard.Commands.DefaultOrchardCommandHandler"
+msgid "Method \"{0}\" does not support switch \"{1}\"."
+msgstr "Methode \"{0}\" ondersteunt switch \"{1}\" niet."
+
+#: "Orchard.Commands.Builtin.HelpCommand"
+msgctxt "Orchard.Commands.Builtin.HelpCommand"
+msgid "List of available commands:"
+msgstr "Lijst van beschikbare commando's"
+
+#: "Orchard.Commands.Builtin.HelpCommand"
+msgctxt "Orchard.Commands.Builtin.HelpCommand"
+msgid "---------------------------"
+msgstr "---------------------------"
+
+#: "Orchard.Commands.Builtin.HelpCommand"
+msgctxt "Orchard.Commands.Builtin.HelpCommand"
+msgid "{0}: no help text"
+msgstr "{0}: geen helptekst"
+
+#: "Orchard.Commands.Builtin.HelpCommand"
+msgctxt "Orchard.Commands.Builtin.HelpCommand"
+msgid "Command {0} doesn't exist"
+msgstr "Commando {0} bestaat niet"
+
+#: "Orchard.Data.Migration.DataMigrationManager"
+msgctxt "Orchard.Data.Migration.DataMigrationManager"
+msgid "Error while running migration version {0} for {1}."
+msgstr ""
+
+#: "Orchard.Data.Migration.DataMigrationNotificationProvider"
+msgctxt "Orchard.Data.Migration.DataMigrationNotificationProvider"
+msgid "Some features need to be upgraded: {0}"
+msgstr "Sommige functies moeten worden bijgewerkt: {0}"
+
+#: "Orchard.Data.Migration.Interpreters.DefaultDataMigrationInterpreter"
+msgctxt "Orchard.Data.Migration.Interpreters.DefaultDataMigrationInterpreter"
+msgid "Error while executing data migration: you need to specify the field's type in order to change its properties"
+msgstr "Fout tijdens het uitvoeren van data migratie. Specifiëer het veld type om de eigenschappen te wijzigen."
+
+#: "Orchard.Data.Migration.Interpreters.MySqlCommandInterpreter"
+msgctxt "Orchard.Data.Migration.Interpreters.MySqlCommandInterpreter"
+msgid "Error while executing data migration: you need to specify the field's type in order to change its properties"
+msgstr "Fout tijdens het uitvoeren van datamigratie. Specificeer het veldtype om de eigenschappen te wijzigen"
+
+#: "Orchard.Data.Migration.Schema.SchemaBuilder"
+msgctxt "Orchard.Data.Migration.Schema.SchemaBuilder"
+msgid "An unexpected error occured while executing the SQL statement: {0}"
+msgstr ""
+
+#: "Orchard.DisplayManagement.Implementation.DefaultDisplayManager"
+msgctxt "Orchard.DisplayManagement.Implementation.DefaultDisplayManager"
+msgid "Shape type {0} not found"
+msgstr "Shape type {0} niet gevonden"
+
+#: "Orchard.Environment.DefaultHostEnvironment"
+msgctxt "Orchard.Environment.DefaultHostEnvironment"
+msgid "Orchard needs to be restarted due to a configuration change, but was unable to do so.\r\n"
+msgstr "Orchard moet opnieuw worden gestart als gevolg van een wijziging in de configuratie, maar was niet in staat om dit zelf te doen. \r\n"
+
+#: "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgctxt "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgid "There are multiple extensions with the same name installed in this instance of Orchard.\r\n"
+msgstr "Er zijn meerdere extensies met dezelfde naam geïnstalleerd in deze instantie van Orchard. \r\n"
+
+#: "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgctxt "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgid "Extension '{0}' has been found from the following locations: {1}.\r\n"
+msgstr "Extensie '{0}' is gevonden op de volgende locaties: {1}. \r\n"
+
+#: "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgctxt "Orchard.Environment.Extensions.ExtensionLoaderCoordinator"
+msgid "This issue can be usually solved by removing or renaming the conflicting extension."
+msgstr "Dit probleem kan meestal opgelost worden door de tegenstrijdige extensie te hernoemen of te verwijderen."
+
+#: "Orchard.Environment.Extensions.ExtensionManager"
+msgctxt "Orchard.Environment.Extensions.ExtensionManager"
+msgid "Error while loading extension '{0}'."
+msgstr "Fout bij het laden van extensie '{0}'."
+
+#: "Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler"
+msgctxt "Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler"
+msgid "Assembly reference '{0}' for project '{1}' cannot be loaded"
+msgstr "Assembly-verwijzing '{0}' voor project '{1}' kan niet worden geladen"
+
+#: "Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler"
+msgctxt "Orchard.Environment.Extensions.Compilers.DefaultExtensionCompiler"
+msgid "Error compiling module \"{0}\" from file \"{1}\":\r\n"
+"{2}"
+msgstr "Fout bij het compileren van module \"{0}\" uit bestand \"{1}\":\r\n"
+"{2}"
+
+#: "Orchard.Environment.Extensions.Folders.ExtensionHarvester"
+msgctxt "Orchard.Environment.Extensions.Folders.ExtensionHarvester"
+msgid "The extension '{0}' could not be loaded because it has an invalid Path ({1}). It was ignored. The Path if specified must be a valid URL segment. The best bet is to stick with letters and numbers with no spaces."
+msgstr "De extensie '{0}' kan niet geladen worden omdat het een ongeldig pad heeft ({1}). Het werd genegeerd. Het pad, indien opgegeven, moet een geldige URL-segment zijn. Bij voorkeur alleen letters en cijfers zonder spaties."
+
+#: "Orchard.Environment.Extensions.Folders.ExtensionHarvester"
+msgctxt "Orchard.Environment.Extensions.Folders.ExtensionHarvester"
+msgid "The extension '{0}' manifest could not be loaded. It was ignored."
+msgstr "Het manifest van de extensie '{0}' kan niet worden geladen. Het werd genegeerd."
+
+#: "Orchard.Environment.Features.FeatureManager"
+msgctxt "Orchard.Environment.Features.FeatureManager"
+msgid "Failed to get state for feature {0}"
+msgstr "Kan de status van feature {0} niet ophalen"
+
+#: "Orchard.Environment.Features.FeatureManager"
+msgctxt "Orchard.Environment.Features.FeatureManager"
+msgid "Found {0} states for feature {1}"
+msgstr "{0} statussen gevonden voor feature {1}"
+
+#: "Orchard.Environment.ShellBuilders.CompositionStrategy"
+msgctxt "Orchard.Environment.ShellBuilders.CompositionStrategy"
+msgid "The feature '{0}' was listed as a dependency of '{1}' of extension '{2}', but this feature could not be found. Please update your manifest file or install the module providing the missing feature."
+msgstr ""
+
+#: "Orchard.Events.DefaultOrchardEventBus"
+msgctxt "Orchard.Events.DefaultOrchardEventBus"
+msgid "{0} is not formatted correctly"
+msgstr "{0} is niet in het juiste formaat"
+
+#: "Orchard.FileSystems.AppData.AppDataFolder"
+msgctxt "Orchard.FileSystems.AppData.AppDataFolder"
+msgid "Unable to make room for file \"{0}\" in \"App_Data\" folder"
+msgstr "Onmogelijk om plaats te maken voor bestand \"{0}\" in map \"App_Data\""
+
+#. "File {0} does not exist"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "File {0} does not exist"
+msgstr "Bestand {0} bestaat niet"
+
+#. "Directory {0} does not exist"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "Directory {0} does not exist"
+msgstr "Directory {0} bestaat niet"
+
+#: "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "The folder could not be created at path: {0}. {1}"
+msgstr "De map kan niet gemaakt worden op pad: {0}.{1}"
+
+#. "Directory {0} already exists"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "Directory {0} already exists"
+msgstr "Directory {0} bestaat al"
+
+#. "File {0} already exists"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "File {0} already exists"
+msgstr "Bestand {0} bestaat al"
+
+#: "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgctxt "Orchard.FileSystems.Media.FileSystemStorageProvider"
+msgid "Directory {0} does not have a parent directory"
+msgstr "Directory {0} heeft geen bovenliggende directory"
+
+#: "Orchard.Localization.Commands.CultureCommands"
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Listing Cultures:"
+msgstr "Overzicht culturen:"
+
+#: "Orchard.Localization.Commands.CultureCommands"
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Site Culture is {0}"
+msgstr "Site cultuur is {0}"
+
+#: "Orchard.Localization.Commands.CultureCommands"
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Setting site culture to {0}"
+msgstr "Site cultuur wordt ingesteld op {0}"
+
+#. "Supplied culture name {0} is not valid."
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Supplied culture name {0} is not valid."
+msgstr "Aangeleverde cultuur naam {0} is niet geldig."
+
+#: "Orchard.Localization.Commands.CultureCommands"
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Site culture set to {0} successfully"
+msgstr "Site cultuur werd succesvol ingesteld op {0}"
+
+#: "Orchard.Localization.Commands.CultureCommands"
+msgctxt "Orchard.Localization.Commands.CultureCommands"
+msgid "Adding site cultures {0}"
+msgstr "Toe te voegen site culturen {0}"
+
+#: "Orchard.Mvc.DataAnnotations.LocalizedRangeAttribute"
+msgctxt "Orchard.Mvc.DataAnnotations.LocalizedRangeAttribute"
+msgid "The field {0} must be between {1} and {2}."
+msgstr "Het veld {0} moet liggen tussen {1} en {2}."
+
+#: "Orchard.Mvc.DataAnnotations.LocalizedRegularExpressionAttribute"
+msgctxt "Orchard.Mvc.DataAnnotations.LocalizedRegularExpressionAttribute"
+msgid "The field {0} must match the regular expression '{1}'."
+msgstr "Het veld {0} moet overeenkomen met de reguliere-expressie '{1}'."
+
+#: "Orchard.Mvc.DataAnnotations.LocalizedRequiredAttribute"
+msgctxt "Orchard.Mvc.DataAnnotations.LocalizedRequiredAttribute"
+msgid "The {0} field is required."
+msgstr "Het {0} veld is verplicht."
+
+#: "Orchard.Mvc.DataAnnotations.LocalizedStringLengthAttribute"
+msgctxt "Orchard.Mvc.DataAnnotations.LocalizedStringLengthAttribute"
+msgid "The field {0} must be a string with a minimum length of {2} and a maximum length of {1}."
+msgstr "Het {0} veld moet een tekenreeks zijn met een minimale lengte van {2} en een maximale lengte van {1}."
+
+#: "Orchard.Mvc.DataAnnotations.LocalizedStringLengthAttribute"
+msgctxt "Orchard.Mvc.DataAnnotations.LocalizedStringLengthAttribute"
+msgid "The field {0} must be a string with a maximum length of {1}."
+msgstr "Het {0} veld moet een tekenreeks zijn met een maximale lengte van {1}."
+
+#: "Orchard.Recipes.Services.RecipeBuilder"
+msgctxt "Orchard.Recipes.Services.RecipeBuilder"
+msgid "Exported from Orchard"
+msgstr ""
+
+#: "Orchard.Security.Authorizer"
+msgctxt "Orchard.Security.Authorizer"
+msgid "{0}. Anonymous users do not have {1} permission."
+msgstr "{0}. Anonieme gebruikers hebben geen {1} bevoegdheid."
+
+#: "Orchard.Security.Authorizer"
+msgctxt "Orchard.Security.Authorizer"
+msgid "{0}. Current user, {2}, does not have {1} permission."
+msgstr "{0}. Huidige gebruiker, {2}, heeft de bevoegdheid {1} niet."
+
+#: "Orchard.UI.Admin.AdminFilter"
+msgctxt "Orchard.UI.Admin.AdminFilter"
+msgid "Can't access the admin"
+msgstr "Kan geen toegang krijgen tot admin"
+
