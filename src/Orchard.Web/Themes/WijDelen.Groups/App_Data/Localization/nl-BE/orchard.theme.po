@@ -15,8 +15,8 @@ msgstr "http://www.redstar.be"
 
 #: ~/Themes/WijDelen.Groups/Theme.txt
 #| msgid "Description"
-msgid "Theme for WijDelen Groups"
-msgstr "Thema voor WijDelen Groups"
+msgid "Theme for Peergroups"
+msgstr "Thema voor Peergroups"
 
 #: ~/Themes/WijDelen.Groups/Views/User.cshtml
 #| msgid "Change Password"

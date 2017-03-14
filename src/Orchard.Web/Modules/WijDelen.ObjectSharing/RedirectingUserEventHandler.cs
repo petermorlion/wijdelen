@@ -4,7 +4,7 @@ using Orchard.Users.Events;
 
 namespace WijDelen.ObjectSharing {
     /// <summary>
-    /// Custom UserEventHandler for WijDelen Groups that redirects a user to the homepage after logging out, and to the new object request page after logging in.
+    /// Custom UserEventHandler for Peergroups that redirects a user to the homepage after logging out, and to the new object request page after logging in.
     /// </summary>
     /// <remarks>Currently causes problems with CurrentUser being null.</remarks>
     public class RedirectingUserEventHandler : IUserEventHandler {

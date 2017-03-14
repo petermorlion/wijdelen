@@ -34,7 +34,7 @@ namespace WijDelen.UserImport.Services {
             }
 
             var recipientVariablesJson = $"{{{string.Join(",", recipientVariables)}}}";
-            var subject = T("Welcome to WijDelen Groups").ToString();
+            var subject = T("Welcome to Peergroups").ToString();
             var text = T("user-verification-mail-text").ToString();
             var html = T("user-verification-mail-html").ToString();
 

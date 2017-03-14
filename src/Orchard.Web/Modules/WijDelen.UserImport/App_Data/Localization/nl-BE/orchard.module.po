@@ -24,19 +24,19 @@ msgid "There is already a user with username {0} and/or email {1}."
 msgstr "Er is al een gebruiker met gebruikersnaam {0} en/of email {1}."
 
 #: wijdelen.userimport.services.mailgunservice
-#| msgid "Welcome to WijDelen Groups"
-msgid "Welcome to WijDelen Groups"
-msgstr "Welkom bij WijDelen Groups"
+#| msgid "Welcome to Peergroups"
+msgid "Welcome to Peergroups"
+msgstr "Welkom bij Peergroups"
 
 #: wijdelen.userimport.services.mailgunservice
 #| msgid "user-verification-mail-text"
 msgid "user-verification-mail-text"
-msgstr "Hallo %recipient.username%!\r\n\r\nWelkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door naar deze link te surfen:\r\n\r\n%recipient.loginlink%\r\n\r\nBedankt en tot binnenkort!"
+msgstr "Hallo %recipient.username%!\r\n\r\nWelkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door naar deze link te surfen:\r\n\r\n%recipient.loginlink%\r\n\r\nBedankt en tot binnenkort!"
 
 #: wijdelen.userimport.services.mailgunservice
 #| msgid "user-verification-mail-html"
 msgid "user-verification-mail-html"
-msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"http://wijdelen.redstar.be/Themes/WijDelen.Groups/Content/navigation-top-logo-belgium.png\"></div><div style="\"margin-top:10px;\"><p>Hallo %recipient.username%!</p><p>Welkom bij WijDelen Groups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:</p><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"%recipient.loginlink%\" style=\"background-color: #04b17b;color: #fff;text-decoration: none;padding: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Starten met WijDelen Groups</a></p><p>Bedankt en tot binnenkort!</p></div></body></html>"
+msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"http://wijdelen.redstar.be/Themes/WijDelen.Groups/Content/navigation-top-logo-belgium.png\"></div><div style="\"margin-top:10px;\"><p>Hallo %recipient.username%!</p><p>Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:</p><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"%recipient.loginlink%\" style=\"background-color: #04b17b;color: #fff;text-decoration: none;padding: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Starten met Peergroups</a></p><p>Bedankt en tot binnenkort!</p></div></body></html>"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
 #| msgid "Summary"
