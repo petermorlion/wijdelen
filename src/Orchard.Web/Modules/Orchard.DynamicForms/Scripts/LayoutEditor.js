@@ -3,65 +3,6 @@
 ** Any changes made directly to this file will be overwritten next time its asset group is processed by Gulp.
 */
 
-angular
-    .module("LayoutEditor")
-    .directive("orcLayoutFieldset", ["$compile", "scopeConfigurator", "environment",
-        function ($compile, scopeConfigurator, environment) {
-            return {
-                restrict: "E",
-                scope: { element: "=" },
-                controller: ["$scope", "$element",
-                    function ($scope, $element) {
-                        scopeConfigurator.configureForElement($scope, $element);
-                        scopeConfigurator.configureForContainer($scope, $element);
-                        $scope.sortableOptions["axis"] = "y";
-                        $scope.edit = function () {
-                            $scope.$root.editElement($scope.element).then(function (args) {
-                                if (args.cancel)
-                                    return;
-                                $scope.$apply(function() {
-                                    $scope.element.data = decodeURIComponent(args.element.data);
-                                    $scope.element.applyElementEditorModel(args.elementEditorModel);
-                                });
-                            });
-                        };
-                    }
-                ],
-                templateUrl: environment.templateUrl("Fieldset"),
-                replace: true
-            };
-        }
-    ]);
-angular
-    .module("LayoutEditor")
-    .directive("orcLayoutForm", ["$compile", "scopeConfigurator", "environment",
-        function ($compile, scopeConfigurator, environment) {
-            return {
-                restrict: "E",
-                scope: { element: "=" },
-                controller: ["$scope", "$element",
-                    function ($scope, $element) {
-                        scopeConfigurator.configureForElement($scope, $element);
-                        scopeConfigurator.configureForContainer($scope, $element);
-                        $scope.sortableOptions["axis"] = "y";
-                        $scope.edit = function () {
-                            $scope.$root.editElement($scope.element).then(function (args) {
-                                if (args.cancel)
-                                    return;
-
-                                $scope.$apply(function() {
-                                    $scope.element.data = decodeURIComponent(args.element.data);
-                                    $scope.element.applyElementEditorModel(args.elementEditorModel);
-                                });
-                            });
-                        };
-                    }
-                ],
-                templateUrl: environment.templateUrl("Form"),
-                replace: true
-            };
-        }
-    ]);
 var LayoutEditor;
 (function ($, LayoutEditor) {
 
@@ -209,3 +150,62 @@ var LayoutEditor;
     LayoutEditor.registerFactory("Form", function(value) { return LayoutEditor.Form.from(value); });
 
 })(jQuery, LayoutEditor || (LayoutEditor = {}));
+angular
+    .module("LayoutEditor")
+    .directive("orcLayoutFieldset", ["$compile", "scopeConfigurator", "environment",
+        function ($compile, scopeConfigurator, environment) {
+            return {
+                restrict: "E",
+                scope: { element: "=" },
+                controller: ["$scope", "$element",
+                    function ($scope, $element) {
+                        scopeConfigurator.configureForElement($scope, $element);
+                        scopeConfigurator.configureForContainer($scope, $element);
+                        $scope.sortableOptions["axis"] = "y";
+                        $scope.edit = function () {
+                            $scope.$root.editElement($scope.element).then(function (args) {
+                                if (args.cancel)
+                                    return;
+                                $scope.$apply(function() {
+                                    $scope.element.data = decodeURIComponent(args.element.data);
+                                    $scope.element.applyElementEditorModel(args.elementEditorModel);
+                                });
+                            });
+                        };
+                    }
+                ],
+                templateUrl: environment.templateUrl("Fieldset"),
+                replace: true
+            };
+        }
+    ]);
+angular
+    .module("LayoutEditor")
+    .directive("orcLayoutForm", ["$compile", "scopeConfigurator", "environment",
+        function ($compile, scopeConfigurator, environment) {
+            return {
+                restrict: "E",
+                scope: { element: "=" },
+                controller: ["$scope", "$element",
+                    function ($scope, $element) {
+                        scopeConfigurator.configureForElement($scope, $element);
+                        scopeConfigurator.configureForContainer($scope, $element);
+                        $scope.sortableOptions["axis"] = "y";
+                        $scope.edit = function () {
+                            $scope.$root.editElement($scope.element).then(function (args) {
+                                if (args.cancel)
+                                    return;
+
+                                $scope.$apply(function() {
+                                    $scope.element.data = decodeURIComponent(args.element.data);
+                                    $scope.element.applyElementEditorModel(args.elementEditorModel);
+                                });
+                            });
+                        };
+                    }
+                ],
+                templateUrl: environment.templateUrl("Form"),
+                replace: true
+            };
+        }
+    ]);
