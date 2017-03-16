@@ -88,7 +88,7 @@
     }
     
     <header class="row">
-        <div class="column column-70">
+        <div class="column column-67">
             <h1>@Display(Model.Title)</h1>
         </div>
         @if (WorkContext.CurrentUser != null) {
@@ -98,12 +98,14 @@
             var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
             var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-            <div class="column column-30 grouplogo">
-                <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img" />
+            <div class="column column-33 grouplogo">
+                @if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) { 
+                    <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
+                }
             </div>
         }
         else {
-            <div class="column column-30"></div>
+            <div class="column column-33"></div>
         }
     </header>
     
