@@ -252,9 +252,11 @@
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Content.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="WijDelen.Groups\node_modules\milligram-less\dist\_Color.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Views\Parts\Localization.ContentTranslations.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
