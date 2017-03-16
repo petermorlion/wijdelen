@@ -1,13 +1,8 @@
 ﻿@using Orchard.Utility.Extensions
-@using Orchard.ContentManagement
-@using Orchard.MediaLibrary.Fields
-@using WijDelen.UserImport.Models
 
 @{
-    if (Model.Title != null) {
-        Layout.Title = Model.Title;
-    }
-
+    Layout.Title = Model.Title;
+    
     Model.Classes.Add("content-item");
 
     var contentTypeClassName = ((string) Model.ContentItem.ContentType).HtmlClassify();
@@ -16,29 +11,16 @@
     var tag = Tag(Model, "article");
 }
 @tag.StartElement
-<header class="row">
-    <div class="column column-70">
-        @Display(Model.Header)
-    </div>
-    @if (WorkContext.CurrentUser != null) {
-        var user = WorkContext.CurrentUser;
-        var groupMembership = ContentExtensions.As<GroupMembershipPart>(user);
-        var group = groupMembership.Group;
-        var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
-        var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
-        
-        <div class="column column-30 grouplogo">
-            <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
-        </div>
-    }
-    else {
-        <div class="column column-30"></div>
-    }
-</header>
+
+<!--@Display(Model.Header)-->
+@*Without triggering a Display of Model.Header, Model.Title seems empty, and so our Layout.Title wouldn't be set*@
+
 @Display(Model.Content)
+
 @if (Model.Footer != null) {
     <footer>
         @Display(Model.Footer)
     </footer>
 }
+
 @tag.EndElement

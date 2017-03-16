@@ -5,8 +5,6 @@
     Layout.Title = T("Received Requests");
 }
 
-<h1>@T("Received Requests")</h1>
-
 @if (Model.Any()) {
     <ul class="receivedobjectrequestlist">
         @foreach (var viewModel in Model) {

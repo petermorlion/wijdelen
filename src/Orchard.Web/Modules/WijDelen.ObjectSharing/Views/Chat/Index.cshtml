@@ -1,7 +1,12 @@
 ﻿@model WijDelen.ObjectSharing.ViewModels.ChatViewModel
 
 @{
-    Layout.Title = T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription);
+    if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
+        Layout.Title = T("Your request for (a) {0}.", Model.ObjectDescription).ToString();
+    }
+    else {
+        Layout.Title = T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription).ToString();
+    }
 }
 
 @if (Model.Message != "") {
@@ -11,14 +16,9 @@
 }
 
 @if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
-    <h1>@T("Your request for (a) {0}.", Model.ObjectDescription)</h1>
-
     <h5>
         @T("{0} has (a) {1} for you.", Model.ConfirmingUserName, Model.ObjectDescription)
     </h5>
-}
-else {
-    <h1>@T("{0} is looking for (a) {1}.", Model.RequestingUserName, Model.ObjectDescription)</h1>
 }
 
 <div class="chat">

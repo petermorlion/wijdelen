@@ -5,9 +5,6 @@
     Layout.Title = T("My Requests");
 }
 
-<h1>@T("My Requests")</h1>
-
-
 @if (Model.Any()) {
     <ul class="objectrequestlist">
         @foreach (var objectRequestRecord in Model) {
