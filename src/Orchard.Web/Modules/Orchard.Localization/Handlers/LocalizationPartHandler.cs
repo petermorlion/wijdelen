@@ -31,7 +31,7 @@ namespace Orchard.Localization.Handlers {
 
         protected static void PropertySetHandlers(ActivatedContentContext context, LocalizationPart localizationPart) {
             localizationPart.CultureField.Setter(cultureRecord => {
-                localizationPart.Record.CultureId = cultureRecord != null ? cultureRecord.Id : 0;
+                localizationPart.Record.CultureId = cultureRecord.Id;
                 return cultureRecord;
             });
             
