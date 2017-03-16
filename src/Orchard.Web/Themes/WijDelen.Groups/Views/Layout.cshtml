@@ -67,7 +67,8 @@
                         var culture = CultureInfo.GetCultureInfo(localization.Culture);
 
                         <li class="language-link">
-                            <a href="@Url.ItemDisplayUrl(localization)">@T("{0}", culture.Parent.NativeName)</a>
+                            @Html.ActionLink(T("{0}", culture.Parent.NativeName).ToString(), "ChangeCulture", new { Controller = "Culture", Area = "WijDelen.Localization", Culture = culture.Name, ReturnUrl = Url.ItemDisplayUrl(localization) }, new {})
+                            @*<a href="@Url.ItemDisplayUrl(localization)">@T("{0}", culture.Parent.NativeName)</a>*@
                         </li>
                     }
                 </ul>

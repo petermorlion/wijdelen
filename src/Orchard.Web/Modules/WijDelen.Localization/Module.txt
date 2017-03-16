@@ -1,0 +1,11 @@
+﻿Name: WijDelen.Localization
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0
+OrchardVersion: 1.0
+Description: Custom localization features for Peergroups
+Features:
+    WijDelen.Localization:
+        Description: Custom localization features for Peergroups
+		Category: Peergroups

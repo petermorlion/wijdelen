@@ -294,6 +294,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Reports.Tests", "O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Mailgun", "Orchard.Web\Modules\WijDelen.Mailgun\WijDelen.Mailgun.csproj", "{E18E27AD-BFA5-43E0-8072-898388598751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Localization", "Orchard.Web\Modules\WijDelen.Localization\WijDelen.Localization.csproj", "{08800878-74CC-4B8B-88B0-3E18FD9F97DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1188,6 +1190,13 @@ Global
 		{E18E27AD-BFA5-43E0-8072-898388598751}.FxCop|Any CPU.Build.0 = Release|Any CPU
 		{E18E27AD-BFA5-43E0-8072-898388598751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E18E27AD-BFA5-43E0-8072-898388598751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1283,6 +1292,7 @@ Global
 		{D66959A3-64FD-4E92-B5B8-FCC24861C85E} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{3A80601D-76B5-4758-9E56-7C294C66C88A} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{E18E27AD-BFA5-43E0-8072-898388598751} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
+		{08800878-74CC-4B8B-88B0-3E18FD9F97DE} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

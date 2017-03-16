@@ -5,4 +5,4 @@ Description: Theme for Peergroups
 Version: 1.0
 Tags: WijDelen
 Zones: Navigation, Messages, Content, AsideFirst, Footer, Header
-Dependencies: WijDelen.UserImport, Orchard.Localization, Orchard.Autoroute
+Dependencies: WijDelen.UserImport, Orchard.Localization, Orchard.Autoroute, WijDelen.Localization
