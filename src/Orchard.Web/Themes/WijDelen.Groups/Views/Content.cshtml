@@ -1,7 +1,6 @@
 ﻿@using Orchard.Utility.Extensions
 @using Orchard.ContentManagement
 @using Orchard.MediaLibrary.Fields
-@using WijDelen.UserImport
 @using WijDelen.UserImport.Models
 
 @{
@@ -29,13 +28,11 @@
         var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
         
         <div class="column column-30 grouplogo">
-            @groupLogoField.FirstMediaUrl
+            <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
         </div>
     }
     else {
-        <div class="column column-30">
-            
-        </div>
+        <div class="column column-30"></div>
     }
 </header>
 @Display(Model.Content)
