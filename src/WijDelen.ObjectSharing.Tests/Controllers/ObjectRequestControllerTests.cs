@@ -138,6 +138,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var actionResult = controller.Item(id);
 
             ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
+                Message = "",
                 ObjectRequestRecord = objectRequestRecords[0],
                 ChatRecords = new List<ChatRecord> { chatRecords[0] }
             });
