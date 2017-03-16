@@ -215,6 +215,10 @@
       <Project>{6bd8b2fa-f2e3-4ac8-a4c3-2925a653889a}</Project>
       <Name>Orchard.Layouts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Orchard.Localization\Orchard.Localization.csproj">
+      <Project>{FBC8B571-ED50-49D8-8D9D-64AB7454A0D6}</Project>
+      <Name>Orchard.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\WijDelen.UserImport\WijDelen.UserImport.csproj">
       <Project>{93d162a5-1383-450d-9cae-189607e7a285}</Project>
       <Name>WijDelen.UserImport</Name>

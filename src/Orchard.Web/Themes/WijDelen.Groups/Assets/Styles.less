@@ -82,6 +82,15 @@ a:hover {
     display: none;
 }
 
+.language ul li {
+    margin: 0;
+}
+
+.language ul li.language-link a {
+    font-size: 1.3rem;
+    line-height: 2.5rem;
+}
+
 /* Larger than tablet screen */
 @media screen and (min-width: 80.0rem) {
     .navigation nav {
@@ -90,6 +99,11 @@ a:hover {
 
     .navigation-large {
         display: block;
+    }
+
+    .navigation-large .language {
+        float: right;
+        margin-right: 20px;
     }
 
     .navigation-mobile {
