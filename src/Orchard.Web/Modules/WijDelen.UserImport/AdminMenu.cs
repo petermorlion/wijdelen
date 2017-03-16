@@ -19,6 +19,11 @@ namespace WijDelen.UserImport {
                 .Caption(T("Peergroups"))
                 .Position("0")
                 .Add(subItem => subItem
+                    .Caption(T("Groups"))
+                    .Position("2")
+                    .Action("List", "Admin", new { area = "Contents", id="Group" })//@Html.ActionLink(T("List Items").ToString(), "List", new {area = "Contents", id = Model.Name})
+                    .Permission(StandardPermissions.SiteOwner))
+                .Add(subItem => subItem
                     .Caption(T("User Import"))
                     .Position("3")
                     .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
