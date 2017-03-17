@@ -166,7 +166,9 @@ namespace WijDelen.UserImport.Tests.Controllers {
             membershipServiceMock.Verify(x => x.SetPassword(user.Object, "password1"));
             userEventHandlerMock.Verify(x => x.ChangedPassword(user.Object));
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
-            Assert.AreEqual("ChangePasswordSuccess", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Index", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("WijDelen.ObjectSharing", ((RedirectToRouteResult)result).RouteValues["area"]);
+            Assert.AreEqual("GetStarted", ((RedirectToRouteResult)result).RouteValues["controller"]);
         }
     }
 }

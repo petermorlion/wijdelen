@@ -76,7 +76,7 @@ namespace WijDelen.UserImport.Controllers {
 
             _userEventHandler.ChangedPassword(user);
 
-            return RedirectToAction("ChangePasswordSuccess");
+            return RedirectToAction("Index", "GetStarted", new {area = "WijDelen.ObjectSharing"});
         }
 
         public Localizer T { get; set; }

@@ -252,3 +252,18 @@ msgstr "Nu even niet"
 #| msgid "No, I do not own this"
 msgid "No, I do not own this"
 msgstr "Nee, dat heb ik niet"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+#| msgid "Let's get started"
+msgid "Let's get started"
+msgstr "Laten we beginnen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+#| msgid "Welcome {0}!"
+msgid "Welcome {0}!"
+msgstr "Welkom {0}!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+#| msgid "Let's start by asking the members of your group if they can lend you something. FIll out the form below and we'll do the rest!"
+msgid "Let's start by asking the members of your group if they can lend you something. FIll out the form below and we'll do the rest!"
+msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand formulier in en wij doen de rest!"
