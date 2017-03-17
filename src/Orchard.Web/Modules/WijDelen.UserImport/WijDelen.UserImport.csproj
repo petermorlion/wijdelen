@@ -102,8 +102,12 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Drivers\GroupMembershipPartDriver.cs" />
     <Compile Include="Drivers\NamePartDriver.cs" />
+    <Compile Include="Drivers\UserDetailsPartDriver.cs" />
     <Compile Include="Handlers\GroupMembershipPartHandler.cs" />
     <Compile Include="Handlers\NamePartHandler.cs" />
+    <Compile Include="Handlers\UserDetailsHandler.cs" />
+    <Compile Include="Models\UserDetailsPart.cs" />
+    <Compile Include="Models\UserDetailsPartRecord.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
     <Compile Include="Models\GroupMembershipPart.cs" />
     <Compile Include="Models\GroupMembershipPartRecord.cs" />
@@ -180,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\Name.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\UserDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\UserDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
