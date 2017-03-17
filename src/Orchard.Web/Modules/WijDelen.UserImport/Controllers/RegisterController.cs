@@ -24,10 +24,8 @@ namespace WijDelen.UserImport.Controllers {
         }
 
         [AlwaysAccessible]
-        public ActionResult Index(string nonce)
-        {
-            if (_userService.ValidateLostPassword(nonce) == null)
-            {
+        public ActionResult Index(string nonce) {
+            if (_userService.ValidateLostPassword(nonce) == null) {
                 return RedirectToAction("LogOn");
             }
 
@@ -39,27 +37,23 @@ namespace WijDelen.UserImport.Controllers {
         [HttpPost]
         [AlwaysAccessible]
         [ValidateInput(false)]
-        public ActionResult Index(string nonce, string newPassword, string confirmPassword, string firstName, string lastName)
-        {
+        public ActionResult Index(string nonce, string newPassword, string confirmPassword, string firstName, string lastName) {
             IUser user;
-            if ((user = _userService.ValidateLostPassword(nonce)) == null)
-            {
+            if ((user = _userService.ValidateLostPassword(nonce)) == null) {
                 return Redirect("~/");
             }
 
             ViewData["PasswordLength"] = MinPasswordLength;
 
-            if (newPassword == null || newPassword.Length < MinPasswordLength)
-            {
+            if (newPassword == null || newPassword.Length < MinPasswordLength) {
                 ModelState.AddModelError("newPassword", T("You must specify a new password of {0} or more characters.", MinPasswordLength));
             }
 
-            if (!string.Equals(newPassword, confirmPassword, StringComparison.Ordinal))
-            {
+            if (!string.Equals(newPassword, confirmPassword, StringComparison.Ordinal)) {
                 ModelState.AddModelError("_FORM", T("The new password and confirmation password do not match."));
             }
 
-            if (string.IsNullOrWhiteSpace(firstName)) {
+            if (string.IsNullOrWhiteSpace(firstName)) { 
                 ModelState.AddModelError("firstName", T("You must specify a first name."));
             }
 
@@ -67,8 +61,7 @@ namespace WijDelen.UserImport.Controllers {
                 ModelState.AddModelError("lastName", T("You must specify a last name."));
             }
 
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) {
                 return View();
             }
 
