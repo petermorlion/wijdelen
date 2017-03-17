@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminControllerTests.cs" />
+    <Compile Include="Controllers\RegisterControllerTests.cs" />
     <Compile Include="Mocks\MockWorkContext.cs" />
     <Compile Include="Models\UserImportResultTests.cs" />
     <Compile Include="Services\CsvReaderTests.cs" />
