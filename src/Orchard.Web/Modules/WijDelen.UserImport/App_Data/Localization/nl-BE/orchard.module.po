@@ -19,9 +19,9 @@ msgid "User {0} has an invalid email address."
 msgstr "Gebruiker {0} heeft een ongeldig email adres."
 
 #: wijdelen.userimport.services.userimportservice
-#| msgid "There is already a user with username {0} and/or email {1}."
-msgid "There is already a user with username {0} and/or email {1}."
-msgstr "Er is al een gebruiker met gebruikersnaam {0} en/of email {1}."
+#| msgid "User {0} already exists."
+msgid "User {0} already exists."
+msgstr "Gebruiker {0} bestaat al."
 
 #: wijdelen.userimport.services.mailgunservice
 #| msgid "Welcome to Peergroups"

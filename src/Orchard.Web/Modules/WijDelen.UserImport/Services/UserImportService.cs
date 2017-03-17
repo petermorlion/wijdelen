@@ -44,7 +44,7 @@ namespace WijDelen.UserImport.Services {
                 }
 
                 if (!string.IsNullOrEmpty(user.UserName) && ! string.IsNullOrEmpty(user.Email) && !_userService.VerifyUserUnicity(user.UserName, user.Email)) {
-                    userImportResult.AddErrorMessage(T("There is already a user with username {0} and/or email {1}.", user.UserName, user.Email).ToString());
+                    userImportResult.AddErrorMessage(T("User {0} already exists.", user.UserName, user.Email).ToString());
                     isValid = false;
                 }
 

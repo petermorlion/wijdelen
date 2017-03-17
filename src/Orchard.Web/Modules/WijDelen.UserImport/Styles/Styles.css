@@ -3,5 +3,11 @@
 ** Any changes made directly to this file will be overwritten next time its asset group is processed by Gulp.
 */
 
+.userimport-results {
+  margin-left: 20px;
+}
+.userimport-summary {
+  margin-left: 20px;
+}
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlN0eWxlcy5jc3MiLCJTdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsQUNMQSIsImZpbGUiOiJTdHlsZXMuY3NzIiwic291cmNlc0NvbnRlbnQiOltudWxsLCJib2R5IHtcclxufSJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ== */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlN0eWxlcy5jc3MiLCJTdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsQUNMQTtFQUNJLGlCQUFBOztBQUdKO0VBQ0ksaUJBQUEiLCJmaWxlIjoiU3R5bGVzLmNzcyIsInNvdXJjZXNDb250ZW50IjpbbnVsbCwiLnVzZXJpbXBvcnQtcmVzdWx0cyB7XHJcbiAgICBtYXJnaW4tbGVmdDogMjBweDtcclxufVxyXG5cclxuLnVzZXJpbXBvcnQtc3VtbWFyeSB7XHJcbiAgICBtYXJnaW4tbGVmdDogMjBweDsgXHJcbn0iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0= */
