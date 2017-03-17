@@ -7,6 +7,7 @@ using Orchard.Security;
 using Orchard.Users.Events;
 using Orchard.Users.Services;
 using WijDelen.UserImport.Controllers;
+using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
@@ -17,7 +18,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestT()
         {
-            var controller = new RegisterController(Mock.Of<IUserService>(), Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(Mock.Of<IUserService>(), Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
             var localizer = NullLocalizer.Instance;
 
             controller.T = localizer;
@@ -29,7 +30,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         public void TestGetWithoutNonce() {
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns((IUser)null); 
-            var controller = new RegisterController(userServiceMock.Object, Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
 
             var result = controller.Index("nonce");
 
@@ -45,7 +46,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
 
             var result = controller.Index("nonce");
 
@@ -58,7 +59,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         {
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns((IUser)null);
-            var controller = new RegisterController(userServiceMock.Object, Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
 
             var result = controller.Index("nonce", "pwd", "pwd", "John", "Doe");
 
@@ -75,7 +76,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
             controller.T = NullLocalizer.Instance;
 
             var result = controller.Index("nonce", "pwd", "pwd", "John", "Doe");
@@ -94,7 +95,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
             controller.T = NullLocalizer.Instance;
 
             var result = controller.Index("nonce", "password1", "password2", "John", "Doe");
@@ -113,7 +114,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
             controller.T = NullLocalizer.Instance;
 
             var result = controller.Index("nonce", "password1", "password1", "", "Doe");
@@ -132,7 +133,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
             controller.T = NullLocalizer.Instance;
 
             var result = controller.Index("nonce", "password1", "password1", "John", "");
@@ -143,25 +144,27 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         [Test]
-        public void TestSuccessfulPost()
-        {
+        public void TestSuccessfulPost() {
+            var user = new Mock<IUser>();
+
             var userServiceMock = new Mock<IUserService>();
-            var user = Mock.Of<IUser>();
-            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(user);
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(user.Object);
 
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
 
             var userEventHandlerMock = new Mock<IUserEventHandler>();
 
-            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, userEventHandlerMock.Object);
+            var updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
+
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, userEventHandlerMock.Object, updateUserDetailsServiceMock.Object);
             controller.T = NullLocalizer.Instance;
 
             var result = controller.Index("nonce", "password1", "password1", "John", "Doe");
 
-
-            membershipServiceMock.Verify(x => x.SetPassword(user, "password1"));
-            userEventHandlerMock.Verify(x => x.ChangedPassword(user));
+            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(user.Object, "John", "Doe"));
+            membershipServiceMock.Verify(x => x.SetPassword(user.Object, "password1"));
+            userEventHandlerMock.Verify(x => x.ChangedPassword(user.Object));
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             Assert.AreEqual("ChangePasswordSuccess", ((RedirectToRouteResult)result).RouteValues["action"]);
         }

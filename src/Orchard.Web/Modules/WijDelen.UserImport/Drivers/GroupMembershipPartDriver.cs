@@ -41,8 +41,7 @@ namespace WijDelen.UserImport.Drivers {
             var model = new EditGroupMembershipViewModel();
             updater.TryUpdateModel(model, Prefix, null, null);
 
-            if (part.ContentItem.Id != 0)
-            {
+            if (part.ContentItem.Id != 0) {
                 _groupService.UpdateGroupMembershipForContentItem(part.ContentItem, model);
             }
 

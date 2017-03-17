@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Web.Mvc;
+using Orchard.ContentManagement;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Themes;
 using Orchard.Users.Services;
 using Orchard.Localization;
 using Orchard.Users.Events;
+using WijDelen.UserImport.Models;
+using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Controllers {
     /// <summary>
@@ -16,11 +19,13 @@ namespace WijDelen.UserImport.Controllers {
         private readonly IUserService _userService;
         private readonly IMembershipService _membershipService;
         private readonly IUserEventHandler _userEventHandler;
+        private readonly IUpdateUserDetailsService _updateUserDetailsService;
 
-        public RegisterController(IUserService userService, IMembershipService membershipService, IUserEventHandler userEventHandler) {
+        public RegisterController(IUserService userService, IMembershipService membershipService, IUserEventHandler userEventHandler, IUpdateUserDetailsService updateUserDetailsService) {
             _userService = userService;
             _membershipService = membershipService;
             _userEventHandler = userEventHandler;
+            _updateUserDetailsService = updateUserDetailsService;
         }
 
         [AlwaysAccessible]
@@ -66,6 +71,8 @@ namespace WijDelen.UserImport.Controllers {
             }
 
             _membershipService.SetPassword(user, newPassword);
+
+            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName);
 
             _userEventHandler.ChangedPassword(user);
 
