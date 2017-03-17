@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Orchard.Logging;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -11,14 +12,16 @@ namespace WijDelen.Mailgun {
         private readonly string _from;
 
         public MailgunClient() {
+            Logger = NullLogger.Instance;
+
             _apiKey = "key-9b8b2053d33de2583bfd3afb604dd820";
 
 #if DEBUG
-            _apiBaseUrl = new Uri("https://api.mailgun.net/v3/sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org");
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
             _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
             _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
 #else
-            _apiBaseUrl = new Uri("https://api.mailgun.net/v3/mg.peergroups.be");
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
             _domain = "mg.peergroups.be";
             _from = "Peergroups <no-reply@peergroups.be>";
 #endif
@@ -57,7 +60,14 @@ namespace WijDelen.Mailgun {
 
             request.Method = Method.POST;
 
-            client.Execute(request);
+            var response = client.Execute(request);
+
+            var statusCodeNumber = (int) response.StatusCode;
+            if (statusCodeNumber < 200 || statusCodeNumber > 399) {
+                Logger.Error("An error occurred when calling Mailgun. Received a {0} and the following content: {1}.", response.StatusCode, response.Content);
+            }
         }
+
+        public ILogger Logger { get; set; }
     }
 }
