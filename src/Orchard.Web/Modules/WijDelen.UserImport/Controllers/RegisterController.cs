@@ -39,7 +39,7 @@ namespace WijDelen.UserImport.Controllers {
         [HttpPost]
         [AlwaysAccessible]
         [ValidateInput(false)]
-        public ActionResult Index(string nonce, string newPassword, string confirmPassword)
+        public ActionResult Index(string nonce, string newPassword, string confirmPassword, string firstName, string lastName)
         {
             IUser user;
             if ((user = _userService.ValidateLostPassword(nonce)) == null)
@@ -57,6 +57,14 @@ namespace WijDelen.UserImport.Controllers {
             if (!string.Equals(newPassword, confirmPassword, StringComparison.Ordinal))
             {
                 ModelState.AddModelError("_FORM", T("The new password and confirmation password do not match."));
+            }
+
+            if (string.IsNullOrWhiteSpace(firstName)) {
+                ModelState.AddModelError("firstName", T("You must specify a first name."));
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName)) {
+                ModelState.AddModelError("lastName", T("You must specify a last name."));
             }
 
             if (!ModelState.IsValid)

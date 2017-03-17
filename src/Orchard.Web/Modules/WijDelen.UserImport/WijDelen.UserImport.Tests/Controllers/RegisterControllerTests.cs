@@ -60,7 +60,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns((IUser)null);
             var controller = new RegisterController(userServiceMock.Object, Mock.Of<IMembershipService>(), Mock.Of<IUserEventHandler>());
 
-            var result = controller.Index("nonce", "pwd", "pwd");
+            var result = controller.Index("nonce", "pwd", "pwd", "John", "Doe");
 
             Assert.IsInstanceOf<RedirectResult>(result);
             Assert.AreEqual("~/", ((RedirectResult)result).Url);
@@ -78,7 +78,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
             controller.T = NullLocalizer.Instance;
 
-            var result = controller.Index("nonce", "pwd", "pwd");
+            var result = controller.Index("nonce", "pwd", "pwd", "John", "Doe");
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual("", ((ViewResult)result).ViewName);
@@ -97,11 +97,49 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
             controller.T = NullLocalizer.Instance;
 
-            var result = controller.Index("nonce", "password1", "password2");
+            var result = controller.Index("nonce", "password1", "password2", "John", "Doe");
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual("", ((ViewResult)result).ViewName);
             Assert.AreEqual("The new password and confirmation password do not match.", ((ViewResult)result).ViewData.ModelState["_FORM"].Errors.Single().ErrorMessage);
+        }
+
+        [Test]
+        public void TestPostWithoutFirstName()
+        {
+            var userServiceMock = new Mock<IUserService>();
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(Mock.Of<IUser>());
+
+            var membershipServiceMock = new Mock<IMembershipService>();
+            membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
+
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            controller.T = NullLocalizer.Instance;
+
+            var result = controller.Index("nonce", "password1", "password1", "", "Doe");
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult)result).ViewName);
+            Assert.AreEqual("You must specify a first name.", ((ViewResult)result).ViewData.ModelState["firstName"].Errors.Single().ErrorMessage);
+        }
+
+        [Test]
+        public void TestPostWithoutLastName()
+        {
+            var userServiceMock = new Mock<IUserService>();
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(Mock.Of<IUser>());
+
+            var membershipServiceMock = new Mock<IMembershipService>();
+            membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
+
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>());
+            controller.T = NullLocalizer.Instance;
+
+            var result = controller.Index("nonce", "password1", "password1", "John", "");
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult)result).ViewName);
+            Assert.AreEqual("You must specify a last name.", ((ViewResult)result).ViewData.ModelState["lastName"].Errors.Single().ErrorMessage);
         }
 
         [Test]
@@ -119,7 +157,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, userEventHandlerMock.Object);
             controller.T = NullLocalizer.Instance;
 
-            var result = controller.Index("nonce", "password1", "password1");
+            var result = controller.Index("nonce", "password1", "password1", "John", "Doe");
 
 
             membershipServiceMock.Verify(x => x.SetPassword(user, "password1"));

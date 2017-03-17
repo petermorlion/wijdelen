@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+@{
+    Layout.Title = T("Just a few more details").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost()) { 
+    <fieldset>
+        <div>
+            <label for="newPassword">@T("Password:")</label>
+            @Html.Password("newPassword") 
+            @Html.ValidationMessage("newPassword") 
+        </div>
+        <div>
+            <label for="confirmPassword">@T("Confirm the password:")</label>
+            @Html.Password("confirmPassword") 
+            @Html.ValidationMessage("confirmPassword") 
+        </div>
+        <div>
+            <label for="firstName">@T("First name:")</label>
+            @Html.TextBox("firstName")
+            @Html.ValidationMessage("firstName") 
+        </div>
+        <div>
+            <label for="confirmPassword">@T("Last name:")</label>
+            @Html.TextBox("lastName")
+            @Html.ValidationMessage("lastName") 
+        </div>
+        <div>
+            <button class="primaryAction" type="submit">@T("Start with Peergroups")</button>
+        </div>
+    </fieldset>
+ } 

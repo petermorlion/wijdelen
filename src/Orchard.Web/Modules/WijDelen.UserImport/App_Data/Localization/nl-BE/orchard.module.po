@@ -122,3 +122,53 @@ msgstr "Bestaande"
 #| msgid "Please provide a group name to create a new group."
 msgid "Please provide a group name to create a new group."
 msgstr "Gelieve de groep een naam te geven om een nieuwe groep te creëren."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a new password of {0} or more characters."
+msgid "You must specify a new password of {0} or more characters."
+msgstr "U moet een nieuw wachtwoord invullen dat uit minimaal 7 karakters bestaat."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "The new password and confirmation password do not match."
+msgid "The new password and confirmation password do not match."
+msgstr "Het nieuwe wachtwoord komt niet overeen met het bevestigingswachtwoord."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a first name."
+msgid "TYou must specify a first name."
+msgstr "U moet een voornaam opgeven."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a last name."
+msgid "TYou must specify a last name."
+msgstr "U moet een familienaam opgeven."
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Just a few more details"
+msgid "Just a few more details"
+msgstr "Nog enkele details"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Password:"
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Confirm the password:"
+msgid "Confirm the password:"
+msgstr "Bevestig het wachtwoord:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Start with Peergroups"
+msgid "Start with Peergroups"
+msgstr "Starten met Peergroups"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "First name:"
+msgid "First name:"
+msgstr "Voornaam:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Last name:"
+msgid "Last name:"
+msgstr "Familienaam:"
