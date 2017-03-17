@@ -9,22 +9,16 @@ namespace WijDelen.UserImport.Services {
             using (var reader = new StreamReader(stream)) {
                 var line = reader.ReadLine();
                 while (line != null) {
-                    var parts = line.Split(';');
-
-                    if (parts[0] == "username") {
-                        line = reader.ReadLine();
-                        continue;
-                    }
-
-                    if (parts.Length != 2) {
+                    
+                    if (line == "") {
                         line = reader.ReadLine();
                         continue;
                     }
 
                     var user = new User
                     {
-                        UserName = parts[0],
-                        Email = parts[1]
+                        UserName = line,
+                        Email = line
                     };
 
                     result.Add(user);

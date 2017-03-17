@@ -11,16 +11,15 @@ namespace WijDelen.UserImport.Tests.Services {
             var reader = new CsvReader();
 
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("username;email");
-            stringBuilder.AppendLine("john.doe;john.doe@example.com");
-            stringBuilder.AppendLine("jane.doe;jane.doe@example.com");
+            stringBuilder.AppendLine("john.doe@example.com");
+            stringBuilder.AppendLine("jane.doe@example.com");
             var stringInMemoryStream = new MemoryStream(Encoding.Default.GetBytes(stringBuilder.ToString()));
             var result = reader.ReadUsers(stringInMemoryStream);
 
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("john.doe", result[0].UserName);
+            Assert.AreEqual("john.doe@example.com", result[0].UserName);
             Assert.AreEqual("john.doe@example.com", result[0].Email);
-            Assert.AreEqual("jane.doe", result[1].UserName);
+            Assert.AreEqual("jane.doe@example.com", result[1].UserName);
             Assert.AreEqual("jane.doe@example.com", result[1].Email);
         }
 
@@ -30,14 +29,13 @@ namespace WijDelen.UserImport.Tests.Services {
             var reader = new CsvReader();
 
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("username;email");
             stringBuilder.AppendLine("");
-            stringBuilder.AppendLine("jane.doe;jane.doe@example.com");
+            stringBuilder.AppendLine("jane.doe@example.com");
             var stringInMemoryStream = new MemoryStream(Encoding.Default.GetBytes(stringBuilder.ToString()));
             var result = reader.ReadUsers(stringInMemoryStream);
 
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("jane.doe", result[0].UserName);
+            Assert.AreEqual("jane.doe@example.com", result[0].UserName);
             Assert.AreEqual("jane.doe@example.com", result[0].Email);
         }
     }
