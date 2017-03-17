@@ -13,4 +13,6 @@
     @T("Let's start by asking the members of your group if they can lend you something. FIll out the form below and we'll do the rest!", WorkContext.CurrentUser.ContentItem.As<UserDetailsPart>().FirstName)
 </p>
 
-@Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
+@{
+    Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
+}
