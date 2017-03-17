@@ -54,27 +54,24 @@
 }
 
 <div class="navigation navigation-large">
-    <div class="language">
-        @if (localizableAspects.Any()) {
-            <div class="language">
-                <ul>
-                    @foreach (var localization in localizableAspects) {
+    @if (localizableAspects.Any()) {
+        <div class="language">
+            <ul>
+                @foreach (var localization in localizableAspects) {
 
-                        if (localization.Culture == null) {
-                            continue;
-                        }
-
-                        var culture = CultureInfo.GetCultureInfo(localization.Culture);
-
-                        <li class="language-link">
-                            @Html.ActionLink(T("{0}", culture.Parent.NativeName).ToString(), "ChangeCulture", new { Controller = "Culture", Area = "WijDelen.Localization", Culture = culture.Name, ReturnUrl = Url.ItemDisplayUrl(localization) }, new {})
-                            @*<a href="@Url.ItemDisplayUrl(localization)">@T("{0}", culture.Parent.NativeName)</a>*@
-                        </li>
+                    if (localization.Culture == null) {
+                        continue;
                     }
-                </ul>
-            </div>
-        }
-    </div>
+
+                    var culture = CultureInfo.GetCultureInfo(localization.Culture);
+
+                    <li class="language-link">
+                        @Html.ActionLink(T("{0}", culture.Parent.NativeName).ToString(), "ChangeCulture", new { Controller = "Culture", Area = "WijDelen.Localization", Culture = culture.Name, ReturnUrl = Url.ItemDisplayUrl(localization) }, new {})
+                    </li>
+                }
+            </ul>
+        </div>
+    }
     <div class="container">
         <div class="row">
             <div class="column column-10">
