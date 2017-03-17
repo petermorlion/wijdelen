@@ -47,7 +47,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var chatMessageViewModels = chatMessages.Select(x => new ChatMessageViewModel {
                 DateTime = x.DateTime,
-                UserName = x.UserName,
+                UserId = x.UserId,
                 Message = x.Message
             }).ToList();
 
@@ -57,7 +57,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ObjectDescription = objectRequest.Description,
                 RequestingUserName = chat.RequestingUserName,
                 ConfirmingUserName = chat.ConfirmingUserName,
-                Message = T(messageKey, chat.RequestingUserName).ToString()
+                Message = T(messageKey, chat.RequestingUserName).ToString(),
+                RequestingUserId = chat.RequestingUserId
             });
         }
         

@@ -1,8 +1,10 @@
-﻿using Orchard.Data;
+﻿using Orchard.ContentManagement;
+using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class ChatMessageReadModelGenerator : IEventHandler<ChatMessageAdded> {
@@ -22,7 +24,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 DateTime = e.DateTime,
                 Message = e.Message,
                 UserId = e.UserId,
-                UserName = user.UserName
+                UserName = $"{user.As<UserDetailsPart>().FirstName} {user.As<UserDetailsPart>().LastName}"
             };
 
             _repository.Create(newRecord);

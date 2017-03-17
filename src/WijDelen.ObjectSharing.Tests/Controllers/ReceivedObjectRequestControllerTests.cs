@@ -10,6 +10,7 @@ using Orchard.Security;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
 
@@ -24,6 +25,10 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
 
+            var fakeUserFactory = new UserFactory();
+            var user1 = fakeUserFactory.Create("jane.doe", "jane.doe@example.com", "Jane", "Doe");
+            var user2 = fakeUserFactory.Create("john.doe", "john.doe@example.com", "John", "Doe");
+
             var persistentRecords = new[] {
                 new ReceivedObjectRequestRecord {
                     ObjectRequestId = Guid.NewGuid(),
@@ -31,7 +36,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     ExtraInfo = "For drinking",
                     UserId = 22,
                     ReceivedDateTime = new DateTime(2016, 11, 27),
-                    RequestingUserId = 1
+                    RequestingUserId = user1.Id
                 },
                 new ReceivedObjectRequestRecord {
                     ObjectRequestId = Guid.NewGuid(),
@@ -39,23 +44,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     ExtraInfo = "For sneaking",
                     UserId = 22,
                     ReceivedDateTime = new DateTime(2016, 12, 27),
-                    RequestingUserId = 2
+                    RequestingUserId = user2.Id
                 },
                 new ReceivedObjectRequestRecord {
                     UserId = 23
                 }
             };
 
-            var userMock1 = new Mock<IUser>();
-            userMock1.Setup(x => x.UserName).Returns("Jane");
-            userMock1.Setup(x => x.Id).Returns(1);
-
-            var userMock2 = new Mock<IUser>();
-            userMock2.Setup(x => x.UserName).Returns("John");
-            userMock2.Setup(x => x.Id).Returns(2);
-
             var queryMock = new Mock<IFindUsersByIdsQuery>();
-            queryMock.Setup(x => x.GetResult(2, 1)).Returns(new List<IUser> {userMock1.Object, userMock2.Object});
+            queryMock.Setup(x => x.GetResult(user2.Id, user1.Id)).Returns(new List<IUser> {user1, user2});
 
             var repositoryMock = new Mock<IRepository<ReceivedObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
@@ -73,7 +70,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
                 ReceivedDateTime = new DateTime(2016, 12, 27),
-                UserName = "John"
+                UserName = "John Doe"
             });
 
             model.ToList()[1].ShouldBeEquivalentTo(new ReceivedObjectRequestViewModel
@@ -82,7 +79,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "Flaming Moe",
                 ExtraInfo = "For drinking",
                 ReceivedDateTime = new DateTime(2016, 11, 27),
-                UserName = "Jane"
+                UserName = "Jane Doe"
             });
         }
     }

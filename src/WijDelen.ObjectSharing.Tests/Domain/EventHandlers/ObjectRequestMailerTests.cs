@@ -10,6 +10,7 @@ using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -29,20 +30,17 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             ObjectRequestMail persistedMail = null;
 
-            var otherUserMock = new Mock<IUser>();
-            otherUserMock.Setup(x => x.Id).Returns(22);
-            otherUserMock.Setup(x => x.Email).Returns("peter.morlion@gmail.com");
-
-            var requestingUserMock = new Mock<IUser>();
-            requestingUserMock.Setup(x => x.UserName).Returns("Jos");
+            var fakeUserFactory = new UserFactory();
+            var otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
+            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
 
             var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
-            getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUserMock.Object);
+            getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
 
             var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
             findOtherUsersQueryMock
                 .Setup(x => x.GetResults(3, "Sneakers"))
-                .Returns(new[] { otherUserMock.Object });
+                .Returns(new[] { otherUser });
 
             var groupServiceMock = new Mock<IGroupService>();
             groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
@@ -65,13 +63,13 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             persistedMail.ObjectRequestId.Should().Be(objectRequestId);
 
             mailServiceMock.Verify(x => x.SendObjectRequestMail(
-                "Jos", 
+                "Jos Joskens", 
                 "Group",
                 objectRequestId,
                 "Sneakers", 
                 "For sneaking", 
                 persistedMail, 
-                new UserEmail {UserId = 22, Email = "peter.morlion@gmail.com"}));
+                new UserEmail {UserId = otherUser.Id, Email = "peter.morlion@gmail.com"}));
 
             repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
         }

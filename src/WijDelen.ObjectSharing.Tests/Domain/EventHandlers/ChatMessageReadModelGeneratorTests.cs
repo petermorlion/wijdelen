@@ -3,11 +3,11 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Data;
-using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
@@ -27,17 +27,17 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 .Setup(x => x.Create(It.IsAny<ChatMessageRecord>()))
                 .Callback((ChatMessageRecord r) => record = r);
 
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.UserName).Returns("Moe"); 
+            var fakeUserFactory = new UserFactory();
+            var user = fakeUserFactory.Create("Moe", "moe@thesimpsons.com", "Moe", "Szyslak");
             var userQueryMock = new Mock<IGetUserByIdQuery>();
-            userQueryMock.Setup(x => x.GetResult(22)).Returns(userMock.Object);
+            userQueryMock.Setup(x => x.GetResult(22)).Returns(user);
 
             var handler = new ChatMessageReadModelGenerator(repositoryMock.Object, userQueryMock.Object);
 
             handler.Handle(chatMessageAdded);
 
             record.UserId.Should().Be(22);
-            record.UserName.Should().Be("Moe");
+            record.UserName.Should().Be("Moe Szyslak");
             record.Message.Should().Be("Message");
             record.DateTime.Should().Be(chatMessageAdded.DateTime);
             record.ChatId.Should().Be(chatMessageAdded.ChatId);

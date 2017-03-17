@@ -27,25 +27,29 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     ChatId = chatId,
                     DateTime = new DateTime(2016, 11, 22),
                     UserName = "Moe",
-                    Message = "Hello"
+                    Message = "Hello",
+                    UserId = 2
                 },
                 new ChatMessageRecord {
                     ChatId = chatId,
                     DateTime = new DateTime(2016, 11, 21),
                     UserName = "Lenny",
-                    Message = "Hi"
+                    Message = "Hi",
+                    UserId = 1
                 },
                 new ChatMessageRecord {
                     ChatId = chatId,
                     DateTime = new DateTime(2016, 11, 23),
                     UserName = "Moe",
-                    Message = "How are you?"
+                    Message = "How are you?",
+                    UserId = 2
                 },
                 new ChatMessageRecord {
                     ChatId = Guid.NewGuid(),
                     DateTime = new DateTime(2016, 11, 22),
                     UserName = "Carl",
-                    Message = "Howdy"
+                    Message = "Howdy",
+                    UserId = 3
                 }
             });
 
@@ -61,7 +65,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var chatRecord = new ChatRecord {
                 ObjectRequestId = objectRequestId,
                 ChatId = chatId,
-                RequestingUserName = "Carl"
+                RequestingUserName = "Carl",
+                RequestingUserId = 666
             };
 
             var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
@@ -80,15 +85,16 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(chatId);
             result.As<ViewResult>().Model.As<ChatViewModel>().ObjectDescription.Should().Be("Sneakers");
             result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserName.Should().Be("Carl");
+            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserId.Should().Be(666);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages.Count.Should().Be(3);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].DateTime.Should().Be(new DateTime(2016, 11, 21));
-            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].UserName.Should().Be("Lenny");
+            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].UserId.Should().Be(1);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[0].Message.Should().Be("Hi");
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[1].DateTime.Should().Be(new DateTime(2016, 11, 22));
-            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[1].UserName.Should().Be("Moe");
+            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[1].UserId.Should().Be(2);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[1].Message.Should().Be("Hello");
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].DateTime.Should().Be(new DateTime(2016, 11, 23));
-            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].UserName.Should().Be("Moe");
+            result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].UserId.Should().Be(2);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].Message.Should().Be("How are you?");
         }
 

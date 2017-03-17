@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Orchard.ContentManagement;
 using Orchard.Localization;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -8,6 +9,7 @@ using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
@@ -48,7 +50,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.ExtraInfo,
                 objectRequested.SourceId);
 
-            var requestingUserName = _getUserByIdQuery.GetResult(objectRequested.UserId).UserName;
+            var requestingUser = _getUserByIdQuery.GetResult(objectRequested.UserId);
+            var requestingUserName = $"{requestingUser.As<UserDetailsPart>().FirstName} {requestingUser.As<UserDetailsPart>().LastName}";
             var groupName = _groupService.GetGroupForUser(objectRequested.UserId).Name;
             var otherUsers = _findOtherUsersQuery.GetResults(objectRequested.UserId, objectRequested.Description).ToList();
 

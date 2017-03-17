@@ -84,7 +84,7 @@ namespace WijDelen.UserImport.Tests.Services {
             Assert.AreEqual(1, result.Count);
             Assert.IsTrue(!result[0].WasImported);
             Assert.AreEqual("john.doe", result[0].UserName);
-            Assert.AreEqual("There is already a user with username john.doe and/or email john.doe@example.com.", result[0].ErrorMessages.Single());
+            Assert.AreEqual("User john.doe already exists.", result[0].ErrorMessages.Single());
         }
 
         [Test]

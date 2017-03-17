@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard;
+using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
@@ -27,13 +30,17 @@ namespace WijDelen.ObjectSharing.Controllers {
             var records = _repository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.ReceivedDateTime).ToList();
             var users = _usersQuery.GetResult(records.Select(x => x.RequestingUserId).Distinct().ToArray()).ToList();
 
-            var viewModels = records.Select(x => new ReceivedObjectRequestViewModel {
-                ObjectRequestId = x.ObjectRequestId,
-                Description = x.Description,
-                ExtraInfo = x.ExtraInfo,
-                UserName = users.Single(u => u.Id == x.RequestingUserId).UserName,
-                ReceivedDateTime = x.ReceivedDateTime
-            });
+            var viewModels = new List<ReceivedObjectRequestViewModel>();
+            foreach (var receivedObjectRequestRecord in records) {
+                var user = users.Single(u => u.Id == receivedObjectRequestRecord.RequestingUserId);
+                viewModels.Add(new ReceivedObjectRequestViewModel {
+                    ObjectRequestId = receivedObjectRequestRecord.ObjectRequestId,
+                    Description = receivedObjectRequestRecord.Description,
+                    ExtraInfo = receivedObjectRequestRecord.ExtraInfo,
+                    UserName = $"{user.As<UserDetailsPart>().FirstName} {user.As<UserDetailsPart>().LastName}",
+                    ReceivedDateTime = receivedObjectRequestRecord.ReceivedDateTime
+                });
+            }
 
             return View(viewModels);
         }

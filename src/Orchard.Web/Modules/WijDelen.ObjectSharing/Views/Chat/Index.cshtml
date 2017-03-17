@@ -1,7 +1,7 @@
 ﻿@model WijDelen.ObjectSharing.ViewModels.ChatViewModel
 
 @{
-    if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
+    if (WorkContext.CurrentUser.Id == Model.RequestingUserId) {
         Layout.Title = T("Your request for (a) {0}.", Model.ObjectDescription).ToString();
     }
     else {
@@ -15,7 +15,7 @@
     </div>
 }
 
-@if (WorkContext.CurrentUser.UserName == Model.RequestingUserName) {
+@if (WorkContext.CurrentUser.Id == Model.RequestingUserId) {
     <h5>
         @T("{0} has (a) {1} for you.", Model.ConfirmingUserName, Model.ObjectDescription)
     </h5>
@@ -24,7 +24,7 @@
 <div class="chat">
     @foreach (var chatMessageViewModel in Model.Messages) {
         var chatBubbleClass = "chatbubble chatbubble-otheruser";
-        if (WorkContext.CurrentUser.UserName == chatMessageViewModel.UserName) {
+        if (WorkContext.CurrentUser.Id == chatMessageViewModel.UserId) {
             chatBubbleClass = "chatbubble chatbubble-currentuser";
         }
 

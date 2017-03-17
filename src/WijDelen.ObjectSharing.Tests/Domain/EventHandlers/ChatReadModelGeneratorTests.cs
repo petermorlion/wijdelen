@@ -8,6 +8,7 @@ using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
@@ -27,13 +28,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 .Setup(x => x.Create(It.IsAny<ChatRecord>()))
                 .Callback((ChatRecord r) => record = r);
 
-            var confirmingUserMock = new Mock<IUser>();
-            confirmingUserMock.Setup(x => x.UserName).Returns("Carl");
-            var requestingUserMock = new Mock<IUser>();
-            requestingUserMock.Setup(x => x.UserName).Returns("Lenny");
+            var fakeUserFactory = new UserFactory();
+            var confirmingUserMock = fakeUserFactory.Create("Carl", "carl@thesimpsons.com", "Carlton", "Carlson");
+            var requestingUserMock = fakeUserFactory.Create("Lenny", "lenny@thesimpsons.com", "Lenford", "Leonard");
             var userQueryMock = new Mock<IGetUserByIdQuery>();
-            userQueryMock.Setup(x => x.GetResult(1)).Returns(confirmingUserMock.Object);
-            userQueryMock.Setup(x => x.GetResult(2)).Returns(requestingUserMock.Object);
+            userQueryMock.Setup(x => x.GetResult(1)).Returns(confirmingUserMock);
+            userQueryMock.Setup(x => x.GetResult(2)).Returns(requestingUserMock);
 
             var handler = new ChatReadModelGenerator(repositoryMock.Object, userQueryMock.Object);
 
@@ -42,9 +42,9 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             record.ChatId.Should().Be(chatStarted.SourceId);
             record.ObjectRequestId.Should().Be(chatStarted.ObjectRequestId);
             record.ConfirmingUserId.Should().Be(1);
-            record.ConfirmingUserName.Should().Be("Carl");
+            record.ConfirmingUserName.Should().Be("Carlton Carlson");
             record.RequestingUserId.Should().Be(2);
-            record.RequestingUserName.Should().Be("Lenny");
+            record.RequestingUserName.Should().Be("Lenford Leonard");
         }
     }
 }

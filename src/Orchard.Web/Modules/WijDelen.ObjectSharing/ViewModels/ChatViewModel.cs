@@ -19,5 +19,7 @@ namespace WijDelen.ObjectSharing.ViewModels {
         /// The message to show to the user.
         /// </summary>
         public string Message { get; set; }
+
+        public int RequestingUserId { get; set; }
     }
 }

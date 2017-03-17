@@ -132,8 +132,10 @@
     <Compile Include="MessageReceiverFilterTests.cs" />
     <Compile Include="TestInfrastructure\Factories\ArchetypeFactory.cs" />
     <Compile Include="TestInfrastructure\Factories\SynonymFactory.cs" />
+    <Compile Include="TestInfrastructure\Factories\UserFactory.cs" />
     <Compile Include="TestInfrastructure\Fakes\FakeFieldStorage.cs" />
     <Compile Include="TestInfrastructure\Fakes\FakeOrchardServices.cs" />
+    <Compile Include="TestInfrastructure\Fakes\FakeUser.cs" />
     <Compile Include="TestInfrastructure\Fakes\FakeWorkContext.cs" />
     <Compile Include="Controllers\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestControllerTests.cs" />
