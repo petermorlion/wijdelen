@@ -2,7 +2,7 @@
 <div class="navigation-user-large">
     @if (WorkContext.CurrentUser != null) {
         <span class="user-actions welcome">
-            @Html.Raw("<a href=\"#popover-user-actions\" data-popover>" + Html.ItemDisplayText(WorkContext.CurrentUser) + "</a>")
+            @Html.Raw("<a href=\"#popover-user-actions\" data-popover>" + T("Account") + "</a>")
         </span>
         <span class="popover" id="popover-user-actions">
             @Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new {Area = "Orchard.Users", Controller = "Account"})

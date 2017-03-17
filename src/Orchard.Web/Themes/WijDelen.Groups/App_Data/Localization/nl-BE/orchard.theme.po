@@ -22,3 +22,8 @@ msgstr "Thema voor Peergroups"
 #| msgid "Change Password"
 msgid "Change Password"
 msgstr "Paswoord wijzigen"
+
+#: ~/Themes/WijDelen.Groups/Views/User.cshtml
+#| msgid "Account"
+msgid "Account"
+msgstr "Account"
