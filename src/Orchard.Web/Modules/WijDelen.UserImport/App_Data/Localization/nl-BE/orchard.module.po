@@ -89,9 +89,9 @@ msgid "User File"
 msgstr "Bestand"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
-#| msgid "Please use a CSV file with two columns: username and email"
-msgid "Please use a CSV file with two columns: username and email"
-msgstr "Gebruik een CSV bestand met twee kolommen: gebruikersnaam en email"
+#| msgid "Please use a CSV file where each line contains exactly one valid email address."
+msgid "Please use a CSV file where each line contains exactly one valid email address."
+msgstr "Gebruik een CSV bestand waar iedere lijn slechts één geldig email adres bevat."
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "Submit"
