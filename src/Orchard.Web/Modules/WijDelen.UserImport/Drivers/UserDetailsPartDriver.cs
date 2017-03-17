@@ -12,7 +12,7 @@ namespace WijDelen.UserImport.Drivers {
             return ContentShape("Parts_UserDetails_Edit",
                 () => shapeHelper.EditorTemplate(
                     TemplateName: "Parts/UserDetails",
-                    Models: part,
+                    Model: part,
                     Prefix: Prefix));
         }
 

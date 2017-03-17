@@ -74,5 +74,22 @@ namespace WijDelen.UserImport {
 
             return 6;
         }
+
+        public int UpdateFrom6() {
+            SchemaBuilder.CreateTable(typeof(UserDetailsPartRecord).Name, table => table
+                .ContentPartRecord()
+                .Column<string>("FirstName")
+                .Column<string>("LastName")
+            );
+
+            ContentDefinitionManager.AlterPartDefinition(
+                typeof(UserDetailsPart).Name, cfg => cfg
+                    .Attachable());
+
+            ContentDefinitionManager.AlterTypeDefinition("User", cfg => cfg
+                .WithPart("UserDetailsPart"));
+
+            return 7;
+        }
     }
 }
