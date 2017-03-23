@@ -17,6 +17,7 @@ Links: #04b17b
 
 @import '../node_modules/milligram-less/dist/_Color.less';
 @import './_Footer.less';
+@import './_Navigation.less';  
 
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
@@ -96,17 +97,9 @@ a:hover {
     line-height: 2.5rem;
 }
 
-/* Larger than tablet screen TEST*/
+/* Larger than tablet screen  */
 @media screen and (min-width: 80.0rem) {
-    .navigation nav {
-        float: right;
-    }
-
-    .navigation-large {
-        display: block;
-    }
-
-    .navigation-large .language {
+   .navigation-large .language {
         position: absolute;
         right: 0;
         margin-right: 20px;
@@ -125,9 +118,7 @@ a:hover {
     }
 
     .navigation-user-large {
-        display: block;
-        margin-right: 40px;
-        float: right;
+        display:block;
     }
 
     .navigation-user-large span.user-actions {

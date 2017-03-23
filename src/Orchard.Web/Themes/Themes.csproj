@@ -94,6 +94,7 @@
     <Content Include="WijDelen.Groups\Assets\Styles.less" />
     <Content Include="WijDelen.Groups\Content\favicon.ico" />
     <Content Include="WijDelen.Groups\Content\logo-footer.png" />
+    <Content Include="WijDelen.Groups\Content\logo-header.png" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium-mobile.png" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
     <Content Include="WijDelen.Groups\Scripts\script.js" />
@@ -264,10 +265,13 @@
     <Content Include="WijDelen.Groups\Views\Parts\Localization.ContentTranslations.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WijDelen.Groups\Views\LogOn.cshtml" />
+    <Content Include="WijDelen.Groups\Assets\_Footer.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WijDelen.Groups\Assets\_Footer.less" />
+    <Content Include="WijDelen.Groups\Views\Navigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Assets\_Navigation.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

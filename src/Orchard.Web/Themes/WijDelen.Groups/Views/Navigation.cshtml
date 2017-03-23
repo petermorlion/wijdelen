@@ -1,0 +1,25 @@
+﻿<nav>
+    <div class="nav-row">
+        <div class="nav-left">
+            <div class="nav-left-top">
+                <div class="nav-left-top-part">
+                    <h1>@Display(Model.Title)</h1>
+                </div>
+                <div class="nav-left-top-part">
+                    @Display(New.User())
+                </div>
+            </div>
+        </div>
+        <div class="nav-right nav-right-top">
+            <img src="@Url.Content("~/Themes/WijDelen.Groups/Content/logo-header.png")" />
+        </div>
+    </div>
+    <div class="nav-row">
+        <div class="nav-left">
+            
+        </div>
+        <div class="nav-right nav-right-bottom">
+            @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
+        </div>
+    </div>
+</nav>

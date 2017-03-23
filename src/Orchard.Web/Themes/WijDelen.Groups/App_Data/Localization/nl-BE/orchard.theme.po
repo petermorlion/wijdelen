@@ -27,3 +27,8 @@ msgstr "Paswoord wijzigen"
 #| msgid "Account"
 msgid "Account"
 msgstr "Account"
+
+#: ~/Themes/WijDelen.Groups/Views/Navigation.cshtml
+#| msgid "New Request"
+msgid "New Request"
+msgstr "Nieuwe oproep"
