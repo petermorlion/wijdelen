@@ -129,7 +129,7 @@
     </div>
 </div>*@
 
-<div class="container">
+<div class="container content-container">
 
     @if (Model.Messages != null) {
         <div class="row">
@@ -140,9 +140,7 @@
     }
     
     <header class="row">
-        <div class="column column-67">
-            <h1>@Display(Model.Title)</h1>
-        </div>
+        
         @if (WorkContext.CurrentUser != null) {
             var user = WorkContext.CurrentUser;
             var groupMembership = ContentExtensions.As<GroupMembershipPart>(user);

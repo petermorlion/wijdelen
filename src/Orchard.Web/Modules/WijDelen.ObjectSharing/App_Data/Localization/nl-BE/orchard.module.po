@@ -1,6 +1,6 @@
 ﻿#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/New.cshtml
-#| msgid "Request object"
-msgid "Request object"
+#| msgid "Make a request"
+msgid "Make a request"
 msgstr "Een oproep doen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
