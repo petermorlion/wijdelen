@@ -32,3 +32,13 @@ msgstr "Account"
 #| msgid "New Request"
 msgid "New Request"
 msgstr "Nieuwe oproep"
+
+#: ~/Themes/WijDelen.Groups/Views/Navigation.cshtml
+#| msgid "My Requests"
+msgid "My Requests"
+msgstr "Mijn oproepen"
+
+#: ~/Themes/WijDelen.Groups/Views/Navigation.cshtml
+#| msgid "Received Requests"
+msgid "Received Requests"
+msgstr "Ontvangen oproepen"
