@@ -20,6 +20,7 @@ Links: #04b17b
 @import './_Navigation.less';
 @import './_Forms.less';
 @import './_MyRequests.less';
+@import './_NewRequest.less';
 
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
@@ -224,29 +225,6 @@ fieldset.login-form legend {
 .autocomplete-suggestion.selected { 
     color: @color-tertiary; 
     background-color: @color-primary;
-}
-
-/* Object Request new
-***************************************************************/
-.objectrequest-progressbar {
-    position: relative;
-}
-
-.objectrequest-progressbar .objectrequest-progressbar-fill {
-    background-color: @color-primary;
-    position: absolute;
-    height: 100%;
-    z-index: 0;
-}
-
-.objectrequest-progressbar .objectrequest-progressbar-text {
-    position: relative;
-    z-index: 1;
-    margin-left: 1rem;
-}
-
-.objectrequest-progressbar .objectrequest-progressbar-text-enough {
-    display: none;
 }
 
 /* Object Request answers
