@@ -276,6 +276,15 @@
   <ItemGroup>
     <Content Include="WijDelen.Groups\Assets\_Forms.less" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Assets\_MyRequests.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Assets\_NewRequest.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Assets\_Popover.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

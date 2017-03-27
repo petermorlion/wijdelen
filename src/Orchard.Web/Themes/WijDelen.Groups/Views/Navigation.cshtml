@@ -1,4 +1,4 @@
-﻿<nav>
+﻿    <nav>
     <div class="nav-row">
         <div class="nav-left">
             <div class="nav-left-top">
@@ -20,7 +20,7 @@
         <div class="nav-left">
             
         </div>
-        <div class="nav-right nav-right-bottom">
+        <div class="nav-right nav-objectrequests">
             @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
             @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
             @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })

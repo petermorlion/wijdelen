@@ -6,9 +6,12 @@ nav {
     a {
         color: @color-initial;
         display: block;
-        float: left;
         padding: 20px;
         text-transform: lowercase;
+    }
+
+    a.account-link {
+        color: @color-initial;
     }
 
     a.logo-link {
@@ -74,8 +77,12 @@ nav {
         }
     }
 
-    .nav-right-bottom {
+    .nav-objectrequests {
         background-color: @color-secondary;
+
+        a {
+            float: left;
+        }
 
         a:hover {
             background-color: @color-primary;

@@ -21,6 +21,7 @@ Links: #04b17b
 @import './_Forms.less';
 @import './_MyRequests.less';
 @import './_NewRequest.less';
+@import './_Popover.less';   
 
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
@@ -172,35 +173,6 @@ fieldset label.forcheckbox {
 
 fieldset.login-form legend {
     display: none;
-}
-
-/*  Popovers 
-***************************************************************/ 
-.popover { 
-    display: none; 
-    border: 1px solid @color-primary; 
-    border-top-width: 0;
-    background-color: @color-background; 
-    position: absolute; 
-    right: 0; 
-    z-index: 100; 
-    border-radius: 0 0 5px 5px; 
-} 
- 
-.popover-open { 
-    display: block; 
-} 
- 
-.popover a { 
-    color: #787a7a; 
-    display: block; 
-    white-space: nowrap; 
-    padding: 0 1.0rem; 
-} 
- 
-.popover a:hover { 
-    color: @color-tertiary; 
-    background-color: @color-primary; 
 }
 
 /*  Autocomplete 
