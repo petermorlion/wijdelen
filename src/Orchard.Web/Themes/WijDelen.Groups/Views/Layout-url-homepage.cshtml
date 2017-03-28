@@ -1,0 +1,65 @@
+﻿@using Orchard.Autoroute.Services
+@using Orchard.ContentManagement
+@using Orchard.ContentManagement.Aspects
+@using Orchard.Localization.Services
+@using Orchard.MediaLibrary.Fields
+@using System.Globalization
+@using WijDelen.UserImport.Models
+
+@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => {
+            ++zoneCounter;
+            return Model[zoneName] != null ? zoneCounter.ToString() : "";
+        }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+
+    SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
+
+#if DEBUG
+    Style.Include("Styles.css");
+#else
+    Style.Include("Styles.min.css");
+#endif
+
+    Script.Include("script.js");
+
+    /* Layout classification based on filled zones
+    ***************************************************************/
+
+    //Add classes to the wrapper div to toggle aside widget zones on and off
+    var asideClass = CalcuClassify(new[] {"AsideFirst", "AsideSecond"}, "aside-"); // for aside-1, aside-2 or aside-12 if any of the aside zones are filled
+    if (HasText(asideClass)) {
+        Model.Classes.Add(asideClass);
+    }
+}
+
+@{
+    var localizableAspects = Enumerable.Empty<ILocalizableAspect>();
+    var homePage = WorkContext.Resolve<IHomeAliasService>().GetHomePage();
+
+    if (homePage != null && homePage.Has<ILocalizableAspect>())
+    {
+        var localizationService = WorkContext.Resolve<ILocalizationService>();
+        localizableAspects = localizationService.GetLocalizations(homePage).Concat(new[] { homePage.As<ILocalizableAspect>() });
+    }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="span-50">
+            
+        </div>
+        <div class="span-50">
+            AANMELDEN
+        </div>
+    </div>
+</div>
