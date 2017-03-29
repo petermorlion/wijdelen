@@ -55,11 +55,22 @@
 
 <div class="container">
     <div class="row">
-        <div class="span-50">
+        <div class="column column-50 homepage-column homepage-column-left">
             
         </div>
-        <div class="span-50">
-            AANMELDEN
+        <div class="column column-50 homepage-column">
+            @Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Url.Action("Index", "ObjectRequest", new {area="WijDelen.ObjectSharing"}, Request.Url.Scheme) }, new { rel = "nofollow", @class="button homepage-login-link" })<a class="button homepage-language-link">NL</a><a class="button homepage-language-link">EN</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column column-50 homepage-column-left">
+            <span class="vertical-align-helper"></span>
+            <img src="@Url.Content("~/Themes/WijDelen.Groups/Content/logo-homepage.png")" alt="@T("Peergroups")" title="@T("Peergroups")" class="homepage-logo"/>
+        </div>
+        <div class="column column-50 homepage-column homepage-column-content">
+            @if (Model.Content != null) {
+                @Display(Model.Content)
+            }
         </div>
     </div>
 </div>

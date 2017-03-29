@@ -96,6 +96,7 @@
     <Content Include="WijDelen.Groups\Content\favicon.ico" />
     <Content Include="WijDelen.Groups\Content\logo-footer.png" />
     <Content Include="WijDelen.Groups\Content\logo-header.png" />
+    <Content Include="WijDelen.Groups\Content\logo-homepage.png" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium-mobile.png" />
     <Content Include="WijDelen.Groups\Content\navigation-top-logo-belgium.png" />
     <Content Include="WijDelen.Groups\Scripts\script.js" />
@@ -288,6 +289,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WijDelen.Groups\Views\Layout-url-homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WijDelen.Groups\Assets\_HomePage.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
