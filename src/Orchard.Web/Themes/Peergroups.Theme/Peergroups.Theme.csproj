@@ -153,9 +153,6 @@
     <Content Include="Views\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="package.json" />
   </ItemGroup>
   <ItemGroup>

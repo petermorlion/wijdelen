@@ -1,4 +1,18 @@
-﻿<nav>
+﻿@functions {
+    bool IsCurrent(string actionName, string controllerName)
+    {
+        string contextAction = (string)Html.ViewContext.RouteData.Values["action"];
+        string contextController = (string)Html.ViewContext.RouteData.Values["controller"];
+
+        bool isCurrent =
+            string.Equals(contextAction, actionName, StringComparison.CurrentCultureIgnoreCase) &&
+            string.Equals(contextController, controllerName, StringComparison.CurrentCultureIgnoreCase);
+
+        return isCurrent;
+    }
+}
+
+<nav>
     <div class="nav-row">
         <div class="nav-left">
             <div class="nav-left-top">
@@ -22,15 +36,15 @@
         </div>
         <div class="nav-right nav-objectrequests">
             @if (Request.IsAuthenticated) {
-                if (!Html.IsCurrent("New", "ObjectRequest")) {
+                if (!IsCurrent("New", "ObjectRequest")) {
                     @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
                 }
 
-                if (!Html.IsCurrent("Index", "ObjectRequest")) {
+                if (!IsCurrent("Index", "ObjectRequest")) {
                     @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
                 }
 
-                if (!Html.IsCurrent("Index", "ReceivedObjectRequest")) {
+                if (!IsCurrent("Index", "ReceivedObjectRequest")) {
                     @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
                 }
             }
