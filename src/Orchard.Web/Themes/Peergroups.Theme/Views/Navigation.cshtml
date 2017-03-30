@@ -1,0 +1,39 @@
+﻿<nav>
+    <div class="nav-row">
+        <div class="nav-left">
+            <div class="nav-left-top">
+                <div class="nav-left-top-part">
+                    <h1>@Display(Model.Title)</h1>
+                </div>
+                <div class="nav-left-top-part">
+                    @Display(New.User())
+                </div>
+            </div>
+        </div>
+        <div class="nav-right nav-right-top">
+            <a href="@Url.Content("~/")" class="logo-link">
+                <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-header.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
+            </a>
+        </div>
+    </div>
+    <div class="nav-row">
+        <div class="nav-left">
+            
+        </div>
+        <div class="nav-right nav-objectrequests">
+            @if (Request.IsAuthenticated) {
+                if (!Html.IsCurrent("New", "ObjectRequest")) {
+                    @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                }
+
+                if (!Html.IsCurrent("Index", "ObjectRequest")) {
+                    @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                }
+
+                if (!Html.IsCurrent("Index", "ReceivedObjectRequest")) {
+                    @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                }
+            }
+        </div>
+    </div>
+</nav>

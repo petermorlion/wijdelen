@@ -1,0 +1,99 @@
+﻿#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Name"
+msgid "Peergroups.Theme"
+msgstr "Peergroups.Theme"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Author"
+msgid "Peter Morlion"
+msgstr "Peter Morlion"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Website"
+msgid "http://www.redstar.be"
+msgstr "http://www.redstar.be"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Description"
+msgid "Theme for Peergroups"
+msgstr "Thema voor Peergroups"
+
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#| msgid "Change Password"
+msgid "Change Password"
+msgstr "Paswoord wijzigen"
+
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#| msgid "Account"
+msgid "Account"
+msgstr "Account"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#| msgid "New Request"
+msgid "New Request"
+msgstr "Nieuwe oproep"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#| msgid "My Requests"
+msgid "My Requests"
+msgstr "Mijn oproepen"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#| msgid "Received Requests"
+msgid "Received Requests"
+msgstr "Ontvangen oproepen"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Change Password"
+msgid "Change Password"
+msgstr "Paswoord wijzigen"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Use the form below to change your password."
+msgid "Use the form below to change your password."
+msgstr "Met onderstaand formulier kan je je paswoord wijzigen."
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "New passwords are required to be a minimum of {0} characters in length."
+msgid "New passwords are required to be a minimum of {0} characters in length."
+msgstr "Nieuwe paswoorden moeten minimaal {0} karakters lang zijn."
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Password change was unsuccessful. Please correct the errors and try again."
+msgid "Password change was unsuccessful. Please correct the errors and try again."
+msgstr "Paswoord wijzigen is niet gelukt. Gelieve de fouten te corrigeren en opnieuw te proberen."
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Account Information"
+msgid "Account Information"
+msgstr "Account gegevens"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Current password:"
+msgid "Current password:"
+msgstr "Huidig paswoord:"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "New password:"
+msgid "New password:"
+msgstr "Nieuw paswoord:"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Confirm new password:"
+msgid "Confirm new password:"
+msgstr "Bevestig nieuw paswoord:"
+
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+#| msgid "Change Password"
+msgid "Change Password"
+msgstr "Wijzig paswoord"
+
+#: orchard.users.controllers.accountcontroller
+#| msgid "You must specify a current password."
+msgid "You must specify a current password."
+msgstr "U moet uw huidig paswoord opgeven."
+
+#: orchard.users.controllers.accountcontroller
+#| msgid "You must specify a new password of {0} or more characters."
+msgid "You must specify a new password of {0} or more characters."
+msgstr "U moet een nieuw paswoord opgeven van {0} of meer karakters."

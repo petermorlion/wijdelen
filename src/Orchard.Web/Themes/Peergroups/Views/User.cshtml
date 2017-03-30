@@ -1,0 +1,31 @@
+﻿@using Orchard.Security
+<div class="navigation-user-large">
+    @if (WorkContext.CurrentUser != null) {
+        <span class="user-actions welcome">
+            @Html.Raw("<a href=\"#popover-user-actions\" data-popover class=\"account-link\">" + T("Account") + "</a>")
+        </span>
+        <span class="popover" id="popover-user-actions">
+            @Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new {Area = "Orchard.Users", Controller = "Account"})
+            @if (AuthorizedFor(StandardPermissions.AccessAdminPanel)) {
+                @Html.ActionLink(T("Dashboard").ToString(), "Index", new {Area = "Dashboard", Controller = "Admin"})
+            }
+            @Html.ActionLink(T("Sign Out").ToString(), "LogOff", new {Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl}, new {rel = "nofollow"})
+        </span>
+    }
+    else {
+        <span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new {Controller = "Account", Area = "Orchard.Users", ReturnUrl = Request.QueryString["ReturnUrl"] ?? Request.RawUrl}, new {rel = "nofollow"})</span>
+    }
+</div>
+
+@*<div class="navigation-user">
+    @if (WorkContext.CurrentUser != null) {
+        @Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new {Area = "Orchard.Users", Controller = "Account"})
+        if (AuthorizedFor(StandardPermissions.AccessAdminPanel)) {
+            @Html.ActionLink(T("Dashboard").ToString(), "Index", new {Area = "Dashboard", Controller = "Admin"})
+        }
+        @Html.ActionLink(T("Sign Out").ToString(), "LogOff", new {Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl}, new {rel = "nofollow"})
+    }
+    else {
+        <span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new {Controller = "Account", Area = "Orchard.Users", ReturnUrl = Request.QueryString["ReturnUrl"] ?? Request.RawUrl}, new {rel = "nofollow"})</span>
+    }
+</div>*@

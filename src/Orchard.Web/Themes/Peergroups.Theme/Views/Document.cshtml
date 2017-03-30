@@ -1,0 +1,32 @@
+﻿@using Orchard.Localization
+@using Orchard.Mvc.Html;
+@using Orchard.UI.Resources;
+@{
+    RegisterLink(new LinkEntry {Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/Peergroups.Theme/Content/favicon.ico")});
+
+    string title = Convert.ToString(Model.Title);
+    string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
+}
+<!DOCTYPE html> 
+<html lang="@WorkContext.CurrentCulture" class="static @Html.ClassForPage()"> 
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Html.Title(title, siteName)</title> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    @Display(Model.Head)
+</head> 
+<body>
+@* Layout (template) is in the Body zone @ the default position (nothing, zero, zilch) *@
+@Display(Model.Body)
+@Display(Model.Tail)
+    
+<footer>
+    <span>&copy; Peergroups</span>
+    <a href="@Url.Content("~/")" class="logo-link">
+        <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-footer.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
+    </a>
+</footer>
+
+</body>
+</html>
