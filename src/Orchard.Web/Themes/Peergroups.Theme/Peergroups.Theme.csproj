@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlExtensions.cs" />
-    <Compile Include="MobileShapeTableProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
