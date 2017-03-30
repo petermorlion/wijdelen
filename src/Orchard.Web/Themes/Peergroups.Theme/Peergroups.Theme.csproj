@@ -159,6 +159,25 @@
   <ItemGroup>
     <Content Include="package.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="node_modules\milligram-less\dist\_Base.less" />
+    <Content Include="node_modules\milligram-less\dist\_Blockquote.less" />
+    <Content Include="node_modules\milligram-less\dist\_Button.less" />
+    <Content Include="node_modules\milligram-less\dist\_Code.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="node_modules\milligram-less\dist\milligram.less" />
+    <Content Include="node_modules\milligram-less\dist\_Divider.less" />
+    <Content Include="node_modules\milligram-less\dist\_Form.less" />
+    <Content Include="node_modules\milligram-less\dist\_Grid.less" />
+    <Content Include="node_modules\milligram-less\dist\_Image.less" />
+    <Content Include="node_modules\milligram-less\dist\_Link.less" />
+    <Content Include="node_modules\milligram-less\dist\_List.less" />
+    <Content Include="node_modules\milligram-less\dist\_Spacing.less" />
+    <Content Include="node_modules\milligram-less\dist\_Table.less" />
+    <Content Include="node_modules\milligram-less\dist\_Typography.less" />
+    <Content Include="node_modules\milligram-less\dist\_Utility.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
