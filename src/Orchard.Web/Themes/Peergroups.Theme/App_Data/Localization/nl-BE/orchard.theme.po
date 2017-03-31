@@ -102,3 +102,33 @@ msgstr "U moet uw huidig paswoord opgeven."
 #| msgid "You must specify a new password of {0} or more characters."
 msgid "You must specify a new password of {0} or more characters."
 msgstr "U moet een nieuw paswoord opgeven van {0} of meer karakters."
+
+#: orchard.users.controllers.accountcontroller
+#| msgid "Log On"
+msgid "Log On"
+msgstr "Aanmelden"
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Please enter your username and password."
+msgid "Please enter your username and password."
+msgstr "Gelieve uw gebruikersnaam (email) en paswoord op te geven."
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Username"
+msgid "Username"
+msgstr "Gebruikersnaam (email)"
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Password"
+msgid "Password"
+msgstr "Paswoord"
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Remember me"
+msgid "Remember me"
+msgstr "Onthouden"
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Sign in"
+msgid "Sign in"
+msgstr "Aanmelden"
