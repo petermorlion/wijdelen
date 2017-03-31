@@ -176,9 +176,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlExtensions.cs" />
+    <Compile Include="MobileShapeTableProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Navigation-mobile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User-mobile.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

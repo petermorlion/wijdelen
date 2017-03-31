@@ -89,3 +89,50 @@ nav {
         }
     }
 }
+
+.nav-mobile {
+    display: table;
+    background-color: @color-primary;
+}
+
+.nav-mobile h1 {
+    font-size: 2.0rem;
+}
+
+.nav-row-mobile{
+    display: table-row;
+}
+
+.nav-left-mobile {
+    display: table-cell;
+    width: 80%;
+    color: @color-initial;
+    padding-left: 2.0rem;
+}
+
+.nav-right-mobile {
+    display: table-cell;
+    width: 20%;
+}
+
+.popover-menu-mobile {
+    right: 0;
+}
+
+.nav-menu-mobile {
+    position: relative;
+    padding-left: 2.0rem;
+}
+
+.nav-menu-mobile:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.80em;
+    width: 1em;
+    height: 0.15em;
+    background: @color-initial;
+    box-shadow: 
+        0 0.25em 0 0 @color-initial,
+        0 0.5em 0 0 @color-initial;
+}

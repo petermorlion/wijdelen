@@ -18,6 +18,11 @@ msgstr "http://www.redstar.be"
 msgid "Theme for Peergroups"
 msgstr "Thema voor Peergroups"
 
+#: ~/Themes/Peergroups.Theme/Views/Layout.cshtml
+#| msgid "Sign In"
+msgid "Sign In"
+msgstr "Aanmelden"
+
 #: ~/Themes/Peergroups.Theme/Views/User.cshtml
 #| msgid "Change Password"
 msgid "Change Password"
