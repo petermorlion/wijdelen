@@ -37,7 +37,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                     ObjectRequestId = receivedObjectRequestRecord.ObjectRequestId,
                     Description = receivedObjectRequestRecord.Description,
                     ExtraInfo = receivedObjectRequestRecord.ExtraInfo,
-                    UserName = $"{user.As<UserDetailsPart>().FirstName} {user.As<UserDetailsPart>().LastName}",
+                    UserName = user.GetUserDisplayName(),
                     ReceivedDateTime = receivedObjectRequestRecord.ReceivedDateTime
                 });
             }

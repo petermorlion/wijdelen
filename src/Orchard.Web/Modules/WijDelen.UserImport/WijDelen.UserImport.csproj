@@ -110,6 +110,7 @@
     <Compile Include="Handlers\UserDetailsHandler.cs" />
     <Compile Include="Models\UserDetailsPart.cs" />
     <Compile Include="Models\UserDetailsPartRecord.cs" />
+    <Compile Include="Models\UserExtensions.cs" />
     <Compile Include="Services\IUpdateUserDetailsService.cs" />
     <Compile Include="Services\UpdateUserDetailsService.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />

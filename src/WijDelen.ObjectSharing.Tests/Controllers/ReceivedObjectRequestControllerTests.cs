@@ -18,15 +18,14 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ReceivedObjectRequestControllerTests {
         [Test]
-        public void WhenGettingReceived_ShouldReturnView()
-        {
+        public void WhenGettingReceived_ShouldReturnView() {
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Id).Returns(22);
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
 
             var fakeUserFactory = new UserFactory();
-            var user1 = fakeUserFactory.Create("jane.doe", "jane.doe@example.com", "Jane", "Doe");
+            var user1 = fakeUserFactory.Create("jane.doe", "jane.doe@example.com", "", "");
             var user2 = fakeUserFactory.Create("john.doe", "john.doe@example.com", "John", "Doe");
 
             var persistentRecords = new[] {
@@ -79,7 +78,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "Flaming Moe",
                 ExtraInfo = "For drinking",
                 ReceivedDateTime = new DateTime(2016, 11, 27),
-                UserName = "Jane Doe"
+                UserName = "jane.doe"
             });
         }
     }

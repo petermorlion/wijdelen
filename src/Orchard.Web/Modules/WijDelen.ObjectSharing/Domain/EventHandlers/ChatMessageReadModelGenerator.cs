@@ -24,7 +24,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 DateTime = e.DateTime,
                 Message = e.Message,
                 UserId = e.UserId,
-                UserName = $"{user.As<UserDetailsPart>().FirstName} {user.As<UserDetailsPart>().LastName}"
+                UserName = user.GetUserDisplayName()
             };
 
             _repository.Create(newRecord);

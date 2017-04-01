@@ -51,7 +51,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.SourceId);
 
             var requestingUser = _getUserByIdQuery.GetResult(objectRequested.UserId);
-            var requestingUserName = $"{requestingUser.As<UserDetailsPart>().FirstName} {requestingUser.As<UserDetailsPart>().LastName}";
+            var requestingUserName = requestingUser.GetUserDisplayName();
             var groupName = _groupService.GetGroupForUser(objectRequested.UserId).Name;
             var otherUsers = _findOtherUsersQuery.GetResults(objectRequested.UserId, objectRequested.Description).ToList();
 

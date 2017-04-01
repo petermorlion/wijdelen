@@ -24,9 +24,9 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 ChatId = e.SourceId,
                 ObjectRequestId = e.ObjectRequestId,
                 RequestingUserId = e.RequestingUserId,
-                RequestingUserName = $"{requestingUser.As<UserDetailsPart>().FirstName} {requestingUser.As<UserDetailsPart>().LastName}",
+                RequestingUserName = requestingUser.GetUserDisplayName(),
                 ConfirmingUserId = e.ConfirmingUserId,
-                ConfirmingUserName = $"{confirmingUser.As<UserDetailsPart>().FirstName} {confirmingUser.As<UserDetailsPart>().LastName}"
+                ConfirmingUserName = confirmingUser.GetUserDisplayName()
             };
 
             _repository.Create(newRecord);
