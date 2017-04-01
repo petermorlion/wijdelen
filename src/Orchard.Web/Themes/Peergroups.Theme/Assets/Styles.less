@@ -20,9 +20,10 @@ Links: #04b17b
 @import './_Navigation.less';
 @import './_Forms.less';
 @import './_MyRequests.less';
-@import './_NewRequest.less';
+@import './_NewRequest.less'; 
 @import './_Popover.less';
 @import './_HomePage.less';
+@import './_ReceivedObjectRequests.less'; 
 
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
@@ -120,55 +121,6 @@ fieldset.login-form legend {
 .autocomplete-suggestion.selected { 
     color: @color-tertiary; 
     background-color: @color-primary;
-}
-
-/* Object Request answers
-***************************************************************/
-.objectrequestanswer {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px; 
-    border-radius: 5px; 
-}
-
-.objectrequestanswer:hover {
-    color: @color-initial;
-}
-
-@color-request-yes: #46d100;
-@color-request-notnow: #a0a0a0;
-@color-request-no: #df0000;
-
-.objectrequestanswer-yes {
-    background-color: @color-request-yes;
-    margin-right: 10px; 
-    border-right: 1px solid darken(@color-request-yes, 20%); 
-    border-bottom: 1px solid darken(@color-request-yes, 20%);
-}
-
-.objectrequestanswer-yes:hover {
-    background-color: lighten(@color-request-yes, 5%)
-}
-
-.objectrequestanswer-notnow {
-    background-color: @color-request-notnow;
-    border-right: 1px solid darken(@color-request-notnow, 20%); 
-    border-bottom: 1px solid darken(@color-request-notnow, 20%);
-}
-
-.objectrequestanswer-notnow:hover {
-    background-color: lighten(@color-request-notnow, 10%)
-}
-
-.objectrequestanswer-no {
-    background-color: @color-request-no;
-    margin-left: 10px; 
-    border-right: 1px solid darken(@color-request-no, 20%); 
-    border-bottom: 1px solid darken(@color-request-no, 20%); 
-}
-
-.objectrequestanswer-no:hover {
-    background-color: lighten(@color-request-no, 20%)
 }
 
 /* Chat
