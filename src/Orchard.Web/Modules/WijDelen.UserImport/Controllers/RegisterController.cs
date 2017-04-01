@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using Orchard.ContentManagement;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Themes;
 using Orchard.Users.Services;
 using Orchard.Localization;
 using Orchard.Users.Events;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Controllers {

@@ -1,0 +1,17 @@
+﻿@model WijDelen.UserImport.ViewModels.UserDetailsViewModel
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Account", new { Area = "WijDelen.UserImport" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <legend>@T("First name")</legend>
+        @Html.TextBoxFor(m => m.FirstName, new { data_auto_complete = "true" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+
+        <legend>@T("Last Name")</legend>
+        @Html.TextBoxFor(m => m.LastName)
+        @Html.ValidationMessageFor(m => m.LastName)
+        
+    </fieldset>
+
+    <button class="primaryAction">@T("Submit")</button>
+}

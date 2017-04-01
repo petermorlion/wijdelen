@@ -5,6 +5,7 @@
             @Html.Raw("<a href=\"#popover-user-actions\" data-popover class=\"account-link\">" + T("Account") + "</a>")
         </span>
         <span class="popover" id="popover-user-actions">
+            @Html.ActionLink(T("Account").ToString(), "Index", new {Area = "WijDelen.UserImport", Controller = "Account"})
             @Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new {Area = "Orchard.Users", Controller = "Account"})
             @if (AuthorizedFor(StandardPermissions.AccessAdminPanel)) {
                 @Html.ActionLink(T("Dashboard").ToString(), "Index", new {Area = "Dashboard", Controller = "Admin"})

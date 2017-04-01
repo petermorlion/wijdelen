@@ -172,3 +172,23 @@ msgstr "Voornaam:"
 #| msgid "Last name:"
 msgid "Last name:"
 msgstr "Familienaam:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "First name"
+msgid "First name"
+msgstr "Voornaam"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Last name"
+msgid "Last name"
+msgstr "Familienaam"
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a last name."
+msgid "TYou must specify a last name."
+msgstr "U moet een familienaam opgeven."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a first name."
+msgid "TYou must specify a first name."
+msgstr "U moet een voornaam opgeven."
