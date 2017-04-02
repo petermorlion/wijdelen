@@ -29,7 +29,7 @@ element.oninput = function() {
     var progressBar = document.getElementById('objectrequest-progressbar-fill');
     var enoughCharactersTextElement = document.getElementById('enoughCharactersText');
 
-    var remainingCharacters = 30 - element.textLength;
+    var remainingCharacters = 30 - element.value.length;
 
     remainCharacterTextElement.style.display = remainingCharacters > 0 ? 'inline' : 'none';
     remainingCharacterCountElement.innerText = remainingCharacters;
