@@ -1,0 +1,13 @@
+State: Running
+Themes: 
+Modules: 
+Name: Default
+DataProvider: SqlServer
+DataConnectionString: Data Source=66.45.251.234\MSSQLSERVER2012;Initial Catalog=WijDelenGroups;User ID=WijDelenGroups;Password=5FgcCbwnrFFz
+DataTablePrefix: wijdelen
+RequestUrlHost: null
+RequestUrlPrefix: null
+EncryptionAlgorithm: AES
+EncryptionKey: 2F69C6907DC3791C890C062E47B65DD9E83D8F156C9E85008CEAB8058A296B29
+HashAlgorithm: HMACSHA256
+HashKey: FEA20427FEE3F89245CFA97CBD009CC0057DB9BFB0D85EABB8F5C71699324AF6572D4A4BD6CAB873C2DF0679988C826566BDC37387EE936DADC20B5156924395
