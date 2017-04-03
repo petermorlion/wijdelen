@@ -139,26 +139,6 @@
         </div>
     }
     
-    <header class="row">
-        
-        @if (WorkContext.CurrentUser != null) {
-            var user = WorkContext.CurrentUser;
-            var groupMembership = ContentExtensions.As<GroupMembershipPart>(user);
-            var group = groupMembership.Group;
-            var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
-            var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
-
-            <div class="column column-33 grouplogo">
-                @if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) { 
-                    <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
-                }
-            </div>
-        }
-        else {
-            <div class="column column-33"></div>
-        }
-    </header>
-    
     <div class="row">
         <div class="column">
             @if (Model.Content != null)

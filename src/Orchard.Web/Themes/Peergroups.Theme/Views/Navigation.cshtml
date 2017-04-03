@@ -1,4 +1,8 @@
-﻿<nav>
+﻿@using Orchard.ContentManagement;
+@using Orchard.MediaLibrary.Fields;
+@using WijDelen.UserImport.Models;
+
+<nav>
     <div class="nav-row">
         <div class="nav-left">
             <div class="nav-left-top">
@@ -13,6 +17,18 @@
         <div class="nav-right nav-right-top">
             <a href="@Url.Content("~/")" class="logo-link">
                 <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-header.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
+                
+                @if (WorkContext.CurrentUser != null) {
+                    var user = WorkContext.CurrentUser;
+                    var groupMembership = user.As<GroupMembershipPart>();
+                    var group = groupMembership.Group;
+                    var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                    var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                    if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) {
+                        <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img" />
+                    }
+                }
             </a>
         </div>
     </div>
