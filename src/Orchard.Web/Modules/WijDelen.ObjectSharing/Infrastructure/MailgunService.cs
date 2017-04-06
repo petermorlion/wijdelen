@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Orchard;
+using Orchard.ContentManagement;
 using Orchard.Localization;
+using Orchard.MediaLibrary.Fields;
 using WijDelen.Mailgun;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class MailgunService : IMailService {
@@ -32,7 +36,21 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var notNowLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/DenyForNow/" + objectRequestId;
             var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/Deny/" + objectRequestId;
 
-            var htmlBody = T("object-request-mail-html", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
+            var groupLogoUrl = "";
+
+            if (_orchardServices.WorkContext.CurrentUser != null) {
+                var user = _orchardServices.WorkContext.CurrentUser;
+                var groupMembership = user.As<GroupMembershipPart>();
+                var group = groupMembership.Group;
+                var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) {
+                    groupLogoUrl = groupLogoField.FirstMediaUrl;
+                }
+            }
+
+            var htmlBody = T("object-request-mail-html", groupLogoUrl, requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
             var textBody = T("object-request-mail-text", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
 
             _mailgunClient.Send(recipients, "", subject, textBody, htmlBody);
@@ -45,8 +63,22 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var to = new[] {toEmailAddress};
 
             var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
-            
-            var htmlBody = T("chat-message-added-mail-html", fromUserName, description, message, chatUrl).ToString();
+
+            var groupLogoUrl = "";
+
+            if (_orchardServices.WorkContext.CurrentUser != null) {
+                var user = _orchardServices.WorkContext.CurrentUser;
+                var groupMembership = user.As<GroupMembershipPart>();
+                var group = groupMembership.Group;
+                var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) {
+                    groupLogoUrl = groupLogoField.FirstMediaUrl;
+                }
+            }
+
+            var htmlBody = T("chat-message-added-mail-html", groupLogoUrl, fromUserName, description, message, chatUrl).ToString();
             var textBody = T("chat-message-added-mail-text", fromUserName, description, message, chatUrl).ToString();
 
             _mailgunClient.Send(to, "", subject, textBody, htmlBody);

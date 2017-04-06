@@ -35,10 +35,12 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
+        /// <remarks>
+        /// Warning: also referenced hard-coded in WijDelen.ObjectSharing.MailgunService
+        /// </remarks>>
         public ActionResult Index(Guid id, string messageKey = "") {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
-            if (chat == null)
-            {
+            if (chat == null) {
                 return new HttpNotFoundResult();
             }
 
