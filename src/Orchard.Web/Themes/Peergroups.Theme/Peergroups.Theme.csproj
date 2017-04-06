@@ -102,6 +102,7 @@
     <Content Include="Content\logo-footer.png" />
     <Content Include="Content\logo-header.png" />
     <Content Include="Content\logo-homepage.png" />
+    <Content Include="Content\logo-mail.gif" />
     <Content Include="Content\navigation-top-logo-belgium-mobile.png" />
     <Content Include="Content\navigation-top-logo-belgium.png" />
     <Content Include="Scripts\script.js" />
