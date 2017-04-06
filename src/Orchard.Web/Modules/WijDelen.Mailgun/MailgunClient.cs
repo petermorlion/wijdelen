@@ -10,11 +10,13 @@ namespace WijDelen.Mailgun {
         private readonly string _apiKey;
         private readonly string _domain;
         private readonly string _from;
+        private readonly string _to;
 
         public MailgunClient() {
             Logger = NullLogger.Instance;
 
             _apiKey = "key-9b8b2053d33de2583bfd3afb604dd820";
+            _to = "no-reply@peergroups.be";
 
 #if DEBUG
             _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
@@ -49,9 +51,10 @@ namespace WijDelen.Mailgun {
             request.AddParameter("subject", subject);
             request.AddParameter("text", textMail);
             request.AddParameter("html", htmlMail);
+            request.AddParameter("to", _to);
 
             foreach (var recipient in recipients) {
-                request.AddParameter("to", recipient);
+                request.AddParameter("bcc", recipient);
             }
 
             if (!string.IsNullOrEmpty(recipientVariables)) {
