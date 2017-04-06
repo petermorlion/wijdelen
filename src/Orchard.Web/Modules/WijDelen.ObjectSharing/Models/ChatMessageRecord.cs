@@ -1,4 +1,5 @@
 ﻿using System;
+using Orchard.Data.Conventions;
 
 namespace WijDelen.ObjectSharing.Models {
     public class ChatMessageRecord {
@@ -7,6 +8,7 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual DateTime DateTime { get; set; }
         public virtual int UserId { get; set; }
         public virtual string UserName { get; set; }
+        [StringLengthMax]
         public virtual string Message { get; set; }
     }
 }

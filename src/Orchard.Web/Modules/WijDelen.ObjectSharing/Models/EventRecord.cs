@@ -1,4 +1,5 @@
 ﻿using System;
+using Orchard.Data.Conventions;
 
 namespace WijDelen.ObjectSharing.Models {
     /// <summary>
@@ -10,6 +11,7 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual Guid AggregateId { get; set; }
         public virtual string AggregateType { get; set; }
         public virtual int Version { get; set; }
+        [StringLengthMax]
         public virtual string Payload { get; set; }
         public virtual string CorrelationId { get; set; }
     }
