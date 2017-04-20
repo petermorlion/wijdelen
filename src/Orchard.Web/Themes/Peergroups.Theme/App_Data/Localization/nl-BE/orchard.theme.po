@@ -113,10 +113,25 @@ msgstr "U moet een nieuw paswoord opgeven van {0} of meer karakters."
 msgid "Log On"
 msgstr "Aanmelden"
 
+#: orchard.users.controllers.accountcontroller
+#| msgid "You must specify a username or e-mail."
+msgid "You must specify a username or e-mail."
+msgstr "Gelieve een email op te geven."
+
+#: orchard.users.controllers.accountcontroller
+#| msgid "Check your e-mail for the confirmation link."
+msgid "Check your e-mail for the confirmation link."
+msgstr "We hebben je een email gestuurd."
+
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Please enter your username and password."
 msgid "Please enter your username and password."
 msgstr "Gelieve uw gebruikersnaam (email) en paswoord op te geven."
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Lost your Password?"
+msgid "Lost your Password?"
+msgstr "Paswoord kwijt?"
 
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Username"
@@ -137,3 +152,28 @@ msgstr "Onthouden"
 #| msgid "Sign in"
 msgid "Sign in"
 msgstr "Aanmelden"
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Lost Password"
+msgid "Lost Password"
+msgstr "Paswoord kwijt"
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr "Gelieve je email adres op te geven. Je zal een link ontvangen om een nieuw paswoord aan te maken."
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Account Information"
+msgid "Account Information"
+msgstr "Account informatie"
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Username or E-mail:"
+msgid "Username or E-mail:"
+msgstr "Email"
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Send Request"
+msgid "Send Request"
+msgstr "Versturen"
