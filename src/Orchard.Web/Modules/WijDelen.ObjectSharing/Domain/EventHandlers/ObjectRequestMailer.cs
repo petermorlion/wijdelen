@@ -49,6 +49,10 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.ExtraInfo,
                 objectRequested.SourceId);
 
+            if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
+                return;
+            }
+
             var requestingUser = _getUserByIdQuery.GetResult(objectRequested.UserId);
             var requestingUserName = requestingUser.GetUserDisplayName();
             var groupName = _groupService.GetGroupForUser(objectRequested.UserId).Name;

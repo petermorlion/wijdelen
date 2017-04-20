@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -72,6 +71,50 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 new UserEmail {UserId = otherUser.Id, Email = "peter.morlion@gmail.com"}));
 
             repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
+        }
+
+        [Test]
+        public void WhenForbiddenObjectIsRequested()
+        {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequested = new ObjectRequested
+            {
+                UserId = 3,
+                Description = "Sex",
+                ExtraInfo = "for sexing",
+                SourceId = objectRequestId,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
+            };
+
+            ObjectRequestMail persistedMail = null;
+
+            var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
+            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
+            var groupServiceMock = new Mock<IGroupService>();
+
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
+                .Callback((ObjectRequestMail mail, string correlationId) => { persistedMail = mail; });
+
+            var mailServiceMock = new Mock<IMailService>();
+
+            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object);
+
+            handler.Handle(objectRequested);
+
+            persistedMail.Should().BeNull();
+
+            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<Guid>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<ObjectRequestMail>(),
+                It.IsAny<UserEmail[]>()), Times.Never);
+
+            repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
         }
     }
 }
