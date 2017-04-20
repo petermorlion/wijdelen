@@ -146,5 +146,12 @@ namespace WijDelen.ObjectSharing {
 
             return 12;
         }
+
+        public int UpdateFrom12() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AddColumn<string>("Status", column => column.WithLength(50)));
+
+            return 13;
+        }
     }
 }

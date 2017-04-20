@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.UserImport.Services;
@@ -39,7 +40,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
                 UserId = 22,
-                CreatedDateTime = new DateTime(2016, 12, 27)
+                CreatedDateTime = new DateTime(2016, 12, 27),
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
             };
 
             handler.Handle(e);
@@ -52,6 +54,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             newRecord.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
             newRecord.GroupId.Should().Be(123);
             newRecord.GroupName.Should().Be("The Flying Hellfish");
+            newRecord.Status.Should().Be("BlockedForForbiddenWords");
         }
     }
 }

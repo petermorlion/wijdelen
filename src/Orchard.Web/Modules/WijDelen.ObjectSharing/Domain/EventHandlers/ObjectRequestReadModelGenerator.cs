@@ -30,7 +30,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     UserId = e.UserId,
                     CreatedDateTime = e.CreatedDateTime,
                     GroupId = group.Id,
-                    GroupName = group.Name
+                    GroupName = group.Name,
+                    Status = e.Status.ToString()
                 };
 
                 _repository.Create(newRecord);
