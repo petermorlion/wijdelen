@@ -208,7 +208,6 @@
     <Content Include="node_modules\milligram-less\dist\_Utility.less" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlExtensions.cs" />
     <Compile Include="MobileShapeTableProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

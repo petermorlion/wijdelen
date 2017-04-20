@@ -9,23 +9,9 @@
         <span id="popover-menu-mobile" class="popover popover-menu-mobile">
             @if (Request.IsAuthenticated)
             {
-                if (!Html.IsCurrent("New", "ObjectRequest"))
-                {
-                    @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
-                    ;
-                }
-
-                if (!Html.IsCurrent("Index", "ObjectRequest"))
-                {
-                    @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
-                    ;
-                }
-
-                if (!Html.IsCurrent("Index", "ReceivedObjectRequest"))
-                {
-                    @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { })
-                    ;
-                }
+                @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
             }
             @Display(New.User())
         </span>
