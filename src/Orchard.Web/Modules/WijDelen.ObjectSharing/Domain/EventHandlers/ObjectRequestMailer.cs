@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Orchard.ContentManagement;
 using Orchard.Localization;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;

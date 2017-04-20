@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using WijDelen.ObjectSharing.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Domain.Entities {
     /// <summary>
@@ -20,7 +23,12 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
-            Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId, CreatedDateTime = DateTime.UtcNow});
+            var status = ObjectRequestStatus.None;
+            if (ForbiddenWords.Dutch.Any(description.Contains) || ForbiddenWords.Dutch.Any(extraInfo.Contains)) {
+                status = ObjectRequestStatus.BlockedForForbiddenWords;
+            }
+
+            Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId, CreatedDateTime = DateTime.UtcNow, Status = status});
         }
 
         public ObjectRequest(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
@@ -44,6 +52,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             ExtraInfo = objectRequested.ExtraInfo;
             UserId = objectRequested.UserId;
             CreatedDateTime = objectRequested.CreatedDateTime;
+            Status = objectRequested.Status;
         }
 
         private void OnObjectRequestConfirmed(ObjectRequestConfirmed objectRequestConfirmed) {
@@ -81,5 +90,6 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         public IEnumerable<int> ConfirmingUserIds => _confirmingUserIds;
         public IEnumerable<int> DenyingUserIds => _denyingUserIds;
         public IEnumerable<int> DenyingForNowUserIds => _denyingForNowUserIds;
+        public ObjectRequestStatus Status { get; private set; }
     }
 }

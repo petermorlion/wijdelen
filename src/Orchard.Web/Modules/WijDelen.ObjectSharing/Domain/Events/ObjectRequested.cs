@@ -1,5 +1,6 @@
 ﻿using System;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Domain.Events {
     public class ObjectRequested : VersionedEvent {
@@ -22,5 +23,10 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// The DateTime when the object request was made.
         /// </summary>
         public DateTime CreatedDateTime { get; set; }
+
+        /// <summary>
+        /// The status of the object request.
+        /// </summary>
+        public ObjectRequestStatus Status { get; set; }
     }
 }

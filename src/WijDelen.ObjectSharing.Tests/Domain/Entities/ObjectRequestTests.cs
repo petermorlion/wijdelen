@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System.Linq;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
     [TestFixture]
@@ -26,8 +27,34 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
 
             ((ObjectRequested) objectRequest.Events.Single()).CreatedDateTime.Should().NotBe(default(DateTime));
             ((ObjectRequested) objectRequest.Events.Single()).CreatedDateTime.Kind.Should().Be(DateTimeKind.Utc);
+            ((ObjectRequested) objectRequest.Events.Single()).Status.Should().Be(ObjectRequestStatus.None);
 
             objectRequest.Version.Should().Be(0);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
+        }
+
+        [Test]
+        public void WhenCreatingObjectRequestWithForbiddenWords()
+        {
+            var id = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(id, "Sex", "for sexing", 22);
+
+            objectRequest.Description.Should().Be("Sex");
+            objectRequest.ExtraInfo.Should().Be("for sexing");
+
+            objectRequest.Events.Single().ShouldBeEquivalentTo(new ObjectRequested {
+                SourceId = id,
+                Description = "Sex",
+                ExtraInfo = "for sexing",
+                UserId = 22
+            });
+
+            ((ObjectRequested)objectRequest.Events.Single()).CreatedDateTime.Should().NotBe(default(DateTime));
+            ((ObjectRequested)objectRequest.Events.Single()).CreatedDateTime.Kind.Should().Be(DateTimeKind.Utc);
+            ((ObjectRequested)objectRequest.Events.Single()).Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
+
+            objectRequest.Version.Should().Be(0);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
         }
 
         [Test]
@@ -48,6 +75,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.ExtraInfo.Should().Be("For sneaking");
             objectRequest.UserId.Should().Be(22);
             objectRequest.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
         }
 
         [Test]
