@@ -1,0 +1,23 @@
+﻿<html>
+<body style="font-family: Verdana, Arial, sans-serif;">
+    <div style="background-color: #04b17b;padding: 0 10px;">
+        <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;">
+        <img src="@Model.GroupLogoUrl" style="height: 35px; vertical-align: middle; margin-left: 10px;">
+    </div><div style="margin-top:10px;">
+        <p>Hallo!</p><p>@Model.RequestingUserName uit de groep @Model.GroupName stuurde je een bericht:</p>
+    </div>
+    <div style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; border: 1px solid #bbb">
+        <p>Ik zoek (een) @Model.Description.</p>
+        <p>Waar heb ik het voor nodig?</p>
+        <p>@Model.ExtraInfo</p>
+        <p>Kan ik die van je lenen?</p>
+    </div>
+    <div>
+        <p style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
+            <a href="@Model.YesLink" style="background-color: #46d100;color: #fff;text-decoration: none;padding: 10px; margin-right: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;">Ja, dat heb ik</a>
+            <a href="@Model.NotNowLink" style="background-color: #a0a0a0;color: #fff;text-decoration: none;padding: 10px; border-radius: 5px; border-right: 1px solid #646464; border-bottom: 1px solid #646464;">Nu even niet</a>
+            <a href="@Model.NoLink" style="background-color: #df0000;color: #fff;text-decoration: none;padding: 10px; margin-left: 10px; border-radius: 5px; border-right: 1px solid #630000; border-bottom: 1px solid #630000;">Nee, dat heb ik niet</a>
+        </p>
+    </div>
+</body>
+</html>

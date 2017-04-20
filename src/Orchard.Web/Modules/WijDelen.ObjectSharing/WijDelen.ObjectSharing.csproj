@@ -313,6 +313,18 @@
   <ItemGroup>
     <Content Include="Views\GetStarted\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.ObjectRequestMail.Text.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.ObjectRequestMail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.ChatMessageAddedMail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.ChatMessageAddedMail.Text.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

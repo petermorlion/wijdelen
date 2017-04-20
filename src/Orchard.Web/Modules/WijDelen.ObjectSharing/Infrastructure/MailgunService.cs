@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Orchard;
 using Orchard.ContentManagement;
+using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.MediaLibrary.Fields;
 using WijDelen.Mailgun;
@@ -12,22 +13,25 @@ using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public class MailgunService : IMailService {
-        private readonly IOrchardServices _orchardServices;
         private readonly IMailgunClient _mailgunClient;
+        private readonly IOrchardServices _orchardServices;
+        private readonly IShapeDisplay _shapeDisplay;
+        private readonly IShapeFactory _shapeFactory;
 
-        public MailgunService(IOrchardServices orchardServices, IMailgunClient mailgunClient) {
+        public MailgunService(IOrchardServices orchardServices, IMailgunClient mailgunClient, IShapeFactory shapeFactory, IShapeDisplay shapeDisplay) {
             _orchardServices = orchardServices;
             _mailgunClient = mailgunClient;
+            _shapeFactory = shapeFactory;
+            _shapeDisplay = shapeDisplay;
 
             T = NullLocalizer.Instance;
         }
 
         public Localizer T { get; set; }
+
         public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params UserEmail[] userEmails) {
             var recipients = new List<string>();
-            foreach (var userEmail in userEmails) {
-                recipients.Add(userEmail.Email);
-            }
+            foreach (var userEmail in userEmails) recipients.Add(userEmail.Email);
 
             var subject = T("Do you have (a) {0}?", description).ToString();
 
@@ -45,17 +49,36 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
                 var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) {
-                    groupLogoUrl = groupLogoField.FirstMediaUrl;
-                }
+                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
             }
 
-            var htmlBody = T("object-request-mail-html", groupLogoUrl, requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
-            var textBody = T("object-request-mail-text", requestingUserName, groupName, description, extraInfo, yesLink, notNowLink, noLink).ToString();
+            var textShape = _shapeFactory.Create("Template_ObjectRequestMail_Text", Arguments.From(new {
+                RequestingUserName = requestingUserName,
+                GroupName = groupName,
+                Description = description,
+                ExtraInfo = extraInfo,
+                YesLink = yesLink,
+                NotNowLink = notNowLink,
+                NoLink = noLink
+            }));
 
-            _mailgunClient.Send(recipients, "", subject, textBody, htmlBody);
+            var htmlShape = _shapeFactory.Create("Template_ObjectRequestMail", Arguments.From(new {
+                GroupLogoUrl = groupLogoUrl,
+                RequestingUserName = requestingUserName,
+                GroupName = groupName,
+                Description = description,
+                ExtraInfo = extraInfo,
+                YesLink = yesLink,
+                NotNowLink = notNowLink,
+                NoLink = noLink
+            }));
 
-            objectRequestMail.MarkAsSent(userEmails, htmlBody);
+            var text = _shapeDisplay.Display(textShape);
+            var html = _shapeDisplay.Display(htmlShape);
+
+            _mailgunClient.Send(recipients, "", subject, text, html);
+
+            objectRequestMail.MarkAsSent(userEmails, html);
         }
 
         public void SendChatMessageAddedMail(string fromUserName, string toUserName, string description, string toEmailAddress, Guid chatId, string message) {
@@ -73,15 +96,28 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
                 var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) {
-                    groupLogoUrl = groupLogoField.FirstMediaUrl;
-                }
+                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
             }
 
-            var htmlBody = T("chat-message-added-mail-html", groupLogoUrl, fromUserName, description, message, chatUrl).ToString();
-            var textBody = T("chat-message-added-mail-text", fromUserName, description, message, chatUrl).ToString();
+            var textShape = _shapeFactory.Create("Template_ChatMessageAddedMail_Text", Arguments.From(new {
+                FromUserName = fromUserName,
+                Description = description,
+                Message = message,
+                ChatUrl = chatUrl
+            }));
 
-            _mailgunClient.Send(to, "", subject, textBody, htmlBody);
+            var htmlShape = _shapeFactory.Create("Template_ChatMessageAddedMail", Arguments.From(new {
+                GroupLogoUrl = groupLogoUrl,
+                FromUserName = fromUserName,
+                Description = description,
+                Message = message,
+                ChatUrl = chatUrl
+            }));
+
+            var text = _shapeDisplay.Display(textShape);
+            var html = _shapeDisplay.Display(htmlShape);
+
+            _mailgunClient.Send(to, "", subject, text, html);
         }
     }
 }
