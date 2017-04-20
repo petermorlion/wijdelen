@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Orchard.Localization;
+using Orchard.Logging;
 using Orchard.Users.Services;
 using WijDelen.Mailgun;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public class MailgunService : IMailService {
-        private static readonly TimeSpan DelayToSetPassword = TimeSpan.FromDays(7);
+        private static readonly TimeSpan DelayToSetPassword = TimeSpan.FromDays(60);
 
         private readonly IUserService _userService;
         private readonly IMailgunClient _mailgunClient;
@@ -17,9 +18,11 @@ namespace WijDelen.UserImport.Services {
             _mailgunClient = mailgunClient;
 
             T = NullLocalizer.Instance;
+            Logger = NullLogger.Instance;
         }
 
         public Localizer T { get; set; }
+        public ILogger Logger { get; set; }
 
         public void SendUserVerificationMails(IEnumerable<UserImportResult> userImportResults, Func<string, string> createUrl) {
             var recipientVariables = new List<string>();
@@ -28,6 +31,8 @@ namespace WijDelen.UserImport.Services {
             foreach (var userImportResult in userImportResults) {
                 var nonce = _userService.CreateNonce(userImportResult.User, DelayToSetPassword);
                 var url = createUrl(nonce);
+
+                Logger.Log(LogLevel.Information, null, "Created nonce {0} for user {1}.", nonce, userImportResult.UserName);
 
                 recipients.Add($"{userImportResult.UserName} <{userImportResult.Email}>");
                 recipientVariables.Add($"\"{userImportResult.Email}\": {{\"username\":\"{userImportResult.UserName}\", \"loginlink\":\"{url}\"}}");
