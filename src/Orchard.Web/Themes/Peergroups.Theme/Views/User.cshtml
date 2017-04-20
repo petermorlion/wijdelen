@@ -1,8 +1,9 @@
 ﻿@using Orchard.Security
+@using WijDelen.UserImport.Models
 <div class="navigation-user-large">
     @if (WorkContext.CurrentUser != null) {
         <span class="user-actions welcome">
-            @Html.Raw("<a href=\"#popover-user-actions\" data-popover class=\"account-link\">" + T("Account") + "</a>")
+            @Html.Raw("<a href=\"#popover-user-actions\" data-popover class=\"account-link\">" + WorkContext.CurrentUser.GetUserDisplayName() + "</a>")
         </span>
         <span class="popover" id="popover-user-actions">
             @Html.ActionLink(T("Account").ToString(), "Index", new {Area = "WijDelen.UserImport", Controller = "Account"})

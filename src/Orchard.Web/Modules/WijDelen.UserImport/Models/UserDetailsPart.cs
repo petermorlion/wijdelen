@@ -18,5 +18,9 @@ namespace WijDelen.UserImport.Models {
             get { return Retrieve(r => r.LastName); }
             set { Store(r => r.LastName, value); }
         }
+
+        public bool IsComplete() {
+            return LastName != "" && FirstName != "";
+        }
     }
 }

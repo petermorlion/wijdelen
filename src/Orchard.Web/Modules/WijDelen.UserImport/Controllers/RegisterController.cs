@@ -35,7 +35,7 @@ namespace WijDelen.UserImport.Controllers {
                 return RedirectToAction("LogOn", "Account", new {area = "Orchard.Users"});
             }
 
-            if (user.ContentItem.As<UserDetailsPart>().FirstName != "" && user.ContentItem.As<UserDetailsPart>().LastName != "") {
+            if (user.ContentItem.As<UserDetailsPart>().IsComplete()) {
                 return RedirectToAction("LogOn", "Account", new { area = "Orchard.Users" });
             }
 
