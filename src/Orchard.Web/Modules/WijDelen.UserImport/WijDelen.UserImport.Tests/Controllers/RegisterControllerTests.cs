@@ -8,6 +8,7 @@ using Orchard.Users.Events;
 using Orchard.Users.Services;
 using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Services;
+using WijDelen.UserImport.Tests.Mocks;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
@@ -40,8 +41,11 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestGetWithNonce() {
+            var userMockFactory = new UserMockFactory();
+            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "", "");
+
             var userServiceMock = new Mock<IUserService>();
-            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(Mock.Of<IUser>());
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(userMock);
 
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
@@ -52,6 +56,25 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual(7, ((ViewResult)result).ViewData["PasswordLength"]);
+        }
+
+        [Test]
+        public void TestGetWithNonceAndUserAlreadyHasFirstAndLastName() {
+            var userMockFactory = new UserMockFactory();
+            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "Moe", "Szyslak");
+            
+            var userServiceMock = new Mock<IUserService>();
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(userMock);
+
+            var membershipServiceMock = new Mock<IMembershipService>();
+            membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings { MinRequiredPasswordLength = 7 });
+
+            var controller = new RegisterController(userServiceMock.Object, membershipServiceMock.Object, Mock.Of<IUserEventHandler>(), Mock.Of<IUpdateUserDetailsService>());
+
+            var result = controller.Index("nonce");
+
+            Assert.IsInstanceOf<RedirectToRouteResult>(result);
+            Assert.AreEqual("LogOn", ((RedirectToRouteResult)result).RouteValues["action"]);
         }
 
         [Test]

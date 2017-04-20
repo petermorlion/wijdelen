@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
+using Orchard.ContentManagement;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Themes;
 using Orchard.Users.Services;
 using Orchard.Localization;
 using Orchard.Users.Events;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Controllers {
@@ -28,7 +30,12 @@ namespace WijDelen.UserImport.Controllers {
 
         [AlwaysAccessible]
         public ActionResult Index(string nonce) {
-            if (_userService.ValidateLostPassword(nonce) == null) {
+            var user = _userService.ValidateLostPassword(nonce);
+            if (user == null) {
+                return RedirectToAction("LogOn");
+            }
+
+            if (user.ContentItem.As<UserDetailsPart>().FirstName != "" && user.ContentItem.As<UserDetailsPart>().LastName != "") {
                 return RedirectToAction("LogOn");
             }
 
