@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Security;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
@@ -52,6 +53,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             userMock.Setup(x => x.Id).Returns(22);
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
+            var notifierMock = new Mock<INotifier>();
+            services.Notifier = notifierMock.Object;
 
             var controller = new ObjectRequestController(commandHandlerMock.Object, null, null, services);
             var viewModel = new NewObjectRequestViewModel {
@@ -63,7 +66,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Item");
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
-            ((RedirectToRouteResult) actionResult).RouteValues["messageKey"].Should().Be("Thanks");
+
+            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
 
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking..........................");
@@ -138,7 +142,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var actionResult = controller.Item(id);
 
             ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
-                Message = "",
                 ObjectRequestRecord = objectRequestRecords[0],
                 ChatRecords = new List<ChatRecord> { chatRecords[0] }
             });

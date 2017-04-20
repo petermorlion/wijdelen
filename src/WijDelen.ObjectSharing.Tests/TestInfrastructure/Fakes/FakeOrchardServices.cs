@@ -9,7 +9,7 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
         public IContentManager ContentManager { get; }
         public ITransactionManager TransactionManager { get; }
         public IAuthorizer Authorizer { get; }
-        public INotifier Notifier { get; }
+        public INotifier Notifier { get; set; }
         public dynamic New { get; }
         public WorkContext WorkContext { get; } = new FakeWorkContext();
     }

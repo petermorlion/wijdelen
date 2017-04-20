@@ -38,7 +38,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         /// <remarks>
         /// Warning: also referenced hard-coded in WijDelen.ObjectSharing.MailgunService
         /// </remarks>>
-        public ActionResult Index(Guid id, string messageKey = "") {
+        public ActionResult Index(Guid id) {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
             if (chat == null) {
                 return new HttpNotFoundResult();
@@ -59,7 +59,6 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ObjectDescription = objectRequest.Description,
                 RequestingUserName = chat.RequestingUserName,
                 ConfirmingUserName = chat.ConfirmingUserName,
-                Message = T(messageKey, chat.RequestingUserName).ToString(),
                 RequestingUserId = chat.RequestingUserId
             });
         }

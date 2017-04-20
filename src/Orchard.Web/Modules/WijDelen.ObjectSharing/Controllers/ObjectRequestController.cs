@@ -5,6 +5,7 @@ using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -59,10 +60,12 @@ namespace WijDelen.ObjectSharing.Controllers {
             var command = new RequestObject(viewModel.Description, viewModel.ExtraInfo, currentUser.Id);
             _requestObjectCommandHandler.Handle(command);
 
-            return RedirectToAction("Item", new {id = command.ObjectRequestId, messageKey = "Thanks"});
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
+
+            return RedirectToAction("Item", new {id = command.ObjectRequestId});
         }
 
-        public ActionResult Item(Guid id, string messageKey = "") {
+        public ActionResult Item(Guid id) {
             var record = _objectRequestRepository.Get(x => x.AggregateId == id);
             var chatRecords = _chatRepository.Fetch(x => x.ObjectRequestId == id).ToList();
 
@@ -76,8 +79,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var viewModel = new ObjectRequestViewModel {
                 ObjectRequestRecord = record,
-                ChatRecords = chatRecords,
-                Message = T(messageKey).ToString()
+                ChatRecords = chatRecords
             };
 
             return View(viewModel);

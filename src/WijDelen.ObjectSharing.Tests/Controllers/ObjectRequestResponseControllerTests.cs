@@ -4,7 +4,9 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Data;
+using Orchard.Localization;
 using Orchard.Security;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
@@ -86,6 +88,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             userMock.Setup(x => x.Id).Returns(22);
             var services = new FakeOrchardServices();
             services.WorkContext.CurrentUser = userMock.Object;
+            var notifierMock = new Mock<INotifier>();
+            services.Notifier = notifierMock.Object;
 
             var persistentRecords = new[] {
                 new ObjectRequestRecord {
@@ -116,7 +120,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 new ChatRecord {
                     ObjectRequestId = id,
                     ConfirmingUserId = 22,
-                    ChatId = chatId
+                    ChatId = chatId,
+                    RequestingUserName = "John Doe"
                 }
             });
 
@@ -128,9 +133,10 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             actionResult.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
             actionResult.As<RedirectToRouteResult>().RouteValues["controller"].Should().Be("Chat");
             actionResult.As<RedirectToRouteResult>().RouteValues["id"].Should().Be(chatId);
-            actionResult.As<RedirectToRouteResult>().RouteValues["messageKey"].Should().Be("Thanks");
             confirmObjectRequest.ConfirmingUserId.Should().Be(22);
             confirmObjectRequest.ObjectRequestId.Should().Be(id);
+
+            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your response. You can now chat with John Doe.")));
         }
 
         [Test]

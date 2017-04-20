@@ -15,11 +15,6 @@ namespace WijDelen.ObjectSharing.ViewModels {
 
         public string ConfirmingUserName { get; set; }
 
-        /// <summary>
-        /// The message to show to the user.
-        /// </summary>
-        public string Message { get; set; }
-
         public int RequestingUserId { get; set; }
     }
 }

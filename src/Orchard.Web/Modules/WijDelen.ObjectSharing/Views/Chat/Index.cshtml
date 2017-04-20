@@ -9,12 +9,6 @@
     }
 }
 
-@if (Model.Message != "") {
-    <div class="message">
-        @Model.Message
-    </div>
-}
-
 @if (WorkContext.CurrentUser.Id == Model.RequestingUserId) {
     <h5>
         @T("{0} has (a) {1} for you.", Model.ConfirmingUserName, Model.ObjectDescription)

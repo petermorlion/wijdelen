@@ -3,7 +3,9 @@ using System.Linq;
 using System.Web.Mvc;
 using Orchard;
 using Orchard.Data;
+using Orchard.Localization;
 using Orchard.Themes;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -32,6 +34,8 @@ namespace WijDelen.ObjectSharing.Controllers {
             _confirmObjectRequestCommandHandler = confirmObjectRequestCommandHandler;
             _denyObjectRequestCommandHandler = denyObjectRequestCommandHandler;
             _denyObjectRequestForNowCommandHandler = denyObjectRequestForNowCommandHandler;
+
+            T = NullLocalizer.Instance;
         }
 
         public ActionResult Deny(Guid id) {
@@ -62,8 +66,10 @@ namespace WijDelen.ObjectSharing.Controllers {
             _confirmObjectRequestCommandHandler.Handle(command);
 
             var chatRecord = _chatRepository.Fetch(x => x.ObjectRequestId == id && x.ConfirmingUserId == currentUser.Id).Single();
+
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your response. You can now chat with {0}.", chatRecord.RequestingUserName));
             
-            return RedirectToAction("Index", "Chat", new {id = chatRecord.ChatId, messageKey = "Thanks"});
+            return RedirectToAction("Index", "Chat", new {id = chatRecord.ChatId});
         }
 
         public ActionResult DenyForNow(Guid id) {
@@ -80,5 +86,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             return View();
         }
+
+        public Localizer T { get; set; }
     }
 }

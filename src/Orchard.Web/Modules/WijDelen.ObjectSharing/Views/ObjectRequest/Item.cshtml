@@ -4,12 +4,6 @@
     Layout.Title = Model.ObjectRequestRecord.Description;
 }
 
-@if (Model.Message != "") {
-    <div class="message">
-        @Model.Message
-    </div>
-}
-
 @Model.ObjectRequestRecord.ExtraInfo
 
 <h2>@T("Reactions")</h2>

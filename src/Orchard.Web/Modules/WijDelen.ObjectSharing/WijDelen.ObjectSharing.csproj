@@ -308,9 +308,6 @@
     <Content Include="Views\ReceivedObjectRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Localization\en\orchard.module.po" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GetStarted\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
