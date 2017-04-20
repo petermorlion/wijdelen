@@ -35,7 +35,12 @@ namespace WijDelen.ObjectSharing {
                             .Position("1")
                             .Action("Synonyms", "Archetypes", new {area = "WijDelen.ObjectSharing"})
                             .Permission(StandardPermissions.SiteOwner)
-                            .LocalNav())));
+                            .LocalNav()))
+                    .Add(subItem => subItem
+                        .Caption(T("Requests"))
+                        .Position("2")
+                        .Action("Index", "ObjectRequestAdmin", new {area = "WijDelen.ObjectSharing"})
+                        .Permission(StandardPermissions.SiteOwner)));
         }
     }
 }

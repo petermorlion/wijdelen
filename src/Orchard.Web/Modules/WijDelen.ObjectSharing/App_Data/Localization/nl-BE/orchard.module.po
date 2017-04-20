@@ -252,3 +252,8 @@ msgstr "Welkom {0}!"
 #| msgid "Let's start by asking the members of your group if they can lend you something. Fill out the form below and we'll do the rest!"
 msgid "Let's start by asking the members of your group if they can lend you something. Fill out the form below and we'll do the rest!"
 msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand formulier in en wij doen de rest!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"
