@@ -32,11 +32,11 @@ namespace WijDelen.UserImport.Controllers {
         public ActionResult Index(string nonce) {
             var user = _userService.ValidateLostPassword(nonce);
             if (user == null) {
-                return RedirectToAction("LogOn");
+                return RedirectToAction("LogOn", "Account", new {area = "Orchard.Users"});
             }
 
             if (user.ContentItem.As<UserDetailsPart>().FirstName != "" && user.ContentItem.As<UserDetailsPart>().LastName != "") {
-                return RedirectToAction("LogOn");
+                return RedirectToAction("LogOn", "Account", new { area = "Orchard.Users" });
             }
 
             ViewData["PasswordLength"] = MinPasswordLength;

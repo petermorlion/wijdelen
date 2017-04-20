@@ -37,6 +37,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             Assert.AreEqual("LogOn", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("WijDelen.ObjectSharing", ((RedirectToRouteResult)result).RouteValues["area"]);
+            Assert.AreEqual("GetStarted", ((RedirectToRouteResult)result).RouteValues["controller"]);
         }
 
         [Test]
@@ -75,6 +77,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             Assert.AreEqual("LogOn", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Account", ((RedirectToRouteResult)result).RouteValues["controller"]);
+            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult)result).RouteValues["area"]);
         }
 
         [Test]
