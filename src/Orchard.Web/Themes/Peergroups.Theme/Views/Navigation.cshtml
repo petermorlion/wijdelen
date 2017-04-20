@@ -15,9 +15,18 @@
             </div>
         </div>
         <div class="nav-right nav-right-top">
-            <a href="@Url.Content("~/")" class="logo-link">
-                <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-header.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
-                
+            @{
+                var homeUrl = Url.Content("~/");
+            }
+            
+
+            @if (WorkContext.CurrentUser != null) {
+                homeUrl = Url.Action("Index", "ReceivedObjectRequest", new { Area = "WijDelen.ObjectSharing" });
+            }
+
+            <a href="@homeUrl" class="logo-link">
+                <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-header.png")" alt="@T("Peergroups")" title="@T("Peergroups")"/>
+
                 @if (WorkContext.CurrentUser != null) {
                     var user = WorkContext.CurrentUser;
                     var groupMembership = user.As<GroupMembershipPart>();
@@ -26,7 +35,7 @@
                     var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
                     if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) {
-                        <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img" />
+                        <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
                     }
                 }
             </a>
