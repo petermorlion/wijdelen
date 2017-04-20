@@ -33,6 +33,11 @@ msgstr "Paswoord wijzigen"
 msgid "Account"
 msgstr "Account"
 
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#| msgid "Sign Out"
+msgid "Sign Out"
+msgstr "Afmelden"
+
 #: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
 #| msgid "New Request"
 msgid "New Request"
