@@ -28,16 +28,6 @@ msgstr "Gebruiker {0} bestaat al."
 msgid "Welcome to Peergroups"
 msgstr "Welkom bij Peergroups"
 
-#: wijdelen.userimport.services.mailgunservice
-#| msgid "user-verification-mail-text"
-msgid "user-verification-mail-text"
-msgstr "Hallo %recipient.username%!\r\n\r\nWelkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door naar deze link te surfen:\r\n\r\n%recipient.loginlink%\r\n\r\nBedankt en tot binnenkort!"
-
-#: wijdelen.userimport.services.mailgunservice
-#| msgid "user-verification-mail-html"
-msgid "user-verification-mail-html"
-msgstr "<html><body style=\"font-family: Verdana, Arial, sans-serif;\"><div style=\"background-color: #04b17b;padding: 0 10px;\"> <img src=\"https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif\" style="vertical-align: middle;"></div><div style="\"margin-top:10px;\"><p>Hallo %recipient.username%!</p><p>Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:</p><p style=\"text-align: center;margin-top: 20px;margin-bottom: 20px;\"> <a href=\"%recipient.loginlink%\" style=\"background-color: #04b17b;color: #fff;text-decoration: none;padding: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;\">Starten met Peergroups</a></p><p>Bedankt en tot binnenkort!</p></div></body></html>"
-
 #: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
 #| msgid "Summary"
 msgid "Summary"
@@ -123,6 +113,11 @@ msgstr "Bestaande"
 msgid "Please provide a group name to create a new group."
 msgstr "Gelieve de groep een naam te geven om een nieuwe groep te creëren."
 
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "User verification mail has been sent."
+msgid "User verification mail has been sent."
+msgstr "Er is een nieuwe verificatiemail verstuurd."
+
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a new password of {0} or more characters."
 msgid "You must specify a new password of {0} or more characters."
@@ -192,3 +187,43 @@ msgstr "U moet een familienaam opgeven."
 #| msgid "You must specify a first name."
 msgid "TYou must specify a first name."
 msgstr "U moet een voornaam opgeven."
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#| msgid "Hello %recipient.username%!"
+msgid "Hello %recipient.username%!"
+msgstr "Hallo %recipient.username%!"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#| msgid "Hello %recipient.username%!"
+msgid "Hello %recipient.username%!"
+msgstr "Hallo %recipient.username%!"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#| msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
+msgstr "Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#| msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:
+msgstr "Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#| msgid "Thank you!"
+msgid "Thank you!"
+msgstr "Bedankt en tot binnenkort!
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#| msgid "Thank you!"
+msgid "Thank you!"
+msgstr "Bedankt en tot binnenkort!"
+
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserVerificationMail.cshtml
+#| msgid "User verification mail"
+msgid "User verification mail"
+msgstr "Verificatiemail"
+
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserVerificationMail.cshtml
+#| msgid "Resend"
+msgid "Resend"
+msgstr "Opnieuw versturen"

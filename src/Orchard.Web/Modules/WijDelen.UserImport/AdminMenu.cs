@@ -21,7 +21,7 @@ namespace WijDelen.UserImport {
                 .Add(subItem => subItem
                     .Caption(T("Groups"))
                     .Position("2")
-                    .Action("List", "Admin", new { area = "Contents", id="Group" })//@Html.ActionLink(T("List Items").ToString(), "List", new {area = "Contents", id = Model.Name})
+                    .Action("List", "Admin", new { area = "Contents", id="Group" })
                     .Permission(StandardPermissions.SiteOwner))
                 .Add(subItem => subItem
                     .Caption(T("User Import"))

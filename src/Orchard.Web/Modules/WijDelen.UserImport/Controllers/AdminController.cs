@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
@@ -6,6 +7,7 @@ using Orchard.Security;
 using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Services;
 using Orchard;
+using Orchard.UI.Notify;
 using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
@@ -15,18 +17,24 @@ namespace WijDelen.UserImport.Controllers {
         private readonly IUserImportService _userImportService;
         private readonly IMailService _mailService;
         private readonly IGroupService _groupService;
+        private readonly IMembershipService _membershipService;
+        private readonly INotifier _notifier;
 
         public AdminController(
             IOrchardServices orchardServices, 
             ICsvReader csvReader, 
             IUserImportService userImportService, 
             IMailService mailService,
-            IGroupService groupService) {
+            IGroupService groupService,
+            IMembershipService membershipService,
+            INotifier notifier) {
             _orchardServices = orchardServices;
             _csvReader = csvReader;
             _userImportService = userImportService;
             _mailService = mailService;
             _groupService = groupService;
+            _membershipService = membershipService;
+            _notifier = notifier;
 
             T = NullLocalizer.Instance;
         }
@@ -66,15 +74,26 @@ namespace WijDelen.UserImport.Controllers {
 
             _groupService.AddUsersToGroup(groupName, userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User));
 
+            SendUserVerificationMails(userImportResults.Where(x => x.WasImported).Select(x => x.User));
+            
+            return View("ImportComplete", userImportResults);
+        }
+
+        public ActionResult ResendUserVerificationMail(string userName) {
+            var user = _membershipService.GetUser(userName);
+            SendUserVerificationMails(new[] { user });
+            _notifier.Add(NotifyType.Success, T("User verification mail has been sent."));
+            return RedirectToAction("Edit", "Admin", new {area = "Orchard.Users", id = user.Id});
+        }
+
+        private void SendUserVerificationMails(IEnumerable<IUser> users) {
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
             if (string.IsNullOrWhiteSpace(siteUrl)) {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
-            _mailService.SendUserVerificationMails(userImportResults.Where(x => x.WasImported), nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl));
-            
-            return View("ImportComplete", userImportResults);
+            _mailService.SendUserVerificationMails(users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl));
         }
     }
 }

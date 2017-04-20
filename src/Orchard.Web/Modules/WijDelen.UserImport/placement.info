@@ -5,4 +5,5 @@
 	<Place Parts_UserDetails_Edit="Content:2"/>
 	<Place Parts_GroupMembership="Content:3"/>
 	<Place Parts_GroupMembership_Edit="Content:3"/>
+	<Place Parts_ResendUserVerificationMail_Edit="Content:4"/>
 </Placement>

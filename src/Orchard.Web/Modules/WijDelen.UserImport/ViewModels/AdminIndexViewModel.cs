@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using Orchard.Roles.ViewModels;
 
 namespace WijDelen.UserImport.ViewModels {
     public class AdminIndexViewModel {

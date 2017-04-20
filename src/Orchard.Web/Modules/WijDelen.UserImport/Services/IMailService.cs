@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Orchard;
-using WijDelen.UserImport.Models;
+using Orchard.Security;
 
 namespace WijDelen.UserImport.Services
 {
     public interface IMailService : IDependency {
-        void SendUserVerificationMails(IEnumerable<UserImportResult> userImportResults, Func<string, string> createUrl);
+        void SendUserVerificationMails(IEnumerable<IUser> users, Func<string, string> createUrl);
     }
 }

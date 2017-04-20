@@ -91,5 +91,16 @@ namespace WijDelen.UserImport {
 
             return 7;
         }
+
+        public int UpdateFrom7() {
+            ContentDefinitionManager.AlterPartDefinition(
+                typeof(ResendUserVerificationMailPart).Name, cfg => cfg
+                    .Attachable());
+
+            ContentDefinitionManager.AlterTypeDefinition("User", cfg => cfg
+                .WithPart("ResendUserVerificationMailPart"));
+
+            return 8;
+        }
     }
 }

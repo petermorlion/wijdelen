@@ -108,9 +108,12 @@
     <Compile Include="Handlers\GroupMembershipPartHandler.cs" />
     <Compile Include="Handlers\NamePartHandler.cs" />
     <Compile Include="Handlers\UserDetailsHandler.cs" />
+    <Compile Include="Models\ResendUserVerificationMailPart.cs" />
+    <Compile Include="Drivers\ResendUserVerificationMailPartDriver.cs" />
     <Compile Include="Models\UserDetailsPart.cs" />
     <Compile Include="Models\UserDetailsPartRecord.cs" />
     <Compile Include="Models\UserExtensions.cs" />
+    <Compile Include="Permissions.cs" />
     <Compile Include="Services\IUpdateUserDetailsService.cs" />
     <Compile Include="Services\UpdateUserDetailsService.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
@@ -202,6 +205,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.UserVerificationMail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.UserVerificationMail.Text.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\ResendUserVerificationMail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
