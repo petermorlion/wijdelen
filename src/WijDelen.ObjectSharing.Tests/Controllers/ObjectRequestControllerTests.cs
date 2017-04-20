@@ -67,8 +67,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Item");
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
 
-            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
-
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking..........................");
             command.UserId.Should().Be(22);

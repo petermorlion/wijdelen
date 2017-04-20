@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Orchard;
 using Orchard.Localization;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
@@ -21,6 +23,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         private readonly IGetUserByIdQuery _getUserByIdQuery;
         private readonly IRandomSampleService _randomSampleService;
         private readonly IFindOtherUsersInGroupThatPossiblyOwnObjectQuery _findOtherUsersQuery;
+        private readonly IOrchardServices _orchardServices;
 
         public ObjectRequestMailer(
             IEventSourcedRepository<ObjectRequestMail> repository, 
@@ -28,13 +31,15 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             IMailService mailService,
             IGetUserByIdQuery getUserByIdQuery,
             IRandomSampleService randomSampleService,
-            IFindOtherUsersInGroupThatPossiblyOwnObjectQuery findOtherUsersQuery) {
+            IFindOtherUsersInGroupThatPossiblyOwnObjectQuery findOtherUsersQuery,
+            IOrchardServices orchardServices) {
             _repository = repository;
             _groupService = groupService;
             _mailService = mailService;
             _getUserByIdQuery = getUserByIdQuery;
             _randomSampleService = randomSampleService;
             _findOtherUsersQuery = findOtherUsersQuery;
+            _orchardServices = orchardServices;
 
             T = NullLocalizer.Instance;
         }
@@ -50,6 +55,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.SourceId);
 
             if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."));
                 return;
             }
 
@@ -70,6 +76,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 objectRequested.ExtraInfo,
                 objectRequestMail,
                 userEmails);
+
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }

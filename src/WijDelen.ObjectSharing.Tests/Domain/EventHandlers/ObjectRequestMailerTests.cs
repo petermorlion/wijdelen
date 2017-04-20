@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Orchard.Localization;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -10,6 +12,7 @@ using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -51,7 +54,11 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             var mailServiceMock = new Mock<IMailService>();
 
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object);
+            var services = new FakeOrchardServices();
+            var notifierMock = new Mock<INotifier>();
+            services.Notifier = notifierMock.Object;
+
+            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, services);
 
             handler.Handle(objectRequested);
 
@@ -71,6 +78,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 new UserEmail {UserId = otherUser.Id, Email = "peter.morlion@gmail.com"}));
 
             repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
+
+            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
         }
 
         [Test]
@@ -92,6 +101,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
             var groupServiceMock = new Mock<IGroupService>();
 
+            var services = new FakeOrchardServices();
+            var notifierMock = new Mock<INotifier>();
+            services.Notifier = notifierMock.Object;
+
             var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
             repositoryMock
                 .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
@@ -99,7 +112,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             var mailServiceMock = new Mock<IMailService>();
 
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object);
+            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, services);
 
             handler.Handle(objectRequested);
 
@@ -115,6 +128,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 It.IsAny<UserEmail[]>()), Times.Never);
 
             repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
+
+            notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
         }
     }
 }
