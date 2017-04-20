@@ -19,23 +19,25 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ObjectRequested e) {
             var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
-            if (existingRecord == null) {
-                var group = _groupService.GetGroupForUser(e.UserId);
-
-                var newRecord = new ObjectRequestRecord {
-                    AggregateId = e.SourceId,
-                    Description = e.Description,
-                    ExtraInfo = e.ExtraInfo,
-                    Version = e.Version,
-                    UserId = e.UserId,
-                    CreatedDateTime = e.CreatedDateTime,
-                    GroupId = group.Id,
-                    GroupName = group.Name,
-                    Status = e.Status.ToString()
-                };
-
-                _repository.Create(newRecord);
+            if (existingRecord != null) {
+                return;
             }
+
+            var group = _groupService.GetGroupForUser(e.UserId);
+
+            var newRecord = new ObjectRequestRecord {
+                AggregateId = e.SourceId,
+                Description = e.Description,
+                ExtraInfo = e.ExtraInfo,
+                Version = e.Version,
+                UserId = e.UserId,
+                CreatedDateTime = e.CreatedDateTime,
+                GroupId = @group.Id,
+                GroupName = @group.Name,
+                Status = e.Status.ToString()
+            };
+
+            _repository.Create(newRecord);
         }
     }
 }
