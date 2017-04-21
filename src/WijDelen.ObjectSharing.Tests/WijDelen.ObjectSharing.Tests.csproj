@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.14.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.14.0\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -112,6 +116,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ChatControllerTests.cs" />
+    <Compile Include="Controllers\ObjectRequestAdminControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestResponseControllerTests.cs" />
     <Compile Include="Controllers\ReceivedObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ChatCommandHandlerTests.cs" />
