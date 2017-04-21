@@ -1,5 +1,24 @@
-﻿@{
+﻿@model IList<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
+
+@{
     Layout.Title = T("Requests");
 }
 
-Coming soon...
+<table class="items">
+    <thead>
+    <tr>
+        <th>@T("Group")</th>
+        <th>@T("Description")</th>
+        <th>@T("Status")</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var record in Model) {
+        <tr>
+            <td>@record.GroupName</td>
+            <td>@record.Description</td>
+            <td>@record.Status</td>
+        </tr>
+    }
+    </tbody>
+</table>

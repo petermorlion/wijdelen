@@ -257,3 +257,13 @@ msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaa
 #| msgid "Requests"
 msgid "Requests"
 msgstr "Oproepen"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groep"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#| msgid "Description"
+msgid "Description"
+msgstr "Omschrijving"
