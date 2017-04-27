@@ -146,6 +146,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
+        public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest()
+        {
+            Assert.Fail("Implement");
+        }
+
+        [Test]
         public void WhenGettingItemForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
@@ -199,6 +205,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.Count().Should().Be(2);
             model.ToList()[0].Should().Be(persistentRecords[1]);
             model.ToList()[1].Should().Be(persistentRecords[0]);
+        }
+
+        [Test]
+        public void WhenGettingIndex_ShouldNotReturnBlockedRequests() {
+            Assert.Fail("Implement");
         }
     }
 }

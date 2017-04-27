@@ -1,5 +1,4 @@
-﻿using Orchard.ContentManagement;
-using Orchard.Data;
+﻿using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
@@ -22,10 +21,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public void Handle(ObjectRequested e) {
             var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
             if (existingRecord != null) {
-                return;
-            }
-
-            if (e.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
                 return;
             }
 

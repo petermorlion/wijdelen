@@ -58,39 +58,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
-        public void WhenObjectRequestBlocked_ShouldNotPersist() {
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {AggregateId = Guid.NewGuid()}
-            };
-
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
-
-            var groupServiceMock = new Mock<IGroupService>();
-            groupServiceMock.Setup(x => x.GetGroupForUser(22)).Returns(new GroupViewModel {
-                Id = 123,
-                Name = "The Flying Hellfish"
-            });
-
-            var aggregateId = Guid.NewGuid();
-            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
-            var e = new ObjectRequested
-            {
-                SourceId = aggregateId,
-                Version = 0,
-                Description = "Sneakers",
-                ExtraInfo = "For sneaking",
-                UserId = 22,
-                CreatedDateTime = new DateTime(2016, 12, 27),
-                Status = ObjectRequestStatus.BlockedForForbiddenWords
-            };
-
-            handler.Handle(e);
-
-            repositoryMock.Verify(x => x.Create(It.IsAny<ObjectRequestRecord>()), Times.Never);
-        }
-
-        [Test]
         public void WhenObjectRequestIsUnblocked_ShouldUpdateObjectRequestRecord()
         {
             var aggregateId = Guid.NewGuid();
