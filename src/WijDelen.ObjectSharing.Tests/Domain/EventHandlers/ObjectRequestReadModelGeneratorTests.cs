@@ -89,5 +89,48 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             repositoryMock.Verify(x => x.Create(It.IsAny<ObjectRequestRecord>()), Times.Never);
         }
+
+        [Test]
+        public void WhenObjectRequestIsUnblocked_ShouldUpdateObjectRequestRecord()
+        {
+            var aggregateId = Guid.NewGuid();
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = aggregateId,
+                    Status = "BlockedForForbiddenWords",
+                    Version = 3
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            ObjectRequestRecord updatedRecord = null;
+            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => updatedRecord = r);
+
+            var groupServiceMock = new Mock<IGroupService>();
+            groupServiceMock.Setup(x => x.GetGroupForUser(22)).Returns(new GroupViewModel
+            {
+                Id = 123,
+                Name = "The Flying Hellfish"
+            });
+
+            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
+            var e = new ObjectRequestUnblocked
+            {
+                SourceId = aggregateId,
+                Version = 4,
+                Description = "Sextant",
+                ExtraInfo = "For sextanting",
+                UserId = 22,
+                Status = ObjectRequestStatus.None
+            };
+
+            handler.Handle(e);
+
+            updatedRecord.AggregateId.Should().Be(aggregateId);
+            updatedRecord.Version.Should().Be(4);
+            updatedRecord.Status.Should().Be("None");
+        }
     }
 }

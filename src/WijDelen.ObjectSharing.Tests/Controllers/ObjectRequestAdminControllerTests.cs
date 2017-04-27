@@ -7,44 +7,69 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard.Data;
+using Orchard.Localization;
 using WijDelen.ObjectSharing.Controllers;
+using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.ViewModels.Admin;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ObjectRequestAdminControllerTests {
-        private IContainer _container;
-        private ObjectRequestAdminController _controller;
-        private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
-
         [SetUp]
         public void Init() {
             var builder = new ContainerBuilder();
 
             _repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            _commandHandler = new Mock<ICommandHandler<UnblockObjectRequests>>();
 
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            builder.RegisterInstance(_commandHandler.Object).As<ICommandHandler<UnblockObjectRequests>>();
             builder.RegisterType<ObjectRequestAdminController>();
 
             _container = builder.Build();
             _controller = _container.Resolve<ObjectRequestAdminController>();
         }
 
+        private IContainer _container;
+        private ObjectRequestAdminController _controller;
+        private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
+        private Mock<ICommandHandler<UnblockObjectRequests>> _commandHandler;
+
+        /// <summary>
+        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
+        /// runtime exception.
+        /// </summary>
+        [Test]
+        public void TestT() {
+            var localizer = NullLocalizer.Instance;
+
+            _controller.T = localizer;
+
+            Assert.AreEqual(localizer, _controller.T);
+        }
+
         [Test]
         public void WhenGettingIndex() {
-            var objectRequestRecord2 = new ObjectRequestRecord {
-                CreatedDateTime = new DateTime(2017, 1, 1)
-            };
-            var objectRequestRecord1 = new ObjectRequestRecord{
+            _controller.T = NullLocalizer.Instance;
+            var objectRequestRecord1 = new ObjectRequestRecord {
+                AggregateId = Guid.NewGuid(),
+                GroupName = "The Simpsons",
+                Description = "Sneakers",
+                Status = "None",
                 CreatedDateTime = new DateTime(2016, 1, 1)
             };
-            var objectRequestRecord3 = new ObjectRequestRecord{
-                CreatedDateTime = new DateTime(2018, 1, 1)
+            var objectRequestRecord2 = new ObjectRequestRecord {
+                AggregateId = Guid.NewGuid(),
+                GroupName = "The Flintstones",
+                Description = "A rock",
+                Status = "BlockedForForbiddenWords",
+                CreatedDateTime = new DateTime(2017, 1, 1)
             };
             var records = new List<ObjectRequestRecord> {
                 objectRequestRecord2,
-                objectRequestRecord1,
-                objectRequestRecord3
+                objectRequestRecord1
             };
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
@@ -52,46 +77,96 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecord>>();
-            model[0].Should().Be(objectRequestRecord3);
-            model[1].Should().Be(objectRequestRecord2);
-            model[2].Should().Be(objectRequestRecord1);
-            model.Count.Should().Be(3);
+            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
+            model[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+                AggregateId = objectRequestRecord1.AggregateId,
+                GroupName = "The Simpsons",
+                Description = "Sneakers",
+                IsSelected = false,
+                Status = ""
+            });
+            model[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+                AggregateId = objectRequestRecord2.AggregateId,
+                GroupName = "The Flintstones",
+                Description = "A rock",
+                IsSelected = false,
+                Status = "Blocked"
+            });
+            model.Count.Should().Be(2);
         }
 
         [Test]
         public void WhenGettingIndexWithMoreThan50Requests() {
             var records = new List<ObjectRequestRecord>();
-            for (var i = 0; i < 100; i++) {
-                records.Add(new ObjectRequestRecord());
-            }
+            for (var i = 0; i < 100; i++) records.Add(new ObjectRequestRecord());
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
 
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecord>>();
+            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
             model.Count.Should().Be(50);
         }
 
         [Test]
         public void WhenGettingIndexWithSkip() {
             var records = new List<ObjectRequestRecord>();
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 50; i++)
                 records.Add(new ObjectRequestRecord {
                     Id = i
                 });
-            }
+
+            for (var i = 50; i < 100; i++)
+                records.Add(new ObjectRequestRecord
+                {
+                    Id = i,
+                    Description = "Second half"
+                });
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
 
             var result = _controller.Index(50);
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecord>>();
+            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
             model.Count.Should().Be(50);
-            model.All(x => x.Id >= 50 && x.Id < 100).Should().BeTrue();
+            model.All(x => x.Description == "Second half").Should().BeTrue();
+        }
+
+        [Test]
+        public void WhenPostingIndex() {
+            var aggregateId1 = Guid.NewGuid();
+            var aggregateId2 = Guid.NewGuid();
+            var viewModels = new List<ObjectRequestRecordViewModel> {
+                new ObjectRequestRecordViewModel {
+                    AggregateId = aggregateId1,
+                    IsSelected = true
+                },
+                new ObjectRequestRecordViewModel {
+                    AggregateId = aggregateId2,
+                    IsSelected = true
+                },
+                new ObjectRequestRecordViewModel {
+                    AggregateId = Guid.NewGuid(),
+                    IsSelected = false
+                }
+            };
+
+            UnblockObjectRequests command = null;
+            _commandHandler
+                .Setup(x => x.Handle(It.IsAny<UnblockObjectRequests>()))
+                .Callback((UnblockObjectRequests cmd) => command = cmd);
+
+            var result = _controller.Index(viewModels);
+
+            command.ObjectRequestIds.ShouldBeEquivalentTo(new List<Guid> {
+                aggregateId1,
+                aggregateId2
+            });
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
         }
     }
 }

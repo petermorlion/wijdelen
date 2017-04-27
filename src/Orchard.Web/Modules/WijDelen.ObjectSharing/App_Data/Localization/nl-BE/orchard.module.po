@@ -267,3 +267,13 @@ msgstr "Groep"
 #| msgid "Description"
 msgid "Description"
 msgstr "Omschrijving"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#| msgid "Unblock"
+msgid "Unblock"
+msgstr "Deblokkeer"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "Blocked"
+msgid "Blocked"
+msgstr "Geblokkeerd"

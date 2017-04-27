@@ -20,6 +20,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Handles<ObjectRequestConfirmed>(OnObjectRequestConfirmed);
             Handles<ObjectRequestDenied>(OnObjectRequestDenied);
             Handles<ObjectRequestDeniedForNow>(OnObjectRequestDeniedForNow);
+            Handles<ObjectRequestUnblocked>(OnObjectRequestUnblocked);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
@@ -47,6 +48,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Update(new ObjectRequestDeniedForNow { DenyingUserId = denyingUserId, DateTimeDenied = DateTime.UtcNow });
         }
 
+        public void Unblock() {
+            Update(new ObjectRequestUnblocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId });
+        }
+
         private void OnObjectRequested(ObjectRequested objectRequested) {
             Description = objectRequested.Description;
             ExtraInfo = objectRequested.ExtraInfo;
@@ -65,6 +70,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         private void OnObjectRequestDeniedForNow(ObjectRequestDeniedForNow objectRequestDeniedForNow) {
             _denyingForNowUserIds.Add(objectRequestDeniedForNow.DenyingUserId);
+        }
+
+        private void OnObjectRequestUnblocked(ObjectRequestUnblocked objectRequestUnblocked) {
+            Status = ObjectRequestStatus.None;
         }
 
         /// <summary>

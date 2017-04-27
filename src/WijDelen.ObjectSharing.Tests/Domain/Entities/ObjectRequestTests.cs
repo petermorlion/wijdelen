@@ -113,5 +113,19 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Version.Should().Be(1);
             objectRequest.DenyingForNowUserIds.ShouldBeEquivalentTo(new List<int> { 3 });
         }
+
+        [Test]
+        public void WhenUnblocking() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sextant", "for sextanting", 22);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
+
+            objectRequest.Unblock();
+
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sextant");
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sextanting");
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
+            objectRequest.Version.Should().Be(1);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
+        }
     }
 }

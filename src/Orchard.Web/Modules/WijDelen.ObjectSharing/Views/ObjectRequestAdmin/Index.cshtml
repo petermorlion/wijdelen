@@ -1,24 +1,43 @@
-﻿@model IList<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
+﻿@model List<WijDelen.ObjectSharing.ViewModels.Admin.ObjectRequestRecordViewModel>
 
 @{
+    var index = 0;
+
     Layout.Title = T("Requests");
 }
 
-<table class="items">
-    <thead>
-    <tr>
-        <th>@T("Group")</th>
-        <th>@T("Description")</th>
-        <th>@T("Status")</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var record in Model) {
-        <tr>
-            <td>@record.GroupName</td>
-            <td>@record.Description</td>
-            <td>@record.Status</td>
-        </tr>
-    }
-    </tbody>
-</table>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset class="bulk-actions">
+        <button type="submit" name="submit.Unblock" value="@T("Unblock")">@T("Unblock")</button>
+    </fieldset>
+
+    <fielset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@T("Group")</th>
+                    <th>@T("Description")</th>
+                    <th>@T("Status")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var record in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="hidden" value="@Model[index].AggregateId" name="@Html.NameOf(m => m[index].AggregateId)" />
+                            <input type="checkbox" value="true" name="@Html.NameOf(m => m[index].IsSelected)" />
+                        </td>
+                        <td>@record.GroupName</td>
+                        <td>@record.Description</td>
+                        <td>@record.Status</td>
+                    </tr>
+
+                    index++;
+                }
+            </tbody>
+        </table>
+    </fielset>
+}

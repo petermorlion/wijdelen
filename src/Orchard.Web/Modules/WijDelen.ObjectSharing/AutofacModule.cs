@@ -19,6 +19,7 @@ namespace WijDelen.ObjectSharing {
                 .As<ICommandHandler<ConfirmObjectRequest>>()
                 .As<ICommandHandler<DenyObjectRequest>>()
                 .As<ICommandHandler<DenyObjectRequestForNow>>()
+                .As<ICommandHandler<UnblockObjectRequests>>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ChatCommandHandler>()

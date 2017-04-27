@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Orchard;
 using Orchard.Localization;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
@@ -130,6 +131,64 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
 
             notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
+        }
+
+        [Test]
+        public void WhenBlockedObjectIsUnblocked()
+        {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequestUnblocked = new ObjectRequestUnblocked
+            {
+                UserId = 3,
+                Description = "Sextant",
+                ExtraInfo = "For sextanting",
+                SourceId = objectRequestId
+            };
+
+            ObjectRequestMail persistedMail = null;
+
+            var fakeUserFactory = new UserFactory();
+            var otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
+            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
+
+            var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
+            getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
+
+            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
+            findOtherUsersQueryMock
+                .Setup(x => x.GetResults(3, "Sextant"))
+                .Returns(new[] { otherUser });
+
+            var groupServiceMock = new Mock<IGroupService>();
+            groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
+
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
+                .Callback((ObjectRequestMail mail, string correlationId) => { persistedMail = mail; });
+
+            var mailServiceMock = new Mock<IMailService>();
+
+            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, default(IOrchardServices));
+
+            handler.Handle(objectRequestUnblocked);
+
+            persistedMail.Should().NotBeNull();
+            persistedMail.UserId.Should().Be(3);
+            persistedMail.Description.Should().Be("Sextant");
+            persistedMail.ExtraInfo.Should().Be("For sextanting");
+            persistedMail.ObjectRequestId.Should().Be(objectRequestId);
+
+            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                "Jos Joskens",
+                "Group",
+                objectRequestId,
+                "Sextant",
+                "For sextanting",
+                persistedMail,
+                new UserEmail { UserId = otherUser.Id, Email = "peter.morlion@gmail.com" }));
+
+            repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
         }
     }
 }

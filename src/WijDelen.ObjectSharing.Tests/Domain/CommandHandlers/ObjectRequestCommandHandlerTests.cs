@@ -9,6 +9,7 @@ using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
     [TestFixture]
@@ -91,6 +92,53 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
             handler.Handle(command);
 
             persistedObjectRequest.DenyingForNowUserIds.ShouldBeEquivalentTo(new List<int> { 22 });
+        }
+
+        [Test]
+        public void WhenHandlingUnblockObjectRequestsCommand_ShouldUnblockObjectRequests() {
+            var objectRequestId1 = Guid.NewGuid();
+            var objectRequest1 = new ObjectRequest(objectRequestId1, "Sneakers", "For sneaking", 1);
+            var objectRequestId2 = Guid.NewGuid();
+            var objectRequest2 = new ObjectRequest(objectRequestId2, "Flaming Moe", "For drinking", 1);
+            var command = new UnblockObjectRequests(new [] { objectRequestId1, objectRequestId2 });
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId1)).Returns(objectRequest1);
+            repositoryMock.Setup(x => x.Find(objectRequestId2)).Returns(objectRequest2);
+
+            ObjectRequest persistedObjectRequest1 = null;
+            ObjectRequest persistedObjectRequest2 = null;
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString()))
+                .Callback((ObjectRequest or, string correlationId) => {
+                    if (or.Id == objectRequestId1) {
+                        persistedObjectRequest1 = or;
+                    } else if (or.Id == objectRequestId2) {
+                        persistedObjectRequest2 = objectRequest2;
+                    } else {
+                        Assert.Fail("Wrong ObjectRequest persisted.");
+                    }
+                });
+
+            var commandHandler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            commandHandler.Handle(command);
+
+            objectRequest1.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked {
+                SourceId = objectRequestId1,
+                Description = "Sneakers",
+                ExtraInfo = "extraInfo",
+                UserId = 1,
+                Version = 1
+            });
+
+            objectRequest2.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked
+            {
+                SourceId = objectRequestId2,
+                Description = "Sneakers",
+                ExtraInfo = "extraInfo",
+                UserId = 1,
+                Version = 1
+            });
         }
     }
 }
