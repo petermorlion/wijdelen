@@ -116,7 +116,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ChatControllerTests.cs" />
-    <Compile Include="Controllers\ObjectRequestAdminControllerTests.cs" />
+    <Compile Include="Controllers\BlockedObjectRequestAdminControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestResponseControllerTests.cs" />
     <Compile Include="Controllers\ReceivedObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ChatCommandHandlerTests.cs" />

@@ -37,9 +37,9 @@ namespace WijDelen.ObjectSharing {
                             .Permission(StandardPermissions.SiteOwner)
                             .LocalNav()))
                     .Add(subItem => subItem
-                        .Caption(T("Requests"))
+                        .Caption(T("Blocked Requests"))
                         .Position("2")
-                        .Action("Index", "ObjectRequestAdmin", new {area = "WijDelen.ObjectSharing"})
+                        .Action("Index", "BlockedObjectRequestAdmin", new {area = "WijDelen.ObjectSharing"})
                         .Permission(StandardPermissions.SiteOwner)));
         }
     }

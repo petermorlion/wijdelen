@@ -14,11 +14,11 @@ using WijDelen.ObjectSharing.ViewModels.Admin;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
-    public class ObjectRequestAdminController : Controller {
+    public class BlockedObjectRequestAdminController : Controller {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
         private readonly ICommandHandler<UnblockObjectRequests> _unblockObjectRequestCommandHandler;
 
-        public ObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler) {
+        public BlockedObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler) {
             _objectRequestRecordRepository = objectRequestRecordRepository;
             _unblockObjectRequestCommandHandler = unblockObjectRequestCommandHandler;
         }
@@ -29,7 +29,11 @@ namespace WijDelen.ObjectSharing.Controllers {
             var take = 50;
             var skip = (page - 1) * take;
 
-            var records = _objectRequestRecordRepository.Table
+            var count = _objectRequestRecordRepository.Table.Count(x => x.Status == "BlockedForForbiddenWords");
+
+            var records = _objectRequestRecordRepository
+                .Table
+                .Where(x => x.Status == "BlockedForForbiddenWords")
                 .OrderBy(x => x.CreatedDateTime)
                 .Skip(skip)
                 .Take(take)
@@ -43,12 +47,10 @@ namespace WijDelen.ObjectSharing.Controllers {
                 })
                 .ToList();
 
-            var count = _objectRequestRecordRepository.Table.Count();
-
             var hasNextPage = page * take < count;
             var hasPreviousPage = page > 1;
 
-            var viewModel = new ObjectRequestAdminViewModel {
+            var viewModel = new BlockedObjectRequestAdminViewModel {
                 ObjectRequests = records,
                 Page = page,
                 ObjectRequestsCount = count,
@@ -61,8 +63,8 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [HttpPost]
         [FormValueRequired("submit.Unblock")]
-        public ActionResult Index(List<ObjectRequestRecordViewModel> viewModels) {
-            var aggregateIds = viewModels.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
+        public ActionResult Index(BlockedObjectRequestAdminViewModel viewModel) {
+            var aggregateIds = viewModel.ObjectRequests.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
             var command = new UnblockObjectRequests(aggregateIds);
             _unblockObjectRequestCommandHandler.Handle(command);
             return RedirectToAction("Index");

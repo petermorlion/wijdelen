@@ -227,3 +227,8 @@ msgstr "Verificatiemail"
 #| msgid "Resend"
 msgid "Resend"
 msgstr "Opnieuw versturen"
+
+#: wijdelen.userimport.adminmenu
+#| msgid "Groups"
+msgid "Groups"
+msgstr "Groepen"

@@ -16,7 +16,7 @@ using WijDelen.ObjectSharing.ViewModels.Admin;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
-    public class ObjectRequestAdminControllerTests {
+    public class BlockedObjectRequestAdminControllerTests {
         [SetUp]
         public void Init() {
             var builder = new ContainerBuilder();
@@ -26,14 +26,16 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             builder.RegisterInstance(_commandHandler.Object).As<ICommandHandler<UnblockObjectRequests>>();
-            builder.RegisterType<ObjectRequestAdminController>();
+            builder.RegisterType<BlockedObjectRequestAdminController>();
 
             _container = builder.Build();
-            _controller = _container.Resolve<ObjectRequestAdminController>();
+            _controller = _container.Resolve<BlockedObjectRequestAdminController>();
+
+            _controller.T = NullLocalizer.Instance;
         }
 
         private IContainer _container;
-        private ObjectRequestAdminController _controller;
+        private BlockedObjectRequestAdminController _controller;
         private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
         private Mock<ICommandHandler<UnblockObjectRequests>> _commandHandler;
 
@@ -52,7 +54,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void WhenGettingIndex() {
-            _controller.T = NullLocalizer.Instance;
             var objectRequestRecord1 = new ObjectRequestRecord {
                 AggregateId = Guid.NewGuid(),
                 GroupName = "The Simpsons",
@@ -77,40 +78,35 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
             model.Page.Should().Be(1);
-            model.ObjectRequestsCount.Should().Be(2);
+            model.ObjectRequestsCount.Should().Be(1);
             model.HasPreviousPage.Should().Be(false);
             model.HasNextPage.Should().Be(false);
             var recordViewModels = model.ObjectRequests;
             recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
-                AggregateId = objectRequestRecord1.AggregateId,
-                GroupName = "The Simpsons",
-                Description = "Sneakers",
-                IsSelected = false,
-                Status = ""
-            });
-            recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 AggregateId = objectRequestRecord2.AggregateId,
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 IsSelected = false,
                 Status = "Blocked"
             });
-            recordViewModels.Count.Should().Be(2);
+            recordViewModels.Count.Should().Be(1);
         }
 
         [Test]
         public void WhenGettingIndexWithMoreThan50Requests() {
             var records = new List<ObjectRequestRecord>();
-            for (var i = 0; i < 100; i++) records.Add(new ObjectRequestRecord());
+            for (var i = 0; i < 100; i++) records.Add(new ObjectRequestRecord {
+                Status = "BlockedForForbiddenWords"
+            });
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
 
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
             model.Page.Should().Be(1);
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(false);
@@ -124,14 +120,16 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var records = new List<ObjectRequestRecord>();
             for (var i = 0; i < 50; i++)
                 records.Add(new ObjectRequestRecord {
-                    Id = i
+                    Id = i,
+                    Status = "BlockedForForbiddenWords"
                 });
 
             for (var i = 50; i < 100; i++)
                 records.Add(new ObjectRequestRecord
                 {
                     Id = i,
-                    Description = "Second half"
+                    Description = "Second half",
+                    Status = "BlockedForForbiddenWords"
                 });
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
@@ -139,7 +137,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index(2);
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
             model.Page.Should().Be(2);
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(true);
@@ -153,7 +151,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenPostingIndex() {
             var aggregateId1 = Guid.NewGuid();
             var aggregateId2 = Guid.NewGuid();
-            var viewModels = new List<ObjectRequestRecordViewModel> {
+            var recordViewModels = new List<ObjectRequestRecordViewModel> {
                 new ObjectRequestRecordViewModel {
                     AggregateId = aggregateId1,
                     IsSelected = true
@@ -173,7 +171,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Setup(x => x.Handle(It.IsAny<UnblockObjectRequests>()))
                 .Callback((UnblockObjectRequests cmd) => command = cmd);
 
-            var result = _controller.Index(viewModels);
+            var viewModel = new BlockedObjectRequestAdminViewModel {
+                ObjectRequests = recordViewModels
+            };
+
+            var result = _controller.Index(viewModel);
 
             command.ObjectRequestIds.ShouldBeEquivalentTo(new List<Guid> {
                 aggregateId1,
