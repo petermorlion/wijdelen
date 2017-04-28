@@ -25,11 +25,14 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public Localizer T { get; set; }
 
-        public ActionResult Index(int skip = 0) {
+        public ActionResult Index(int page = 1) {
+            var take = 50;
+            var skip = (page - 1) * take;
+
             var records = _objectRequestRecordRepository.Table
                 .OrderBy(x => x.CreatedDateTime)
                 .Skip(skip)
-                .Take(50)
+                .Take(take)
                 .ToList()
                 .Select(x => new ObjectRequestRecordViewModel {
                     AggregateId = x.AggregateId,
@@ -40,7 +43,20 @@ namespace WijDelen.ObjectSharing.Controllers {
                 })
                 .ToList();
 
-            return View(records);
+            var count = _objectRequestRecordRepository.Table.Count();
+
+            var hasNextPage = page * take < count;
+            var hasPreviousPage = page > 1;
+
+            var viewModel = new ObjectRequestAdminViewModel {
+                ObjectRequests = records,
+                Page = page,
+                ObjectRequestsCount = count,
+                HasNextPage = hasNextPage,
+                HasPreviousPage = hasPreviousPage
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]

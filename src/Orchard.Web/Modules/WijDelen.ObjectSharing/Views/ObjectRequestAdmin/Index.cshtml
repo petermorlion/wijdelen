@@ -1,4 +1,4 @@
-﻿@model List<WijDelen.ObjectSharing.ViewModels.Admin.ObjectRequestRecordViewModel>
+﻿@model WijDelen.ObjectSharing.ViewModels.Admin.ObjectRequestAdminViewModel
 
 @{
     var index = 0;
@@ -25,12 +25,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var record in Model)
+                @foreach (var record in Model.ObjectRequests)
                 {
                     <tr>
                         <td>
-                            <input type="hidden" value="@Model[index].AggregateId" name="@Html.NameOf(m => m[index].AggregateId)" />
-                            <input type="checkbox" value="true" name="@Html.NameOf(m => m[index].IsSelected)" />
+                            <input type="hidden" value="@Model.ObjectRequests[index].AggregateId" name="@Html.NameOf(m => m.ObjectRequests[index].AggregateId)" />
+                            <input type="checkbox" value="true" name="@Html.NameOf(m => m.ObjectRequests[index].IsSelected)" />
                         </td>
                         <td>@record.GroupName</td>
                         <td>@record.Description</td>
@@ -43,3 +43,13 @@
         </table>
     </fielset>
 }
+
+<div class="pager-footer">
+    @if (Model.HasPreviousPage) {
+        @Html.ActionLink("<<", "Index", new { page = Model.Page - 1 })
+    }
+    
+    @if (Model.HasNextPage) {
+        @Html.ActionLink(">>", "Index", new { page = Model.Page + 1 })
+    }
+</div>

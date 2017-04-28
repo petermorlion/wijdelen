@@ -77,22 +77,27 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
-            model[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            model.Page.Should().Be(1);
+            model.ObjectRequestsCount.Should().Be(2);
+            model.HasPreviousPage.Should().Be(false);
+            model.HasNextPage.Should().Be(false);
+            var recordViewModels = model.ObjectRequests;
+            recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 AggregateId = objectRequestRecord1.AggregateId,
                 GroupName = "The Simpsons",
                 Description = "Sneakers",
                 IsSelected = false,
                 Status = ""
             });
-            model[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+            recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 AggregateId = objectRequestRecord2.AggregateId,
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 IsSelected = false,
                 Status = "Blocked"
             });
-            model.Count.Should().Be(2);
+            recordViewModels.Count.Should().Be(2);
         }
 
         [Test]
@@ -105,12 +110,17 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
-            model.Count.Should().Be(50);
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            model.Page.Should().Be(1);
+            model.ObjectRequestsCount.Should().Be(100);
+            model.HasPreviousPage.Should().Be(false);
+            model.HasNextPage.Should().Be(true);
+            var recordViewModels = model.ObjectRequests;
+            recordViewModels.Count.Should().Be(50);
         }
 
         [Test]
-        public void WhenGettingIndexWithSkip() {
+        public void WhenGettingIndexWithPage() {
             var records = new List<ObjectRequestRecord>();
             for (var i = 0; i < 50; i++)
                 records.Add(new ObjectRequestRecord {
@@ -126,12 +136,17 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
 
-            var result = _controller.Index(50);
+            var result = _controller.Index(2);
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<IList<ObjectRequestRecordViewModel>>();
-            model.Count.Should().Be(50);
-            model.All(x => x.Description == "Second half").Should().BeTrue();
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            model.Page.Should().Be(2);
+            model.ObjectRequestsCount.Should().Be(100);
+            model.HasPreviousPage.Should().Be(true);
+            model.HasNextPage.Should().Be(false);
+            var recordViewModels = model.ObjectRequests;
+            recordViewModels.Count.Should().Be(50);
+            recordViewModels.All(x => x.Description == "Second half").Should().BeTrue();
         }
 
         [Test]
