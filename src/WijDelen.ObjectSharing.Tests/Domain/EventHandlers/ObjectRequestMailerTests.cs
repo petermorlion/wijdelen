@@ -131,6 +131,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
 
             notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
+            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
         }
 
         [Test]

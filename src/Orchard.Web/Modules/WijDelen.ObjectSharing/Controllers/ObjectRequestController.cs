@@ -75,6 +75,10 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
+            if (record.Status == "BlockedForForbiddenWords") {
+                return RedirectToAction("New");
+            }
+
             var viewModel = new ObjectRequestViewModel {
                 ObjectRequestRecord = record,
                 ChatRecords = chatRecords
@@ -84,7 +88,10 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         public ActionResult Index() {
-            var records = _objectRequestRepository.Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id).OrderByDescending(x => x.CreatedDateTime).ToList();
+            var records = _objectRequestRepository
+                .Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id
+                    && x.Status != "BlockedForForbiddenWords")
+                .OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(records);
         }
 

@@ -12,6 +12,7 @@ using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
@@ -148,7 +149,35 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest()
         {
-            Assert.Fail("Implement");
+            var id = Guid.NewGuid();
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var objectRequestRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = id,
+                    UserId = 22,
+                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22
+                }
+            };
+
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(objectRequestRecords);
+
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+
+            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
+
+            var actionResult = controller.Item(id);
+
+            ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("New");
         }
 
         [Test]
@@ -209,7 +238,36 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void WhenGettingIndex_ShouldNotReturnBlockedRequests() {
-            Assert.Fail("Implement");
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(22);
+            var services = new FakeOrchardServices();
+            services.WorkContext.CurrentUser = userMock.Object;
+
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2016, 11, 27),
+                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2016, 12, 27)
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            var controller = new ObjectRequestController(null, repositoryMock.Object, null, services);
+
+            var actionResult = controller.Index();
+
+            var model = ((ViewResult)actionResult).Model as IEnumerable<ObjectRequestRecord>;
+            model.Should().NotBeNull();
+            model.Count().Should().Be(1);
+            model.ToList()[0].Should().Be(persistentRecords[1]);
         }
     }
 }

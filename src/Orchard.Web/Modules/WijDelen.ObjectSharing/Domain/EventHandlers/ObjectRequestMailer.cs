@@ -48,7 +48,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ObjectRequested objectRequested) {
             SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId, objectRequested.Status);
-            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
         }
 
         public void Handle(ObjectRequestUnblocked e) {
@@ -85,6 +84,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 extraInfo,
                 objectRequestMail,
                 userEmails);
+
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
