@@ -9,7 +9,9 @@
 @using (Html.BeginFormAntiForgeryPost())
 {
     <fieldset class="bulk-actions">
-        <button type="submit" name="submit.Unblock" value="@T("Unblock")">@T("Unblock")</button>
+        <div class="manage">
+            <button type="submit" name="submit.Unblock" value="@T("Unblock")">@T("Unblock")</button>
+        </div>
     </fieldset>
 
     <fielset>
