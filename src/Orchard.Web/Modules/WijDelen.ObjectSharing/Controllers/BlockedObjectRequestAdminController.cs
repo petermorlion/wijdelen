@@ -67,7 +67,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var aggregateIds = viewModel.ObjectRequests.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
             var command = new UnblockObjectRequests(aggregateIds);
             _unblockObjectRequestCommandHandler.Handle(command);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {page = viewModel.Page});
         }
 
         private string GetStatus(ObjectRequestRecord objectRequestRecord) {

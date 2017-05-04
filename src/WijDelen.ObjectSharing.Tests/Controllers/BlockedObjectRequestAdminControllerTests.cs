@@ -172,7 +172,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Callback((UnblockObjectRequests cmd) => command = cmd);
 
             var viewModel = new BlockedObjectRequestAdminViewModel {
-                ObjectRequests = recordViewModels
+                ObjectRequests = recordViewModels,
+                Page = 2
             };
 
             var result = _controller.Index(viewModel);
@@ -184,6 +185,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             result.Should().BeOfType<RedirectToRouteResult>();
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) result).RouteValues["page"].Should().Be(2);
         }
     }
 }
