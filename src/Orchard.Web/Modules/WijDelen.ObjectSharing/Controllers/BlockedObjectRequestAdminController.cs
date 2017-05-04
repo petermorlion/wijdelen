@@ -34,7 +34,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var totalPages = GetTotalPages(count, take);
 
             if (page > totalPages) {
-                page = totalPages;
+                return RedirectToAction("Index", new { page = totalPages });
             }
 
             var skip = (page - 1) * take;

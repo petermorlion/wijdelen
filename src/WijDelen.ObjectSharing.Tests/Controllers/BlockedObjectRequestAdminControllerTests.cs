@@ -174,16 +174,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var result = _controller.Index(200);
 
-            result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
-            model.Page.Should().Be(2);
-            model.ObjectRequestsCount.Should().Be(100);
-            model.HasPreviousPage.Should().Be(true);
-            model.HasNextPage.Should().Be(false);
-            model.TotalPages.Should().Be(2);
-            var recordViewModels = model.ObjectRequests;
-            recordViewModels.Count.Should().Be(50);
-            recordViewModels.All(x => x.Description == "Second half").Should().BeTrue();
+            result.Should().BeOfType<RedirectToRouteResult>();
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult)result).RouteValues["page"].Should().Be(2);
         }
 
         [Test]
