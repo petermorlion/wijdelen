@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Orchard;
 using Orchard.ContentManagement;
 using Orchard.MediaLibrary.Fields;
+using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Users.Models;
 using WijDelen.UserImport.Models;
@@ -9,19 +11,19 @@ using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Services {
     public class GroupService : IGroupService {
-        private readonly IContentManager _contentManager;
+        private readonly IOrchardServices _orchardServices;
 
-        public GroupService(IContentManager contentManager) {
-            _contentManager = contentManager;
+        public GroupService(IContentManager contentManager, IOrchardServices orchardServices) {
+            _orchardServices = orchardServices;
         }
 
         public void AddUsersToGroup(string groupName, IEnumerable<IUser> users) {
-            var group = _contentManager.Query().ForType("Group").Where<NamePartRecord>(x => x.Name == groupName).List().FirstOrDefault();
+            var group = _orchardServices.ContentManager.Query().ForType("Group").Where<NamePartRecord>(x => x.Name == groupName).List().FirstOrDefault();
             if (group == null) {
-                group = _contentManager.New("Group");
+                group = _orchardServices.ContentManager.New("Group");
                 group.As<NamePart>().Name = groupName;
-                _contentManager.Create(group);
-                _contentManager.Publish(group);
+                _orchardServices.ContentManager.Create(group);
+                _orchardServices.ContentManager.Publish(group);
             }
 
             foreach (var user in users) {
@@ -35,7 +37,7 @@ namespace WijDelen.UserImport.Services {
 
         public IEnumerable<GroupViewModel> GetGroups() {
             var result = new List<GroupViewModel>();
-            var groups = _contentManager.Query().ForType("Group").List();
+            var groups = _orchardServices.ContentManager.Query().ForType("Group").List();
             foreach (var x in groups) {
                 var groupViewModel = new GroupViewModel {
                     Id = x.Id,
@@ -58,17 +60,28 @@ namespace WijDelen.UserImport.Services {
 
         public void UpdateGroupMembershipForContentItem(ContentItem item, EditGroupMembershipViewModel model) {
             var groupMembershipPart = item.As<GroupMembershipPart>();
-            groupMembershipPart.Group = _contentManager.Get(model.GroupId);
+            groupMembershipPart.Group = _orchardServices.ContentManager.Get(model.GroupId);
         }
 
         public GroupViewModel GetGroupForUser(int userId) {
-            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
+            var user = _orchardServices.ContentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
             var group = user.As<GroupMembershipPart>().Group;
-            return group != null ? new GroupViewModel
+            var groupViewModel = group != null ? new GroupViewModel
             {
                 Id = group.Id,
                 Name = group.As<NamePart>().Name
             } : null;
+
+            var groupLogoField = group.ContentItem.Parts
+                    .SingleOrDefault(p => p.PartDefinition.Name == "GroupLogoPart")
+                    ?.Fields.SingleOrDefault(f => f.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+            if (groupLogoField != null) {
+                var url = _orchardServices.WorkContext.HttpContext.Request.Url;
+                groupViewModel.LogoUrl = url.Scheme + "://" + url.Authority + groupLogoField.FirstMediaUrl;
+            }
+
+            return groupViewModel;
         }
 
         public bool IsMemberOfGroup(int userId) {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
+using Orchard;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.Logging;
@@ -15,12 +17,14 @@ namespace WijDelen.UserImport.Services {
         private readonly IMailgunClient _mailgunClient;
         private readonly IShapeFactory _shapeFactory;
         private readonly IShapeDisplay _shapeDisplay;
+        private readonly IOrchardServices _orchardServices;
 
-        public MailgunService(IUserService userService, IMailgunClient mailgunClient, IShapeFactory shapeFactory, IShapeDisplay shapeDisplay) {
+        public MailgunService(IUserService userService, IMailgunClient mailgunClient, IShapeFactory shapeFactory, IShapeDisplay shapeDisplay, IOrchardServices orchardServices) {
             _userService = userService;
             _mailgunClient = mailgunClient;
             _shapeFactory = shapeFactory;
             _shapeDisplay = shapeDisplay;
+            _orchardServices = orchardServices;
 
             T = NullLocalizer.Instance;
             Logger = NullLogger.Instance;
@@ -48,13 +52,17 @@ namespace WijDelen.UserImport.Services {
             
             var textShape = _shapeFactory.Create("Template_UserInvitationMail_Text", Arguments.From(new
             {
-                GroupName = groupName,
+                GroupName = groupName
             }));
 
+            var currentUrl = _orchardServices.WorkContext.HttpContext.Request.Url;
+            var applicationPath = _orchardServices.WorkContext.HttpContext.Request.ApplicationPath;
+            var baseUrl = currentUrl.Scheme + "://" + currentUrl.Authority + applicationPath.TrimEnd('/') + "/";
             var htmlShape = _shapeFactory.Create("Template_UserInvitationMail", Arguments.From(new
             {
                 GroupName = groupName,
-                GroupLogoUrl = groupLogoUrl
+                GroupLogoUrl = groupLogoUrl,
+                PeergroupsLogoUrl = baseUrl + "/Themes/Peergroups.Theme/Content/logo-mail.gif"
             }));
 
             var text = _shapeDisplay.Display(textShape);

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
@@ -9,7 +8,6 @@ using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Services;
 using Orchard;
 using Orchard.UI.Notify;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
