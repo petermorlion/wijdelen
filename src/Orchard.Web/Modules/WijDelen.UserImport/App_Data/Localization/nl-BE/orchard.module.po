@@ -98,6 +98,11 @@ msgstr "Groep"
 msgid "User invitation mail has been sent."
 msgstr "Er is een nieuwe uitnodigingsmail verstuurd."
 
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "The user needs to be part of a group first."
+msgid "The user needs to be part of a group first."
+msgstr "De gebruiker moet eerst lid van een groep zijn."
+
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a new password of {0} or more characters."
 msgid "You must specify a new password of {0} or more characters."

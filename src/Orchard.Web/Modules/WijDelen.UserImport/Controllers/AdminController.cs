@@ -73,8 +73,13 @@ namespace WijDelen.UserImport.Controllers {
         public ActionResult ResendUserInvitationMail(string userName) {
             var user = _membershipService.GetUser(userName);
             var groupViewModel = _groupService.GetGroupForUser(user.Id);
-            SendUserInvitationMails(new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl);
-            _notifier.Add(NotifyType.Success, T("User invitation mail has been sent."));
+            if (groupViewModel == null) {
+                _notifier.Add(NotifyType.Warning, T("The user needs to be part of a group first."));
+            } else {
+                SendUserInvitationMails(new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl);
+                _notifier.Add(NotifyType.Success, T("User invitation mail has been sent."));
+            }
+
             return RedirectToAction("Edit", "Admin", new {area = "Orchard.Users", id = user.Id});
         }
 

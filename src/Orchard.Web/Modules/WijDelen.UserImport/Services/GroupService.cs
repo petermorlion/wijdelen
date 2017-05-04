@@ -3,7 +3,6 @@ using System.Linq;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.MediaLibrary.Fields;
-using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Users.Models;
 using WijDelen.UserImport.Models;
@@ -71,6 +70,10 @@ namespace WijDelen.UserImport.Services {
                 Id = group.Id,
                 Name = group.As<NamePart>().Name
             } : null;
+
+            if (groupViewModel == null) {
+                return null;
+            }
 
             var groupLogoField = group.ContentItem.Parts
                     .SingleOrDefault(p => p.PartDefinition.Name == "GroupLogoPart")

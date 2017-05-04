@@ -182,5 +182,36 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("User invitation mail has been sent.")));
         }
+
+        [Test]
+        public void TestResendUserInvitationMailWithoutGroup() {
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Id).Returns(2);
+
+            var site = new Mock<ISite>();
+            var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
+            _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
+            site.Setup(x => x.BaseUrl).Returns("baseUrl");
+            _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock.Object);
+
+            _groupServiceMock.Setup(x => x.GetGroupForUser(2)).Returns((GroupViewModel) null);
+
+            var result = _controller.ResendUserInvitationMail("moe");
+
+            Assert.IsInstanceOf<RedirectToRouteResult>(result);
+            Assert.AreEqual("Edit", ((RedirectToRouteResult)result).RouteValues["action"]);
+            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult)result).RouteValues["area"]);
+            Assert.AreEqual("Admin", ((RedirectToRouteResult)result).RouteValues["controller"]);
+            Assert.AreEqual(2, ((RedirectToRouteResult)result).RouteValues["id"]);
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("The user needs to be part of a group first.")));
+
+            _mailServiceMock
+                .Verify(x => x.SendUserInvitationMails(
+                    It.IsAny<IEnumerable<IUser>>(),
+                    It.IsAny<Func<string, string>>(),
+                    It.IsAny<string>(),
+                    It.IsAny<string>()), Times.Never);
+        }
     }
 }
