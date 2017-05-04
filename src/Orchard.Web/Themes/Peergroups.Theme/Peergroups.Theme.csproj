@@ -103,6 +103,12 @@
     <Content Include="Content\logo-header.png" />
     <Content Include="Content\logo-homepage.gif" />
     <Content Include="Content\logo-mail.gif" />
+    <Content Include="Content\mobile-icons\120.png" />
+    <Content Include="Content\mobile-icons\128.png" />
+    <Content Include="Content\mobile-icons\152.png" />
+    <Content Include="Content\mobile-icons\167.png" />
+    <Content Include="Content\mobile-icons\180.png" />
+    <Content Include="Content\mobile-icons\192.png" />
     <Content Include="Content\navigation-top-logo-belgium-mobile.png" />
     <Content Include="Content\navigation-top-logo-belgium.png" />
     <Content Include="Scripts\script.js" />
