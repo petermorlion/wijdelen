@@ -27,7 +27,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         public Localizer T { get; set; }
 
         public ActionResult Index(int page = 1) {
-            const int take = 1;
+            const int take = 50;
 
             var count = _objectRequestRecordRepository.Table.Count(x => x.Status == "BlockedForForbiddenWords");
             var totalPages = GetTotalPages(count, take);
