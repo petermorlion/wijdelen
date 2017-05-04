@@ -7,7 +7,6 @@ namespace WijDelen.UserImport.ViewModels {
         public string NewGroupName { get; set; }
         public int SelectedGroupId { get; set; }
         public IEnumerable<GroupViewModel> Groups { get; set; }
-        public UserImportLinkMode UserImportLinkMode { get; set; }
 
         [Required, FileExtensions(Extensions = "csv")]
         public HttpPostedFileBase File { get; set; }

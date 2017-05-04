@@ -153,23 +153,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         [Test]
-        public void TestIndexPostWithoutNewGroupName() {
-            _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-
-            var viewModel = new AdminIndexViewModel {
-                NewGroupName = "",
-                UserImportLinkMode = UserImportLinkMode.New
-            };
-
-            var result = _controller.Index(viewModel);
-
-            Assert.IsInstanceOf<ViewResult>(result);
-            Assert.AreEqual("", ((ViewResult)result).ViewName);
-            Assert.AreEqual("Please provide a group name to create a new group.", ((ViewResult)result).ViewData.ModelState["NewGroupName"].Errors.Single().ErrorMessage);
-        }
-
-        [Test]
         public void TestResendUserInvitationMail() {
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Id).Returns(2);

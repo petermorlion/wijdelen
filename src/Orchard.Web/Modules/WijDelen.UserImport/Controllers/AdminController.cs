@@ -56,24 +56,12 @@ namespace WijDelen.UserImport.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
-            if (viewModel.UserImportLinkMode == UserImportLinkMode.New && string.IsNullOrEmpty(viewModel.NewGroupName)) {
-                ModelState.AddModelError("NewGroupName", T("Please provide a group name to create a new group."));
-                return View();
-            }
-
             var users = _csvReader.ReadUsers(viewModel.File.InputStream);
             var userImportResults = _userImportService.ImportUsers(users);
 
-            string groupName;
-            string groupLogoUrl = "";
-            if (viewModel.UserImportLinkMode == UserImportLinkMode.New) {
-                groupName = viewModel.NewGroupName;
-            }
-            else {
-                var groupViewModel = _groupService.GetGroups().Single(g => g.Id == viewModel.SelectedGroupId);
-                groupName = groupViewModel.Name;
-                groupLogoUrl = groupViewModel.LogoUrl;
-            }
+            var groupViewModel = _groupService.GetGroups().Single(g => g.Id == viewModel.SelectedGroupId);
+            var groupName = groupViewModel.Name;
+            var groupLogoUrl = groupViewModel.LogoUrl;
 
             _groupService.AddUsersToGroup(groupName, userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User));
 

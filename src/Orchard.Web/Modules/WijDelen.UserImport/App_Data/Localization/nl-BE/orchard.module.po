@@ -93,26 +93,6 @@ msgstr "Verzenden"
 msgid "Group"
 msgstr "Groep"
 
-#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
-#| msgid "Specify a new group or choose an existing one."
-msgid "Specify a new group or choose an existing one."
-msgstr "Specifieer een nieuwe groep of kies een bestaande."
-
-#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
-#| msgid "New"
-msgid "New"
-msgstr "Nieuw"
-
-#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
-#| msgid "Existing"
-msgid "Existing"
-msgstr "Bestaande"
-
-#: wijdelen.userimport.controllers.admincontroller
-#| msgid "Please provide a group name to create a new group."
-msgid "Please provide a group name to create a new group."
-msgstr "Gelieve de groep een naam te geven om een nieuwe groep te creëren."
-
 #: wijdelen.userimport.controllers.admincontroller
 #| msgid "User invitation mail has been sent."
 msgid "User invitation mail has been sent."
