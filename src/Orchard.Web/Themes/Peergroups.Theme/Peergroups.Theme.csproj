@@ -128,6 +128,10 @@
       <Name>Orchard.Core</Name>
       <Private>false</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\Modules\Orchard.MediaLibrary\Orchard.MediaLibrary.csproj">
+      <Project>{73a7688a-5bd3-4f7e-adfa-ce36c5a10e3b}</Project>
+      <Name>Orchard.MediaLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Modules\WijDelen.Localization\WijDelen.Localization.csproj">
       <Project>{08800878-74cc-4b8b-88b0-3e18fd9f97de}</Project>
       <Name>WijDelen.Localization</Name>

@@ -1,7 +1,6 @@
-﻿@using Orchard.ContentManagement;
-@using Orchard.MediaLibrary.Fields;
-@using WijDelen.UserImport.Models;
-
+﻿@using Orchard.ContentManagement
+@using Orchard.MediaLibrary.Fields
+@using WijDelen.UserImport.Models
 <nav>
     <div class="nav-row">
         <div class="nav-left">
@@ -18,10 +17,10 @@
             @{
                 var homeUrl = Url.Content("~/");
             }
-            
+
 
             @if (WorkContext.CurrentUser != null) {
-                homeUrl = Url.Action("Index", "ReceivedObjectRequest", new { Area = "WijDelen.ObjectSharing" });
+                homeUrl = Url.Action("Index", "ReceivedObjectRequest", new {Area = "WijDelen.ObjectSharing"});
             }
 
             <a href="@homeUrl" class="logo-link">
@@ -31,11 +30,13 @@
                     var user = WorkContext.CurrentUser;
                     var groupMembership = user.As<GroupMembershipPart>();
                     var group = groupMembership.Group;
-                    var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
-                    var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+                    if (group != null) {
+                        var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                        var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                    if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) {
-                        <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
+                        if (!string.IsNullOrEmpty(groupLogoField.FirstMediaUrl)) {
+                            <img src="@groupLogoField.FirstMediaUrl" alt="@(group.As<NamePart>().Name)" title="@(group.As<NamePart>().Name)" class="grouplogo-img"/>
+                        }
                     }
                 }
             </a>
@@ -43,13 +44,16 @@
     </div>
     <div class="nav-row">
         <div class="nav-left">
-            
+
         </div>
         <div class="nav-right nav-objectrequests">
             @if (Request.IsAuthenticated) {
-                @Html.ActionLink(T("New Request").ToString(), "New", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
-                @Html.ActionLink(T("My Requests").ToString(), "Index", new { Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
-                @Html.ActionLink(T("Received Requests").ToString(), "Index", new { Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing" }, new { });
+                @Html.ActionLink(T("New Request").ToString(), "New", new {Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing"}, new {})
+                ;
+                @Html.ActionLink(T("My Requests").ToString(), "Index", new {Controller = "ObjectRequest", Area = "WijDelen.ObjectSharing"}, new {})
+                ;
+                @Html.ActionLink(T("Received Requests").ToString(), "Index", new {Controller = "ReceivedObjectRequest", Area = "WijDelen.ObjectSharing"}, new {})
+                ;
             }
         </div>
     </div>
