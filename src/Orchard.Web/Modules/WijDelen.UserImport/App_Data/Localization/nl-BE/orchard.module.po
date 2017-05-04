@@ -199,14 +199,14 @@ msgid "Hello %recipient.username%!"
 msgstr "Hallo %recipient.username%!"
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
-#| msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
-msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
-msgstr "Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
+#| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
-#| msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:"
-msgid "Welcome to Peergroups. To get started, please activate your account by clicking the link below:
-msgstr "Welkom bij Peergroups. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
+#| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:
+msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
 #| msgid "Thank you!"

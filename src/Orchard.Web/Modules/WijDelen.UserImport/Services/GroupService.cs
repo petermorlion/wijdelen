@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
+using Orchard.MediaLibrary.Fields;
 using Orchard.Security;
 using Orchard.Users.Models;
 using WijDelen.UserImport.Models;
@@ -33,10 +34,26 @@ namespace WijDelen.UserImport.Services {
         }
 
         public IEnumerable<GroupViewModel> GetGroups() {
-            return _contentManager.Query().ForType("Group").List().Select(x => new GroupViewModel {
-                Id = x.Id,
-                Name = x.As<NamePart>().Name
-            });
+            var result = new List<GroupViewModel>();
+            var groups = _contentManager.Query().ForType("Group").List();
+            foreach (var x in groups) {
+                var groupViewModel = new GroupViewModel {
+                    Id = x.Id,
+                    Name = x.As<NamePart>().Name
+                };
+
+                var groupLogoField = x.Parts
+                    .SingleOrDefault(p => p.PartDefinition.Name == "GroupLogoPart")
+                    ?.Fields.SingleOrDefault(f => f.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                if (groupLogoField != null) {
+                    groupViewModel.LogoUrl = groupLogoField.FirstMediaUrl;
+                }
+
+                result.Add(groupViewModel);
+            }
+
+            return result;
         }
 
         public void UpdateGroupMembershipForContentItem(ContentItem item, EditGroupMembershipViewModel model) {

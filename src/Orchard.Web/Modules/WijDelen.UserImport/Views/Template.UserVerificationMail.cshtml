@@ -1,11 +1,12 @@
 ﻿<html>
 <body style="font-family: Verdana, Arial, sans-serif;">
 <div style="background-color: #04b17b; padding: 0 10px;">
-    <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;">
+    <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-mail.gif")" style="vertical-align: middle;" />
+    <img src="Model.GroupLogoUrl" style="vertical-align: middle; height: 50px; float: right;" />
 </div>
 <div style="margin-top:10px;"> 
     <p>@T("Hello %recipient.username%!")</p>
-    <p>@T("Welcome to Peergroups. To get started, please activate your account by clicking the link below:")</p>
+    <p>@T("Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:", Model.GroupName)</p>
     <p style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
          <a href="%recipient.loginlink%" style="background-color: #04b17b; color: #fff; text-decoration: none; padding: 10px; border-radius: 5px; border-right: 1px solid #216400; border-bottom: 1px solid #216400;">Starten met Peergroups</a>
     </p>

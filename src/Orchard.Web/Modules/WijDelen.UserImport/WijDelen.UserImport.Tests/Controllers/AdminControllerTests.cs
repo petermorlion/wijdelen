@@ -129,8 +129,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
                 IList<IUser> importedUsers = null;
                 _mailServiceMock
-                    .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>()))
-                    .Callback((IEnumerable<IUser> r, Func<string, string> f) => importedUsers = r.ToList());
+                    .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "New Group", ""))
+                    .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
                 var usersFile = new Mock<HttpPostedFileBase>();
                 usersFile.Setup(x => x.InputStream).Returns(memoryStream);
@@ -180,10 +180,13 @@ namespace WijDelen.UserImport.Tests.Controllers {
             site.Setup(x => x.BaseUrl).Returns("baseUrl");
             _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock.Object);
 
+            var groupViewModel = new GroupViewModel { Name = "Existing group", LogoUrl = "url" };
+            _groupServiceMock.Setup(x => x.GetGroupForUser(2)).Returns(groupViewModel);
+
             IList<IUser> importedUsers = null;
             _mailServiceMock
-                .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>()))
-                .Callback((IEnumerable<IUser> r, Func<string, string> f) => importedUsers = r.ToList());
+                .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url"))
+                .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
             var result = _controller.ResendUserVerificationMail("moe");
 
