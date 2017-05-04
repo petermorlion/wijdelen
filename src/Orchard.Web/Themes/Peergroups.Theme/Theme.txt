@@ -2,7 +2,7 @@ Name: Peergroups Theme
 Author: Peter Morlion
 Website: http://www.redstar.be
 Description: Theme for Peergroups
-Version: 2.0
+Version: 2.1
 Tags: WijDelen, Peergroups
 Zones: Navigation, Messages, Content, AsideFirst, Footer, Header
 Dependencies: WijDelen.UserImport, Orchard.Localization, Orchard.Autoroute, Orchard.MediaLibrary, WijDelen.Localization, UrlAlternates

@@ -126,7 +126,7 @@ msgstr "We hebben je een email gestuurd."
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Please enter your username and password."
 msgid "Please enter your username and password."
-msgstr "Gelieve uw gebruikersnaam (email) en paswoord op te geven."
+msgstr "Gelieve uw email en paswoord op te geven."
 
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Lost your Password?"

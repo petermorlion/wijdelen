@@ -1,0 +1,24 @@
+﻿#: orchard.users.controllers.accountcontroller
+#| msgid "You must specify a username or e-mail."
+msgid "You must specify a username or e-mail."
+msgstr "You must specify an e-mail."
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Please enter your username and password."
+msgid "Please enter your username and password."
+msgstr "Please enter your email and password."
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Username"
+msgid "Username"
+msgstr "Email"
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr "Please enter your email address. You will receive a link to create a new password via email."
+
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
+#| msgid "Username or E-mail:"
+msgid "Username or E-mail:"
+msgstr "Email:"
