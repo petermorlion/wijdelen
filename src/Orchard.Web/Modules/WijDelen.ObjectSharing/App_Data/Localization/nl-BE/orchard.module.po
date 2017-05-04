@@ -297,3 +297,8 @@ msgstr "Geblokkeerd"
 #| msgid "Please select at least one request to unblock."
 msgid "Please select at least one request to unblock."
 msgstr "Gelieve minstens één oproep te selecteren."
+
+#: wijdelen.objectsharing.controllers.blockedobjectrequestadmincontroller
+#| msgid "The selected requests were unblocked and mails have been sent to the users."
+msgid "The selected requests were unblocked and mails have been sent to the users."
+msgstr "De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd naar de gebruikers."

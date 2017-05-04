@@ -90,6 +90,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 var aggregateIds = viewModel.ObjectRequests.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
                 var command = new UnblockObjectRequests(aggregateIds);
                 _unblockObjectRequestCommandHandler.Handle(command);
+                _notifier.Add(NotifyType.Success, T("The selected requests were unblocked and mails have been sent to the users."));
             }
             
             return RedirectToAction("Index", new {page = viewModel.Page});

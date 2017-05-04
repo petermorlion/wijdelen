@@ -177,6 +177,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 new UserEmail { UserId = _otherUser.Id, Email = "peter.morlion@gmail.com" }));
 
             _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
         }
     }
 }

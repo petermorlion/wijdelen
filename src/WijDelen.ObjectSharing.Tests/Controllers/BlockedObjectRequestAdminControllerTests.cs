@@ -225,6 +225,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.Should().BeOfType<RedirectToRouteResult>();
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
             ((RedirectToRouteResult) result).RouteValues["page"].Should().Be(2);
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("The selected requests were unblocked and mails have been sent to the users.")));
         }
 
         [Test]

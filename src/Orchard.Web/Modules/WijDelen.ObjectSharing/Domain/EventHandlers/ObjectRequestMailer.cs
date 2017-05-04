@@ -47,7 +47,14 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public Localizer T { get; set; }
 
         public void Handle(ObjectRequested objectRequested) {
+            if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords)
+            {
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."));
+                return;
+            }
+
             SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId, objectRequested.Status);
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
         }
 
         public void Handle(ObjectRequestUnblocked e) {
@@ -61,11 +68,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 description,
                 extraInfo,
                 sourceId);
-
-            if (objectRequestStatus == ObjectRequestStatus.BlockedForForbiddenWords) {
-                _orchardServices.Notifier.Add(NotifyType.Warning, T("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."));
-                return;
-            }
 
             var requestingUser = _getUserByIdQuery.GetResult(userId);
             var requestingUserName = requestingUser.GetUserDisplayName();
@@ -84,8 +86,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 extraInfo,
                 objectRequestMail,
                 userEmails);
-
-            _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
