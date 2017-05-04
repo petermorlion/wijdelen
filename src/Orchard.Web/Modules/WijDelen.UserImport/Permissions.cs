@@ -4,13 +4,13 @@ using Orchard.Security.Permissions;
 
 namespace WijDelen.UserImport {
     public class Permissions : IPermissionProvider {
-        public static readonly Permission SendUserVerificationMails = new Permission {Description = "Send user verifiation mails", Name = "SendUserVerificationMails"};
+        public static readonly Permission SendUserInvitationMails = new Permission {Description = "Send user invitation mails", Name = "SendUserInvitationMails"};
 
         public virtual Feature Feature { get; set; }
 
         public IEnumerable<Permission> GetPermissions() {
             return new[] {
-                SendUserVerificationMails
+                SendUserInvitationMails
             };
         }
 
@@ -18,7 +18,7 @@ namespace WijDelen.UserImport {
             return new[] {
                 new PermissionStereotype {
                     Name = "Administrator",
-                    Permissions = new[] {SendUserVerificationMails}
+                    Permissions = new[] {SendUserInvitationMails}
                 }
             };
         }

@@ -7,7 +7,7 @@ namespace WijDelen.UserImport.Drivers {
     public class ResendUserVerificationMailPartDriver : ContentPartDriver<ResendUserVerificationMailPart> {
         private readonly IAuthenticationService _authenticationService;
         private readonly IAuthorizationService _authorizationService;
-        private const string TemplateName = "Parts/ResendUserVerificationMail";
+        private const string TemplateName = "Parts/ResendUserInvitationMail";
 
         public ResendUserVerificationMailPartDriver(
             IAuthenticationService authenticationService,
@@ -23,7 +23,7 @@ namespace WijDelen.UserImport.Drivers {
         protected override DriverResult Editor(ResendUserVerificationMailPart resendUserVerificationMailPart, dynamic shapeHelper)
         {
             // don't show editor without correct permission
-            if (!_authorizationService.TryCheckAccess(Permissions.SendUserVerificationMails, _authenticationService.GetAuthenticatedUser(), resendUserVerificationMailPart))
+            if (!_authorizationService.TryCheckAccess(Permissions.SendUserInvitationMails, _authenticationService.GetAuthenticatedUser(), resendUserVerificationMailPart))
                 return null;
 
             return ContentShape("Parts_ResendUserVerificationMail_Edit",

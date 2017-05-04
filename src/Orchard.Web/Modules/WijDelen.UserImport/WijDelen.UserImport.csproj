@@ -211,13 +211,13 @@
     <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Template.UserVerificationMail.cshtml" />
+    <Content Include="Views\Template.UserInvitationMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Template.UserVerificationMail.Text.cshtml" />
+    <Content Include="Views\Template.UserInvitationMail.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\ResendUserVerificationMail.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\ResendUserInvitationMail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

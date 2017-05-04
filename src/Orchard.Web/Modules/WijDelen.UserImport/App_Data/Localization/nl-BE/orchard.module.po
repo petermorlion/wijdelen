@@ -114,9 +114,9 @@ msgid "Please provide a group name to create a new group."
 msgstr "Gelieve de groep een naam te geven om een nieuwe groep te creëren."
 
 #: wijdelen.userimport.controllers.admincontroller
-#| msgid "User verification mail has been sent."
-msgid "User verification mail has been sent."
-msgstr "Er is een nieuwe verificatiemail verstuurd."
+#| msgid "User invitation mail has been sent."
+msgid "User invitation mail has been sent."
+msgstr "Er is een nieuwe uitnodigingsmail verstuurd."
 
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a new password of {0} or more characters."
@@ -188,42 +188,42 @@ msgstr "U moet een familienaam opgeven."
 msgid "TYou must specify a first name."
 msgstr "U moet een voornaam opgeven."
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Hello %recipient.username%!"
 msgid "Hello %recipient.username%!"
 msgstr "Hallo %recipient.username%!"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Hello %recipient.username%!"
 msgid "Hello %recipient.username%!"
 msgstr "Hallo %recipient.username%!"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
 msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
 msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
 msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:
 msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
 msgstr "Bedankt en tot binnenkort!
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserVerificationMail.Text.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
 msgstr "Bedankt en tot binnenkort!"
 
-#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserVerificationMail.cshtml
-#| msgid "User verification mail"
-msgid "User verification mail"
-msgstr "Verificatiemail"
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
+#| msgid "User invitation mail"
+msgid "User invitation mail"
+msgstr "Uitnodigingsmail"
 
-#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserVerificationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
 #| msgid "Resend"
 msgid "Resend"
 msgstr "Opnieuw versturen"

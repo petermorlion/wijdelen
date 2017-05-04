@@ -1,6 +1,0 @@
-﻿@model string
-
-<fieldset>
-    <legend>@T("User verification mail")</legend>
-    @Html.ActionLink(T("Resend"), "ResendUserVerificationMail", "Admin", new { area = "WijDelen.UserImport", userName = Model }, new { @class = "button" })
-</fieldset>

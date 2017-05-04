@@ -129,7 +129,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
                 IList<IUser> importedUsers = null;
                 _mailServiceMock
-                    .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "New Group", ""))
+                    .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "New Group", ""))
                     .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
                 var usersFile = new Mock<HttpPostedFileBase>();
@@ -170,7 +170,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         [Test]
-        public void TestResendUserVerificationMail() {
+        public void TestResendUserInvitationMail() {
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Id).Returns(2);
 
@@ -185,10 +185,10 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             IList<IUser> importedUsers = null;
             _mailServiceMock
-                .Setup(x => x.SendUserVerificationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url"))
+                .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url"))
                 .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
-            var result = _controller.ResendUserVerificationMail("moe");
+            var result = _controller.ResendUserInvitationMail("moe");
 
             Assert.AreEqual(userMock.Object, importedUsers.Single());
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
@@ -197,7 +197,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             Assert.AreEqual("Admin", ((RedirectToRouteResult)result).RouteValues["controller"]);
             Assert.AreEqual(2, ((RedirectToRouteResult)result).RouteValues["id"]);
 
-            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("User verification mail has been sent.")));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("User invitation mail has been sent.")));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace WijDelen.UserImport.Services {
         public Localizer T { get; set; }
         public ILogger Logger { get; set; }
 
-        public void SendUserVerificationMails(IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) {
+        public void SendUserInvitationMails(IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) {
             var recipientVariables = new List<string>();
             var recipients = new List<string>();
             
@@ -46,12 +46,12 @@ namespace WijDelen.UserImport.Services {
             var recipientVariablesJson = $"{{{string.Join(",", recipientVariables)}}}";
             var subject = T("Welcome to Peergroups").ToString();
             
-            var textShape = _shapeFactory.Create("Template_UserVerificationMail_Text", Arguments.From(new
+            var textShape = _shapeFactory.Create("Template_UserInvitationMail_Text", Arguments.From(new
             {
                 GroupName = groupName,
             }));
 
-            var htmlShape = _shapeFactory.Create("Template_UserVerificationMail", Arguments.From(new
+            var htmlShape = _shapeFactory.Create("Template_UserInvitationMail", Arguments.From(new
             {
                 GroupName = groupName,
                 GroupLogoUrl = groupLogoUrl

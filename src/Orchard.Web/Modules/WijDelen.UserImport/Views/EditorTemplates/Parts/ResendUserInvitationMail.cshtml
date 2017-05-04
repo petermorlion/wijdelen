@@ -1,0 +1,6 @@
+﻿@model string
+
+<fieldset>
+    <legend>@T("User invitation mail")</legend>
+    @Html.ActionLink(T("Resend"), "ResendUserInvitationMail", "Admin", new { area = "WijDelen.UserImport", userName = Model }, new { @class = "button" })
+</fieldset>
