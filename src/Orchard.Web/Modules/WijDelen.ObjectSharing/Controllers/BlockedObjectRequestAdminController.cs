@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Orchard.Core.Contents.Controllers;
 using Orchard.Data;
@@ -26,10 +24,16 @@ namespace WijDelen.ObjectSharing.Controllers {
         public Localizer T { get; set; }
 
         public ActionResult Index(int page = 1) {
-            var take = 50;
-            var skip = (page - 1) * take;
+            const int take = 1;
 
             var count = _objectRequestRecordRepository.Table.Count(x => x.Status == "BlockedForForbiddenWords");
+            var totalPages = GetTotalPages(count, take);
+
+            if (page > totalPages) {
+                page = totalPages;
+            }
+
+            var skip = (page - 1) * take;
 
             var records = _objectRequestRecordRepository
                 .Table
@@ -55,10 +59,22 @@ namespace WijDelen.ObjectSharing.Controllers {
                 Page = page,
                 ObjectRequestsCount = count,
                 HasNextPage = hasNextPage,
-                HasPreviousPage = hasPreviousPage
+                HasPreviousPage = hasPreviousPage,
+                TotalPages = totalPages
             };
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// Returns the index of the last page. Implemented using a calculation found here: http://stackoverflow.com/questions/17944/how-to-round-up-the-result-of-integer-division
+        /// </summary>
+        /// <param name="totalRecords"></param>
+        /// <param name="recordsPerPage"></param>
+        /// <returns></returns>
+        private static int GetTotalPages(int totalRecords, int recordsPerPage) {
+            var count = (totalRecords + recordsPerPage - 1) / recordsPerPage;
+            return count;
         }
 
         [HttpPost]

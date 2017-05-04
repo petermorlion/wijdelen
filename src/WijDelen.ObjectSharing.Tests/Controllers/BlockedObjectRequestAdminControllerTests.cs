@@ -83,6 +83,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.ObjectRequestsCount.Should().Be(1);
             model.HasPreviousPage.Should().Be(false);
             model.HasNextPage.Should().Be(false);
+            model.TotalPages.Should().Be(1);
             var recordViewModels = model.ObjectRequests;
             recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 AggregateId = objectRequestRecord2.AggregateId,
@@ -111,6 +112,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(false);
             model.HasNextPage.Should().Be(true);
+            model.TotalPages.Should().Be(2);
             var recordViewModels = model.ObjectRequests;
             recordViewModels.Count.Should().Be(50);
         }
@@ -142,6 +144,40 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(true);
             model.HasNextPage.Should().Be(false);
+            model.TotalPages.Should().Be(2);
+            var recordViewModels = model.ObjectRequests;
+            recordViewModels.Count.Should().Be(50);
+            recordViewModels.All(x => x.Description == "Second half").Should().BeTrue();
+        }
+
+        [Test]
+        public void WhenGettingIndexWithPageTooFarOff() {
+            var records = new List<ObjectRequestRecord>();
+            for (var i = 0; i < 50; i++)
+                records.Add(new ObjectRequestRecord {
+                    Id = i,
+                    Status = "BlockedForForbiddenWords"
+                });
+
+            for (var i = 50; i < 100; i++)
+                records.Add(new ObjectRequestRecord
+                {
+                    Id = i,
+                    Description = "Second half",
+                    Status = "BlockedForForbiddenWords"
+                });
+
+            _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
+
+            var result = _controller.Index(200);
+
+            result.Should().BeOfType<ViewResult>();
+            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
+            model.Page.Should().Be(2);
+            model.ObjectRequestsCount.Should().Be(100);
+            model.HasPreviousPage.Should().Be(true);
+            model.HasNextPage.Should().Be(false);
+            model.TotalPages.Should().Be(2);
             var recordViewModels = model.ObjectRequests;
             recordViewModels.Count.Should().Be(50);
             recordViewModels.All(x => x.Description == "Second half").Should().BeTrue();

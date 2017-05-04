@@ -9,10 +9,8 @@
 @if (Model.ObjectRequestsCount == 0) {
     <span>@T("There are currently no blocked requests")</span>
 }
-else
-{
-    using (Html.BeginFormAntiForgeryPost())
-    {
+else {
+    using (Html.BeginFormAntiForgeryPost()) {
         <fieldset class="bulk-actions">
             <div class="manage">
                 <button type="submit" name="submit.Unblock" value="@T("Unblock")">@T("Unblock")</button>
@@ -22,28 +20,27 @@ else
         <fielset>
             <table class="items">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>@T("Group")</th>
-                        <th>@T("Description")</th>
-                        <th>@T("Status")</th>
-                    </tr>
+                <tr>
+                    <th></th>
+                    <th>@T("Group")</th>
+                    <th>@T("Description")</th>
+                    <th>@T("Status")</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var record in Model.ObjectRequests)
-                    {
-                        <tr>
-                            <td>
-                                <input type="hidden" value="@Model.ObjectRequests[index].AggregateId" name="@Html.NameOf(m => m.ObjectRequests[index].AggregateId)" />
-                                <input type="checkbox" value="true" name="@Html.NameOf(m => m.ObjectRequests[index].IsSelected)" />
-                            </td>
-                            <td>@record.GroupName</td>
-                            <td>@record.Description</td>
-                            <td>@record.Status</td>
-                        </tr>
+                @foreach (var record in Model.ObjectRequests) {
+                    <tr>
+                        <td>
+                            <input type="hidden" value="@Model.ObjectRequests[index].AggregateId" name="@Html.NameOf(m => m.ObjectRequests[index].AggregateId)"/>
+                            <input type="checkbox" value="true" name="@Html.NameOf(m => m.ObjectRequests[index].IsSelected)"/>
+                        </td>
+                        <td>@record.GroupName</td>
+                        <td>@record.Description</td>
+                        <td>@record.Status</td>
+                    </tr>
 
-                        index++;
-                    }
+                    index++;
+                }
                 </tbody>
             </table>
         </fielset>
@@ -51,11 +48,28 @@ else
 }
 
 <div class="pager-footer">
-    @if (Model.HasPreviousPage) {
-        @Html.ActionLink("<<", "Index", new { page = Model.Page - 1 })
-    }
-    
-    @if (Model.HasNextPage) {
-        @Html.ActionLink(">>", "Index", new { page = Model.Page + 1 })
-    }
+    <ul class="pager">
+        @if (Model.HasPreviousPage) {
+            <li>
+                @Html.ActionLink("<", "Index", new {page = Model.Page - 1})
+            </li>
+        }
+
+        @for (var i = 1; i <= Model.TotalPages; i++) {
+            <li>
+                @if (Model.Page == i) {
+                    <span>@i</span>
+                }
+                else {
+                    @Html.ActionLink(i.ToString(), "Index", new {page = i})
+                }
+            </li>
+        }
+
+        @if (Model.HasNextPage) {
+            <li>
+                @Html.ActionLink(">", "Index", new {page = Model.Page + 1})
+            </li>
+        }
+    </ul>
 </div>

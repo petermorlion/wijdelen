@@ -7,5 +7,6 @@ namespace WijDelen.ObjectSharing.ViewModels.Admin {
         public int ObjectRequestsCount { get; set; }
         public bool HasPreviousPage { get; set; }
         public bool HasNextPage { get; set; }
+        public int TotalPages { get; set; }
     }
 }
