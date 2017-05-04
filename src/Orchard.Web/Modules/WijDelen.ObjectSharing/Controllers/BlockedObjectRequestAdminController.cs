@@ -4,6 +4,7 @@ using Orchard.Core.Contents.Controllers;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.UI.Admin;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
@@ -15,10 +16,12 @@ namespace WijDelen.ObjectSharing.Controllers {
     public class BlockedObjectRequestAdminController : Controller {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
         private readonly ICommandHandler<UnblockObjectRequests> _unblockObjectRequestCommandHandler;
+        private readonly INotifier _notifier;
 
-        public BlockedObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler) {
+        public BlockedObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler, INotifier notifier) {
             _objectRequestRecordRepository = objectRequestRecordRepository;
             _unblockObjectRequestCommandHandler = unblockObjectRequestCommandHandler;
+            _notifier = notifier;
         }
 
         public Localizer T { get; set; }
@@ -80,9 +83,14 @@ namespace WijDelen.ObjectSharing.Controllers {
         [HttpPost]
         [FormValueRequired("submit.Unblock")]
         public ActionResult Index(BlockedObjectRequestAdminViewModel viewModel) {
-            var aggregateIds = viewModel.ObjectRequests.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
-            var command = new UnblockObjectRequests(aggregateIds);
-            _unblockObjectRequestCommandHandler.Handle(command);
+            if (viewModel.ObjectRequests.All(x => !x.IsSelected)) {
+                _notifier.Add(NotifyType.Warning, T("Please select at least one request to unblock."));  
+            } else {
+                var aggregateIds = viewModel.ObjectRequests.Where(x => x.IsSelected).Select(x => x.AggregateId).ToList();
+                var command = new UnblockObjectRequests(aggregateIds);
+                _unblockObjectRequestCommandHandler.Handle(command);
+            }
+            
             return RedirectToAction("Index", new {page = viewModel.Page});
         }
 

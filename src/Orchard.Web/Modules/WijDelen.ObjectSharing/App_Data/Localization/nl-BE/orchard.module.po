@@ -292,3 +292,8 @@ msgstr "Geblokkeerde oproepen"
 #| msgid "Blocked"
 msgid "Blocked"
 msgstr "Geblokkeerd"
+
+#: wijdelen.objectsharing.controllers.blockedobjectrequestadmincontroller
+#| msgid "Please select at least one request to unblock."
+msgid "Please select at least one request to unblock."
+msgstr "Gelieve minstens één oproep te selecteren."

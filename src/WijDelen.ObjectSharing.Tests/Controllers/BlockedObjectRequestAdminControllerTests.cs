@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Orchard.Data;
 using Orchard.Localization;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
@@ -23,9 +24,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             _repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             _commandHandler = new Mock<ICommandHandler<UnblockObjectRequests>>();
+            _notifierMock = new Mock<INotifier>();
 
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             builder.RegisterInstance(_commandHandler.Object).As<ICommandHandler<UnblockObjectRequests>>();
+            builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
             builder.RegisterType<BlockedObjectRequestAdminController>();
 
             _container = builder.Build();
@@ -38,6 +41,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         private BlockedObjectRequestAdminController _controller;
         private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
         private Mock<ICommandHandler<UnblockObjectRequests>> _commandHandler;
+        private Mock<INotifier> _notifierMock;
 
         /// <summary>
         /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
@@ -222,6 +226,41 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.Should().BeOfType<RedirectToRouteResult>();
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
             ((RedirectToRouteResult) result).RouteValues["page"].Should().Be(2);
+        }
+
+        [Test]
+        public void WhenPostingIndexWithoutSelection()
+        {
+            var aggregateId1 = Guid.NewGuid();
+            var aggregateId2 = Guid.NewGuid();
+            var recordViewModels = new List<ObjectRequestRecordViewModel> {
+                new ObjectRequestRecordViewModel {
+                    AggregateId = aggregateId1,
+                    IsSelected = false
+                },
+                new ObjectRequestRecordViewModel {
+                    AggregateId = aggregateId2,
+                    IsSelected = false
+                },
+                new ObjectRequestRecordViewModel {
+                    AggregateId = Guid.NewGuid(),
+                    IsSelected = false
+                }
+            };
+
+            var viewModel = new BlockedObjectRequestAdminViewModel
+            {
+                ObjectRequests = recordViewModels,
+                Page = 2
+            };
+
+            var result = _controller.Index(viewModel);
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult)result).RouteValues["page"].Should().Be(2);
+            _commandHandler.Verify(x => x.Handle(It.IsAny<UnblockObjectRequests>()), Times.Never);
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Please select at least one request to unblock.")));
         }
     }
 }
