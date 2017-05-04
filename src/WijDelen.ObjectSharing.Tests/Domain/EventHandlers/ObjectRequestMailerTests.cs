@@ -1,9 +1,11 @@
 ﻿using System;
+using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard;
 using Orchard.Localization;
+using Orchard.Security;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
@@ -21,6 +23,58 @@ using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
     public class ObjectRequestMailerTests {
+        private ObjectRequestMailer _objectRequestMailer;
+        private Mock<IEventSourcedRepository<ObjectRequestMail>> _repositoryMock;
+        private Mock<IGroupService> _groupServiceMock;
+        private Mock<IMailService> _mailServiceMock;
+        private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
+        private Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery> _findOtherUsersQueryMock;
+        private Mock<INotifier> _notifierMock;
+        private IUser _otherUser;
+        private ObjectRequestMail _persistedMail;
+
+        [SetUp]
+        public void Init() {
+            var builder = new ContainerBuilder();
+
+            _groupServiceMock = new Mock<IGroupService>();
+            _repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
+            _mailServiceMock = new Mock<IMailService>();
+            _getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
+            _findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
+
+            var services = new FakeOrchardServices();
+            _notifierMock = new Mock<INotifier>();
+            services.Notifier = _notifierMock.Object;
+
+            builder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
+            builder.RegisterInstance(_repositoryMock.Object).As<IEventSourcedRepository<ObjectRequestMail>>();
+            builder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
+            builder.RegisterInstance(_getUserByIdQueryMock.Object).As<IGetUserByIdQuery>();
+            builder.RegisterInstance(_findOtherUsersQueryMock.Object).As<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
+            builder.RegisterInstance(services).As<IOrchardServices>();
+            builder.RegisterInstance(new RandomSampleService()).As<IRandomSampleService>();
+
+            builder.RegisterType<ObjectRequestMailer>();
+
+            var fakeUserFactory = new UserFactory();
+            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
+            _otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
+            _getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
+
+            _groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
+
+            _persistedMail = null;
+            _repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
+                .Callback((ObjectRequestMail mail, string correlationId) => { _persistedMail = mail; });
+
+            var container = builder.Build();
+            _objectRequestMailer = container.Resolve<ObjectRequestMailer>();
+
+            _objectRequestMailer.T = NullLocalizer.Instance;
+        }
+
         [Test]
         public void WhenObjectIsRequested() {
             var objectRequestId = Guid.NewGuid();
@@ -31,56 +85,30 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 SourceId = objectRequestId
             };
 
-            ObjectRequestMail persistedMail = null;
-
-            var fakeUserFactory = new UserFactory();
-            var otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
-            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
-
-            var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
-            getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
-
-            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
-            findOtherUsersQueryMock
+            _findOtherUsersQueryMock
                 .Setup(x => x.GetResults(3, "Sneakers"))
-                .Returns(new[] { otherUser });
+                .Returns(new[] { _otherUser });
 
-            var groupServiceMock = new Mock<IGroupService>();
-            groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
+            _objectRequestMailer.Handle(objectRequested);
 
-            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
-            repositoryMock
-                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
-                .Callback((ObjectRequestMail mail, string correlationId) => { persistedMail = mail; });
+            _persistedMail.Should().NotBeNull();
+            _persistedMail.UserId.Should().Be(3);
+            _persistedMail.Description.Should().Be("Sneakers");
+            _persistedMail.ExtraInfo.Should().Be("For sneaking");
+            _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
 
-            var mailServiceMock = new Mock<IMailService>();
-
-            var services = new FakeOrchardServices();
-            var notifierMock = new Mock<INotifier>();
-            services.Notifier = notifierMock.Object;
-
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, services);
-
-            handler.Handle(objectRequested);
-
-            persistedMail.Should().NotBeNull();
-            persistedMail.UserId.Should().Be(3);
-            persistedMail.Description.Should().Be("Sneakers");
-            persistedMail.ExtraInfo.Should().Be("For sneaking");
-            persistedMail.ObjectRequestId.Should().Be(objectRequestId);
-
-            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
                 "Jos Joskens", 
                 "Group",
                 objectRequestId,
                 "Sneakers", 
                 "For sneaking", 
-                persistedMail, 
-                new UserEmail {UserId = otherUser.Id, Email = "peter.morlion@gmail.com"}));
+                _persistedMail, 
+                new UserEmail {UserId = _otherUser.Id, Email = "peter.morlion@gmail.com"}));
 
-            repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
+            _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
 
-            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
         }
 
         [Test]
@@ -96,30 +124,11 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Status = ObjectRequestStatus.BlockedForForbiddenWords
             };
 
-            ObjectRequestMail persistedMail = null;
+            _objectRequestMailer.Handle(objectRequested);
 
-            var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
-            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
-            var groupServiceMock = new Mock<IGroupService>();
+            _persistedMail.Should().BeNull();
 
-            var services = new FakeOrchardServices();
-            var notifierMock = new Mock<INotifier>();
-            services.Notifier = notifierMock.Object;
-
-            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
-            repositoryMock
-                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
-                .Callback((ObjectRequestMail mail, string correlationId) => { persistedMail = mail; });
-
-            var mailServiceMock = new Mock<IMailService>();
-
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, services);
-
-            handler.Handle(objectRequested);
-
-            persistedMail.Should().BeNull();
-
-            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<Guid>(),
@@ -128,10 +137,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 It.IsAny<ObjectRequestMail>(),
                 It.IsAny<UserEmail[]>()), Times.Never);
 
-            repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
+            _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
 
-            notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
-            notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
         }
 
         [Test]
@@ -146,50 +155,28 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 SourceId = objectRequestId
             };
 
-            ObjectRequestMail persistedMail = null;
-
-            var fakeUserFactory = new UserFactory();
-            var otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
-            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
-
-            var getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
-            getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
-
-            var findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
-            findOtherUsersQueryMock
+            _findOtherUsersQueryMock
                 .Setup(x => x.GetResults(3, "Sextant"))
-                .Returns(new[] { otherUser });
+                .Returns(new[] { _otherUser });
 
-            var groupServiceMock = new Mock<IGroupService>();
-            groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
+            _objectRequestMailer.Handle(objectRequestUnblocked);
 
-            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
-            repositoryMock
-                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
-                .Callback((ObjectRequestMail mail, string correlationId) => { persistedMail = mail; });
+            _persistedMail.Should().NotBeNull();
+            _persistedMail.UserId.Should().Be(3);
+            _persistedMail.Description.Should().Be("Sextant");
+            _persistedMail.ExtraInfo.Should().Be("For sextanting");
+            _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
 
-            var mailServiceMock = new Mock<IMailService>();
-
-            var handler = new ObjectRequestMailer(repositoryMock.Object, groupServiceMock.Object, mailServiceMock.Object, getUserByIdQueryMock.Object, new RandomSampleService(), findOtherUsersQueryMock.Object, default(IOrchardServices));
-
-            handler.Handle(objectRequestUnblocked);
-
-            persistedMail.Should().NotBeNull();
-            persistedMail.UserId.Should().Be(3);
-            persistedMail.Description.Should().Be("Sextant");
-            persistedMail.ExtraInfo.Should().Be("For sextanting");
-            persistedMail.ObjectRequestId.Should().Be(objectRequestId);
-
-            mailServiceMock.Verify(x => x.SendObjectRequestMail(
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
                 "Jos Joskens",
                 "Group",
                 objectRequestId,
                 "Sextant",
                 "For sextanting",
-                persistedMail,
-                new UserEmail { UserId = otherUser.Id, Email = "peter.morlion@gmail.com" }));
+                _persistedMail,
+                new UserEmail { UserId = _otherUser.Id, Email = "peter.morlion@gmail.com" }));
 
-            repositoryMock.Verify(x => x.Save(persistedMail, It.IsAny<string>()));
+            _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
         }
     }
 }

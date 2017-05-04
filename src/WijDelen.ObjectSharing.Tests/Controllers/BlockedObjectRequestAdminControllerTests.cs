@@ -31,13 +31,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
             builder.RegisterType<BlockedObjectRequestAdminController>();
 
-            _container = builder.Build();
-            _controller = _container.Resolve<BlockedObjectRequestAdminController>();
+            var container = builder.Build();
+            _controller = container.Resolve<BlockedObjectRequestAdminController>();
 
             _controller.T = NullLocalizer.Instance;
         }
 
-        private IContainer _container;
         private BlockedObjectRequestAdminController _controller;
         private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
         private Mock<ICommandHandler<UnblockObjectRequests>> _commandHandler;
