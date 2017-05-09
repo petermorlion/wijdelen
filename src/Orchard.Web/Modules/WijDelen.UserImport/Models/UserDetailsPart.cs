@@ -27,6 +27,13 @@ namespace WijDelen.UserImport.Models {
             set { Store(r => r.Culture, value); }
         }
 
+        [DisplayName("Receive mails")]
+        public bool ReceiveMails
+        {
+            get { return Retrieve(r => r.ReceiveMails); }
+            set { Store(r => r.ReceiveMails, value); }
+        }
+
         public bool IsComplete() {
             return LastName != "" && FirstName != "";
         }

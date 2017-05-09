@@ -30,6 +30,7 @@ namespace WijDelen.UserImport.Tests.Mocks {
             userDetailsPart.FirstName = firstName;
             userDetailsPart.LastName = lastName;
             userDetailsPart.Culture = culture;
+            userDetailsPart.ReceiveMails = true;
 
             var user = new UserMock
             {

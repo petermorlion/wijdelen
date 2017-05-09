@@ -81,7 +81,7 @@ namespace WijDelen.UserImport.Controllers {
 
             _membershipService.SetPassword(user, newPassword);
 
-            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture);
+            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture, true);
 
             _userEventHandler.ChangedPassword(user);
 

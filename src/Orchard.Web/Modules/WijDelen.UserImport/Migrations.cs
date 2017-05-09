@@ -110,5 +110,13 @@ namespace WijDelen.UserImport {
 
             return 9;
         }
+
+        public int UpdateFrom9() {
+            SchemaBuilder.AlterTable(typeof(UserDetailsPartRecord).Name, table => table
+                .AddColumn<bool>("ReceiveMails", column => column.WithDefault(true))
+            );
+
+            return 10;
+        }
     }
 }

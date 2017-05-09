@@ -27,4 +27,12 @@
         })
         @Html.ValidationMessageFor(model => model.Culture)
     </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ReceiveMails)
+    </div>
+    <div class="editor-field">
+        @Html.CheckBoxFor(m => m.ReceiveMails)
+        @Html.ValidationMessageFor(model => model.ReceiveMails)
+    </div>
 </fieldset>

@@ -3,20 +3,27 @@
 @using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Account", new { Area = "WijDelen.UserImport" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <fieldset>
-        <legend>@T("First name")</legend>
+        <label for="FirstName">@T("First name")</label>
         @Html.TextBoxFor(m => m.FirstName, new { data_auto_complete = "true" })
         @Html.ValidationMessageFor(m => m.FirstName)
 
-        <legend>@T("Last Name")</legend>
+        <label for="LastName">@T("Last Name")</label>
         @Html.TextBoxFor(m => m.LastName)
         @Html.ValidationMessageFor(m => m.LastName)
         
-        <legend>@T("Language")</legend>
+        <label for="Culture">@T("Language")</label>
         @Html.DropDownListFor(model => model.Culture, new List<SelectListItem> {
             new SelectListItem { Text = T("Nederlands").ToString(), Value = "nl-BE" },
             new SelectListItem { Text = T("English").ToString(), Value = "en-US" },
         })
         @Html.ValidationMessageFor(m => m.Culture)
+        
+        @Html.CheckBoxFor(model => model.ReceiveMails)
+        <label class="label-inline" for="ReceiveMails">@T("Receive Mails")</label>
+        @Html.ValidationMessageFor(m => m.ReceiveMails)
+        <p>
+            <small>@T("Uncheck this if you do not want to receive mails from new requests, chat messages, etc.")</small>
+        </p>
         
     </fieldset>
 

@@ -56,19 +56,20 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             var viewmodel = ((ViewResult) result).Model as UserDetailsViewModel;
             Assert.IsNotNull(viewmodel);
-            Assert.AreEqual("Peter", viewmodel.FirstName);
-            Assert.AreEqual("Morlion", viewmodel.LastName);
-            Assert.AreEqual("en-US", viewmodel.Culture);
+            viewmodel.FirstName.Should().Be("Peter");
+            viewmodel.LastName.Should().Be("Morlion");
+            viewmodel.Culture.Should().Be("en-US");
+            viewmodel.ReceiveMails.Should().BeTrue();
         }
 
         [Test]
         public void TestIndexPost() {
-            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE"};
+            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE", ReceiveMails = false};
 
             var result = _controller.Index(viewModel);
 
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
-            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE"));
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE", false));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Your details have been saved successfully.")));
         }
 

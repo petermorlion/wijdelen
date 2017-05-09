@@ -164,6 +164,16 @@ msgid "Language"
 msgstr "Taal"
 
 #: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Receive Mails"
+msgid "Receive Mails"
+msgstr "Mails ontvangen"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Uncheck this if you do not want to receive mails from new requests, chat messages, etc."
+msgid "Uncheck this if you do not want to receive mails from new requests, chat messages, etc."
+msgstr "Vink deze optie uit indien je geen mails van nieuwe oproepen of chat berichten wil ontvangen."
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
 #| msgid "Save"
 msgid "Save"
 msgstr "Opslaan"

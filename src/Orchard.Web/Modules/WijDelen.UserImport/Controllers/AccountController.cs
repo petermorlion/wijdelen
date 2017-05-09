@@ -29,7 +29,8 @@ namespace WijDelen.UserImport.Controllers {
             var viewModel = new UserDetailsViewModel {
                 FirstName = userDetailsPart.FirstName,
                 LastName = userDetailsPart.LastName,
-                Culture = userDetailsPart.Culture
+                Culture = userDetailsPart.Culture,
+                ReceiveMails = userDetailsPart.ReceiveMails
             };
             return View(viewModel);
         }
@@ -49,7 +50,7 @@ namespace WijDelen.UserImport.Controllers {
                 return View();
 
             var user = _orchardServices.WorkContext.CurrentUser;
-            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture);
+            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture, viewModel.ReceiveMails);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Your details have been saved successfully."));
             return RedirectToAction("Index");
         }

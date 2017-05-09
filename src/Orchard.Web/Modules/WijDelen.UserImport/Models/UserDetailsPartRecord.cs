@@ -5,5 +5,6 @@ namespace WijDelen.UserImport.Models {
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string Culture { get; set; }
+        public virtual bool ReceiveMails { get; set; }
     }
 }
