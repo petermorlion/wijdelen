@@ -1,0 +1,41 @@
+.chatmessage {
+    position: relative;
+}
+
+.chatbubble {
+    border-radius: @border-radius;
+    color: @color-initial;
+    padding: 10px 15px;
+}
+
+.chatbubble:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+    top: 12px;
+	bottom: auto;
+	border: 12px solid;
+}
+
+.chatbubble-currentuser {
+    background-color: @color-primary;
+    margin-left: 40px;
+}
+
+.chatbubble-currentuser:after {
+    border-color: @color-primary transparent transparent @color-primary;
+    left: auto;
+	right: -20px;
+}
+
+.chatbubble-otheruser {
+    background-color: @color-quaternary;
+    margin-right: 40px;
+}
+
+.chatbubble-otheruser:after {
+    border-color: @color-quaternary @color-quaternary transparent transparent;
+    left: -20px;
+	right: auto;
+}

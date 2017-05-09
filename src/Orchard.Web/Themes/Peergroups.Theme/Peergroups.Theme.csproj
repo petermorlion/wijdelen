@@ -238,6 +238,9 @@
   <ItemGroup>
     <Content Include="App_Data\Localization\en-US\orchard.theme.po" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\_Chat.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

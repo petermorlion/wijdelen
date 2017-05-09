@@ -1,6 +1,8 @@
 ﻿using System;
+using Autofac;
 using Moq;
 using NUnit.Framework;
+using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
@@ -8,26 +10,22 @@ using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Infrastructure;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
     public class ChatMessageMailerTests {
-        [Test]
-        public void WhenMessageAdded() {
-            var chatId = Guid.NewGuid();
+        [SetUp]
+        public void Init() {
+            _chatId = Guid.NewGuid();
             var objectRequestId = Guid.NewGuid();
-
-            var e = new ChatMessageAdded {
-                ChatId = chatId,
-                UserId = 22,
-                Message = "I have Reebok Pumps"
-            };
 
             var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
             chatRepositoryMock.SetRecords(new[] {
                 new ChatRecord {
-                    ChatId = chatId,
+                    ChatId = _chatId,
                     ConfirmingUserId = 22,
                     ConfirmingUserName = "John",
                     RequestingUserId = 1,
@@ -35,6 +33,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                     ObjectRequestId = objectRequestId
                 }
             });
+
 
             var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             objectRequestRepositoryMock.SetRecords(new[] {
@@ -44,18 +43,56 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 }
             });
 
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Email).Returns("jane.doe@gmail.com");
+            var userMockFactory = new UserFactory();
+            _userMock = userMockFactory.Create("jane.doe@gmail.com", "jane.doe@gmail.com", "Jane", "Doe");
+            
             var userQueryMock = new Mock<IGetUserByIdQuery>();
-            userQueryMock.Setup(x => x.GetResult(1)).Returns(userMock.Object);
+            userQueryMock.Setup(x => x.GetResult(1)).Returns(_userMock);
 
-            var mailServiceMock = new Mock<IMailService>();
+            _mailServiceMock = new Mock<IMailService>();
 
-            var handler = new ChatMessageMailer(chatRepositoryMock.Object, objectRequestRepositoryMock.Object, userQueryMock.Object, mailServiceMock.Object);
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterInstance(chatRepositoryMock.Object).As<IRepository<ChatRecord>>();
+            containerBuilder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            containerBuilder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
+            containerBuilder.RegisterInstance(userQueryMock.Object).As<IGetUserByIdQuery>();
+            containerBuilder.RegisterType<ChatMessageMailer>();
+            var container = containerBuilder.Build();
 
-            handler.Handle(e);
+            _handler = container.Resolve<ChatMessageMailer>();
+        }
 
-            mailServiceMock.Verify(x => x.SendChatMessageAddedMail("John", "Jane", "Sneakers", "jane.doe@gmail.com", chatId, "I have Reebok Pumps"));
+        private ChatMessageMailer _handler;
+        private Mock<IMailService> _mailServiceMock;
+        private Guid _chatId;
+        private IUser _userMock;
+
+        [Test]
+        public void WhenMessageAdded() {
+            var e = new ChatMessageAdded {
+                ChatId = _chatId,
+                UserId = 22,
+                Message = "I have Reebok Pumps"
+            };
+
+            _handler.Handle(e);
+
+            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail("John", "Sneakers", "jane.doe@gmail.com", _chatId, "I have Reebok Pumps"));
+        }
+
+        [Test]
+        public void WhenMessageAddedWithUnsubscribedUser() {
+            _userMock.As<UserDetailsPart>().ReceiveMails = false;
+            var e = new ChatMessageAdded
+            {
+                ChatId = _chatId,
+                UserId = 22,
+                Message = "I have Reebok Pumps"
+            };
+
+            _handler.Handle(e);
+
+            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
         }
     }
 }

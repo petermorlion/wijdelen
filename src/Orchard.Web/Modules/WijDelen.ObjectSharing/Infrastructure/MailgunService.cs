@@ -84,7 +84,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             objectRequestMail.MarkAsSent(userEmails, html);
         }
 
-        public void SendChatMessageAddedMail(string fromUserName, string toUserName, string description, string toEmailAddress, Guid chatId, string message) {
+        public void SendChatMessageAddedMail(string fromUserName, string description, string toEmailAddress, Guid chatId, string message) {
             var subject = T("{0} reacted on your request for a {1}.", fromUserName, description).ToString();
             var to = new[] {toEmailAddress};
 

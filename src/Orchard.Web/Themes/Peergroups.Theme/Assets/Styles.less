@@ -25,6 +25,7 @@ Links: #04b17b
 @import './_HomePage.less';
 @import './_ReceivedObjectRequests.less'; 
 @import './_Messages.less';
+@import './_Chat.less'; 
 
 /* 
 This theme takes a different approach than the usual way of styling Orchard themes. 
@@ -122,49 +123,4 @@ fieldset.login-form legend {
 .autocomplete-suggestion.selected { 
     color: @color-tertiary; 
     background-color: @color-primary;
-}
-
-/* Chat
-***************************************************************/
-
-.chatmessage {
-    position: relative;
-}
-
-.chatbubble {
-    border-radius: @border-radius;
-    padding: 10px 15px;
-}
-
-.chatbubble:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-    top: 12px;
-	bottom: auto;
-	border: 12px solid;
-}
-
-.chatbubble-currentuser {
-    background-color: @color-primary;
-    color: @color-initial;
-    margin-left: 40px;
-}
-
-.chatbubble-currentuser:after {
-    border-color: @color-primary transparent transparent @color-primary;
-    left: auto;
-	right: -20px;
-}
-
-.chatbubble-otheruser {
-    background-color: @color-quaternary;
-    margin-right: 40px;
-}
-
-.chatbubble-otheruser:after {
-    border-color: @color-quaternary @color-quaternary transparent transparent;
-    left: -20px;
-	right: auto;
 }

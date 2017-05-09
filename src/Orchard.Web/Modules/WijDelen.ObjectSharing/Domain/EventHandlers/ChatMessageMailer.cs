@@ -1,9 +1,11 @@
-﻿using Orchard.Data;
+﻿using Orchard.ContentManagement;
+using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
+using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class ChatMessageMailer : IEventHandler<ChatMessageAdded> {
@@ -25,11 +27,14 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             var fromUserName = e.UserId == chat.ConfirmingUserId ? chat.ConfirmingUserName : chat.RequestingUserName;
 
-            var toUserName = e.UserId == chat.ConfirmingUserId ? chat.RequestingUserName : chat.ConfirmingUserName;
             var toUserId = e.UserId == chat.ConfirmingUserId ? chat.RequestingUserId : chat.ConfirmingUserId;
             var toUser = _userQuery.GetResult(toUserId);
 
-            _mailService.SendChatMessageAddedMail(fromUserName, toUserName, objectRequest.Description, toUser.Email, e.ChatId, e.Message);
+            if (!toUser.As<UserDetailsPart>().ReceiveMails) {
+                return;
+            }
+
+            _mailService.SendChatMessageAddedMail(fromUserName, objectRequest.Description, toUser.Email, e.ChatId, e.Message);
         }
     }
 }
