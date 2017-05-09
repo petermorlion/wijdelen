@@ -198,6 +198,11 @@ msgstr "Je moet een taal opgeven."
 msgid "Your details have been saved successfully."
 msgstr "Je details werden correct opgeslaan."
 
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You will no longer receive mails regarding requests or chat messages."
+msgid "You will no longer receive mails regarding requests or chat messages."
+msgstr "Je zal niet langer mails ontvangen over oproepen of chat berichten."
+
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Hello %recipient.username%!"
 msgid "Hello %recipient.username%!"

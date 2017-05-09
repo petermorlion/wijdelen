@@ -54,5 +54,14 @@ namespace WijDelen.UserImport.Controllers {
             _orchardServices.Notifier.Add(NotifyType.Success, T("Your details have been saved successfully."));
             return RedirectToAction("Index");
         }
+
+        public ActionResult Unsubscribe() {
+            var user = _orchardServices.WorkContext.CurrentUser;
+            var userDetailsPart = user.As<UserDetailsPart>();
+            _updateUserDetailsService.UpdateUserDetails(user, userDetailsPart.FirstName, userDetailsPart.LastName, userDetailsPart.Culture, false);
+            _orchardServices.Notifier.Add(NotifyType.Success, T("You will no longer receive mails regarding requests or chat messages."));
+
+            return RedirectToAction("Index");
+        }
     }
 }

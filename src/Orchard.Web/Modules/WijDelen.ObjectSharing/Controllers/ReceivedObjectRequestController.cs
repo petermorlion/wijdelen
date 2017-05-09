@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using Orchard;
-using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;

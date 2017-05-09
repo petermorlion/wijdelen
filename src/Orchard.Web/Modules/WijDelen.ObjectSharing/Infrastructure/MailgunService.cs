@@ -41,6 +41,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/Deny/" + objectRequestId;
 
             var groupLogoUrl = "";
+            var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
 
             if (_orchardServices.WorkContext.CurrentUser != null) {
                 var user = _orchardServices.WorkContext.CurrentUser;
@@ -59,7 +60,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 ExtraInfo = extraInfo,
                 YesLink = yesLink,
                 NotNowLink = notNowLink,
-                NoLink = noLink
+                NoLink = noLink,
+                UnsubscribeUrl = unsubscribeUrl
             }));
 
             var htmlShape = _shapeFactory.Create("Template_ObjectRequestMail", Arguments.From(new {
@@ -70,7 +72,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 ExtraInfo = extraInfo,
                 YesLink = yesLink,
                 NotNowLink = notNowLink,
-                NoLink = noLink
+                NoLink = noLink,
+                UnsubscribeUrl = unsubscribeUrl
             }));
 
             var text = _shapeDisplay.Display(textShape);
@@ -86,6 +89,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var to = new[] {toEmailAddress};
 
             var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
+            var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
 
             var groupLogoUrl = "";
 
@@ -103,7 +107,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 FromUserName = fromUserName,
                 Description = description,
                 Message = message,
-                ChatUrl = chatUrl
+                ChatUrl = chatUrl,
+                UnsubscribeUrl = unsubscribeUrl
             }));
 
             var htmlShape = _shapeFactory.Create("Template_ChatMessageAddedMail", Arguments.From(new {
@@ -111,7 +116,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 FromUserName = fromUserName,
                 Description = description,
                 Message = message,
-                ChatUrl = chatUrl
+                ChatUrl = chatUrl,
+                UnsubscribeUrl = unsubscribeUrl
             }));
 
             var text = _shapeDisplay.Display(textShape);

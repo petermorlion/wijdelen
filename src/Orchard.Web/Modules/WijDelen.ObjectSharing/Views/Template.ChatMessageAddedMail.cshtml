@@ -1,20 +1,25 @@
 ﻿<html>
 <body style="font-family: Verdana, Arial, sans-serif;">
-    <div style="background-color: #04b17b; padding: 0 10px;">
-        <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;"><img src="@Model.GroupLogoUrl" style="height: 35px; margin-left: 10px; vertical-align: middle;">
-    </div>
-    <div style="margin-top: 10px;">
-        <p>Hallo!</p>
-        <p>@Model.FromUserName reageerde op je oproep voor (een) @Model.Description:</p>
-    </div>
-    <div style="background-color: #f5f5f5; border: 1px solid #bbb; border-radius: 5px; padding: 10px;">
+<div style="background-color: #04b17b; padding: 0 10px;">
+    <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;"><img src="@Model.GroupLogoUrl" style="height: 35px; margin-left: 10px; vertical-align: middle;">
+</div>
+<div style="margin-top: 10px;">
+    <p>@T("Hello")</p>
+    <p>@T("{0} reacted to your request for (a) {1}:", Model.FromUserName, Model.Description)</p>
+</div>
+<div style="background-color: #f5f5f5; border: 1px solid #bbb; border-radius: 5px; padding: 10px;">
 
-        <p>@Model.Message</p>
-    </div>
-    <div>
-        <p style="margin-bottom: 20px; margin-top: 20px; text-align: center;">
-            <a href="@Model.ChatUrl" style="background-color: #46d100; border-bottom: 1px solid #216400; border-radius: 5px; border-right: 1px solid #216400; color: #fff; margin-right: 10px; padding: 10px; text-decoration: none;">Reageren</a>
-        </p>
-    </div>
+    <p>@Model.Message</p>
+</div>
+<div>
+    <p style="margin-bottom: 20px; margin-top: 20px; text-align: center;">
+        <a href="@Model.ChatUrl" style="background-color: #46d100; border-bottom: 1px solid #216400; border-radius: 5px; border-right: 1px solid #216400; color: #fff; margin-right: 10px; padding: 10px; text-decoration: none;">Reageren</a>
+    </p>
+</div>
+<div>
+    <p style="font-size: 10px;">
+        <a href="@Model.UnsubscribeUrl">@T("Unsubscribe")</a>
+    </p>
+</div>
 </body>
 </html>

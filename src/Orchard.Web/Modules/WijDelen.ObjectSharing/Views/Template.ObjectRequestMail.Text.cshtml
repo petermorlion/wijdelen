@@ -1,15 +1,17 @@
-﻿Hallo,
+﻿@T("Hello")
 
-@Model.RequestingUserName uit de groep @Model.GroupName stuurde je een bericht:
+@T("{0} from the group {1} sent you a message:", Model.RequestingUserName, Model.GroupName)
 
-Ik zoek (een) @Model.Description.
+@T("I'm looking for (a) {0}.", Model.Description)
 
-Waar heb ik het voor nodig?
+@T("What do I need it for?")
 
 @Model.ExtraInfo
 
-Kan ik die van je lenen?
+@T("Can you lend me this?")
 
-Ja, dat heb ik: @Model.YesLink
-Nu even niet: @Model.NotNowLink
-Nee, dat heb ik niet: @Model.NoLink
+@T("Yes, I own that:") @Model.YesLink
+@T("Not right now:") @Model.NotNowLink
+@T("No, I don't own that:") @Model.NoLink
+
+@T("Unsubscribe:") @Model.UnsubscribeUrl

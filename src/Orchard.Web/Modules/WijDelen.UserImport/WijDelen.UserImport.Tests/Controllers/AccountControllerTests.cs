@@ -118,6 +118,15 @@ namespace WijDelen.UserImport.Tests.Controllers {
             Assert.AreEqual("You must specify a last name.", ((ViewResult) result).ViewData.ModelState["LastName"].Errors.Single().ErrorMessage);
         }
 
+        [Test]
+        public void TestUnsubscribe() {
+            var result = _controller.Unsubscribe();
+
+            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Peter", "Morlion", "en-US", false));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("You will no longer receive mails regarding requests or chat messages.")));
+        }
+
         /// <summary>
         /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
         /// runtime exception.

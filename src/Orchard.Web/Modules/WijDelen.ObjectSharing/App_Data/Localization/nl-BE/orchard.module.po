@@ -302,3 +302,128 @@ msgstr "Gelieve minstens één oproep te selecteren."
 #| msgid "The selected requests were unblocked and mails have been sent to the users."
 msgid "The selected requests were unblocked and mails have been sent to the users."
 msgstr "De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd naar de gebruikers."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#| msgid "Unsubscribe"
+msgid "Unsubscribe"
+msgstr "Uitschrijven"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#| msgid "{0} reacted to your request for (a) {1}:"
+msgid "{0} reacted to your request for (a) {1}:"
+msgstr "{0} reageerde op je oproep voor (een) {1}:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#| msgid "{0} reacted to your request for (a) {1}:"
+msgid "{0} reacted to your request for (a) {1}:"
+msgstr "{0} reageerde op je oproep voor (een) {1}:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#| msgid "Respond:"
+msgid "Respond:"
+msgstr "Reageren:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#| msgid "Unsubscribe:"
+msgid "Unsubscribe:"
+msgstr "Uitschrijven:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "{0} from the group {1} sent you a message:"
+msgid "{0} from the group {1} sent you a message:"
+msgstr "{0} uit de groep {1} stuurde je een bericht:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "I'm looking for (a) {0}."
+msgid "I'm looking for (a) {0}."
+msgstr "Ik zoek (een) {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "What do I need it for?"
+msgid "What do I need it for?"
+msgstr "Waar heb ik het voor nodig?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "Can you lend me this?"
+msgid "Can you lend me this?"
+msgstr "Kan ik die van je lenen?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "Yes, I own that"
+msgid "Yes, I own that"
+msgstr "Ja, dat heb ik"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "Not right now"
+msgid "Not right now"
+msgstr "Nu even niet"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "No, I don't own that"
+msgid "No, I don't own that"
+msgstr "Nee, dat heb ik niet"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#| msgid "Unsubscribe"
+msgid "Unsubscribe"
+msgstr "Uitschrijven"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "{0} from the group {1} sent you a message:"
+msgid "{0} from the group {1} sent you a message:"
+msgstr "{0} uit de groep {1} stuurde je een bericht:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "I'm looking for (a) {0}."
+msgid "I'm looking for (a) {0}."
+msgstr "Ik zoek (een) {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "What do I need it for?"
+msgid "What do I need it for?"
+msgstr "Waar heb ik het voor nodig?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "Can you lend me this?"
+msgid "Can you lend me this?"
+msgstr "Kan ik die van je lenen?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "Yes, I own that:"
+msgid "Yes, I own that:"
+msgstr "Ja, dat heb ik:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "Not right now:"
+msgid "Not right now:"
+msgstr "Nu even niet:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "No, I don't own that:"
+msgid "No, I don't own that:"
+msgstr "Nee, dat heb ik niet:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#| msgid "Unsubscribe:"
+msgid "Unsubscribe:"
+msgstr "Uitschrijven:"
