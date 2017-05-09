@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CultureController.cs" />
+    <Compile Include="CultureSelectorUserEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,14 @@
     <ProjectReference Include="..\Orchard.Localization\Orchard.Localization.csproj">
       <Project>{FBC8B571-ED50-49D8-8D9D-64AB7454A0D6}</Project>
       <Name>Orchard.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
+      <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
+      <Name>Orchard.Users</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WijDelen.UserImport\WijDelen.UserImport.csproj">
+      <Project>{93D162A5-1383-450D-9CAE-189607E7A285}</Project>
+      <Name>WijDelen.UserImport</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

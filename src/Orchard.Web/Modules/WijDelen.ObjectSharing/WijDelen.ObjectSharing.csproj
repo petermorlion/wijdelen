@@ -204,7 +204,6 @@
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
     <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
     <Compile Include="Models\UserInventoryRecord.cs" />
-    <Compile Include="RedirectingUserEventHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ChatMessageRecord.cs" />
     <Compile Include="Models\ChatRecord.cs" />

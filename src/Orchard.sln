@@ -298,6 +298,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Localization", "Or
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peergroups.Theme", "Orchard.Web\Themes\Peergroups.Theme\Peergroups.Theme.csproj", "{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Localization.Tests", "Orchard.Web\Modules\WijDelen.Localization\WijDelen.Localization.Tests\WijDelen.Localization.Tests.csproj", "{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1209,6 +1211,13 @@ Global
 		{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873}.FxCop|Any CPU.Build.0 = Release|Any CPU
 		{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1306,6 +1315,7 @@ Global
 		{E18E27AD-BFA5-43E0-8072-898388598751} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{08800878-74CC-4B8B-88B0-3E18FD9F97DE} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873} = {74492CBC-7201-417E-BC29-28B4C25A58B0}
+		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4
