@@ -9,6 +9,7 @@ using Orchard;
 using Orchard.Settings;
 using Orchard.UI.Admin;
 using Orchard.UI.Navigation;
+using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
@@ -16,15 +17,17 @@ namespace WijDelen.UserImport.Controllers {
     public class GroupUsersController : Controller {
         private readonly IOrchardServices _orchardServices;
         private readonly ISiteService _siteService;
+        private readonly IGroupService _groupService;
 
         public Localizer T { get; set; }
         dynamic Shape { get; set; }
 
-        public GroupUsersController(IOrchardServices orchardServices, ISiteService siteService, IShapeFactory shapeFactory) {
+        public GroupUsersController(IOrchardServices orchardServices, ISiteService siteService, IShapeFactory shapeFactory, IGroupService groupService) {
             _orchardServices = orchardServices;
             _siteService = siteService;
-            Shape = shapeFactory;
+            _groupService = groupService;
 
+            Shape = shapeFactory;
             T = NullLocalizer.Instance;
         }
 
@@ -42,11 +45,15 @@ namespace WijDelen.UserImport.Controllers {
                 .Slice(pager.GetStartIndex(), pager.PageSize)
                 .ToList();
 
+            var groups = _groupService.GetGroups().OrderBy(x => x.Name).ToList();
+            groups.Insert(0, new GroupViewModel());
+
             var model = new GroupUsersIndexViewModel {
                 Users = results
                     .Select(x => new GroupUserEntry { User = x.Record })
                     .ToList(),
-                Pager = pagerShape
+                Pager = pagerShape,
+                Groups = groups
             };
 
             return View(model);

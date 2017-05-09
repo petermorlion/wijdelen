@@ -14,6 +14,12 @@
 @using (Html.BeginFormAntiForgeryPost()) { 
     @Html.ValidationSummary()
 
+    <fieldset class="bulk-actions">
+        <label for="filterResults">@T("Filter:")</label>
+        @Html.DropDownListFor(m => m.SelectedGroupId, Model.Groups.Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name}))
+        <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
+    </fieldset>
+
     <fieldset>
         <table class="items">
             <thead>
