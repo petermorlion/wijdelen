@@ -24,9 +24,11 @@ namespace WijDelen.UserImport.Controllers {
 
         public ActionResult Index() {
             var user = _orchardServices.WorkContext.CurrentUser;
+            var userDetailsPart = user.ContentItem.As<UserDetailsPart>();
             var viewModel = new UserDetailsViewModel {
-                FirstName = user.ContentItem.As<UserDetailsPart>().FirstName,
-                LastName = user.ContentItem.As<UserDetailsPart>().LastName
+                FirstName = userDetailsPart.FirstName,
+                LastName = userDetailsPart.LastName,
+                Culture = userDetailsPart.Culture
             };
             return View(viewModel);
         }
@@ -39,11 +41,14 @@ namespace WijDelen.UserImport.Controllers {
             if (string.IsNullOrWhiteSpace(viewModel.LastName))
                 ModelState.AddModelError("LastName", T("You must specify a last name."));
 
+            if (string.IsNullOrWhiteSpace(viewModel.Culture))
+                ModelState.AddModelError("Culture", T("You must specify a language."));
+
             if (!ModelState.IsValid)
                 return View();
 
             var user = _orchardServices.WorkContext.CurrentUser;
-            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName);
+            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture);
             return RedirectToAction("Index");
         }
     }

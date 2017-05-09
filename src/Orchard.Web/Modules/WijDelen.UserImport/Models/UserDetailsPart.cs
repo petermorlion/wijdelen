@@ -19,6 +19,14 @@ namespace WijDelen.UserImport.Models {
             set { Store(r => r.LastName, value); }
         }
 
+        [Required]
+        [DisplayName("Language")]
+        public string Culture
+        {
+            get { return Retrieve(r => r.Culture); }
+            set { Store(r => r.Culture, value); }
+        }
+
         public bool IsComplete() {
             return LastName != "" && FirstName != "";
         }

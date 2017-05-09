@@ -47,7 +47,7 @@ namespace WijDelen.UserImport.Controllers {
         [HttpPost]
         [AlwaysAccessible]
         [ValidateInput(false)]
-        public ActionResult Index(string nonce, string newPassword, string confirmPassword, string firstName, string lastName) {
+        public ActionResult Index(string nonce, string newPassword, string confirmPassword, string firstName, string lastName, string culture) {
             IUser user;
             if ((user = _userService.ValidateLostPassword(nonce)) == null) {
                 return Redirect("~/");
@@ -71,13 +71,17 @@ namespace WijDelen.UserImport.Controllers {
                 ModelState.AddModelError("lastName", T("You must specify a last name."));
             }
 
+            if (string.IsNullOrWhiteSpace(culture)) {
+                ModelState.AddModelError("culture", T("You must specify a language."));
+            }
+
             if (!ModelState.IsValid) {
                 return View();
             }
 
             _membershipService.SetPassword(user, newPassword);
 
-            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName);
+            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture);
 
             _userEventHandler.ChangedPassword(user);
 

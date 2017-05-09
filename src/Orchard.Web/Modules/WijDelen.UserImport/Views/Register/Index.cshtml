@@ -22,9 +22,17 @@
             @Html.ValidationMessage("firstName") 
         </div>
         <div>
-            <label for="confirmPassword">@T("Last name:")</label>
+            <label for="lastName">@T("Last name:")</label>
             @Html.TextBox("lastName")
             @Html.ValidationMessage("lastName") 
+        </div>
+        <div>
+            <label for="culture">@T("Language:")</label>
+            @Html.DropDownList("culture", new List<SelectListItem> {
+                new SelectListItem { Text = T("Nederlands").ToString(), Value = "nl-BE" },
+                new SelectListItem { Text = T("English").ToString(), Value = "en-US" },
+            })
+            @Html.ValidationMessage("culture")
         </div>
         <div>
             <button class="primaryAction" type="submit">@T("Start with Peergroups")</button>

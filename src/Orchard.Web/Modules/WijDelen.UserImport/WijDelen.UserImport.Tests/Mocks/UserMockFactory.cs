@@ -9,7 +9,7 @@ namespace WijDelen.UserImport.Tests.Mocks {
     public class UserMockFactory {
         private int _nextId = 1;
 
-        public IUser Create(string userName, string email, string firstName, string lastName)
+        public IUser Create(string userName, string email, string firstName, string lastName, string culture)
         {
             var contentItem = new ContentItem
             {
@@ -29,6 +29,7 @@ namespace WijDelen.UserImport.Tests.Mocks {
 
             userDetailsPart.FirstName = firstName;
             userDetailsPart.LastName = lastName;
+            userDetailsPart.Culture = culture;
 
             var user = new UserMock
             {

@@ -13,8 +13,98 @@ using WijDelen.UserImport.ViewModels;
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
     public class AccountControllerTests {
+        [Test]
+        public void TestIndex() {
+            var mockWorkContext = new MockWorkContext();
+            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "nl-BE");
+            mockWorkContext.CurrentUser = userMock;
+            var orchardServicesMock = new Mock<IOrchardServices>();
+            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
+            var controller = new AccountController(orchardServicesMock.Object, Mock.Of<IUpdateUserDetailsService>());
+
+            var result = controller.Index();
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.IsInstanceOf<UserDetailsViewModel>(((ViewResult) result).Model);
+
+            var viewmodel = ((ViewResult) result).Model as UserDetailsViewModel;
+            Assert.IsNotNull(viewmodel);
+            Assert.AreEqual("Peter", viewmodel.FirstName);
+            Assert.AreEqual("Morlion", viewmodel.LastName);
+            Assert.AreEqual("nl-BE", viewmodel.Culture);
+        }
+
+        [Test]
+        public void TestIndexPost() {
+            var mockWorkContext = new MockWorkContext();
+            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US");
+            mockWorkContext.CurrentUser = userMock;
+            var orchardServicesMock = new Mock<IOrchardServices>();
+            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
+            var updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
+            var controller = new AccountController(orchardServicesMock.Object, updateUserDetailsServiceMock.Object);
+            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE"};
+
+            var result = controller.Index(viewModel);
+
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(userMock, "Moe", "Szyslak", "nl-BE"));
+        }
+
+        [Test]
+        public void TestIndexPostWithoutCulture() {
+            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
+            controller.T = NullLocalizer.Instance;
+            var viewModel = new UserDetailsViewModel {
+                FirstName = "Moe",
+                LastName = "Szyslak",
+                Culture = ""
+            };
+
+            var result = controller.Index(viewModel);
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult) result).ViewName);
+            Assert.AreEqual("You must specify a language.", ((ViewResult) result).ViewData.ModelState["Culture"].Errors.Single().ErrorMessage);
+        }
+
+        [Test]
+        public void TestIndexPostWithoutFirstName() {
+            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
+            controller.T = NullLocalizer.Instance;
+            var viewModel = new UserDetailsViewModel {
+                FirstName = "",
+                LastName = "Szyslak",
+                Culture = "nl-BE"
+            };
+
+            var result = controller.Index(viewModel);
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult) result).ViewName);
+            Assert.AreEqual("You must specify a first name.", ((ViewResult) result).ViewData.ModelState["FirstName"].Errors.Single().ErrorMessage);
+        }
+
+        [Test]
+        public void TestIndexPostWithoutLastName() {
+            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
+            controller.T = NullLocalizer.Instance;
+            var viewModel = new UserDetailsViewModel {
+                FirstName = "Moe",
+                LastName = "",
+                Culture = "nl-BE"
+            };
+
+            var result = controller.Index(viewModel);
+
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreEqual("", ((ViewResult) result).ViewName);
+            Assert.AreEqual("You must specify a last name.", ((ViewResult) result).ViewData.ModelState["LastName"].Errors.Single().ErrorMessage);
+        }
+
         /// <summary>
-        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
+        ///     Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
+        ///     runtime exception.
         /// </summary>
         [Test]
         public void TestT() {
@@ -24,78 +114,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
             controller.T = localizer;
 
             Assert.AreEqual(localizer, controller.T);
-        }
-
-        [Test]
-        public void TestIndex() {
-            var mockWorkContext = new MockWorkContext();
-            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion");
-            mockWorkContext.CurrentUser = userMock;
-            var orchardServicesMock = new Mock<IOrchardServices>();
-            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            var controller = new AccountController(orchardServicesMock.Object, Mock.Of<IUpdateUserDetailsService>());
-
-            var result = controller.Index();
-
-            Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsInstanceOf<UserDetailsViewModel>(((ViewResult)result).Model);
-
-            var viewmodel = ((ViewResult) result).Model as UserDetailsViewModel;
-            Assert.IsNotNull(viewmodel);
-            Assert.AreEqual("Peter", viewmodel.FirstName);
-            Assert.AreEqual("Morlion", viewmodel.LastName);
-        }
-
-        [Test]
-        public void TestIndexPost() {
-            var mockWorkContext = new MockWorkContext();
-            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion");
-            mockWorkContext.CurrentUser = userMock;
-            var orchardServicesMock = new Mock<IOrchardServices>();
-            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            var updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
-            var controller = new AccountController(orchardServicesMock.Object, updateUserDetailsServiceMock.Object);
-            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak"};
-
-            var result = controller.Index(viewModel);
-
-            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
-            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(userMock, "Moe", "Szyslak"));
-        }
-
-        [Test]
-        public void TestIndexPostWithoutFirstName()
-        {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
-            controller.T = NullLocalizer.Instance;
-            var viewModel = new UserDetailsViewModel {
-                FirstName = "",
-                LastName = "Szyslak"
-            };
-
-            var result = controller.Index(viewModel);
-
-            Assert.IsInstanceOf<ViewResult>(result);
-            Assert.AreEqual("", ((ViewResult)result).ViewName);
-            Assert.AreEqual("You must specify a first name.", ((ViewResult)result).ViewData.ModelState["FirstName"].Errors.Single().ErrorMessage);
-        }
-
-        [Test]
-        public void TestIndexPostWithoutLastName()
-        {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
-            controller.T = NullLocalizer.Instance;
-            var viewModel = new UserDetailsViewModel
-            {
-                FirstName = "Moe",
-                LastName = ""
-            };
-
-            var result = controller.Index(viewModel);
-
-            Assert.IsInstanceOf<ViewResult>(result);
-            Assert.AreEqual("", ((ViewResult)result).ViewName);
-            Assert.AreEqual("You must specify a last name.", ((ViewResult)result).ViewData.ModelState["LastName"].Errors.Single().ErrorMessage);
         }
     }
 }

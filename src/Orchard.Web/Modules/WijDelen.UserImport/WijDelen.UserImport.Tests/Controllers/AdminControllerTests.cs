@@ -119,7 +119,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 _csvReaderMock.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
 
                 var userFactory = new UserMockFactory();
-                var john = userFactory.Create("john", "john.doe@example.com", "John", "Doe");
+                var john = userFactory.Create("john", "john.doe@example.com", "John", "Doe", "nl-BE");
                 
                 var userImportResults = new List<UserImportResult> {
                     new UserImportResult("john", "john.doe@example.com") { User = john },
@@ -129,7 +129,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
                 IList<IUser> importedUsers = null;
                 _mailServiceMock
-                    .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "New Group", ""))
+                    .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "The Group", ""))
                     .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
                 var usersFile = new Mock<HttpPostedFileBase>();
@@ -137,7 +137,9 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
                 var viewModel = new AdminIndexViewModel();
                 viewModel.File = usersFile.Object;
-                viewModel.NewGroupName = "New Group";
+                viewModel.SelectedGroupId = 123456;
+
+                _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {new GroupViewModel {Id = 123456, Name = "The Group", LogoUrl = ""} });
 
                 var result = _controller.Index(viewModel);
 
@@ -148,7 +150,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 Assert.AreEqual("john", importedUsers.Single().UserName);
                 Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
 
-                _groupServiceMock.Verify(x => x.AddUsersToGroup("New Group", It.IsAny<IEnumerable<IUser>>()));
+                _groupServiceMock.Verify(x => x.AddUsersToGroup("The Group", It.IsAny<IEnumerable<IUser>>()));
             }
         }
 

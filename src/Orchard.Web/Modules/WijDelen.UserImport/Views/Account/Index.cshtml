@@ -11,7 +11,14 @@
         @Html.TextBoxFor(m => m.LastName)
         @Html.ValidationMessageFor(m => m.LastName)
         
+        <legend>@T("Language")</legend>
+        @Html.DropDownListFor(model => model.Culture, new List<SelectListItem> {
+            new SelectListItem { Text = T("Nederlands").ToString(), Value = "nl-BE" },
+            new SelectListItem { Text = T("English").ToString(), Value = "en-US" },
+        })
+        @Html.ValidationMessageFor(m => m.Culture)
+        
     </fieldset>
 
-    <button class="primaryAction">@T("Submit")</button>
+    <button class="primaryAction">@T("Save")</button>
 }

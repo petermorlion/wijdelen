@@ -4,7 +4,6 @@ using System.Web;
 
 namespace WijDelen.UserImport.ViewModels {
     public class AdminIndexViewModel {
-        public string NewGroupName { get; set; }
         public int SelectedGroupId { get; set; }
         public IEnumerable<GroupViewModel> Groups { get; set; }
 

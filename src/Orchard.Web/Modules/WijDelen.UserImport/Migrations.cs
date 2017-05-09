@@ -102,5 +102,13 @@ namespace WijDelen.UserImport {
 
             return 8;
         }
+
+        public int UpdateFrom8() {
+            SchemaBuilder.AlterTable(typeof(UserDetailsPartRecord).Name, table => table
+                .AddColumn<string>("Culture")
+            );
+
+            return 9;
+        }
     }
 }

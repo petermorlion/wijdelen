@@ -136,7 +136,7 @@ msgstr "Paswoord kwijt?"
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Username"
 msgid "Username"
-msgstr "Gebruikersnaam (email)"
+msgstr "Email"
 
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Password"

@@ -63,9 +63,10 @@ namespace WijDelen.UserImport.Controllers {
             var groupName = groupViewModel.Name;
             var groupLogoUrl = groupViewModel.LogoUrl;
 
-            _groupService.AddUsersToGroup(groupName, userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User));
+            var importedUsers = userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User);
+            _groupService.AddUsersToGroup(groupName, importedUsers);
 
-            SendUserInvitationMails(userImportResults.Where(x => x.WasImported).Select(x => x.User), groupName, groupLogoUrl);
+            SendUserInvitationMails(importedUsers, groupName, groupLogoUrl);
             
             return View("ImportComplete", userImportResults);
         }

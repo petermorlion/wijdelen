@@ -16,4 +16,15 @@
         @Html.TextBoxFor(model => model.LastName)
         @Html.ValidationMessageFor(model => model.LastName)
     </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Culture)
+    </div>
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.Culture, new List<SelectListItem> {
+            new SelectListItem { Text = T("Nederlands").ToString(), Value = "nl-BE" },
+            new SelectListItem { Text = T("English").ToString(), Value = "en-US" },
+        })
+        @Html.ValidationMessageFor(model => model.Culture)
+    </div>
 </fieldset>

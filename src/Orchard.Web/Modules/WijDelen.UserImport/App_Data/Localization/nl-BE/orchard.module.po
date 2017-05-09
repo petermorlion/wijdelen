@@ -153,6 +153,11 @@ msgstr "Voornaam:"
 msgid "Last name:"
 msgstr "Familienaam:"
 
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Language:"
+msgid "Language:"
+msgstr "Taal:"
+
 #: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
 #| msgid "First name"
 msgid "First name"
@@ -163,6 +168,16 @@ msgstr "Voornaam"
 msgid "Last name"
 msgstr "Familienaam"
 
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Language"
+msgid "Language"
+msgstr "Taal"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Save"
+msgid "Save"
+msgstr "Opslaan"
+
 #: wijdelen.userimport.controllers.accountcontroller
 #| msgid "You must specify a last name."
 msgid "TYou must specify a last name."
@@ -172,6 +187,11 @@ msgstr "U moet een familienaam opgeven."
 #| msgid "You must specify a first name."
 msgid "TYou must specify a first name."
 msgstr "U moet een voornaam opgeven."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a language."
+msgid "TYou must specify a language."
+msgstr "U moet een taal opgeven."
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Hello %recipient.username%!"
