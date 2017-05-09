@@ -8,13 +8,13 @@ namespace WijDelen.UserImport.Tests.Models {
     public class UserImportResultTests {
         [Test]
         public void TestWasImportedWithUser() {
-            var userImportResult = new UserImportResult("name", "email") { User = Mock.Of<IUser>()};
+            var userImportResult = new UserImportResult("email") { User = Mock.Of<IUser>()};
             Assert.IsTrue(userImportResult.WasImported);
         }
 
         [Test]
         public void TestWasImportedWithoutUser() {
-            var userImportResult = new UserImportResult("name", "email");
+            var userImportResult = new UserImportResult("email");
             Assert.IsFalse(userImportResult.WasImported);
         }
     }

@@ -4,7 +4,6 @@ using Moq;
 using NUnit.Framework;
 using Orchard.Security;
 using Orchard.Users.Services;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 
 namespace WijDelen.UserImport.Tests.Services {
@@ -12,8 +11,8 @@ namespace WijDelen.UserImport.Tests.Services {
     public class UserImportServiceTests {
         [Test]
         public void TestWithValidUser() {
-            var users = new List<User> {
-                new User { UserName = "john.doe", Email = "john.doe@example.com" }
+            var users = new List<string> {
+                "john.doe@example.com"
             };
 
             CreateUserParams createUserParams = null;
@@ -24,26 +23,26 @@ namespace WijDelen.UserImport.Tests.Services {
                 .Returns(Mock.Of<IUser>());
 
             var userService = new Mock<IUserService>();
-            userService.Setup(x => x.VerifyUserUnicity("john.doe", "john.doe@example.com")).Returns(true);
+            userService.Setup(x => x.VerifyUserUnicity("john.doe@example.com", "john.doe@example.com")).Returns(true);
 
             var service = new UserImportService(memberShipService.Object, userService.Object);
 
             var result = service.ImportUsers(users);
 
-            Assert.AreEqual("john.doe", createUserParams.Username);
+            Assert.AreEqual("john.doe@example.com", createUserParams.Username);
             Assert.AreEqual("john.doe@example.com", createUserParams.Email);
             Assert.IsTrue(createUserParams.IsApproved);
 
             Assert.AreEqual(1, result.Count);
             Assert.IsTrue(result[0].WasImported);
-            Assert.AreEqual("john.doe", result[0].UserName);
+            Assert.AreEqual("john.doe@example.com", result[0].Email);
         }
 
         [Test]
         public void TestWithInvalidEmail()
         {
-            var users = new List<User> {
-                new User { UserName = "john.doe", Email = "john.doe" }
+            var users = new List<string> {
+                "john.doe"
             };
 
             var memberShipService = new Mock<IMembershipService>();
@@ -59,21 +58,21 @@ namespace WijDelen.UserImport.Tests.Services {
 
             Assert.AreEqual(1, result.Count);
             Assert.IsTrue(!result[0].WasImported);
-            Assert.AreEqual("john.doe", result[0].UserName);
-            Assert.AreEqual("User john.doe has an invalid email address.", result[0].ErrorMessages.Single());
+            Assert.AreEqual("john.doe", result[0].Email);
+            Assert.AreEqual("john.doe is an invalid email address.", result[0].ErrorMessages.Single());
         }
 
         [Test]
         public void TestWithDuplicateUserName()
         {
-            var users = new List<User> {
-                new User { UserName = "john.doe", Email = "john.doe@example.com" }
+            var users = new List<string> {
+                "john.doe@example.com"
             };
 
             var memberShipService = new Mock<IMembershipService>();
 
             var userService = new Mock<IUserService>();
-            userService.Setup(x => x.VerifyUserUnicity("john.doe", "john.doe@example.com")).Returns(false);
+            userService.Setup(x => x.VerifyUserUnicity("john.doe@example.com", "john.doe@example.com")).Returns(false);
             
             var service = new UserImportService(memberShipService.Object, userService.Object);
 
@@ -83,50 +82,8 @@ namespace WijDelen.UserImport.Tests.Services {
 
             Assert.AreEqual(1, result.Count);
             Assert.IsTrue(!result[0].WasImported);
-            Assert.AreEqual("john.doe", result[0].UserName);
-            Assert.AreEqual("User john.doe already exists.", result[0].ErrorMessages.Single());
-        }
-
-        [Test]
-        public void TestWithEmptyUserName()
-        {
-            var users = new List<User> {
-                new User { UserName = "", Email = "john.doe@example.com" }
-            };
-
-            var memberShipService = new Mock<IMembershipService>();
-
-            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
-
-            var result = service.ImportUsers(users);
-
-            memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.IsTrue(!result[0].WasImported);
-            Assert.AreEqual("", result[0].UserName);
-            Assert.AreEqual("User with email john.doe@example.com has no username.", result[0].ErrorMessages.Single());
-        }
-
-        [Test]
-        public void TestWithEmptyEmail()
-        {
-            var users = new List<User> {
-                new User { UserName = "john.doe", Email = "" }
-            };
-
-            var memberShipService = new Mock<IMembershipService>();
-
-            var service = new UserImportService(memberShipService.Object, Mock.Of<IUserService>());
-
-            var result = service.ImportUsers(users);
-
-            memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.IsTrue(!result[0].WasImported);
-            Assert.AreEqual("john.doe", result[0].UserName);
-            Assert.AreEqual("User john.doe has no email.", result[0].ErrorMessages.Single());
+            Assert.AreEqual("john.doe@example.com", result[0].Email);
+            Assert.AreEqual("User john.doe@example.com already exists.", result[0].ErrorMessages.Single());
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Autofac;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard;
@@ -28,7 +29,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
         private IContainer _container;
         private Mock<IMailService> _mailServiceMock;
         private Mock<IUserImportService> _userImportServiceMock;
-        private Mock<ICsvReader> _csvReaderMock;
         private Mock<IGroupService> _groupServiceMock;
         private Mock<INotifier> _notifierMock;
 
@@ -40,7 +40,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
             _orchardServicesMock = new Mock<IOrchardServices>();
             _authorizerMock = new Mock<IAuthorizer>();
             _membershipServiceMock = new Mock<IMembershipService>();
-            _csvReaderMock = new Mock<ICsvReader>();
             _userImportServiceMock = new Mock<IUserImportService>();
             _mailServiceMock = new Mock<IMailService>();
             _groupServiceMock = new Mock<IGroupService>();
@@ -51,7 +50,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
             builder.RegisterInstance(_membershipServiceMock.Object).As<IMembershipService>();
             builder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
             builder.RegisterInstance(_userImportServiceMock.Object).As<IUserImportService>();
-            builder.RegisterInstance(_csvReaderMock.Object).As<ICsvReader>();
             builder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
             builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
             builder.RegisterType<AdminController>();
@@ -115,29 +113,29 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
                 site.Setup(x => x.BaseUrl).Returns("baseUrl");
 
-                var users = new List<User>();
-                _csvReaderMock.Setup(x => x.ReadUsers(memoryStream)).Returns(users);
-
                 var userFactory = new UserMockFactory();
                 var john = userFactory.Create("john", "john.doe@example.com", "John", "Doe", "nl-BE");
                 
                 var userImportResults = new List<UserImportResult> {
-                    new UserImportResult("john", "john.doe@example.com") { User = john },
-                    new UserImportResult("jane", "jane.doe@example.com")
+                    new UserImportResult("john.doe@example.com") { User = john },
+                    new UserImportResult("jane.doe@example.com")
                 };
-                _userImportServiceMock.Setup(x => x.ImportUsers(users)).Returns(userImportResults);
+
+                IList<string> importedEmails = null;
+                _userImportServiceMock
+                    .Setup(x => x.ImportUsers(It.IsAny<IList<string>>()))
+                    .Callback((IList<string> e) => importedEmails = e)
+                    .Returns(userImportResults);
 
                 IList<IUser> importedUsers = null;
                 _mailServiceMock
                     .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "The Group", ""))
                     .Callback((IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
 
-                var usersFile = new Mock<HttpPostedFileBase>();
-                usersFile.Setup(x => x.InputStream).Returns(memoryStream);
-
-                var viewModel = new AdminIndexViewModel();
-                viewModel.File = usersFile.Object;
-                viewModel.SelectedGroupId = 123456;
+                var viewModel = new AdminIndexViewModel {
+                    UserEmails = "john.doe@example.com" + Environment.NewLine + "jane.doe@example.com",
+                    SelectedGroupId = 123456
+                };
 
                 _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {new GroupViewModel {Id = 123456, Name = "The Group", LogoUrl = ""} });
 
@@ -149,6 +147,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 Assert.AreEqual(1, importedUsers.Count);
                 Assert.AreEqual("john", importedUsers.Single().UserName);
                 Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
+                importedEmails.ShouldBeEquivalentTo(new[] { "jane.doe@example.com", "john.doe@example.com" });
 
                 _groupServiceMock.Verify(x => x.AddUsersToGroup("The Group", It.IsAny<IEnumerable<IUser>>()));
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Orchard.Localization;
@@ -13,7 +14,6 @@ using WijDelen.UserImport.ViewModels;
 namespace WijDelen.UserImport.Controllers {
     public class AdminController : Controller {
         private readonly IOrchardServices _orchardServices;
-        private readonly ICsvReader _csvReader;
         private readonly IUserImportService _userImportService;
         private readonly IMailService _mailService;
         private readonly IGroupService _groupService;
@@ -22,14 +22,12 @@ namespace WijDelen.UserImport.Controllers {
 
         public AdminController(
             IOrchardServices orchardServices, 
-            ICsvReader csvReader, 
             IUserImportService userImportService, 
             IMailService mailService,
             IGroupService groupService,
             IMembershipService membershipService,
             INotifier notifier) {
             _orchardServices = orchardServices;
-            _csvReader = csvReader;
             _userImportService = userImportService;
             _mailService = mailService;
             _groupService = groupService;
@@ -56,7 +54,7 @@ namespace WijDelen.UserImport.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
-            var users = _csvReader.ReadUsers(viewModel.File.InputStream);
+            var users = viewModel.UserEmails.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             var userImportResults = _userImportService.ImportUsers(users);
 
             var groupViewModel = _groupService.GetGroups().Single(g => g.Id == viewModel.SelectedGroupId);

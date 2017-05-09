@@ -26,7 +26,7 @@
 <h3>@T("The following users were imported:")</h3>
 <ul class="userimport-results">
     @foreach (var result in Model.Where(x => x.WasImported)) {
-        <li>@result.UserName</li>
+        <li>@result.Email</li>
     }
 </ul>
 
@@ -34,7 +34,7 @@
 <ul class="userimport-results">
     @foreach (var result in Model.Where(x => !x.WasImported)) {
         <li>
-            @result.UserName &nbsp;
+            @result.Email &nbsp;
             <ul class="userimport-results-messages">
                 @foreach (var message in result.ErrorMessages) {
                     <li>@message</li>

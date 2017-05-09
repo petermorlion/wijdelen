@@ -5,8 +5,7 @@ namespace WijDelen.UserImport.Models {
     public class UserImportResult {
         private readonly IList<string> _errorMessages;
 
-        public UserImportResult(string userName, string email) {
-            UserName = userName;
+        public UserImportResult(string email) {
             Email = email;
 
             _errorMessages = new List<string>();
@@ -14,7 +13,6 @@ namespace WijDelen.UserImport.Models {
 
         public bool WasImported => User != null;
 
-        public string UserName { get; private set; }
         public string Email { get; private set; }
         public IUser User { get; set; }
 

@@ -10,8 +10,8 @@
 
     <fieldset>
         <legend>@T("User File")</legend>
-        @Html.LabelFor(m => m.File, T("Please use a CSV file where each line contains exactly one valid email address."))
-        @Html.TextBoxFor(m => m.File, new {type="file"})
+        @Html.LabelFor(m => m.UserEmails, T("Please use one line with exactly one valid email address per user to import."))
+        @Html.TextAreaFor(m => m.UserEmails)
     </fieldset>
 
     <fieldset>

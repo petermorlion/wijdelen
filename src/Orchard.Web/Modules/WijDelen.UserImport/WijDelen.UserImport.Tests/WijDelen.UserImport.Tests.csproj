@@ -143,7 +143,6 @@
     <Compile Include="Mocks\UserMock.cs" />
     <Compile Include="Mocks\UserMockFactory.cs" />
     <Compile Include="Models\UserImportResultTests.cs" />
-    <Compile Include="Services\CsvReaderTests.cs" />
     <Compile Include="Services\UserImportServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>

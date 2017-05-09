@@ -4,19 +4,9 @@ msgid "You are not authorized to import users."
 msgstr "Je hebt onvoldoende rechten om gebruikers te importeren."
 
 #: wijdelen.userimport.services.userimportservice
-#| msgid "User with email {0} has no username."
-msgid "User with email {0} has no username."
-msgstr "Gebruiker met email {0} heeft geen gebruikersnaam."
-
-#: wijdelen.userimport.services.userimportservice
-#| msgid "User {0} has no email."
-msgid "User {0} has no email."
-msgstr "Gebruiker {0} heeft geen email."
-
-#: wijdelen.userimport.services.userimportservice
-#| msgid "User {0} has an invalid email address."
-msgid "User {0} has an invalid email address."
-msgstr "Gebruiker {0} heeft een ongeldig email adres."
+#| msgid "{0} is an invalid email address."
+msgid "{0} is an invalid email address."
+msgstr "{0} is een ongeldig email adres."
 
 #: wijdelen.userimport.services.userimportservice
 #| msgid "User {0} already exists."
@@ -79,9 +69,9 @@ msgid "User File"
 msgstr "Bestand"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
-#| msgid "Please use a CSV file where each line contains exactly one valid email address."
-msgid "Please use a CSV file where each line contains exactly one valid email address."
-msgstr "Gebruik een CSV bestand waar iedere lijn slechts één geldig email adres bevat."
+#| msgid "Please use one line with exactly one valid email address per user to import."
+msgid "Please use one line with exactly one valid email address per user to import."
+msgstr "Gelieve per gebruiker die je wil importeren één lijn met een geldig email adres te gebruiken."
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "Submit"

@@ -122,12 +122,9 @@
     <Compile Include="Models\NamePart.cs" />
     <Compile Include="Models\NamePartRecord.cs" />
     <Compile Include="Models\UserImportResult.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminMenu.cs" />
-    <Compile Include="Services\CsvReader.cs" />
     <Compile Include="Services\GroupService.cs" />
-    <Compile Include="Services\ICsvReader.cs" />
     <Compile Include="Services\IGroupService.cs" />
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\IUserImportService.cs" />

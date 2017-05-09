@@ -20,39 +20,28 @@ namespace WijDelen.UserImport.Services {
 
         public Localizer T { get; set; }
 
-        public IList<UserImportResult> ImportUsers(IList<User> users) {
+        public IList<UserImportResult> ImportUsers(IList<string> emails) {
             var result = new List<UserImportResult>();
 
-            foreach (var user in users) {
-                var userImportResult = new UserImportResult(user.UserName, user.Email);
+            foreach (var email in emails) {
+                var userImportResult = new UserImportResult(email);
                 var isValid = true;
 
-                if (string.IsNullOrEmpty(user.UserName)) {
-                    userImportResult.AddErrorMessage(T("User with email {0} has no username.", user.Email).ToString());
+                if (!string.IsNullOrEmpty(email) && !Regex.IsMatch(email, UserPart.EmailPattern)) {
+                    userImportResult.AddErrorMessage(T("{0} is an invalid email address.", email).ToString());
                     isValid = false;
                 }
 
-                if (string.IsNullOrEmpty(user.Email))
-                {
-                    userImportResult.AddErrorMessage(T("User {0} has no email.", user.UserName).ToString());
-                    isValid = false;
-                }
-
-                if (!string.IsNullOrEmpty(user.Email) && !Regex.IsMatch(user.Email, UserPart.EmailPattern)) {
-                    userImportResult.AddErrorMessage(T("User {0} has an invalid email address.", user.UserName).ToString());
-                    isValid = false;
-                }
-
-                if (!string.IsNullOrEmpty(user.UserName) && ! string.IsNullOrEmpty(user.Email) && !_userService.VerifyUserUnicity(user.UserName, user.Email)) {
-                    userImportResult.AddErrorMessage(T("User {0} already exists.", user.UserName, user.Email).ToString());
+                if (!string.IsNullOrEmpty(email) && !_userService.VerifyUserUnicity(email, email)) {
+                    userImportResult.AddErrorMessage(T("User {0} already exists.", email).ToString());
                     isValid = false;
                 }
 
                 if (isValid) {
                     var newUser = _membershipService.CreateUser(new CreateUserParams(
-                        user.UserName,
+                        email,
                         "",
-                        user.Email,
+                        email,
                         "",
                         "",
                         true));
