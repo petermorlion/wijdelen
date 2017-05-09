@@ -170,18 +170,23 @@ msgstr "Opslaan"
 
 #: wijdelen.userimport.controllers.accountcontroller
 #| msgid "You must specify a last name."
-msgid "TYou must specify a last name."
-msgstr "U moet een familienaam opgeven."
+msgid "You must specify a last name."
+msgstr "Je moet een familienaam opgeven."
 
 #: wijdelen.userimport.controllers.accountcontroller
 #| msgid "You must specify a first name."
-msgid "TYou must specify a first name."
-msgstr "U moet een voornaam opgeven."
+msgid "You must specify a first name."
+msgstr "Je moet een voornaam opgeven."
 
 #: wijdelen.userimport.controllers.accountcontroller
 #| msgid "You must specify a language."
-msgid "TYou must specify a language."
-msgstr "U moet een taal opgeven."
+msgid "You must specify a language."
+msgstr "Je moet een taal opgeven."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "Your details have been saved successfully."
+msgid "Your details have been saved successfully."
+msgstr "Je details werden correct opgeslaan."
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Hello %recipient.username%!"

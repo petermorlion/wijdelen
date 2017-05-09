@@ -82,7 +82,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         [HttpPost]
-        [FormValueRequired("submit.Unblock")]
+        [Orchard.Mvc.FormValueRequired("submit.Unblock")]
         public ActionResult Index(BlockedObjectRequestAdminViewModel viewModel) {
             if (viewModel.ObjectRequests.All(x => !x.IsSelected)) {
                 _notifier.Add(NotifyType.Warning, T("Please select at least one request to unblock."));  

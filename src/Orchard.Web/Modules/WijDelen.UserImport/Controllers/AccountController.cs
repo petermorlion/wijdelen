@@ -4,6 +4,7 @@ using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Themes;
+using Orchard.UI.Notify;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
@@ -49,6 +50,7 @@ namespace WijDelen.UserImport.Controllers {
 
             var user = _orchardServices.WorkContext.CurrentUser;
             _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture);
+            _orchardServices.Notifier.Add(NotifyType.Success, T("Your details have been saved successfully."));
             return RedirectToAction("Index");
         }
     }

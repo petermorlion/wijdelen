@@ -1,10 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard;
 using Orchard.Localization;
+using Orchard.Security;
+using Orchard.UI.Notify;
 using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
@@ -13,16 +16,40 @@ using WijDelen.UserImport.ViewModels;
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
     public class AccountControllerTests {
-        [Test]
-        public void TestIndex() {
+        private AccountController _controller;
+        private Mock<IUpdateUserDetailsService> _updateUserDetailsServiceMock;
+        private IUser _userMock;
+        private Mock<INotifier> _notifierMock;
+
+        [SetUp]
+        public void Init() {
             var mockWorkContext = new MockWorkContext();
-            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "nl-BE");
-            mockWorkContext.CurrentUser = userMock;
+            _userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US");
+            mockWorkContext.CurrentUser = _userMock;
             var orchardServicesMock = new Mock<IOrchardServices>();
             orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            var controller = new AccountController(orchardServicesMock.Object, Mock.Of<IUpdateUserDetailsService>());
 
-            var result = controller.Index();
+            _updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
+
+            _notifierMock = new Mock<INotifier>();
+            orchardServicesMock.Setup(x => x.Notifier).Returns(_notifierMock.Object);
+
+            var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.RegisterType<AccountController>();
+            containerBuilder.RegisterInstance(orchardServicesMock.Object).As<IOrchardServices>();
+            containerBuilder.RegisterInstance(_updateUserDetailsServiceMock.Object).As<IUpdateUserDetailsService>();
+            containerBuilder.RegisterInstance(_notifierMock.Object).As<INotifier>();
+
+            var container = containerBuilder.Build();
+
+            _controller = container.Resolve<AccountController>();
+            _controller.T = NullLocalizer.Instance;
+        }
+
+        [Test]
+        public void TestIndex() {
+            var result = _controller.Index();
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.IsInstanceOf<UserDetailsViewModel>(((ViewResult) result).Model);
@@ -31,37 +58,29 @@ namespace WijDelen.UserImport.Tests.Controllers {
             Assert.IsNotNull(viewmodel);
             Assert.AreEqual("Peter", viewmodel.FirstName);
             Assert.AreEqual("Morlion", viewmodel.LastName);
-            Assert.AreEqual("nl-BE", viewmodel.Culture);
+            Assert.AreEqual("en-US", viewmodel.Culture);
         }
 
         [Test]
         public void TestIndexPost() {
-            var mockWorkContext = new MockWorkContext();
-            var userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US");
-            mockWorkContext.CurrentUser = userMock;
-            var orchardServicesMock = new Mock<IOrchardServices>();
-            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            var updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
-            var controller = new AccountController(orchardServicesMock.Object, updateUserDetailsServiceMock.Object);
             var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE"};
 
-            var result = controller.Index(viewModel);
+            var result = _controller.Index(viewModel);
 
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
-            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(userMock, "Moe", "Szyslak", "nl-BE"));
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE"));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Your details have been saved successfully.")));
         }
 
         [Test]
         public void TestIndexPostWithoutCulture() {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
-            controller.T = NullLocalizer.Instance;
             var viewModel = new UserDetailsViewModel {
                 FirstName = "Moe",
                 LastName = "Szyslak",
                 Culture = ""
             };
 
-            var result = controller.Index(viewModel);
+            var result = _controller.Index(viewModel);
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual("", ((ViewResult) result).ViewName);
@@ -70,15 +89,13 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexPostWithoutFirstName() {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
-            controller.T = NullLocalizer.Instance;
             var viewModel = new UserDetailsViewModel {
                 FirstName = "",
                 LastName = "Szyslak",
                 Culture = "nl-BE"
             };
 
-            var result = controller.Index(viewModel);
+            var result = _controller.Index(viewModel);
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual("", ((ViewResult) result).ViewName);
@@ -87,15 +104,13 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestIndexPostWithoutLastName() {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
-            controller.T = NullLocalizer.Instance;
             var viewModel = new UserDetailsViewModel {
                 FirstName = "Moe",
                 LastName = "",
                 Culture = "nl-BE"
             };
 
-            var result = controller.Index(viewModel);
+            var result = _controller.Index(viewModel);
 
             Assert.IsInstanceOf<ViewResult>(result);
             Assert.AreEqual("", ((ViewResult) result).ViewName);
@@ -103,17 +118,16 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         /// <summary>
-        ///     Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
-        ///     runtime exception.
+        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
+        /// runtime exception.
         /// </summary>
         [Test]
         public void TestT() {
-            var controller = new AccountController(Mock.Of<IOrchardServices>(), Mock.Of<IUpdateUserDetailsService>());
             var localizer = NullLocalizer.Instance;
 
-            controller.T = localizer;
+            _controller.T = localizer;
 
-            Assert.AreEqual(localizer, controller.T);
+            Assert.AreEqual(localizer, _controller.T);
         }
     }
 }
