@@ -3,6 +3,11 @@
 msgid "You must specify a username or e-mail."
 msgstr "You must specify an e-mail."
 
+#: orchard.users.controllers.accountcontroller
+#| msgid "The username or e-mail or password provided is incorrect."
+msgid "The username or e-mail or password provided is incorrect."
+msgstr "The e-mail or password provided is incorrect."
+
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Please enter your username and password."
 msgid "Please enter your username and password."

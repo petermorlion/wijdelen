@@ -109,6 +109,11 @@ msgid "You must specify a new password of {0} or more characters."
 msgstr "U moet een nieuw paswoord opgeven van {0} of meer karakters."
 
 #: orchard.users.controllers.accountcontroller
+#| msgid "The username or e-mail or password provided is incorrect."
+msgid "The username or e-mail or password provided is incorrect."
+msgstr "Het email adres of paswoord is niet correct."
+
+#: orchard.users.controllers.accountcontroller
 #| msgid "Log On"
 msgid "Log On"
 msgstr "Aanmelden"
@@ -152,6 +157,11 @@ msgstr "Onthouden"
 #| msgid "Sign in"
 msgid "Sign in"
 msgstr "Aanmelden"
+
+#: ~/Modules/Orchard.Users/Views/LogOn.cshtml
+#| msgid "Login was unsuccessful. Please correct the errors and try again."
+msgid "Login was unsuccessful. Please correct the errors and try again."
+msgstr "Kon niet aanmelden. Gelieve onderstaande fouten te corrigeren en opnieuw te proberen."
 
 #: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
 #| msgid "Lost Password"
