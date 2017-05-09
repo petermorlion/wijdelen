@@ -25,6 +25,7 @@
             <thead>
                 <tr>
                     <th scope="col">@T("Email")</th>
+                    <th scope="col">@T("Group")</th>
                     <th scope="col">@T("Actions")</th>
                 </tr>
             </thead>
@@ -34,12 +35,15 @@
                     @entry.User.Email
                 </td>
                 <td>
-                    @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.User.Id }) |
-                    @Html.ActionLink(T("Delete").ToString(), "Delete", new { entry.User.Id}, new { itemprop = "RemoveUrl UnsafeUrl" }) |
+                    @entry.GroupName
+                </td>
+                <td>
+                    @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }) |
+                    @Html.ActionLink(T("Delete").ToString(), "Delete", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "RemoveUrl UnsafeUrl" }) |
                     @if (entry.User.RegistrationStatus == UserStatus.Pending) {
-                        @Html.ActionLink(T("Approve").ToString(), "Approve", new { entry.User.Id }, new { itemprop = "UnsafeUrl" })
+                        @Html.ActionLink(T("Approve").ToString(), "Approve", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
                     } else {
-                        @Html.ActionLink(T("Disable").ToString(), "Moderate", new { entry.User.Id }, new { itemprop = "UnsafeUrl" })
+                        @Html.ActionLink(T("Disable").ToString(), "Moderate", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
                     }
                 </td>
             </tr>
