@@ -226,12 +226,22 @@ msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
-msgstr "Bedankt en tot binnenkort!
+msgstr "Bedankt en tot binnenkort!""
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
+#| msgid "Unsubscribe"
+msgid "Unsubscribe"
+msgstr "Uitschrijven"
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
 msgstr "Bedankt en tot binnenkort!"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
+#| msgid "Unsubscribe:"
+msgid "Unsubscribe:"
+msgstr "Uitschrijven:"
 
 #: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
 #| msgid "User invitation mail"
