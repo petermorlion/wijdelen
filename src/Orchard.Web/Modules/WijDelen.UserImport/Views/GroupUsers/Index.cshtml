@@ -1,0 +1,47 @@
+@model WijDelen.UserImport.ViewModels.GroupUsersIndexViewModel
+@using Orchard.Core.Shapes;
+@using Orchard.Users.Models;
+@using Orchard.Users.ViewModels;
+
+
+
+@{
+    var userIndex = 0;
+
+    Layout.Title = T("Groups").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost()) { 
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">@T("Email")</th>
+                    <th scope="col">@T("Actions")</th>
+                </tr>
+            </thead>
+            @foreach (var entry in Model.Users) { 
+            <tr>
+                <td>
+                    @entry.User.Email
+                </td>
+                <td>
+                    @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.User.Id }) |
+                    @Html.ActionLink(T("Delete").ToString(), "Delete", new { entry.User.Id}, new { itemprop = "RemoveUrl UnsafeUrl" }) |
+                    @if (entry.User.RegistrationStatus == UserStatus.Pending) {
+                        @Html.ActionLink(T("Approve").ToString(), "Approve", new { entry.User.Id }, new { itemprop = "UnsafeUrl" })
+                    } else {
+                        @Html.ActionLink(T("Disable").ToString(), "Moderate", new { entry.User.Id }, new { itemprop = "UnsafeUrl" })
+                    }
+                </td>
+            </tr>
+                    userIndex++;
+            }
+        </table>
+
+    @Display(Model.Pager)
+
+    </fieldset>
+} 

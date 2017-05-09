@@ -28,6 +28,10 @@ namespace WijDelen.UserImport {
                     .Position("3")
                     .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
                     .Permission(StandardPermissions.SiteOwner)));
+
+            builder.Add(T("Users"),
+                menu => menu.Add(T("Groups"), "3.0", item => item.Action("Index", "GroupUsers", new { area = "WijDelen.UserImport" })
+                    .LocalNav()));
         }
     }
 }
