@@ -16,6 +16,7 @@ using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -32,6 +33,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         private Mock<INotifier> _notifierMock;
         private IUser _otherUser;
         private ObjectRequestMail _persistedMail;
+        private IUser _unsubscribedUser;
 
         [SetUp]
         public void Init() {
@@ -60,6 +62,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var fakeUserFactory = new UserFactory();
             var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
             _otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
+            _unsubscribedUser = fakeUserFactory.Create("john.doe@example.com", "john.doe@example.com", "John", "Doe", false);
+
             _getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
 
             _groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
@@ -87,7 +91,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _findOtherUsersQueryMock
                 .Setup(x => x.GetResults(3, "Sneakers"))
-                .Returns(new[] { _otherUser });
+                .Returns(new[] { _otherUser, _unsubscribedUser });
 
             _objectRequestMailer.Handle(objectRequested);
 

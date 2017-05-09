@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Orchard;
+using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
@@ -53,15 +54,15 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 return;
             }
 
-            SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId, objectRequested.Status);
+            SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
         }
 
         public void Handle(ObjectRequestUnblocked e) {
-            SendObjectRequestMail(e.UserId, e.Description, e.ExtraInfo, e.SourceId, e.Status);
+            SendObjectRequestMail(e.UserId, e.Description, e.ExtraInfo, e.SourceId);
         }
 
-        private void SendObjectRequestMail(int userId, string description, string extraInfo, Guid sourceId, ObjectRequestStatus objectRequestStatus) {
+        private void SendObjectRequestMail(int userId, string description, string extraInfo, Guid sourceId) {
             var objectRequestMail = new ObjectRequestMail(
                 Guid.NewGuid(),
                 userId,
@@ -74,7 +75,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             var groupName = _groupService.GetGroupForUser(userId).Name;
             var otherUsers = _findOtherUsersQuery.GetResults(userId, description).ToList();
 
-            var recipients = _randomSampleService.GetRandomSample(otherUsers, 250);
+            var recipients = _randomSampleService.GetRandomSample(otherUsers, 250).Where(x => x.As<UserDetailsPart>().ReceiveMails);
 
             var userEmails = recipients.Select(x => new UserEmail {UserId = x.Id, Email = x.Email}).ToArray();
 

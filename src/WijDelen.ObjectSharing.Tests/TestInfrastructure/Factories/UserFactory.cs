@@ -12,7 +12,7 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories
     {
         private int _nextId = 1;
 
-        public IUser Create(string userName, string email, string firstName, string lastName)
+        public IUser Create(string userName, string email, string firstName, string lastName, bool receiveMails = true)
         {
             var contentItem = new ContentItem {
                 VersionRecord = new ContentItemVersionRecord
@@ -31,6 +31,7 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories
 
             userDetailsPart.FirstName = firstName;
             userDetailsPart.LastName = lastName;
+            userDetailsPart.ReceiveMails = receiveMails;
 
             var user = new FakeUser {
                 Id = _nextId,
