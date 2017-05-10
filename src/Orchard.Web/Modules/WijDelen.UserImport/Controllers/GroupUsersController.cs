@@ -45,7 +45,7 @@ namespace WijDelen.UserImport.Controllers {
             var users = _orchardServices.ContentManager.Query<UserPart, UserPartRecord>().List().Select(x => x.ContentItem).ToList();
             
             if (selectedGroupId > 0) {
-                users = users.Where(x => x.As<GroupMembershipPart>().Group.Id == selectedGroupId).ToList();
+                users = users.Where(x => x?.As<GroupMembershipPart>()?.Group?.Id == selectedGroupId).ToList();
             }
 
             var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count);
