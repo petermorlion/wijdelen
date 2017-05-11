@@ -27,6 +27,7 @@
                     <th scope="col">@T("Email")</th>
                     <th scope="col">@T("Group")</th>
                     <th scope="col">@T("Actions")</th>
+                    <th scope="col">@T("Last Login Time")</th>
                 </tr>
             </thead>
             @foreach (var entry in Model.Users) { 
@@ -44,6 +45,12 @@
                         @Html.ActionLink(T("Approve").ToString(), "Approve", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
                     } else {
                         @Html.ActionLink(T("Disable").ToString(), "Moderate", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
+                    }
+                </td>
+                <td>
+                    @if (entry.User.LastLoginUtc != null)
+                    {
+                        @Display(New.DateTimeRelative(dateTimeUtc: entry.User.LastLoginUtc))
                     }
                 </td>
             </tr>
