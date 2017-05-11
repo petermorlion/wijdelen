@@ -1,4 +1,5 @@
-﻿@model WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel
+﻿@using WijDelen.ObjectSharing.Controllers
+@model WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel
 
 @{
     Style.Include("auto-complete.css");
@@ -6,17 +7,16 @@
     Script.Include("ObjectRequest/new.js").AtFoot();
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new { Area = "WijDelen.ObjectSharing" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
     <fieldset>
         <legend>@T("I would like to borrow the following item")</legend>
-        @Html.TextBoxFor(m => m.Description, new { data_auto_complete = "true" })
+        @Html.TextBoxFor(m => m.Description, new {data_auto_complete = "true", maxlength = ObjectRequestController.MaximumDescriptionLength })
         @Html.ValidationMessageFor(m => m.Description)
     </fieldset>
 
     <fieldset>
         <legend>@T("A nice story to convince the group members")</legend>
-        @Html.TextAreaFor(m => m.ExtraInfo)
+        @Html.TextAreaFor(m => m.ExtraInfo, new {maxlength = ObjectRequestController.MaximumExtraInfoLength})
         @Html.ValidationMessageFor(m => m.ExtraInfo)
         <div class="objectrequest-progressbar">
             <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
