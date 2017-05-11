@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Security;
@@ -20,35 +22,19 @@ using WijDelen.ObjectSharing.ViewModels;
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ObjectRequestControllerTests {
-        /// <summary>
-        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
-        /// </summary>
-        [Test]
-        public void TestT() {
-            var controller = new ObjectRequestController(null, null, null, null);
-            var localizer = NullLocalizer.Instance;
+        private ObjectRequestController _controller;
+        private Mock<ICommandHandler<RequestObject>> _commandHandlerMock;
+        private Guid _objectRequestIdForOtherUser;
+        private Guid _objectRequestId;
+        private ObjectRequestRecord[] _persistentRecords;
+        private ChatRecord[] _chatRecords;
+        private Guid _blockedObjectRequestId;
 
-            controller.T = localizer;
+        [SetUp]
+        public void Init() {
+            var containerBuilder = new ContainerBuilder();
 
-            Assert.AreEqual(localizer, controller.T);
-        }
-
-        [Test]
-        public void ShouldValidateNewObjectRequest() {
-            var controller = new ObjectRequestController(null, null, null, null);
-            var viewModel = new NewObjectRequestViewModel();
-
-            var viewResult = controller.New(viewModel);
-
-            ((ViewResult) viewResult).ViewData.ModelState["Description"].Errors.Single().ErrorMessage.Should().Be("Please provide a description of the item you need.");
-            ((ViewResult) viewResult).ViewData.ModelState["ExtraInfo"].Errors.Single().ErrorMessage.Should().Be("Please provide some extra info.");
-        }
-
-        [Test]
-        public void WhenPosting_ShouldCallCommandHandlerAndRedirect() {
-            var commandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
-            RequestObject command = null;
-            commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
+            _commandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
 
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Id).Returns(22);
@@ -57,13 +43,77 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var notifierMock = new Mock<INotifier>();
             services.Notifier = notifierMock.Object;
 
-            var controller = new ObjectRequestController(commandHandlerMock.Object, null, null, services);
+            _objectRequestIdForOtherUser = Guid.NewGuid();
+            _objectRequestId = Guid.NewGuid();
+            _blockedObjectRequestId = Guid.NewGuid();
+            _persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = _objectRequestIdForOtherUser,
+                    UserId = 10
+                },
+                new ObjectRequestRecord {
+                    AggregateId = _objectRequestId,
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2016, 1, 1)
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22,
+                    CreatedDateTime = new DateTime(2017, 1, 1)
+                },
+                new ObjectRequestRecord {
+                    AggregateId = _blockedObjectRequestId,
+                    UserId = 22,
+                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
+                }
+            };
+
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(_persistentRecords);
+
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+            _chatRecords = new[] {
+                new ChatRecord {
+                    ObjectRequestId = _objectRequestId
+                },
+                new ChatRecord {
+                    ObjectRequestId = Guid.NewGuid()
+                }
+            };
+            chatRepositoryMock.SetRecords(_chatRecords);
+
+            containerBuilder.RegisterInstance(_commandHandlerMock.Object).As<ICommandHandler<RequestObject>>();
+            containerBuilder.RegisterInstance(services).As<IOrchardServices>();
+            containerBuilder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            containerBuilder.RegisterInstance(chatRepositoryMock.Object).As<IRepository<ChatRecord>>();
+            containerBuilder.RegisterType<ObjectRequestController>();
+            var container = containerBuilder.Build();
+
+            _controller = container.Resolve<ObjectRequestController>();
+            _controller.T = NullLocalizer.Instance;
+        }
+        
+        [Test]
+        public void ShouldValidateNewObjectRequest() {
+            var viewModel = new NewObjectRequestViewModel();
+
+            var viewResult = _controller.New(viewModel);
+
+            ((ViewResult) viewResult).ViewData.ModelState["Description"].Errors.Single().ErrorMessage.Should().Be("Please provide a description of the item you need.");
+            ((ViewResult) viewResult).ViewData.ModelState["ExtraInfo"].Errors.Single().ErrorMessage.Should().Be("Please provide some extra info.");
+        }
+
+        [Test]
+        public void WhenPosting_ShouldCallCommandHandlerAndRedirect() {
+            RequestObject command = null;
+            _commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
+
             var viewModel = new NewObjectRequestViewModel {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking.........................."
             };
 
-            var actionResult = controller.New(viewModel);
+            var actionResult = _controller.New(viewModel);
 
             ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("Item");
             ((RedirectToRouteResult) actionResult).RouteValues["id"].Should().Be(command.ObjectRequestId);
@@ -75,107 +125,25 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
         [Test]
         public void WhenGettingItemForWrongUser_ShouldReturnUnauthorized() {
-            var id = Guid.NewGuid();
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(22);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = id,
-                    UserId = 10
-                }
-            };
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(persistentRecords);
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-
-            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
-
-            var actionResult = controller.Item(id);
+            var actionResult = _controller.Item(_objectRequestIdForOtherUser);
 
             actionResult.Should().BeOfType<HttpUnauthorizedResult>();
         }
 
         [Test]
         public void WhenGettingItem_ShouldReturnView() {
-            var id = Guid.NewGuid();
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(22);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var objectRequestRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = id,
-                    UserId = 22
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22
-                }
-            };
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(objectRequestRecords);
-
-            var chatRecords = new[] {
-                new ChatRecord {
-                    ObjectRequestId = id
-                },
-                new ChatRecord {
-                    ObjectRequestId = Guid.NewGuid()
-                }
-            };
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-            chatRepositoryMock.SetRecords(chatRecords);
-
-            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
-
-            var actionResult = controller.Item(id);
+            var actionResult = _controller.Item(_objectRequestId);
 
             ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
-                ObjectRequestRecord = objectRequestRecords[0],
-                ChatRecords = new List<ChatRecord> { chatRecords[0] }
+                ObjectRequestRecord = _persistentRecords[1],
+                ChatRecords = new List<ChatRecord> { _chatRecords[0] }
             });
         }
 
         [Test]
         public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest()
         {
-            var id = Guid.NewGuid();
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(22);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var objectRequestRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = id,
-                    UserId = 22,
-                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22
-                }
-            };
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(objectRequestRecords);
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-
-            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, services);
-
-            var actionResult = controller.Item(id);
+            var actionResult = _controller.Item(_blockedObjectRequestId);
 
             ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("New");
         }
@@ -184,90 +152,21 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenGettingItemForUnknownId_ShouldReturnNotFound() {
             var id = Guid.NewGuid();
 
-            var persistentRecords = new ObjectRequestRecord[0];
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(persistentRecords);
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-
-            var controller = new ObjectRequestController(null, objectRequestRepositoryMock.Object, chatRepositoryMock.Object, null);
-
-            var actionResult = controller.Item(id);
+            var actionResult = _controller.Item(id);
 
             actionResult.Should().BeOfType<HttpNotFoundResult>();
         }
 
         [Test]
-        public void WhenGettingIndex_ShouldReturnView() {
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(22);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22,
-                    CreatedDateTime = new DateTime(2016, 11, 27)
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22,
-                    CreatedDateTime = new DateTime(2016, 12, 27)
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 23
-                }
-            };
-
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
-
-            var controller = new ObjectRequestController(null, repositoryMock.Object, null, services);
-
-            var actionResult = controller.Index();
+        public void WhenGettingIndex_ShouldReturnViewWithNonBlockedRequests() {
+            var actionResult = _controller.Index();
 
             var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
             model.Should().NotBeNull();
             model.Count().Should().Be(2);
-            model.ToList()[0].Should().Be(persistentRecords[1]);
-            model.ToList()[1].Should().Be(persistentRecords[0]);
-        }
-
-        [Test]
-        public void WhenGettingIndex_ShouldNotReturnBlockedRequests() {
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(22);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22,
-                    CreatedDateTime = new DateTime(2016, 11, 27),
-                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22,
-                    CreatedDateTime = new DateTime(2016, 12, 27)
-                }
-            };
-
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
-
-            var controller = new ObjectRequestController(null, repositoryMock.Object, null, services);
-
-            var actionResult = controller.Index();
-
-            var model = ((ViewResult)actionResult).Model as IEnumerable<ObjectRequestRecord>;
-            model.Should().NotBeNull();
-            model.Count().Should().Be(1);
-            model.ToList()[0].Should().Be(persistentRecords[1]);
+            model.ToList()[0].Should().Be(_persistentRecords[2]);
+            model.ToList()[1].Should().Be(_persistentRecords[1]);
+            model.ToList().Should().NotContain(_persistentRecords[3]);
         }
     }
 }
