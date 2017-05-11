@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
@@ -152,6 +153,16 @@ namespace WijDelen.ObjectSharing {
                 .AddColumn<string>("Status", column => column.WithLength(50)));
 
             return 13;
+        }
+
+        public int UpdateFrom13() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AlterColumn("ExtraInfo", column => column.WithType(DbType.String).Unlimited()));
+
+            SchemaBuilder.AlterTable(typeof(ReceivedObjectRequestRecord).Name, table => table
+                .AlterColumn("ExtraInfo", column => column.WithType(DbType.String).Unlimited()));
+
+            return 14;
         }
     }
 }
