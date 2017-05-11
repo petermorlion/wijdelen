@@ -68,6 +68,16 @@ msgstr "Gelieve een beetje extra informatie te geven."
 msgid "Please provide some more extra info (at least 30 characters)."
 msgstr "Gelieve een beetje meer extra informatie te geven (ten minste 30 karakters)."
 
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Please limit your description to {0} characters."
+msgid "Please limit your description to {0} characters."
+msgstr "Gelieve de omschrijving te beperken tot {0} karakters."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "Please limit the extra info to {0} characters."
+msgid "Please limit the extra info to {0} characters."
+msgstr "Gelieve de extra informatie te beperken tot {0} karakters."
+
 #: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
 #| msgid "Thank you for your request. We sent your request to the members of your group."
 msgid "Thank you for your request. We sent your request to the members of your group."

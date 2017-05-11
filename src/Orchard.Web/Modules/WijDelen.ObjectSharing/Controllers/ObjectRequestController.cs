@@ -20,6 +20,9 @@ namespace WijDelen.ObjectSharing.Controllers {
         private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IOrchardServices _orchardServices;
 
+        private const int MaximumDescriptionLength = 50;
+        private const int MaximumExtraInfoLength = 1000;
+
         public ObjectRequestController(
             ICommandHandler<RequestObject> requestObjectCommandHandler,
             IRepository<ObjectRequestRecord> objectRequestRepository,
@@ -41,10 +44,14 @@ namespace WijDelen.ObjectSharing.Controllers {
         public ActionResult New(NewObjectRequestViewModel viewModel) {
             if (string.IsNullOrWhiteSpace(viewModel.Description)) {
                 ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.Description, T("Please provide a description of the item you need."));
+            } else if (viewModel.Description.Length > MaximumDescriptionLength) {
+                ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.Description, T("Please limit your description to {0} characters.", MaximumDescriptionLength));
             }
 
             if (string.IsNullOrWhiteSpace(viewModel.ExtraInfo)) {
                 ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some extra info."));
+            } else if (viewModel.Description.Length > MaximumDescriptionLength) {
+                ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please limit the extra info to {0} characters.", MaximumExtraInfoLength));
             }
 
             if (!string.IsNullOrWhiteSpace(viewModel.ExtraInfo) && viewModel.ExtraInfo.Length < 30) {

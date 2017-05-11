@@ -22,14 +22,6 @@ using WijDelen.ObjectSharing.ViewModels;
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ObjectRequestControllerTests {
-        private ObjectRequestController _controller;
-        private Mock<ICommandHandler<RequestObject>> _commandHandlerMock;
-        private Guid _objectRequestIdForOtherUser;
-        private Guid _objectRequestId;
-        private ObjectRequestRecord[] _persistentRecords;
-        private ChatRecord[] _chatRecords;
-        private Guid _blockedObjectRequestId;
-
         [SetUp]
         public void Init() {
             var containerBuilder = new ContainerBuilder();
@@ -92,15 +84,81 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             _controller = container.Resolve<ObjectRequestController>();
             _controller.T = NullLocalizer.Instance;
         }
-        
+
+        private ObjectRequestController _controller;
+        private Mock<ICommandHandler<RequestObject>> _commandHandlerMock;
+        private Guid _objectRequestIdForOtherUser;
+        private Guid _objectRequestId;
+        private ObjectRequestRecord[] _persistentRecords;
+        private ChatRecord[] _chatRecords;
+        private Guid _blockedObjectRequestId;
+
         [Test]
-        public void ShouldValidateNewObjectRequest() {
+        public void ShouldNotAllowEmptyValuesForNewObjectRequest() {
             var viewModel = new NewObjectRequestViewModel();
 
             var viewResult = _controller.New(viewModel);
 
             ((ViewResult) viewResult).ViewData.ModelState["Description"].Errors.Single().ErrorMessage.Should().Be("Please provide a description of the item you need.");
             ((ViewResult) viewResult).ViewData.ModelState["ExtraInfo"].Errors.Single().ErrorMessage.Should().Be("Please provide some extra info.");
+        }
+
+        [Test]
+        public void ShouldNotAllowTooLongValuesForNewObjectRequest() {
+            var viewModel = new NewObjectRequestViewModel {
+                Description = new string('*', 51),
+                ExtraInfo = new string('*', 1001)
+            };
+
+            var viewResult = _controller.New(viewModel);
+
+            ((ViewResult) viewResult).ViewData.ModelState["Description"].Errors.Single().ErrorMessage.Should().Be("Please limit your description to 50 characters.");
+            ((ViewResult) viewResult).ViewData.ModelState["ExtraInfo"].Errors.Single().ErrorMessage.Should().Be("Please limit the extra info to 1000 characters.");
+        }
+
+        [Test]
+        public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest() {
+            var actionResult = _controller.Item(_blockedObjectRequestId);
+
+            ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("New");
+        }
+
+        [Test]
+        public void WhenGettingIndex_ShouldReturnViewWithNonBlockedRequests() {
+            var actionResult = _controller.Index();
+
+            var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
+            model.Should().NotBeNull();
+            model.Count().Should().Be(2);
+            model.ToList()[0].Should().Be(_persistentRecords[2]);
+            model.ToList()[1].Should().Be(_persistentRecords[1]);
+            model.ToList().Should().NotContain(_persistentRecords[3]);
+        }
+
+        [Test]
+        public void WhenGettingItem_ShouldReturnView() {
+            var actionResult = _controller.Item(_objectRequestId);
+
+            ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
+                ObjectRequestRecord = _persistentRecords[1],
+                ChatRecords = new List<ChatRecord> {_chatRecords[0]}
+            });
+        }
+
+        [Test]
+        public void WhenGettingItemForUnknownId_ShouldReturnNotFound() {
+            var id = Guid.NewGuid();
+
+            var actionResult = _controller.Item(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenGettingItemForWrongUser_ShouldReturnUnauthorized() {
+            var actionResult = _controller.Item(_objectRequestIdForOtherUser);
+
+            actionResult.Should().BeOfType<HttpUnauthorizedResult>();
         }
 
         [Test]
@@ -121,52 +179,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking..........................");
             command.UserId.Should().Be(22);
-        }
-
-        [Test]
-        public void WhenGettingItemForWrongUser_ShouldReturnUnauthorized() {
-            var actionResult = _controller.Item(_objectRequestIdForOtherUser);
-
-            actionResult.Should().BeOfType<HttpUnauthorizedResult>();
-        }
-
-        [Test]
-        public void WhenGettingItem_ShouldReturnView() {
-            var actionResult = _controller.Item(_objectRequestId);
-
-            ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ObjectRequestViewModel {
-                ObjectRequestRecord = _persistentRecords[1],
-                ChatRecords = new List<ChatRecord> { _chatRecords[0] }
-            });
-        }
-
-        [Test]
-        public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest()
-        {
-            var actionResult = _controller.Item(_blockedObjectRequestId);
-
-            ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("New");
-        }
-
-        [Test]
-        public void WhenGettingItemForUnknownId_ShouldReturnNotFound() {
-            var id = Guid.NewGuid();
-
-            var actionResult = _controller.Item(id);
-
-            actionResult.Should().BeOfType<HttpNotFoundResult>();
-        }
-
-        [Test]
-        public void WhenGettingIndex_ShouldReturnViewWithNonBlockedRequests() {
-            var actionResult = _controller.Index();
-
-            var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
-            model.Should().NotBeNull();
-            model.Count().Should().Be(2);
-            model.ToList()[0].Should().Be(_persistentRecords[2]);
-            model.ToList()[1].Should().Be(_persistentRecords[1]);
-            model.ToList().Should().NotContain(_persistentRecords[3]);
         }
     }
 }
