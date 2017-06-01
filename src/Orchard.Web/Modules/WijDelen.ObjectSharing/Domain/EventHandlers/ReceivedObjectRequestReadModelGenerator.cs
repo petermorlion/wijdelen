@@ -9,18 +9,41 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         IEventHandler<ObjectRequestConfirmed>,
         IEventHandler<ObjectRequestDenied>,
         IEventHandler<ObjectRequestDeniedForNow> {
-        private readonly IRepository<ReceivedObjectRequestRecord> _repository;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
+        private readonly IRepository<ReceivedObjectRequestRecord> _repository;
 
         public ReceivedObjectRequestReadModelGenerator(IRepository<ReceivedObjectRequestRecord> repository, IRepository<ObjectRequestRecord> objectRequestRepository) {
             _repository = repository;
             _objectRequestRepository = objectRequestRepository;
         }
 
+        public void Handle(ObjectRequestConfirmed e) {
+            var record = _repository.Get(x => x.UserId == e.ConfirmingUserId && x.ObjectRequestId == e.SourceId);
+            if (record == null) return;
+
+            _repository.Delete(record);
+        }
+
+        public void Handle(ObjectRequestDenied e) {
+            var record = _repository.Get(x => x.UserId == e.DenyingUserId && x.ObjectRequestId == e.SourceId);
+            if (record == null)
+                return;
+
+            _repository.Delete(record);
+        }
+
+        public void Handle(ObjectRequestDeniedForNow e) {
+            var record = _repository.Get(x => x.UserId == e.DenyingUserId && x.ObjectRequestId == e.SourceId);
+            if (record == null)
+                return;
+
+            _repository.Delete(record);
+        }
+
         public void Handle(ObjectRequestMailSent e) {
             var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == e.ObjectRequestId);
 
-            foreach (var recipient in e.Recipients) {
+            foreach (var recipient in e.Recipients)
                 _repository.Create(new ReceivedObjectRequestRecord {
                     UserId = recipient.UserId,
                     ObjectRequestId = e.ObjectRequestId,
@@ -29,22 +52,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     ReceivedDateTime = e.SentDateTime,
                     RequestingUserId = e.RequestingUserId
                 });
-            }
-        }
-
-        public void Handle(ObjectRequestConfirmed e) {
-            var record = _repository.Get(x => x.UserId == e.ConfirmingUserId && x.ObjectRequestId == e.SourceId);
-            _repository.Delete(record);
-        }
-
-        public void Handle(ObjectRequestDenied e) {
-            var record = _repository.Get(x => x.UserId == e.DenyingUserId && x.ObjectRequestId == e.SourceId);
-            _repository.Delete(record);
-        }
-
-        public void Handle(ObjectRequestDeniedForNow e) {
-            var record = _repository.Get(x => x.UserId == e.DenyingUserId && x.ObjectRequestId == e.SourceId);
-            _repository.Delete(record);
         }
     }
 }
