@@ -31,6 +31,59 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         public Localizer T { get; set; }
 
         public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users) {
+            var usersByCulture = users.GroupBy(x => x.As<UserDetailsPart>()?.Culture);
+            foreach (var usersByCultureGroup in usersByCulture)
+                SendLocalizedObjectRequestMail(usersByCultureGroup.Key, requestingUserName, groupName, objectRequestId, description, extraInfo, objectRequestMail, usersByCultureGroup.ToArray());
+        }
+
+        public void SendChatMessageAddedMail(string fromUserName, string description, string toEmailAddress, Guid chatId, string message) {
+            var subject = T("{0} reacted on your request for a {1}.", fromUserName, description).ToString();
+            var to = new[] {toEmailAddress};
+
+            var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
+            var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
+
+            var groupLogoUrl = "";
+
+            if (_orchardServices.WorkContext.CurrentUser != null) {
+                var user = _orchardServices.WorkContext.CurrentUser;
+                var groupMembership = user.As<GroupMembershipPart>();
+                var group = groupMembership.Group;
+                var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
+            }
+
+            var textShape = _shapeFactory.Create("Template_ChatMessageAddedMail_Text", Arguments.From(new {
+                FromUserName = fromUserName,
+                Description = description,
+                Message = message,
+                ChatUrl = chatUrl,
+                UnsubscribeUrl = unsubscribeUrl
+            }));
+
+            var htmlShape = _shapeFactory.Create("Template_ChatMessageAddedMail", Arguments.From(new {
+                GroupLogoUrl = groupLogoUrl,
+                FromUserName = fromUserName,
+                Description = description,
+                Message = message,
+                ChatUrl = chatUrl,
+                UnsubscribeUrl = unsubscribeUrl
+            }));
+
+            var text = _shapeDisplay.Display(textShape);
+            var html = _shapeDisplay.Display(htmlShape);
+
+            _mailgunClient.Send(to, "", subject, text, html);
+        }
+
+        private void SendLocalizedObjectRequestMail(string culture, string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users) {
+            var originalCulture = _orchardServices.WorkContext.CurrentCulture;
+
+            if (!string.IsNullOrEmpty(culture))
+                _orchardServices.WorkContext.CurrentCulture = culture;
+
             var recipients = new List<string>();
             var userEmails = users.Select(x => new UserEmail {UserId = x.Id, Email = x.Email}).ToList();
 
@@ -86,48 +139,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             _mailgunClient.Send(recipients, "", subject, text, html);
 
             objectRequestMail.MarkAsSent(userEmails, html);
-        }
 
-        public void SendChatMessageAddedMail(string fromUserName, string description, string toEmailAddress, Guid chatId, string message) {
-            var subject = T("{0} reacted on your request for a {1}.", fromUserName, description).ToString();
-            var to = new[] {toEmailAddress};
-
-            var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
-            var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
-
-            var groupLogoUrl = "";
-
-            if (_orchardServices.WorkContext.CurrentUser != null) {
-                var user = _orchardServices.WorkContext.CurrentUser;
-                var groupMembership = user.As<GroupMembershipPart>();
-                var group = groupMembership.Group;
-                var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
-                var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
-
-                if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
-            }
-
-            var textShape = _shapeFactory.Create("Template_ChatMessageAddedMail_Text", Arguments.From(new {
-                FromUserName = fromUserName,
-                Description = description,
-                Message = message,
-                ChatUrl = chatUrl,
-                UnsubscribeUrl = unsubscribeUrl
-            }));
-
-            var htmlShape = _shapeFactory.Create("Template_ChatMessageAddedMail", Arguments.From(new {
-                GroupLogoUrl = groupLogoUrl,
-                FromUserName = fromUserName,
-                Description = description,
-                Message = message,
-                ChatUrl = chatUrl,
-                UnsubscribeUrl = unsubscribeUrl
-            }));
-
-            var text = _shapeDisplay.Display(textShape);
-            var html = _shapeDisplay.Display(htmlShape);
-
-            _mailgunClient.Send(to, "", subject, text, html);
+            _orchardServices.WorkContext.CurrentCulture = originalCulture;
         }
     }
 }
