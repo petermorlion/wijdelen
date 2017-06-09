@@ -2,11 +2,13 @@
 using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
+using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Users.Events;
 using Orchard.Users.Services;
 using WijDelen.UserImport.Controllers;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
 
@@ -16,7 +18,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestGetWithNonce() {
             var userMockFactory = new UserMockFactory();
-            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "", "", "nl-BE");
+            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "", "", "nl-BE", GroupMembershipStatus.Pending);
 
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(userMock);
@@ -35,7 +37,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestGetWithNonceAndUserAlreadyHasFirstAndLastName() {
             var userMockFactory = new UserMockFactory();
-            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "Moe", "Szyslak", "nl-BE");
+            var userMock = userMockFactory.Create("moe@simpsons.com", "moe@simpsons.com", "Moe", "Szyslak", "nl-BE", GroupMembershipStatus.Pending);
 
             var userServiceMock = new Mock<IUserService>();
             userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(userMock);
@@ -171,10 +173,10 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestSuccessfulPost() {
-            var user = new Mock<IUser>();
+            var user = new UserMockFactory().Create("john.doe", "john.doe@example.com", "John", "Doe", "en", GroupMembershipStatus.Pending);
 
             var userServiceMock = new Mock<IUserService>();
-            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(user.Object);
+            userServiceMock.Setup(x => x.ValidateLostPassword("nonce")).Returns(user);
 
             var membershipServiceMock = new Mock<IMembershipService>();
             membershipServiceMock.Setup(x => x.GetSettings()).Returns(new MembershipSettings {MinRequiredPasswordLength = 7});
@@ -188,13 +190,14 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             var result = controller.Index("nonce", "password1", "password1", "John", "Doe", "nl-BE");
 
-            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(user.Object, "John", "Doe", "nl-BE", true));
-            membershipServiceMock.Verify(x => x.SetPassword(user.Object, "password1"));
-            userEventHandlerMock.Verify(x => x.ChangedPassword(user.Object));
+            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(user, "John", "Doe", "nl-BE", true));
+            membershipServiceMock.Verify(x => x.SetPassword(user, "password1"));
+            userEventHandlerMock.Verify(x => x.ChangedPassword(user));
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
             Assert.AreEqual("Index", ((RedirectToRouteResult) result).RouteValues["action"]);
             Assert.AreEqual("WijDelen.ObjectSharing", ((RedirectToRouteResult) result).RouteValues["area"]);
             Assert.AreEqual("GetStarted", ((RedirectToRouteResult) result).RouteValues["controller"]);
+            Assert.AreEqual(GroupMembershipStatus.Approved, user.As<GroupMembershipPart>().GroupMembershipStatus);
         }
 
         /// <summary>

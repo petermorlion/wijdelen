@@ -13,23 +13,20 @@ namespace WijDelen.UserImport.Models {
 
         [Required]
         [DisplayName("Last Name")]
-        public string LastName
-        {
+        public string LastName {
             get { return Retrieve(r => r.LastName); }
             set { Store(r => r.LastName, value); }
         }
 
         [Required]
         [DisplayName("Language")]
-        public string Culture
-        {
+        public string Culture {
             get { return Retrieve(r => r.Culture); }
             set { Store(r => r.Culture, value); }
         }
 
         [DisplayName("Receive mails")]
-        public bool ReceiveMails
-        {
+        public bool ReceiveMails {
             get { return Retrieve(r => r.ReceiveMails); }
             set { Store(r => r.ReceiveMails, value); }
         }

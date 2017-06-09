@@ -9,7 +9,7 @@ namespace WijDelen.UserImport.Tests.Mocks {
     public class UserMockFactory {
         private int _nextId = 1;
 
-        public IUser Create(string userName, string email, string firstName, string lastName, string culture)
+        public IUser Create(string userName, string email, string firstName, string lastName, string culture, GroupMembershipStatus groupMembershipStatus)
         {
             var contentItem = new ContentItem
             {
@@ -27,10 +27,16 @@ namespace WijDelen.UserImport.Tests.Mocks {
             infosetPart.TypePartDefinition = new ContentTypePartDefinition(new ContentPartDefinition("InfosetPart"), new SettingsDictionary());
             contentItem.Weld(infosetPart);
 
+            var groupMembershipPart = new GroupMembershipPart { Record = new GroupMembershipPartRecord() };
+            groupMembershipPart.TypePartDefinition = new ContentTypePartDefinition(new ContentPartDefinition("GroupMembershipPart"), new SettingsDictionary());
+            contentItem.Weld(groupMembershipPart);
+
             userDetailsPart.FirstName = firstName;
             userDetailsPart.LastName = lastName;
             userDetailsPart.Culture = culture;
             userDetailsPart.ReceiveMails = true;
+
+            groupMembershipPart.GroupMembershipStatus = groupMembershipStatus;
 
             var user = new UserMock
             {

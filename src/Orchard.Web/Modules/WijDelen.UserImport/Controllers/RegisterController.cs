@@ -83,6 +83,8 @@ namespace WijDelen.UserImport.Controllers {
 
             _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture, true);
 
+            user.As<GroupMembershipPart>().GroupMembershipStatus = GroupMembershipStatus.Approved;
+
             _userEventHandler.ChangedPassword(user);
 
             return RedirectToAction("Index", "GetStarted", new {area = "WijDelen.ObjectSharing"});

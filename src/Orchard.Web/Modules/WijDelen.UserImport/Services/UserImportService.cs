@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Users.Models;

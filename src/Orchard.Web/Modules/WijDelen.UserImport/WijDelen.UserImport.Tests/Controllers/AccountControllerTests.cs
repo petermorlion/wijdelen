@@ -9,6 +9,7 @@ using Orchard.Localization;
 using Orchard.Security;
 using Orchard.UI.Notify;
 using WijDelen.UserImport.Controllers;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
 using WijDelen.UserImport.ViewModels;
@@ -24,7 +25,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [SetUp]
         public void Init() {
             var mockWorkContext = new MockWorkContext();
-            _userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US");
+            _userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US", GroupMembershipStatus.Approved);
             mockWorkContext.CurrentUser = _userMock;
             var orchardServicesMock = new Mock<IOrchardServices>();
             orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);

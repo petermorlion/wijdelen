@@ -287,3 +287,23 @@ msgstr "Goedkeuren"
 #| msgid "Disable"
 msgid "Disable"
 msgstr "Uitschakelen"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Active"
+msgid "Active"
+msgstr "Actief"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Account activated"
+msgid "Account activated"
+msgstr "Account geactiveerd"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Pending"
+msgid "Pending"
+msgstr "Niet actief"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Account pending"
+msgid "Account pending"
+msgstr "Account wacht op activatie"

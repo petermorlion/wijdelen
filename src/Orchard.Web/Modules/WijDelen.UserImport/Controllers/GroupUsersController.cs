@@ -57,7 +57,11 @@ namespace WijDelen.UserImport.Controllers {
 
             var model = new GroupUsersIndexViewModel {
                 Users = results
-                    .Select(x => new GroupUserEntry {User = x.As<UserPart>().Record, GroupName = x.As<GroupMembershipPart>()?.Group?.As<NamePart>()?.Name })
+                    .Select(x => new GroupUserEntry {
+                        User = x.As<UserPart>().Record,
+                        GroupName = x.As<GroupMembershipPart>()?.Group?.As<NamePart>()?.Name,
+                        GroupMembershipStatus = x.As<GroupMembershipPart>()?.GroupMembershipStatus ?? GroupMembershipStatus.Pending
+                    })
                     .ToList(),
                 Pager = pagerShape,
                 Groups = groups

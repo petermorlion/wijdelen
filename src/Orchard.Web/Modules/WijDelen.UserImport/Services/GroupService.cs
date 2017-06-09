@@ -12,7 +12,7 @@ namespace WijDelen.UserImport.Services {
     public class GroupService : IGroupService {
         private readonly IOrchardServices _orchardServices;
 
-        public GroupService(IContentManager contentManager, IOrchardServices orchardServices) {
+        public GroupService(IOrchardServices orchardServices) {
             _orchardServices = orchardServices;
         }
 
@@ -27,6 +27,7 @@ namespace WijDelen.UserImport.Services {
 
             foreach (var user in users) {
                 user.As<GroupMembershipPart>().Group = group;
+                user.As<GroupMembershipPart>().GroupMembershipStatus = GroupMembershipStatus.Pending;
             }
         }
 

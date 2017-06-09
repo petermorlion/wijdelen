@@ -17,6 +17,7 @@ using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -64,7 +65,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
             _otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
             _unsubscribedUser = fakeUserFactory.Create("john.doe@example.com", "john.doe@example.com", "John", "Doe", false);
-            _pendingUser = fakeUserFactory.Create("jane.doe@example.com", "jane.doe@example.com", "Jane", "Doe", true, UserStatus.Pending);
+            _pendingUser = fakeUserFactory.Create("jane.doe@example.com", "jane.doe@example.com", "Jane", "Doe", true, GroupMembershipStatus.Pending);
 
             _getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
 

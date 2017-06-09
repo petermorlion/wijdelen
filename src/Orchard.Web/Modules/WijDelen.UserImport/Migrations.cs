@@ -118,5 +118,13 @@ namespace WijDelen.UserImport {
 
             return 10;
         }
+
+        public int UpdateFrom10() {
+            SchemaBuilder.AlterTable(typeof(GroupMembershipPartRecord).Name, table => table
+                .AddColumn<string>("GroupMembershipStatus", column => column.WithDefault("Approved").NotNull())
+            );
+
+            return 11;
+        }
     }
 }

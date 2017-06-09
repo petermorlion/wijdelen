@@ -2,6 +2,7 @@
 @using Orchard.Core.Shapes;
 @using Orchard.Users.Models;
 @using Orchard.Users.ViewModels;
+@using WijDelen.UserImport.Models
 
 
 
@@ -39,12 +40,18 @@
                     @entry.GroupName
                 </td>
                 <td>
-                    @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }) |
-                    @Html.ActionLink(T("Delete").ToString(), "Delete", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "RemoveUrl UnsafeUrl" }) |
+                    @if (entry.GroupMembershipStatus == GroupMembershipStatus.Approved) { 
+                        <img class="icon" src="@Href("~/Modules/WijDelen.UserImport/Content/groupmembership-approved.png")" alt="@T("Active")" title="@T("Account activated")" /> 
+                    } else { 
+                        <img class="icon" src="@Href("~/Modules/WijDelen.UserImport/Content/groupmembership-pending.png")" alt="@T("Pending")" title="@T("Account pending")" />
+                    } 
+                    @Html.ActionLink(T("Edit").ToString(), "Edit", new {entry.User.Id, area = "Orchard.Users", controller = "Admin"}) |
+                    @Html.ActionLink(T("Delete").ToString(), "Delete", new {entry.User.Id, area = "Orchard.Users", controller = "Admin"}, new {itemprop = "RemoveUrl UnsafeUrl"}) |
                     @if (entry.User.RegistrationStatus == UserStatus.Pending) {
-                        @Html.ActionLink(T("Approve").ToString(), "Approve", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
-                    } else {
-                        @Html.ActionLink(T("Disable").ToString(), "Moderate", new { entry.User.Id, area = "Orchard.Users", controller = "Admin" }, new { itemprop = "UnsafeUrl" })
+                        @Html.ActionLink(T("Approve").ToString(), "Approve", new {entry.User.Id, area = "Orchard.Users", controller = "Admin"}, new {itemprop = "UnsafeUrl"})
+                    }
+                    else {
+                        @Html.ActionLink(T("Disable").ToString(), "Moderate", new {entry.User.Id, area = "Orchard.Users", controller = "Admin"}, new {itemprop = "UnsafeUrl"})
                     }
                 </td>
                 <td>
