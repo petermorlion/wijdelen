@@ -89,6 +89,11 @@ namespace WijDelen.UserImport.Controllers {
         [Orchard.Mvc.FormValueRequired("submit.ResendUserInvitationMails")]
         public ActionResult Index(string returnUrl, int selectedGroupId = 0)
         {
+            if (selectedGroupId == 0) {
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("You must select a group. No mails were sent."));
+                return RedirectToAction("Index", new { selectedGroupId });
+            }
+
             return RedirectToAction("ConfirmResendUserInvitationMails", new { selectedGroupId, returnUrl });
         }
 

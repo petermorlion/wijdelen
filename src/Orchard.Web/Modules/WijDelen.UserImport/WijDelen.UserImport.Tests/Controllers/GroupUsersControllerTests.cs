@@ -94,6 +94,18 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         [Test]
+        public void TestPostResendUserInvitationMailsWithoutGroupId() {
+            var result = _controller.Index("returnUrl");
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+
+            var redirectToRouteResult = (RedirectToRouteResult)result;
+            redirectToRouteResult.RouteValues["action"].Should().Be("Index");
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("You must select a group. No mails were sent.")));
+        }
+
+        [Test]
         public void TestConfirmResendUserInvitationMails() {
             _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {
                 new GroupViewModel { Id = 1 },

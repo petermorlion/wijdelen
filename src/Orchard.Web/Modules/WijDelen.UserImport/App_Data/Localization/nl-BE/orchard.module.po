@@ -337,3 +337,8 @@ msgstr "Nee"
 #| msgid "The invitation mails have been sent."
 msgid "The invitation mails have been sent."
 msgstr "De uitnodigingsmails werden verstuurd."
+
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "You must select a group. No mails were sent."
+msgid "You must select a group. No mails were sent."
+msgstr "Je moet een groep selecteren. Er werden geen mails verstuurd."
