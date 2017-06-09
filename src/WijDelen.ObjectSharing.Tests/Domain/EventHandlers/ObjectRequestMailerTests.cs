@@ -7,7 +7,6 @@ using Orchard;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.UI.Notify;
-using Orchard.Users.Models;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -111,7 +110,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 "Sneakers", 
                 "For sneaking", 
                 _persistedMail, 
-                new UserEmail {UserId = _otherUser.Id, Email = "peter.morlion@gmail.com"}));
+                It.Is((IUser u) => u.Id == _otherUser.Id && u.Email == "peter.morlion@gmail.com")));
 
             _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
 
@@ -142,7 +141,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<ObjectRequestMail>(),
-                It.IsAny<UserEmail[]>()), Times.Never);
+                It.IsAny<IUser[]>()), Times.Never);
 
             _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
 
@@ -181,7 +180,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 "Sextant",
                 "For sextanting",
                 _persistedMail,
-                new UserEmail { UserId = _otherUser.Id, Email = "peter.morlion@gmail.com" }));
+                It.Is((IUser u) => u.Id == _otherUser.Id && u.Email == "peter.morlion@gmail.com")));
 
             _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);

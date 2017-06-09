@@ -1,11 +1,11 @@
 ﻿using System;
 using Orchard;
+using Orchard.Security;
 using WijDelen.ObjectSharing.Domain.Entities;
-using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public interface IMailService : IDependency {
-        void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params UserEmail[] userEmails);
+        void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users);
         void SendChatMessageAddedMail(string fromUserName, string description, string toEmailAddress, Guid chatId, string message);
     }
 }

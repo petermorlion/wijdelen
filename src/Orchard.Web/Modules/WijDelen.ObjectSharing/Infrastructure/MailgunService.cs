@@ -6,6 +6,7 @@ using Orchard.ContentManagement;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.MediaLibrary.Fields;
+using Orchard.Security;
 using WijDelen.Mailgun;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
@@ -29,9 +30,12 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
         public Localizer T { get; set; }
 
-        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params UserEmail[] userEmails) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users) {
             var recipients = new List<string>();
-            foreach (var userEmail in userEmails) recipients.Add(userEmail.Email);
+            var userEmails = users.Select(x => new UserEmail {UserId = x.Id, Email = x.Email}).ToList();
+
+            foreach (var userEmail in userEmails)
+                recipients.Add(userEmail.Email);
 
             var subject = T("Do you have (a) {0}?", description).ToString();
 

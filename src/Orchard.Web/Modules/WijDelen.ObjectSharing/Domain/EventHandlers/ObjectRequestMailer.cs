@@ -4,7 +4,6 @@ using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.UI.Notify;
-using Orchard.Users.Models;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
@@ -78,8 +77,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             var recipients = _randomSampleService.GetRandomSample(otherUsers, 250).Where(x => x.As<UserDetailsPart>().ReceiveMails && x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Approved);
 
-            var userEmails = recipients.Select(x => new UserEmail {UserId = x.Id, Email = x.Email}).ToArray();
-
             _mailService.SendObjectRequestMail(
                 requestingUserName,
                 groupName,
@@ -87,7 +84,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 description,
                 extraInfo,
                 objectRequestMail,
-                userEmails);
+                recipients.ToArray());
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
         }
