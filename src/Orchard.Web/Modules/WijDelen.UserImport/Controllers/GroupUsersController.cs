@@ -5,6 +5,7 @@ using Orchard;
 using Orchard.ContentManagement;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
+using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Admin;
@@ -18,13 +19,15 @@ namespace WijDelen.UserImport.Controllers {
     [Admin]
     public class GroupUsersController : Controller {
         private readonly IGroupService _groupService;
+        private readonly IMailService _mailService;
         private readonly IOrchardServices _orchardServices;
         private readonly ISiteService _siteService;
 
-        public GroupUsersController(IOrchardServices orchardServices, ISiteService siteService, IShapeFactory shapeFactory, IGroupService groupService) {
+        public GroupUsersController(IOrchardServices orchardServices, ISiteService siteService, IShapeFactory shapeFactory, IGroupService groupService, IMailService mailService) {
             _orchardServices = orchardServices;
             _siteService = siteService;
             _groupService = groupService;
+            _mailService = mailService;
 
             Shape = shapeFactory;
             T = NullLocalizer.Instance;
@@ -79,6 +82,28 @@ namespace WijDelen.UserImport.Controllers {
         [Orchard.Mvc.FormValueRequired("submit.Filter")]
         public ActionResult Index(int selectedGroupId = 0) {
             return RedirectToAction("Index", new {selectedGroupId});
+        }
+
+        [HttpPost]
+        [Orchard.Mvc.FormValueRequired("submit.ResendUserInvitationMails")]
+        public ActionResult Index(string returnUrl, int selectedGroupId = 0)
+        {
+            return RedirectToAction("ConfirmResendUserInvitationMails", new { selectedGroupId, returnUrl });
+        }
+
+        public ActionResult ConfirmResendUserInvitationMails(string returnUrl, int selectedGroupId) {
+            var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
+            return View(new ConfirmResendUserInvitationMailsViewModel { GroupId = selectedGroupId, GroupName = groupViewModel.Name, ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmResendUserInvitationMails(int selectedGroupId, string returnUrl) {
+            var users = _groupService.GetUsersInGroup(selectedGroupId).Where(x => x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Pending);
+            var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
+            var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+            _mailService.SendUserInvitationMails(users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl);
+            
+            return Redirect(returnUrl);
         }
     }
 }

@@ -133,6 +133,7 @@
     <Compile Include="Services\MailgunService.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Services\UserImportService.cs" />
+    <Compile Include="ViewModels\ConfirmResendUserInvitationMailsViewModel.cs" />
     <Compile Include="ViewModels\EditGroupMembershipViewModel.cs" />
     <Compile Include="ViewModels\GroupUsersIndexViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
@@ -226,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GroupUsers\ConfirmResendUserInvitationMails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

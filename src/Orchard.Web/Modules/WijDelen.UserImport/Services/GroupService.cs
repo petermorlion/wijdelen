@@ -88,8 +88,13 @@ namespace WijDelen.UserImport.Services {
             return groupViewModel;
         }
 
-        public bool IsMemberOfGroup(int userId) {
-            return GetGroupForUser(userId) != null;
+        public IList<IUser> GetUsersInGroup(int groupId) {
+            var result = new List<IUser>();
+            foreach (var userPart in _orchardServices.ContentManager.Query<UserPart, UserPartRecord>().List().ToList()) {
+                result.Add(userPart);
+            }
+
+            return result;
         }
     }
 }

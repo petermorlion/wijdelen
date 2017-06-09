@@ -10,9 +10,7 @@ namespace WijDelen.UserImport.Services {
         string GetGroupName(IContent group);
         IEnumerable<GroupViewModel> GetGroups();
         void UpdateGroupMembershipForContentItem(ContentItem contentItem, EditGroupMembershipViewModel model);
-
         GroupViewModel GetGroupForUser(int userId);
-
-        bool IsMemberOfGroup(int userId);
+        IList<IUser> GetUsersInGroup(int groupId);
     }
 }

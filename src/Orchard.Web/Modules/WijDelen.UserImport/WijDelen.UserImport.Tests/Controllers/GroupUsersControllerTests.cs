@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using Autofac;
 using FluentAssertions;
 using Moq;
@@ -10,18 +13,25 @@ using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Navigation;
 using WijDelen.UserImport.Controllers;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.Tests.Mocks;
+using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
     public class GroupUsersControllerTests {
         private GroupUsersController _controller;
         private Mock<IAuthorizer> _authorizerMock;
+        private Mock<IGroupService> _groupServiceMock;
+        private Mock<IMailService> _mailServiceMock;
 
         [SetUp]
         public void Init() {
-            var mockWorkContext = new MockWorkContext();
+            var site = new Mock<ISite>();
+            site.Setup(x => x.BaseUrl).Returns("baseUrl");
+            var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
+
             _authorizerMock = new Mock<IAuthorizer>();
 
             var orchardServicesMock = new Mock<IOrchardServices>();
@@ -30,7 +40,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             
             var siteServiceMock = new Mock<ISiteService>();
             var shapeFactoryMock = new Mock<IShapeFactory>();
-            var groupServiceMock = new Mock<IGroupService>();
+            _groupServiceMock = new Mock<IGroupService>();
+            _mailServiceMock = new Mock<IMailService>();
             
             var containerBuilder = new ContainerBuilder();
 
@@ -38,7 +49,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             containerBuilder.RegisterInstance(orchardServicesMock.Object).As<IOrchardServices>();
             containerBuilder.RegisterInstance(siteServiceMock.Object).As<ISiteService>();
             containerBuilder.RegisterInstance(shapeFactoryMock.Object).As<IShapeFactory>();
-            containerBuilder.RegisterInstance(groupServiceMock.Object).As<IGroupService>();
+            containerBuilder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
+            containerBuilder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
 
             var container = containerBuilder.Build();
 
@@ -57,14 +69,75 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
         [Test]
         public void TestPostFilter() {
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
-
             var result = _controller.Index(3);
 
             result.Should().BeOfType<RedirectToRouteResult>();
 
             var redirectToRouteResult = (RedirectToRouteResult) result;
             redirectToRouteResult.RouteValues["action"].Should().Be("Index");
+        }
+
+        [Test]
+        public void TestPostResendUserInvitationMails() {
+            var result = _controller.Index("returnUrl", 3);
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+
+            var redirectToRouteResult = (RedirectToRouteResult) result;
+            redirectToRouteResult.RouteValues["action"].Should().Be("ConfirmResendUserInvitationMails");
+            redirectToRouteResult.RouteValues["selectedGroupId"].Should().Be(3);
+            redirectToRouteResult.RouteValues["returnUrl"].Should().Be("returnUrl");
+        }
+
+        [Test]
+        public void TestConfirmResendUserInvitationMails() {
+            _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {
+                new GroupViewModel { Id = 1 },
+                new GroupViewModel { Id = 1 },
+                new GroupViewModel { Id = 3, Name = "TestGroup" }
+            });
+
+            var result = _controller.ConfirmResendUserInvitationMails("returnUrl", 3);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult) result;
+            viewResult.Model.Should().BeOfType<ConfirmResendUserInvitationMailsViewModel>();
+
+            var viewModel = (ConfirmResendUserInvitationMailsViewModel) viewResult.Model;
+            viewModel.GroupId.Should().Be(3);
+            viewModel.GroupName.Should().Be("TestGroup");
+            viewModel.ReturnUrl.Should().Be("returnUrl");
+        }
+
+        [Test]
+        public void TestPostConfirmResendUserInvitationMails() {
+            _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {
+                new GroupViewModel { Id = 1 },
+                new GroupViewModel { Id = 1 },
+                new GroupViewModel { Id = 3, Name = "TestGroup", LogoUrl = "abc" }
+            });
+
+            var pendingUser = new UserMockFactory().Create("john.doe", "john.doe@example.com", "John", "Doe", "en", GroupMembershipStatus.Pending);
+            var approvedUser = new UserMockFactory().Create("jane.doe", "jane.doe@example.com", "Jane", "Doe", "en", GroupMembershipStatus.Approved);
+            _groupServiceMock.Setup(x => x.GetUsersInGroup(3)).Returns(new[] {
+                pendingUser,
+                approvedUser
+            });
+
+            IEnumerable<IUser> recipients = null;
+            _mailServiceMock
+                .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
+                .Callback((IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { recipients = users; });
+
+            var result = _controller.ConfirmResendUserInvitationMails(3, "returnUrl");
+
+            result.Should().BeOfType<RedirectResult>();
+
+            var redirectToRouteResult = (RedirectResult)result;
+            redirectToRouteResult.Url.Should().Be("returnUrl");
+
+            recipients.Single().Should().Be(pendingUser);
         }
     }
 }

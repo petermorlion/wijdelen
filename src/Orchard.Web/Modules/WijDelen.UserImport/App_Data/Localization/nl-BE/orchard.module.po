@@ -307,3 +307,28 @@ msgstr "Niet actief"
 #| msgid "Account pending"
 msgid "Account pending"
 msgstr "Account wacht op activatie"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Resend invitation mails"
+msgid "Resend invitation mails"
+msgstr "Verstuur uitnodigingsmails opnieuw"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Confirm"
+msgid "Confirm"
+msgstr "Bevestig"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Are you sure you want to resend the invitation mail to the inactive users of the group {0}?"
+msgid "Are you sure you want to resend the invitation mail to the inactive users of the group {0}?"
+msgstr "Weet je zeker dat je de uitnodigingsmail naar de niet-actieve gebruikers van de groep {0} wil versturen?"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Ja"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "No
+msgid "No"
+msgstr "Nee"
