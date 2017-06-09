@@ -3,6 +3,7 @@ using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 using Orchard.ContentManagement.MetaData.Models;
 using Orchard.ContentManagement.Records;
 using Orchard.Security;
+using Orchard.Users.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.UserImport.Models;
 
@@ -12,7 +13,7 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories
     {
         private int _nextId = 1;
 
-        public IUser Create(string userName, string email, string firstName, string lastName, bool receiveMails = true)
+        public IUser Create(string userName, string email, string firstName, string lastName, bool receiveMails = true, UserStatus emailStatus = UserStatus.Approved)
         {
             var contentItem = new ContentItem {
                 VersionRecord = new ContentItemVersionRecord
@@ -29,9 +30,15 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories
             infosetPart.TypePartDefinition = new ContentTypePartDefinition(new ContentPartDefinition("InfosetPart"), new SettingsDictionary());
             contentItem.Weld(infosetPart);
 
+            var userPart = new UserPart { Record = new UserPartRecord() };
+            userPart.TypePartDefinition = new ContentTypePartDefinition(new ContentPartDefinition("UserPart"), new SettingsDictionary());
+            contentItem.Weld(userPart);
+
             userDetailsPart.FirstName = firstName;
             userDetailsPart.LastName = lastName;
             userDetailsPart.ReceiveMails = receiveMails;
+
+            userPart.EmailStatus = emailStatus;
 
             var user = new FakeUser {
                 Id = _nextId,

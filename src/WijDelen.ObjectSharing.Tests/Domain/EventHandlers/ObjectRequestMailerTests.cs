@@ -7,6 +7,7 @@ using Orchard;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.UI.Notify;
+using Orchard.Users.Models;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -16,7 +17,6 @@ using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
@@ -34,6 +34,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         private IUser _otherUser;
         private ObjectRequestMail _persistedMail;
         private IUser _unsubscribedUser;
+        private IUser _pendingUser;
 
         [SetUp]
         public void Init() {
@@ -63,6 +64,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
             _otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
             _unsubscribedUser = fakeUserFactory.Create("john.doe@example.com", "john.doe@example.com", "John", "Doe", false);
+            _pendingUser = fakeUserFactory.Create("jane.doe@example.com", "jane.doe@example.com", "Jane", "Doe", true, UserStatus.Pending);
 
             _getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
 
@@ -91,7 +93,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _findOtherUsersQueryMock
                 .Setup(x => x.GetResults(3, "Sneakers"))
-                .Returns(new[] { _otherUser, _unsubscribedUser });
+                .Returns(new[] { _otherUser, _unsubscribedUser, _pendingUser });
 
             _objectRequestMailer.Handle(objectRequested);
 
