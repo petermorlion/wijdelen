@@ -74,5 +74,11 @@ namespace WijDelen.UserImport.Controllers {
 
             return View(model);
         }
+
+        [HttpPost]
+        [Orchard.Mvc.FormValueRequired("submit.Filter")]
+        public ActionResult Index(int selectedGroupId = 0) {
+            return RedirectToAction("Index", new {selectedGroupId});
+        }
     }
 }

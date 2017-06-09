@@ -54,5 +54,17 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             result.Should().BeOfType<HttpUnauthorizedResult>();
         }
+
+        [Test]
+        public void TestPostFilter() {
+            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+
+            var result = _controller.Index(3);
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+
+            var redirectToRouteResult = (RedirectToRouteResult) result;
+            redirectToRouteResult.RouteValues["action"].Should().Be("Index");
+        }
     }
 }
