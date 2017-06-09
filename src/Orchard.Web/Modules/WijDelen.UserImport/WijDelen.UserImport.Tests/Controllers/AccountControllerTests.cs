@@ -6,6 +6,7 @@ using Moq;
 using NUnit.Framework;
 using Orchard;
 using Orchard.Localization;
+using Orchard.Localization.Providers;
 using Orchard.Security;
 using Orchard.UI.Notify;
 using WijDelen.UserImport.Controllers;
@@ -21,16 +22,19 @@ namespace WijDelen.UserImport.Tests.Controllers {
         private Mock<IUpdateUserDetailsService> _updateUserDetailsServiceMock;
         private IUser _userMock;
         private Mock<INotifier> _notifierMock;
+        private Mock<ICultureStorageProvider> _cultureStorageProviderMock;
+        private MockWorkContext _mockWorkContext;
 
         [SetUp]
         public void Init() {
-            var mockWorkContext = new MockWorkContext();
+            _mockWorkContext = new MockWorkContext();
             _userMock = new UserMockFactory().Create("peter.morlion@gmail.com", "peter.morlion@gmail.com", "Peter", "Morlion", "en-US", GroupMembershipStatus.Approved);
-            mockWorkContext.CurrentUser = _userMock;
+            _mockWorkContext.CurrentUser = _userMock;
             var orchardServicesMock = new Mock<IOrchardServices>();
-            orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
+            orchardServicesMock.Setup(x => x.WorkContext).Returns(_mockWorkContext);
 
             _updateUserDetailsServiceMock = new Mock<IUpdateUserDetailsService>();
+            _cultureStorageProviderMock = new Mock<ICultureStorageProvider>();
 
             _notifierMock = new Mock<INotifier>();
             orchardServicesMock.Setup(x => x.Notifier).Returns(_notifierMock.Object);
@@ -41,6 +45,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             containerBuilder.RegisterInstance(orchardServicesMock.Object).As<IOrchardServices>();
             containerBuilder.RegisterInstance(_updateUserDetailsServiceMock.Object).As<IUpdateUserDetailsService>();
             containerBuilder.RegisterInstance(_notifierMock.Object).As<INotifier>();
+            containerBuilder.RegisterInstance(_cultureStorageProviderMock.Object).As<ICultureStorageProvider>();
 
             var container = containerBuilder.Build();
 
@@ -72,6 +77,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
             _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE", false));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Your details have been saved successfully.")));
+            _cultureStorageProviderMock.Verify(x => x.SetCulture("nl-BE"));
+            _mockWorkContext.CurrentCulture.Should().Be("nl-BE");
         }
 
         [Test]

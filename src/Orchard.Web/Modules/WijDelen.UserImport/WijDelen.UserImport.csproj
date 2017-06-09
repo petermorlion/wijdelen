@@ -166,6 +166,10 @@
       <Name>Orchard.Core</Name>
       <Private>false</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Localization\Orchard.Localization.csproj">
+      <Project>{FBC8B571-ED50-49D8-8D9D-64AB7454A0D6}</Project>
+      <Name>Orchard.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.MediaLibrary\Orchard.MediaLibrary.csproj">
       <Project>{73A7688A-5BD3-4F7E-ADFA-CE36C5A10E3B}</Project>
       <Name>Orchard.MediaLibrary</Name>
