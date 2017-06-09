@@ -247,3 +247,43 @@ msgstr "Opnieuw versturen"
 #| msgid "Groups"
 msgid "Groups"
 msgstr "Groepen"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Groups"
+msgid "Groups"
+msgstr "Groepen"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groep"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Actions"
+msgid "Actions"
+msgstr "Acties"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Last Login Time"
+msgid "Last Login Time"
+msgstr "Laatste login"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Edit"
+msgid "Edit"
+msgstr "Bewerken"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Delete"
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Approve"
+msgid "Approve"
+msgstr "Goedkeuren"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Disable"
+msgid "Disable"
+msgstr "Uitschakelen"

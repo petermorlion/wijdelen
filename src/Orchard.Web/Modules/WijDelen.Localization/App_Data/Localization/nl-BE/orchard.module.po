@@ -1,0 +1,39 @@
+﻿#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} seconds ago"
+msgid "{0} seconds ago"
+msgstr "{0} seconden geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} minutes ago"
+msgid "{0} minutes ago"
+msgstr "{0} minuten geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} hours ago"
+msgid "{0} hours ago"
+msgstr "{0} uren geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} days ago"
+msgid "{0} days ago"
+msgstr "{0} dagen geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} weeks ago"
+msgid "{0} weeks ago"
+msgstr "{0} weken geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} months ago"
+msgid "{0} months ago"
+msgstr "{0} maanden geleden"
+
+#: Orchard.Core.Shapes.DateTimeShapes
+#| msgid "{0} years ago"
+msgid "{0} years ago"
+msgstr "{0} jaren geleden"
+
+#: ~/Themes/TheAdmin/Views/Pager.cshtml
+#| msgid "Showing items {0} - {1} of {2}"
+msgid "Showing items {0} - {1} of {2}"
+msgstr "Items {0} - {1} van {2}"
