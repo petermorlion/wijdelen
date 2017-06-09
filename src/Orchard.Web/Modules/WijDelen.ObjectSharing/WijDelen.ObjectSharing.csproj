@@ -227,7 +227,6 @@
     <Compile Include="ViewModels\SynonymsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets.json" />
     <Content Include="Scripts\auto-complete.js" />
     <Content Include="Scripts\auto-complete.min.js" />
     <Content Include="Scripts\ObjectRequest\new.js" />
@@ -271,9 +270,7 @@
       <Name>WijDelen.UserImport</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 [
     {
         "inputs": [ "Assets/Styles.less" ],
-        "output": "Styles/Styles.css"
+        "output": "Styles/WijDelen.UserImport.Styles.css"
     }
 ]

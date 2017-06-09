@@ -131,8 +131,8 @@
     <Content Include="Assets\Styles.less" />
     <Content Include="node_modules\milligram-less\examples\index.html" />
     <Content Include="node_modules\normalize.css\normalize.css" />
-    <Content Include="Styles\Styles.css" />
-    <Content Include="Styles\Styles.min.css" />
+    <Content Include="Styles\WijDelen.Reports.Styles.css" />
+    <Content Include="Styles\WijDelen.Reports.Styles.min.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
