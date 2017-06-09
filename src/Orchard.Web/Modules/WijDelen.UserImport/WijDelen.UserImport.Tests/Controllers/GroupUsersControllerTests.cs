@@ -12,6 +12,7 @@ using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Navigation;
+using Orchard.UI.Notify;
 using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
@@ -25,6 +26,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         private Mock<IAuthorizer> _authorizerMock;
         private Mock<IGroupService> _groupServiceMock;
         private Mock<IMailService> _mailServiceMock;
+        private Mock<INotifier> _notifierMock;
 
         [SetUp]
         public void Init() {
@@ -33,10 +35,12 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
 
             _authorizerMock = new Mock<IAuthorizer>();
+            _notifierMock = new Mock<INotifier>();
 
             var orchardServicesMock = new Mock<IOrchardServices>();
             orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
             orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
+            orchardServicesMock.Setup(x => x.Notifier).Returns(_notifierMock.Object);
             
             var siteServiceMock = new Mock<ISiteService>();
             var shapeFactoryMock = new Mock<IShapeFactory>();
@@ -138,6 +142,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             redirectToRouteResult.Url.Should().Be("returnUrl");
 
             recipients.Single().Should().Be(pendingUser);
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("The invitation mails have been sent.")));
         }
     }
 }

@@ -332,3 +332,8 @@ msgstr "Ja"
 #| msgid "No
 msgid "No"
 msgstr "Nee"
+
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "The invitation mails have been sent."
+msgid "The invitation mails have been sent."
+msgstr "De uitnodigingsmails werden verstuurd."

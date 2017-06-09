@@ -10,6 +10,7 @@ using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Admin;
 using Orchard.UI.Navigation;
+using Orchard.UI.Notify;
 using Orchard.Users.Models;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
@@ -101,7 +102,9 @@ namespace WijDelen.UserImport.Controllers {
             var users = _groupService.GetUsersInGroup(selectedGroupId).Where(x => x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Pending);
             var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+
             _mailService.SendUserInvitationMails(users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl);
+            _orchardServices.Notifier.Add(NotifyType.Success, T("The invitation mails have been sent."));
             
             return Redirect(returnUrl);
         }
