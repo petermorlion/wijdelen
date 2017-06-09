@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: Peter Morlion
 Website: http://www.redstar.be
-Version: 3.3.0
+Version: 3.3.1
 OrchardVersion: 1.10
 Description: User import for Peergroups
 Features:
