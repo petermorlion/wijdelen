@@ -90,7 +90,7 @@ namespace WijDelen.UserImport.Services {
 
         public IList<IUser> GetUsersInGroup(int groupId) {
             var result = new List<IUser>();
-            foreach (var userPart in _orchardServices.ContentManager.Query<UserPart, UserPartRecord>().List().ToList()) {
+            foreach (var userPart in _orchardServices.ContentManager.Query<UserPart, UserPartRecord>().List().Where(x => x.As<GroupMembershipPart>()?.Group?.Id == groupId).ToList()) {
                 result.Add(userPart);
             }
 
