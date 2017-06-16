@@ -33,7 +33,7 @@
 @using (Html.BeginFormAntiForgeryPost(Url.Action("AddMessage", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
     @Html.HiddenFor(m => m.ChatId)
     <fieldset>
-        @Html.TextBoxFor(m => m.NewMessage, new {placeholder = T("Write a message here.") })
+        @Html.TextAreaFor(m => m.NewMessage, new {placeholder = T("Write a message here.") })
         @Html.ValidationMessageFor(m => m.NewMessage)
     </fieldset>
 
