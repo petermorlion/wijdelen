@@ -4,22 +4,25 @@
     Layout.Title = Model.ObjectRequestRecord.Description;
 }
 
-@Model.ObjectRequestRecord.ExtraInfo
+<span style="white-space: pre-line">@Model.ObjectRequestRecord.ExtraInfo</span>
 
 <h2>@T("Reactions")</h2>
 
 <ul class="objectrequestlist">
-    @if (Model.ChatRecords.Any()) {
-        foreach (var chatRecord in @Model.ChatRecords) {
+    @if (Model.ChatRecords.Any())
+    {
+        foreach (var chatRecord in @Model.ChatRecords)
+        {
             <li class="objectrequestlist-item">
                 @Html.ActionLink(chatRecord.ConfirmingUserName,
                     "Index",
-                    new {controller = "Chat", area = "WijDelen.ObjectSharing", id = chatRecord.ChatId},
-                    new {@class = "objectrequestlist-link"})
+                    new { controller = "Chat", area = "WijDelen.ObjectSharing", id = chatRecord.ChatId },
+                    new { @class = "objectrequestlist-link" })
             </li>
         }
     }
-    else {
+    else
+    {
         @T("There are no reactions yet.")
     }
 </ul>
