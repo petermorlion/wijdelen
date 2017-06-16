@@ -74,6 +74,11 @@ msgid "Send mails in"
 msgstr "Mails versturen in"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "The imported users will also use this language as default. They can change this on registration."
+msgid "The imported users will also use this language as default. They can change this on registration."
+msgstr "De geïmporteerde gebruikers zullen deze taal gebruiken. Ze kunnen dit veranderen bij registratie."
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "Please use one line with exactly one valid email address per user to import."
 msgid "Please use one line with exactly one valid email address per user to import."
 msgstr "Gelieve per gebruiker die je wil importeren één lijn met een geldig email adres te gebruiken."

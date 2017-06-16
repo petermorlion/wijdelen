@@ -15,7 +15,8 @@
     </fieldset>
 
     <fieldset>
-        <label for="SiteCulture">@T("Send mails in")</label>
+        @Html.LabelFor(m => m.CultureForMails, T("Send mails in"))
+        <p>@T("The imported users will also use this language as default. They can change this on registration.")</p>
         @Html.DropDownListFor(m => m.CultureForMails, new SelectList(Model.SiteCultures, Model.CultureForMails))
     </fieldset>
 

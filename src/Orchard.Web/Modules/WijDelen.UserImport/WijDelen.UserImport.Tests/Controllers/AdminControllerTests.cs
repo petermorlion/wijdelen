@@ -138,8 +138,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             IList<string> importedEmails = null;
             _userImportServiceMock
-                .Setup(x => x.ImportUsers(It.IsAny<IList<string>>()))
-                .Callback((IList<string> e) => importedEmails = e)
+                .Setup(x => x.ImportUsers("test", It.IsAny<IList<string>>()))
+                .Callback((string culture, IList<string> e) => importedEmails = e)
                 .Returns(userImportResults);
 
             IList<IUser> importedUsers = null;

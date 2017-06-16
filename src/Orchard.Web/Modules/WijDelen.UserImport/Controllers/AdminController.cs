@@ -63,7 +63,7 @@ namespace WijDelen.UserImport.Controllers {
             }
 
             var users = viewModel.UserEmails.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            var userImportResults = _userImportService.ImportUsers(users);
+            var userImportResults = _userImportService.ImportUsers(viewModel.CultureForMails, users);
 
             var groupViewModel = _groupService.GetGroups().Single(g => g.Id == viewModel.SelectedGroupId);
             var groupName = groupViewModel.Name;

@@ -21,7 +21,7 @@ namespace WijDelen.UserImport.Services {
 
         public Localizer T { get; set; }
 
-        public IList<UserImportResult> ImportUsers(IList<string> emails) {
+        public IList<UserImportResult> ImportUsers(string culture, IList<string> emails) {
             var result = new List<UserImportResult>();
 
             foreach (var email in emails) {
@@ -46,6 +46,8 @@ namespace WijDelen.UserImport.Services {
                         "",
                         "",
                         true));
+
+                    newUser.As<UserDetailsPart>().Culture = culture;
 
                     userImportResult.User = newUser;
                 }

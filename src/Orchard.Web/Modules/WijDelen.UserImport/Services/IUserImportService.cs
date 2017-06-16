@@ -4,6 +4,6 @@ using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport.Services {
     public interface IUserImportService : IDependency {
-        IList<UserImportResult> ImportUsers(IList<string> emails);
+        IList<UserImportResult> ImportUsers(string culture, IList<string> emails);
     }
 }

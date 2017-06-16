@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Orchard.ContentManagement;
 using Orchard.Security;
 using Orchard.Users.Services;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
+using WijDelen.UserImport.Tests.Mocks;
 
 namespace WijDelen.UserImport.Tests.Services {
     [TestFixture]
@@ -20,22 +24,23 @@ namespace WijDelen.UserImport.Tests.Services {
             memberShipService
                 .Setup(x => x.CreateUser(It.IsAny<CreateUserParams>()))
                 .Callback((CreateUserParams x) => createUserParams = x)
-                .Returns(Mock.Of<IUser>());
+                .Returns(new UserMockFactory().Create("", "", "", "", "", GroupMembershipStatus.Pending));
 
             var userService = new Mock<IUserService>();
             userService.Setup(x => x.VerifyUserUnicity("john.doe@example.com", "john.doe@example.com")).Returns(true);
 
             var service = new UserImportService(memberShipService.Object, userService.Object);
 
-            var result = service.ImportUsers(users);
+            var result = service.ImportUsers("fr", users);
 
-            Assert.AreEqual("john.doe@example.com", createUserParams.Username);
-            Assert.AreEqual("john.doe@example.com", createUserParams.Email);
-            Assert.IsTrue(createUserParams.IsApproved);
+            createUserParams.Username.Should().Be("john.doe@example.com");
+            createUserParams.Email.Should().Be("john.doe@example.com");
+            createUserParams.IsApproved.Should().BeTrue();
 
-            Assert.AreEqual(1, result.Count);
-            Assert.IsTrue(result[0].WasImported);
-            Assert.AreEqual("john.doe@example.com", result[0].Email);
+            result.Count.Should().Be(1);
+            result[0].WasImported.Should().BeTrue();
+            result[0].Email.Should().Be("john.doe@example.com");
+            result[0].User.As<UserDetailsPart>().Culture.Should().Be("fr");
         }
 
         [Test]
@@ -52,7 +57,7 @@ namespace WijDelen.UserImport.Tests.Services {
 
             var service = new UserImportService(memberShipService.Object, userService.Object);
 
-            var result = service.ImportUsers(users);
+            var result = service.ImportUsers("fr", users);
 
             memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
 
@@ -76,7 +81,7 @@ namespace WijDelen.UserImport.Tests.Services {
             
             var service = new UserImportService(memberShipService.Object, userService.Object);
 
-            var result = service.ImportUsers(users);
+            var result = service.ImportUsers("fr", users);
 
             memberShipService.Verify(x => x.CreateUser(It.IsAny<CreateUserParams>()), Times.Never);
 
