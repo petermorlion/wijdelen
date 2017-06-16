@@ -83,27 +83,33 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.Should().BeOfType<ViewResult>();
             var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
             model.Page.Should().Be(1);
-            model.ObjectRequestsCount.Should().Be(1);
+            model.ObjectRequestsCount.Should().Be(2);
             model.HasPreviousPage.Should().Be(false);
             model.HasNextPage.Should().Be(false);
             model.TotalPages.Should().Be(1);
             var recordViewModels = model.ObjectRequests;
             recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+                AggregateId = objectRequestRecord1.AggregateId,
+                GroupName = "The Simpsons",
+                Description = "Sneakers",
+                IsSelected = false,
+                Status = ""
+            });
+            recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 AggregateId = objectRequestRecord2.AggregateId,
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 IsSelected = false,
                 Status = "Blocked"
             });
-            recordViewModels.Count.Should().Be(1);
+            recordViewModels.Count.Should().Be(2);
         }
 
         [Test]
         public void WhenGettingIndexWithMoreThan50Requests() {
             var records = new List<ObjectRequestRecord>();
-            for (var i = 0; i < 100; i++) records.Add(new ObjectRequestRecord {
-                Status = "BlockedForForbiddenWords"
-            });
+            for (var i = 0; i < 100; i++)
+                records.Add(new ObjectRequestRecord());
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
 
@@ -125,16 +131,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var records = new List<ObjectRequestRecord>();
             for (var i = 0; i < 50; i++)
                 records.Add(new ObjectRequestRecord {
-                    Id = i,
-                    Status = "BlockedForForbiddenWords"
+                    Id = i
                 });
 
             for (var i = 50; i < 100; i++)
-                records.Add(new ObjectRequestRecord
-                {
+                records.Add(new ObjectRequestRecord {
                     Id = i,
-                    Description = "Second half",
-                    Status = "BlockedForForbiddenWords"
+                    Description = "Second half"
                 });
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
@@ -158,16 +161,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var records = new List<ObjectRequestRecord>();
             for (var i = 0; i < 50; i++)
                 records.Add(new ObjectRequestRecord {
-                    Id = i,
-                    Status = "BlockedForForbiddenWords"
+                    Id = i
                 });
 
             for (var i = 50; i < 100; i++)
-                records.Add(new ObjectRequestRecord
-                {
+                records.Add(new ObjectRequestRecord {
                     Id = i,
-                    Description = "Second half",
-                    Status = "BlockedForForbiddenWords"
+                    Description = "Second half"
                 });
 
             _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
@@ -175,8 +175,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index(200);
 
             result.Should().BeOfType<RedirectToRouteResult>();
-            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
-            ((RedirectToRouteResult)result).RouteValues["page"].Should().Be(2);
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) result).RouteValues["page"].Should().Be(2);
         }
 
         [Test]
@@ -222,8 +222,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenPostingIndexWithoutSelection()
-        {
+        public void WhenPostingIndexWithoutSelection() {
             var aggregateId1 = Guid.NewGuid();
             var aggregateId2 = Guid.NewGuid();
             var recordViewModels = new List<ObjectRequestRecordViewModel> {
@@ -241,8 +240,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 }
             };
 
-            var viewModel = new ObjectRequestAdminViewModel
-            {
+            var viewModel = new ObjectRequestAdminViewModel {
                 ObjectRequests = recordViewModels,
                 Page = 2
             };
@@ -250,8 +248,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index(viewModel);
 
             result.Should().BeOfType<RedirectToRouteResult>();
-            ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
-            ((RedirectToRouteResult)result).RouteValues["page"].Should().Be(2);
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) result).RouteValues["page"].Should().Be(2);
             _commandHandler.Verify(x => x.Handle(It.IsAny<UnblockObjectRequests>()), Times.Never);
             _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Please select at least one request to unblock.")));
         }

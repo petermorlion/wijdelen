@@ -28,7 +28,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         public ActionResult Index(int page = 1) {
             const int take = 50;
 
-            var count = _objectRequestRecordRepository.Table.Count(x => x.Status == "BlockedForForbiddenWords");
+            var count = _objectRequestRecordRepository.Table.Count();
             var totalPages = GetTotalPages(count, take);
 
             if (page > totalPages) {
@@ -39,7 +39,6 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var records = _objectRequestRecordRepository
                 .Table
-                .Where(x => x.Status == "BlockedForForbiddenWords")
                 .OrderBy(x => x.CreatedDateTime)
                 .Skip(skip)
                 .Take(take)

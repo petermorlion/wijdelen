@@ -279,8 +279,8 @@ msgid "Let's start by asking the members of your group if they can lend you some
 msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand formulier in en wij doen de rest!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
-#| msgid "Blocked Requests"
-msgid "Blocked Requests"
+#| msgid "Requests"
+msgid "Requests"
 msgstr "Oproepen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
@@ -302,11 +302,6 @@ msgstr "Deblokkeer"
 #| msgid "There are currently no blocked requests"
 msgid "There are currently no blocked requests"
 msgstr "Er zijn momenteel geen geblokkeerde oproepen"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
-#| msgid "Blocked Requests"
-msgid "Blocked Requests"
-msgstr "Geblokkeerde oproepen"
 
 #: wijdelen.objectsharing.controllers.objectrequestadmincontroller
 #| msgid "Blocked"
