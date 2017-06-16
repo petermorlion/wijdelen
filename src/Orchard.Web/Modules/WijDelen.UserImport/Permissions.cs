@@ -19,6 +19,10 @@ namespace WijDelen.UserImport {
                 new PermissionStereotype {
                     Name = "Administrator",
                     Permissions = new[] {SendUserInvitationMails}
+                },
+                new PermissionStereotype {
+                    Name = "PeergroupsAdministrator",
+                    Permissions = new[] {SendUserInvitationMails}
                 }
             };
         }

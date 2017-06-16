@@ -3,10 +3,17 @@ using System.Data;
 using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
+using Orchard.Roles.Services;
 using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing {
     public class Migrations : DataMigrationImpl {
+        private readonly IRoleService _roleService;
+
+        public Migrations(IRoleService roleService) {
+            _roleService = roleService;
+        }
+
         public int Create() {
             SchemaBuilder.CreateTable(typeof(EventRecord).Name, table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
@@ -163,6 +170,11 @@ namespace WijDelen.ObjectSharing {
                 .AlterColumn("ExtraInfo", column => column.WithType(DbType.String).Unlimited()));
 
             return 14;
+        }
+
+        public int UpdateFrom14() {
+            _roleService.CreateRole("PeergroupsAdministrator");
+            return 15;
         }
     }
 }

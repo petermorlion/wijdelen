@@ -1,10 +1,16 @@
 using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using Orchard.Data.Migration;
+using Orchard.Roles.Services;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.UserImport {
     public class Migrations : DataMigrationImpl {
+        private readonly IRoleService _roleService;
+
+        public Migrations(IRoleService roleService) {
+            _roleService = roleService;
+        }
 
         public int Create() {
             SchemaBuilder.CreateTable(typeof(NamePartRecord).Name, table => table
@@ -125,6 +131,11 @@ namespace WijDelen.UserImport {
             );
 
             return 11;
+        }
+
+        public int UpdateFrom11() {
+            _roleService.CreateRole("PeergroupsAdministrator");
+            return 12;
         }
     }
 }
