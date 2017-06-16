@@ -42,18 +42,32 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Description.Should().Be("Sex");
             objectRequest.ExtraInfo.Should().Be("for sexing");
 
-            objectRequest.Events.Single().ShouldBeEquivalentTo(new ObjectRequested {
+            objectRequest.Events.First().ShouldBeEquivalentTo(new ObjectRequested {
                 SourceId = id,
                 Description = "Sex",
                 ExtraInfo = "for sexing",
-                UserId = 22
+                UserId = 22,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords,
+                Version = 0
             });
 
-            ((ObjectRequested)objectRequest.Events.Single()).CreatedDateTime.Should().NotBe(default(DateTime));
-            ((ObjectRequested)objectRequest.Events.Single()).CreatedDateTime.Kind.Should().Be(DateTimeKind.Utc);
-            ((ObjectRequested)objectRequest.Events.Single()).Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
+            objectRequest.Events.Last().ShouldBeEquivalentTo(new ObjectRequestBlocked
+            {
+                SourceId = id,
+                Description = "Sex",
+                ExtraInfo = "for sexing",
+                UserId = 22,
+                ForbiddenWords = new List<string> { "sex" },
+                Version = 1
+            });
 
-            objectRequest.Version.Should().Be(0);
+            var events = objectRequest.Events.ToList();
+            events.Count.Should().Be(2);
+
+            ((ObjectRequested)events[0]).CreatedDateTime.Should().NotBe(default(DateTime));
+            ((ObjectRequested)events[0]).CreatedDateTime.Kind.Should().Be(DateTimeKind.Utc);
+
+            objectRequest.Version.Should().Be(1);
             objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
         }
 

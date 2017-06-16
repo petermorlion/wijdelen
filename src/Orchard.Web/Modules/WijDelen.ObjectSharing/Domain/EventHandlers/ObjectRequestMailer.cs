@@ -16,7 +16,7 @@ using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class ObjectRequestMailer : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>
+    public class ObjectRequestMailer : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>
     {
         private readonly IEventSourcedRepository<ObjectRequestMail> _repository;
         private readonly IGroupService _groupService;
@@ -87,6 +87,10 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 recipients.ToArray());
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
+        }
+
+        public void Handle(ObjectRequestBlocked e) {
+            
         }
     }
 }
