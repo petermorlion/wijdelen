@@ -173,7 +173,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             var admins = userParts.Where(x => x.As<UserRolesPart>().Roles.Contains("Administrator")).ToList();
             var adminEmails = admins.Select(x => x.Email).ToList();
 
-            //_mailgunClient.Send(adminEmails, "", subject, "", html);
+            _mailgunClient.Send(adminEmails, "", subject, "", html);
         }
     }
 }

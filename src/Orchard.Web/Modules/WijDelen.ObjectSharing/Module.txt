@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: Peter Morlion
 Website: http://www.redstar.be
-Version: 1.6.0
+Version: 1.6.1
 OrchardVersion: 1.10
 Description: The core of Peergroups, allowing users to request and share objects in their groups.
 Features:
