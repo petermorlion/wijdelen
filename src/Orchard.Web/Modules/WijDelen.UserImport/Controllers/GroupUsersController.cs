@@ -108,7 +108,12 @@ namespace WijDelen.UserImport.Controllers {
             var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
-            _mailService.SendUserInvitationMails(users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl);
+            var usersByCulture = users.GroupBy(x => x.As<UserDetailsPart>()?.Culture);
+
+            foreach (var group in usersByCulture) {
+                _mailService.SendUserInvitationMails(group.Key, group, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl);
+            }
+            
             _orchardServices.Notifier.Add(NotifyType.Success, T("The invitation mails have been sent."));
             
             return Redirect(returnUrl);

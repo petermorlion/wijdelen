@@ -134,17 +134,27 @@ namespace WijDelen.UserImport.Tests.Controllers {
                 new GroupViewModel { Id = 3, Name = "TestGroup", LogoUrl = "abc" }
             });
 
-            var pendingUser = new UserMockFactory().Create("john.doe", "john.doe@example.com", "John", "Doe", "en", GroupMembershipStatus.Pending);
-            var approvedUser = new UserMockFactory().Create("jane.doe", "jane.doe@example.com", "Jane", "Doe", "en", GroupMembershipStatus.Approved);
+            var pendingEnglishUser = new UserMockFactory().Create("john.doe", "john.doe@example.com", "John", "Doe", "en", GroupMembershipStatus.Pending);
+            var pendingFrenchUser = new UserMockFactory().Create("pierre", "pierre@example.com", "Pierre", "Bof", "fr", GroupMembershipStatus.Pending);
+            var approvedEnglishUser = new UserMockFactory().Create("jane.doe", "jane.doe@example.com", "Jane", "Doe", "en", GroupMembershipStatus.Approved);
+            var approvedFrenchUser = new UserMockFactory().Create("jeanne.d'arc", "jeanne@example.com", "Jeanne", "D'arc", "fr", GroupMembershipStatus.Approved);
+
             _groupServiceMock.Setup(x => x.GetUsersInGroup(3)).Returns(new[] {
-                pendingUser,
-                approvedUser
+                pendingEnglishUser,
+                pendingFrenchUser,
+                approvedEnglishUser,
+                approvedFrenchUser
             });
 
-            IEnumerable<IUser> recipients = null;
+            IEnumerable<IUser> englishRecipients = null;
             _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails(It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
-                .Callback((IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { recipients = users; });
+                .Setup(x => x.SendUserInvitationMails("en", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
+                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { englishRecipients = users; });
+
+            IEnumerable<IUser> frenchRecipients = null;
+            _mailServiceMock
+                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
+                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { frenchRecipients = users; });
 
             var result = _controller.ConfirmResendUserInvitationMails(3, "returnUrl");
 
@@ -153,7 +163,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var redirectToRouteResult = (RedirectResult)result;
             redirectToRouteResult.Url.Should().Be("returnUrl");
 
-            recipients.Single().Should().Be(pendingUser);
+            englishRecipients.Single().Should().Be(pendingEnglishUser);
+            frenchRecipients.Single().Should().Be(pendingFrenchUser);
 
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("The invitation mails have been sent.")));
         }

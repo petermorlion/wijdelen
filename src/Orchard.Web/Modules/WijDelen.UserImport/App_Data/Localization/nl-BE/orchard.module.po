@@ -69,6 +69,11 @@ msgid "Users"
 msgstr "Gebruikers"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Send mails in"
+msgid "Send mails in"
+msgstr "Mails versturen in"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "Please use one line with exactly one valid email address per user to import."
 msgid "Please use one line with exactly one valid email address per user to import."
 msgstr "Gelieve per gebruiker die je wil importeren één lijn met een geldig email adres te gebruiken."

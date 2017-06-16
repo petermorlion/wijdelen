@@ -15,6 +15,11 @@
     </fieldset>
 
     <fieldset>
+        <label for="SiteCulture">@T("Send mails in")</label>
+        @Html.DropDownListFor(m => m.CultureForMails, new SelectList(Model.SiteCultures, Model.CultureForMails))
+    </fieldset>
+
+    <fieldset>
         <legend>@T("Group")</legend>
         @Html.DropDownListFor(m => m.SelectedGroupId, new SelectList(Model.Groups, "Id", "Name"))
     </fieldset>

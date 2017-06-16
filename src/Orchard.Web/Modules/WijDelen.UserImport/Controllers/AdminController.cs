@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Orchard.Localization;
+using Orchard.Localization.Services;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
 using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Services;
 using Orchard;
+using Orchard.ContentManagement;
 using Orchard.UI.Notify;
+using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
@@ -19,6 +22,7 @@ namespace WijDelen.UserImport.Controllers {
         private readonly IGroupService _groupService;
         private readonly IMembershipService _membershipService;
         private readonly INotifier _notifier;
+        private readonly ICultureManager _cultureManager;
 
         public AdminController(
             IOrchardServices orchardServices, 
@@ -26,13 +30,15 @@ namespace WijDelen.UserImport.Controllers {
             IMailService mailService,
             IGroupService groupService,
             IMembershipService membershipService,
-            INotifier notifier) {
+            INotifier notifier,
+            ICultureManager cultureManager) {
             _orchardServices = orchardServices;
             _userImportService = userImportService;
             _mailService = mailService;
             _groupService = groupService;
             _membershipService = membershipService;
             _notifier = notifier;
+            _cultureManager = cultureManager;
 
             T = NullLocalizer.Instance;
         }
@@ -45,7 +51,9 @@ namespace WijDelen.UserImport.Controllers {
             }
 
             var groups = _groupService.GetGroups();
-            return View(new AdminIndexViewModel { Groups = groups });
+            var cultures = _cultureManager.ListCultures();
+            var defaultSiteCulture = _cultureManager.GetSiteCulture();
+            return View(new AdminIndexViewModel { Groups = groups, SiteCultures = cultures, CultureForMails = defaultSiteCulture });
         }
 
         [HttpPost]
@@ -64,7 +72,7 @@ namespace WijDelen.UserImport.Controllers {
             var importedUsers = userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User);
             _groupService.AddUsersToGroup(groupName, importedUsers);
 
-            SendUserInvitationMails(importedUsers, groupName, groupLogoUrl);
+            SendUserInvitationMails(viewModel.CultureForMails, importedUsers, groupName, groupLogoUrl);
             
             return View("ImportComplete", userImportResults);
         }
@@ -75,21 +83,22 @@ namespace WijDelen.UserImport.Controllers {
             if (groupViewModel == null) {
                 _notifier.Add(NotifyType.Warning, T("The user needs to be part of a group first."));
             } else {
-                SendUserInvitationMails(new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl);
+                var culture = user.As<UserDetailsPart>()?.Culture;
+                SendUserInvitationMails(culture, new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl);
                 _notifier.Add(NotifyType.Success, T("User invitation mail has been sent."));
             }
 
             return RedirectToAction("Edit", "Admin", new {area = "Orchard.Users", id = user.Id});
         }
 
-        private void SendUserInvitationMails(IEnumerable<IUser> users, string groupName, string groupLogoUrl) {
+        private void SendUserInvitationMails(string culture, IEnumerable<IUser> users, string groupName, string groupLogoUrl) {
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
             if (string.IsNullOrWhiteSpace(siteUrl)) {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
-            _mailService.SendUserInvitationMails(users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl), groupName, groupLogoUrl);
+            _mailService.SendUserInvitationMails(culture, users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl), groupName, groupLogoUrl);
         }
     }
 }

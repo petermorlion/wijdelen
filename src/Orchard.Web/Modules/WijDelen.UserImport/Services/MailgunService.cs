@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using Orchard;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
@@ -33,7 +32,7 @@ namespace WijDelen.UserImport.Services {
         public Localizer T { get; set; }
         public ILogger Logger { get; set; }
 
-        public void SendUserInvitationMails(IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) {
+        public void SendUserInvitationMails(string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) {
             var recipientVariables = new List<string>();
             var recipients = new List<string>();
             
