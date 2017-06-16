@@ -55,6 +55,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
+            //_mailService.SendAdminObjectRequestMail
         }
 
         public void Handle(ObjectRequestUnblocked e) {

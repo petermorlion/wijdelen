@@ -175,5 +175,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
             _mailgunClient.Send(adminEmails, "", subject, "", html);
         }
+
+        public void SendAmindObjectRequestMail(string requestingUserName, string description, string extraInfo) {
+            throw new NotImplementedException();
+        }
     }
 }
