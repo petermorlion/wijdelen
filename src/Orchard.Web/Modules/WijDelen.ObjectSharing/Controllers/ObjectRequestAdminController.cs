@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Orchard.Data;
 using Orchard.Localization;
@@ -13,12 +12,12 @@ using WijDelen.ObjectSharing.ViewModels.Admin;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
-    public class BlockedObjectRequestAdminController : Controller {
+    public class ObjectRequestAdminController : Controller {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
         private readonly ICommandHandler<UnblockObjectRequests> _unblockObjectRequestCommandHandler;
         private readonly INotifier _notifier;
 
-        public BlockedObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler, INotifier notifier) {
+        public ObjectRequestAdminController(IRepository<ObjectRequestRecord> objectRequestRecordRepository, ICommandHandler<UnblockObjectRequests> unblockObjectRequestCommandHandler, INotifier notifier) {
             _objectRequestRecordRepository = objectRequestRecordRepository;
             _unblockObjectRequestCommandHandler = unblockObjectRequestCommandHandler;
             _notifier = notifier;
@@ -57,7 +56,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var hasNextPage = page * take < count;
             var hasPreviousPage = page > 1;
 
-            var viewModel = new BlockedObjectRequestAdminViewModel {
+            var viewModel = new ObjectRequestAdminViewModel {
                 ObjectRequests = records,
                 Page = page,
                 ObjectRequestsCount = count,
@@ -82,7 +81,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         [HttpPost]
         [Orchard.Mvc.FormValueRequired("submit.Unblock")]
-        public ActionResult Index(BlockedObjectRequestAdminViewModel viewModel) {
+        public ActionResult Index(ObjectRequestAdminViewModel viewModel) {
             if (viewModel.ObjectRequests.All(x => !x.IsSelected)) {
                 _notifier.Add(NotifyType.Warning, T("Please select at least one request to unblock."));  
             } else {

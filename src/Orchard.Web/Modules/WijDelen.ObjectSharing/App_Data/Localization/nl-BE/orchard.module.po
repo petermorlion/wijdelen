@@ -94,9 +94,9 @@ msgid "Synonyms"
 msgstr "Synoniemen"
 
 #: wijdelen.objectsharing.adminmenu
-#| msgid "Blocked Requests"
-msgid "Blocked Requests"
-msgstr "Geblokeerde oproepen"
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"
 
 #: wijdelen.objectsharing.controllers.archetypescontroller
 #| msgid "Please provide a name for the archetype."
@@ -278,47 +278,47 @@ msgstr "Welkom {0}!"
 msgid "Let's start by asking the members of your group if they can lend you something. Fill out the form below and we'll do the rest!"
 msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand formulier in en wij doen de rest!"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "Blocked Requests"
 msgid "Blocked Requests"
 msgstr "Oproepen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "Group"
 msgid "Group"
 msgstr "Groep"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "Description"
 msgid "Description"
 msgstr "Omschrijving"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "Unblock"
 msgid "Unblock"
 msgstr "Deblokkeer"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "There are currently no blocked requests"
 msgid "There are currently no blocked requests"
 msgstr "Er zijn momenteel geen geblokkeerde oproepen"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/BlockedObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "Blocked Requests"
 msgid "Blocked Requests"
 msgstr "Geblokkeerde oproepen"
 
-#: wijdelen.objectsharing.controllers.blockedobjectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
 #| msgid "Blocked"
 msgid "Blocked"
 msgstr "Geblokkeerd"
 
-#: wijdelen.objectsharing.controllers.blockedobjectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
 #| msgid "Please select at least one request to unblock."
 msgid "Please select at least one request to unblock."
 msgstr "Gelieve minstens één oproep te selecteren."
 
-#: wijdelen.objectsharing.controllers.blockedobjectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
 #| msgid "The selected requests were unblocked and mails have been sent to the users."
 msgid "The selected requests were unblocked and mails have been sent to the users."
 msgstr "De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd naar de gebruikers."

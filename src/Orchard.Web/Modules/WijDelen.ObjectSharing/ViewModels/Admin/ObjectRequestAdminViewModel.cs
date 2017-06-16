@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace WijDelen.ObjectSharing.ViewModels.Admin {
-    public class BlockedObjectRequestAdminViewModel {
+    public class ObjectRequestAdminViewModel {
         public List<ObjectRequestRecordViewModel> ObjectRequests { get; set; }
         public int Page { get; set; }
         public int ObjectRequestsCount { get; set; }

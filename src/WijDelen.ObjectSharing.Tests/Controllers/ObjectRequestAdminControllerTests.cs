@@ -17,7 +17,7 @@ using WijDelen.ObjectSharing.ViewModels.Admin;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
-    public class BlockedObjectRequestAdminControllerTests {
+    public class ObjectRequestAdminControllerTests {
         [SetUp]
         public void Init() {
             var builder = new ContainerBuilder();
@@ -29,15 +29,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             builder.RegisterInstance(_commandHandler.Object).As<ICommandHandler<UnblockObjectRequests>>();
             builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
-            builder.RegisterType<BlockedObjectRequestAdminController>();
+            builder.RegisterType<ObjectRequestAdminController>();
 
             var container = builder.Build();
-            _controller = container.Resolve<BlockedObjectRequestAdminController>();
+            _controller = container.Resolve<ObjectRequestAdminController>();
 
             _controller.T = NullLocalizer.Instance;
         }
 
-        private BlockedObjectRequestAdminController _controller;
+        private ObjectRequestAdminController _controller;
         private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
         private Mock<ICommandHandler<UnblockObjectRequests>> _commandHandler;
         private Mock<INotifier> _notifierMock;
@@ -81,7 +81,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
             model.Page.Should().Be(1);
             model.ObjectRequestsCount.Should().Be(1);
             model.HasPreviousPage.Should().Be(false);
@@ -110,7 +110,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index();
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
             model.Page.Should().Be(1);
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(false);
@@ -142,7 +142,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var result = _controller.Index(2);
 
             result.Should().BeOfType<ViewResult>();
-            var model = result.As<ViewResult>().Model.As<BlockedObjectRequestAdminViewModel>();
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
             model.Page.Should().Be(2);
             model.ObjectRequestsCount.Should().Be(100);
             model.HasPreviousPage.Should().Be(true);
@@ -203,7 +203,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 .Setup(x => x.Handle(It.IsAny<UnblockObjectRequests>()))
                 .Callback((UnblockObjectRequests cmd) => command = cmd);
 
-            var viewModel = new BlockedObjectRequestAdminViewModel {
+            var viewModel = new ObjectRequestAdminViewModel {
                 ObjectRequests = recordViewModels,
                 Page = 2
             };
@@ -241,7 +241,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 }
             };
 
-            var viewModel = new BlockedObjectRequestAdminViewModel
+            var viewModel = new ObjectRequestAdminViewModel
             {
                 ObjectRequests = recordViewModels,
                 Page = 2

@@ -126,7 +126,7 @@
     <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GetStartedController.cs" />
-    <Compile Include="Controllers\BlockedObjectRequestAdminController.cs" />
+    <Compile Include="Controllers\ObjectRequestAdminController.cs" />
     <Compile Include="Controllers\ObjectRequestController.cs" />
     <Compile Include="Controllers\ObjectRequestResponseController.cs" />
     <Compile Include="Controllers\ReceivedObjectRequestController.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Services\IRandomSampleService.cs" />
     <Compile Include="Domain\Services\RandomSampleService.cs" />
-    <Compile Include="ViewModels\Admin\BlockedObjectRequestAdminViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ObjectRequestAdminViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestRecordViewModel.cs" />
     <Compile Include="ViewModels\ChatMessageViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
@@ -334,7 +334,7 @@
     <Content Include="Views\Template.ChatMessageAddedMail.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\BlockedObjectRequestAdmin\Index.cshtml" />
+    <Content Include="Views\ObjectRequestAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Template.AdminObjectRequestMail.cshtml" />
