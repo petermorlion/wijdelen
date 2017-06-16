@@ -114,9 +114,14 @@ msgid "Received Requests"
 msgstr "Ontvangen oproepen"
 
 #: wijdelen.objectsharing.infrastructure.mailgunservice
-#| msgid "Do you have (a) {0}??"
+#| msgid "Do you have (a) {0}?"
 msgid "Do you have (a) {0}?"
 msgstr "Heb jij (een) {0}?"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "A request for (a) {0} was blocked"
+msgid "A request for (a) {0} was blocked"
+msgstr "Een oproep voor (een) {0} werd geblokkeerd"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #| msgid "Thank you!"
@@ -437,3 +442,28 @@ msgstr "Nee, dat heb ik niet:"
 #| msgid "Unsubscribe:"
 msgid "Unsubscribe:"
 msgstr "Uitschrijven:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "A request by {0} was blocked and requires your attention."
+msgid "A request by {0} was blocked and requires your attention."
+msgstr "Een oproep van {0} werd geblokkeerd en heeft je aandacht nodig."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Description:"
+msgid "Description:"
+msgstr "Description:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Extra info:"
+msgid "Extra info:"
+msgstr "Extra info:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Forbidden words:"
+msgid "Forbidden words:"
+msgstr "Verboden woorden:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "You can see the blocked requests here"
+msgid "You can see the blocked requests here"
+msgstr "Je kan de geblokkeerde oproepen hier zien"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Autofac;
 using FluentAssertions;
 using Moq;
@@ -184,6 +185,21 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
+        }
+
+        [Test]
+        public void WhenObjectRequestBlocked() {
+            var forbiddenWords = new List<string> { "sex" };
+            var objectRequestBlocked = new ObjectRequestBlocked {
+                UserId = 3,
+                Description = "Sextant",
+                ExtraInfo = "For sextanting",
+                ForbiddenWords = forbiddenWords
+            };
+
+           _objectRequestMailer.Handle(objectRequestBlocked);
+
+            _mailServiceMock.Verify(x => x.SendAdminObjectRequestBlockedMail("Jos Joskens", "Sextant", "For sextanting", forbiddenWords));
         }
     }
 }

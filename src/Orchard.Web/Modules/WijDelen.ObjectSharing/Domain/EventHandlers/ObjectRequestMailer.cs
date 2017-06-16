@@ -48,8 +48,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public Localizer T { get; set; }
 
         public void Handle(ObjectRequested objectRequested) {
-            if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords)
-            {
+            if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
                 _orchardServices.Notifier.Add(NotifyType.Warning, T("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."));
                 return;
             }
@@ -60,6 +59,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ObjectRequestUnblocked e) {
             SendObjectRequestMail(e.UserId, e.Description, e.ExtraInfo, e.SourceId);
+        }
+
+        public void Handle(ObjectRequestBlocked e) {
+            var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
+            _mailService.SendAdminObjectRequestBlockedMail(requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo, e.ForbiddenWords);
         }
 
         private void SendObjectRequestMail(int userId, string description, string extraInfo, Guid sourceId) {
@@ -87,10 +91,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 recipients.ToArray());
 
             _repository.Save(objectRequestMail, Guid.NewGuid().ToString());
-        }
-
-        public void Handle(ObjectRequestBlocked e) {
-            
         }
     }
 }

@@ -258,6 +258,10 @@
       <Project>{73A7688A-5BD3-4F7E-ADFA-CE36C5A10E3B}</Project>
       <Name>Orchard.MediaLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Roles\Orchard.Roles.csproj">
+      <Project>{D10AD48F-407D-4DB5-A328-173EC7CB010F}</Project>
+      <Name>Orchard.Roles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Users\Orchard.Users.csproj">
       <Project>{79AED36E-ABD0-4747-93D3-8722B042454B}</Project>
       <Name>Orchard.Users</Name>
@@ -271,7 +275,9 @@
       <Name>WijDelen.UserImport</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Template.ObjectRequestBlockedMail.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

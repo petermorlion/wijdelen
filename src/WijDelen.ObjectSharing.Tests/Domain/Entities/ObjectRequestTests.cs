@@ -37,15 +37,15 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
         public void WhenCreatingObjectRequestWithForbiddenWords()
         {
             var id = Guid.NewGuid();
-            var objectRequest = new ObjectRequest(id, "Sex", "for sexing", 22);
+            var objectRequest = new ObjectRequest(id, "Sex", "for Sexing", 22);
 
             objectRequest.Description.Should().Be("Sex");
-            objectRequest.ExtraInfo.Should().Be("for sexing");
+            objectRequest.ExtraInfo.Should().Be("for Sexing");
 
             objectRequest.Events.First().ShouldBeEquivalentTo(new ObjectRequested {
                 SourceId = id,
                 Description = "Sex",
-                ExtraInfo = "for sexing",
+                ExtraInfo = "for Sexing",
                 UserId = 22,
                 Status = ObjectRequestStatus.BlockedForForbiddenWords,
                 Version = 0
@@ -55,11 +55,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             {
                 SourceId = id,
                 Description = "Sex",
-                ExtraInfo = "for sexing",
+                ExtraInfo = "for Sexing",
                 UserId = 22,
-                ForbiddenWords = new List<string> { "sex" },
                 Version = 1
             });
+
+            ((ObjectRequestBlocked)objectRequest.Events.Last()).ForbiddenWords.ShouldBeEquivalentTo(new List<string> { "sex" });
 
             var events = objectRequest.Events.ToList();
             events.Count.Should().Be(2);
@@ -138,7 +139,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sextant");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sextanting");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
-            objectRequest.Version.Should().Be(1);
+            objectRequest.Version.Should().Be(2);
             objectRequest.Status.Should().Be(ObjectRequestStatus.None);
         }
     }

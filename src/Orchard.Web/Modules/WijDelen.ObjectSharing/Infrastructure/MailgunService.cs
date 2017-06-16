@@ -6,7 +6,9 @@ using Orchard.ContentManagement;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.MediaLibrary.Fields;
+using Orchard.Roles.Models;
 using Orchard.Security;
+using Orchard.Users.Models;
 using WijDelen.Mailgun;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
@@ -154,6 +156,24 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             finally {
                 _orchardServices.WorkContext.CurrentCulture = originalCulture;
             }
+        }
+
+        public void SendAdminObjectRequestBlockedMail(string requestingUserName, string description, string extraInfo, IList<string> forbiddenWords) {
+            var htmlShape = _shapeFactory.Create("Template_ObjectRequestBlockedMail", Arguments.From(new {
+                RequestingUserName = requestingUserName,
+                Description = description,
+                ExtraInfo = extraInfo,
+                ForbiddenWords = forbiddenWords
+            }));
+
+            var subject = T("A request for (a) {0} was blocked", description).ToString();
+            var html = _shapeDisplay.Display(htmlShape);
+
+            var userParts = _orchardServices.ContentManager.Query<UserPart>().List();
+            var admins = userParts.Where(x => x.As<UserRolesPart>().Roles.Contains("Administrator")).ToList();
+            var adminEmails = admins.Select(x => x.Email).ToList();
+
+            //_mailgunClient.Send(adminEmails, "", subject, "", html);
         }
     }
 }

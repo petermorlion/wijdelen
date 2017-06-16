@@ -26,14 +26,14 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
             var status = ObjectRequestStatus.None;
-            if (ForbiddenWords.Dutch.Any(description.Contains) || ForbiddenWords.Dutch.Any(extraInfo.Contains)) {
+            var forbiddenWords = ForbiddenWords.Dutch.Where(x => description.ToLower().Contains(x.ToLower()) || extraInfo.ToLower().Contains(x.ToLower())).ToList();
+            if (forbiddenWords.Any()) {
                 status = ObjectRequestStatus.BlockedForForbiddenWords;
             }
 
             Update(new ObjectRequested {Description = description, ExtraInfo = extraInfo, UserId = userId, CreatedDateTime = DateTime.UtcNow, Status = status});
 
             if (status == ObjectRequestStatus.BlockedForForbiddenWords) {
-                var forbiddenWords = ForbiddenWords.Dutch.Where(description.Contains).ToList();
                 Update(new ObjectRequestBlocked {Description = description, ExtraInfo = extraInfo, UserId = userId, ForbiddenWords = forbiddenWords});
             }
         }

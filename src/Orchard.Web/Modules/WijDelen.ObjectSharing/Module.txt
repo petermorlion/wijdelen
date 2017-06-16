@@ -2,11 +2,11 @@
 AntiForgery: enabled
 Author: Peter Morlion
 Website: http://www.redstar.be
-Version: 1.5.1
+Version: 1.6.0
 OrchardVersion: 1.10
 Description: The core of Peergroups, allowing users to request and share objects in their groups.
 Features:
     WijDelen.ObjectSharing:
         Description: Allows users to request and share objects in their groups.
 		Category: Peergroups
-		Dependencies: WijDelen.UserImport, WijDelen.Mailgun, Orchard.Users, Orchard.ContentPicker
+		Dependencies: WijDelen.UserImport, WijDelen.Mailgun, Orchard.Users, Orchard.ContentPicker, Orchard.Roles

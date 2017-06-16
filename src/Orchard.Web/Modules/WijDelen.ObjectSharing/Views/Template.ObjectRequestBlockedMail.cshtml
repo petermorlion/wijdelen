@@ -1,0 +1,31 @@
+﻿@using Orchard.Mvc.Extensions
+<html>
+<body style="font-family: Verdana, Arial, sans-serif;">
+<div style="background-color: #04b17b; padding: 0 10px;">
+    <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;">
+    <img src="@Model.GroupLogoUrl" style="height: 35px; margin-left: 10px; vertical-align: middle;">
+</div>
+<div style="margin-top: 10px;">
+    <p>@T("Hello")</p>
+    <p>@T("A request by {0} was blocked and requires your attention.", Model.RequestingUserName)</p>
+</div>
+<div style="background-color: #f5f5f5; border: 1px solid #bbb; border-radius: 5px; padding: 10px;">
+    <strong>@T("Description:")</strong>
+    <p>@Model.Description</p>
+    
+    <strong>@T("Extra info:")</strong>
+    <p style="white-space: pre-line">@Model.ExtraInfo</p>
+    
+    <strong>@T("Forbidden words:")</strong>
+    <ul>
+        @foreach (var forbiddenWord in Model.ForbiddenWords)
+        {
+            <li>@forbiddenWord</li>
+        }
+    </ul>
+</div>
+<div style="margin-top: 10px;">
+    <a href="@Url.MakeAbsolute(Url.Action("Index", "BlockedObjectRequestAdmin"))">@T("You can see the blocked requests here")</a>
+</div>
+</body>
+</html>
