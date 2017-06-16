@@ -31,7 +31,10 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var viewModels = new List<ReceivedObjectRequestViewModel>();
             foreach (var receivedObjectRequestRecord in records) {
-                var user = users.Single(u => u.Id == receivedObjectRequestRecord.RequestingUserId);
+                var user = users.SingleOrDefault(u => u.Id == receivedObjectRequestRecord.RequestingUserId);
+                if (user == null)
+                    continue;
+
                 viewModels.Add(new ReceivedObjectRequestViewModel {
                     ObjectRequestId = receivedObjectRequestRecord.ObjectRequestId,
                     Description = receivedObjectRequestRecord.Description,
