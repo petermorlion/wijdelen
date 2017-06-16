@@ -123,6 +123,11 @@ msgstr "Heb jij (een) {0}?"
 msgid "A request for (a) {0} was blocked"
 msgstr "Een oproep voor (een) {0} werd geblokkeerd"
 
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "A request for (a) {0} was made"
+msgid "A request for (a) {0} was made"
+msgstr "Er is een nieuwe oproep voor (een) {0}"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
@@ -443,27 +448,52 @@ msgstr "Nee, dat heb ik niet:"
 msgid "Unsubscribe:"
 msgstr "Uitschrijven:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "A request by {0} was blocked and requires your attention."
 msgid "A request by {0} was blocked and requires your attention."
 msgstr "Een oproep van {0} werd geblokkeerd en heeft je aandacht nodig."
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "Description:"
 msgid "Description:"
 msgstr "Description:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "Extra info:"
 msgid "Extra info:"
 msgstr "Extra info:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "Forbidden words:"
 msgid "Forbidden words:"
 msgstr "Verboden woorden:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "You can see the blocked requests here"
 msgid "You can see the blocked requests here"
 msgstr "Je kan de geblokkeerde oproepen hier zien"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+#| msgid "The following request was made by {0}."
+msgid "The following request was made by {0}."
+msgstr "De volgende oproep werd gemaakt door {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+#| msgid "Description:"
+msgid "Description:"
+msgstr "Description:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+#| msgid "Extra info:"
+msgid "Extra info:"
+msgstr "Extra info:"

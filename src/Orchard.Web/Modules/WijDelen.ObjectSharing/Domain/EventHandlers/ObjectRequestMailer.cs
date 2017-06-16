@@ -3,6 +3,7 @@ using System.Linq;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Localization;
+using Orchard.Security;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -53,13 +54,17 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 return;
             }
 
-            SendObjectRequestMail(objectRequested.UserId, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId);
+            var requestingUser = _getUserByIdQuery.GetResult(objectRequested.UserId);
+
+            SendObjectRequestMail(requestingUser, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
-            //_mailService.SendAdminObjectRequestMail
+
+            _mailService.SendAdminObjectRequestMail(requestingUser.GetUserDisplayName(), objectRequested.Description, objectRequested.ExtraInfo);
         }
 
         public void Handle(ObjectRequestUnblocked e) {
-            SendObjectRequestMail(e.UserId, e.Description, e.ExtraInfo, e.SourceId);
+            var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
+            SendObjectRequestMail(requestingUser, e.Description, e.ExtraInfo, e.SourceId);
         }
 
         public void Handle(ObjectRequestBlocked e) {
@@ -67,18 +72,17 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _mailService.SendAdminObjectRequestBlockedMail(requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo, e.ForbiddenWords);
         }
 
-        private void SendObjectRequestMail(int userId, string description, string extraInfo, Guid sourceId) {
+        private void SendObjectRequestMail(IUser requestingUser, string description, string extraInfo, Guid sourceId) {
             var objectRequestMail = new ObjectRequestMail(
                 Guid.NewGuid(),
-                userId,
+                requestingUser.Id,
                 description,
                 extraInfo,
                 sourceId);
-
-            var requestingUser = _getUserByIdQuery.GetResult(userId);
+            
             var requestingUserName = requestingUser.GetUserDisplayName();
-            var groupName = _groupService.GetGroupForUser(userId).Name;
-            var otherUsers = _findOtherUsersQuery.GetResults(userId, description).ToList();
+            var groupName = _groupService.GetGroupForUser(requestingUser.Id).Name;
+            var otherUsers = _findOtherUsersQuery.GetResults(requestingUser.Id, description).ToList();
 
             var recipients = _randomSampleService.GetRandomSample(otherUsers, 250).Where(x => x.As<UserDetailsPart>().ReceiveMails && x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Approved);
 

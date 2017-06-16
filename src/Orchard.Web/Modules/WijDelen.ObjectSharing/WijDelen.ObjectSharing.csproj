@@ -277,7 +277,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Template.ObjectRequestBlockedMail.cshtml" />
+    <Content Include="Views\Template.AdminObjectRequestBlockedMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -335,6 +335,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\BlockedObjectRequestAdmin\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Template.AdminObjectRequestMail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

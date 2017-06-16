@@ -36,6 +36,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         private ObjectRequestMail _persistedMail;
         private IUser _unsubscribedUser;
         private IUser _pendingUser;
+        private IUser _requestingUser;
 
         [SetUp]
         public void Init() {
@@ -62,14 +63,14 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             builder.RegisterType<ObjectRequestMailer>();
 
             var fakeUserFactory = new UserFactory();
-            var requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
+            _requestingUser = fakeUserFactory.Create("jos", "jos@example.com", "Jos", "Joskens");
             _otherUser = fakeUserFactory.Create("peter.morlion", "peter.morlion@gmail.com", "Peter", "Morlion");
             _unsubscribedUser = fakeUserFactory.Create("john.doe@example.com", "john.doe@example.com", "John", "Doe", false);
             _pendingUser = fakeUserFactory.Create("jane.doe@example.com", "jane.doe@example.com", "Jane", "Doe", true, GroupMembershipStatus.Pending);
 
-            _getUserByIdQueryMock.Setup(x => x.GetResult(3)).Returns(requestingUser);
+            _getUserByIdQueryMock.Setup(x => x.GetResult(_requestingUser.Id)).Returns(_requestingUser);
 
-            _groupServiceMock.Setup(x => x.GetGroupForUser(3)).Returns(new GroupViewModel { Name = "Group" });
+            _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel { Name = "Group" });
 
             _persistedMail = null;
             _repositoryMock
@@ -86,20 +87,20 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         public void WhenObjectIsRequested() {
             var objectRequestId = Guid.NewGuid();
             var objectRequested = new ObjectRequested {
-                UserId = 3,
+                UserId = _requestingUser.Id,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
                 SourceId = objectRequestId
             };
 
             _findOtherUsersQueryMock
-                .Setup(x => x.GetResults(3, "Sneakers"))
+                .Setup(x => x.GetResults(_requestingUser.Id, "Sneakers"))
                 .Returns(new[] { _otherUser, _unsubscribedUser, _pendingUser });
 
             _objectRequestMailer.Handle(objectRequested);
 
             _persistedMail.Should().NotBeNull();
-            _persistedMail.UserId.Should().Be(3);
+            _persistedMail.UserId.Should().Be(_requestingUser.Id);
             _persistedMail.Description.Should().Be("Sneakers");
             _persistedMail.ExtraInfo.Should().Be("For sneaking");
             _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
@@ -112,6 +113,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 "For sneaking", 
                 _persistedMail, 
                 It.Is((IUser u) => u.Id == _otherUser.Id && u.Email == "peter.morlion@gmail.com")));
+
+            _mailServiceMock.Verify(x => x.SendAdminObjectRequestMail("Jos Joskens", "Sneakers", "For sneaking"));
 
             _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
 
@@ -156,20 +159,20 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var objectRequestId = Guid.NewGuid();
             var objectRequestUnblocked = new ObjectRequestUnblocked
             {
-                UserId = 3,
+                UserId = _requestingUser.Id,
                 Description = "Sextant",
                 ExtraInfo = "For sextanting",
                 SourceId = objectRequestId
             };
 
             _findOtherUsersQueryMock
-                .Setup(x => x.GetResults(3, "Sextant"))
+                .Setup(x => x.GetResults(_requestingUser.Id, "Sextant"))
                 .Returns(new[] { _otherUser });
 
             _objectRequestMailer.Handle(objectRequestUnblocked);
 
             _persistedMail.Should().NotBeNull();
-            _persistedMail.UserId.Should().Be(3);
+            _persistedMail.UserId.Should().Be(_requestingUser.Id);
             _persistedMail.Description.Should().Be("Sextant");
             _persistedMail.ExtraInfo.Should().Be("For sextanting");
             _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
@@ -191,7 +194,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         public void WhenObjectRequestBlocked() {
             var forbiddenWords = new List<string> { "sex" };
             var objectRequestBlocked = new ObjectRequestBlocked {
-                UserId = 3,
+                UserId = _requestingUser.Id,
                 Description = "Sextant",
                 ExtraInfo = "For sextanting",
                 ForbiddenWords = forbiddenWords
