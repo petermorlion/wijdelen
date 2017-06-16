@@ -23,10 +23,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ChatMessageAdded e) {
             var chat = _chatRepository.Get(x => x.ChatId == e.ChatId);
-            var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == chat.ObjectRequestId);
-
-            var fromUserName = e.UserId == chat.ConfirmingUserId ? chat.ConfirmingUserName : chat.RequestingUserName;
-
+            
             var toUserId = e.UserId == chat.ConfirmingUserId ? chat.RequestingUserId : chat.ConfirmingUserId;
             var toUser = _userQuery.GetResult(toUserId);
 
@@ -34,7 +31,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 return;
             }
 
-            _mailService.SendChatMessageAddedMail(fromUserName, objectRequest.Description, toUser.Email, e.ChatId, e.Message);
+            var fromUserName = e.UserId == chat.ConfirmingUserId ? chat.ConfirmingUserName : chat.RequestingUserName;
+            var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == chat.ObjectRequestId);
+            var culture = toUser.As<UserDetailsPart>()?.Culture;
+
+            _mailService.SendChatMessageAddedMail(culture, fromUserName, objectRequest.Description, toUser.Email, e.ChatId, e.Message);
         }
     }
 }

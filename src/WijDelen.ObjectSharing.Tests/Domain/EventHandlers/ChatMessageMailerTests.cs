@@ -45,6 +45,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             var userMockFactory = new UserFactory();
             _userMock = userMockFactory.Create("jane.doe@gmail.com", "jane.doe@gmail.com", "Jane", "Doe");
+            _userMock.As<UserDetailsPart>().Culture = "test";
             
             var userQueryMock = new Mock<IGetUserByIdQuery>();
             userQueryMock.Setup(x => x.GetResult(1)).Returns(_userMock);
@@ -77,7 +78,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _handler.Handle(e);
 
-            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail("John", "Sneakers", "jane.doe@gmail.com", _chatId, "I have Reebok Pumps"));
+            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail("test", "John", "Sneakers", "jane.doe@gmail.com", _chatId, "I have Reebok Pumps"));
         }
 
         [Test]
@@ -92,7 +93,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _handler.Handle(e);
 
-            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
+            _mailServiceMock.Verify(x => x.SendChatMessageAddedMail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
         }
     }
 }
