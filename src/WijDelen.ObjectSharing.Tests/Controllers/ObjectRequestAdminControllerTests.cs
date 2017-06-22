@@ -58,6 +58,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void WhenGettingIndex() {
             var objectRequestRecord1 = new ObjectRequestRecord {
+                Id = 1,
                 AggregateId = Guid.NewGuid(),
                 GroupName = "The Simpsons",
                 Description = "Sneakers",
@@ -65,6 +66,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 CreatedDateTime = new DateTime(2016, 1, 1)
             };
             var objectRequestRecord2 = new ObjectRequestRecord {
+                Id = 2,
                 AggregateId = Guid.NewGuid(),
                 GroupName = "The Flintstones",
                 Description = "A rock",
@@ -90,6 +92,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var recordViewModels = model.ObjectRequests;
             recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel
             {
+                Id = 2,
                 AggregateId = objectRequestRecord2.AggregateId,
                 GroupName = "The Flintstones",
                 Description = "A rock",
@@ -98,6 +101,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 CreatedDateTime = new DateTime(2017, 1, 1)
             });
             recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+                Id = 1,
                 AggregateId = objectRequestRecord1.AggregateId,
                 GroupName = "The Simpsons",
                 Description = "Sneakers",

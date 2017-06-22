@@ -2,6 +2,7 @@
 
 namespace WijDelen.ObjectSharing.ViewModels.Admin {
     public class ObjectRequestRecordViewModel {
+        public int Id { get; set; }
         public Guid AggregateId { get; set; }
         public bool IsSelected { get; set; }
         public string GroupName { get; set; }

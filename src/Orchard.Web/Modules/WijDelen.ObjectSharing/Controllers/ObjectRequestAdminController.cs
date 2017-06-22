@@ -53,6 +53,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 .Take(take)
                 .ToList()
                 .Select(x => new ObjectRequestRecordViewModel {
+                    Id = x.Id,
                     AggregateId = x.AggregateId,
                     IsSelected = false,
                     GroupName = x.GroupName,
