@@ -323,6 +323,16 @@ msgstr "Gelieve minstens één oproep te selecteren."
 msgid "The selected requests were unblocked and mails have been sent to the users."
 msgstr "De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd naar de gebruikers."
 
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "OK"
+msgid "OK"
+msgstr "OK"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "Blocked (forbidden words)"
+msgid "Blocked (forbidden words)"
+msgstr "Geblokkeerd (verboden woorden)"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
 #| msgid "Unsubscribe"
 msgid "Unsubscribe"

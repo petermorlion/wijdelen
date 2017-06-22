@@ -94,7 +94,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 IsSelected = false,
-                Status = "Blocked",
+                Status = "Blocked (forbidden words)",
                 CreatedDateTime = new DateTime(2017, 1, 1)
             });
             recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
@@ -102,11 +102,61 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Simpsons",
                 Description = "Sneakers",
                 IsSelected = false,
-                Status = "",
+                Status = "OK",
                 CreatedDateTime = new DateTime(2016, 1, 1)
+            });
+            model.PossibleStatusses.ShouldBeEquivalentTo(new List<ObjectRequestStatusViewModel> {
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = -1, Translation = "" },
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 0, Translation = "None" },
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 1, Translation = "Blocked (forbidden words)" }
             });
             
             recordViewModels.Count.Should().Be(2);
+        }
+
+        [Test]
+        public void WhenGettingIndexFiltered()
+        {
+            var objectRequestRecord1 = new ObjectRequestRecord
+            {
+                AggregateId = Guid.NewGuid(),
+                GroupName = "The Simpsons",
+                Description = "Sneakers",
+                Status = "None",
+                CreatedDateTime = new DateTime(2016, 1, 1)
+            };
+            var objectRequestRecord2 = new ObjectRequestRecord
+            {
+                AggregateId = Guid.NewGuid(),
+                GroupName = "The Flintstones",
+                Description = "A rock",
+                Status = "BlockedForForbiddenWords",
+                CreatedDateTime = new DateTime(2017, 1, 1)
+            };
+            var records = new List<ObjectRequestRecord> {
+                objectRequestRecord2,
+                objectRequestRecord1
+            };
+
+            _repositoryMock.Setup(x => x.Table).Returns(records.AsQueryable());
+
+            var result = _controller.Index(selectedObjectRequestStatusValue: 1);
+
+            result.Should().BeOfType<ViewResult>();
+            var model = result.As<ViewResult>().Model.As<ObjectRequestAdminViewModel>();
+            model.ObjectRequestsCount.Should().Be(1);
+            var recordViewModels = model.ObjectRequests;
+            recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel
+            {
+                AggregateId = objectRequestRecord2.AggregateId,
+                GroupName = "The Flintstones",
+                Description = "A rock",
+                IsSelected = false,
+                Status = "Blocked (forbidden words)",
+                CreatedDateTime = new DateTime(2017, 1, 1)
+            });
+
+            recordViewModels.Count.Should().Be(1);
         }
 
         [Test]
@@ -158,6 +208,21 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var recordViewModels = model.ObjectRequests;
             recordViewModels.Count.Should().Be(50);
             recordViewModels.All(x => x.Description == "Second half").Should().BeTrue();
+        }
+
+        [Test]
+        public void WhenPostingIndexWithoutFilter() {
+            var result = _controller.IndexPost();
+            result.Should().BeOfType<RedirectToRouteResult>();
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+        }
+
+        [Test]
+        public void WhenPostingIndexWithFilter() {
+            var result = _controller.IndexPost(1);
+            result.Should().BeOfType<RedirectToRouteResult>();
+            ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
+            ((RedirectToRouteResult) result).RouteValues["selectedObjectRequestStatusValue"].Should().Be(1);
         }
 
         [Test]

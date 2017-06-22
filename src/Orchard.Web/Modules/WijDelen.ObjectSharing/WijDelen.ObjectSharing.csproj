@@ -219,6 +219,7 @@
     <Compile Include="Domain\Services\RandomSampleService.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestAdminViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestRecordViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ObjectRequestStatusViewModel.cs" />
     <Compile Include="ViewModels\ChatMessageViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />

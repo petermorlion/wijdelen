@@ -11,8 +11,12 @@
 }
 else {
     using (Html.BeginFormAntiForgeryPost()) {
+        
         <fieldset class="bulk-actions">
             <div class="manage">
+                <label for="filterResults">@T("Filter:")</label>
+                @Html.DropDownList("selectedObjectRequestStatusValue", Model.PossibleStatusses.Select(x => new SelectListItem { Value = x.ObjectRequestStatusValue.ToString(), Text = x.Translation }))
+                <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
                 <button type="submit" name="submit.Unblock" value="@T("Unblock")">@T("Unblock")</button>
             </div>
         </fieldset>

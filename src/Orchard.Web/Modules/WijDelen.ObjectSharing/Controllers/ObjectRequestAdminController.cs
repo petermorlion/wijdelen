@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.Data;
 using Orchard.Localization;
@@ -25,10 +27,18 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public Localizer T { get; set; }
 
-        public ActionResult Index(int page = 1) {
+        public ActionResult Index(int page = 1, int selectedObjectRequestStatusValue = -1) {
             const int take = 50;
 
-            var count = _objectRequestRecordRepository.Table.Count();
+            var filteredRecords = _objectRequestRecordRepository
+                .Table;
+
+            if (selectedObjectRequestStatusValue != -1) {
+                var objectRequestStatus = (ObjectRequestStatus)selectedObjectRequestStatusValue;
+                filteredRecords = filteredRecords.Where(x => x.Status == objectRequestStatus.ToString());
+            }
+
+            var count = filteredRecords.Count();
             var totalPages = GetTotalPages(count, take);
 
             if (page > totalPages) {
@@ -37,8 +47,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var skip = (page - 1) * take;
 
-            var records = _objectRequestRecordRepository
-                .Table
+            var records = filteredRecords
                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip(skip)
                 .Take(take)
@@ -56,13 +65,20 @@ namespace WijDelen.ObjectSharing.Controllers {
             var hasNextPage = page * take < count;
             var hasPreviousPage = page > 1;
 
+            var possibleStatusses = new List<ObjectRequestStatusViewModel> {
+                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = -1, Translation = ""},
+                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.None, Translation = T("OK").ToString()},
+                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.BlockedForForbiddenWords, Translation = T("Blocked (forbidden words)").ToString()}
+            };
+
             var viewModel = new ObjectRequestAdminViewModel {
                 ObjectRequests = records,
                 Page = page,
                 ObjectRequestsCount = count,
                 HasNextPage = hasNextPage,
                 HasPreviousPage = hasPreviousPage,
-                TotalPages = totalPages
+                TotalPages = totalPages,
+                PossibleStatusses = possibleStatusses
             };
 
             return View(viewModel);
@@ -94,13 +110,25 @@ namespace WijDelen.ObjectSharing.Controllers {
             return RedirectToAction("Index", new {page = viewModel.Page});
         }
 
+        [HttpPost]
+        [Orchard.Mvc.FormValueRequired("submit.Filter")]
+        [ActionName("Index")]
+        public ActionResult IndexPost(int selectedObjectRequestStatusValue = -1)
+        {
+            if (selectedObjectRequestStatusValue == -1) {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index", new { selectedObjectRequestStatusValue });
+        }
+
         private string GetStatus(ObjectRequestRecord objectRequestRecord) {
             if (objectRequestRecord.Status == ObjectRequestStatus.BlockedForForbiddenWords.ToString()) {
-                return T("Blocked").ToString();
+                return T("Blocked (forbidden words)").ToString();
             }
 
             if (objectRequestRecord.Status == ObjectRequestStatus.None.ToString()) {
-                return "";
+                return T("OK").ToString();
             }
 
             return objectRequestRecord.Status;
