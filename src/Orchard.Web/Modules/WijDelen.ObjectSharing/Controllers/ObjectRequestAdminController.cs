@@ -39,7 +39,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var records = _objectRequestRecordRepository
                 .Table
-                .OrderBy(x => x.CreatedDateTime)
+                .OrderByDescending(x => x.CreatedDateTime)
                 .Skip(skip)
                 .Take(take)
                 .ToList()
@@ -48,7 +48,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                     IsSelected = false,
                     GroupName = x.GroupName,
                     Description = x.Description,
-                    Status = GetStatus(x)
+                    Status = GetStatus(x),
+                    CreatedDateTime = x.CreatedDateTime
                 })
                 .ToList();
 

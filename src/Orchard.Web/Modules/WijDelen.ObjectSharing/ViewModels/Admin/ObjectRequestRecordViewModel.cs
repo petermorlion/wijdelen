@@ -7,5 +7,6 @@ namespace WijDelen.ObjectSharing.ViewModels.Admin {
         public string GroupName { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
+        public DateTime CreatedDateTime { get; set; }
     }
 }

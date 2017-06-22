@@ -22,6 +22,7 @@ else {
                 <thead>
                 <tr>
                     <th></th>
+                    <th>@T("Created")</th>
                     <th>@T("Group")</th>
                     <th>@T("Description")</th>
                     <th>@T("Status")</th>
@@ -34,6 +35,7 @@ else {
                             <input type="hidden" value="@Model.ObjectRequests[index].AggregateId" name="@Html.NameOf(m => m.ObjectRequests[index].AggregateId)"/>
                             <input type="checkbox" value="true" name="@Html.NameOf(m => m.ObjectRequests[index].IsSelected)"/>
                         </td>
+                        <td>@record.CreatedDateTime</td>
                         <td>@record.GroupName</td>
                         <td>@record.Description</td>
                         <td>@record.Status</td>

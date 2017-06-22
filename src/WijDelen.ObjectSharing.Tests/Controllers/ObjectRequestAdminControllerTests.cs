@@ -88,20 +88,24 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.HasNextPage.Should().Be(false);
             model.TotalPages.Should().Be(1);
             var recordViewModels = model.ObjectRequests;
-            recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
-                AggregateId = objectRequestRecord1.AggregateId,
-                GroupName = "The Simpsons",
-                Description = "Sneakers",
-                IsSelected = false,
-                Status = ""
-            });
-            recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+            recordViewModels[0].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel
+            {
                 AggregateId = objectRequestRecord2.AggregateId,
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 IsSelected = false,
-                Status = "Blocked"
+                Status = "Blocked",
+                CreatedDateTime = new DateTime(2017, 1, 1)
             });
+            recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
+                AggregateId = objectRequestRecord1.AggregateId,
+                GroupName = "The Simpsons",
+                Description = "Sneakers",
+                IsSelected = false,
+                Status = "",
+                CreatedDateTime = new DateTime(2016, 1, 1)
+            });
+            
             recordViewModels.Count.Should().Be(2);
         }
 

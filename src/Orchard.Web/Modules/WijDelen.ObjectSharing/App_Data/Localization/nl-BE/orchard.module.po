@@ -299,6 +299,11 @@ msgid "Unblock"
 msgstr "Deblokkeer"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#| msgid "Created"
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #| msgid "There are currently no blocked requests"
 msgid "There are currently no blocked requests"
 msgstr "Er zijn momenteel geen geblokkeerde oproepen"
