@@ -5,6 +5,7 @@ using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -82,7 +83,11 @@ namespace WijDelen.ObjectSharing.Controllers {
             }
 
             if (record.Status == "BlockedForForbiddenWords") {
-                return RedirectToAction("New");
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("This request was blocked because it contains words that may be considered offensive or inappropriate."));
+            }
+
+            if (record.Status == "BlockedByAdmin") {
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("This request was blocked by the administrator:\n\n{0}", record.BlockReason));
             }
 
             var viewModel = new ObjectRequestViewModel {

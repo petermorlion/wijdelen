@@ -78,6 +78,16 @@ msgstr "Gelieve de omschrijving te beperken tot {0} karakters."
 msgid "Please limit the extra info to {0} characters."
 msgstr "Gelieve de extra informatie te beperken tot {0} karakters."
 
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "This request was blocked because it contains words that may be considered offensive or inappropriate."
+msgid "This request was blocked because it contains words that may be considered offensive or inappropriate."
+msgstr "Deze oproep werd geblokkeerd omdat het woorden bevat die als beledigend of ongepast kunnen worden beschouwd."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+#| msgid "This request was blocked by the administrator:\n\n{0}"
+msgid "This request was blocked by the administrator:\n\n{0}"
+msgstr "Deze oproep werd geblokkeerd door de beheerder:\n\n{0}"
+
 #: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
 #| msgid "Thank you for your request. We sent your request to the members of your group."
 msgid "Thank you for your request. We sent your request to the members of your group."

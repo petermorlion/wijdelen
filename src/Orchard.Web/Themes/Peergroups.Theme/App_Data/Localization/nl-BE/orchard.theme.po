@@ -53,6 +53,21 @@ msgstr "Mijn oproepen"
 msgid "Received Requests"
 msgstr "Ontvangen oproepen"
 
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+#| msgid "New Request"
+msgid "New Request"
+msgstr "Nieuwe oproep"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+#| msgid "My Requests"
+msgid "My Requests"
+msgstr "Mijn oproepen"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+#| msgid "Received Requests"
+msgid "Received Requests"
+msgstr "Ontvangen oproepen"
+
 #: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
 #| msgid "Change Password"
 msgid "Change Password"
