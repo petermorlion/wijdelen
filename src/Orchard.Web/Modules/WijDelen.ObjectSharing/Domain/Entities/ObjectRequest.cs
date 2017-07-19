@@ -54,6 +54,11 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Update(new ObjectRequestDeniedForNow { DenyingUserId = denyingUserId, DateTimeDenied = DateTime.UtcNow });
         }
 
+        public void Block(string reason) {
+            var forbiddenWords = ForbiddenWords.GetForbiddenWordsInString(Description).Union(ForbiddenWords.GetForbiddenWordsInString(ExtraInfo)).ToList();
+            Update(new ObjectRequestBlocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId, ForbiddenWords = forbiddenWords, Reason = reason });
+        }
+
         public void Unblock() {
             Update(new ObjectRequestUnblocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId });
         }
@@ -83,6 +88,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         private void OnObjectRequestBlocked(ObjectRequestBlocked objectRequestBlocked) {
+            Status = ObjectRequestStatus.BlockedForForbiddenWords;
+            BlockReason = objectRequestBlocked.Reason;
         }
 
         /// <summary>
@@ -109,5 +116,6 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         public IEnumerable<int> DenyingUserIds => _denyingUserIds;
         public IEnumerable<int> DenyingForNowUserIds => _denyingForNowUserIds;
         public ObjectRequestStatus Status { get; private set; }
+        public string BlockReason { get; private set; }
     }
 }

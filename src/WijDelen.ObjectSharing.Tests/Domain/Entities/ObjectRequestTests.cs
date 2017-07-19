@@ -142,5 +142,22 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Version.Should().Be(2);
             objectRequest.Status.Should().Be(ObjectRequestStatus.None);
         }
+
+        [Test]
+        public void WhenBlocking() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "for sneaking", 22);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
+
+            objectRequest.Block("Just because");
+
+            objectRequest.Events.Last().As<ObjectRequestBlocked>().Description.Should().Be("Sneakers");
+            objectRequest.Events.Last().As<ObjectRequestBlocked>().ExtraInfo.Should().Be("for sneaking");
+            objectRequest.Events.Last().As<ObjectRequestBlocked>().UserId.Should().Be(22);
+            objectRequest.Events.Last().As<ObjectRequestBlocked>().ForbiddenWords.ShouldBeEquivalentTo(new List<string>());
+            objectRequest.Events.Last().As<ObjectRequestBlocked>().Reason.Should().Be("Just because");
+            objectRequest.Version.Should().Be(1);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
+            objectRequest.BlockReason.Should().Be("Just because");
+        }
     }
 }
