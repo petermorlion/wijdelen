@@ -333,6 +333,16 @@ msgstr "OK"
 msgid "Blocked (forbidden words)"
 msgstr "Geblokkeerd (verboden woorden)"
 
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "Blocked (by administrator)"
+msgid "Blocked (by administrator)"
+msgstr "Geblokkeerd (door de beheerder)"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "Blocked (by administrator)"
+msgid "Blocked (by administrator)"
+msgstr "Geblokkeerd (door de beheerder)"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
 #| msgid "Unsubscribe"
 msgid "Unsubscribe"
@@ -517,6 +527,11 @@ msgstr "OK"
 #| msgid "Blocked (forbidden words)"
 msgid "Blocked (forbidden words)"
 msgstr "Geblokkeerd (verboden woorden)"
+
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+#| msgid "Blocked (by administrator)"
+msgid "Blocked (by administrator)"
+msgstr "Geblokkeerd (door de beheerder)"
 
 #: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
 #| msgid "The request was blocked and a mail was sent to the user."

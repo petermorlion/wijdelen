@@ -18,9 +18,9 @@ using WijDelen.UserImport.Models;
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ObjectRequestDetailsAdminController : Controller {
+        private readonly ICommandHandler<BlockObjectRequestByAdmin> _commandHandler;
         private readonly IGetUserByIdQuery _getUserByIdQuery;
         private readonly INotifier _notifier;
-        private readonly ICommandHandler<BlockObjectRequestByAdmin> _commandHandler;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
 
         public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier, ICommandHandler<BlockObjectRequestByAdmin> commandHandler) {
@@ -50,8 +50,7 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Index(Guid objectRequestId, string blockReason)
-        {
+        public ActionResult Index(Guid objectRequestId, string blockReason) {
             var command = new BlockObjectRequestByAdmin(objectRequestId, blockReason);
             _commandHandler.Handle(command);
             _notifier.Add(NotifyType.Success, T("The request was blocked and a mail was sent to the user."));
@@ -64,6 +63,9 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             if (objectRequestRecord.Status == ObjectRequestStatus.None.ToString())
                 return T("OK").ToString();
+
+            if (objectRequestRecord.Status == ObjectRequestStatus.BlockedByAdmin.ToString())
+                return T("Blocked (by administrator)").ToString();
 
             return objectRequestRecord.Status;
         }

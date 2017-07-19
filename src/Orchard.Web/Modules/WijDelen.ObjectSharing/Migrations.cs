@@ -179,7 +179,7 @@ namespace WijDelen.ObjectSharing {
 
         public int UpdateFrom15() {
             SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
-                .AlterColumn("BlockReason", column => column.WithType(DbType.String).Unlimited()));
+                .AddColumn<string>("BlockReason", column => column.Unlimited()));
 
             return 16;
         }
