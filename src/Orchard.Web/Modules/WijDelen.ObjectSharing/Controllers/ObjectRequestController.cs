@@ -95,8 +95,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public ActionResult Index() {
             var records = _objectRequestRepository
-                .Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id
-                    && x.Status != "BlockedForForbiddenWords")
+                .Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id)
                 .OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(records);
         }

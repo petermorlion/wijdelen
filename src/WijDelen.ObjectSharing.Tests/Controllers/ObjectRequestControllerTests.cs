@@ -124,15 +124,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingIndex_ShouldReturnViewWithNonBlockedRequests() {
+        public void WhenGettingIndex_ShouldReturnView() {
             var actionResult = _controller.Index();
 
             var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
             model.Should().NotBeNull();
-            model.Count().Should().Be(2);
+            model.Count().Should().Be(3);
             model.ToList()[0].Should().Be(_persistentRecords[2]);
             model.ToList()[1].Should().Be(_persistentRecords[1]);
-            model.ToList().Should().NotContain(_persistentRecords[3]);
+            model.ToList()[2].Should().Be(_persistentRecords[3]);
         }
 
         [Test]

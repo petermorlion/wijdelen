@@ -1,0 +1,9 @@
+﻿#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+#| msgid "ObjectRequestStatus.BlockedByAdmin"
+msgid "ObjectRequestStatus.BlockedByAdmin"
+msgstr "This request has been blocked by the administrator: {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+#| msgid "ObjectRequestStatus.BlockedForForbiddenWords"
+msgid "ObjectRequestStatus.BlockedForForbiddenWords"
+msgstr "This request has been blocked."

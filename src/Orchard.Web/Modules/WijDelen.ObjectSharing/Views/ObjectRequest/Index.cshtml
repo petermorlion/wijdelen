@@ -1,18 +1,29 @@
-﻿@using WijDelen.ObjectSharing.ViewModels
+﻿@using WijDelen.ObjectSharing.Domain.ValueTypes
+@using WijDelen.ObjectSharing.ViewModels
 @model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
 
 @{
     Layout.Title = T("My Requests");
+    Script.Include("https://use.fontawesome.com/9b21350ae6.js");
 }
 
 @if (Model.Any()) {
     <ul class="objectrequestlist">
         @foreach (var objectRequestRecord in Model) {
             <li class="objectrequestlist-item">
-                @Html.ActionLink(objectRequestRecord.Description,
-                    "Item",
-                    new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId},
-                    new {@class = "objectrequestlist-link"})
+                <a href="@Url.Action("Item", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId})"
+                   class="objectrequestlist-link @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {<text>objectrequestlist-link-blocked</text>}"
+
+                   @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {
+                       <text>title="@T("ObjectRequestStatus." + objectRequestRecord.Status, objectRequestRecord.BlockReason)"</text>
+                   }>
+                    
+                    @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    }
+
+                    @objectRequestRecord.Description
+                </a>
             </li>
         }
     </ul>
