@@ -13,6 +13,7 @@ namespace WijDelen.Mailgun {
         /// <param name="subject">The subject of the email.</param>
         /// <param name="textMail">A text version of the mail.</param>
         /// <param name="htmlMail">A html version of the mail.</param>
-        void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string textMail, string htmlMail);
+        /// <param name="allowReply">Allow recipients to reply to this email, i.e. to the administrator.</param>
+        void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string textMail, string htmlMail, bool allowReply = false);
     }
 }

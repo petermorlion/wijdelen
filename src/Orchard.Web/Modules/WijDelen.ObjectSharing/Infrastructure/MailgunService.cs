@@ -235,7 +235,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
                 var html = _shapeDisplay.Display(htmlShape);
 
-                _mailgunClient.Send(recipients, "", subject, "", html);
+                _mailgunClient.Send(recipients, "", subject, "", html, true);
             }
             finally
             {

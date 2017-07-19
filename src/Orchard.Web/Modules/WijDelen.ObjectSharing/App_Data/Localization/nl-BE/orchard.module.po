@@ -637,3 +637,8 @@ msgstr "De reden die werd opgegeven was:"
 #| msgid "Unsubscribe"
 msgid "Unsubscribe"
 msgstr "Uitschrijven"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "If you think this is a mistake, please reply to this email."
+msgid "If you think this is a mistake, please reply to this email."
+msgstr "Als je denkt dat dit een vergissing is, stuur ons dan een antwoord op deze mail."
