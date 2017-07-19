@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WijDelen.ObjectSharing.ViewModels.Admin {
     public class ObjectRequestDetailsAdminViewModel {
@@ -9,5 +10,6 @@ namespace WijDelen.ObjectSharing.ViewModels.Admin {
         public DateTime CreatedDateTime { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public IList<string> ForbiddenWords { get; set; }
     }
 }

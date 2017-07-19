@@ -63,7 +63,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Simpsons",
                 Description = "Sneakers",
                 Status = "None",
-                CreatedDateTime = new DateTime(2016, 1, 1)
+                CreatedDateTime = new DateTime(2016, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             var objectRequestRecord2 = new ObjectRequestRecord {
                 Id = 2,
@@ -71,7 +71,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 Status = "BlockedForForbiddenWords",
-                CreatedDateTime = new DateTime(2017, 1, 1)
+                CreatedDateTime = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             var records = new List<ObjectRequestRecord> {
                 objectRequestRecord2,
@@ -98,7 +98,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "A rock",
                 IsSelected = false,
                 Status = "Blocked (forbidden words)",
-                CreatedDateTime = new DateTime(2017, 1, 1)
+                CreatedDateTime = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime()
             });
             recordViewModels[1].ShouldBeEquivalentTo(new ObjectRequestRecordViewModel {
                 Id = 1,
@@ -107,11 +107,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "Sneakers",
                 IsSelected = false,
                 Status = "OK",
-                CreatedDateTime = new DateTime(2016, 1, 1)
+                CreatedDateTime = new DateTime(2016, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime()
             });
             model.PossibleStatusses.ShouldBeEquivalentTo(new List<ObjectRequestStatusViewModel> {
                 new ObjectRequestStatusViewModel { ObjectRequestStatusValue = -1, Translation = "" },
-                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 0, Translation = "None" },
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 0, Translation = "OK" },
                 new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 1, Translation = "Blocked (forbidden words)" }
             });
             
@@ -127,7 +127,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Simpsons",
                 Description = "Sneakers",
                 Status = "None",
-                CreatedDateTime = new DateTime(2016, 1, 1)
+                CreatedDateTime = new DateTime(2016, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             var objectRequestRecord2 = new ObjectRequestRecord
             {
@@ -135,7 +135,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 GroupName = "The Flintstones",
                 Description = "A rock",
                 Status = "BlockedForForbiddenWords",
-                CreatedDateTime = new DateTime(2017, 1, 1)
+                CreatedDateTime = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             };
             var records = new List<ObjectRequestRecord> {
                 objectRequestRecord2,
@@ -157,7 +157,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "A rock",
                 IsSelected = false,
                 Status = "Blocked (forbidden words)",
-                CreatedDateTime = new DateTime(2017, 1, 1)
+                CreatedDateTime = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime()
             });
 
             recordViewModels.Count.Should().Be(1);

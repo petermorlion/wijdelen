@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WijDelen.ObjectSharing.Data {
     public static class ForbiddenWords {
+        public static IList<string> GetForbiddenWordsInString(string input) {
+            var inputWords = input.Split(' ').Select(x => x.ToLower()).ToList();
+            return Dutch.Union(English).Union(French).Intersect(inputWords).ToList();
+        }
+
         private static readonly IList<string> _english = new List<string> {
             
         };

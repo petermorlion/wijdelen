@@ -26,7 +26,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
             var status = ObjectRequestStatus.None;
-            var forbiddenWords = ForbiddenWords.Dutch.Where(x => description.ToLower().Contains(x.ToLower()) || extraInfo.ToLower().Contains(x.ToLower())).ToList();
+            var forbiddenWords = ForbiddenWords.GetForbiddenWordsInString(description).Union(ForbiddenWords.GetForbiddenWordsInString(extraInfo)).ToList();
             if (forbiddenWords.Any()) {
                 status = ObjectRequestStatus.BlockedForForbiddenWords;
             }

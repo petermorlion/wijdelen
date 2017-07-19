@@ -131,12 +131,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
 
         [Test]
         public void WhenUnblocking() {
-            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sextant", "for sextanting", 22);
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sex", "for sextanting", 22);
             objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
 
             objectRequest.Unblock();
 
-            objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sextant");
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sex");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sextanting");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
             objectRequest.Version.Should().Be(2);

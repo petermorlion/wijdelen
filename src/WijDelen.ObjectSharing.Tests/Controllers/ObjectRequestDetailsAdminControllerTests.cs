@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Security;
@@ -14,7 +14,6 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.ViewModels.Admin;
-using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
@@ -34,7 +33,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Id = 12,
                 Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString(),
                 CreatedDateTime = new DateTime(2017, 07, 19, 12, 30, 0, DateTimeKind.Utc),
-                Description = "Description",
+                Description = "Description test",
                 ExtraInfo = "Extra Info",
                 GroupName = "Group",
                 UserId = 33
@@ -61,9 +60,10 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             result.Should().BeOfType<ViewResult>();
             var model = result.As<ViewResult>().Model.As<ObjectRequestDetailsAdminViewModel>();
-            model.Status.Should().Be("BlockedForForbiddenWords");
+            model.Status.Should().Be("Blocked (forbidden words)");
+            model.ForbiddenWords.ShouldBeEquivalentTo(new List<string> {"test"});
             model.CreatedDateTime.Should().Be(new DateTime(2017, 07, 19, 12, 30, 0, DateTimeKind.Utc).ToLocalTime());
-            model.Description.Should().Be("Description");
+            model.Description.Should().Be("Description test");
             model.ExtraInfo.Should().Be("Extra Info");
             model.GroupName.Should().Be("Group");
             model.FirstName.Should().Be("Jane");
