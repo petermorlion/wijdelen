@@ -7,6 +7,8 @@ using Orchard.Localization;
 using Orchard.UI.Admin;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Data;
+using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
@@ -18,12 +20,14 @@ namespace WijDelen.ObjectSharing.Controllers {
     public class ObjectRequestDetailsAdminController : Controller {
         private readonly IGetUserByIdQuery _getUserByIdQuery;
         private readonly INotifier _notifier;
+        private readonly ICommandHandler<BlockObjectRequestByAdmin> _commandHandler;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
 
-        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier) {
+        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier, ICommandHandler<BlockObjectRequestByAdmin> commandHandler) {
             _objectRequestRecordRepository = repository;
             _getUserByIdQuery = getUserByIdQuery;
             _notifier = notifier;
+            _commandHandler = commandHandler;
         }
 
         public Localizer T { get; set; }
@@ -48,6 +52,8 @@ namespace WijDelen.ObjectSharing.Controllers {
         [HttpPost]
         public ActionResult Index(Guid objectRequestId, string blockReason)
         {
+            var command = new BlockObjectRequestByAdmin(objectRequestId, blockReason);
+            _commandHandler.Handle(command);
             _notifier.Add(NotifyType.Success, T("The request was blocked and a mail was sent to the user."));
             return RedirectToAction("Index", new {objectRequestId});
         }

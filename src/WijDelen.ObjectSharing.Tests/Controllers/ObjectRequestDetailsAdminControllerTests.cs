@@ -11,6 +11,8 @@ using Orchard.Localization;
 using Orchard.Security;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
+using WijDelen.ObjectSharing.Domain.Commands;
+using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
@@ -45,10 +47,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             _userQueryMock.Setup(x => x.GetResult(33)).Returns(_userMock);
 
             _notifierMock = new Mock<INotifier>();
+            _commandHandlerMock = new Mock<ICommandHandler<BlockObjectRequestByAdmin>>();
 
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             builder.RegisterInstance(_userQueryMock.Object).As<IGetUserByIdQuery>();
             builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
+            builder.RegisterInstance(_commandHandlerMock.Object).As<ICommandHandler<BlockObjectRequestByAdmin>>();
             builder.RegisterType<ObjectRequestDetailsAdminController>();
 
             var container = builder.Build();
@@ -63,6 +67,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         private IUser _userMock;
         private Guid _aggregateId;
         private Mock<INotifier> _notifierMock;
+        private Mock<ICommandHandler<BlockObjectRequestByAdmin>> _commandHandlerMock;
 
         [Test]
         public void TestIndex() {
@@ -90,6 +95,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             redirectToRouteResult.RouteValues["objectRequestId"].Should().Be(_aggregateId);
 
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("The request was blocked and a mail was sent to the user.")));
+
+            _commandHandlerMock.Verify(x => x.Handle(It.Is<BlockObjectRequestByAdmin>(command => command.Reason == "Just because" && command.ObjectRequestId == _aggregateId)));
         }
     }
 }
