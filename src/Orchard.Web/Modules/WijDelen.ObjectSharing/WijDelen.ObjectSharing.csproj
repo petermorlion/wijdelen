@@ -219,6 +219,7 @@
     <Compile Include="Domain\Services\IRandomSampleService.cs" />
     <Compile Include="Domain\Services\RandomSampleService.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestAdminViewModel.cs" />
+    <Compile Include="ViewModels\Admin\ObjectRequestDetailsAdminViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestRecordViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestStatusViewModel.cs" />
     <Compile Include="ViewModels\ChatMessageViewModel.cs" />

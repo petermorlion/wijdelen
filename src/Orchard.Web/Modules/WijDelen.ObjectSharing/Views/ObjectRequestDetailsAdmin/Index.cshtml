@@ -1,5 +1,23 @@
-﻿@{
-    Layout.Title = "REPLACE";
+﻿@model WijDelen.ObjectSharing.ViewModels.Admin.ObjectRequestDetailsAdminViewModel
+
+@{
+    Layout.Title = Model.Description;
 }
 
-<span>Foo</span>
+<h2>User</h2>
+@Model.FirstName @Model.LastName
+
+<h2>Group</h2>
+@Model.GroupName
+
+<h2>Description</h2>
+@Model.Description
+
+<h2>Extra Info</h2>
+@Model.ExtraInfo
+
+<h2>Status</h2>
+@Model.Status
+
+<h2>Created</h2>
+@Model.CreatedDateTime

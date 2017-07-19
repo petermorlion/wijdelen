@@ -59,7 +59,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                     GroupName = x.GroupName,
                     Description = x.Description,
                     Status = GetStatus(x),
-                    CreatedDateTime = x.CreatedDateTime
+                    CreatedDateTime = x.CreatedDateTime.ToLocalTime()
                 })
                 .ToList();
 

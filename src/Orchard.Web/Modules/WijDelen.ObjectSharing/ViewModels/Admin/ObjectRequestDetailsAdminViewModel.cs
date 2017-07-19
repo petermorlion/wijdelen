@@ -1,15 +1,13 @@
 ﻿using System;
-using Orchard.Security;
-using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.ViewModels.Admin {
-    public class ObjectRequestRecordViewModel {
-        public int Id { get; set; }
-        public Guid AggregateId { get; set; }
-        public bool IsSelected { get; set; }
+    public class ObjectRequestDetailsAdminViewModel {
         public string GroupName { get; set; }
         public string Description { get; set; }
+        public string ExtraInfo { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDateTime { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
