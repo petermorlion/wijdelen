@@ -173,6 +173,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Version.Should().Be(1);
             objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedByAdmin);
             objectRequest.BlockReason.Should().Be("Just because");
+            objectRequest.UserId.Should().Be(22);
+            objectRequest.Description.Should().Be("Sneakers");
         }
     }
 }

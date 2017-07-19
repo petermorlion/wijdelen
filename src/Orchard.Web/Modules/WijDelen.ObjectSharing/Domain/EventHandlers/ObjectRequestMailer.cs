@@ -17,7 +17,7 @@ using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class ObjectRequestMailer : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>
+    public class ObjectRequestMailer : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>, IEventHandler<ObjectRequestBlockedByAdmin>
     {
         private readonly IEventSourcedRepository<ObjectRequestMail> _repository;
         private readonly IGroupService _groupService;
@@ -74,6 +74,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public void Handle(ObjectRequestBlocked e) {
             var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
             _mailService.SendAdminObjectRequestBlockedMail(e.SourceId, requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo, e.ForbiddenWords);
+        }
+
+        public void Handle(ObjectRequestBlockedByAdmin e) {
+            var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
+            _mailService.SendObjectRequestBlockedMail(requestingUser, e.SourceId, e.Description, e.Reason);
         }
 
         private void SendObjectRequestMail(IUser requestingUser, string description, string extraInfo, Guid sourceId) {

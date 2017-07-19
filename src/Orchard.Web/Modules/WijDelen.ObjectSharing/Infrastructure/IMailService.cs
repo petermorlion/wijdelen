@@ -10,5 +10,6 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         void SendChatMessageAddedMail(string culture, string fromUserName, string description, string toEmailAddress, Guid chatId, string message);
         void SendAdminObjectRequestBlockedMail(Guid objectRequestId, string requestingUserName, string description, string extraInfo, IList<string> forbiddenWords);
         void SendAdminObjectRequestMail(string requestingUserName, string description, string extraInfo);
+        void SendObjectRequestBlockedMail(IUser requestingUser, Guid sourceId, string description, string reason);
     }
 }

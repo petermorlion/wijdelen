@@ -138,6 +138,11 @@ msgstr "Een oproep voor (een) {0} werd geblokkeerd"
 msgid "A request for (a) {0} was made"
 msgstr "Er is een nieuwe oproep voor (een) {0}"
 
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+#| msgid "Your request has been blocked"
+msgid "Your request has been blocked"
+msgstr "Je aanvraag werd geblokkeerd"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
@@ -612,3 +617,23 @@ msgstr "Deblokkeren"
 #| msgid "Reason"
 msgid "Reason"
 msgstr "Reden"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Hello"
+msgid "Hello"
+msgstr "Hallo"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Your request for (a) {0} has been blocked."
+msgid "Your request for (a) {0} has been blocked."
+msgstr "Je oproep voor (een) {0} werd geblokkeerd."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "The reason given was this:"
+msgid "The reason given was this:"
+msgstr "De reden die werd opgegeven was:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+#| msgid "Unsubscribe"
+msgid "Unsubscribe"
+msgstr "Uitschrijven"

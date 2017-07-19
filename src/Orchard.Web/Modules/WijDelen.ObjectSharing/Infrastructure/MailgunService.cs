@@ -193,5 +193,54 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 _orchardServices.WorkContext.CurrentCulture = originalCulture;
             }
         }
+
+        public void SendObjectRequestBlockedMail(IUser requestingUser, Guid sourceId, string description, string reason) {
+            var originalCulture = _orchardServices.WorkContext.CurrentCulture;
+            var culture = requestingUser.As<UserDetailsPart>()?.Culture;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(culture))
+                    _orchardServices.WorkContext.CurrentCulture = culture;
+
+                var recipients = new List<string> { requestingUser.Email };
+
+                var subject = T("Your request has been blocked", description).ToString();
+
+                var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+                var objectRequestLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/Item/" + sourceId;
+
+                var groupLogoUrl = "";
+                var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
+
+                if (_orchardServices.WorkContext.CurrentUser != null)
+                {
+                    var user = _orchardServices.WorkContext.CurrentUser;
+                    var groupMembership = user.As<GroupMembershipPart>();
+                    var group = groupMembership.Group;
+                    var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
+                    var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
+
+                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
+                }
+
+                var htmlShape = _shapeFactory.Create("Template_ObjectRequestBlockedMail", Arguments.From(new
+                {
+                    GroupLogoUrl = groupLogoUrl,
+                    Description = description,
+                    ObjectRequestLink = objectRequestLink,
+                    UnsubscribeUrl = unsubscribeUrl,
+                    Reason = reason
+                }));
+
+                var html = _shapeDisplay.Display(htmlShape);
+
+                _mailgunClient.Send(recipients, "", subject, "", html);
+            }
+            finally
+            {
+                _orchardServices.WorkContext.CurrentCulture = originalCulture;
+            }
+        }
     }
 }

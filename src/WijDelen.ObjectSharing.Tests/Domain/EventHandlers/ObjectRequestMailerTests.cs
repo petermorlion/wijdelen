@@ -229,5 +229,20 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _mailServiceMock.Verify(x => x.SendAdminObjectRequestBlockedMail(sourceId, "Jos Joskens", "Sextant", "For sextanting", forbiddenWords));
         }
+
+        [Test]
+        public void WhenObjectRequestBlockedByAdmin() {
+            var sourceId = Guid.NewGuid();
+            var objectRequestBlocked = new ObjectRequestBlockedByAdmin {
+                UserId = _requestingUser.Id,
+                Description = "Sneakers",
+                SourceId = sourceId,
+                Reason = "Reason"
+            };
+
+           _objectRequestMailer.Handle(objectRequestBlocked);
+
+            _mailServiceMock.Verify(x => x.SendObjectRequestBlockedMail(_requestingUser, sourceId, "Sneakers", "Reason"));
+        }
     }
 }

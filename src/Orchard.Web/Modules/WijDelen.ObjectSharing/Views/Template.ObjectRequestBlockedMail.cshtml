@@ -1,0 +1,19 @@
+﻿<html>
+<body style="font-family: Verdana, Arial, sans-serif;">
+<div style="background-color: #04b17b; padding: 0 10px;">
+    <img src="https://peergroups.be/Themes/Peergroups.Theme/Content/logo-mail.gif" style="vertical-align: middle;">
+    <img src="@Model.GroupLogoUrl" style="height: 35px; margin-left: 10px; vertical-align: middle;">
+</div>
+<div style="margin-top: 10px;">
+    <p>@T("Hello")</p>
+    <p>@T("Your request for (a) {0} has been blocked.", Model.Description)</p>
+    <p>@T("The reason given was this:")</p>
+    <p style="white-space: pre-line">@Model.Reason</p>
+</div>
+<div>
+    <p style="font-size: 10px;">
+        <a href="@Model.UnsubscribeUrl">@T("Unsubscribe")</a>
+    </p>
+</div>
+</body>
+</html>

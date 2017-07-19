@@ -56,7 +56,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Block(string reason) {
-            Update(new ObjectRequestBlockedByAdmin { Reason = reason });
+            Update(new ObjectRequestBlockedByAdmin { UserId = UserId, Reason = reason, Description = Description });
         }
 
         public void Unblock() {
