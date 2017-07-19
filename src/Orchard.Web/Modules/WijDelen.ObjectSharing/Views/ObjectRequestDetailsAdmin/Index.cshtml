@@ -35,7 +35,7 @@
 @using (Html.BeginFormAntiForgeryPost()) {
     <fieldset>
         <label for="block-reason">@T("Reason")</label>
-        <textarea id="block-reason"></textarea>
+        <textarea id="block-reason" name="blockReason"></textarea>
     </fieldset>
 
     <button type="submit">@T("Block")</button>

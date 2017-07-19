@@ -9,6 +9,7 @@ using NUnit.Framework;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Security;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
@@ -43,8 +44,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             _userQueryMock = new Mock<IGetUserByIdQuery>();
             _userQueryMock.Setup(x => x.GetResult(33)).Returns(_userMock);
 
+            _notifierMock = new Mock<INotifier>();
+
             builder.RegisterInstance(_repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             builder.RegisterInstance(_userQueryMock.Object).As<IGetUserByIdQuery>();
+            builder.RegisterInstance(_notifierMock.Object).As<INotifier>();
             builder.RegisterType<ObjectRequestDetailsAdminController>();
 
             var container = builder.Build();
@@ -58,6 +62,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         private Mock<IGetUserByIdQuery> _userQueryMock;
         private IUser _userMock;
         private Guid _aggregateId;
+        private Mock<INotifier> _notifierMock;
 
         [Test]
         public void TestIndex() {
@@ -73,6 +78,18 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.GroupName.Should().Be("Group");
             model.FirstName.Should().Be("Jane");
             model.LastName.Should().Be("Doe");
+        }
+
+        [Test]
+        public void TestIndexPost() {
+            var result = _controller.Index(_aggregateId, "Just because");
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+            var redirectToRouteResult = result.As<RedirectToRouteResult>();
+            redirectToRouteResult.RouteValues["action"].Should().Be("Index");
+            redirectToRouteResult.RouteValues["objectRequestId"].Should().Be(_aggregateId);
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("The request was blocked and a mail was sent to the user.")));
         }
     }
 }

@@ -518,6 +518,11 @@ msgstr "OK"
 msgid "Blocked (forbidden words)"
 msgstr "Geblokkeerd (verboden woorden)"
 
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+#| msgid "The request was blocked and a mail was sent to the user."
+msgid "The request was blocked and a mail was sent to the user."
+msgstr "De oproep werd geblokkeerd en er werd een mail verstuurd naar de gebruiker."
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
 #| msgid "User"
 msgid "User"

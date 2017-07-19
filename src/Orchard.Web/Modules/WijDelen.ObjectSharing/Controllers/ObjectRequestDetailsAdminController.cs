@@ -5,6 +5,7 @@ using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.UI.Admin;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Data;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
@@ -16,11 +17,13 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ObjectRequestDetailsAdminController : Controller {
         private readonly IGetUserByIdQuery _getUserByIdQuery;
+        private readonly INotifier _notifier;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
 
-        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery) {
+        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier) {
             _objectRequestRecordRepository = repository;
             _getUserByIdQuery = getUserByIdQuery;
+            _notifier = notifier;
         }
 
         public Localizer T { get; set; }
@@ -40,6 +43,13 @@ namespace WijDelen.ObjectSharing.Controllers {
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(Guid objectRequestId, string blockReason)
+        {
+            _notifier.Add(NotifyType.Success, T("The request was blocked and a mail was sent to the user."));
+            return RedirectToAction("Index", new {objectRequestId});
         }
 
         private string GetStatus(ObjectRequestRecord objectRequestRecord) {
