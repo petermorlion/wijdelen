@@ -37,7 +37,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     Description = "Description test",
                     ExtraInfo = "Extra Info",
                     GroupName = "Group",
-                    UserId = 33
+                    UserId = 33,
+                    BlockReason = "Reason"
                 }
             }.AsQueryable());
 
@@ -83,6 +84,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.GroupName.Should().Be("Group");
             model.FirstName.Should().Be("Jane");
             model.LastName.Should().Be("Doe");
+            model.BlockReason.Should().Be("Reason");
+            model.CanBlock.Should().BeFalse("Because it is already blocked.");
+            model.CanUnblock.Should().BeFalse("Because it is already blocked.");
         }
 
         [Test]

@@ -33,10 +33,18 @@
 
 <h2>@T("Block")</h2>
 @using (Html.BeginFormAntiForgeryPost()) {
-    <fieldset>
-        <label for="block-reason">@T("Reason")</label>
-        <textarea id="block-reason" name="blockReason"></textarea>
-    </fieldset>
+    if (Model.CanBlock) {
+        <fieldset>
+            <label for="block-reason">@T("Reason")</label>
+            <textarea id="block-reason" name="blockReason">@Model.BlockReason</textarea>
+        </fieldset>
 
-    <button type="submit">@T("Block")</button>
+        <button type="submit">@T("Block")</button>
+    }
+    else if (Model.CanUnblock) {
+        <h3>@T("Reason")</h3>
+        <p style="white-space: pre-line">@Model.BlockReason</p>
+
+        <button type="submit">@T("Unblock")</button>
+    }
 }

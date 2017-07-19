@@ -43,7 +43,10 @@ namespace WijDelen.ObjectSharing.Controllers {
                 GroupName = objectRequestRecord.GroupName,
                 FirstName = user.As<UserDetailsPart>().FirstName,
                 LastName = user.As<UserDetailsPart>().LastName,
-                ForbiddenWords = ForbiddenWords.GetForbiddenWordsInString(objectRequestRecord.Description).Union(ForbiddenWords.GetForbiddenWordsInString(objectRequestRecord.ExtraInfo)).ToList()
+                ForbiddenWords = ForbiddenWords.GetForbiddenWordsInString(objectRequestRecord.Description).Union(ForbiddenWords.GetForbiddenWordsInString(objectRequestRecord.ExtraInfo)).ToList(),
+                BlockReason = objectRequestRecord.BlockReason,
+                CanBlock = objectRequestRecord.Status == ObjectRequestStatus.None.ToString(),
+                CanUnblock = objectRequestRecord.Status != ObjectRequestStatus.None.ToString(),
             };
 
             return View(viewModel);

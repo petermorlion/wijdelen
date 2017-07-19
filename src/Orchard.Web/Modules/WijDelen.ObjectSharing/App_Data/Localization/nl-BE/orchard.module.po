@@ -579,6 +579,11 @@ msgid "Block"
 msgstr "Blokkeren"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+#| msgid "Unblock"
+msgid "Unblock"
+msgstr "Deblokkeren"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
 #| msgid "Reason"
 msgid "Reason"
 msgstr "Reden"
