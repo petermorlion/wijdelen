@@ -139,6 +139,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sex");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sextanting");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().WasPreviouslyBlockedByAdmin.Should().BeFalse();
             objectRequest.Version.Should().Be(2);
             objectRequest.Status.Should().Be(ObjectRequestStatus.None);
         }
@@ -155,6 +156,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sneakers");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sneaking");
             objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().WasPreviouslyBlockedByAdmin.Should().BeTrue();
             objectRequest.Version.Should().Be(2);
             objectRequest.Status.Should().Be(ObjectRequestStatus.None);
             objectRequest.BlockReason.Should().BeEmpty();

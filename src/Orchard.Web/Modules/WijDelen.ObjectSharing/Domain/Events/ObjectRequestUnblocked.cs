@@ -22,5 +22,10 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// The status of the object request.
         /// </summary>
         public ObjectRequestStatus Status { get; set; }
+
+        /// <summary>
+        /// True if this request was previously blocked by an admin. In that case, mails have already been sent, and don't need to be sent again.
+        /// </summary>
+        public bool WasPreviouslyBlockedByAdmin { get; set; }
     }
 }

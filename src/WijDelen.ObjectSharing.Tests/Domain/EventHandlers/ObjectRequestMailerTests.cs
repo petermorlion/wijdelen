@@ -191,6 +191,29 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
+        public void WhenObjectBlockedByAdminIsUnblocked()
+        {
+            var objectRequestUnblocked = new ObjectRequestUnblocked
+            {
+                WasPreviouslyBlockedByAdmin = true
+            };
+
+            _objectRequestMailer.Handle(objectRequestUnblocked);
+            
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<Guid>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<ObjectRequestMail>(),
+                It.IsAny<IUser>()), Times.Never);
+
+            _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
+            _notifierMock.Verify(x => x.Add(It.IsAny<NotifyType>(), It.IsAny<LocalizedString>()), Times.Never);
+        }
+
+        [Test]
         public void WhenObjectRequestBlocked() {
             var forbiddenWords = new List<string> { "sex" };
             var sourceId = Guid.NewGuid();

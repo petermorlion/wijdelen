@@ -60,7 +60,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Unblock() {
-            Update(new ObjectRequestUnblocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId });
+            Update(new ObjectRequestUnblocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId, WasPreviouslyBlockedByAdmin = Status == ObjectRequestStatus.BlockedByAdmin});
         }
 
         private void OnObjectRequested(ObjectRequested objectRequested) {

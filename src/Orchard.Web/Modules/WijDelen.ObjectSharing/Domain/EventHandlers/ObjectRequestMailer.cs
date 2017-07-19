@@ -63,6 +63,10 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         }
 
         public void Handle(ObjectRequestUnblocked e) {
+            if (e.WasPreviouslyBlockedByAdmin) {
+                return;
+            }
+
             var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
             SendObjectRequestMail(requestingUser, e.Description, e.ExtraInfo, e.SourceId);
         }
