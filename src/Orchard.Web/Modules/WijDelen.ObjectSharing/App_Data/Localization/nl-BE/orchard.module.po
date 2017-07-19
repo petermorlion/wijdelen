@@ -484,9 +484,9 @@ msgid "Forbidden words:"
 msgstr "Verboden woorden:"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
-#| msgid "You can see the blocked requests here"
-msgid "You can see the blocked requests here"
-msgstr "Je kan de geblokkeerde oproepen hier zien"
+#| msgid "You can see the blocked request here"
+msgid "You can see the blocked request here"
+msgstr "Je kan de geblokkeerde oproep hier zien"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
 #| msgid "Hello"
@@ -552,3 +552,13 @@ msgstr "Verboden woorden"
 #| msgid "Created"
 msgid "Created"
 msgstr "Aangemaakt"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+#| msgid "Block"
+msgid "Block"
+msgstr "Blokkeren"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+#| msgid "Reason"
+msgid "Reason"
+msgstr "Reden"

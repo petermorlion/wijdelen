@@ -41,7 +41,7 @@ else {
                         </td>
                         <td>@record.CreatedDateTime</td>
                         <td>@record.GroupName</td>
-                        <td>@Html.ActionLink(record.Description, "Index", "ObjectRequestDetailsAdmin", new {objectRequestId = record.Id}, new {})</td>
+                        <td>@Html.ActionLink(record.Description, "Index", "ObjectRequestDetailsAdmin", new {objectRequestId = record.AggregateId}, new {})</td>
                         <td>@record.Status</td>
                     </tr>
 

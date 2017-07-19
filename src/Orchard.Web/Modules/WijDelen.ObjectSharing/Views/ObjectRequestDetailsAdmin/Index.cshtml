@@ -30,3 +30,13 @@
 
 <h2>@T("Created")</h2>
 @Model.CreatedDateTime
+
+<h2>@T("Block")</h2>
+@using (Html.BeginFormAntiForgeryPost()) {
+    <fieldset>
+        <label for="block-reason">@T("Reason")</label>
+        <textarea id="block-reason"></textarea>
+    </fieldset>
+
+    <button type="submit">@T("Block")</button>
+}

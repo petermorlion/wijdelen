@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Autofac;
 using FluentAssertions;
@@ -18,26 +19,24 @@ using WijDelen.ObjectSharing.ViewModels.Admin;
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ObjectRequestDetailsAdminControllerTests {
-        private ObjectRequestDetailsAdminController _controller;
-        private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
-        private Mock<IGetUserByIdQuery> _userQueryMock;
-        private IUser _userMock;
-
         [SetUp]
-        public void Init()
-        {
+        public void Init() {
             var builder = new ContainerBuilder();
 
             _repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            _repositoryMock.Setup(x => x.Get(12)).Returns(new ObjectRequestRecord {
-                Id = 12,
-                Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString(),
-                CreatedDateTime = new DateTime(2017, 07, 19, 12, 30, 0, DateTimeKind.Utc),
-                Description = "Description test",
-                ExtraInfo = "Extra Info",
-                GroupName = "Group",
-                UserId = 33
-            });
+            _aggregateId = Guid.NewGuid();
+            _repositoryMock.Setup(x => x.Table).Returns(new List<ObjectRequestRecord> {
+                new ObjectRequestRecord {
+                    Id = 12,
+                    AggregateId = _aggregateId,
+                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString(),
+                    CreatedDateTime = new DateTime(2017, 07, 19, 12, 30, 0, DateTimeKind.Utc),
+                    Description = "Description test",
+                    ExtraInfo = "Extra Info",
+                    GroupName = "Group",
+                    UserId = 33
+                }
+            }.AsQueryable());
 
             var userMockFactory = new UserFactory();
             _userMock = userMockFactory.Create("jane.doe@gmail.com", "jane.doe@gmail.com", "Jane", "Doe");
@@ -54,9 +53,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             _controller.T = NullLocalizer.Instance;
         }
 
+        private ObjectRequestDetailsAdminController _controller;
+        private Mock<IRepository<ObjectRequestRecord>> _repositoryMock;
+        private Mock<IGetUserByIdQuery> _userQueryMock;
+        private IUser _userMock;
+        private Guid _aggregateId;
+
         [Test]
         public void TestIndex() {
-            var result = _controller.Index(12);
+            var result = _controller.Index(_aggregateId);
 
             result.Should().BeOfType<ViewResult>();
             var model = result.As<ViewResult>().Model.As<ObjectRequestDetailsAdminViewModel>();

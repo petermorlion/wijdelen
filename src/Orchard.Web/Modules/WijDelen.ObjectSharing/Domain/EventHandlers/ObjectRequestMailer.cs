@@ -69,7 +69,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ObjectRequestBlocked e) {
             var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
-            _mailService.SendAdminObjectRequestBlockedMail(requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo, e.ForbiddenWords);
+            _mailService.SendAdminObjectRequestBlockedMail(e.SourceId, requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo, e.ForbiddenWords);
         }
 
         private void SendObjectRequestMail(IUser requestingUser, string description, string extraInfo, Guid sourceId) {

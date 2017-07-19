@@ -90,12 +90,13 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             }
         }
 
-        public void SendAdminObjectRequestBlockedMail(string requestingUserName, string description, string extraInfo, IList<string> forbiddenWords) {
+        public void SendAdminObjectRequestBlockedMail(Guid objectRequestId, string requestingUserName, string description, string extraInfo, IList<string> forbiddenWords) {
             var htmlShape = _shapeFactory.Create("Template_AdminObjectRequestBlockedMail", Arguments.From(new {
                 RequestingUserName = requestingUserName,
                 Description = description,
                 ExtraInfo = extraInfo,
-                ForbiddenWords = forbiddenWords
+                ForbiddenWords = forbiddenWords,
+                ObjectRequestId = objectRequestId
             }));
 
             var subject = T("A request for (a) {0} was blocked", description).ToString();

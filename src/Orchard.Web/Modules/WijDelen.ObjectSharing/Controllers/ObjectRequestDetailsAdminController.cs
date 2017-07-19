@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.ContentManagement;
 using Orchard.Data;
@@ -24,8 +25,8 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public Localizer T { get; set; }
 
-        public ViewResult Index(int objectRequestId) {
-            var objectRequestRecord = _objectRequestRecordRepository.Get(objectRequestId);
+        public ViewResult Index(Guid objectRequestId) {
+            var objectRequestRecord = _objectRequestRecordRepository.Table.Single(x => x.AggregateId == objectRequestId);
             var user = _getUserByIdQuery.GetResult(objectRequestRecord.UserId);
             var viewModel = new ObjectRequestDetailsAdminViewModel {
                 Status = GetStatus(objectRequestRecord),
