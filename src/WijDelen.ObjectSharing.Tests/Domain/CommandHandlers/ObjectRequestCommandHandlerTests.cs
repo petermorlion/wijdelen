@@ -9,7 +9,6 @@ using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
-using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
     [TestFixture]
@@ -123,7 +122,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
 
             commandHandler.Handle(command);
 
-            objectRequest1.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked {
+            persistedObjectRequest1.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked {
                 SourceId = objectRequestId1,
                 Description = "Sneakers",
                 ExtraInfo = "extraInfo",
@@ -131,13 +130,48 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
                 Version = 1
             });
 
-            objectRequest2.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked
+            persistedObjectRequest2.Events.Last().ShouldBeEquivalentTo(new ObjectRequestUnblocked
             {
                 SourceId = objectRequestId2,
                 Description = "Sneakers",
                 ExtraInfo = "extraInfo",
                 UserId = 1,
                 Version = 1
+            });
+        }
+
+        [Test]
+        public void WhenHandlingBlockObjectRequestByAdminCommand_ShouldBlockObjectRequest()
+        {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(objectRequestId, "Sneakers", "For sneaking", 1);
+            var command = new BlockObjectRequestByAdmin(objectRequestId, "Just because");
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId)).Returns(objectRequest);
+
+            ObjectRequest persistedObjectRequest = null;
+            repositoryMock
+                .Setup(x => x.Save(It.IsAny<ObjectRequest>(), command.Id.ToString()))
+                .Callback((ObjectRequest or, string correlationId) => {
+                    if (or.Id == objectRequestId)
+                    {
+                        persistedObjectRequest = or;
+                    }
+                    else
+                    {
+                        Assert.Fail("Wrong ObjectRequest persisted.");
+                    }
+                });
+
+            var commandHandler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            commandHandler.Handle(command);
+
+            objectRequest.Events.Last().ShouldBeEquivalentTo(new ObjectRequestBlockedByAdmin
+            {
+                SourceId = objectRequestId,
+                Version = 1,
+                Reason = "Just because"
             });
         }
     }

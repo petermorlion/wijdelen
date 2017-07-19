@@ -135,6 +135,7 @@
     <Compile Include="Domain\CommandHandlers\ChatCommandHandler.cs" />
     <Compile Include="Domain\CommandHandlers\ObjectRequestCommandHandler.cs" />
     <Compile Include="Domain\Commands\AddChatMessage.cs" />
+    <Compile Include="Domain\Commands\BlockObjectRequestByAdmin.cs" />
     <Compile Include="Domain\Commands\ConfirmObjectRequest.cs" />
     <Compile Include="Domain\Commands\DenyObjectRequest.cs" />
     <Compile Include="Domain\Commands\DenyObjectRequestForNow.cs" />
