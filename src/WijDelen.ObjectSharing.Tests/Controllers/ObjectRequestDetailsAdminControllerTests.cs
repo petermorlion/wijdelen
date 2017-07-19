@@ -89,7 +89,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.LastName.Should().Be("Doe");
             model.BlockReason.Should().Be("Reason");
             model.CanBlock.Should().BeFalse("Because it is already blocked.");
-            model.CanUnblock.Should().BeFalse("Because it is already blocked.");
+            model.CanUnblock.Should().BeTrue("Because it is blocked.");
         }
 
         [Test]

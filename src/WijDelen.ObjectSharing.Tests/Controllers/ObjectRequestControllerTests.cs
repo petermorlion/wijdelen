@@ -117,13 +117,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         [Test]
-        public void WhenGettingBlockedItem_ShouldRedirectToNewObjectRequest() {
-            var actionResult = _controller.Item(_blockedObjectRequestId);
-
-            ((RedirectToRouteResult) actionResult).RouteValues["action"].Should().Be("New");
-        }
-
-        [Test]
         public void WhenGettingIndex_ShouldReturnView() {
             var actionResult = _controller.Index();
 
