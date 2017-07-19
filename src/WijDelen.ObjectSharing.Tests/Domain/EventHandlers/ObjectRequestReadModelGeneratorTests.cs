@@ -47,7 +47,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             handler.Handle(e);
 
             newRecord.AggregateId.Should().Be(aggregateId);
-            newRecord.Version.Should().Be(0);
             newRecord.Description.Should().Be("Sneakers");
             newRecord.ExtraInfo.Should().Be("For sneaking");
             newRecord.UserId.Should().Be(22);
@@ -65,7 +64,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 new ObjectRequestRecord {
                     AggregateId = aggregateId,
                     Status = "BlockedForForbiddenWords",
-                    Version = 3
+                    BlockReason = "Reason"
                 }
             };
 
@@ -96,8 +95,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             handler.Handle(e);
 
             updatedRecord.AggregateId.Should().Be(aggregateId);
-            updatedRecord.Version.Should().Be(4);
             updatedRecord.Status.Should().Be("None");
+            updatedRecord.BlockReason.Should().Be("");
         }
 
         [Test]
@@ -106,8 +105,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var aggregateId = Guid.NewGuid();
             var persistentRecords = new[] {
                 new ObjectRequestRecord {
-                    AggregateId = aggregateId,
-                    Version = 3
+                    AggregateId = aggregateId
                 }
             };
 
@@ -130,7 +128,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             handler.Handle(e);
 
             updatedRecord.AggregateId.Should().Be(aggregateId);
-            updatedRecord.Version.Should().Be(4);
             updatedRecord.Status.Should().Be("BlockedByAdmin");
             updatedRecord.BlockReason.Should().Be("Just because");
         }

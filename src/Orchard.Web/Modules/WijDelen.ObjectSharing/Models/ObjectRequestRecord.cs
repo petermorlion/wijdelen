@@ -9,7 +9,6 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual Guid AggregateId { get; set; }
         public virtual string Description { get; set; }
         public virtual string ExtraInfo { get; set; }
-        public virtual int Version { get; set; }
         public virtual int UserId { get; set; }
         public virtual DateTime CreatedDateTime { get; set; }
         public virtual int GroupId { get; set; }

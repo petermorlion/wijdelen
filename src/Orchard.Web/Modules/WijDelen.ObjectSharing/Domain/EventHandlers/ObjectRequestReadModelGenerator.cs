@@ -30,7 +30,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 AggregateId = e.SourceId,
                 Description = e.Description,
                 ExtraInfo = e.ExtraInfo,
-                Version = e.Version,
                 UserId = e.UserId,
                 CreatedDateTime = e.CreatedDateTime,
                 GroupId = group.Id,
@@ -48,7 +47,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             }
 
             existingRecord.Status = e.Status.ToString();
-            existingRecord.Version = e.Version;
+            existingRecord.BlockReason = "";
             _repository.Update(existingRecord);
         }
 
@@ -60,7 +59,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             existingRecord.BlockReason = e.Reason;
             existingRecord.Status = ObjectRequestStatus.BlockedByAdmin.ToString();
-            existingRecord.Version = e.Version;
             _repository.Update(existingRecord);
         }
     }

@@ -183,5 +183,12 @@ namespace WijDelen.ObjectSharing {
 
             return 16;
         }
+
+        public int UpdateFrom16() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .DropColumn("Version"));
+
+            return 17;
+        }
     }
 }

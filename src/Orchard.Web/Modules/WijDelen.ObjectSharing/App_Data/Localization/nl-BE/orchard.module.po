@@ -538,6 +538,11 @@ msgstr "Geblokkeerd (door de beheerder)"
 msgid "The request was blocked and a mail was sent to the user."
 msgstr "De oproep werd geblokkeerd en er werd een mail verstuurd naar de gebruiker."
 
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+#| msgid "The request was unblocked."
+msgid "The request was unblocked."
+msgstr "De oproep werd gedeblokkeerd."
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
 #| msgid "User"
 msgid "User"
