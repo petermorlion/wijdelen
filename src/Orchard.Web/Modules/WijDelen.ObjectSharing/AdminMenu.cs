@@ -28,19 +28,19 @@ namespace WijDelen.ObjectSharing {
                             .Caption(T("Archetypes"))
                             .Position("0")
                             .Action("Index", "Archetypes", new {area = "WijDelen.ObjectSharing"})
-                            .Permission(StandardPermissions.SiteOwner)
+                            .Permission(Permissions.ManageArchetypes)
                             .LocalNav())
                         .Add(tab => tab
                             .Caption(T("Synonyms"))
                             .Position("1")
                             .Action("Synonyms", "Archetypes", new {area = "WijDelen.ObjectSharing"})
-                            .Permission(StandardPermissions.SiteOwner)
+                            .Permission(Permissions.ManageArchetypes)
                             .LocalNav()))
                     .Add(subItem => subItem
                         .Caption(T("Requests"))
                         .Position("2")
                         .Action("Index", "ObjectRequestAdmin", new {area = "WijDelen.ObjectSharing"})
-                        .Permission(StandardPermissions.SiteOwner)));
+                        .Permission(Permissions.ManageObjectRequests)));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Orchard.Localization;
-using Orchard.Security;
 using Orchard.UI.Navigation;
 
 namespace WijDelen.UserImport {
@@ -22,12 +21,12 @@ namespace WijDelen.UserImport {
                     .Caption(T("Groups"))
                     .Position("2")
                     .Action("List", "Admin", new { area = "Contents", id="Group" })
-                    .Permission(StandardPermissions.SiteOwner))
+                    .Permission(Permissions.ManageGroups))
                 .Add(subItem => subItem
                     .Caption(T("User Import"))
                     .Position("3")
                     .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
-                    .Permission(StandardPermissions.SiteOwner)));
+                    .Permission(Permissions.ImportUsers)));
 
             builder.Add(T("Users"),
                 menu => menu.Add(T("Groups"), "3.0", item => item.Action("Index", "GroupUsers", new { area = "WijDelen.UserImport" })

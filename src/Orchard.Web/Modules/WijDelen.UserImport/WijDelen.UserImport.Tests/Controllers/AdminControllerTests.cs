@@ -75,7 +75,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestIndexWithoutAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
+            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(false);
 
             var result = _controller.Index();
 
@@ -85,7 +85,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestIndexWithAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(true);
             var cultures = new List<string> {"en", "nl", "test"};
             _cultureManagerMock.Setup(x => x.ListCultures()).Returns(cultures);
             _cultureManagerMock.Setup(x => x.GetSiteCulture()).Returns("test");
@@ -111,7 +111,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestIndexPostWithoutAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(false);
+            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(false);
 
             var result = _controller.Index(null);
 
@@ -121,7 +121,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         [Test]
         public void TestIndexPostWithAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(StandardPermissions.SiteOwner, It.IsAny<LocalizedString>())).Returns(true);
+            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(true);
 
             var site = new Mock<ISite>();
             var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };

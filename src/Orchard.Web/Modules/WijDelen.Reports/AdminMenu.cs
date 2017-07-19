@@ -26,14 +26,15 @@ namespace WijDelen.Reports {
                     .Caption(T("Reports"))
                     .Position("5")
                     .LinkToFirstChild(true)
-                    .Permission(StandardPermissions.SiteOwner)
                     .Add(tab => tab
                         .Caption(T("Overview"))
                         .Action("Index", "Admin", new { area = "WijDelen.Reports" })
+                        .Permission(Permissions.ViewReports)
                         .LocalNav())
                     .Add(tab => tab
                         .Caption(T("Details"))
                         .Action("Details", "Admin", new { area = "WijDelen.Reports" })
+                        .Permission(Permissions.ViewReports)
                         .LocalNav())));
         }
     }

@@ -46,7 +46,7 @@ namespace WijDelen.UserImport.Controllers {
         public Localizer T { get; set; }
 
         public ActionResult Index() {
-            if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ImportUsers, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }
 
@@ -58,7 +58,7 @@ namespace WijDelen.UserImport.Controllers {
 
         [HttpPost]
         public ActionResult Index(AdminIndexViewModel viewModel) {
-            if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to import users."))) {
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ImportUsers, T("You are not authorized to import users."))) {
                 return new HttpUnauthorizedResult();
             }
 
