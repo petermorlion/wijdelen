@@ -33,8 +33,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 Version = e.Version,
                 UserId = e.UserId,
                 CreatedDateTime = e.CreatedDateTime,
-                GroupId = @group.Id,
-                GroupName = @group.Name,
+                GroupId = group.Id,
+                GroupName = group.Name,
                 Status = e.Status.ToString()
             };
 

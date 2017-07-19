@@ -85,6 +85,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
 
         private void OnObjectRequestUnblocked(ObjectRequestUnblocked objectRequestUnblocked) {
             Status = ObjectRequestStatus.None;
+            BlockReason = "";
         }
 
         private void OnObjectRequestBlocked(ObjectRequestBlocked objectRequestBlocked) {

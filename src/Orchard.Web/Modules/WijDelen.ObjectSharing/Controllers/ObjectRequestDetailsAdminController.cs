@@ -18,16 +18,18 @@ using WijDelen.UserImport.Models;
 namespace WijDelen.ObjectSharing.Controllers {
     [Admin]
     public class ObjectRequestDetailsAdminController : Controller {
-        private readonly ICommandHandler<BlockObjectRequestByAdmin> _commandHandler;
+        private readonly ICommandHandler<BlockObjectRequestByAdmin> _blockCommandHandler;
+        private readonly ICommandHandler<UnblockObjectRequests> _unblockCommandHandler;
         private readonly IGetUserByIdQuery _getUserByIdQuery;
         private readonly INotifier _notifier;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRecordRepository;
 
-        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier, ICommandHandler<BlockObjectRequestByAdmin> commandHandler) {
+        public ObjectRequestDetailsAdminController(IRepository<ObjectRequestRecord> repository, IGetUserByIdQuery getUserByIdQuery, INotifier notifier, ICommandHandler<BlockObjectRequestByAdmin> blockCommandHandler, ICommandHandler<UnblockObjectRequests> unblockCommandHandler) {
             _objectRequestRecordRepository = repository;
             _getUserByIdQuery = getUserByIdQuery;
             _notifier = notifier;
-            _commandHandler = commandHandler;
+            _blockCommandHandler = blockCommandHandler;
+            _unblockCommandHandler = unblockCommandHandler;
         }
 
         public Localizer T { get; set; }
@@ -53,10 +55,21 @@ namespace WijDelen.ObjectSharing.Controllers {
         }
 
         [HttpPost]
+        [Orchard.Mvc.FormValueRequired("submit.Block")]
         public ActionResult Index(Guid objectRequestId, string blockReason) {
             var command = new BlockObjectRequestByAdmin(objectRequestId, blockReason);
-            _commandHandler.Handle(command);
+            _blockCommandHandler.Handle(command);
             _notifier.Add(NotifyType.Success, T("The request was blocked and a mail was sent to the user."));
+            return RedirectToAction("Index", new {objectRequestId});
+        }
+
+        [HttpPost]
+        [Orchard.Mvc.FormValueRequired("submit.Unblock")]
+        [ActionName("Index")]
+        public ActionResult IndexPOST(Guid objectRequestId) {
+            var command = new UnblockObjectRequests(new [] { objectRequestId });
+            _unblockCommandHandler.Handle(command);
+            _notifier.Add(NotifyType.Success, T("The request was unblocked."));
             return RedirectToAction("Index", new {objectRequestId});
         }
 

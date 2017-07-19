@@ -144,6 +144,23 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
         }
 
         [Test]
+        public void WhenUnblockingManuallyBlockedRequest() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "for sneaking", 22);
+            objectRequest.Block("Enough with the sneakers already");
+            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedByAdmin);
+            objectRequest.BlockReason.Should().Be("Enough with the sneakers already");
+
+            objectRequest.Unblock();
+
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().Description.Should().Be("Sneakers");
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().ExtraInfo.Should().Be("for sneaking");
+            objectRequest.Events.Last().As<ObjectRequestUnblocked>().UserId.Should().Be(22);
+            objectRequest.Version.Should().Be(2);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
+            objectRequest.BlockReason.Should().BeEmpty();
+        }
+
+        [Test]
         public void WhenBlocking() {
             var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "for sneaking", 22);
             objectRequest.Status.Should().Be(ObjectRequestStatus.None);

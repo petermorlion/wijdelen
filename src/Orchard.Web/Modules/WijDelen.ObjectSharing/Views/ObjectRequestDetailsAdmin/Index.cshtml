@@ -39,12 +39,12 @@
             <textarea id="block-reason" name="blockReason">@Model.BlockReason</textarea>
         </fieldset>
 
-        <button type="submit">@T("Block")</button>
+        <button type="submit" name="submit.Block" value="Block">@T("Block")</button>
     }
     else if (Model.CanUnblock) {
         <h3>@T("Reason")</h3>
         <p style="white-space: pre-line">@Model.BlockReason</p>
 
-        <button type="submit">@T("Unblock")</button>
+        <button type="submit" name="submit.Unblock" value="Unblock">@T("Unblock")</button>
     }
 }
