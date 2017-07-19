@@ -22,10 +22,5 @@ namespace WijDelen.ObjectSharing.Domain.Events {
         /// The words used that make this request forbidden.
         /// </summary>
         public IList<string> ForbiddenWords { get; set; }
-
-        /// <summary>
-        /// The reason the request was blocked, when blocked manually.
-        /// </summary>
-        public string Reason { get; set; }
     }
 }

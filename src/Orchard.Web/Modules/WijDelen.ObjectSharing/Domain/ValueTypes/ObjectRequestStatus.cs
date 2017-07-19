@@ -8,6 +8,11 @@
         /// <summary>
         /// Blocked because it contained forbidden words.
         /// </summary>
-        BlockedForForbiddenWords
+        BlockedForForbiddenWords,
+
+        /// <summary>
+        /// Blocked manually by an administrator
+        /// </summary>
+        BlockedByAdmin
     }
 }

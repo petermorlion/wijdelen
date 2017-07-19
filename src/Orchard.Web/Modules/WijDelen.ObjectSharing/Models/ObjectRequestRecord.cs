@@ -15,5 +15,6 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual int GroupId { get; set; }
         public virtual string GroupName { get; set; }
         public virtual string Status { get; set; }
+        public virtual string BlockReason { get; set; }
     }
 }

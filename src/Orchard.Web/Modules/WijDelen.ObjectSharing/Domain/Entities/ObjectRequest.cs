@@ -22,6 +22,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Handles<ObjectRequestDeniedForNow>(OnObjectRequestDeniedForNow);
             Handles<ObjectRequestUnblocked>(OnObjectRequestUnblocked);
             Handles<ObjectRequestBlocked>(OnObjectRequestBlocked);
+            Handles<ObjectRequestBlockedByAdmin>(OnObjectRequestBlockedByAdmin);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
@@ -55,8 +56,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Block(string reason) {
-            var forbiddenWords = ForbiddenWords.GetForbiddenWordsInString(Description).Union(ForbiddenWords.GetForbiddenWordsInString(ExtraInfo)).ToList();
-            Update(new ObjectRequestBlocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId, ForbiddenWords = forbiddenWords, Reason = reason });
+            Update(new ObjectRequestBlockedByAdmin { Reason = reason });
         }
 
         public void Unblock() {
@@ -88,8 +88,11 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         private void OnObjectRequestBlocked(ObjectRequestBlocked objectRequestBlocked) {
-            Status = ObjectRequestStatus.BlockedForForbiddenWords;
-            BlockReason = objectRequestBlocked.Reason;
+        }
+
+        private void OnObjectRequestBlockedByAdmin(ObjectRequestBlockedByAdmin objectRequestBlockedByAdmin) {
+            Status = ObjectRequestStatus.BlockedByAdmin;
+            BlockReason = objectRequestBlockedByAdmin.Reason;
         }
 
         /// <summary>

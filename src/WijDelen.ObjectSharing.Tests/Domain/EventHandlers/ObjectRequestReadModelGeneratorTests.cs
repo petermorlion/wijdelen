@@ -99,5 +99,40 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             updatedRecord.Version.Should().Be(4);
             updatedRecord.Status.Should().Be("None");
         }
+
+        [Test]
+        public void WhenObjectRequestIsBlocked_ShouldUpdateObjectRequestRecord()
+        {
+            var aggregateId = Guid.NewGuid();
+            var persistentRecords = new[] {
+                new ObjectRequestRecord {
+                    AggregateId = aggregateId,
+                    Version = 3
+                }
+            };
+
+            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            repositoryMock.SetRecords(persistentRecords);
+
+            ObjectRequestRecord updatedRecord = null;
+            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => updatedRecord = r);
+
+            var groupServiceMock = new Mock<IGroupService>();
+
+            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
+            var e = new ObjectRequestBlockedByAdmin
+            {
+                SourceId = aggregateId,
+                Version = 4,
+                Reason = "Just because"
+            };
+
+            handler.Handle(e);
+
+            updatedRecord.AggregateId.Should().Be(aggregateId);
+            updatedRecord.Version.Should().Be(4);
+            updatedRecord.Status.Should().Be("BlockedByAdmin");
+            updatedRecord.BlockReason.Should().Be("Just because");
+        }
     }
 }

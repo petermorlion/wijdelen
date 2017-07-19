@@ -1,6 +1,7 @@
 ﻿using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.UserImport.Services;
 
@@ -8,7 +9,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     /// <summary>
     /// Generates the read model of an object request.
     /// </summary>
-    public class ObjectRequestReadModelGenerator : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked> {
+    public class ObjectRequestReadModelGenerator : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlockedByAdmin> {
         private readonly IRepository<ObjectRequestRecord> _repository;
         private readonly IGroupService _groupService;
 
@@ -42,12 +43,23 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public void Handle(ObjectRequestUnblocked e) {
             var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
-            if (existingRecord == null)
-            {
+            if (existingRecord == null) {
                 return;
             }
 
             existingRecord.Status = e.Status.ToString();
+            existingRecord.Version = e.Version;
+            _repository.Update(existingRecord);
+        }
+
+        public void Handle(ObjectRequestBlockedByAdmin e) {
+            var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
+            if (existingRecord == null) {
+                return;
+            }
+
+            existingRecord.BlockReason = e.Reason;
+            existingRecord.Status = ObjectRequestStatus.BlockedByAdmin.ToString();
             existingRecord.Version = e.Version;
             _repository.Update(existingRecord);
         }

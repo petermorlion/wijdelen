@@ -176,5 +176,12 @@ namespace WijDelen.ObjectSharing {
             _roleService.CreateRole("PeergroupsAdministrator");
             return 15;
         }
+
+        public int UpdateFrom15() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AlterColumn("BlockReason", column => column.WithType(DbType.String).Unlimited()));
+
+            return 16;
+        }
     }
 }

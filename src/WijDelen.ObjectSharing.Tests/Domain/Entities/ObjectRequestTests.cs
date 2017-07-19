@@ -150,13 +150,9 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
 
             objectRequest.Block("Just because");
 
-            objectRequest.Events.Last().As<ObjectRequestBlocked>().Description.Should().Be("Sneakers");
-            objectRequest.Events.Last().As<ObjectRequestBlocked>().ExtraInfo.Should().Be("for sneaking");
-            objectRequest.Events.Last().As<ObjectRequestBlocked>().UserId.Should().Be(22);
-            objectRequest.Events.Last().As<ObjectRequestBlocked>().ForbiddenWords.ShouldBeEquivalentTo(new List<string>());
-            objectRequest.Events.Last().As<ObjectRequestBlocked>().Reason.Should().Be("Just because");
+            objectRequest.Events.Last().As<ObjectRequestBlockedByAdmin>().Reason.Should().Be("Just because");
             objectRequest.Version.Should().Be(1);
-            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.BlockedByAdmin);
             objectRequest.BlockReason.Should().Be("Just because");
         }
     }
