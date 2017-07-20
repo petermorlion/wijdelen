@@ -1,10 +1,11 @@
 ﻿Name: WijDelen.MailChimp
-AntiForgery: enabled
-Author: The Orchard Team
-Website: http://orchardproject.net
+AntiForgery: enabled 
+Author: Peter Morlion 
+Website: http://www.redstar.be 
 Version: 1.0
 OrchardVersion: 1.0
-Description: Description for the module
+Description: A module containing code to communicate with MailChimp. 
 Features:
     WijDelen.MailChimp:
-        Description: Description for feature WijDelen.MailChimp.
+        Description: Code to communicate with Mailchimp.
+	Category: Peergroups
