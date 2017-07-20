@@ -46,11 +46,29 @@ namespace WijDelen.MailChimp {
         }
 
         public void Subscribe(string email) {
-            throw new NotImplementedException();
+            ChangeSubscriptionStatus(email, "subscribed");
         }
 
         public void Unsubscribe(string email) {
-            throw new NotImplementedException();
+            ChangeSubscriptionStatus(email, "unsubscribed");
+        }
+
+        private void ChangeSubscriptionStatus(string email, string status) {
+            var client = new RestClient
+            {
+                BaseUrl = _apiBaseUrl,
+                Authenticator = new HttpBasicAuthenticator("api", _apiKey)
+            };
+
+            var emailHash = GetHash(email);
+
+            var request = new RestRequest();
+            request.Resource = "list/{listId}/members/{emailHash}";
+            request.AddUrlSegment("listId", _listId);
+            request.AddUrlSegment("emailHash", emailHash);
+            request.AddBody(new { email_address = email, status = status, merge_fields = new { FNAME = "", LNAME = "", } });
+            request.Method = Method.POST;
+            client.Execute(request);
         }
 
         private static string GetHash(string input) {
