@@ -68,7 +68,8 @@ namespace WijDelen.ObjectSharing.Controllers {
             var possibleStatusses = new List<ObjectRequestStatusViewModel> {
                 new ObjectRequestStatusViewModel {ObjectRequestStatusValue = -1, Translation = ""},
                 new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.None, Translation = T("OK").ToString()},
-                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.BlockedForForbiddenWords, Translation = T("Blocked (forbidden words)").ToString()}
+                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.BlockedForForbiddenWords, Translation = T("Blocked (forbidden words)").ToString()},
+                new ObjectRequestStatusViewModel {ObjectRequestStatusValue = (int) ObjectRequestStatus.BlockedByAdmin, Translation = T("Blocked (by administrator)").ToString()}
             };
 
             var viewModel = new ObjectRequestAdminViewModel {
