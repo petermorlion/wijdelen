@@ -93,7 +93,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             var groupName = _groupService.GetGroupForUser(requestingUser.Id).Name;
             var otherUsers = _findOtherUsersQuery.GetResults(requestingUser.Id, description).ToList();
 
-            var recipients = _randomSampleService.GetRandomSample(otherUsers, 250).Where(x => x.As<UserDetailsPart>().ReceiveMails && x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Approved);
+            var recipients = _randomSampleService.GetRandomSample(otherUsers, 50).Where(x => x.As<UserDetailsPart>().ReceiveMails && x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Approved);
 
             _mailService.SendObjectRequestMail(
                 requestingUserName,
