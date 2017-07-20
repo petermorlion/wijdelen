@@ -48,8 +48,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var subject = T("{0} reacted on your request for a {1}.", fromUserName, description).ToString();
                 var to = new[] {toEmailAddress};
 
-                var chatUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
-                var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
+                var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+                var chatUrl = siteUrl + "/WijDelen.ObjectSharing/Chat/Index/" + chatId;
+                var unsubscribeUrl = siteUrl + "/WijDelen.UserImport/Account/Unsubscribe";
 
                 var groupLogoUrl = "";
 
@@ -60,7 +61,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                     var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
                     var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
+                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = siteUrl + groupLogoField.FirstMediaUrl;
                 }
 
                 var textShape = _shapeFactory.Create("Template_ChatMessageAddedMail_Text", Arguments.From(new {
@@ -147,7 +148,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var noLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequestResponse/Deny/" + objectRequestId;
 
                 var groupLogoUrl = "";
-                var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
+                var unsubscribeUrl = siteUrl + "/WijDelen.UserImport/Account/Unsubscribe";
 
                 if (_orchardServices.WorkContext.CurrentUser != null) {
                     var user = _orchardServices.WorkContext.CurrentUser;
@@ -156,7 +157,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                     var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
                     var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
+                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = siteUrl + groupLogoField.FirstMediaUrl;
                 }
 
                 var textShape = _shapeFactory.Create("Template_ObjectRequestMail_Text", Arguments.From(new {
@@ -211,7 +212,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var objectRequestLink = siteUrl + "/WijDelen.ObjectSharing/ObjectRequest/Item/" + sourceId;
 
                 var groupLogoUrl = "";
-                var unsubscribeUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl + "/WijDelen.UserImport/Account/Unsubscribe";
+                var unsubscribeUrl = siteUrl + "/WijDelen.UserImport/Account/Unsubscribe";
 
                 if (_orchardServices.WorkContext.CurrentUser != null)
                 {
@@ -221,7 +222,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                     var groupLogoPart = group.ContentItem.Parts.Single(x => x.PartDefinition.Name == "GroupLogoPart");
                     var groupLogoField = groupLogoPart.Fields.Single(x => x.FieldDefinition.Name == "MediaLibraryPickerField") as MediaLibraryPickerField;
 
-                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = groupLogoField.FirstMediaUrl;
+                    if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = siteUrl + groupLogoField.FirstMediaUrl;
                 }
 
                 var htmlShape = _shapeFactory.Create("Template_ObjectRequestBlockedMail", Arguments.From(new
