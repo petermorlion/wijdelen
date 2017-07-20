@@ -202,3 +202,8 @@ msgstr "Email"
 #| msgid "Send Request"
 msgid "Send Request"
 msgstr "Versturen"
+
+#: ~/Modules/Orchard.Users/Views/Template.User.LostPassword.cshtml
+#| msgid "Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
+msgid "Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
+msgstr "Beste {0}, <a href=\"{1}\">klik hier</a> om je paswoord te wijzigen."
