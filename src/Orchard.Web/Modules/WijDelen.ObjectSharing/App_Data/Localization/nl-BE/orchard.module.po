@@ -168,6 +168,11 @@ msgstr "Geen probleem!"
 msgid "Please provide a message."
 msgstr "Gelieve een boodschap op te geven."
 
+#: wijdelen.objectsharing.controllers.chatcontroller
+#| msgid "This request is blocked. It is currently not possible to add new messages."
+msgid "This request is blocked. It is currently not possible to add new messages."
+msgstr "Deze oproep is geblokkerd. Het is momenteel niet mogelijk om berichten toe te voegen."
+
 #: wijdelen.objectsharing.controllers.objectrequestresponsecontroller
 #| msgid "Thank you for your response. You can now chat with {0}."
 msgid "Thank you for your response. You can now chat with {0}."

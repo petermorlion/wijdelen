@@ -8,9 +8,11 @@ using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Security;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Controllers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.ObjectSharing.ViewModels;
@@ -56,7 +58,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var objectRequestId = Guid.NewGuid();
             var objectRequest = new ObjectRequestRecord {
                 AggregateId = objectRequestId,
-                Description = "Sneakers"
+                Description = "Sneakers",
+                Status = ObjectRequestStatus.None.ToString()
             };
 
             var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
@@ -96,6 +99,57 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].DateTime.Should().Be(new DateTime(2016, 11, 23));
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].UserId.Should().Be(2);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].Message.Should().Be("How are you?");
+            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeFalse();
+        }
+
+        [Test]
+        public void WhenGettingExistingChatForBlockedRequest()
+        {
+            var chatId = Guid.NewGuid();
+            var chatMessageRepositoryMock = new Mock<IRepository<ChatMessageRecord>>();
+
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequestRecord
+            {
+                AggregateId = objectRequestId,
+                Description = "Sneakers",
+                Status = ObjectRequestStatus.BlockedByAdmin.ToString()
+            };
+
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            objectRequestRepositoryMock.SetRecords(new[] { objectRequest });
+
+            var chatRecord = new ChatRecord
+            {
+                ObjectRequestId = objectRequestId,
+                ChatId = chatId,
+                RequestingUserName = "Carl",
+                RequestingUserId = 666
+            };
+
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
+            chatRepositoryMock.SetRecords(new[] { chatRecord });
+
+            var notifierMock = new Mock<INotifier>();
+            var orchardServiceMock = new Mock<IOrchardServices>();
+            orchardServiceMock.Setup(x => x.Notifier).Returns(notifierMock.Object);
+
+            var controller = new ChatController(
+                chatMessageRepositoryMock.Object,
+                objectRequestRepositoryMock.Object,
+                default(ICommandHandler<AddChatMessage>),
+                chatRepositoryMock.Object,
+                orchardServiceMock.Object);
+
+            var result = controller.Index(chatId);
+
+            result.Should().BeOfType<ViewResult>();
+            result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(chatId);
+            result.As<ViewResult>().Model.As<ChatViewModel>().ObjectDescription.Should().Be("Sneakers");
+            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserName.Should().Be("Carl");
+            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserId.Should().Be(666);
+            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeTrue();
+            notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request is blocked. It is currently not possible to add new messages.")));
         }
 
         [Test]

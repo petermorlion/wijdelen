@@ -5,8 +5,10 @@ using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
+using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
 
@@ -53,13 +55,20 @@ namespace WijDelen.ObjectSharing.Controllers {
                 Message = x.Message
             }).ToList();
 
+            var isForBlockedObjectRequest = objectRequest.Status != ObjectRequestStatus.None.ToString();
+
+            if (isForBlockedObjectRequest) {
+                _orchardServices.Notifier.Add(NotifyType.Warning, T("This request is blocked. It is currently not possible to add new messages."));
+            }
+
             return View(new ChatViewModel {
                 Messages = chatMessageViewModels,
                 ChatId = id,
                 ObjectDescription = objectRequest.Description,
                 RequestingUserName = chat.RequestingUserName,
                 ConfirmingUserName = chat.ConfirmingUserName,
-                RequestingUserId = chat.RequestingUserId
+                RequestingUserId = chat.RequestingUserId,
+                IsForBlockedObjectRequest = isForBlockedObjectRequest
             });
         }
         
