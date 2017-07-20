@@ -1,0 +1,10 @@
+﻿Name: WijDelen.MailChimp
+AntiForgery: enabled
+Author: The Orchard Team
+Website: http://orchardproject.net
+Version: 1.0
+OrchardVersion: 1.0
+Description: Description for the module
+Features:
+    WijDelen.MailChimp:
+        Description: Description for feature WijDelen.MailChimp.
