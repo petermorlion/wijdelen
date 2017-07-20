@@ -129,6 +129,11 @@ msgid "Just a few more details"
 msgstr "Nog enkele details"
 
 #: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
+msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
+msgstr "Om te kunnen starten met Peergroups, gelieve een paswoord aan te maken en enkele persoonlijke details op te geven."
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
 #| msgid "Password:"
 msgid "Password:"
 msgstr "Wachtwoord:"
