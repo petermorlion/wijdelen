@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -20,27 +21,75 @@ using WijDelen.ObjectSharing.ViewModels;
 namespace WijDelen.ObjectSharing.Tests.Controllers {
     [TestFixture]
     public class ChatControllerTests {
-        [Test]
-        public void WhenGettingExistingChat() {
-            var chatId = Guid.NewGuid();
+        private ChatController _controller;
+        private Guid _chatId;
+        private ObjectRequestRecord _objectRequest;
+        private Mock<INotifier> _notifierMock;
+        private Mock<ICommandHandler<AddChatMessage>> _addChatMessageCommandHandlerMock;
+        private Mock<IUser> _userMock;
+
+        [SetUp]
+        public void Init() {
+            var builder = new ContainerBuilder();
+
+            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
+            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
             var chatMessageRepositoryMock = new Mock<IRepository<ChatMessageRecord>>();
+            _addChatMessageCommandHandlerMock = new Mock<ICommandHandler<AddChatMessage>>();
+
+            _notifierMock = new Mock<INotifier>();
+            _userMock = new Mock<IUser>();
+            _userMock.Setup(x => x.Id).Returns(666);
+            var fakeOrchardServices = new FakeOrchardServices();
+            fakeOrchardServices.WorkContext.CurrentUser = _userMock.Object;
+            fakeOrchardServices.Notifier = _notifierMock.Object;
+
+            builder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            builder.RegisterInstance(chatRepositoryMock.Object).As<IRepository<ChatRecord>>();
+            builder.RegisterInstance(chatMessageRepositoryMock.Object).As<IRepository<ChatMessageRecord>>();
+            builder.RegisterInstance(_addChatMessageCommandHandlerMock.Object).As<ICommandHandler<AddChatMessage>>();
+            builder.RegisterInstance(fakeOrchardServices).As<IOrchardServices>();
+            builder.RegisterType<ChatController>();
+
+            var objectRequestId = Guid.NewGuid();
+            _objectRequest = new ObjectRequestRecord
+            {
+                AggregateId = objectRequestId,
+                Description = "Sneakers",
+                Status = ObjectRequestStatus.None.ToString()
+            };
+
+            objectRequestRepositoryMock.SetRecords(new[] { _objectRequest });
+
+            _chatId = Guid.NewGuid();
+            var chatRecord = new ChatRecord
+            {
+                ObjectRequestId = objectRequestId,
+                ChatId = _chatId,
+                RequestingUserName = "Carl",
+                RequestingUserId = 666,
+                ConfirmingUserId = 2
+            };
+
+            chatRepositoryMock.SetRecords(new[] { chatRecord });
+
             chatMessageRepositoryMock.SetRecords(new[] {
                 new ChatMessageRecord {
-                    ChatId = chatId,
+                    ChatId = _chatId,
                     DateTime = new DateTime(2016, 11, 22),
                     UserName = "Moe",
                     Message = "Hello",
                     UserId = 2
                 },
                 new ChatMessageRecord {
-                    ChatId = chatId,
+                    ChatId = _chatId,
                     DateTime = new DateTime(2016, 11, 21),
                     UserName = "Lenny",
                     Message = "Hi",
                     UserId = 1
                 },
                 new ChatMessageRecord {
-                    ChatId = chatId,
+                    ChatId = _chatId,
                     DateTime = new DateTime(2016, 11, 23),
                     UserName = "Moe",
                     Message = "How are you?",
@@ -55,37 +104,81 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 }
             });
 
-            var objectRequestId = Guid.NewGuid();
-            var objectRequest = new ObjectRequestRecord {
-                AggregateId = objectRequestId,
-                Description = "Sneakers",
-                Status = ObjectRequestStatus.None.ToString()
-            };
+            var container = builder.Build();
+            _controller = container.Resolve<ChatController>();
 
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(new[] { objectRequest });
+            _controller.T = NullLocalizer.Instance;
+        }
 
-            var chatRecord = new ChatRecord {
-                ObjectRequestId = objectRequestId,
-                ChatId = chatId,
-                RequestingUserName = "Carl",
-                RequestingUserId = 666
-            };
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-            chatRepositoryMock.SetRecords(new[] {chatRecord});
-
-            var controller = new ChatController(
-                chatMessageRepositoryMock.Object,
-                objectRequestRepositoryMock.Object,
-                default(ICommandHandler<AddChatMessage>),
-                chatRepositoryMock.Object,
-                default(IOrchardServices));
-
-            var result = controller.Index(chatId);
+        [Test]
+        public void WhenGettingExistingChat() {
+            var result = _controller.Index(_chatId);
 
             result.Should().BeOfType<ViewResult>();
-            result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(chatId);
+            ViewResultShouldContainAllChatData(result);
+            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeFalse();
+        }
+
+        [Test]
+        public void WhenGettingExistingChatForBlockedRequest() {
+            _objectRequest.Status = ObjectRequestStatus.BlockedByAdmin.ToString();
+
+            var result = _controller.Index(_chatId);
+
+            result.Should().BeOfType<ViewResult>();
+            ViewResultShouldContainAllChatData(result);
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request is blocked. It is currently not possible to add new messages.")));
+        }
+
+        [Test]
+        public void WhenGettingUnknownChat() {
+            var chatId = Guid.NewGuid();
+
+            var result = _controller.Index(chatId);
+
+            result.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenAddingChatMessage() {
+            AddChatMessage command = null;
+
+            _addChatMessageCommandHandlerMock
+                .Setup(x => x.Handle(It.IsAny<AddChatMessage>()))
+                .Callback((AddChatMessage c) => command = c);
+            
+            var result = _controller.Index(new ChatViewModel {ChatId = _chatId, NewMessage = "Hello"});
+
+            result.Should().BeOfType<RedirectToRouteResult>();
+            result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
+            result.As<RedirectToRouteResult>().RouteValues["id"].Should().Be(_chatId);
+            command.ChatId.Should().Be(_chatId);
+            command.UserId.Should().Be(666);
+            command.Message.Should().Be("Hello");
+            command.DateTime.Kind.Should().Be(DateTimeKind.Utc);
+        }
+
+        [Test]
+        public void WhenAddingChatMessageForOtherUser() {
+            _userMock.Setup(x => x.Id).Returns(1);
+
+            var result = _controller.Index(new ChatViewModel {ChatId = _chatId, NewMessage = "Hello"});
+
+            result.Should().BeOfType<HttpUnauthorizedResult>();
+        }
+
+        [Test]
+        public void WhenAddingEmptyChatMessage() {
+            var result = _controller.Index(new ChatViewModel {ChatId = _chatId, NewMessage = ""});
+
+            result.Should().BeOfType<ViewResult>();
+            ViewResultShouldContainAllChatData(result);
+            result.As<ViewResult>().ViewName.Should().Be("");
+            result.As<ViewResult>().ViewData.ModelState.Values.ToList()[0].Errors.ToList()[0].ErrorMessage.Should().Be("Please provide a message.");
+        }
+
+        private void ViewResultShouldContainAllChatData(ActionResult result) {
+            result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(_chatId);
             result.As<ViewResult>().Model.As<ChatViewModel>().ObjectDescription.Should().Be("Sneakers");
             result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserName.Should().Be("Carl");
             result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserId.Should().Be(666);
@@ -99,181 +192,6 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].DateTime.Should().Be(new DateTime(2016, 11, 23));
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].UserId.Should().Be(2);
             result.As<ViewResult>().Model.As<ChatViewModel>().Messages[2].Message.Should().Be("How are you?");
-            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeFalse();
-        }
-
-        [Test]
-        public void WhenGettingExistingChatForBlockedRequest()
-        {
-            var chatId = Guid.NewGuid();
-            var chatMessageRepositoryMock = new Mock<IRepository<ChatMessageRecord>>();
-
-            var objectRequestId = Guid.NewGuid();
-            var objectRequest = new ObjectRequestRecord
-            {
-                AggregateId = objectRequestId,
-                Description = "Sneakers",
-                Status = ObjectRequestStatus.BlockedByAdmin.ToString()
-            };
-
-            var objectRequestRepositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            objectRequestRepositoryMock.SetRecords(new[] { objectRequest });
-
-            var chatRecord = new ChatRecord
-            {
-                ObjectRequestId = objectRequestId,
-                ChatId = chatId,
-                RequestingUserName = "Carl",
-                RequestingUserId = 666
-            };
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-            chatRepositoryMock.SetRecords(new[] { chatRecord });
-
-            var notifierMock = new Mock<INotifier>();
-            var orchardServiceMock = new Mock<IOrchardServices>();
-            orchardServiceMock.Setup(x => x.Notifier).Returns(notifierMock.Object);
-
-            var controller = new ChatController(
-                chatMessageRepositoryMock.Object,
-                objectRequestRepositoryMock.Object,
-                default(ICommandHandler<AddChatMessage>),
-                chatRepositoryMock.Object,
-                orchardServiceMock.Object);
-
-            var result = controller.Index(chatId);
-
-            result.Should().BeOfType<ViewResult>();
-            result.As<ViewResult>().Model.As<ChatViewModel>().ChatId.Should().Be(chatId);
-            result.As<ViewResult>().Model.As<ChatViewModel>().ObjectDescription.Should().Be("Sneakers");
-            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserName.Should().Be("Carl");
-            result.As<ViewResult>().Model.As<ChatViewModel>().RequestingUserId.Should().Be(666);
-            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeTrue();
-            notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request is blocked. It is currently not possible to add new messages.")));
-        }
-
-        [Test]
-        public void WhenGettingUnknownChat() {
-            var chatId = Guid.NewGuid();
-            var repositoryMock = new Mock<IRepository<ChatRecord>>();
-            repositoryMock.SetRecords(new[] {
-                new ChatRecord {
-                    ChatId = Guid.NewGuid(),
-                }
-            });
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<AddChatMessage>),
-                repositoryMock.Object,
-                default(IOrchardServices));
-
-            var result = controller.Index(chatId);
-
-            result.Should().BeOfType<HttpNotFoundResult>();
-        }
-
-        [Test]
-        public void WhenAddingChatMessage() {
-            var chatId = Guid.NewGuid();
-            var commandHandlerMock = new Mock<ICommandHandler<AddChatMessage>>();
-            AddChatMessage command = null;
-
-            commandHandlerMock
-                .Setup(x => x.Handle(It.IsAny<AddChatMessage>()))
-                .Callback((AddChatMessage c) => command = c);
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(23);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-            var chatRecord = new ChatRecord {
-                ChatId = chatId,
-                ConfirmingUserId = 2,
-                RequestingUserId = 23
-            };
-
-            chatRepositoryMock.SetRecords(new[] {chatRecord});
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                default(IRepository<ObjectRequestRecord>),
-                commandHandlerMock.Object,
-                chatRepositoryMock.Object,
-                services);
-
-            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = "Hello",});
-
-            result.Should().BeOfType<RedirectToRouteResult>();
-            result.As<RedirectToRouteResult>().RouteValues["action"].Should().Be("Index");
-            result.As<RedirectToRouteResult>().RouteValues["id"].Should().Be(chatId);
-            command.ChatId.Should().Be(chatId);
-            command.UserId.Should().Be(23);
-            command.Message.Should().Be("Hello");
-            command.DateTime.Kind.Should().Be(DateTimeKind.Utc);
-        }
-
-        [Test]
-        public void WhenAddingChatMessageForOtherUser() {
-            var chatId = Guid.NewGuid();
-
-            var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Id).Returns(23);
-            var services = new FakeOrchardServices();
-            services.WorkContext.CurrentUser = userMock.Object;
-
-            var chatRepositoryMock = new Mock<IRepository<ChatRecord>>();
-            var chatRecord = new ChatRecord {
-                ChatId = chatId,
-                ConfirmingUserId = 2,
-                RequestingUserId = 1
-            };
-
-            chatRepositoryMock.SetRecords(new[] {chatRecord});
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<AddChatMessage>),
-                chatRepositoryMock.Object,
-                services);
-
-            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = "Hello"});
-
-            result.Should().BeOfType<HttpUnauthorizedResult>();
-        }
-
-        [Test]
-        public void WhenAddingEmptyChatMessage() {
-            var chatId = Guid.NewGuid();
-
-            var controller = new ChatController(
-                default(IRepository<ChatMessageRecord>),
-                default(IRepository<ObjectRequestRecord>),
-                default(ICommandHandler<AddChatMessage>),
-                default(IRepository<ChatRecord>),
-                default(IOrchardServices));
-
-            var result = controller.AddMessage(new ChatViewModel {ChatId = chatId, NewMessage = ""});
-
-            result.Should().BeOfType<ViewResult>();
-            result.As<ViewResult>().ViewData.ModelState.Values.ToList()[0].Errors.ToList()[0].ErrorMessage.Should().Be("Please provide a message.");
-        }
-
-        /// <summary>
-        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
-        /// </summary>
-        [Test]
-        public void TestT() {
-            var controller = new ChatController(null, null, null, null, null);
-            var localizer = NullLocalizer.Instance;
-
-            controller.T = localizer;
-
-            Assert.AreEqual(localizer, controller.T);
         }
     }
 }

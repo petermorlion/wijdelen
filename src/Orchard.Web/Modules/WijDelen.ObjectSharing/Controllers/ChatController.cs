@@ -16,14 +16,14 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     [Authorize]
     public class ChatController : Controller {
-        private readonly IRepository<ChatMessageRecord> _chatMessageRepository;
-        private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly ICommandHandler<AddChatMessage> _addChatMessageCommandHandler;
+        private readonly IRepository<ChatMessageRecord> _chatMessageRepository;
         private readonly IRepository<ChatRecord> _chatRepository;
+        private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IOrchardServices _orchardServices;
 
         public ChatController(
-            IRepository<ChatMessageRecord> chatMessageRepository, 
+            IRepository<ChatMessageRecord> chatMessageRepository,
             IRepository<ObjectRequestRecord> objectRequestRepository,
             ICommandHandler<AddChatMessage> addChatMessageCommandHandler,
             IRepository<ChatRecord> chatRepository,
@@ -37,15 +37,49 @@ namespace WijDelen.ObjectSharing.Controllers {
             T = NullLocalizer.Instance;
         }
 
+        public Localizer T { get; set; }
+
         /// <remarks>
-        /// Warning: also referenced hard-coded in WijDelen.ObjectSharing.MailgunService
-        /// </remarks>>
+        ///     Warning: also referenced hard-coded in WijDelen.ObjectSharing.MailgunService
+        /// </remarks>
+        /// >
         public ActionResult Index(Guid id) {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
-            if (chat == null) {
-                return new HttpNotFoundResult();
-            }
+            if (chat == null) return new HttpNotFoundResult();
 
+            var chatViewModel = GetChatViewModel(id, chat);
+
+            return View(chatViewModel);
+        }
+
+        /// <summary>
+        /// Adds a message to the chat.
+        /// </summary>
+        /// <param name="postedViewModel">The viewmodel as posted by the browser. This will be an incomplete viewmodel, as not all properties
+        /// of the viewmodel are present in the form.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Index(ChatViewModel postedViewModel) {
+            var chat = _chatRepository.Fetch(x => x.ChatId == postedViewModel.ChatId).SingleOrDefault();
+            if (chat == null) return new HttpNotFoundResult();
+
+            var userId = _orchardServices.WorkContext.CurrentUser.Id;
+            if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) return new HttpUnauthorizedResult();
+
+            var viewModel = GetChatViewModel(postedViewModel.ChatId, chat);
+
+            if (string.IsNullOrWhiteSpace(postedViewModel.NewMessage))
+                ModelState.AddModelError<ChatViewModel, string>(m => m.NewMessage, T("Please provide a message."));
+
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            var addChatMessage = new AddChatMessage(viewModel.ChatId, userId, postedViewModel.NewMessage, DateTime.UtcNow);
+            _addChatMessageCommandHandler.Handle(addChatMessage);
+            return RedirectToAction("Index", new {id = viewModel.ChatId});
+        }
+
+        private ChatViewModel GetChatViewModel(Guid id, ChatRecord chat) {
             var chatMessages = _chatMessageRepository.Fetch(x => x.ChatId == id).OrderBy(x => x.DateTime).ToList();
             var objectRequest = _objectRequestRepository.Fetch(x => x.AggregateId == chat.ObjectRequestId).Single();
 
@@ -57,11 +91,9 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var isForBlockedObjectRequest = objectRequest.Status != ObjectRequestStatus.None.ToString();
 
-            if (isForBlockedObjectRequest) {
-                _orchardServices.Notifier.Add(NotifyType.Warning, T("This request is blocked. It is currently not possible to add new messages."));
-            }
+            if (isForBlockedObjectRequest) _orchardServices.Notifier.Add(NotifyType.Warning, T("This request is blocked. It is currently not possible to add new messages."));
 
-            return View(new ChatViewModel {
+            var chatViewModel = new ChatViewModel {
                 Messages = chatMessageViewModels,
                 ChatId = id,
                 ObjectDescription = objectRequest.Description,
@@ -69,33 +101,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ConfirmingUserName = chat.ConfirmingUserName,
                 RequestingUserId = chat.RequestingUserId,
                 IsForBlockedObjectRequest = isForBlockedObjectRequest
-            });
+            };
+            return chatViewModel;
         }
-        
-        [HttpPost]
-        public ActionResult AddMessage(ChatViewModel viewModel) {
-            if (string.IsNullOrWhiteSpace(viewModel.NewMessage))
-            {
-                ModelState.AddModelError<ChatViewModel, string>(m => m.NewMessage, T("Please provide a message."));
-            }
-            
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-
-            var userId = _orchardServices.WorkContext.CurrentUser.Id;
-            var chat = _chatRepository.Fetch(x => x.ChatId == viewModel.ChatId).Single();
-
-            if (chat.ConfirmingUserId != userId && chat.RequestingUserId != userId) {
-                return new HttpUnauthorizedResult();
-            }
-
-            var addChatMessage = new AddChatMessage(viewModel.ChatId, userId, viewModel.NewMessage, DateTime.UtcNow);
-            _addChatMessageCommandHandler.Handle(addChatMessage);
-            return RedirectToAction("Index", new {id = viewModel.ChatId});
-        }
-
-        public Localizer T { get; set; }
     }
 }

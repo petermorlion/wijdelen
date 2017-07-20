@@ -29,7 +29,7 @@
 </div>
 
 @if (!Model.IsForBlockedObjectRequest) {
-    using (Html.BeginFormAntiForgeryPost(Url.Action("AddMessage", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+    using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
         @Html.HiddenFor(m => m.ChatId)
         <fieldset>
             @Html.TextAreaFor(m => m.NewMessage, new {placeholder = T("Write a message here.")})
