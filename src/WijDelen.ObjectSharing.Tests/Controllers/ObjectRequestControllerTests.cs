@@ -228,5 +228,14 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             command.ObjectRequestId.Should().Be(id);
         }
+
+        /// <summary>
+        /// These properties should also remain public, as they are used in the cshtml file.
+        /// </summary>
+        [Test]
+        public void TestMaximumLengths() {
+            ObjectRequestController.MaximumDescriptionLength.Should().Be(50);
+            ObjectRequestController.MaximumExtraInfoLength.Should().Be(1000);
+        }
     }
 }

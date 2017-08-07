@@ -16,8 +16,8 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
     [Authorize]
     public class ObjectRequestController : Controller {
-        private const int MaximumDescriptionLength = 50;
-        private const int MaximumExtraInfoLength = 1000;
+        public const int MaximumDescriptionLength = 50;
+        public const int MaximumExtraInfoLength = 1000;
         private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IOrchardServices _orchardServices;
