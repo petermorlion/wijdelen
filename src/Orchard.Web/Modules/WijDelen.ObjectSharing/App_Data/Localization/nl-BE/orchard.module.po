@@ -238,6 +238,11 @@ msgstr "Reacties"
 msgid "There are no reactions yet."
 msgstr "Er zijn nog geen reacties."
 
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+#| msgid "Stop request"
+msgid "Stop request"
+msgstr "Oproep stopzetten"
+
 #: wijdelen.objectsharing.infrastructure.mailgunservice
 #| msgid "{0} reacted on your request for a {1}."
 msgid "{0} reacted on your request for a {1}."
@@ -647,3 +652,28 @@ msgstr "Uitschrijven"
 #| msgid "If you think this is a mistake, please reply to this email."
 msgid "If you think this is a mistake, please reply to this email."
 msgstr "Als je denkt dat dit een vergissing is, stuur ons dan een antwoord op deze mail."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+#| msgid "Stop Request"
+msgid "Stop Request"
+msgstr "Oproep stopzetten"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+#| msgid "Are you sure you want to cancel your request for (a) {0}?"
+msgid "Are you sure you want to cancel your request for (a) {0}?"
+msgstr "Weet je zeker dat je je oproep voor (een) {0} wil stopzetten?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+#| msgid "You will no longer be able to receive answers to this request. This action cannot be undone."
+msgid "You will no longer be able to receive answers to this request. This action cannot be undone."
+msgstr "Je zal niet langer antwoorden kunnen ontvangen op deze oproep. Deze actie kan niet ongedaan worden gemaakt."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Ja"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+#| msgid "No"
+msgid "No"
+msgstr "Nee"

@@ -1,0 +1,22 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.ConfirmStopObjectRequestViewModel
+
+@{
+    Layout.Title = T("Stop Request").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+
+    @T("Are you sure you want to cancel your request for (a) {0}?", Model.Description)
+
+    <p>
+        <small>@T("You will no longer be able to receive answers to this request. This action cannot be undone.")</small>
+    </p>
+
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <button type="submit" class="button-small button-clear" value="@T("Yes")">@T("Yes")</button>
+        @Html.ActionLink(T("No"), "Item", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = Model.Id}, new {@class = "button button-small"})
+    </fieldset>
+}

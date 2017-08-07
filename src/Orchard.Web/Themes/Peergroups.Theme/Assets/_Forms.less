@@ -30,13 +30,19 @@ input[type='reset'],
 input[type='submit'], 
 .button {
     background-color: @color-quinary;
-    border: 0;
+    border-color: @color-quinary;
     border-radius: 0;
     padding: 20px 40px;
     height: auto;
     font-weight: lighter;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: lighten(@color-quinary, 10%);
+        border-color: lighten(@color-quinary, 10%);
+    }
+
+    &.button-small {
+        padding: 0px 30px;
     }
 }

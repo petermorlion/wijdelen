@@ -26,7 +26,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void Init() {
             var containerBuilder = new ContainerBuilder();
 
-            _commandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
+            _requestObjectCommandHandlerMock = new Mock<ICommandHandler<RequestObject>>();
+            _stopObjectRequestCommandHandlerMock = new Mock<ICommandHandler<StopObjectRequest>>();
 
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Id).Returns(22);
@@ -46,7 +47,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 new ObjectRequestRecord {
                     AggregateId = _objectRequestId,
                     UserId = 22,
-                    CreatedDateTime = new DateTime(2016, 1, 1)
+                    CreatedDateTime = new DateTime(2016, 1, 1),
+                    Description = "Sneakers"
                 },
                 new ObjectRequestRecord {
                     AggregateId = Guid.NewGuid(),
@@ -74,7 +76,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             };
             chatRepositoryMock.SetRecords(_chatRecords);
 
-            containerBuilder.RegisterInstance(_commandHandlerMock.Object).As<ICommandHandler<RequestObject>>();
+            containerBuilder.RegisterInstance(_requestObjectCommandHandlerMock.Object).As<ICommandHandler<RequestObject>>();
+            containerBuilder.RegisterInstance(_stopObjectRequestCommandHandlerMock.Object).As<ICommandHandler<StopObjectRequest>>();
             containerBuilder.RegisterInstance(services).As<IOrchardServices>();
             containerBuilder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
             containerBuilder.RegisterInstance(chatRepositoryMock.Object).As<IRepository<ChatRecord>>();
@@ -86,12 +89,13 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         }
 
         private ObjectRequestController _controller;
-        private Mock<ICommandHandler<RequestObject>> _commandHandlerMock;
+        private Mock<ICommandHandler<RequestObject>> _requestObjectCommandHandlerMock;
         private Guid _objectRequestIdForOtherUser;
         private Guid _objectRequestId;
         private ObjectRequestRecord[] _persistentRecords;
         private ChatRecord[] _chatRecords;
         private Guid _blockedObjectRequestId;
+        private Mock<ICommandHandler<StopObjectRequest>> _stopObjectRequestCommandHandlerMock;
 
         [Test]
         public void ShouldNotAllowEmptyValuesForNewObjectRequest() {
@@ -157,7 +161,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         [Test]
         public void WhenPosting_ShouldCallCommandHandlerAndRedirect() {
             RequestObject command = null;
-            _commandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
+            _requestObjectCommandHandlerMock.Setup(x => x.Handle(It.IsAny<RequestObject>())).Callback((RequestObject c) => command = c);
 
             var viewModel = new NewObjectRequestViewModel {
                 Description = "Sneakers",
@@ -172,6 +176,52 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             command.Description.Should().Be("Sneakers");
             command.ExtraInfo.Should().Be("For sneaking..........................");
             command.UserId.Should().Be(22);
+        }
+
+        [Test]
+        public void WhenGettingStop() {
+            var actionResult = _controller.Stop(_objectRequestId);
+
+            actionResult.Should().BeOfType<ViewResult>();
+            ((ViewResult) actionResult).Model.ShouldBeEquivalentTo(new ConfirmStopObjectRequestViewModel {
+                Id = _objectRequestId,
+                Description = "Sneakers"
+            });
+        }
+
+        [Test]
+        public void WhenGettingStopForObjectRequestOfOtherUser() {
+            var actionResult = _controller.Stop(_objectRequestIdForOtherUser);
+
+            actionResult.Should().BeOfType<HttpUnauthorizedResult>();
+        }
+
+        [Test]
+        public void WhenGettingStopForUnknownId_ShouldReturnNotFound() {
+            var id = Guid.NewGuid();
+
+            var actionResult = _controller.Stop(id);
+
+            actionResult.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test]
+        public void WhenConfirmingStop_ShouldCallCommandHandlerAndRedirect() {
+            var id = Guid.NewGuid();
+            StopObjectRequest command = null;
+            _stopObjectRequestCommandHandlerMock.Setup(x => x.Handle(It.IsAny<StopObjectRequest>())).Callback((StopObjectRequest c) => command = c);
+
+            var viewModel = new ConfirmStopObjectRequestViewModel
+            {
+                Id = id,
+                Description = "Sneakers"
+            };
+
+            var actionResult = _controller.Stop(viewModel);
+
+            ((RedirectToRouteResult)actionResult).RouteValues["action"].Should().Be("Index");
+
+            command.ObjectRequestId.Should().Be(id);
         }
     }
 }

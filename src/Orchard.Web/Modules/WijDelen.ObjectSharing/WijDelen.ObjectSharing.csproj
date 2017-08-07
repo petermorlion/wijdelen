@@ -228,6 +228,7 @@
     <Compile Include="ViewModels\Admin\ObjectRequestStatusViewModel.cs" />
     <Compile Include="ViewModels\ChatMessageViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
+    <Compile Include="ViewModels\ConfirmStopObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
@@ -354,6 +355,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Template.ObjectRequestBlockedMail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ObjectRequest\Stop.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

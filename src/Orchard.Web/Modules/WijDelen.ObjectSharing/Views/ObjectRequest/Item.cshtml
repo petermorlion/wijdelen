@@ -7,6 +7,12 @@
 
 <span style="white-space: pre-line">@Model.ObjectRequestRecord.ExtraInfo</span>
 
+<div>
+    @if (Model.ObjectRequestRecord.Status != ObjectRequestStatus.Stopped.ToString()) {
+        @Html.ActionLink(T("Stop request"), "Stop", new { controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = Model.ObjectRequestRecord.AggregateId }, new { @class = "button button-small"});
+    }
+</div>
+ 
 @if (Model.ObjectRequestRecord.Status == ObjectRequestStatus.None.ToString()) {
     <h2>@T("Reactions")</h2>
 
