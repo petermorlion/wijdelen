@@ -140,6 +140,7 @@
     <Compile Include="Domain\Commands\DenyObjectRequest.cs" />
     <Compile Include="Domain\Commands\DenyObjectRequestForNow.cs" />
     <Compile Include="Domain\Commands\RequestObject.cs" />
+    <Compile Include="Domain\Commands\StopObjectRequest.cs" />
     <Compile Include="Domain\Commands\UnblockObjectRequests.cs" />
     <Compile Include="Domain\Entities\Chat.cs" />
     <Compile Include="Domain\Entities\ChatMessage.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Domain\Events\ChatStarted.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />
+    <Compile Include="Domain\Events\ObjectRequestStopped.cs" />
     <Compile Include="Domain\Events\ObjectRequestUnblocked.cs" />
     <Compile Include="Domain\Events\UserInventoryCreated.cs" />
     <Compile Include="Domain\Messaging\EventBus.cs" />

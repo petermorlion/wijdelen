@@ -176,5 +176,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequest.UserId.Should().Be(22);
             objectRequest.Description.Should().Be("Sneakers");
         }
+
+        [Test]
+        public void WhenStopping() {
+            var objectRequest = new ObjectRequest(Guid.NewGuid(), "Sneakers", "for sneaking", 22);
+            objectRequest.Status.Should().Be(ObjectRequestStatus.None);
+
+            objectRequest.Stop();
+
+            objectRequest.Events.Last().Should().BeOfType<ObjectRequestStopped>();
+            objectRequest.Status.Should().Be(ObjectRequestStatus.Stopped);
+        }
     }
 }

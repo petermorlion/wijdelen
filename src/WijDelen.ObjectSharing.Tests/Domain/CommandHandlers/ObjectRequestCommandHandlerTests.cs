@@ -9,6 +9,7 @@ using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
     [TestFixture]
@@ -173,6 +174,28 @@ namespace WijDelen.ObjectSharing.Tests.Domain.CommandHandlers {
                 Version = 1,
                 Reason = "Just because"
             });
+        }
+
+        [Test]
+        public void WhenStoppingObjectRequest() {
+            var objectRequestId = Guid.NewGuid();
+            var objectRequest = new ObjectRequest(objectRequestId, "Sneakers", "For sneaking", 1);
+            var command = new StopObjectRequest(objectRequestId);
+            var repositoryMock = new Mock<IEventSourcedRepository<ObjectRequest>>();
+            repositoryMock.Setup(x => x.Find(objectRequestId)).Returns(objectRequest);
+
+            var commandHandler = new ObjectRequestCommandHandler(repositoryMock.Object);
+
+            commandHandler.Handle(command);
+
+            objectRequest.Events.Last().ShouldBeEquivalentTo(new ObjectRequestStopped {
+                SourceId = objectRequestId,
+                Version = 1
+            });
+
+            objectRequest.Status.Should().Be(ObjectRequestStatus.Stopped);
+
+            repositoryMock.Verify(x => x.Save(objectRequest, command.Id.ToString()));
         }
     }
 }

@@ -10,7 +10,8 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
         ICommandHandler<DenyObjectRequest>,
         ICommandHandler<DenyObjectRequestForNow>,
         ICommandHandler<UnblockObjectRequests>,
-        ICommandHandler<BlockObjectRequestByAdmin> {
+        ICommandHandler<BlockObjectRequestByAdmin>,
+        ICommandHandler<StopObjectRequest> {
         private readonly IEventSourcedRepository<ObjectRequest> _repository;
 
         public ObjectRequestCommandHandler(IEventSourcedRepository<ObjectRequest> repository) {
@@ -49,6 +50,12 @@ namespace WijDelen.ObjectSharing.Domain.CommandHandlers {
         public void Handle(BlockObjectRequestByAdmin command) {
             var objectRequest = _repository.Find(command.ObjectRequestId);
             objectRequest.Block(command.Reason);
+            _repository.Save(objectRequest, command.Id.ToString());
+        }
+
+        public void Handle(StopObjectRequest command) {
+            var objectRequest = _repository.Find(command.ObjectRequestId);
+            objectRequest.Stop();
             _repository.Save(objectRequest, command.Id.ToString());
         }
     }

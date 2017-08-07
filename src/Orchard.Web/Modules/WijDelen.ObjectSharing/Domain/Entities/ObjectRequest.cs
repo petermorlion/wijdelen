@@ -23,6 +23,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Handles<ObjectRequestUnblocked>(OnObjectRequestUnblocked);
             Handles<ObjectRequestBlocked>(OnObjectRequestBlocked);
             Handles<ObjectRequestBlockedByAdmin>(OnObjectRequestBlockedByAdmin);
+            Handles<ObjectRequestStopped>(OnObjectRequestStopped);
         }
 
         public ObjectRequest(Guid id, string description, string extraInfo, int userId) : this(id) {
@@ -63,6 +64,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Update(new ObjectRequestUnblocked { Description = Description, ExtraInfo = ExtraInfo, UserId = UserId, WasPreviouslyBlockedByAdmin = Status == ObjectRequestStatus.BlockedByAdmin});
         }
 
+        public void Stop() {
+            Update(new ObjectRequestStopped());
+        }
+
         private void OnObjectRequested(ObjectRequested objectRequested) {
             Description = objectRequested.Description;
             ExtraInfo = objectRequested.ExtraInfo;
@@ -94,6 +99,10 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         private void OnObjectRequestBlockedByAdmin(ObjectRequestBlockedByAdmin objectRequestBlockedByAdmin) {
             Status = ObjectRequestStatus.BlockedByAdmin;
             BlockReason = objectRequestBlockedByAdmin.Reason;
+        }
+
+        private void OnObjectRequestStopped(ObjectRequestStopped objectRequestStopped) {
+            Status = ObjectRequestStatus.Stopped;
         }
 
         /// <summary>

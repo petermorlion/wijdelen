@@ -13,6 +13,11 @@
         /// <summary>
         /// Blocked manually by an administrator
         /// </summary>
-        BlockedByAdmin
+        BlockedByAdmin,
+
+        /// <summary>
+        /// Stopped by the user.
+        /// </summary>
+        Stopped
     }
 }
