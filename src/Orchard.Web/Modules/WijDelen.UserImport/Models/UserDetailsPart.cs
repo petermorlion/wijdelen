@@ -30,13 +30,7 @@ namespace WijDelen.UserImport.Models {
             get { return Retrieve(r => r.ReceiveMails); }
             set { Store(r => r.ReceiveMails, value); }
         }
-
-        [DisplayName("Subscribed to newsletter")]
-        public bool IsSubscribedToNewsletter {
-            get { return Retrieve(r => r.IsSubscribedToNewsletter); }
-            set { Store(r => r.IsSubscribedToNewsletter, value); }
-        }
-
+        
         public bool IsComplete() {
             return LastName != "" && FirstName != "";
         }

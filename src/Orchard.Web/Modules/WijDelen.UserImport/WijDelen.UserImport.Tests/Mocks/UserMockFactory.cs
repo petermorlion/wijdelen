@@ -35,7 +35,6 @@ namespace WijDelen.UserImport.Tests.Mocks {
             userDetailsPart.LastName = lastName;
             userDetailsPart.Culture = culture;
             userDetailsPart.ReceiveMails = true;
-            userDetailsPart.IsSubscribedToNewsletter = true;
 
             groupMembershipPart.GroupMembershipStatus = groupMembershipStatus;
 

@@ -6,6 +6,7 @@ using Orchard.Localization.Providers;
 using Orchard.Mvc.Extensions;
 using Orchard.Themes;
 using Orchard.UI.Notify;
+using WijDelen.MailChimp;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
@@ -17,11 +18,16 @@ namespace WijDelen.UserImport.Controllers {
         private readonly IOrchardServices _orchardServices;
         private readonly IUpdateUserDetailsService _updateUserDetailsService;
         private readonly ICultureStorageProvider _cultureStorageProvider;
+        private readonly IMailChimpClient _mailChimpClient;
 
-        public AccountController(IOrchardServices orchardServices, IUpdateUserDetailsService updateUserDetailsService, ICultureStorageProvider cultureStorageProvider) {
+        public AccountController(IOrchardServices orchardServices, 
+            IUpdateUserDetailsService updateUserDetailsService, 
+            ICultureStorageProvider cultureStorageProvider,
+            IMailChimpClient mailChimpClient) {
             _orchardServices = orchardServices;
             _updateUserDetailsService = updateUserDetailsService;
             _cultureStorageProvider = cultureStorageProvider;
+            _mailChimpClient = mailChimpClient;
         }
 
         public Localizer T { get; set; }
@@ -29,12 +35,13 @@ namespace WijDelen.UserImport.Controllers {
         public ActionResult Index() {
             var user = _orchardServices.WorkContext.CurrentUser;
             var userDetailsPart = user.ContentItem.As<UserDetailsPart>();
+            var isSubscribedToNewsletter = _mailChimpClient.IsSubscribed(user.Email);
             var viewModel = new UserDetailsViewModel {
                 FirstName = userDetailsPart.FirstName,
                 LastName = userDetailsPart.LastName,
                 Culture = userDetailsPart.Culture,
                 ReceiveMails = userDetailsPart.ReceiveMails,
-                IsSubscribedToNewsletter = userDetailsPart.IsSubscribedToNewsletter
+                IsSubscribedToNewsletter = isSubscribedToNewsletter
             };
             return View(viewModel);
         }
@@ -68,7 +75,7 @@ namespace WijDelen.UserImport.Controllers {
         public ActionResult Unsubscribe() {
             var user = _orchardServices.WorkContext.CurrentUser;
             var userDetailsPart = user.As<UserDetailsPart>();
-            _updateUserDetailsService.UpdateUserDetails(user, userDetailsPart.FirstName, userDetailsPart.LastName, userDetailsPart.Culture, false, userDetailsPart.IsSubscribedToNewsletter);
+            _updateUserDetailsService.UpdateUserDetails(user, userDetailsPart.FirstName, userDetailsPart.LastName, userDetailsPart.Culture, false);
             _orchardServices.Notifier.Add(NotifyType.Success, T("You will no longer receive mails regarding requests or chat messages."));
 
             return RedirectToAction("Index");

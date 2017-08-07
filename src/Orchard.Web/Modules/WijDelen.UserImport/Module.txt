@@ -9,4 +9,4 @@ Features:
     WijDelen.UserImport:
         Description: Allows importing users to Peergroups
 		Category: Peergroups
-		Dependencies: WijDelen.Mailgun, Orchard.Users, Orchard.MediaLibrary, Orchard.Roles, Orchard.Localization
+		Dependencies: WijDelen.Mailgun, WijDelen.MailChimp, Orchard.Users, Orchard.MediaLibrary, Orchard.Roles, Orchard.Localization

@@ -9,6 +9,7 @@ using Orchard.Localization;
 using Orchard.Localization.Providers;
 using Orchard.Security;
 using Orchard.UI.Notify;
+using WijDelen.MailChimp;
 using WijDelen.UserImport.Controllers;
 using WijDelen.UserImport.Models;
 using WijDelen.UserImport.Services;
@@ -23,6 +24,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
         private IUser _userMock;
         private Mock<INotifier> _notifierMock;
         private Mock<ICultureStorageProvider> _cultureStorageProviderMock;
+        private Mock<IMailChimpClient> _mailChimpClientMock;
         private MockWorkContext _mockWorkContext;
 
         [SetUp]
@@ -39,6 +41,9 @@ namespace WijDelen.UserImport.Tests.Controllers {
             _notifierMock = new Mock<INotifier>();
             orchardServicesMock.Setup(x => x.Notifier).Returns(_notifierMock.Object);
 
+            _mailChimpClientMock = new Mock<IMailChimpClient>();
+            _mailChimpClientMock.Setup(x => x.IsSubscribed("peter.morlion@gmail.com")).Returns(true);
+
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterType<AccountController>();
@@ -46,6 +51,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             containerBuilder.RegisterInstance(_updateUserDetailsServiceMock.Object).As<IUpdateUserDetailsService>();
             containerBuilder.RegisterInstance(_notifierMock.Object).As<INotifier>();
             containerBuilder.RegisterInstance(_cultureStorageProviderMock.Object).As<ICultureStorageProvider>();
+            containerBuilder.RegisterInstance(_mailChimpClientMock.Object).As<IMailChimpClient>();
 
             var container = containerBuilder.Build();
 
@@ -132,21 +138,8 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var result = _controller.Unsubscribe();
 
             ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
-            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Peter", "Morlion", "en-US", false, true));
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Peter", "Morlion", "en-US", false, null));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("You will no longer receive mails regarding requests or chat messages.")));
-        }
-
-        /// <summary>
-        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
-        /// runtime exception.
-        /// </summary>
-        [Test]
-        public void TestT() {
-            var localizer = NullLocalizer.Instance;
-
-            _controller.T = localizer;
-
-            Assert.AreEqual(localizer, _controller.T);
         }
     }
 }
