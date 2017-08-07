@@ -89,9 +89,11 @@ namespace WijDelen.ObjectSharing.Controllers {
                 Message = x.Message
             }).ToList();
 
-            var isForBlockedObjectRequest = objectRequest.Status != ObjectRequestStatus.None.ToString();
-
+            var isForBlockedObjectRequest = objectRequest.Status == ObjectRequestStatus.BlockedForForbiddenWords.ToString() || objectRequest.Status == ObjectRequestStatus.BlockedByAdmin.ToString();
             if (isForBlockedObjectRequest) _orchardServices.Notifier.Add(NotifyType.Warning, T("This request is blocked. It is currently not possible to add new messages."));
+
+            var isStopped = objectRequest.Status == ObjectRequestStatus.Stopped.ToString();
+            if (isStopped) _orchardServices.Notifier.Add(NotifyType.Warning, T("This request has been stopped by {0}. It is currently not possible to add new messages.", chat.RequestingUserName));
 
             var chatViewModel = new ChatViewModel {
                 Messages = chatMessageViewModels,
@@ -100,7 +102,8 @@ namespace WijDelen.ObjectSharing.Controllers {
                 RequestingUserName = chat.RequestingUserName,
                 ConfirmingUserName = chat.ConfirmingUserName,
                 RequestingUserId = chat.RequestingUserId,
-                IsForBlockedObjectRequest = isForBlockedObjectRequest
+                IsForBlockedObjectRequest = isForBlockedObjectRequest,
+                IsStopped = isStopped
             };
             return chatViewModel;
         }

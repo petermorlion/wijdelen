@@ -128,6 +128,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             result.Should().BeOfType<ViewResult>();
             ViewResultShouldContainAllChatData(result);
             _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request is blocked. It is currently not possible to add new messages.")));
+            result.As<ViewResult>().Model.As<ChatViewModel>().IsForBlockedObjectRequest.Should().BeTrue();
         }
 
         [Test]
@@ -175,6 +176,18 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             ViewResultShouldContainAllChatData(result);
             result.As<ViewResult>().ViewName.Should().Be("");
             result.As<ViewResult>().ViewData.ModelState.Values.ToList()[0].Errors.ToList()[0].ErrorMessage.Should().Be("Please provide a message.");
+        }
+
+        [Test]
+        public void WhenGettingExistingChatForStoppedRequest() {
+            _objectRequest.Status = ObjectRequestStatus.Stopped.ToString();
+
+            var result = _controller.Index(_chatId);
+
+            result.Should().BeOfType<ViewResult>();
+            ViewResultShouldContainAllChatData(result);
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request has been stopped by Carl. It is currently not possible to add new messages.")));
+            result.As<ViewResult>().Model.As<ChatViewModel>().IsStopped.Should().BeTrue();
         }
 
         private void ViewResultShouldContainAllChatData(ActionResult result) {

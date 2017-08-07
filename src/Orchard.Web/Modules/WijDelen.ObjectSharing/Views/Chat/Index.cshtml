@@ -28,7 +28,7 @@
     }
 </div>
 
-@if (!Model.IsForBlockedObjectRequest) {
+@if (!Model.IsForBlockedObjectRequest && !Model.IsStopped) {
     using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
         @Html.HiddenFor(m => m.ChatId)
         <fieldset>

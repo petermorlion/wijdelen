@@ -17,5 +17,6 @@ namespace WijDelen.ObjectSharing.ViewModels {
 
         public int RequestingUserId { get; set; }
         public bool IsForBlockedObjectRequest { get; set; }
+        public bool IsStopped { get; set; }
     }
 }

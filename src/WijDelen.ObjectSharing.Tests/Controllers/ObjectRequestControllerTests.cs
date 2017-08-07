@@ -59,6 +59,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     AggregateId = _blockedObjectRequestId,
                     UserId = 22,
                     Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
+                },
+                new ObjectRequestRecord {
+                    AggregateId = Guid.NewGuid(),
+                    UserId = 22,
+                    Status = ObjectRequestStatus.Stopped.ToString()
                 }
             };
 
