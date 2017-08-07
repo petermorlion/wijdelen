@@ -9,7 +9,12 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     /// <summary>
     /// Generates the read model of an object request.
     /// </summary>
-    public class ObjectRequestReadModelGenerator : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlockedByAdmin> {
+    public class ObjectRequestReadModelGenerator : 
+        IEventHandler<ObjectRequested>, 
+        IEventHandler<ObjectRequestUnblocked>, 
+        IEventHandler<ObjectRequestBlockedByAdmin>,
+        IEventHandler<ObjectRequestStopped> {
+
         private readonly IRepository<ObjectRequestRecord> _repository;
         private readonly IGroupService _groupService;
 
@@ -59,6 +64,16 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             existingRecord.BlockReason = e.Reason;
             existingRecord.Status = ObjectRequestStatus.BlockedByAdmin.ToString();
+            _repository.Update(existingRecord);
+        }
+
+        public void Handle(ObjectRequestStopped e) {
+            var existingRecord = _repository.Get(x => x.AggregateId == e.SourceId);
+            if (existingRecord == null) {
+                return;
+            }
+
+            existingRecord.Status = ObjectRequestStatus.Stopped.ToString();
             _repository.Update(existingRecord);
         }
     }

@@ -378,6 +378,11 @@ msgstr "Geblokkeerd (door de beheerder)"
 msgid "Blocked (by administrator)"
 msgstr "Geblokkeerd (door de beheerder)"
 
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#| msgid "Stopped (by the user)"
+msgid "Stopped (by the user)"
+msgstr "Stopgezet (door de gebruiker)"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
 #| msgid "Unsubscribe"
 msgid "Unsubscribe"

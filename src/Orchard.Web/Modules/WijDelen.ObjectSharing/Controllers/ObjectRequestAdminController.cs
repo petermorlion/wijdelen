@@ -136,6 +136,10 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return T("Blocked (by administrator)").ToString();
             }
 
+            if (objectRequestRecord.Status == ObjectRequestStatus.Stopped.ToString()) {
+                return T("Stopped (by the user)").ToString();
+            }
+
             return objectRequestRecord.Status;
         }
     }

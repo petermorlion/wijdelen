@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -14,17 +15,32 @@ using WijDelen.UserImport.ViewModels;
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
     public class ObjectRequestReadModelGeneratorTests {
-        [Test]
-        public void WhenHandlingObjectRequested_ShouldSaveNewObjectRequestRecord() {
+        private ObjectRequestReadModelGenerator _handler;
+        private ObjectRequestRecord _newRecord;
+        private ObjectRequestRecord _updatedRecord;
+        private Guid _normalAggregateId;
+        private Guid _blockedAggregateId;
+
+        [SetUp]
+        public void Init() {
+            _normalAggregateId = Guid.NewGuid();
+            _blockedAggregateId = Guid.NewGuid();
             var persistentRecords = new[] {
-                new ObjectRequestRecord {AggregateId = Guid.NewGuid()}
+                new ObjectRequestRecord {
+                    AggregateId = _normalAggregateId
+                },
+                new ObjectRequestRecord {
+                    AggregateId = _blockedAggregateId,
+                    Status = "BlockedForForbiddenWords",
+                    BlockReason = "Reason"
+                }
             };
 
             var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
             repositoryMock.SetRecords(persistentRecords);
 
-            ObjectRequestRecord newRecord = null;
-            repositoryMock.Setup(x => x.Create(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => newRecord = r);
+            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => _updatedRecord = r);
+            repositoryMock.Setup(x => x.Create(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => _newRecord = r);
 
             var groupServiceMock = new Mock<IGroupService>();
             groupServiceMock.Setup(x => x.GetGroupForUser(22)).Returns(new GroupViewModel {
@@ -32,8 +48,18 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Name = "The Flying Hellfish"
             });
 
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(groupServiceMock.Object).As<IGroupService>();
+            builder.RegisterInstance(repositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            builder.RegisterType<ObjectRequestReadModelGenerator>();
+
+            var container = builder.Build();
+            _handler = container.Resolve<ObjectRequestReadModelGenerator>();
+        }
+
+        [Test]
+        public void WhenHandlingObjectRequested_ShouldSaveNewObjectRequestRecord() {
             var aggregateId = Guid.NewGuid();
-            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
             var e = new ObjectRequested {
                 SourceId = aggregateId,
                 Version = 0,
@@ -44,47 +70,24 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Status = ObjectRequestStatus.None
             };
 
-            handler.Handle(e);
+            _handler.Handle(e);
 
-            newRecord.AggregateId.Should().Be(aggregateId);
-            newRecord.Description.Should().Be("Sneakers");
-            newRecord.ExtraInfo.Should().Be("For sneaking");
-            newRecord.UserId.Should().Be(22);
-            newRecord.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
-            newRecord.GroupId.Should().Be(123);
-            newRecord.GroupName.Should().Be("The Flying Hellfish");
-            newRecord.Status.Should().Be("None");
+            _newRecord.AggregateId.Should().Be(aggregateId);
+            _newRecord.Description.Should().Be("Sneakers");
+            _newRecord.ExtraInfo.Should().Be("For sneaking");
+            _newRecord.UserId.Should().Be(22);
+            _newRecord.CreatedDateTime.Should().Be(new DateTime(2016, 12, 27));
+            _newRecord.GroupId.Should().Be(123);
+            _newRecord.GroupName.Should().Be("The Flying Hellfish");
+            _newRecord.Status.Should().Be("None");
         }
 
         [Test]
         public void WhenObjectRequestIsUnblocked_ShouldUpdateObjectRequestRecord()
         {
-            var aggregateId = Guid.NewGuid();
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = aggregateId,
-                    Status = "BlockedForForbiddenWords",
-                    BlockReason = "Reason"
-                }
-            };
-
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
-
-            ObjectRequestRecord updatedRecord = null;
-            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => updatedRecord = r);
-
-            var groupServiceMock = new Mock<IGroupService>();
-            groupServiceMock.Setup(x => x.GetGroupForUser(22)).Returns(new GroupViewModel
-            {
-                Id = 123,
-                Name = "The Flying Hellfish"
-            });
-
-            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
             var e = new ObjectRequestUnblocked
             {
-                SourceId = aggregateId,
+                SourceId = _blockedAggregateId,
                 Version = 4,
                 Description = "Sextant",
                 ExtraInfo = "For sextanting",
@@ -92,44 +95,40 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Status = ObjectRequestStatus.None
             };
 
-            handler.Handle(e);
+            _handler.Handle(e);
 
-            updatedRecord.AggregateId.Should().Be(aggregateId);
-            updatedRecord.Status.Should().Be("None");
-            updatedRecord.BlockReason.Should().Be("");
+            _updatedRecord.AggregateId.Should().Be(_blockedAggregateId);
+            _updatedRecord.Status.Should().Be("None");
+            _updatedRecord.BlockReason.Should().Be("");
         }
 
         [Test]
         public void WhenObjectRequestIsBlocked_ShouldUpdateObjectRequestRecord()
         {
-            var aggregateId = Guid.NewGuid();
-            var persistentRecords = new[] {
-                new ObjectRequestRecord {
-                    AggregateId = aggregateId
-                }
-            };
-
-            var repositoryMock = new Mock<IRepository<ObjectRequestRecord>>();
-            repositoryMock.SetRecords(persistentRecords);
-
-            ObjectRequestRecord updatedRecord = null;
-            repositoryMock.Setup(x => x.Update(It.IsAny<ObjectRequestRecord>())).Callback((ObjectRequestRecord r) => updatedRecord = r);
-
-            var groupServiceMock = new Mock<IGroupService>();
-
-            var handler = new ObjectRequestReadModelGenerator(repositoryMock.Object, groupServiceMock.Object);
             var e = new ObjectRequestBlockedByAdmin
             {
-                SourceId = aggregateId,
+                SourceId = _normalAggregateId,
                 Version = 4,
                 Reason = "Just because"
             };
 
-            handler.Handle(e);
+            _handler.Handle(e);
 
-            updatedRecord.AggregateId.Should().Be(aggregateId);
-            updatedRecord.Status.Should().Be("BlockedByAdmin");
-            updatedRecord.BlockReason.Should().Be("Just because");
+            _updatedRecord.AggregateId.Should().Be(_normalAggregateId);
+            _updatedRecord.Status.Should().Be("BlockedByAdmin");
+            _updatedRecord.BlockReason.Should().Be("Just because");
+        }
+
+        [Test]
+        public void WhenObjectRequestIsStopped() {
+            var e = new ObjectRequestStopped {
+                SourceId = _normalAggregateId
+            };
+
+            _handler.Handle(e);
+
+            _updatedRecord.AggregateId.Should().Be(_normalAggregateId);
+            _updatedRecord.Status.Should().Be("Stopped");
         }
     }
 }
