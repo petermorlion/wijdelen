@@ -7,3 +7,8 @@ msgstr "This request has been blocked by the administrator: {0}."
 #| msgid "ObjectRequestStatus.BlockedForForbiddenWords"
 msgid "ObjectRequestStatus.BlockedForForbiddenWords"
 msgstr "This request has been blocked."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+#| msgid "ObjectRequestStatus.Stopped"
+msgid "ObjectRequestStatus.Stopped"
+msgstr "This request has been stopped."

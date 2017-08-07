@@ -48,22 +48,22 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                     AggregateId = _objectRequestId,
                     UserId = 22,
                     CreatedDateTime = new DateTime(2016, 1, 1),
-                    Description = "Sneakers"
+                    Description = "Sneakers",
+                    Status = ObjectRequestStatus.Stopped.ToString()
                 },
                 new ObjectRequestRecord {
                     AggregateId = Guid.NewGuid(),
                     UserId = 22,
-                    CreatedDateTime = new DateTime(2017, 1, 1)
+                    CreatedDateTime = new DateTime(2017, 1, 1),
+                    Description = "Most recent request",
+                    Status = ObjectRequestStatus.None.ToString()
                 },
                 new ObjectRequestRecord {
                     AggregateId = _blockedObjectRequestId,
                     UserId = 22,
-                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
-                },
-                new ObjectRequestRecord {
-                    AggregateId = Guid.NewGuid(),
-                    UserId = 22,
-                    Status = ObjectRequestStatus.Stopped.ToString()
+                    Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString(),
+                    Description = "Test",
+                    BlockReason = "BlockReason"
                 }
             };
 
@@ -129,12 +129,30 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenGettingIndex_ShouldReturnView() {
             var actionResult = _controller.Index();
 
-            var model = ((ViewResult) actionResult).Model as IEnumerable<ObjectRequestRecord>;
+            var model = ((ViewResult) actionResult).Model as IEnumerable<IndexObjectRequestViewModel>;
             model.Should().NotBeNull();
             model.Count().Should().Be(3);
-            model.ToList()[0].Should().Be(_persistentRecords[2]);
-            model.ToList()[1].Should().Be(_persistentRecords[1]);
-            model.ToList()[2].Should().Be(_persistentRecords[3]);
+            model.ToList()[0].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
+                AggregateId = _persistentRecords[2].AggregateId,
+                Description = "Most recent request",
+                Status = "None",
+                BlockReason = null
+            });
+
+            model.ToList()[1].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
+                AggregateId = _persistentRecords[1].AggregateId,
+                Description = "Sneakers",
+                Status = "Stopped",
+                BlockReason = null
+            });
+
+            model.ToList()[2].ShouldBeEquivalentTo(new IndexObjectRequestViewModel
+            {
+                AggregateId = _persistentRecords[3].AggregateId,
+                Description = "Test",
+                Status = "BlockedForForbiddenWords",
+                BlockReason = "BlockReason"
+            });
         }
 
         [Test]

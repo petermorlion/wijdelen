@@ -77,6 +77,8 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             if (record.Status == "BlockedByAdmin") _orchardServices.Notifier.Add(NotifyType.Warning, T("This request was blocked by the administrator:\n\n{0}", record.BlockReason));
 
+            if (record.Status == "Stopped") _orchardServices.Notifier.Add(NotifyType.Warning, T("This request has been stopped. You can not add any more messages and other users can no longer respond to this request."));
+
             var viewModel = new ObjectRequestViewModel {
                 ObjectRequestRecord = record,
                 ChatRecords = chatRecords
@@ -87,9 +89,17 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public ActionResult Index() {
             var records = _objectRequestRepository
-                .Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id && x.Status != ObjectRequestStatus.Stopped.ToString())
+                .Fetch(x => x.UserId == _orchardServices.WorkContext.CurrentUser.Id)
                 .OrderByDescending(x => x.CreatedDateTime).ToList();
-            return View(records);
+
+            var viewModels = records.Select(x => new IndexObjectRequestViewModel {
+                AggregateId = x.AggregateId,
+                Status = x.Status,
+                Description = x.Description,
+                BlockReason = x.BlockReason
+            });
+
+            return View(viewModels);
         }
 
         public ActionResult Stop(Guid id) {

@@ -230,6 +230,7 @@
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ConfirmStopObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
+    <Compile Include="ViewModels\IndexObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
     <Compile Include="ViewModels\ObjectRequestViewModel.cs" />

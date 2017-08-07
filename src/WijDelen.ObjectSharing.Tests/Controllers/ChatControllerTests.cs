@@ -186,7 +186,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             result.Should().BeOfType<ViewResult>();
             ViewResultShouldContainAllChatData(result);
-            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request has been stopped by Carl. It is currently not possible to add new messages.")));
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("This request has been stopped. It is currently not possible to add new messages.")));
             result.As<ViewResult>().Model.As<ChatViewModel>().IsStopped.Should().BeTrue();
         }
 

@@ -9,26 +9,24 @@
 
 <div>
     @if (Model.ObjectRequestRecord.Status != ObjectRequestStatus.Stopped.ToString()) {
-        @Html.ActionLink(T("Stop request"), "Stop", new { controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = Model.ObjectRequestRecord.AggregateId }, new { @class = "button button-small"});
+        @Html.ActionLink(T("Stop request"), "Stop", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = Model.ObjectRequestRecord.AggregateId}, new {@class = "button button-small"});
     }
 </div>
  
-@if (Model.ObjectRequestRecord.Status == ObjectRequestStatus.None.ToString()) {
-    <h2>@T("Reactions")</h2>
+<h2>@T("Reactions")</h2>
 
-    <ul class="objectrequestlist">
-        @if (Model.ChatRecords.Any()) {
-            foreach (var chatRecord in Model.ChatRecords) {
-                <li class="objectrequestlist-item">
-                    @Html.ActionLink(chatRecord.ConfirmingUserName,
-                        "Index",
-                        new {controller = "Chat", area = "WijDelen.ObjectSharing", id = chatRecord.ChatId},
-                        new {@class = "objectrequestlist-link"})
-                </li>
-            }
+<ul class="objectrequestlist">
+    @if (Model.ChatRecords.Any()) {
+        foreach (var chatRecord in Model.ChatRecords) {
+            <li class="objectrequestlist-item">
+                @Html.ActionLink(chatRecord.ConfirmingUserName,
+                    "Index",
+                    new {controller = "Chat", area = "WijDelen.ObjectSharing", id = chatRecord.ChatId},
+                    new {@class = "objectrequestlist-link"})
+            </li>
         }
-        else {
-            @T("There are no reactions yet.")
-        }
-    </ul>
-}
+    }
+    else {
+        @T("There are no reactions yet.")
+    }
+</ul>

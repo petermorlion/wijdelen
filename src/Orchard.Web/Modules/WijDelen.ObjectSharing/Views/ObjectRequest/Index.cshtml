@@ -1,6 +1,6 @@
 ﻿@using WijDelen.ObjectSharing.Domain.ValueTypes
 @using WijDelen.ObjectSharing.ViewModels
-@model IEnumerable<WijDelen.ObjectSharing.Models.ObjectRequestRecord>
+@model IEnumerable<IndexObjectRequestViewModel>
 
 @{
     Layout.Title = T("My Requests");
@@ -9,20 +9,20 @@
 
 @if (Model.Any()) {
     <ul class="objectrequestlist">
-        @foreach (var objectRequestRecord in Model) {
+        @foreach (var objectRequest in Model) {
             <li class="objectrequestlist-item">
-                <a href="@Url.Action("Item", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequestRecord.AggregateId})"
-                   class="objectrequestlist-link @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {<text>objectrequestlist-link-blocked</text>}"
+                <a href="@Url.Action("Item", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequest.AggregateId})"
+                   class="objectrequestlist-link @if (objectRequest.Status != ObjectRequestStatus.None.ToString()) {<text>objectrequestlist-link-blocked</text>}"
 
-                   @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {
-                       <text>title="@T("ObjectRequestStatus." + objectRequestRecord.Status, objectRequestRecord.BlockReason)"</text>
+                   @if (objectRequest.Status != ObjectRequestStatus.None.ToString()) {
+                       <text>title="@T("ObjectRequestStatus." + objectRequest.Status, objectRequest.BlockReason)"</text>
                    }>
                     
-                    @if (objectRequestRecord.Status != ObjectRequestStatus.None.ToString()) {
+                    @if (objectRequest.Status == ObjectRequestStatus.BlockedForForbiddenWords.ToString() || objectRequest.Status == ObjectRequestStatus.BlockedByAdmin.ToString()) {
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                     }
 
-                    @objectRequestRecord.Description
+                    @objectRequest.Description
                 </a>
             </li>
         }
