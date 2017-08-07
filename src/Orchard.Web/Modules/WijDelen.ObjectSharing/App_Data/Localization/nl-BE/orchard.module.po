@@ -91,7 +91,7 @@ msgstr "Deze oproep werd geblokkeerd door de beheerder:\n\n{0}"
 #: wijdelen.objectsharing.controllers.objectrequestcontroller
 #| msgid "This request has been stopped. You can not add any more messages and other users can no longer respond to this request."
 msgid "This request has been stopped. You can not add any more messages and other users can no longer respond to this request."
-msgstr "Deze oproep werd stopgezet. Je kan geen berichten meer toevoegen en andere gebruikers kunnen niet langer antwoorden op deze oproep.s"
+msgstr "Deze oproep werd stopgezet. Je kan geen berichten meer toevoegen en andere gebruikers kunnen niet langer antwoorden op deze oproep."
 
 #: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
 #| msgid "Thank you for your request. We sent your request to the members of your group."
