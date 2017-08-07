@@ -22,10 +22,10 @@ namespace WijDelen.UserImport.Services {
             }
 
             if (isSubscribedToNewsletter.Value) {
-                _mailChimpClient.Subscribe(user.Email);
+                _mailChimpClient.Subscribe(user.Email, firstName, lastName);
             }
             else {
-                _mailChimpClient.Unsubscribe(user.Email);
+                _mailChimpClient.Unsubscribe(user.Email, firstName, lastName);
             }
         }
     }
