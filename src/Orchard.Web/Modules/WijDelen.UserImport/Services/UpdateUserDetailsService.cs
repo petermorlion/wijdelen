@@ -21,11 +21,13 @@ namespace WijDelen.UserImport.Services {
                 return;
             }
 
+            var groupName = user.As<GroupMembershipPart>()?.Group?.As<NamePart>()?.Name;
+
             if (isSubscribedToNewsletter.Value) {
-                _mailChimpClient.Subscribe(user.Email, firstName, lastName);
+                _mailChimpClient.Subscribe(user.Email, firstName, lastName, groupName);
             }
             else {
-                _mailChimpClient.Unsubscribe(user.Email, firstName, lastName);
+                _mailChimpClient.Unsubscribe(user.Email, firstName, lastName, groupName);
             }
         }
     }

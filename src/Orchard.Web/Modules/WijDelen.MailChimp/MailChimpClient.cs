@@ -53,15 +53,15 @@ namespace WijDelen.MailChimp {
             return _jsonConverter.Deserialize<dynamic>(response.Content).status == "subscribed";
         }
 
-        public void Subscribe(string email, string firstName, string lastName) {
-            ChangeSubscriptionStatus(email, firstName, lastName, "subscribed");
+        public void Subscribe(string email, string firstName, string lastName, string groupName) {
+            ChangeSubscriptionStatus(email, firstName, lastName, groupName, "subscribed");
         }
 
-        public void Unsubscribe(string email, string firstName, string lastName) {
-            ChangeSubscriptionStatus(email, firstName, lastName, "unsubscribed");
+        public void Unsubscribe(string email, string firstName, string lastName, string groupName) {
+            ChangeSubscriptionStatus(email, firstName, lastName, groupName, "unsubscribed");
         }
 
-        private void ChangeSubscriptionStatus(string email, string firstName, string lastName, string status) {
+        private void ChangeSubscriptionStatus(string email, string firstName, string lastName, string groupName, string status) {
             var client = new RestClient
             {
                 BaseUrl = _apiBaseUrl,
@@ -74,7 +74,7 @@ namespace WijDelen.MailChimp {
             request.Resource = "lists/{listId}/members/{emailHash}";
             request.AddUrlSegment("listId", _listId);
             request.AddUrlSegment("emailHash", emailHash);
-            request.AddJsonBody(new { email_address = email, status = status, statues_if_new = status, merge_fields = new { FNAME = firstName, LNAME = lastName } });
+            request.AddJsonBody(new { email_address = email, status = status, statues_if_new = status, merge_fields = new { FNAME = firstName, LNAME = lastName, MMERGE4 = groupName } });
             request.Method = Method.PUT;
             var response = client.Execute(request);
 

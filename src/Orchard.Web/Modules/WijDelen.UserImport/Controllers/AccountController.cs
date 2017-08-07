@@ -61,7 +61,7 @@ namespace WijDelen.UserImport.Controllers {
                 return View();
 
             var user = _orchardServices.WorkContext.CurrentUser;
-            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture, viewModel.ReceiveMails, viewModel.IsSubscribedToNewsletter);
+            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture,  viewModel.ReceiveMails, viewModel.IsSubscribedToNewsletter);
             _orchardServices.WorkContext.CurrentCulture = viewModel.Culture;
             _cultureStorageProvider.SetCulture(viewModel.Culture);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Your details have been saved successfully."));

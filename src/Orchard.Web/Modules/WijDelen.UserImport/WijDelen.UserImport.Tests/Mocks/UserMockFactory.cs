@@ -37,7 +37,7 @@ namespace WijDelen.UserImport.Tests.Mocks {
             userDetailsPart.ReceiveMails = true;
 
             groupMembershipPart.GroupMembershipStatus = groupMembershipStatus;
-
+            
             var user = new UserMock
             {
                 Id = _nextId,
