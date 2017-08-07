@@ -46,7 +46,11 @@ namespace WijDelen.MailChimp {
             request.Method = Method.GET;
             var response = client.Execute(request);
 
-            return response.StatusCode == HttpStatusCode.OK && _jsonConverter.Deserialize<dynamic>(response.Content).status == "subscribed";
+            if (response.StatusCode != HttpStatusCode.OK) {
+                Logger.Error($"Could not get subscription status of {email}. Response status: {response.StatusCode}. Response content: {response.Content}");
+            }
+
+            return _jsonConverter.Deserialize<dynamic>(response.Content).status == "subscribed";
         }
 
         public void Subscribe(string email) {
@@ -75,7 +79,7 @@ namespace WijDelen.MailChimp {
             var response = client.Execute(request);
 
             if (response.StatusCode != HttpStatusCode.OK) {
-                Logger.Warning("Something happened");
+                Logger.Error($"Could not update subscription status of {email}. Response status: {response.StatusCode}. Response content: {response.Content}");
             }
         }
 
