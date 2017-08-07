@@ -173,5 +173,46 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             record.ReceivedDateTime.Should().Be(e.SentDateTime);
             record.RequestingUserId.Should().Be(666);
         }
+
+        [Test]
+        public void WhenObjectRequestStopped_RemoveRecords() {
+            var repositoryMock = new Mock<IRepository<ReceivedObjectRequestRecord>>();
+            var objectRequestId = Guid.NewGuid();
+
+            var receivedObjectRequestRecord1 = new ReceivedObjectRequestRecord {
+                UserId = 22,
+                ObjectRequestId = objectRequestId
+            };
+
+            var receivedObjectRequestRecord2 = new ReceivedObjectRequestRecord
+            {
+                UserId = 23,
+                ObjectRequestId = objectRequestId
+            };
+
+            var otherObjectRequestRecord = new ReceivedObjectRequestRecord
+            {
+                UserId = 23,
+                ObjectRequestId = Guid.NewGuid()
+            };
+
+            repositoryMock.SetRecords(new[] {
+                receivedObjectRequestRecord1,
+                receivedObjectRequestRecord2,
+                otherObjectRequestRecord
+            });
+
+            var e = new ObjectRequestStopped {
+                SourceId = objectRequestId
+            };
+
+            var handler = new ReceivedObjectRequestReadModelGenerator(repositoryMock.Object, null);
+
+            handler.Handle(e);
+
+            repositoryMock.Verify(x => x.Delete(receivedObjectRequestRecord1));
+            repositoryMock.Verify(x => x.Delete(receivedObjectRequestRecord2));
+            repositoryMock.Verify(x => x.Delete(otherObjectRequestRecord), Times.Never);
+        }
     }
 }

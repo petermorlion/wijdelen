@@ -8,7 +8,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         IEventHandler<ObjectRequestMailSent>,
         IEventHandler<ObjectRequestConfirmed>,
         IEventHandler<ObjectRequestDenied>,
-        IEventHandler<ObjectRequestDeniedForNow> {
+        IEventHandler<ObjectRequestDeniedForNow>,
+        IEventHandler<ObjectRequestStopped> {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IRepository<ReceivedObjectRequestRecord> _repository;
 
@@ -52,6 +53,14 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     ReceivedDateTime = e.SentDateTime,
                     RequestingUserId = e.RequestingUserId
                 });
+        }
+
+        public void Handle(ObjectRequestStopped e) {
+            var objectRequests = _repository.Fetch(x => x.ObjectRequestId == e.SourceId);
+
+            foreach (var objectRequestRecord in objectRequests) {
+                _repository.Delete(objectRequestRecord);
+            }
         }
     }
 }
