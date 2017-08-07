@@ -33,7 +33,8 @@ namespace WijDelen.UserImport.Controllers {
                 FirstName = userDetailsPart.FirstName,
                 LastName = userDetailsPart.LastName,
                 Culture = userDetailsPart.Culture,
-                ReceiveMails = userDetailsPart.ReceiveMails
+                ReceiveMails = userDetailsPart.ReceiveMails,
+                IsSubscribedToNewsletter = userDetailsPart.IsSubscribedToNewsletter
             };
             return View(viewModel);
         }
@@ -53,17 +54,21 @@ namespace WijDelen.UserImport.Controllers {
                 return View();
 
             var user = _orchardServices.WorkContext.CurrentUser;
-            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture, viewModel.ReceiveMails);
+            _updateUserDetailsService.UpdateUserDetails(user, viewModel.FirstName, viewModel.LastName, viewModel.Culture, viewModel.ReceiveMails, viewModel.IsSubscribedToNewsletter);
             _orchardServices.WorkContext.CurrentCulture = viewModel.Culture;
             _cultureStorageProvider.SetCulture(viewModel.Culture);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Your details have been saved successfully."));
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Unsubscribes from mails regarding object requests. Unsubscribing from newsletters will be handled
+        /// in the user account details screen or via Mailchimp directly.
+        /// </summary>
         public ActionResult Unsubscribe() {
             var user = _orchardServices.WorkContext.CurrentUser;
             var userDetailsPart = user.As<UserDetailsPart>();
-            _updateUserDetailsService.UpdateUserDetails(user, userDetailsPart.FirstName, userDetailsPart.LastName, userDetailsPart.Culture, false);
+            _updateUserDetailsService.UpdateUserDetails(user, userDetailsPart.FirstName, userDetailsPart.LastName, userDetailsPart.Culture, false, userDetailsPart.IsSubscribedToNewsletter);
             _orchardServices.Notifier.Add(NotifyType.Success, T("You will no longer receive mails regarding requests or chat messages."));
 
             return RedirectToAction("Index");

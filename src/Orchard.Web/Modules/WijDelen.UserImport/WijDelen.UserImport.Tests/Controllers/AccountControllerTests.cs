@@ -66,16 +66,17 @@ namespace WijDelen.UserImport.Tests.Controllers {
             viewmodel.LastName.Should().Be("Morlion");
             viewmodel.Culture.Should().Be("en-US");
             viewmodel.ReceiveMails.Should().BeTrue();
+            viewmodel.IsSubscribedToNewsletter.Should().BeTrue();
         }
 
         [Test]
         public void TestIndexPost() {
-            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE", ReceiveMails = false};
+            var viewModel = new UserDetailsViewModel {FirstName = "Moe", LastName = "Szyslak", Culture = "nl-BE", ReceiveMails = false, IsSubscribedToNewsletter = true};
 
             var result = _controller.Index(viewModel);
 
             ((RedirectToRouteResult) result).RouteValues["action"].Should().Be("Index");
-            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE", false));
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Moe", "Szyslak", "nl-BE", false, true));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Your details have been saved successfully.")));
             _cultureStorageProviderMock.Verify(x => x.SetCulture("nl-BE"));
             _mockWorkContext.CurrentCulture.Should().Be("nl-BE");
@@ -131,7 +132,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var result = _controller.Unsubscribe();
 
             ((RedirectToRouteResult)result).RouteValues["action"].Should().Be("Index");
-            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Peter", "Morlion", "en-US", false));
+            _updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(_userMock, "Peter", "Morlion", "en-US", false, true));
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("You will no longer receive mails regarding requests or chat messages.")));
         }
 

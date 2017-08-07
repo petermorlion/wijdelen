@@ -137,5 +137,11 @@ namespace WijDelen.UserImport {
             _roleService.CreateRole("PeergroupsAdministrator");
             return 12;
         }
+
+        public int UpdateFrom12() {
+            SchemaBuilder.AlterTable(typeof(UserDetailsPartRecord).Name, table => table
+                .AddColumn<bool>("IsSubscribedToNewsletter", column => column.WithDefault(false)));
+            return 13;
+        }
     }
 }

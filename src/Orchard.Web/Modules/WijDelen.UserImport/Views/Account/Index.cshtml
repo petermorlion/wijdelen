@@ -25,6 +25,10 @@
             <small>@T("Uncheck this if you do not want to receive mails from new requests, chat messages, etc.")</small>
         </p>
         
+        @Html.CheckBoxFor(model => model.IsSubscribedToNewsletter)
+        <label class="label-inline" for="IsSubscribedToNewsletter">@T("Subscribe to newsletter")</label>
+        @Html.ValidationMessageFor(m => m.IsSubscribedToNewsletter)
+        
     </fieldset>
 
     <button class="primaryAction">@T("Save")</button>

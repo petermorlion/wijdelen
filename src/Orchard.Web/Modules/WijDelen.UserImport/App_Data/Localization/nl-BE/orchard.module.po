@@ -193,6 +193,11 @@ msgstr "Vink deze optie uit indien je geen mails van nieuwe oproepen of chat ber
 msgid "Save"
 msgstr "Opslaan"
 
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Subscribe to newsletter"
+msgid "Subscribe to newsletter"
+msgstr "Abonneren op nieuwsbrief"
+
 #: wijdelen.userimport.controllers.accountcontroller
 #| msgid "You must specify a last name."
 msgid "You must specify a last name."

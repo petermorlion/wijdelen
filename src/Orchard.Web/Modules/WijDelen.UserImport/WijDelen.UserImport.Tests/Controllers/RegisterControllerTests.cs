@@ -190,7 +190,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             var result = controller.Index("nonce", "password1", "password1", "John", "Doe", "nl-BE");
 
-            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(user, "John", "Doe", "nl-BE", true));
+            updateUserDetailsServiceMock.Verify(x => x.UpdateUserDetails(user, "John", "Doe", "nl-BE", true, true));
             membershipServiceMock.Verify(x => x.SetPassword(user, "password1"));
             userEventHandlerMock.Verify(x => x.ChangedPassword(user));
             Assert.IsInstanceOf<RedirectToRouteResult>(result);

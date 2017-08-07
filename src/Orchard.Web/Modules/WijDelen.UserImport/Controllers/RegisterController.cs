@@ -81,7 +81,7 @@ namespace WijDelen.UserImport.Controllers {
 
             _membershipService.SetPassword(user, newPassword);
 
-            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture, true);
+            _updateUserDetailsService.UpdateUserDetails(user, firstName, lastName, culture, true, true);
 
             user.As<GroupMembershipPart>().GroupMembershipStatus = GroupMembershipStatus.Approved;
 

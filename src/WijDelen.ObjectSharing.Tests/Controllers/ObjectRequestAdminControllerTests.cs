@@ -112,7 +112,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.PossibleStatusses.ShouldBeEquivalentTo(new List<ObjectRequestStatusViewModel> {
                 new ObjectRequestStatusViewModel { ObjectRequestStatusValue = -1, Translation = "" },
                 new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 0, Translation = "OK" },
-                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 1, Translation = "Blocked (forbidden words)" }
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 1, Translation = "Blocked (forbidden words)" },
+                new ObjectRequestStatusViewModel { ObjectRequestStatusValue = 2, Translation = "Blocked (by administrator)" }
             });
             
             recordViewModels.Count.Should().Be(2);
