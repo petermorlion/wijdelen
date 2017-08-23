@@ -19,16 +19,6 @@ namespace WijDelen.Reports.Queries {
             _shellSettings = shellSettings;
         }
 
-        private string GetFullTableName(Type type) {
-            var tablePrefix = _shellSettings.DataTablePrefix;
-            var featurePrefix = "WijDelen_ObjectSharing";
-            if (string.IsNullOrWhiteSpace(tablePrefix)) {
-                return $"{featurePrefix}_{type.Name}";
-            }
-
-            return $"{tablePrefix}_{featurePrefix}_{type.Name}";
-        }
-
         public IEnumerable<GroupDetailsViewModel> GetResults(int? groupId, DateTime startDate, DateTime stopDate) {
             var results = new List<GroupDetailsViewModel>();
 
@@ -44,9 +34,9 @@ namespace WijDelen.Reports.Queries {
                 stopDate = new DateTime(stopDate.Year, stopDate.Month, stopDate.Day, 23, 59, 59);
             }
 
-            var objectRequestRecord = GetFullTableName(typeof(ObjectRequestRecord));
-            var objectRequestMailRecord = GetFullTableName(typeof(ObjectRequestMailRecord));
-            var objectRequestResponseRecord = GetFullTableName(typeof(ObjectRequestResponseRecord));
+            var objectRequestRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestRecord));
+            var objectRequestMailRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestMailRecord));
+            var objectRequestResponseRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestResponseRecord));
 
             var requestsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(r.AggregateId) " +
                                                $"FROM {objectRequestRecord} r " +
@@ -111,23 +101,21 @@ namespace WijDelen.Reports.Queries {
         }
 
         private int GetCountForId(int id, IList<object[]> items) {
-            var list = items.ToList();
-            var correctItem = list.SingleOrDefault(x => (int)x.ToList()[0] == id);
+            var correctItem = items.SingleOrDefault(x => (int)x[0] == id);
             if (correctItem == null) {
                 return 0;
             }
 
-            return (int)correctItem.ToList()[1];
+            return (int)correctItem[1];
         }
 
         private int GetResponseCountForId(int id, IList<object[]> items, ObjectRequestAnswer answer) {
-            var list = items.ToList();
-            var correctItem = list.SingleOrDefault(x => (int)x.ToList()[0] == id && x.ToList()[1].ToString() == answer.ToString());
+            var correctItem = items.SingleOrDefault(x => (int)x[0] == id && x[1].ToString() == answer.ToString());
             if (correctItem == null) {
                 return 0;
             }
 
-            return (int)correctItem.ToList()[2];
+            return (int)correctItem[2];
         }
     }
 }

@@ -122,6 +122,7 @@
     <Compile Include="Queries\MonthSummaryQuery.cs" />
     <Compile Include="Queries\RequestsDetailsQuery.cs" />
     <Compile Include="Queries\TotalsQuery.cs" />
+    <Compile Include="Queries\ShellSettingsExtensions.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\RequestsDetailsViewModel.cs" />
     <Compile Include="ViewModels\RequestsViewModel.cs" />

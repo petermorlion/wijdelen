@@ -115,9 +115,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenGettingIndex_ShouldReturnThreeObjectRequestsForCurrentUsersGroup() {
             var result = _controller.Index();
 
-            result.Should().BeOfType<ViewResult>();
+            result.Should().BeOfType<PartialViewResult>();
 
-            var model = ((ViewResult)result).Model as IEnumerable<GroupObjectRequestViewModel>;
+            var model = ((PartialViewResult)result).Model as IEnumerable<GroupObjectRequestViewModel>;
             model.Should().NotBeNull();
             var viewModels = model.ToList();
             viewModels.ShouldBeEquivalentTo(new[] {
