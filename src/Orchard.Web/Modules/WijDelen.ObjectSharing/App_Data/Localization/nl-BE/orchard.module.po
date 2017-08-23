@@ -697,3 +697,13 @@ msgstr "Ja"
 #| msgid "No"
 msgid "No"
 msgstr "Nee"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+#| msgid "Need inspiration?"
+msgid "Need inspiration?"
+msgstr "Inspiratie nodig?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+#| msgid "These are some of the requests that have been made in your group:"
+msgid "These are some of the requests that have been made in your group:"
+msgstr "Dit zijn enkele oproepen uit jouw groep:"

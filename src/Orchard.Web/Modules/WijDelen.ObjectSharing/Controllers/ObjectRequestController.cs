@@ -8,7 +8,6 @@ using Orchard.Themes;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
-using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
 

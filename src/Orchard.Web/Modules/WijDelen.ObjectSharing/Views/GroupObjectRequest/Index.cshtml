@@ -1,0 +1,26 @@
+﻿@using WijDelen.ObjectSharing.ViewModels
+@model IEnumerable<GroupObjectRequestViewModel>
+    
+@if (Model.Any()) {
+    <h2>@T("Need inspiration?")</h2>
+    <p>@T("These are some of the requests that have been made in your group:")</p>
+
+    <div class="container">
+        <div class="row">
+            @foreach (var objectRequest in Model) {
+                <div class="column column-33 groupobjectrequest">
+                    @{
+                        var user = objectRequest.UserName;
+                        if (!string.IsNullOrEmpty(objectRequest.FirstName)) {
+                            user = string.Format("{0} {1}", objectRequest.FirstName, objectRequest.LastName);
+                        }
+                    }
+                    
+                    <div class="groupobjectrequest-text">
+                        @T("{0} requested (a) {1}", user, objectRequest.Description)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
