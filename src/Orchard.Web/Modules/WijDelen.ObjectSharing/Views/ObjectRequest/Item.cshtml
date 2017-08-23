@@ -5,6 +5,8 @@
     Layout.Title = Model.ObjectRequestRecord.Description;
 }
 
+<h1>@Model.ObjectRequestRecord.Description</h1>
+
 <span style="white-space: pre-line">@Model.ObjectRequestRecord.ExtraInfo</span>
 
 <div>
@@ -12,7 +14,7 @@
         @Html.ActionLink(T("Stop request"), "Stop", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = Model.ObjectRequestRecord.AggregateId}, new {@class = "button button-small"});
     }
 </div>
- 
+
 <h2>@T("Reactions")</h2>
 
 <ul class="objectrequestlist">

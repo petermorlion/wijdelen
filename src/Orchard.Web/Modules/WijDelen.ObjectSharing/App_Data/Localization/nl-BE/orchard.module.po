@@ -189,19 +189,19 @@ msgid "Thank you for your response. You can now chat with {0}."
 msgstr "Bedankt voor je antwoord. Je kan hieronder berichten sturen naar {0}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
-#| msgid "{0} is looking for (a) {1}."
-msgid "{0} is looking for (a) {1}."
-msgstr "{0} zoekt (een) {1}."
+#| msgid "{0} is looking for (a) {1}"
+msgid "{0} is looking for (a) {1}"
+msgstr "{0} zoekt (een) {1}"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
-#| msgid "{0} has (a) {1} for you."
-msgid "{0} has (a) {1} for you."
-msgstr "{0} heeft (een) {1} voor jou."
+#| msgid "{0} has (a) {1} for you"
+msgid "{0} has (a) {1} for you"
+msgstr "{0} heeft (een) {1} voor jou"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
-#| msgid "Your request for (a) {0}."
-msgid "Your request for (a) {0}."
-msgstr "Jouw oproep voor (een) {0}."
+#| msgid "Your request for (a) {0}"
+msgid "Your request for (a) {0}"
+msgstr "Jouw oproep voor (een) {0}"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
 #| msgid "Write a message here."
