@@ -132,3 +132,58 @@ msgstr "Oproepen"
 #| msgid "Requests"
 msgid "Requests"
 msgstr "Oproepen"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "From"
+msgid "From"
+msgstr "Van"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "To"
+msgid "To"
+msgstr "Tot"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Apply"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "There is not data to display. Did you select a group?"
+msgid "There is not data to display. Did you select a group?"
+msgstr "Er is geen data om te tonen. Heb je een groep geselecteerd?"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Created"
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Email"
+msgid "Email"
+msgstr "Email"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Description"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Mails"
+msgid "Mails"
+msgstr "Mails"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Ja"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "No"
+msgid "No"
+msgstr "Nee"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Not Now"
+msgid "Not Now"
+msgstr "Nu niet"

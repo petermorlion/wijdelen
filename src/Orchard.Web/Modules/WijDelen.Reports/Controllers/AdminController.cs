@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Orchard.Localization;
@@ -9,13 +8,14 @@ using WijDelen.Reports.ViewModels;
 
 namespace WijDelen.Reports.Controllers {
     public class AdminController : Controller {
-        private readonly ITotalsQuery _totalsQuery;
-        private readonly IMonthSummaryQuery _monthSummaryQuery;
-        private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly IGroupMonthSummaryQuery _groupMonthSummaryQuery;
         private readonly IDateLocalizationServices _dateLocalizationServices;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IGroupDetailsQuery _groupDetailsQuery;
+        private readonly IGroupMonthSummaryQuery _groupMonthSummaryQuery;
         private readonly IGroupsQuery _groupsQuery;
+        private readonly IMonthSummaryQuery _monthSummaryQuery;
+        private readonly IRequestsDetailsQuery _requestsDetailsQuery;
+        private readonly ITotalsQuery _totalsQuery;
 
         public AdminController(
             ITotalsQuery totalsQuery,
@@ -24,15 +24,19 @@ namespace WijDelen.Reports.Controllers {
             IGroupMonthSummaryQuery groupMonthSummaryQuery,
             IDateLocalizationServices dateLocalizationServices,
             IGroupDetailsQuery groupDetailsQuery,
-            IGroupsQuery groupsQuery) {
+            IGroupsQuery groupsQuery,
+            IRequestsDetailsQuery requestsDetailsQuery) {
             _groupDetailsQuery = groupDetailsQuery;
             _groupsQuery = groupsQuery;
+            _requestsDetailsQuery = requestsDetailsQuery;
             _totalsQuery = totalsQuery;
             _monthSummaryQuery = monthSummaryQuery;
             _dateTimeProvider = dateTimeProvider;
             _groupMonthSummaryQuery = groupMonthSummaryQuery;
             _dateLocalizationServices = dateLocalizationServices;
         }
+
+        public Localizer T { get; set; }
 
         public ActionResult Index() {
             var totals = _totalsQuery.GetResults();
@@ -77,16 +81,14 @@ namespace WijDelen.Reports.Controllers {
                 stopDateTime = new DateTime(utcNow.Year, utcNow.Month, DateTime.DaysInMonth(utcNow.Year, utcNow.Month));
             }
 
-            if (!startDateTime.HasValue && stopDateTime.HasValue) {
+            if (!startDateTime.HasValue && stopDateTime.HasValue)
                 startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
-            }
 
-            if (!stopDateTime.HasValue && startDateTime.HasValue) {
+            if (!stopDateTime.HasValue && startDateTime.HasValue)
                 stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
-            }
 
             var groups = _groupsQuery.GetResults().OrderBy(x => x.Name).ToList();
-            groups.Insert(0, new GroupViewModel { Id = 0, Name = "" });
+            groups.Insert(0, new GroupViewModel {Id = 0, Name = ""});
 
             var viewModel = new GroupsViewModel {
                 StartDate = startDateTime.Value,
@@ -94,19 +96,39 @@ namespace WijDelen.Reports.Controllers {
                 Groups = groups
             };
 
-            if (selectedGroupId.HasValue && selectedGroupId.Value == 0) {
-                selectedGroupId = null;
-            }
-            
+            if (selectedGroupId.HasValue && selectedGroupId.Value == 0) selectedGroupId = null;
+
             viewModel.GroupDetails = _groupDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value).OrderBy(x => x.GroupName);
 
             return View(viewModel);
         }
 
-        public ActionResult Requests(int? selectedGroupId, string startDate, string stopDate) {
-            return View();
-        }
+        public ActionResult Requests(string startDate, string stopDate, int selectedGroupId = 0) {
+            var startDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(startDate);
+            var stopDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(stopDate);
 
-        public Localizer T { get; set; }
+            if (!startDateTime.HasValue && !stopDateTime.HasValue) {
+                var utcNow = _dateTimeProvider.UtcNow();
+                startDateTime = new DateTime(utcNow.Year, utcNow.Month, 1);
+                stopDateTime = new DateTime(utcNow.Year, utcNow.Month, DateTime.DaysInMonth(utcNow.Year, utcNow.Month));
+            }
+
+            if (!startDateTime.HasValue && stopDateTime.HasValue) startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
+
+            if (!stopDateTime.HasValue && startDateTime.HasValue) stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
+
+            var groups = _groupsQuery.GetResults().OrderBy(x => x.Name).ToList();
+            groups.Insert(0, new GroupViewModel {Id = 0, Name = ""});
+
+            var viewModel = new RequestsViewModel {
+                StartDate = startDateTime.Value,
+                StopDate = stopDateTime.Value,
+                Groups = groups
+            };
+
+            viewModel.Details = _requestsDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value);
+
+            return View(viewModel);
+        }
     }
 }

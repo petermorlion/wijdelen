@@ -7,5 +7,6 @@ namespace WijDelen.Reports.ViewModels {
         public int SelectedGroupId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
+        public IEnumerable<RequestsDetailsViewModel> Details { get; set; }
     }
 }

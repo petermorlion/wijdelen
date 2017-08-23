@@ -117,10 +117,13 @@
     <Compile Include="Queries\IGroupMonthSummaryQuery.cs" />
     <Compile Include="Queries\IGroupsQuery.cs" />
     <Compile Include="Queries\IMonthSummaryQuery.cs" />
+    <Compile Include="Queries\IRequestsDetailsQuery.cs" />
     <Compile Include="Queries\ITotalsQuery.cs" />
     <Compile Include="Queries\MonthSummaryQuery.cs" />
+    <Compile Include="Queries\RequestsDetailsQuery.cs" />
     <Compile Include="Queries\TotalsQuery.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\RequestsDetailsViewModel.cs" />
     <Compile Include="ViewModels\RequestsViewModel.cs" />
     <Compile Include="ViewModels\GroupsViewModel.cs" />
     <Compile Include="ViewModels\GroupDetailsViewModel.cs" />
