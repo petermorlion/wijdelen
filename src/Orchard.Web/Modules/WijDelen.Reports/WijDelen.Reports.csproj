@@ -121,7 +121,8 @@
     <Compile Include="Queries\MonthSummaryQuery.cs" />
     <Compile Include="Queries\TotalsQuery.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
-    <Compile Include="ViewModels\DetailsViewModel.cs" />
+    <Compile Include="ViewModels\RequestsViewModel.cs" />
+    <Compile Include="ViewModels\GroupsViewModel.cs" />
     <Compile Include="ViewModels\GroupDetailsViewModel.cs" />
     <Compile Include="ViewModels\GroupMonthSummaryViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />

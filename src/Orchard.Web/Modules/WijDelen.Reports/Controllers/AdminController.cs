@@ -88,7 +88,7 @@ namespace WijDelen.Reports.Controllers {
             var groups = _groupsQuery.GetResults().OrderBy(x => x.Name).ToList();
             groups.Insert(0, new GroupViewModel { Id = 0, Name = "" });
 
-            var viewModel = new DetailsViewModel {
+            var viewModel = new GroupsViewModel {
                 StartDate = startDateTime.Value,
                 StopDate = stopDateTime.Value,
                 Groups = groups
@@ -103,7 +103,7 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Requests() {
+        public ActionResult Requests(int? selectedGroupId, string startDate, string stopDate) {
             return View();
         }
 

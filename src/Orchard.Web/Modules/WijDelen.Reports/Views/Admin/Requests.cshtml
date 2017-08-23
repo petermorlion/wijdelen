@@ -17,4 +17,23 @@
     Script.Require("jQueryTimeEntry").AtFoot();
 }
 
-TEST
+<div class="row">
+    <div class="column">
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("Requests", "Admin", new { Area = "WijDelen.Reports" }), FormMethod.Get))
+        {
+            @Html.ValidationSummary()
+
+            @Html.LabelFor(x => x.StartDate, T("Group").Text, new { @class = "reportsdetails-label reportsdetails-label-first" })
+            @Html.DropDownListFor(x => x.SelectedGroupId, new SelectList(Model.Groups, "Id", "Name"))
+
+            @Html.LabelFor(x => x.StartDate, T("From").Text, new { @class = "reportsdetails-label" })
+            @Html.TextBoxFor(m => m.StartDate, "{0:d/MM/yyyy}", new { @class = "text", id = "reportsdetails-startdate" })
+
+            @Html.LabelFor(x => x.StopDate, T("To").Text, new { @class = "reportsdetails-label" })
+
+            @Html.TextBoxFor(m => m.StopDate, "{0:d/MM/yyyy}", new { @class = "text", id = "reportsdetails-stopdate" })
+
+            <button type="submit">@T("Apply")</button>
+        }
+    </div>
+</div>
