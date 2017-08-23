@@ -81,7 +81,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         }
 
         [Test]
-        public void WhenRequestingDetails_ShouldReturnDefaultView() {
+        public void WhenRequestingGroups_ShouldReturnDefaultView() {
             var dateTimeProviderMock = new Mock<IDateTimeProvider>();
             dateTimeProviderMock.Setup(x => x.UtcNow()).Returns(new DateTime(2017, 1, 26, 0, 0, 0, DateTimeKind.Utc));
 
@@ -103,7 +103,7 @@ namespace WijDelen.Reports.Tests.Controllers {
 
             var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), dateTimeProviderMock.Object, default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details(null, null, null);
+            var result = controller.Groups(null, null, null);
 
             result.Should().BeOfType<ViewResult>();
 
@@ -118,7 +118,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         }
 
         [Test]
-        public void WhenRequestingDetailsForPeriodAndGroup_ShouldReturnViewForPeriodAndGroup() {
+        public void WhenRequestingGroupsForPeriodAndGroup_ShouldReturnViewForPeriodAndGroup() {
             var startDate = new DateTime(2015, 1, 1);
             var stopDate = new DateTime(2015, 1, 31);
 
@@ -144,7 +144,7 @@ namespace WijDelen.Reports.Tests.Controllers {
 
             var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details(2, "startDate", "stopDate");
+            var result = controller.Groups(2, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 
@@ -161,7 +161,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         }
 
         [Test]
-        public void WhenRequestingDetailsWithOnlyStartDate_ShouldReturnViewWithStopDate() {
+        public void WhenRequestingGroupsWithOnlyStartDate_ShouldReturnViewWithStopDate() {
             var startDate = new DateTime(2015, 1, 15);
 
             var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
@@ -178,7 +178,7 @@ namespace WijDelen.Reports.Tests.Controllers {
 
             var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details(null, "startDate", "stopDate");
+            var result = controller.Groups(null, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 
@@ -190,7 +190,7 @@ namespace WijDelen.Reports.Tests.Controllers {
         }
 
         [Test]
-        public void WhenRequestingDetailsWithOnlyStopDate_ShouldReturnViewWithStartDate() {
+        public void WhenRequestingGroupsWithOnlyStopDate_ShouldReturnViewWithStartDate() {
             var stopDate = new DateTime(2015, 1, 15);
 
             var dateLocalizationServicesMock = new Mock<IDateLocalizationServices>();
@@ -207,7 +207,7 @@ namespace WijDelen.Reports.Tests.Controllers {
 
             var controller = new AdminController(default(ITotalsQuery), default(IMonthSummaryQuery), default(IDateTimeProvider), default(IGroupMonthSummaryQuery), dateLocalizationServicesMock.Object, groupDetailsQueryMock.Object, groupsQueryMock.Object);
 
-            var result = controller.Details(null, "startDate", "stopDate");
+            var result = controller.Groups(null, "startDate", "stopDate");
 
             result.Should().BeOfType<ViewResult>();
 

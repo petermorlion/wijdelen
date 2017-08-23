@@ -1,0 +1,20 @@
+﻿@model WijDelen.Reports.ViewModels.DetailsViewModel
+
+@{
+    Layout.Title = T("Requests").ToString();
+
+#if DEBUG
+    Style.Include("WijDelen.Reports.Styles.css");
+#else
+    Style.Include("WijDelen.Reports.Styles.min.css");
+#endif
+
+    Style.Require("jQueryCalendars_Picker");
+    Style.Require("jQueryTimeEntry");
+    Style.Require("jQueryDateTimeEditor");
+
+    Script.Require("jQueryCalendars_Picker").AtFoot();
+    Script.Require("jQueryTimeEntry").AtFoot();
+}
+
+TEST

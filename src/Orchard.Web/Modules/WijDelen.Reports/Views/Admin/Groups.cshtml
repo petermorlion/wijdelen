@@ -1,7 +1,7 @@
 ﻿@model WijDelen.Reports.ViewModels.DetailsViewModel
 
 @{
-    Layout.Title = T("Details").ToString();
+    Layout.Title = T("Groups").ToString();
 
 #if DEBUG
     Style.Include("WijDelen.Reports.Styles.css");
@@ -19,7 +19,7 @@
 
 <div class="row">
     <div class="column">
-        @using (Html.BeginFormAntiForgeryPost(Url.Action("Details", "Admin", new {Area = "WijDelen.Reports"}), FormMethod.Get)) {
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("Groups", "Admin", new {Area = "WijDelen.Reports"}), FormMethod.Get)) {
             @Html.ValidationSummary()
 
             @Html.LabelFor(x => x.StartDate, T("Group").Text, new { @class = "reportsdetails-label reportsdetails-label-first" })

@@ -164,7 +164,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Groups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />
@@ -203,6 +203,9 @@
     <Content Include="node_modules\normalize.css\LICENSE.md" />
     <Content Include="node_modules\normalize.css\package.json" />
     <Content Include="node_modules\normalize.css\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Requests.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

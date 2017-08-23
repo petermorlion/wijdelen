@@ -53,57 +53,57 @@ msgstr "Groep"
 msgid "Boink! There aren't any groups with valuable data yet."
 msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
-#| msgid "Details"
-msgid "Details"
-msgstr "Details"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#| msgid "Groups"
+msgid "Groups"
+msgstr "Groepen"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "From"
 msgid "From"
 msgstr "Van"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "To"
 msgid "To"
 msgstr "Tot"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Apply"
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Group"
 msgid "Group"
 msgstr "Groep"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Requests"
 msgid "Requests"
 msgstr "Oproepen"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Mails"
 msgid "Mails"
 msgstr "Mails"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Yes"
 msgid "Yes"
 msgstr "Ja"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "No"
 msgid "No"
 msgstr "Nee"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Not Now"
 msgid "Not Now"
 msgstr "Nu niet"
 
-#: ~/Modules/WijDelen.Reports/Views/Admin/Details.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Boink! There aren't any groups with valuable data yet."
 msgid "Boink! There aren't any groups with valuable data yet."
 msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
@@ -119,6 +119,16 @@ msgid "Overview"
 msgstr "Overzicht"
 
 #: wijdelen.reports.adminmenu
-#| msgid "Details"
-msgid "Details"
-msgstr "Details"
+#| msgid "Groups"
+msgid "Groups"
+msgstr "Groepen"
+
+#: wijdelen.reports.adminmenu
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Requests"
+msgid "Requests"
+msgstr "Oproepen"

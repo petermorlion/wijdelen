@@ -67,7 +67,7 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Details(int? selectedGroupId, string startDate, string stopDate) {
+        public ActionResult Groups(int? selectedGroupId, string startDate, string stopDate) {
             var startDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(startDate);
             var stopDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(stopDate);
 
@@ -101,6 +101,10 @@ namespace WijDelen.Reports.Controllers {
             viewModel.GroupDetails = _groupDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value).OrderBy(x => x.GroupName);
 
             return View(viewModel);
+        }
+
+        public ActionResult Requests() {
+            return View();
         }
 
         public Localizer T { get; set; }

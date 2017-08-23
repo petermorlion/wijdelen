@@ -1,5 +1,4 @@
 ﻿using Orchard.Localization;
-using Orchard.Security;
 using Orchard.UI.Navigation;
 
 namespace WijDelen.Reports {
@@ -32,8 +31,13 @@ namespace WijDelen.Reports {
                         .Permission(Permissions.ViewReports)
                         .LocalNav())
                     .Add(tab => tab
-                        .Caption(T("Details"))
-                        .Action("Details", "Admin", new { area = "WijDelen.Reports" })
+                        .Caption(T("Groups"))
+                        .Action("Groups", "Admin", new { area = "WijDelen.Reports" })
+                        .Permission(Permissions.ViewReports)
+                        .LocalNav())
+                    .Add(tab => tab
+                        .Caption(T("Requests"))
+                        .Action("Requests", "Admin", new { area = "WijDelen.Reports" })
                         .Permission(Permissions.ViewReports)
                         .LocalNav())));
         }
