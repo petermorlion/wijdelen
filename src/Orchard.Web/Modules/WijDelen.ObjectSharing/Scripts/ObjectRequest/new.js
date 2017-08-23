@@ -24,17 +24,35 @@ new autoComplete({
 
 var element = document.getElementById('ExtraInfo');
 element.oninput = function() {
-    var remainingCharacterCountElement = document.getElementById('remainingCharacterCount');
-    var remainCharacterTextElement = document.getElementById('remainCharacterText');
-    var progressBar = document.getElementById('objectrequest-progressbar-fill');
+    var characterCount = element.value.length;
+    var noCharactersText = document.getElementById('noCharactersText');
+    noCharactersText.style.display = 'none';
+
+    var oneCharacterText = document.getElementById('oneCharacterText');
+    oneCharacterText.style.display = 'none';
+
+    var tenCharactersText = document.getElementById('tenCharactersText');
+    tenCharactersText.style.display = 'none';
+
+    var twentyCharactersText = document.getElementById('twentyCharactersText');
+    twentyCharactersText.style.display = 'none';
+
     var enoughCharactersTextElement = document.getElementById('enoughCharactersText');
+    enoughCharactersTextElement.style.display = 'none';
 
-    var remainingCharacters = 30 - element.value.length;
-
-    remainCharacterTextElement.style.display = remainingCharacters > 0 ? 'inline' : 'none';
-    remainingCharacterCountElement.innerText = remainingCharacters;
-    enoughCharactersTextElement.style.display = remainingCharacters > 0 ? 'none' : 'inline';
+    if (characterCount === 0) {
+        noCharactersText.style.display = 'inline';
+    } else if (characterCount >= 1 && characterCount < 10) {
+        oneCharacterText.style.display = 'inline';
+    } else if (characterCount >= 10 && characterCount < 20) {
+        tenCharactersText.style.display = 'inline';
+    } else if (characterCount >= 20 && characterCount < 30) {
+        twentyCharactersText.style.display = 'inline';
+    } else if (characterCount >= 30) {
+        enoughCharactersTextElement.style.display = 'inline';
+    }
 
     var percentage = Math.min(element.textLength * 100 / 30, 100);
+    var progressBar = document.getElementById('objectrequest-progressbar-fill');
     progressBar.style.width = percentage.toString() + '%';
 };

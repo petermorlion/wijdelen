@@ -20,8 +20,11 @@
         @Html.ValidationMessageFor(m => m.ExtraInfo)
         <div class="objectrequest-progressbar">
             <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
-            <small id="remainCharacterText" class="objectrequest-progressbar-text objectrequest-progressbar-text-remaining">@T("Just {0} more characters!", new HtmlString("<span id=\"remainingCharacterCount\">30</span>"))</small>
-            <small id="enoughCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-enough">@T("Great story!")</small>
+            <small id="noCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-0">@T("Go ahead, don't be afraid!")</small>
+            <small id="oneCharacterText" class="objectrequest-progressbar-text objectrequest-progressbar-text-1">@T("Well, it's a start")</small>
+            <small id="tenCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-10">@T("Just a little more...")</small>
+            <small id="twentyCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-20">@T("Almost there!")</small>
+            <small id="enoughCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-30">@T("Great story!")</small>
         </div>
     </fieldset>
 

@@ -14,9 +14,24 @@ msgid "A nice story to convince the group members"
 msgstr "Een tof verhaal om je groepsleden te overtuigen"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
-#| msgid "Just {0} more characters!"
-msgid "Just {0} more characters!"
-msgstr "Nog {0} karakters te gaan!"
+#| msgid "Go ahead, don't be afraid!"
+msgid "Go ahead, don't be afraid!"
+msgstr "Doe maar, niet bang zijn!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+#| msgid "Well, it's a start"
+msgid "Well, it's a start"
+msgstr "Het is toch al iets"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+#| msgid "Just a little more..."
+msgid "Just a little more..."
+msgstr "Nog een klein beetje meer..."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+#| msgid "Almost there!"
+msgid "Almost there!"
+msgstr "Bijna klaar!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
 #| msgid "Great story!"
