@@ -65,14 +65,10 @@
         </div>
     }
     
-    <div class="row">
-        <div class="column">
-            @if (Model.Content != null)
+    @if (Model.Content != null)
             {
-                @Display(Model.Content)
-            }
-        </div>
-    </div>
+        @Display(Model.Content)
+    }
 
     @if (Model.Footer != null) {
         <div class="row">

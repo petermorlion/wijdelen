@@ -48,6 +48,7 @@ namespace WijDelen.MailChimp {
 
             if (response.StatusCode != HttpStatusCode.OK) {
                 Logger.Error($"Could not get subscription status of {email}. Response status: {response.StatusCode}. Response content: {response.Content}");
+                return false;
             }
 
             return _jsonConverter.Deserialize<dynamic>(response.Content).status == "subscribed";

@@ -9,24 +9,22 @@
     <ul class="receivedobjectrequestlist">
         @foreach (var viewModel in Model) {
             <li class="receivedobjectrequestlist-item">
-                <div class="container">
-                    <div class="row">
-                        <div class="column">
-                            <h4>@T("{0} is looking for (a)", viewModel.UserName)</h4>
-                            <h5>@viewModel.Description</h5>
-                            <p>@viewModel.ExtraInfo</p>
-                        </div>
+                <div class="row">
+                    <div class="column">
+                        <h4>@T("{0} is looking for (a)", viewModel.UserName)</h4>
+                        <h5>@viewModel.Description</h5>
+                        <p>@viewModel.ExtraInfo</p>
                     </div>
-                    <div class="row">
-                        <div class="column">
-                            @Html.ActionLink(T("Yes, I own this"), "Confirm", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-yes button" })
-                        </div>
-                        <div class="column">
-                            @Html.ActionLink(T("Not right now"), "DenyForNow", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-notnow button" })
-                        </div>
-                        <div class="column">
-                            @Html.ActionLink(T("No, I do not own this"), "Deny", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-no button" })
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        @Html.ActionLink(T("Yes, I own this"), "Confirm", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-yes button" })
+                    </div>
+                    <div class="column">
+                        @Html.ActionLink(T("Not right now"), "DenyForNow", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-notnow button" })
+                    </div>
+                    <div class="column">
+                        @Html.ActionLink(T("No, I do not own this"), "Deny", new { area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = viewModel.ObjectRequestId }, new { @class = "objectrequestanswer objectrequestanswer-no button" })
                     </div>
                 </div>
             </li>
