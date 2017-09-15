@@ -125,13 +125,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             indexViewModel.ObjectRequests[0].CreatedDateTime.Should().Be(_objectRequest2.CreatedDateTime.ToLocalTime());
             indexViewModel.ObjectRequests[0].Description.Should().Be("Flaming Moe");
-            indexViewModel.ObjectRequests[0].FirstName.Should().Be("Carl");
-            indexViewModel.ObjectRequests[0].LastName.Should().Be("Carlson");
+            indexViewModel.ObjectRequests[0].UserName.Should().Be("Carl Carlson");
 
             indexViewModel.ObjectRequests[1].CreatedDateTime.Should().Be(_objectRequest1.CreatedDateTime.ToLocalTime());
             indexViewModel.ObjectRequests[1].Description.Should().Be("Sneakers");
-            indexViewModel.ObjectRequests[1].FirstName.Should().Be("Moe");
-            indexViewModel.ObjectRequests[1].LastName.Should().Be("Szyslak");
+            indexViewModel.ObjectRequests[1].UserName.Should().Be("Moe Szyslak");
         }
     }
 }

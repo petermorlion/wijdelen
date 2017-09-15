@@ -727,3 +727,8 @@ msgstr "Dit zijn enkele oproepen uit jouw groep:"
 #| msgid "My Feed"
 msgid "My Feed"
 msgstr "Mijn feed"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
+msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
+msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."

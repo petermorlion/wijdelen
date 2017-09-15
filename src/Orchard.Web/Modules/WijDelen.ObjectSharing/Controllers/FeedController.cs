@@ -22,7 +22,10 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public Localizer T { get; set; }
 
-        public FeedController(IRepository<ObjectRequestRecord> objectRequestRepository, IOrchardServices orchardServices, IFindUsersByIdsQuery findUsersByIdsQuery) {
+        public FeedController(
+            IRepository<ObjectRequestRecord> objectRequestRepository, 
+            IOrchardServices orchardServices, 
+            IFindUsersByIdsQuery findUsersByIdsQuery) {
             _objectRequestRepository = objectRequestRepository;
             _orchardServices = orchardServices;
             _findUsersByIdsQuery = findUsersByIdsQuery;
@@ -42,8 +45,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 model.ObjectRequests.Add(new ObjectRequestViewModel {
                     CreatedDateTime = objectRequestRecord.CreatedDateTime.ToLocalTime(),
                     Description = objectRequestRecord.Description,
-                    FirstName = userDetailsPart.FirstName,
-                    LastName = userDetailsPart?.LastName
+                    UserName = user.GetUserDisplayName(),
                 });
             }
 

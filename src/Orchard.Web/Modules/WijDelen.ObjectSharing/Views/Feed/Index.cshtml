@@ -1,13 +1,28 @@
-﻿@model WijDelen.ObjectSharing.ViewModels.Feed.IndexViewModel
+﻿@using WijDelen.ObjectSharing.ViewModels
+@model WijDelen.ObjectSharing.ViewModels.Feed.IndexViewModel
 
 @{
     Layout.Title = T("My Feed");
 }
 
-<ol>
-    @foreach (var objectRequestRecord in Model.ObjectRequests) {
-        <li>
-            @objectRequestRecord.Description
-        </li>
-    }
-</ol>
+@if (Model.ObjectRequests.Any()) {
+    <ol class="feedlist">
+        @foreach (var objectRequestRecord in Model.ObjectRequests) {
+            <li>
+                <div class="row">
+                    <div class="column">
+                        <h5>@T("{0} is looking for (a)", objectRequestRecord.UserName)</h5>
+                        <h4>@objectRequestRecord.Description</h4>
+                    </div>
+                </div>
+            </li>
+        }
+    </ol>
+}
+else {
+    <p>
+        @T("You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started.")
+    </p>
+
+    Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
+}
