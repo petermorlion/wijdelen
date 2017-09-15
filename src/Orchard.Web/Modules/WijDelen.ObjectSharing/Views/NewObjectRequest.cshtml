@@ -7,28 +7,33 @@
     Script.Include("ObjectRequest/new.js").AtFoot();
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
-    <fieldset>
-        <legend>@T("I would like to borrow the following item")</legend>
-        @Html.TextBoxFor(m => m.Description, new {data_auto_complete = "true", maxlength = ObjectRequestController.MaximumDescriptionLength })
-        @Html.ValidationMessageFor(m => m.Description)
-    </fieldset>
+<div class="row">
+    <div class="column column-75">
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+            <fieldset>
+                <legend>@T("I would like to borrow the following item")</legend>
+                @Html.TextBoxFor(m => m.Description, new {data_auto_complete = "true", maxlength = ObjectRequestController.MaximumDescriptionLength})
+                @Html.ValidationMessageFor(m => m.Description)
+            </fieldset>
 
-    <fieldset>
-        <legend>@T("A nice story to convince the group members")</legend>
-        @Html.TextAreaFor(m => m.ExtraInfo, new {maxlength = ObjectRequestController.MaximumExtraInfoLength})
-        @Html.ValidationMessageFor(m => m.ExtraInfo)
-        <div class="objectrequest-progressbar">
-            <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
-            <small id="noCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-0">@T("Go ahead, don't be afraid!")</small>
-            <small id="oneCharacterText" class="objectrequest-progressbar-text objectrequest-progressbar-text-1">@T("Well, it's a start")</small>
-            <small id="tenCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-10">@T("Just a little more...")</small>
-            <small id="twentyCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-20">@T("Almost there!")</small>
-            <small id="enoughCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-30">@T("Great story!")</small>
-        </div>
-    </fieldset>
+            <fieldset>
+                <legend>@T("A nice story to convince the group members")</legend>
+                @Html.TextAreaFor(m => m.ExtraInfo, new {maxlength = ObjectRequestController.MaximumExtraInfoLength})
+                @Html.ValidationMessageFor(m => m.ExtraInfo)
+                <div class="objectrequest-progressbar">
+                    <div class="objectrequest-progressbar-fill" id="objectrequest-progressbar-fill"></div>
+                    <small id="noCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-0">@T("Go ahead, don't be afraid!")</small>
+                    <small id="oneCharacterText" class="objectrequest-progressbar-text objectrequest-progressbar-text-1">@T("Well, it's a start")</small>
+                    <small id="tenCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-10">@T("Just a little more...")</small>
+                    <small id="twentyCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-20">@T("Almost there!")</small>
+                    <small id="enoughCharactersText" class="objectrequest-progressbar-text objectrequest-progressbar-text-30">@T("Great story!")</small>
+                </div>
+            </fieldset>
 
-    <button class="primaryAction">@T("Submit")</button>
-}
-
-@{ Html.RenderAction("Index", "GroupObjectRequest");}
+            <button class="primaryAction">@T("Submit")</button>
+        }
+    </div>
+    <div class="column column-25">
+        @{ Html.RenderAction("Index", "GroupObjectRequest"); }
+    </div>
+</div>

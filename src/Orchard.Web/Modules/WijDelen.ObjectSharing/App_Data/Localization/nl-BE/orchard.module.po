@@ -723,6 +723,11 @@ msgstr "Inspiratie nodig?"
 msgid "These are some of the requests that have been made in your group:"
 msgstr "Dit zijn enkele oproepen uit jouw groep:"
 
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+#| msgid "{0} requested (a) {1}"
+msgid "{0} requested (a) {1}"
+msgstr "{0} zoekt (een) {1}"
+
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
 #| msgid "My Feed"
 msgid "My Feed"

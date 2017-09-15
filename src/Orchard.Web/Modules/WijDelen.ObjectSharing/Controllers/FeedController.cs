@@ -16,6 +16,7 @@ namespace WijDelen.ObjectSharing.Controllers {
     [Authorize]
     public class FeedController : Controller {
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
+        private readonly IRepository<ChatMessageRecord> _chatMessageRepository;
         private readonly IOrchardServices _orchardServices;
         private readonly IFindUsersByIdsQuery _findUsersByIdsQuery;
         private const int FeedLimit = 10;
@@ -33,7 +34,13 @@ namespace WijDelen.ObjectSharing.Controllers {
 
         public ActionResult Index() {
             var groupId = _orchardServices.WorkContext.CurrentUser.As<GroupMembershipPart>().Group.Id;
-            var objectRequests = _objectRequestRepository.Fetch(x => x.GroupId == groupId).OrderByDescending(x => x.CreatedDateTime).Take(FeedLimit).ToList();
+            var currentUserId = _orchardServices.WorkContext.CurrentUser.Id;
+            var objectRequests = _objectRequestRepository
+                .Fetch(x => x.GroupId == groupId && x.UserId != currentUserId)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .Take(FeedLimit)
+                .ToList();
+
             var userIds = objectRequests.Select(x => x.UserId).Distinct().ToList();
             var users = _findUsersByIdsQuery.GetResult(userIds.ToArray()).ToList();
 
@@ -45,7 +52,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 model.ObjectRequests.Add(new ObjectRequestViewModel {
                     CreatedDateTime = objectRequestRecord.CreatedDateTime.ToLocalTime(),
                     Description = objectRequestRecord.Description,
-                    UserName = user.GetUserDisplayName(),
+                    UserName = user?.GetUserDisplayName(),
                     ChatCount = objectRequestRecord.ChatCount
                 });
             }

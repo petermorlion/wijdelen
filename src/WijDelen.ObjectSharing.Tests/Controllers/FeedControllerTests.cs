@@ -28,6 +28,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         private ObjectRequestRecord _objectRequest2;
         private ObjectRequestRecord _blockedObjectRequest;
         private ObjectRequestRecord _objectRequestInOtherGroup;
+        private ObjectRequestRecord _myObjectRequest;
 
         [SetUp]
         public void Init()
@@ -79,13 +80,25 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 ChatCount = 3
             };
 
+            _myObjectRequest = new ObjectRequestRecord
+            {
+                AggregateId = Guid.NewGuid(),
+                Description = "Khlav Kalash",
+                CreatedDateTime = new DateTime(2017, 9, 15, 0, 0, 0, DateTimeKind.Utc),
+                GroupId = myGroupId,
+                UserId = _user.Id,
+                Status = ObjectRequestStatus.None.ToString(),
+                ChatCount = 4
+            };
+
             _blockedObjectRequest = new ObjectRequestRecord
             {
                 AggregateId = Guid.NewGuid(),
                 Description = "Sex",
                 CreatedDateTime = new DateTime(2017, 9, 14, 0, 0, 0, DateTimeKind.Utc),
                 GroupId = 777,
-                Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString()
+                Status = ObjectRequestStatus.BlockedForForbiddenWords.ToString(),
+                UserId = moe.Id
             };
 
             _objectRequestInOtherGroup = new ObjectRequestRecord
@@ -94,10 +107,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 Description = "Donuts",
                 CreatedDateTime = new DateTime(2017, 9, 14, 0, 0, 0, DateTimeKind.Utc),
                 GroupId = 666,
-                Status = ObjectRequestStatus.None.ToString()
+                Status = ObjectRequestStatus.None.ToString(),
+                UserId = moe.Id
             };
 
-            var objectRequestRecords = new List<ObjectRequestRecord> { _objectRequest1, _objectRequest2, _blockedObjectRequest, _objectRequestInOtherGroup };
+            var objectRequestRecords = new List<ObjectRequestRecord> { _objectRequest1, _objectRequest2, _blockedObjectRequest, _objectRequestInOtherGroup, _myObjectRequest };
             for (var i = 0; i < 20; i++) {
                 objectRequestRecords.Add(new ObjectRequestRecord {
                     GroupId = myGroupId,
@@ -134,6 +148,10 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             indexViewModel.ObjectRequests[1].Description.Should().Be("Sneakers");
             indexViewModel.ObjectRequests[1].UserName.Should().Be("Moe Szyslak");
             indexViewModel.ObjectRequests[1].ChatCount.Should().Be(12);
+
+            indexViewModel.ObjectRequests.Should().NotContain(x => x.Description == _blockedObjectRequest.Description);
+            indexViewModel.ObjectRequests.Should().NotContain(x => x.Description == _objectRequestInOtherGroup.Description);
+            indexViewModel.ObjectRequests.Should().NotContain(x => x.Description == _myObjectRequest.Description);
         }
     }
 }
