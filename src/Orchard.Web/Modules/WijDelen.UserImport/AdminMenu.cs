@@ -9,9 +9,7 @@ namespace WijDelen.UserImport {
 
         public Localizer T { get; set; }
 
-        public string MenuName {
-            get { return "admin"; }
-        }
+        public string MenuName => "admin";
 
         public void GetNavigation(NavigationBuilder builder) {
             builder.Add(item => item
@@ -30,7 +28,8 @@ namespace WijDelen.UserImport {
 
             builder.Add(T("Users"),
                 menu => menu.Add(T("Groups"), "3.0", item => item.Action("Index", "GroupUsers", new { area = "WijDelen.UserImport" })
-                    .LocalNav()));
+                    .LocalNav()
+                    .Permission(Permissions.ManageGroups)));
         }
     }
 }

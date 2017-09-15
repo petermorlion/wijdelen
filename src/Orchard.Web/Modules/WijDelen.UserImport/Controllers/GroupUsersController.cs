@@ -38,7 +38,7 @@ namespace WijDelen.UserImport.Controllers {
         private dynamic Shape { get; }
 
         public ActionResult Index(PagerParameters pagerParameters, int selectedGroupId = 0) {
-            if (!_orchardServices.Authorizer.Authorize(StandardPermissions.SiteOwner, T("You are not authorized to view this page.")))
+            if (!_orchardServices.Authorizer.Authorize(Permissions.ManageGroups, T("You are not authorized to view this page.")))
                 return new HttpUnauthorizedResult();
 
             var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
