@@ -64,7 +64,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 CreatedDateTime = new DateTime(2017, 9, 10, 0, 0, 0, DateTimeKind.Utc),
                 GroupId = myGroupId,
                 UserId = moe.Id,
-                Status = ObjectRequestStatus.None.ToString()
+                Status = ObjectRequestStatus.None.ToString(),
+                ChatCount = 12
             };
 
             _objectRequest2 = new ObjectRequestRecord
@@ -74,7 +75,8 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 CreatedDateTime = new DateTime(2017, 9, 15, 0, 0, 0, DateTimeKind.Utc),
                 GroupId = myGroupId,
                 UserId = carl.Id,
-                Status = ObjectRequestStatus.None.ToString()
+                Status = ObjectRequestStatus.None.ToString(),
+                ChatCount = 3
             };
 
             _blockedObjectRequest = new ObjectRequestRecord
@@ -126,10 +128,12 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             indexViewModel.ObjectRequests[0].CreatedDateTime.Should().Be(_objectRequest2.CreatedDateTime.ToLocalTime());
             indexViewModel.ObjectRequests[0].Description.Should().Be("Flaming Moe");
             indexViewModel.ObjectRequests[0].UserName.Should().Be("Carl Carlson");
+            indexViewModel.ObjectRequests[0].ChatCount.Should().Be(3);
 
             indexViewModel.ObjectRequests[1].CreatedDateTime.Should().Be(_objectRequest1.CreatedDateTime.ToLocalTime());
             indexViewModel.ObjectRequests[1].Description.Should().Be("Sneakers");
             indexViewModel.ObjectRequests[1].UserName.Should().Be("Moe Szyslak");
+            indexViewModel.ObjectRequests[1].ChatCount.Should().Be(12);
         }
     }
 }

@@ -15,6 +15,20 @@
                         <h4>@objectRequestRecord.Description</h4>
                     </div>
                 </div>
+                @if (objectRequestRecord.ChatCount > 0) {
+                    <div class="row">
+                        <div class="column">
+                            <p>
+                                @if (objectRequestRecord.ChatCount == 1) {
+                                    @T("One person reacted to this request.", objectRequestRecord.ChatCount)
+                                }
+                                else if (objectRequestRecord.ChatCount > 1) {
+                                    @T("{0} people reacted to this request.", objectRequestRecord.ChatCount)
+                                }
+                            </p>
+                        </div>
+                    </div>
+                }
             </li>
         }
     </ol>

@@ -35,7 +35,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var groupId = _orchardServices.WorkContext.CurrentUser.As<GroupMembershipPart>().Group.Id;
             var objectRequests = _objectRequestRepository.Fetch(x => x.GroupId == groupId).OrderByDescending(x => x.CreatedDateTime).Take(FeedLimit).ToList();
             var userIds = objectRequests.Select(x => x.UserId).Distinct().ToList();
-            var users = _findUsersByIdsQuery.GetResult(userIds.ToArray());
+            var users = _findUsersByIdsQuery.GetResult(userIds.ToArray()).ToList();
 
             var model = new IndexViewModel {ObjectRequests = new List<ObjectRequestViewModel>()};
 
@@ -46,6 +46,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                     CreatedDateTime = objectRequestRecord.CreatedDateTime.ToLocalTime(),
                     Description = objectRequestRecord.Description,
                     UserName = user.GetUserDisplayName(),
+                    ChatCount = objectRequestRecord.ChatCount
                 });
             }
 

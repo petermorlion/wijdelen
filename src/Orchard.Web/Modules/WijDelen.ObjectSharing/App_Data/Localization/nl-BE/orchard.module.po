@@ -732,3 +732,13 @@ msgstr "Mijn feed"
 #| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
 msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
 msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "One person reacted to this request."
+msgid "One person reacted to this request."
+msgstr "Eén persoon heeft gereageerd op deze oproep."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "{0} people reacted to this request."
+msgid "{0} people reacted to this request."
+msgstr "{0} personen hebben gereageerd op deze oproep."
