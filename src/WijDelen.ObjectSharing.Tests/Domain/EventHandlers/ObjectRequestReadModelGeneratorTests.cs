@@ -130,5 +130,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _updatedRecord.AggregateId.Should().Be(_normalAggregateId);
             _updatedRecord.Status.Should().Be("Stopped");
         }
+
+        [Test]
+        public void WhenChatIsStarted_ShouldIncrementChatCounter() {
+            var e = new ChatStarted {
+                ObjectRequestId = _normalAggregateId
+            };
+
+            _handler.Handle(e);
+
+            _updatedRecord.ChatCount.Should().Be(1);
+        }
     }
 }

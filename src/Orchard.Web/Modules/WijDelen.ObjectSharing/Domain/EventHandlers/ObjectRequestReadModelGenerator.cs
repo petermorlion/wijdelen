@@ -13,7 +13,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         IEventHandler<ObjectRequested>, 
         IEventHandler<ObjectRequestUnblocked>, 
         IEventHandler<ObjectRequestBlockedByAdmin>,
-        IEventHandler<ObjectRequestStopped> {
+        IEventHandler<ObjectRequestStopped>,
+        IEventHandler<ChatStarted> {
 
         private readonly IRepository<ObjectRequestRecord> _repository;
         private readonly IGroupService _groupService;
@@ -74,6 +75,16 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             }
 
             existingRecord.Status = ObjectRequestStatus.Stopped.ToString();
+            _repository.Update(existingRecord);
+        }
+
+        public void Handle(ChatStarted e) {
+            var existingRecord = _repository.Get(x => x.AggregateId == e.ObjectRequestId);
+            if (existingRecord == null) {
+                return;
+            }
+
+            existingRecord.ChatCount += 1;
             _repository.Update(existingRecord);
         }
     }

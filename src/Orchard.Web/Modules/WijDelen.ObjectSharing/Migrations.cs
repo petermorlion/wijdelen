@@ -190,5 +190,12 @@ namespace WijDelen.ObjectSharing {
 
             return 17;
         }
+
+        public int UpdateFrom17() {
+            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
+                .AddColumn<int>("ChatCount", column => column.NotNull().WithDefault(0)));
+
+            return 18;
+        }
     }
 }
