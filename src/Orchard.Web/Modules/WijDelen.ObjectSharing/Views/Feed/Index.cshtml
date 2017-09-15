@@ -1,0 +1,13 @@
+﻿@model WijDelen.ObjectSharing.ViewModels.Feed.IndexViewModel
+
+@{
+    Layout.Title = T("My Feed");
+}
+
+<ol>
+    @foreach (var objectRequestRecord in Model.ObjectRequests) {
+        <li>
+            @objectRequestRecord.Description
+        </li>
+    }
+</ol>

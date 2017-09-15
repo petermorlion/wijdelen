@@ -125,6 +125,7 @@
     <Compile Include="Controllers\Api\ArchetypesController.cs" />
     <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\GetStartedController.cs" />
     <Compile Include="Controllers\GroupObjectRequestController.cs" />
     <Compile Include="Controllers\ObjectRequestAdminController.cs" />
@@ -231,6 +232,8 @@
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ConfirmStopObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
+    <Compile Include="ViewModels\Feed\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Feed\ObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\GroupObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\IndexObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
@@ -364,6 +367,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GroupObjectRequest\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feed\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

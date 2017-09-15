@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Orchard.Themes;
-using Orchard.Localization;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]

@@ -722,3 +722,8 @@ msgstr "Inspiratie nodig?"
 #| msgid "These are some of the requests that have been made in your group:"
 msgid "These are some of the requests that have been made in your group:"
 msgstr "Dit zijn enkele oproepen uit jouw groep:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "My Feed"
+msgid "My Feed"
+msgstr "Mijn feed"
