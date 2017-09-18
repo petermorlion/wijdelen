@@ -3,6 +3,7 @@ using System;
 namespace WijDelen.Reports.ViewModels {
     public class RequestsDetailsViewModel {
         public DateTime CreatedDateTime { get; set; }
+        public string GroupName { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
 

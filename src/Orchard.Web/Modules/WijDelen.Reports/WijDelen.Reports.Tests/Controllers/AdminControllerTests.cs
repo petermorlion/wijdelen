@@ -304,5 +304,43 @@ namespace WijDelen.Reports.Tests.Controllers {
             viewModel.StopDate.Should().Be(new DateTime(2015, 1, 15));
             viewModel.Details.ShouldBeEquivalentTo(requestDetailsViewModels);
         }
+
+        [Test]
+        public void WhenRequestingRequestsForPeriodAndAllGroups_ShouldReturnViewForPeriodAndGroup()
+        {
+            var startDate = new DateTime(2015, 1, 1);
+            var stopDate = new DateTime(2015, 1, 31);
+            _dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("startDate", null)).Returns(startDate);
+            _dateLocalizationServicesMock.Setup(x => x.ConvertFromLocalizedDateString("stopDate", null)).Returns(stopDate);
+
+            var groups = new List<GroupViewModel> {
+                new GroupViewModel {Id = 1, Name = "Pin Pals"},
+                new GroupViewModel {Id = 2, Name = "Flying Hellfish"}
+            };
+
+            _groupsQueryMock
+                .Setup(x => x.GetResults())
+                .Returns(groups);
+
+            var requestsDetailsViewModels = new List<RequestsDetailsViewModel>();
+            _requestsDetailsQueryMock
+                .Setup(x => x.GetResults(null, new DateTime(2015, 1, 1), new DateTime(2015, 1, 31)))
+                .Returns(requestsDetailsViewModels);
+
+            var result = _controller.Requests("startDate", "stopDate", 0);
+
+            result.Should().BeOfType<ViewResult>();
+
+            var viewResult = (ViewResult)result;
+            var viewModel = (RequestsViewModel)viewResult.Model;
+            viewModel.StartDate.Should().Be(new DateTime(2015, 1, 1));
+            viewModel.StopDate.Should().Be(new DateTime(2015, 1, 31));
+            viewModel.Details.Should().BeSameAs(requestsDetailsViewModels);
+            viewModel.Groups.ShouldBeEquivalentTo(new List<GroupViewModel> {
+                new GroupViewModel {Id = 0, Name = ""},
+                new GroupViewModel {Id = 2, Name = "Flying Hellfish"},
+                new GroupViewModel {Id = 1, Name = "Pin Pals"}
+            });
+        }
     }
 }

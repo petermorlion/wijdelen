@@ -43,7 +43,7 @@
     <div class="column">
         @if (!Model.Details.Any()) {
             <div class="reports-nodata">
-                @T("There is not data to display. Did you select a group?")
+                @T("There is not data to display.")
             </div>
         }
         
@@ -52,6 +52,7 @@
                 <thead>
                     <tr>
                         <th>@T("Created")</th>
+                        <th>@T("Group")</th>
                         <th>@T("Email")</th>
                         <th>@T("Description")</th>
                         <th>@T("Mails")</th>
@@ -66,6 +67,7 @@
                         {
                             <tr>
                                 <td>@detailsViewModel.CreatedDateTime</td>
+                                <td>@detailsViewModel.GroupName</td>
                                 <td>@detailsViewModel.Email</td>
                                 <td>@detailsViewModel.Description</td>
                                 <td>@detailsViewModel.MailCount</td>

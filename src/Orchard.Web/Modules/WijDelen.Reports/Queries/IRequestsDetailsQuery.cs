@@ -8,6 +8,6 @@ namespace WijDelen.Reports.Queries {
     /// Gets a detailed report on the requests for a group between two dates.
     /// </summary>
     public interface IRequestsDetailsQuery : IDependency {
-        IEnumerable<RequestsDetailsViewModel> GetResults(int groupId, DateTime startDate, DateTime stopDate);
+        IEnumerable<RequestsDetailsViewModel> GetResults(int? groupId, DateTime startDate, DateTime stopDate);
     }
 }

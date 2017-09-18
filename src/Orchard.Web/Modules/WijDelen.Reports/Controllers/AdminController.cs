@@ -103,7 +103,7 @@ namespace WijDelen.Reports.Controllers {
             return View(viewModel);
         }
 
-        public ActionResult Requests(string startDate, string stopDate, int selectedGroupId = 0) {
+        public ActionResult Requests(string startDate, string stopDate, int? selectedGroupId) {
             var startDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(startDate);
             var stopDateTime = _dateLocalizationServices.ConvertFromLocalizedDateString(stopDate);
 
@@ -113,21 +113,24 @@ namespace WijDelen.Reports.Controllers {
                 stopDateTime = new DateTime(utcNow.Year, utcNow.Month, DateTime.DaysInMonth(utcNow.Year, utcNow.Month));
             }
 
-            if (!startDateTime.HasValue && stopDateTime.HasValue) startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
+            if (!startDateTime.HasValue) startDateTime = new DateTime(stopDateTime.Value.Year, stopDateTime.Value.Month, 1);
 
-            if (!stopDateTime.HasValue && startDateTime.HasValue) stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
+            if (!stopDateTime.HasValue) stopDateTime = new DateTime(startDateTime.Value.Year, startDateTime.Value.Month, DateTime.DaysInMonth(startDateTime.Value.Year, startDateTime.Value.Month));
 
             var groups = _groupsQuery.GetResults().OrderBy(x => x.Name).ToList();
             groups.Insert(0, new GroupViewModel {Id = 0, Name = ""});
 
+            if (selectedGroupId == 0) {
+                selectedGroupId = null;
+            }
+
             var viewModel = new RequestsViewModel {
                 StartDate = startDateTime.Value,
                 StopDate = stopDateTime.Value,
-                Groups = groups
+                Groups = groups,
+                Details = _requestsDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value)
             };
-
-            viewModel.Details = _requestsDetailsQuery.GetResults(selectedGroupId, startDateTime.Value, stopDateTime.Value);
-
+            
             return View(viewModel);
         }
     }

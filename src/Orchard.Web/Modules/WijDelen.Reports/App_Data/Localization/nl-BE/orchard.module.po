@@ -149,9 +149,9 @@ msgid "Apply"
 msgstr "Toepassen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "There is not data to display. Did you select a group?"
-msgid "There is not data to display. Did you select a group?"
-msgstr "Er is geen data om te tonen. Heb je een groep geselecteerd?"
+#| msgid "There is not data to display."
+msgid "There is not data to display."
+msgstr "Er is geen data om te tonen."
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 #| msgid "Created"
