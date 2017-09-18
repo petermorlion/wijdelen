@@ -200,7 +200,7 @@ namespace WijDelen.ObjectSharing {
                     .Column<string>("ItemType", column => column.NotNull())
                     .Column<Guid>("ObjectRequestId", column => column.NotNull())
                     .Column<Guid>("ChatId", column => column.NotNull())
-                    .Column<int>("ChatCount", column => column.NotNull())
+                    .Column<int>("ConfirmationCount", column => column.NotNull())
                     .Column<string>("SendingUserName", column => column.NotNull())
                     .Column<int>("UserId", column => column.NotNull())
             );

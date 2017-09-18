@@ -734,9 +734,9 @@ msgid "My Feed"
 msgstr "Mijn feed"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
-#| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
-msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
-msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
+#| msgid "You don't have anything in your feed yet. Why not send out a request in your group? Fill in the fields below to get started."
+msgid "You don't have anything in your feed yet. Why not send out a request in your group? Fill in the fields below to get started."
+msgstr "Je hebt momenteel geen berichten in je feed. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
 #| msgid "One person reacted to this request."

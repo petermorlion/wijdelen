@@ -1,7 +1,5 @@
 ﻿@using WijDelen.ObjectSharing.ViewModels
-@using ChatMessageViewModel = WijDelen.ObjectSharing.ViewModels.Feed.ChatMessageViewModel
-@using ObjectRequestViewModel = WijDelen.ObjectSharing.ViewModels.Feed.ObjectRequestViewModel
-@model WijDelen.ObjectSharing.ViewModels.Feed.IndexViewModel
+@model FeedViewModel
 
 @{
     Layout.Title = T("My Feed");
@@ -11,28 +9,23 @@
     <ol class="feedlist">
         @foreach (var item in Model.Items) {
             <li>
-                @{
-                    var objectRequestViewModel = item as ObjectRequestViewModel;
-                    var chatMessageViewModel = item as ChatMessageViewModel;
-                }
-
-                @if (objectRequestViewModel != null) {
+                if (item.ItemType == FeedItemType.ObjectRequest) {
                     <div class="row">
                         <div class="column">
-                            <h5>@T("{0} is looking for (a)", objectRequestViewModel.UserName)</h5>
-                            <h4>@objectRequestViewModel.Description</h4>
-                            <p>@objectRequestViewModel.ExtraInfo</p>
+                            <h5>@T("{0} is looking for (a)", item.SendingUserName)</h5>
+                            <h4>@item.Description</h4>
+                            <p>@item.ExtraInfo</p>
                         </div>
                     </div>
                     if (objectRequestViewModel.ChatCount > 0) {
                         <div class="row">
                             <div class="column">
                                 <p>
-                                    @if (objectRequestViewModel.ChatCount == 1) {
-                                        @T("One person reacted to this request.", objectRequestViewModel.ChatCount)
+                                    @if (item.ConfirmationCount == 1) {
+                                        @T("One person reacted to this request.", item.ConfirmationCount)
                                     }
-                                    else if (objectRequestViewModel.ChatCount > 1) {
-                                        @T("{0} people reacted to this request.", objectRequestViewModel.ChatCount)
+                                    else if (item.ConfirmationCount > 1) {
+                                        @T("{0} people reacted to this request.", item.ConfirmationCount)
                                     }
                                 </p>
                             </div>
@@ -48,22 +41,22 @@
                     else {
                         <div class="row">
                             <div class="column">
-                                @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes button button-small"})
+                                @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = item.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes button button-small"})
                             </div>
                             <div class="column">
-                                @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow button button-small"})
+                                @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = item.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow button button-small"})
                             </div>
                             <div class="column">
-                                @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no button button-small"})
+                                @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = item.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no button button-small"})
                             </div>
                         </div>
                     }
                 }
-                else if (chatMessageViewModel != null) {
+                else if (item.ItemType == FeedItemType.ChatMessage) {
                     <div class="row">
                         <div class="column">
-                            <h5>@T("{0} left you a message about (a) {1}", chatMessageViewModel.UserName, chatMessageViewModel.Description)</h5>
-                            @Html.ActionLink(T("Reply"), "Index", "Chat", new {id = chatMessageViewModel.ChatId}, new {@class = "button button-small"})
+                            <h5>@T("{0} left you a message about (a) {1}", item.SendingUserName, item.Description)</h5>
+                            @Html.ActionLink(T("Reply"), "Index", "Chat", new {id = item.ChatId}, new {@class = "button button-small"})
                         </div>
                     </div>
                 }
@@ -73,7 +66,7 @@
 }
 else {
     <p>
-        @T("You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started.")
+        @T("You don't have anything in your feed yet. Why not send out a request in your group? Fill in the fields below to get started.")
     </p>
 
     Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
