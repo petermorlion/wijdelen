@@ -59,7 +59,8 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
                     Description = objectRequestRecord.Description,
                     UserName = user?.GetUserDisplayName(),
                     ChatCount = objectRequestRecord.ChatCount,
-                    ExtraInfo = objectRequestRecord.ExtraInfo
+                    ExtraInfo = objectRequestRecord.ExtraInfo,
+                    ObjectRequestId = objectRequestRecord.AggregateId
                 });
             }
 

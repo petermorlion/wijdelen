@@ -7,5 +7,6 @@ namespace WijDelen.ObjectSharing.ViewModels.Feed {
         public DateTime DateTime { get; set; }
         public int ChatCount { get; set; }
         public string ExtraInfo { get; set; }
+        public Guid ObjectRequestId { get; set; }
     }
 }

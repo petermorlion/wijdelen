@@ -762,3 +762,18 @@ msgstr "{0} zoekt (een)"
 #| msgid "Reply"
 msgid "Reply"
 msgstr "Antwoorden"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "Yes, I own this"
+msgid "Yes, I own this"
+msgstr "Ja, dat heb ik"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "Not right now"
+msgid "Not right now"
+msgstr "Nu even niet"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "No, I do not own this"
+msgid "No, I do not own this"
+msgstr "Nee, dat heb ik niet"

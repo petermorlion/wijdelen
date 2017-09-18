@@ -1,4 +1,6 @@
-﻿@using WijDelen.ObjectSharing.ViewModels.Feed
+﻿@using WijDelen.ObjectSharing.ViewModels
+@using ChatMessageViewModel = WijDelen.ObjectSharing.ViewModels.Feed.ChatMessageViewModel
+@using ObjectRequestViewModel = WijDelen.ObjectSharing.ViewModels.Feed.ObjectRequestViewModel
 @model WijDelen.ObjectSharing.ViewModels.Feed.IndexViewModel
 
 @{
@@ -23,20 +25,32 @@
                         </div>
                     </div>
                     if (objectRequestViewModel.ChatCount > 0) {
-                         <div class="row">
-                             <div class="column">
-                                 <p>
-                                     @if (objectRequestViewModel.ChatCount == 1) {
-                                         @T("One person reacted to this request.", objectRequestViewModel.ChatCount)
-                                     }
-                                     else if (objectRequestViewModel.ChatCount > 1) {
-                                         @T("{0} people reacted to this request.", objectRequestViewModel.ChatCount)
-                                     }
-                                 </p>
-                             </div>
-                         </div>
-                     }
-                } else if (chatMessageViewModel != null) {
+                        <div class="row">
+                            <div class="column">
+                                <p>
+                                    @if (objectRequestViewModel.ChatCount == 1) {
+                                        @T("One person reacted to this request.", objectRequestViewModel.ChatCount)
+                                    }
+                                    else if (objectRequestViewModel.ChatCount > 1) {
+                                        @T("{0} people reacted to this request.", objectRequestViewModel.ChatCount)
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="column">
+                            @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes button button-small"})
+                        </div>
+                        <div class="column">
+                            @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow button button-small" })
+                        </div>
+                        <div class="column">
+                            @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no button button-small" })
+                        </div>
+                    </div>
+                }
+                else if (chatMessageViewModel != null) {
                     <div class="row">
                         <div class="column">
                             <h5>@T("{0} left you a message about (a) {1}", chatMessageViewModel.UserName, chatMessageViewModel.Description)</h5>
@@ -53,5 +67,5 @@ else {
         @T("You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started.")
     </p>
 
-    Html.RenderPartial("NewObjectRequest", new WijDelen.ObjectSharing.ViewModels.NewObjectRequestViewModel());
+    Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());
 }

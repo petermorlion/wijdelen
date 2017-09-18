@@ -155,6 +155,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
             ((ObjectRequestViewModel)result[0]).UserName.Should().Be("Carl Carlson");
             ((ObjectRequestViewModel)result[0]).ChatCount.Should().Be(3);
             ((ObjectRequestViewModel)result[0]).ExtraInfo.Should().Be("For drinking");
+            ((ObjectRequestViewModel)result[0]).ObjectRequestId.Should().Be(_objectRequest2.AggregateId);
 
             ((ChatMessageViewModel)result[1]).ChatId.Should().Be(_chatMessageViewModel.ChatId);
             ((ChatMessageViewModel)result[1]).DateTime.Should().Be(_chatMessageViewModel.DateTime.ToLocalTime());
@@ -166,6 +167,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
             ((ObjectRequestViewModel)result[2]).UserName.Should().Be("Moe Szyslak");
             ((ObjectRequestViewModel)result[2]).ChatCount.Should().Be(12);
             ((ObjectRequestViewModel)result[2]).ExtraInfo.Should().Be("For sneaking");
+            ((ObjectRequestViewModel)result[2]).ObjectRequestId.Should().Be(_objectRequest1.AggregateId);
 
             result.Should().NotContain(x => x is ObjectRequestViewModel && ((ObjectRequestViewModel)x).Description == _blockedObjectRequest.Description);
             result.Should().NotContain(x => x is ObjectRequestViewModel && ((ObjectRequestViewModel)x).Description == _objectRequestInOtherGroup.Description);
