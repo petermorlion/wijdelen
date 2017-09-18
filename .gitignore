@@ -198,3 +198,4 @@ src/Rebracer.xml
 # =========================
 
 src/Orchard.Web/Themes/WijDelen.Groups/node_modules
+src/Orchard.Web/Modules/WijDelen.Reports/node_modules

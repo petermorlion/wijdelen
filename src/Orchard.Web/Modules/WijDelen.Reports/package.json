@@ -9,6 +9,8 @@
   "author": "Peter Morlion",
   "license": "UNLICENSED",
   "dependencies": {
-    "milligram-less": "^1.0.0"
+    "file-saver": "^1.3.3",
+    "milligram-less": "^1.0.0",
+    "xlsx": "^0.11.3"
   }
 }

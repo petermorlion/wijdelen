@@ -1,8 +1,8 @@
 [
-    {
-      "inputs": [
-        "Assets/Styles.less"
-      ],
-        "output": "Styles/WijDelen.Reports.Styles.css"
-    }
+  {
+    "inputs": [
+      "Assets/Styles.less"
+    ],
+    "output": "Styles/WijDelen.Reports.Styles.css"
+  }
 ]
