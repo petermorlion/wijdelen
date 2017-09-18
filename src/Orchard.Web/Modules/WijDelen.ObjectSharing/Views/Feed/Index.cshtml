@@ -1,4 +1,5 @@
 ﻿@using WijDelen.ObjectSharing.ViewModels
+@using WijDelen.ObjectSharing.Models
 @model FeedViewModel
 
 @{
@@ -9,7 +10,7 @@
     <ol class="feedlist">
         @foreach (var item in Model.Items) {
             <li>
-                if (item.ItemType == FeedItemType.ObjectRequest) {
+                @if (item.ItemType == FeedItemType.ObjectRequest) {
                     <div class="row">
                         <div class="column">
                             <h5>@T("{0} is looking for (a)", item.SendingUserName)</h5>
@@ -17,7 +18,8 @@
                             <p>@item.ExtraInfo</p>
                         </div>
                     </div>
-                    if (objectRequestViewModel.ChatCount > 0) {
+                    if (item.ConfirmationCount > 0)
+                    {
                         <div class="row">
                             <div class="column">
                                 <p>
@@ -31,7 +33,9 @@
                             </div>
                         </div>
                     }
-                    if (objectRequestViewModel.CurrentUsersResponse.HasValue) {
+                    <!-- TODO: check if user has already responded-->
+                    if (false)
+                    {
                         <div class="row">
                             <div class="column">
                                 @T("You have already replied to this request.") @*@Html.ActionLink(T("See messages"), "Index", "Chat", new {id = }, new {})*@

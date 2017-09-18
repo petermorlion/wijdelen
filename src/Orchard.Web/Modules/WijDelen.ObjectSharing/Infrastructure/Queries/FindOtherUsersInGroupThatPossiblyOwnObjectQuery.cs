@@ -24,7 +24,11 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
         }
 
         public IEnumerable<IUser> GetResults(int userId, string description) {
-            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().Single();
+            var user = _contentManager.Query().ForType("User").Where<UserPartRecord>(x => x.Id == userId).List().SingleOrDefault();
+            if (user == null) {
+                return new List<IUser>();
+            }
+
             var group = user.As<GroupMembershipPart>().Group;
             var otherUsersInGroup = _contentManager
                 .Query<UserPart, UserPartRecord>()

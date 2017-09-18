@@ -37,9 +37,10 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _feedItemRepositoryMock = new Mock<IRepository<FeedItemRecord>>();
             _feedItemRepositoryMock.Setup(x => x.Update(It.IsAny<FeedItemRecord>())).Callback((FeedItemRecord i) => { _persistedItems.Add(i); });
 
-            _moe = new UserFactory().Create("moe.szyslak@simpsons.com", "moe.szyslak@simpsons.com", "Moe", "Szyslak");
-            _carl = new UserFactory().Create("carl@simpsons.com", "carl@simpsons.com", "Carl", "Carlson");
-            _lenny = new UserFactory().Create("lenny@simpsons.com", "lenny@simpsons.com", "Lenny", "Lenford");
+            var userFactory = new UserFactory();
+            _moe = userFactory.Create("moe.szyslak@simpsons.com", "moe.szyslak@simpsons.com", "Moe", "Szyslak");
+            _carl = userFactory.Create("carl@simpsons.com", "carl@simpsons.com", "Carl", "Carlson");
+            _lenny = userFactory.Create("lenny@simpsons.com", "lenny@simpsons.com", "Lenny", "Lenford");
 
             var userQueryMock = new Mock<IGetUserByIdQuery>();
             userQueryMock.Setup(x => x.GetResult(_moe.Id)).Returns(_moe);

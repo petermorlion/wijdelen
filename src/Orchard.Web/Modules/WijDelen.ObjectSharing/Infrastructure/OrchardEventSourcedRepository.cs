@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json;
 using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
@@ -16,10 +15,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         public OrchardEventSourcedRepository(IRepository<EventRecord> orchardRepository, IEventBus eventBus) {
-            _jsonSerializerSettings = new JsonSerializerSettings {
-                TypeNameHandling = TypeNameHandling.All,
-                TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
-            };
+            _jsonSerializerSettings = new VersionedEventSerializerSettings();
 
             _orchardRepository = orchardRepository;
             _eventBus = eventBus;
@@ -48,8 +44,8 @@ namespace WijDelen.ObjectSharing.Infrastructure {
         }
 
         private IVersionedEvent Deserialize(EventRecord e) {
-            var deserializeObject = JsonConvert.DeserializeObject(e.Payload, _jsonSerializerSettings);
-            return (IVersionedEvent)deserializeObject;
+            var deserializeObject = JsonConvert.DeserializeObject<IVersionedEvent>(e.Payload, _jsonSerializerSettings);
+            return deserializeObject;
         }
 
         public void Save(T eventSourced, string correlationId) {

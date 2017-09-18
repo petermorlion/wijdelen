@@ -7,6 +7,7 @@ namespace WijDelen.ObjectSharing {
         public static readonly Permission BlockObjectRequests = new Permission {Description = "Block Object Requests", Name = "BlockObjectRequests"};
         public static readonly Permission ManageArchetypes = new Permission {Description = "Manage Archetypes", Name = "ManageArchetypes"};
         public static readonly Permission ManageObjectRequests = new Permission {Description = "Manage Object Request", Name = "ManageObjectRequests"};
+        public static readonly Permission ManageFeeds = new Permission {Description = "Manage Feeds", Name = "ManageFeeds"};
 
         public virtual Feature Feature { get; set; }
 
@@ -14,7 +15,8 @@ namespace WijDelen.ObjectSharing {
             return new[] {
                 BlockObjectRequests,
                 ManageArchetypes,
-                ManageObjectRequests
+                ManageObjectRequests,
+                ManageFeeds
             };
         }
 
@@ -22,7 +24,7 @@ namespace WijDelen.ObjectSharing {
             return new[] {
                 new PermissionStereotype {
                     Name = "Administrator",
-                    Permissions = new[] {BlockObjectRequests, ManageArchetypes, ManageObjectRequests}
+                    Permissions = new[] {BlockObjectRequests, ManageArchetypes, ManageObjectRequests, ManageFeeds}
                 },
                 new PermissionStereotype {
                     Name = "PeergroupsAdministrator",

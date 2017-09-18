@@ -1,0 +1,11 @@
+﻿@{
+    Layout.Title = T("Feeds");
+}
+
+@using (Html.BeginFormAntiForgeryPost()) {
+    <fieldset class="bulk-actions">
+        <div class="manage">
+            <button type="submit" name="submit" value="RebuildFeeds">@T("Rebuild feeds")</button>
+        </div>
+    </fieldset>
+}

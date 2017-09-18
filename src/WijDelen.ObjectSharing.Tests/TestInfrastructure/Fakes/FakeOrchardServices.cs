@@ -8,7 +8,7 @@ namespace WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes {
     public class FakeOrchardServices : IOrchardServices {
         public IContentManager ContentManager { get; }
         public ITransactionManager TransactionManager { get; }
-        public IAuthorizer Authorizer { get; }
+        public IAuthorizer Authorizer { get; set; }
         public INotifier Notifier { get; set; }
         public dynamic New { get; }
         public WorkContext WorkContext { get; } = new FakeWorkContext();

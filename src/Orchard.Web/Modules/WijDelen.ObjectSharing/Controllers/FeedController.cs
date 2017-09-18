@@ -1,13 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Orchard;
-using Orchard.ContentManagement;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;
-using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]

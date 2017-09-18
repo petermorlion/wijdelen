@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ArchetypesControllerTests.cs" />
     <Compile Include="Controllers\ChatControllerTests.cs" />
+    <Compile Include="Controllers\FeedAdminControllerTests.cs" />
     <Compile Include="Controllers\FeedControllerTests.cs" />
     <Compile Include="Controllers\GroupObjectRequestControllerTests.cs" />
     <Compile Include="Controllers\ObjectRequestAdminControllerTests.cs" />

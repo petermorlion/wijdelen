@@ -9,9 +9,7 @@ using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class FeedReadModelGenerator :
-        IEventHandler<ObjectRequested>,
-        IEventHandler<ChatMessageAdded>,
-        IEventHandler<ObjectRequestConfirmed> {
+        IFeedReadModelGenerator {
         private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IRepository<FeedItemRecord> _feedItemRepository;
         private readonly IFindOtherUsersInGroupThatPossiblyOwnObjectQuery _findOtherUsersInGroupThatPossiblyOwnObjectQuery;
@@ -34,8 +32,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         public void Handle(ChatMessageAdded e) {
             var chat = _chatRepository.Fetch(x => x.ChatId == e.SourceId).Single();
             var objectRequest = _objectRequestRepository.Fetch(x => x.AggregateId == chat.ObjectRequestId).Single();
-            var sendingUserId = chat.RequestingUserId == e.UserId ? chat.ConfirmingUserId : chat.RequestingUserId;
-            var sendingUser = _userQuery.GetResult(sendingUserId);
+            var receivingUserId = chat.RequestingUserId == e.UserId ? chat.ConfirmingUserId : chat.RequestingUserId;
+            var sendingUser = _userQuery.GetResult(e.UserId);
 
             var feedItem = new FeedItemRecord {
                 DateTime = e.DateTime,
@@ -43,8 +41,8 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 ExtraInfo = objectRequest.ExtraInfo,
                 ItemType = FeedItemType.ChatMessage,
                 ObjectRequestId = objectRequest.AggregateId,
-                SendingUserName = sendingUser.GetUserDisplayName(),
-                UserId = sendingUserId,
+                SendingUserName = sendingUser?.GetUserDisplayName() ?? "",
+                UserId = receivingUserId,
                 ChatId = chat.ChatId
             };
 
@@ -64,7 +62,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                     ExtraInfo = e.ExtraInfo,
                     ItemType = FeedItemType.ObjectRequest,
                     ObjectRequestId = e.SourceId,
-                    SendingUserName = user.GetUserDisplayName(),
+                    SendingUserName = user?.GetUserDisplayName() ?? "",
                     UserId = otherUser.Id
                 };
 

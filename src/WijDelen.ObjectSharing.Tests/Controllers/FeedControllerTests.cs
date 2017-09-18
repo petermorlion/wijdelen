@@ -32,10 +32,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var fakeOrchardServices = new FakeOrchardServices();
             fakeOrchardServices.WorkContext.CurrentUser = _user;
 
-            _item1 = new FeedItemRecord();
-            _item2 = new FeedItemRecord();
+            _item1 = new FeedItemRecord {UserId = _user.Id};
+            _item2 = new FeedItemRecord {UserId = _user.Id};
+            var item3 = new FeedItemRecord {UserId = 66};
             var repositoryMock = new Mock<IRepository<FeedItemRecord>>();
-            repositoryMock.SetRecords(new[] {_item1, _item2});
+            repositoryMock.SetRecords(new[] {_item1, _item2, item3});
 
             builder.RegisterInstance(fakeOrchardServices).As<IOrchardServices>();
             builder.RegisterInstance(repositoryMock.Object).As<IRepository<FeedItemRecord>>();

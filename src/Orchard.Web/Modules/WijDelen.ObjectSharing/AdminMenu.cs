@@ -40,7 +40,12 @@ namespace WijDelen.ObjectSharing {
                         .Caption(T("Requests"))
                         .Position("2")
                         .Action("Index", "ObjectRequestAdmin", new {area = "WijDelen.ObjectSharing"})
-                        .Permission(Permissions.ManageObjectRequests)));
+                        .Permission(Permissions.ManageObjectRequests)))
+                    .Add(subItem => subItem
+                        .Caption(T("Feeds"))
+                        .Position("3")
+                        .Action("Index", "FeedAdmin", new {area = "WijDelen.ObjectSharing"})
+                        .Permission(Permissions.ManageFeeds));
         }
     }
 }
