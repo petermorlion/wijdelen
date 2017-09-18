@@ -65,6 +65,10 @@
       <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
@@ -198,12 +202,14 @@
     <Compile Include="Domain\Entities\ObjectRequest.cs" />
     <Compile Include="Infrastructure\Queries\FindAllArchetypesQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindAllSynonymsQuery.cs" />
+    <Compile Include="Infrastructure\Queries\FindFeedViewModelsQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindOtherUsersInGroupThatPossiblyOwnObjectQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindSynonymsByExactMatchQuery.cs" />
     <Compile Include="Infrastructure\Queries\FindUsersByIdsQuery.cs" />
     <Compile Include="Infrastructure\Queries\GetUserByIdQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindAllArchetypesQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindAllSynonymsQuery.cs" />
+    <Compile Include="Infrastructure\Queries\IFindFeedViewModelsQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindOtherUsersInGroupThatPossiblyOwnObjectQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindSynonymsByExactMatchQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindArchetypesByTitleQuery.cs" />
@@ -224,6 +230,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Services\IRandomSampleService.cs" />
     <Compile Include="Domain\Services\RandomSampleService.cs" />
+    <Compile Include="ShellSettingsExtensions.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestAdminViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestDetailsAdminViewModel.cs" />
     <Compile Include="ViewModels\Admin\ObjectRequestRecordViewModel.cs" />
@@ -232,6 +239,8 @@
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ConfirmStopObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\EditArchetypedSynonymViewModel.cs" />
+    <Compile Include="ViewModels\Feed\ChatMessageViewModel.cs" />
+    <Compile Include="ViewModels\Feed\IFeedItemViewModel.cs" />
     <Compile Include="ViewModels\Feed\IndexViewModel.cs" />
     <Compile Include="ViewModels\Feed\ObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\GroupObjectRequestViewModel.cs" />

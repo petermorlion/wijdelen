@@ -747,3 +747,18 @@ msgstr "Eén persoon heeft gereageerd op deze oproep."
 #| msgid "{0} people reacted to this request."
 msgid "{0} people reacted to this request."
 msgstr "{0} personen hebben gereageerd op deze oproep."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "{0} left you a message about (a) {1}"
+msgid "{0} left you a message about (a) {1}"
+msgstr "{0} heeft je een bericht gestuurd over (een) {1}"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "{0} is looking for (a)"
+msgid "{0} is looking for (a)"
+msgstr "{0} zoekt (een)"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "Reply"
+msgid "Reply"
+msgstr "Antwoorden"
