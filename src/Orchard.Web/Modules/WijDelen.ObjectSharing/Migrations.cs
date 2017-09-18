@@ -192,8 +192,18 @@ namespace WijDelen.ObjectSharing {
         }
 
         public int UpdateFrom17() {
-            SchemaBuilder.AlterTable(typeof(ObjectRequestRecord).Name, table => table
-                .AddColumn<int>("ChatCount", column => column.NotNull().WithDefault(0)));
+            SchemaBuilder.CreateTable(typeof(FeedItemRecord).Name, table => table
+                    .Column<int>("Id", column => column.PrimaryKey().Identity())
+                    .Column<DateTime>("DateTime", column => column.NotNull())
+                    .Column<string>("Description")
+                    .Column<string>("ExtraInfo", column => column.Unlimited())
+                    .Column<string>("ItemType", column => column.NotNull())
+                    .Column<Guid>("ObjectRequestId", column => column.NotNull())
+                    .Column<Guid>("ChatId", column => column.NotNull())
+                    .Column<int>("ChatCount", column => column.NotNull())
+                    .Column<string>("SendingUserName", column => column.NotNull())
+                    .Column<int>("UserId", column => column.NotNull())
+            );
 
             return 18;
         }

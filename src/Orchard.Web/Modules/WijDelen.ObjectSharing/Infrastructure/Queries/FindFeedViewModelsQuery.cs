@@ -65,7 +65,6 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
                     DateTime = objectRequestRecord.CreatedDateTime.ToLocalTime(),
                     Description = objectRequestRecord.Description,
                     UserName = user?.GetUserDisplayName(),
-                    ChatCount = objectRequestRecord.ChatCount,
                     ExtraInfo = objectRequestRecord.ExtraInfo,
                     ObjectRequestId = objectRequestRecord.AggregateId,
                     CurrentUsersResponse = answer

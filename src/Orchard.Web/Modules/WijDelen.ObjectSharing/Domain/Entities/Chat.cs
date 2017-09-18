@@ -25,7 +25,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void AddMessage(DateTime dateTime, int userId, string message) {
-            Update(new ChatMessageAdded {ChatId = Id, DateTime = dateTime, Message = message, UserId = userId});
+            Update(new ChatMessageAdded {DateTime = dateTime, Message = message, UserId = userId});
         }
 
         private void OnChatStarted(ChatStarted chatStarted) {

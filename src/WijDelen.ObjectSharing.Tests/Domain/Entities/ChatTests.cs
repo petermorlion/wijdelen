@@ -59,7 +59,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             chat.Events.Last().As<ChatMessageAdded>().DateTime.Should().Be(dateTime);
             chat.Events.Last().As<ChatMessageAdded>().UserId.Should().Be(2);
             chat.Events.Last().As<ChatMessageAdded>().Message.Should().Be("Hello");
-            chat.Events.Last().As<ChatMessageAdded>().ChatId.Should().Be(chat.Id);
+            chat.Events.Last().As<ChatMessageAdded>().SourceId.Should().Be(chat.Id);
 
             chat.Messages.Single().ShouldBeEquivalentTo(new ChatMessage(dateTime, 2, "Hello"));
         }

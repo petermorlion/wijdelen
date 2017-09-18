@@ -15,7 +15,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         [Test]
         public void WhenChatMessageAdded() {
             var chatMessageAdded = new ChatMessageAdded {
-                ChatId = Guid.NewGuid(),
+                SourceId = Guid.NewGuid(),
                 DateTime = DateTime.Now,
                 Message = "Message",
                 UserId = 22
@@ -40,7 +40,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             record.UserName.Should().Be("Moe Szyslak");
             record.Message.Should().Be("Message");
             record.DateTime.Should().Be(chatMessageAdded.DateTime);
-            record.ChatId.Should().Be(chatMessageAdded.ChatId);
+            record.ChatId.Should().Be(chatMessageAdded.SourceId);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             var user = _userQuery.GetResult(e.UserId);
 
             var newRecord = new ChatMessageRecord {
-                ChatId = e.ChatId,
+                ChatId = e.SourceId,
                 DateTime = e.DateTime,
                 Message = e.Message,
                 UserId = e.UserId,

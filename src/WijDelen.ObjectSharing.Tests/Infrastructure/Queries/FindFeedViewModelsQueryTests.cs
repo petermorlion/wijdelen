@@ -74,7 +74,6 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
                 GroupId = _groupId,
                 UserId = moe.Id,
                 Status = ObjectRequestStatus.None.ToString(),
-                ChatCount = 12,
                 ExtraInfo = "For sneaking"
             };
 
@@ -86,7 +85,6 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
                 GroupId = _groupId,
                 UserId = carl.Id,
                 Status = ObjectRequestStatus.None.ToString(),
-                ChatCount = 3,
                 ExtraInfo = "For drinking"
             };
 
@@ -97,7 +95,6 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
                 GroupId = _groupId,
                 UserId = _userId,
                 Status = ObjectRequestStatus.None.ToString(),
-                ChatCount = 4
             };
 
             _blockedObjectRequest = new ObjectRequestRecord

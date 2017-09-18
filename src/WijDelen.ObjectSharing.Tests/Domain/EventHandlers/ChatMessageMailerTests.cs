@@ -71,7 +71,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         [Test]
         public void WhenMessageAdded() {
             var e = new ChatMessageAdded {
-                ChatId = _chatId,
+                SourceId = _chatId,
                 UserId = 22,
                 Message = "I have Reebok Pumps"
             };
@@ -86,7 +86,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _userMock.As<UserDetailsPart>().ReceiveMails = false;
             var e = new ChatMessageAdded
             {
-                ChatId = _chatId,
+                SourceId = _chatId,
                 UserId = 22,
                 Message = "I have Reebok Pumps"
             };

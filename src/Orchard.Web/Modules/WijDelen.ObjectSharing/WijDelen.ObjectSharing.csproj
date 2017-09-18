@@ -157,6 +157,7 @@
     <Compile Include="Domain\EventHandlers\ChatMessageReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ChatReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
+    <Compile Include="Domain\EventHandlers\FeedReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGenerator.cs" />
@@ -216,6 +217,8 @@
     <Compile Include="Infrastructure\Queries\FindArchetypesByTitleQuery.cs" />
     <Compile Include="Infrastructure\Queries\IFindUsersByIdsQuery.cs" />
     <Compile Include="Infrastructure\Queries\IGetUserByIdQuery.cs" />
+    <Compile Include="Models\FeedItemRecord.cs" />
+    <Compile Include="Models\FeedItemType.cs" />
     <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
     <Compile Include="Models\UserInventoryRecord.cs" />
     <Compile Include="Migrations.cs" />
