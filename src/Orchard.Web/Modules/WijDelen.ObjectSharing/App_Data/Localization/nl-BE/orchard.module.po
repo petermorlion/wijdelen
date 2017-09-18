@@ -777,3 +777,13 @@ msgstr "Nu even niet"
 #| msgid "No, I do not own this"
 msgid "No, I do not own this"
 msgstr "Nee, dat heb ik niet"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "You have already replied to this request."
+msgid "You have already replied to this request."
+msgstr "Je hebt al geantwoord op deze oproep."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+#| msgid "See messages"
+msgid "See messages"
+msgstr "Bekijk berichten"

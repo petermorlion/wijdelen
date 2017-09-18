@@ -38,17 +38,26 @@
                             </div>
                         </div>
                     }
-                    <div class="row">
-                        <div class="column">
-                            @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes button button-small"})
+                    if (objectRequestViewModel.CurrentUsersResponse.HasValue) {
+                        <div class="row">
+                            <div class="column">
+                                @T("You have already replied to this request.") @*@Html.ActionLink(T("See messages"), "Index", "Chat", new {id = }, new {})*@
+                            </div>
                         </div>
-                        <div class="column">
-                            @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow button button-small" })
+                    }
+                    else {
+                        <div class="row">
+                            <div class="column">
+                                @Html.ActionLink(T("Yes, I own this"), "Confirm", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-yes button button-small"})
+                            </div>
+                            <div class="column">
+                                @Html.ActionLink(T("Not right now"), "DenyForNow", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-notnow button button-small"})
+                            </div>
+                            <div class="column">
+                                @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no button button-small"})
+                            </div>
                         </div>
-                        <div class="column">
-                            @Html.ActionLink(T("No, I do not own this"), "Deny", new {area = "WijDelen.ObjectSharing", controller = "ObjectRequestResponse", id = objectRequestViewModel.ObjectRequestId}, new {@class = "objectrequestanswer objectrequestanswer-no button button-small" })
-                        </div>
-                    </div>
+                    }
                 }
                 else if (chatMessageViewModel != null) {
                     <div class="row">

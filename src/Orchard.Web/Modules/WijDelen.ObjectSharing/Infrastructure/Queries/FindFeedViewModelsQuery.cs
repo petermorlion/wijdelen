@@ -11,6 +11,7 @@ using WijDelen.UserImport.Models;
 namespace WijDelen.ObjectSharing.Infrastructure.Queries {
     public class FindFeedViewModelsQuery : IFindFeedViewModelsQuery {
         private readonly IFindUsersByIdsQuery _findUsersByIdsQuery;
+        private readonly IRepository<ObjectRequestResponseRecord> _objectRequestResponseRepository;
         private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly ShellSettings _shellSettings;
         private readonly ITransactionManager _transactionManager;
@@ -19,11 +20,13 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
             IRepository<ObjectRequestRecord> objectRequestRepository,
             ITransactionManager transactionManager,
             ShellSettings shellSettings,
-            IFindUsersByIdsQuery findUsersByIdsQuery) {
+            IFindUsersByIdsQuery findUsersByIdsQuery,
+            IRepository<ObjectRequestResponseRecord> objectRequestResponseRepository) {
             _objectRequestRepository = objectRequestRepository;
             _transactionManager = transactionManager;
             _shellSettings = shellSettings;
             _findUsersByIdsQuery = findUsersByIdsQuery;
+            _objectRequestResponseRepository = objectRequestResponseRepository;
         }
 
         public IList<IFeedItemViewModel> GetResults(int groupId, int userId, int take) {
@@ -47,12 +50,16 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
                 .Take(take)
                 .ToList();
 
+            var objectRequestIds = objectRequests.Select(x => x.AggregateId).ToList();
+            var objectRequestResponses = _objectRequestResponseRepository.Fetch(x => objectRequestIds.Contains(x.ObjectRequestId) && x.UserId == userId).ToList();
+
             var userIds = objectRequests.Select(x => x.UserId).Distinct().ToList();
             var users = _findUsersByIdsQuery.GetResult(userIds.ToArray()).ToList();
 
             var viewModels = new List<ObjectRequestViewModel>();
             foreach (var objectRequestRecord in objectRequests) {
                 var user = users.SingleOrDefault(x => x.Id == objectRequestRecord.UserId);
+                var answer = objectRequestResponses.SingleOrDefault(x => x.ObjectRequestId == objectRequestRecord.AggregateId)?.Response;
 
                 viewModels.Add(new ObjectRequestViewModel {
                     DateTime = objectRequestRecord.CreatedDateTime.ToLocalTime(),
@@ -60,7 +67,8 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
                     UserName = user?.GetUserDisplayName(),
                     ChatCount = objectRequestRecord.ChatCount,
                     ExtraInfo = objectRequestRecord.ExtraInfo,
-                    ObjectRequestId = objectRequestRecord.AggregateId
+                    ObjectRequestId = objectRequestRecord.AggregateId,
+                    CurrentUsersResponse = answer
                 });
             }
 
@@ -81,8 +89,8 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
                                                    "ORDER BY cm.DateTime DESC")
                 .SetParameter("userId", userId);
 
-            var objectses = chatQuery.List<object[]>();
-            return objectses.Select(x => new ChatMessageViewModel {
+            var records = chatQuery.List<object[]>();
+            return records.Select(x => new ChatMessageViewModel {
                 ChatId = Guid.Parse(x[0].ToString()),
                 Description = x[1].ToString(),
                 DateTime = DateTime.Parse(x[2].ToString()).ToLocalTime(),

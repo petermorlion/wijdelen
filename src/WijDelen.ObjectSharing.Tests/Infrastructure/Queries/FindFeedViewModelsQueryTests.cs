@@ -7,6 +7,7 @@ using NHibernate;
 using NUnit.Framework;
 using Orchard.Data;
 using Orchard.Environment.Configuration;
+using WijDelen.ObjectSharing.Domain.Enums;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
@@ -47,8 +48,8 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
             transactionManagerMock.Setup(x => x.GetSession()).Returns(sessionMock.Object);
             var sqlQueryMock = new Mock<ISQLQuery>();
             sessionMock.Setup(x => x.CreateSQLQuery(It.IsAny<string>())).Returns(sqlQueryMock.Object);
-            var queryMock = new Mock<IQuery>();
-            sqlQueryMock.Setup(x => x.SetParameter("userId", _userId)).Returns(queryMock.Object);
+            var chatQueryMock = new Mock<IQuery>();
+            sqlQueryMock.Setup(x => x.SetParameter("userId", _userId)).Returns(chatQueryMock.Object);
             _chatMessageViewModel = new ChatMessageViewModel {
                 ChatId = Guid.NewGuid(),
                 DateTime = new DateTime(2017, 9, 12, 0, 0, 0, DateTimeKind.Utc),
@@ -56,7 +57,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
                 UserName = "Lenny"
             };
 
-            queryMock.Setup(x => x.List<object[]>()).Returns(new[] {
+            chatQueryMock.Setup(x => x.List<object[]>()).Returns(new[] {
                 new object[] {
                     _chatMessageViewModel.ChatId,
                     _chatMessageViewModel.Description,
@@ -64,14 +65,6 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
                     _chatMessageViewModel.UserName
                 }
             });
-
-            var shellSettings = new ShellSettings();
-
-            builder.RegisterInstance(findUsersQueryMock.Object).As<IFindUsersByIdsQuery>();
-            builder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
-            builder.RegisterInstance(transactionManagerMock.Object).As<ITransactionManager>();
-            builder.RegisterInstance(shellSettings).AsSelf();
-            builder.RegisterType<FindFeedViewModelsQuery>();
 
             _objectRequest1 = new ObjectRequestRecord
             {
@@ -139,6 +132,21 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
 
             objectRequestRepositoryMock.SetRecords(objectRequestRecords);
 
+            var objectRequestResponseRepositoryMock = new Mock<IRepository<ObjectRequestResponseRecord>>();
+            objectRequestResponseRepositoryMock.SetRecords(new[] {
+                new ObjectRequestResponseRecord { ObjectRequestId = _objectRequest2.AggregateId, UserId = _userId, Response = ObjectRequestAnswer.Yes },
+                new ObjectRequestResponseRecord { ObjectRequestId = _objectRequest1.AggregateId, UserId = carl.Id },
+            });
+
+            var shellSettings = new ShellSettings();
+
+            builder.RegisterInstance(findUsersQueryMock.Object).As<IFindUsersByIdsQuery>();
+            builder.RegisterInstance(objectRequestRepositoryMock.Object).As<IRepository<ObjectRequestRecord>>();
+            builder.RegisterInstance(transactionManagerMock.Object).As<ITransactionManager>();
+            builder.RegisterInstance(objectRequestResponseRepositoryMock.Object).As<IRepository<ObjectRequestResponseRecord>>();
+            builder.RegisterInstance(shellSettings).AsSelf();
+            builder.RegisterType<FindFeedViewModelsQuery>();
+
             var container = builder.Build();
             _query = container.Resolve<FindFeedViewModelsQuery>();
         }
@@ -156,6 +164,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
             ((ObjectRequestViewModel)result[0]).ChatCount.Should().Be(3);
             ((ObjectRequestViewModel)result[0]).ExtraInfo.Should().Be("For drinking");
             ((ObjectRequestViewModel)result[0]).ObjectRequestId.Should().Be(_objectRequest2.AggregateId);
+            ((ObjectRequestViewModel)result[0]).CurrentUsersResponse.Should().Be(ObjectRequestAnswer.Yes);
 
             ((ChatMessageViewModel)result[1]).ChatId.Should().Be(_chatMessageViewModel.ChatId);
             ((ChatMessageViewModel)result[1]).DateTime.Should().Be(_chatMessageViewModel.DateTime.ToLocalTime());
@@ -168,6 +177,7 @@ namespace WijDelen.ObjectSharing.Tests.Infrastructure.Queries {
             ((ObjectRequestViewModel)result[2]).ChatCount.Should().Be(12);
             ((ObjectRequestViewModel)result[2]).ExtraInfo.Should().Be("For sneaking");
             ((ObjectRequestViewModel)result[2]).ObjectRequestId.Should().Be(_objectRequest1.AggregateId);
+            ((ObjectRequestViewModel)result[2]).CurrentUsersResponse.Should().BeNull();
 
             result.Should().NotContain(x => x is ObjectRequestViewModel && ((ObjectRequestViewModel)x).Description == _blockedObjectRequest.Description);
             result.Should().NotContain(x => x is ObjectRequestViewModel && ((ObjectRequestViewModel)x).Description == _objectRequestInOtherGroup.Description);
