@@ -33,9 +33,9 @@
             @Html.TextBoxFor(m => m.StopDate, "{0:d/MM/yyyy}", new {@class = "text", id = "reportsdetails-stopdate"})
 
             <button type="submit">@T("Apply")</button>
+
+            <a id="exportToExcelLink">@T("Export to Excel")</a>
         }
-        
-        <a id="exportToExcelLink">Export to Excel</a>
     </div>
 </div>
 

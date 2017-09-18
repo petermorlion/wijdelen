@@ -187,3 +187,8 @@ msgstr "Nee"
 #| msgid "Not Now"
 msgid "Not Now"
 msgstr "Nu niet"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
+#| msgid "Export to Excel"
+msgid "Export to Excel"
+msgstr "Exporteren naar Excel"
