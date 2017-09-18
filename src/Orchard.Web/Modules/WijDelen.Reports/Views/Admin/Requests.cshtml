@@ -34,6 +34,8 @@
 
             <button type="submit">@T("Apply")</button>
         }
+        
+        <a id="exportToExcelLink">Export to Excel</a>
     </div>
 </div>
 
@@ -44,35 +46,38 @@
                 @T("There is not data to display. Did you select a group?")
             </div>
         }
-
-        <table class="reports-numbers">
-            <thead>
-            <tr>
-                <th>@T("Created")</th>
-                <th>@T("Email")</th>
-                <th>@T("Description")</th>
-                <th>@T("Mails")</th>
-                <th>@T("Yes")</th>
-                <th>@T("No")</th>
-                <th>@T("Not Now")</th>
-            </tr>
-            </thead>
-            <tbody>
-            @{
-                foreach (var detailsViewModel in Model.Details) {
+        
+        <div id="requestsreport">
+            <table class="reports-numbers">
+                <thead>
                     <tr>
-                        <td>@detailsViewModel.CreatedDateTime</td>
-                        <td>@detailsViewModel.Email</td>
-                        <td>@detailsViewModel.Description</td>
-                        <td>@detailsViewModel.MailCount</td>
-                        <td>@detailsViewModel.YesCount</td>
-                        <td>@detailsViewModel.NoCount</td>
-                        <td>@detailsViewModel.NotNowCount</td>
+                        <th>@T("Created")</th>
+                        <th>@T("Email")</th>
+                        <th>@T("Description")</th>
+                        <th>@T("Mails")</th>
+                        <th>@T("Yes")</th>
+                        <th>@T("No")</th>
+                        <th>@T("Not Now")</th>
                     </tr>
-                }
-            }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var detailsViewModel in Model.Details)
+                        {
+                            <tr>
+                                <td>@detailsViewModel.CreatedDateTime</td>
+                                <td>@detailsViewModel.Email</td>
+                                <td>@detailsViewModel.Description</td>
+                                <td>@detailsViewModel.MailCount</td>
+                                <td>@detailsViewModel.YesCount</td>
+                                <td>@detailsViewModel.NoCount</td>
+                                <td>@detailsViewModel.NotNowCount</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -95,6 +100,17 @@
 
             $("#reportsdetails-startdate").calendarsPicker(calendarPickerOptions);
             $("#reportsdetails-stopdate").calendarsPicker(calendarPickerOptions);
+
+            $("#exportToExcelLink").click(function() {
+                var dataType = 'data:application/vnd.ms-excel';
+                var requestsReport = document.getElementById('requestsreport');
+                var tableHtml = requestsReport.outerHTML.replace(/ /g, '%20');
+
+                var a = document.createElement('a');
+                a.href = dataType + ', ' + tableHtml;
+                a.download = 'exported_table_' + Math.floor((Math.random() * 9999999) + 1000000) + '.xls';
+                a.click();
+            });
         });
     </script>
 }
