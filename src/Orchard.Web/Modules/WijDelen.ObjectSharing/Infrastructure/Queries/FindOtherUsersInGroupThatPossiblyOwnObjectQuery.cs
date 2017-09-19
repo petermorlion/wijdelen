@@ -30,6 +30,10 @@ namespace WijDelen.ObjectSharing.Infrastructure.Queries {
             }
 
             var group = user.As<GroupMembershipPart>().Group;
+            if (group == null) {
+                return new List<IUser>();
+            }
+
             var otherUsersInGroup = _contentManager
                 .Query<UserPart, UserPartRecord>()
                 .Where<GroupMembershipPartRecord>(x => x.Group.Id == group.Id)

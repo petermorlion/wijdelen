@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Orchard;
@@ -9,8 +8,6 @@ using Orchard.UI.Admin;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.Events;
-using WijDelen.ObjectSharing.Domain.EventSourcing;
-using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Infrastructure;
 using WijDelen.ObjectSharing.Models;
 
