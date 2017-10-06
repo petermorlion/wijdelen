@@ -1,10 +1,13 @@
 [
-    {
-      "inputs": [
-        "Assets/normalize.css",
-        "node_modules/milligram-less/dist/milligram.less",
-        "Assets/Styles.less"
-      ],
-        "output": "Styles/Styles.css"
-    }
+  {
+    "inputs": [
+      "Assets/normalize.css",
+      "node_modules/milligram-less/dist/milligram.less",
+      "Assets/Styles.less"
+    ],
+    "output": "Styles/Styles.css",
+    "watch": [
+      "Assets/*.less"
+    ]
+  }
 ]
