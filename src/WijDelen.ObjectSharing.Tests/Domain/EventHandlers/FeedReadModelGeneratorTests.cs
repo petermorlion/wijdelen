@@ -195,7 +195,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
-        public void WhenObjectRequestConfirmed_ShouldRemoveFeedItemForUser() {
+        public void WhenObjectRequestConfirmed_ShouldMarkAsConfirmed() {
             var e = new ObjectRequestConfirmed {
                 SourceId = _existingObjectRequestId,
                 ConfirmingUserId = _lenny.Id,
@@ -204,7 +204,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _generator.Handle(e);
 
-            _feedItemRepositoryMock.Verify(x => x.Delete(_feedItemRecord));
+            _feedItemRecord.IsConfirmed.Should().BeTrue();
         }
 
         [Test]
@@ -229,6 +229,20 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _generator.Handle(e);
 
             _feedItemRepositoryMock.Verify(x => x.Delete(_feedItemRecord));
+        }
+
+        [Test]
+        public void WhenChatStarted_ShouldMarkAsConfirmed() {
+            var chatId = Guid.NewGuid();
+            var e = new ChatStarted {
+                ObjectRequestId = _existingObjectRequestId,
+                ConfirmingUserId = _lenny.Id,
+                SourceId = chatId
+            };
+
+            _generator.Handle(e);
+
+            _feedItemRecord.ChatId.Should().Be(chatId);
         }
     }
 }

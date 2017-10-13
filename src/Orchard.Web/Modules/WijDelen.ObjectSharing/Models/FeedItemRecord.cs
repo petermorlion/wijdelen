@@ -12,5 +12,10 @@ namespace WijDelen.ObjectSharing.Models {
         public virtual string Description { get; set; }
         public virtual string ExtraInfo { get; set; }
         public virtual int ConfirmationCount { get; set; }
+
+        /// <summary>
+        /// True if the user of this FeedItemRecord has confirmed this request.
+        /// </summary>
+        public virtual bool IsConfirmed { get; set; }
     }
 }

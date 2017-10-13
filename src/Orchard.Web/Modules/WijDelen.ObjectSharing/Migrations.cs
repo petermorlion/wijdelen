@@ -207,5 +207,12 @@ namespace WijDelen.ObjectSharing {
 
             return 18;
         }
+
+        public int UpdateFrom18() {
+            SchemaBuilder.AlterTable(typeof(FeedItemRecord).Name, table => table
+                    .AddColumn<bool>("IsConfirmed"));
+
+            return 19;
+        }
     }
 }

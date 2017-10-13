@@ -7,6 +7,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         IEventHandler<ObjectRequested>,
         IEventHandler<ObjectRequestConfirmed>,
         IEventHandler<ObjectRequestDenied>,
-        IEventHandler<ObjectRequestDeniedForNow> {
+        IEventHandler<ObjectRequestDeniedForNow>,
+        IEventHandler<ChatStarted> {
     }
 }

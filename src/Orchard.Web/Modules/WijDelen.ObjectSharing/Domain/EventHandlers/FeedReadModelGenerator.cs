@@ -7,8 +7,7 @@ using WijDelen.ObjectSharing.Models;
 using WijDelen.UserImport.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class FeedReadModelGenerator :
-        IFeedReadModelGenerator {
+    public class FeedReadModelGenerator : IFeedReadModelGenerator {
         private readonly IRepository<ChatRecord> _chatRepository;
         private readonly IRepository<FeedItemRecord> _feedItemRepository;
         private readonly IFindOtherUsersInGroupThatPossiblyOwnObjectQuery _findOtherUsersInGroupThatPossiblyOwnObjectQuery;
@@ -84,7 +83,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 return;
             }
 
-            _feedItemRepository.Delete(feedItem);
+            feedItem.IsConfirmed = true;
         }
 
         public void Handle(ObjectRequestDenied e) {
@@ -106,6 +105,17 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             }
 
             _feedItemRepository.Delete(feedItem);
+        }
+
+        public void Handle(ChatStarted e) {
+            var userId = e.ConfirmingUserId;
+            var feedItem = _feedItemRepository.Fetch(x => x.ObjectRequestId == e.ObjectRequestId && x.UserId == userId).FirstOrDefault();
+            if (feedItem == null)
+            {
+                return;
+            }
+
+            feedItem.ChatId = e.SourceId;
         }
     }
 }

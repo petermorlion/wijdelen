@@ -65,6 +65,18 @@ namespace WijDelen.ObjectSharing.Controllers {
                     _feedReadModelGenerator.Handle((ChatMessageAdded) versionedEvent);
                     counter += 1;
                 }
+                else if (versionedEvent.GetType() == typeof(ChatStarted)) {
+                    _feedReadModelGenerator.Handle((ChatStarted) versionedEvent);
+                    counter += 1;
+                }
+                else if (versionedEvent.GetType() == typeof(ObjectRequestDenied)) {
+                    _feedReadModelGenerator.Handle((ObjectRequestDenied) versionedEvent);
+                    counter += 1;
+                }
+                else if (versionedEvent.GetType() == typeof(ObjectRequestDeniedForNow)) {
+                    _feedReadModelGenerator.Handle((ObjectRequestDeniedForNow) versionedEvent);
+                    counter += 1;
+                }
             }
 
             _orchardServices.Notifier.Add(NotifyType.Success, T("{0} events processed succesfully.", counter));

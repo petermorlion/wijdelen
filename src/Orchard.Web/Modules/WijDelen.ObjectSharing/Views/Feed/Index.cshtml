@@ -33,12 +33,12 @@
                             </div>
                         </div>
                     }
-                    <!-- TODO: check if user has already responded-->
-                    if (false)
+                    
+                    if (item.IsConfirmed)
                     {
                         <div class="row">
                             <div class="column">
-                                @T("You have already replied to this request.") @*@Html.ActionLink(T("See messages"), "Index", "Chat", new {id = }, new {})*@
+                                @T("You have already replied to this request.") @Html.ActionLink(T("See messages"), "Index", "Chat", new {id = item.ChatId }, new {})
                             </div>
                         </div>
                     }

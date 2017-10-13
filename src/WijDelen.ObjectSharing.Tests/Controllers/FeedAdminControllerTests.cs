@@ -25,6 +25,9 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         private Mock<IFeedReadModelGenerator> _feedReadModelGenerator;
         private Mock<IRepository<FeedItemRecord>> _feedItemRecordRepositoryMock;
         private FeedItemRecord _existingFeedItemRecord;
+        private ObjectRequestDenied _objectRequestDenied;
+        private ObjectRequestDeniedForNow _objectRequestDeniedForNow;
+        private ChatStarted _chatStarted;
 
         [SetUp]
         public void Init() {
@@ -33,8 +36,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             var builder = new ContainerBuilder();
 
             _objectRequested = new ObjectRequested { SourceId = Guid.NewGuid() };
-            _objectRequestConfirmed = new ObjectRequestConfirmed() { SourceId = Guid.NewGuid() };
-            _chatMessageAdded = new ChatMessageAdded() { SourceId = Guid.NewGuid() };
+            _objectRequestDenied = new ObjectRequestDenied { SourceId = Guid.NewGuid() };
+            _objectRequestDeniedForNow = new ObjectRequestDeniedForNow { SourceId = Guid.NewGuid() };
+            _objectRequestConfirmed = new ObjectRequestConfirmed { SourceId = Guid.NewGuid() };
+            _chatMessageAdded = new ChatMessageAdded { SourceId = Guid.NewGuid() };
+            _chatStarted = new ChatStarted { SourceId = Guid.NewGuid() };
             var eventRepositoryMock = new Mock<IRepository<EventRecord>>();
             eventRepositoryMock.SetRecords(new[] {
                 new EventRecord {
@@ -45,6 +51,15 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 },
                 new EventRecord {
                     Payload = JsonConvert.SerializeObject(_chatMessageAdded, serializerSettings)
+                },
+                new EventRecord {
+                    Payload = JsonConvert.SerializeObject(_objectRequestDenied, serializerSettings)
+                },
+                new EventRecord {
+                    Payload = JsonConvert.SerializeObject(_objectRequestDeniedForNow, serializerSettings)
+                },
+                new EventRecord {
+                    Payload = JsonConvert.SerializeObject(_chatStarted, serializerSettings)
                 }
             });
 
@@ -78,7 +93,10 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ObjectRequested e) => e.SourceId == _objectRequested.SourceId)));
             _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ObjectRequestConfirmed e) => e.SourceId == _objectRequestConfirmed.SourceId)));
+            _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ObjectRequestDenied e) => e.SourceId == _objectRequestDenied.SourceId)));
+            _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ObjectRequestDeniedForNow e) => e.SourceId == _objectRequestDeniedForNow.SourceId)));
             _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ChatMessageAdded e) => e.SourceId == _chatMessageAdded.SourceId)));
+            _feedReadModelGenerator.Verify(x => x.Handle(It.Is((ChatStarted e) => e.SourceId == _chatStarted.SourceId)));
 
             _feedItemRecordRepositoryMock.Verify(x => x.Delete(_existingFeedItemRecord));
         }
