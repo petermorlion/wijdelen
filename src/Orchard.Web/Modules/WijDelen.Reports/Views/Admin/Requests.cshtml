@@ -118,7 +118,7 @@
             $("#exportToExcelLink").click(function() {
                 var reportTable = document.getElementById('reportTable');
 
-                var wb = XLSX.utils.table_to_book(reportTable, {sheet:"Sheet JS"});
+                var wb = XLSX.utils.table_to_book(reportTable, {sheet:"Data"});
                 var wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
                 var fname = '@(@T("Requests").ToString() + ".xlsx")';
                 try {
