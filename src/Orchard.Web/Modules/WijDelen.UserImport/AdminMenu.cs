@@ -17,12 +17,12 @@ namespace WijDelen.UserImport {
                 .Position("0")
                 .Add(subItem => subItem
                     .Caption(T("Groups"))
-                    .Position("2")
+                    .Position("4")
                     .Action("List", "Admin", new { area = "Contents", id="Group" })
                     .Permission(Permissions.ManageGroups))
                 .Add(subItem => subItem
                     .Caption(T("User Import"))
-                    .Position("3")
+                    .Position("5")
                     .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
                     .Permission(Permissions.ImportUsers)));
 

@@ -23,7 +23,7 @@ namespace WijDelen.Reports {
                 .Position("0")
                 .Add(subItem => subItem
                     .Caption(T("Reports"))
-                    .Position("5")
+                    .Position("6")
                     .LinkToFirstChild(true)
                     .Add(tab => tab
                         .Caption(T("Overview"))
