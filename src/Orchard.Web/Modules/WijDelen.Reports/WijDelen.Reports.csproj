@@ -142,6 +142,7 @@
     <Content Include="node_modules\normalize.css\normalize.css" />
     <Content Include="node_modules\xlsx\dist\xlsx.full.min.js" />
     <Content Include="Scripts\FileSaver.min.js" />
+    <Content Include="Scripts\ExcelExport.js" />
     <Content Include="Scripts\xlsx.full.min.js" />
     <Content Include="Styles\WijDelen.Reports.Styles.css" />
     <Content Include="Styles\WijDelen.Reports.Styles.min.css" />
