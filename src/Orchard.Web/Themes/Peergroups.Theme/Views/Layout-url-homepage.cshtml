@@ -3,6 +3,11 @@
 @using Orchard.ContentManagement
 @using Orchard.ContentManagement.Aspects
 @using Orchard.Localization.Services
+
+@{
+    Script.Require("jQuery").AtFoot();
+}
+
 @functions {
     // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
     string CalcuClassify(string[] zoneNames, string classNamePrefix) {
@@ -21,9 +26,9 @@
 
     SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
 
-    #if DEBUG
+#if DEBUG
     Style.Include("Styles.css");
-    #else
+#else
     Style.Include("Styles.min.css");
 #endif
 
@@ -76,3 +81,10 @@
         @Display(Model.Content)
     }
 </div>
+
+
+@using (Script.Foot()) {
+    <script type="text/javascript">
+        setTimeout(function() { $(".press-grid div.row").animate({ left: "-=50px" }, 1000); }, 1500);
+    </script>
+}
