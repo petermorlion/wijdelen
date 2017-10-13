@@ -249,9 +249,6 @@
     <Content Include="Assets\_Feed.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\_HomePageNew.less" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\_Grid.less" />
   </ItemGroup>
   <PropertyGroup>
