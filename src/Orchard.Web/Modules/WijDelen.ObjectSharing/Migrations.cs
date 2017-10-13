@@ -214,5 +214,17 @@ namespace WijDelen.ObjectSharing {
 
             return 19;
         }
+
+        public int UpdateFrom19() {
+            ContentDefinitionManager.AlterTypeDefinition("Archetype", builder =>
+                builder
+                    .Listable(false));
+
+            ContentDefinitionManager.AlterTypeDefinition("Synonym", builder =>
+                builder
+                    .Listable(false));
+
+            return 20;
+        }
     }
 }
