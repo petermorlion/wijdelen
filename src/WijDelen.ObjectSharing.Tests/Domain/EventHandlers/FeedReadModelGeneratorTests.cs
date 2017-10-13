@@ -72,7 +72,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _feedItemRecord = new FeedItemRecord {
                ObjectRequestId = _existingObjectRequestId,
-               ConfirmationCount = 2
+               ConfirmationCount = 2,
+               UserId = _lenny.Id
             };
 
             _otherFeedItemRecord = new FeedItemRecord {
@@ -191,6 +192,43 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _feedItemRecord.ConfirmationCount.Should().Be(3);
             _otherFeedItemRecord.ConfirmationCount.Should().Be(1);
+        }
+
+        [Test]
+        public void WhenObjectRequestConfirmed_ShouldRemoveFeedItemForUser() {
+            var e = new ObjectRequestConfirmed {
+                SourceId = _existingObjectRequestId,
+                ConfirmingUserId = _lenny.Id,
+                DateTimeConfirmed = new DateTime(2107, 9, 18, 10, 8, 12, DateTimeKind.Utc)
+            };
+
+            _generator.Handle(e);
+
+            _feedItemRepositoryMock.Verify(x => x.Delete(_feedItemRecord));
+        }
+
+        [Test]
+        public void WhenObjectRequestDenied_ShouldRemoveFeedItemForUser() {
+            var e = new ObjectRequestDenied {
+                SourceId = _existingObjectRequestId,
+                DenyingUserId = _lenny.Id
+            };
+
+            _generator.Handle(e);
+
+            _feedItemRepositoryMock.Verify(x => x.Delete(_feedItemRecord));
+        }
+
+        [Test]
+        public void WhenObjectRequestDeniedForNow_ShouldRemoveFeedItemForUser() {
+            var e = new ObjectRequestDeniedForNow {
+                SourceId = _existingObjectRequestId,
+                DenyingUserId = _lenny.Id
+            };
+
+            _generator.Handle(e);
+
+            _feedItemRepositoryMock.Verify(x => x.Delete(_feedItemRecord));
         }
     }
 }

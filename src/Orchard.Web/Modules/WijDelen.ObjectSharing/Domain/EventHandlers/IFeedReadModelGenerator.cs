@@ -1,10 +1,12 @@
-using Orchard;
 using WijDelen.ObjectSharing.Domain.Events;
+using WijDelen.ObjectSharing.Domain.Messaging;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public interface IFeedReadModelGenerator : IDependency {
-        void Handle(ChatMessageAdded e);
-        void Handle(ObjectRequested e);
-        void Handle(ObjectRequestConfirmed e);
+    public interface IFeedReadModelGenerator : 
+        IEventHandler<ChatMessageAdded>,
+        IEventHandler<ObjectRequested>,
+        IEventHandler<ObjectRequestConfirmed>,
+        IEventHandler<ObjectRequestDenied>,
+        IEventHandler<ObjectRequestDeniedForNow> {
     }
 }

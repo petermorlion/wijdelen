@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Orchard.Data;
 using WijDelen.ObjectSharing.Domain.Events;
-using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
@@ -77,6 +76,36 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 feedItemRecord.ConfirmationCount += 1;
                 _feedItemRepository.Update(feedItemRecord);
             }
+
+            var userId = e.ConfirmingUserId;
+            var feedItem = _feedItemRepository.Fetch(x => x.ObjectRequestId == e.SourceId && x.UserId == userId).FirstOrDefault();
+            if (feedItem == null)
+            {
+                return;
+            }
+
+            _feedItemRepository.Delete(feedItem);
+        }
+
+        public void Handle(ObjectRequestDenied e) {
+            var userId = e.DenyingUserId;
+            var feedItem = _feedItemRepository.Fetch(x => x.ObjectRequestId == e.SourceId && x.UserId == userId).FirstOrDefault();
+            if (feedItem == null) {
+                return;
+            }
+
+            _feedItemRepository.Delete(feedItem);
+        }
+
+        public void Handle(ObjectRequestDeniedForNow e) {
+            var userId = e.DenyingUserId;
+            var feedItem = _feedItemRepository.Fetch(x => x.ObjectRequestId == e.SourceId && x.UserId == userId).FirstOrDefault();
+            if (feedItem == null)
+            {
+                return;
+            }
+
+            _feedItemRepository.Delete(feedItem);
         }
     }
 }
