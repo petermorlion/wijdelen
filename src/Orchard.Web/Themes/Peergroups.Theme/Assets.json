@@ -9,5 +9,14 @@
     "watch": [
       "Assets/*.less"
     ]
+  },
+  {
+    "inputs": [
+      "node_modules/font-awesome/less/font-awesome.less"
+    ],
+    "output": "Styles/font-awesome.css",
+    "watch": [
+      "node_modules/font-awesome/less/*.less"
+    ]
   }
 ]

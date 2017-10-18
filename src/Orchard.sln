@@ -302,6 +302,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Localization.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.MailChimp", "Orchard.Web\Modules\WijDelen.MailChimp\WijDelen.MailChimp.csproj", "{0C815BB7-C0A5-47AD-8099-7B157E356724}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Contact", "Orchard.Web\Modules\WijDelen.Contact\WijDelen.Contact.csproj", "{BE0244D7-5E0F-40EC-8F88-594ED926B219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Contact.Tests", "Orchard.Web\Modules\WijDelen.Contact\WijDelen.Contact.Tests\WijDelen.Contact.Tests.csproj", "{A1B00962-6804-4F93-8E13-6864F9E5D98C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1227,6 +1231,20 @@ Global
 		{0C815BB7-C0A5-47AD-8099-7B157E356724}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{0C815BB7-C0A5-47AD-8099-7B157E356724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C815BB7-C0A5-47AD-8099-7B157E356724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1326,6 +1344,8 @@ Global
 		{D3ED5BF9-E6E5-4498-9BB3-EEAF01722873} = {74492CBC-7201-417E-BC29-28B4C25A58B0}
 		{E0ABC7E9-A20C-492F-A1ED-74A6D08BFE89} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 		{0C815BB7-C0A5-47AD-8099-7B157E356724} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
+		{BE0244D7-5E0F-40EC-8F88-594ED926B219} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
+		{A1B00962-6804-4F93-8E13-6864F9E5D98C} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

@@ -1,4 +1,9 @@
 ﻿@using Orchard.Localization
+@using System.Globalization
+@using Orchard.Autoroute.Services
+@using Orchard.ContentManagement
+@using Orchard.ContentManagement.Aspects
+@using Orchard.Localization.Services
 @using Orchard.Mvc.Html;
 @using Orchard.UI.Resources;
 @{
@@ -7,6 +12,19 @@
     string title = Convert.ToString(Model.Title);
     string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
 }
+
+@{
+    var localizableAspects = Enumerable.Empty<ILocalizableAspect>();
+    var homePage = WorkContext.Resolve<IHomeAliasService>().GetHomePage();
+    ILocalizableAspect homePageAspect = null;
+
+    if (homePage != null && homePage.Has<ILocalizableAspect>()) {
+        var localizationService = WorkContext.Resolve<ILocalizationService>();
+        localizableAspects = localizationService.GetLocalizations(homePage).Concat(new[] { homePage.As<ILocalizableAspect>() });
+        homePageAspect = localizableAspects.FirstOrDefault(x => x.Culture == WorkContext.CurrentCulture);
+    }
+}
+
 <!DOCTYPE html>
 <html lang="@WorkContext.CurrentCulture" class="static @Html.ClassForPage()">
 <head>
@@ -39,10 +57,25 @@
     @Display(Model.Body)
     @Display(Model.Tail)
 
-    <footer>
-        <span>&copy; Peergroups</span>
-        <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-footer.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
-    </footer>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="column column-50 navigation">
+                @if (homePageAspect != null) {
+                    <a href="@Url.ItemDisplayUrl(homePageAspect)">Home</a>
+                }
+                |
+                <a href="@Href("~/WijDelen.Contact/Contact")">Contact</a>
+            </div>
+            <div class="column column-50 align-right">
+                <span class="copyright">&copy; Peergroups</span>
+                <a href="/">
+                    <img src="@Url.Content("~/Themes/Peergroups.Theme/Content/logo-footer.png")" alt="@T("Peergroups")" title="@T("Peergroups")" />
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

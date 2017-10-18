@@ -37,6 +37,13 @@
     width: 100%;
 }
 
+.container-homepage-fullwidth a[id] {
+    display: block;
+    position: relative;
+    visibility: hidden;
+    top: -100px;
+}
+
 .container-homepage-fullwidth .row {
     margin: 0;
     width: 100%;
@@ -80,6 +87,11 @@
     margin: 0 auto;
 }
 
+.customers img {
+    width: 30%;
+    vertical-align: middle;
+}
+
 .homepage-quote {
     padding: 2.0rem 0;
     font-style: italic;
@@ -94,9 +106,14 @@
 .homepage-pricing table tr td, .homepage-pricing table tr th {
     text-align: center;
     width: 100px;
+    border-bottom-color: @color-primary;
 }
 
 .homepage-pricing table tr td:first-of-type, .homepage-pricing table tr th:first-of-type {
     text-align: left;
     width: 400px;
+}
+
+.homepage-pricing table tr td .fa {
+    color: @color-secondary;
 }

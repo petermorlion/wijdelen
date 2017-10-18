@@ -9,6 +9,7 @@
   "author": "Peter Morlion",
   "license": "UNLICENSED",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "milligram-less": "^1.0.0"
   }
 }

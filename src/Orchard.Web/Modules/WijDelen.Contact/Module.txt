@@ -1,0 +1,12 @@
+﻿Name: WijDelen.Contact
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0.0
+OrchardVersion: 1.10
+Description: A contact form for Peergroups
+Features:
+    WijDelen.Contact:
+        Description: A contact form for Peergroups
+		Category: Peergroups
+		Dependencies: WijDelen.Mailgun, Orchard.Users, Orchard.Roles
