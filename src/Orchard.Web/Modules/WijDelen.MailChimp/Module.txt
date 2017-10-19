@@ -8,4 +8,4 @@ Description: A module containing code to communicate with MailChimp.
 Features:
     WijDelen.MailChimp:
         Description: Code to communicate with Mailchimp.
-	Category: Peergroups
+		Category: Peergroups
