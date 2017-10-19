@@ -101,6 +101,7 @@
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\logo-footer.png" />
     <Content Include="Content\logo-header.png" />
+    <Content Include="Content\logo-homepage-header-mobile.gif" />
     <Content Include="Content\logo-homepage-header.gif" />
     <Content Include="Content\logo-homepage.gif" />
     <Content Include="Content\logo-mail.gif" />
@@ -274,6 +275,12 @@
     <Content Include="node_modules\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="node_modules\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="node_modules\font-awesome\fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\HomepageNavigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\HomepageNavigation-mobile.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

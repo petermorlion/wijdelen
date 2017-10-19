@@ -18,7 +18,7 @@ msgstr "http://www.redstar.be"
 msgid "Theme for Peergroups"
 msgstr "Thema voor Peergroups"
 
-#: ~/Themes/Peergroups.Theme/Views/Layout.cshtml
+#: ~/Themes/Peergroups.Theme/Views/HomepageNavigation.cshtml
 #| msgid "Sign In"
 msgid "Sign In"
 msgstr "Aanmelden"

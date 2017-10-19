@@ -117,3 +117,28 @@
 .homepage-pricing table tr td .fa {
     color: @color-secondary;
 }
+
+@media (max-width: 640px) {
+    .container-homepage-header {
+        margin: 0;
+        padding: 0;
+
+        & .container-homepage-header-logo {
+            float: left;
+
+            & img {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+            }
+        }
+
+        & .container-homepage-header-buttons {
+            float: right;
+
+            & .button {
+                padding: 1.0rem;
+            }
+        }
+    }
+}

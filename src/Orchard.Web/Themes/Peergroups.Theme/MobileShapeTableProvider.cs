@@ -20,6 +20,11 @@ namespace Peergroups.Theme {
                 .OnDisplaying(display => {
                     if (IsMobileBrowser()) display.ShapeMetadata.Alternates.Add("User__mobile");
                 });
+
+            builder.Describe("HomepageNavigation")
+                .OnDisplaying(display => {
+                    if (IsMobileBrowser()) display.ShapeMetadata.Alternates.Add("HomepageNavigation__mobile");
+                });
         }
 
         /// <summary>

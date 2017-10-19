@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WijDelen.ObjectSharing.ViewModels.GroupObjectRequestViewModel>
 
-@if (Model.Any()) {
+@if (Model != null && Model.Any()) {
     <h4>@T("Need inspiration?")</h4>
     <p>@T("These are some of the requests that have been made in your group:")</p>
 
