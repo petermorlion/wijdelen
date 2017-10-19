@@ -9,4 +9,4 @@ Features:
     WijDelen.Localization:
         Description: Custom localization features for Peergroups
 		Category: Peergroups
-		Dependencies: WijDelen.UserImport, Orchard.Users
+		Dependencies: WijDelen.UserImport, Orchard.Users, Orchard.Localization.CultureSelector
