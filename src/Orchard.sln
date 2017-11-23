@@ -306,6 +306,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Contact", "Orchard
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WijDelen.Contact.Tests", "Orchard.Web\Modules\WijDelen.Contact\WijDelen.Contact.Tests\WijDelen.Contact.Tests.csproj", "{A1B00962-6804-4F93-8E13-6864F9E5D98C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peergroups.Theme.Tests", "Orchard.Web\Modules\Peergroups.Theme\Peergroups.Theme.Tests\Peergroups.Theme.Tests.csproj", "{F8D656AC-367A-447D-B306-467DFDFB68E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeCoverage|Any CPU = CodeCoverage|Any CPU
@@ -1245,6 +1247,13 @@ Global
 		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B00962-6804-4F93-8E13-6864F9E5D98C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D656AC-367A-447D-B306-467DFDFB68E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1346,6 +1355,7 @@ Global
 		{0C815BB7-C0A5-47AD-8099-7B157E356724} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{BE0244D7-5E0F-40EC-8F88-594ED926B219} = {E8A69B2D-3B71-4669-80A1-98F00D937EE4}
 		{A1B00962-6804-4F93-8E13-6864F9E5D98C} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
+		{F8D656AC-367A-447D-B306-467DFDFB68E5} = {74E681ED-FECC-4034-B9BD-01B0BB1BDECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4

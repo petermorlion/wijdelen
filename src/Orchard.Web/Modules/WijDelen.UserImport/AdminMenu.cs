@@ -24,11 +24,11 @@ namespace WijDelen.UserImport {
                     .Caption(T("User Import"))
                     .Position("5")
                     .Action("Index", "Admin", new { area = "WijDelen.UserImport" })
-                    .Permission(Permissions.ImportUsers)));
-
-            builder.Add(T("Users"),
-                menu => menu.Add(T("Groups"), "3.0", item => item.Action("Index", "GroupUsers", new { area = "WijDelen.UserImport" })
-                    .LocalNav()
+                    .Permission(Permissions.ImportUsers))
+                .Add(subItem => subItem
+                    .Caption(T("Users"))
+                    .Position("6")
+                    .Action("Index", "GroupUsers", new { area = "WijDelen.UserImport" })
                     .Permission(Permissions.ManageGroups)));
         }
     }
