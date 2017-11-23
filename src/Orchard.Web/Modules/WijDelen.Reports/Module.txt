@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: Peter Morlion
 Website: http://www.redstar.be
-Version: 1.6.1
+Version: 1.6.2
 OrchardVersion: 1.0
 Description: Reports for Peergroups
 Features:

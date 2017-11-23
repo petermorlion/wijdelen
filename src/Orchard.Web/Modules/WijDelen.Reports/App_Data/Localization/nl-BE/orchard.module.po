@@ -104,6 +104,11 @@ msgid "Not Now"
 msgstr "Nu niet"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#| msgid "Export to Excel"
+msgid "Export to Excel"
+msgstr "Exporteren naar Excel"
+
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 #| msgid "Boink! There aren't any groups with valuable data yet."
 msgid "Boink! There aren't any groups with valuable data yet."
 msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
