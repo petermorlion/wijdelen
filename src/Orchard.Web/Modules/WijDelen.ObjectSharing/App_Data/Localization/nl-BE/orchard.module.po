@@ -214,15 +214,10 @@ msgstr "Bedankt!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
-#, fuzzy
 msgid ""
 "Thank you for answering. We will take note of your answer and try not to "
 "bother you with similar requests in the future."
 msgstr ""
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
-"Bedankt voor je antwoord. We zullen het noteren en in proberen je in de "
-"toekomst geen gelijkaardige oproepen meer door te sturen.\n"
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
 "Bedankt voor je antwoord. We zullen je antwoord noteren en proberen "
 "dergelijke vragen niet langer te stellen in de toekomst."
 
@@ -360,13 +355,8 @@ msgstr ""
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
-#, fuzzy
 msgid "{0} is looking for (a)"
-msgstr ""
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
-"{0} is op zoek naar (een)\n"
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
-"{0} zoekt (een)"
+msgstr "{0} is op zoek naar (een)\n"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
@@ -417,13 +407,8 @@ msgstr "Omschrijving"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
-#, fuzzy
 msgid "Unblock"
-msgstr ""
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
-"Deblokkeer\n"
-"#-#-#-#-#  catalog.po  #-#-#-#-#\n"
-"Deblokkeren"
+msgstr "Deblokkeren"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
