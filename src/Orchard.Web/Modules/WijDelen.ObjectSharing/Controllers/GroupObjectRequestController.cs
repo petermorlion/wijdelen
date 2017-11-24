@@ -29,7 +29,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var currentUser = _orchardServices.WorkContext.CurrentUser;
             var currentGroupId = currentUser.As<GroupMembershipPart>()?.Group?.Id;
             if (!currentGroupId.HasValue) {
-                return View();
+                return PartialView();
             }
 
             var objectRequests = _objectRequestRepository
