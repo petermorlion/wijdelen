@@ -49,6 +49,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 BlockReason = objectRequestRecord.BlockReason,
                 CanBlock = objectRequestRecord.Status == ObjectRequestStatus.None.ToString(),
                 CanUnblock = objectRequestRecord.Status != ObjectRequestStatus.None.ToString(),
+                Email = user.Email
             };
 
             return View(viewModel);

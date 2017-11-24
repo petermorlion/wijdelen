@@ -90,6 +90,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
             model.BlockReason.Should().Be("Reason");
             model.CanBlock.Should().BeFalse("Because it is already blocked.");
             model.CanUnblock.Should().BeTrue("Because it is blocked.");
+            model.Email.Should().Be("jane.doe@gmail.com");
         }
 
         [Test]

@@ -14,5 +14,6 @@ namespace WijDelen.ObjectSharing.ViewModels.Admin {
         public string BlockReason { get; set; }
         public bool CanBlock { get; set; }
         public bool CanUnblock { get; set; }
+        public string Email { get; set; }
     }
 }
