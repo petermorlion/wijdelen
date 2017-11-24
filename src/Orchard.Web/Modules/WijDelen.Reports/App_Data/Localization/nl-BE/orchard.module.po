@@ -1,5 +1,17 @@
-﻿#: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Reports"
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_BE\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#: wijdelen.reports.adminmenu
 msgid "Reports"
 msgstr "Rapporten"
 
@@ -19,32 +31,38 @@ msgid "Total requests"
 msgstr "Totaal oproepen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Requests"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#: wijdelen.reports.adminmenu
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Requests"
 msgstr "Oproepen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Mails"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Mails"
 msgstr "Mails"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Yes"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Yes"
 msgstr "Ja"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "No"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "No"
 msgstr "Nee"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Not Now"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Not Now"
 msgstr "Nu niet"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Index.cshtml
-#| msgid "Group"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
 msgid "Group"
 msgstr "Groep"
 
@@ -54,57 +72,27 @@ msgid "There aren't any groups with valuable data yet."
 msgstr "Er zijn nog geen groepen met waardevolle data."
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Groups"
+#: wijdelen.reports.adminmenu
 msgid "Groups"
 msgstr "Groepen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "From"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "From"
 msgstr "Van"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "To"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "To"
 msgstr "Tot"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Apply"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Apply"
 msgstr "Toepassen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Group"
-msgid "Group"
-msgstr "Groep"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Requests"
-msgid "Requests"
-msgstr "Oproepen"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Mails"
-msgid "Mails"
-msgstr "Mails"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Yes"
-msgid "Yes"
-msgstr "Ja"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "No"
-msgid "No"
-msgstr "Nee"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Not Now"
-msgid "Not Now"
-msgstr "Nu niet"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Groups.cshtml
-#| msgid "Export to Excel"
+#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 msgid "Export to Excel"
 msgstr "Exporteren naar Excel"
 
@@ -114,44 +102,9 @@ msgid "Boink! There aren't any groups with valuable data yet."
 msgstr "Boink! Er zijn nog geen groepen met waardevolle data."
 
 #: wijdelen.reports.adminmenu
-#| msgid "Reports"
-msgid "Reports"
-msgstr "Rapporten"
-
-#: wijdelen.reports.adminmenu
 #| msgid "Overview"
 msgid "Overview"
 msgstr "Overzicht"
-
-#: wijdelen.reports.adminmenu
-#| msgid "Groups"
-msgid "Groups"
-msgstr "Groepen"
-
-#: wijdelen.reports.adminmenu
-#| msgid "Requests"
-msgid "Requests"
-msgstr "Oproepen"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Requests"
-msgid "Requests"
-msgstr "Oproepen"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "From"
-msgid "From"
-msgstr "Van"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "To"
-msgid "To"
-msgstr "Tot"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Apply"
-msgid "Apply"
-msgstr "Toepassen"
 
 #: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
 #| msgid "There is not data to display."
@@ -172,28 +125,3 @@ msgstr "Email"
 #| msgid "Description"
 msgid "Description"
 msgstr "Omschrijving"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Mails"
-msgid "Mails"
-msgstr "Mails"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Yes"
-msgid "Yes"
-msgstr "Ja"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "No"
-msgid "No"
-msgstr "Nee"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Not Now"
-msgid "Not Now"
-msgstr "Nu niet"
-
-#: ~/Modules/WijDelen.Reports/Views/Admin/Requests.cshtml
-#| msgid "Export to Excel"
-msgid "Export to Excel"
-msgstr "Exporteren naar Excel"

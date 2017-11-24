@@ -1,4 +1,16 @@
-﻿#: wijdelen.userimport.controllers.admincontroller
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_BE\n"
+"X-Generator: Poedit 2.0.4\n"
+
 #| msgid "You are not authorized to import users."
 msgid "You are not authorized to import users."
 msgstr "Je hebt onvoldoende rechten om gebruikers te importeren."
@@ -89,6 +101,7 @@ msgid "Submit"
 msgstr "Verzenden"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
 #| msgid "Group"
 msgid "Group"
 msgstr "Groep"
@@ -115,12 +128,12 @@ msgstr "Het nieuwe wachtwoord komt niet overeen met het bevestigingswachtwoord."
 
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a first name."
-msgid "TYou must specify a first name."
+msgid "You must specify a first name."
 msgstr "U moet een voornaam opgeven."
 
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a last name."
-msgid "TYou must specify a last name."
+msgid "You must specify a last name."
 msgstr "U moet een familienaam opgeven."
 
 #: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
@@ -240,14 +253,10 @@ msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om 
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
-msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:
+msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below"
 msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om van start te gaan, gelieve je account te activeren door op onderstaande knop te klikken:"
 
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
-#| msgid "Thank you!"
-msgid "Thank you!"
-msgstr "Bedankt en tot binnenkort!"
-
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
@@ -264,19 +273,10 @@ msgid "Resend"
 msgstr "Opnieuw versturen"
 
 #: wijdelen.userimport.adminmenu
-#| msgid "Groups"
-msgid "Groups"
-msgstr "Groepen"
-
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
 #| msgid "Groups"
 msgid "Groups"
 msgstr "Groepen"
-
-#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
-#| msgid "Group"
-msgid "Group"
-msgstr "Groep"
 
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
 #| msgid "Actions"
@@ -349,7 +349,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
-#| msgid "No
+#| msgid "No"
 msgid "No"
 msgstr "Nee"
 
@@ -362,3 +362,4 @@ msgstr "De uitnodigingsmails werden verstuurd."
 #| msgid "You must select a group. No mails were sent."
 msgid "You must select a group. No mails were sent."
 msgstr "Je moet een groep selecteren. Er werden geen mails verstuurd."
+

@@ -1,4 +1,16 @@
-﻿#: ~/Themes/Peergroups.Theme/Theme.txt
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_BE\n"
+"X-Generator: Poedit 2.0.4\n"
+
 #| msgid "Name"
 msgid "Peergroups.Theme"
 msgstr "Peergroups.Theme"
@@ -24,7 +36,7 @@ msgid "Sign In"
 msgstr "Aanmelden"
 
 #: ~/Themes/Peergroups.Theme/Views/User.cshtml
-#| msgid "Change Password"
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
 msgid "Change Password"
 msgstr "Paswoord wijzigen"
 
@@ -39,39 +51,19 @@ msgid "Sign Out"
 msgstr "Afmelden"
 
 #: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
-#| msgid "New Request"
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
 msgid "New Request"
 msgstr "Nieuwe oproep"
 
 #: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
-#| msgid "My Requests"
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
 msgid "My Requests"
 msgstr "Mijn oproepen"
 
 #: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
-#| msgid "Received Requests"
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
 msgid "Received Requests"
 msgstr "Ontvangen oproepen"
-
-#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
-#| msgid "New Request"
-msgid "New Request"
-msgstr "Nieuwe oproep"
-
-#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
-#| msgid "My Requests"
-msgid "My Requests"
-msgstr "Mijn oproepen"
-
-#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
-#| msgid "Received Requests"
-msgid "Received Requests"
-msgstr "Ontvangen oproepen"
-
-#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
-#| msgid "Change Password"
-msgid "Change Password"
-msgstr "Paswoord wijzigen"
 
 #: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
 #| msgid "Use the form below to change your password."
@@ -79,17 +71,22 @@ msgid "Use the form below to change your password."
 msgstr "Met onderstaand formulier kan je je paswoord wijzigen."
 
 #: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
-#| msgid "New passwords are required to be a minimum of {0} characters in length."
+#| msgid ""
+#| "New passwords are required to be a minimum of {0} characters in length."
 msgid "New passwords are required to be a minimum of {0} characters in length."
 msgstr "Nieuwe paswoorden moeten minimaal {0} karakters lang zijn."
 
 #: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
-#| msgid "Password change was unsuccessful. Please correct the errors and try again."
-msgid "Password change was unsuccessful. Please correct the errors and try again."
-msgstr "Paswoord wijzigen is niet gelukt. Gelieve de fouten te corrigeren en opnieuw te proberen."
+#| msgid ""
+#| "Password change was unsuccessful. Please correct the errors and try again."
+msgid ""
+"Password change was unsuccessful. Please correct the errors and try again."
+msgstr ""
+"Paswoord wijzigen is niet gelukt. Gelieve de fouten te corrigeren en opnieuw "
+"te proberen."
 
 #: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
-#| msgid "Account Information"
+#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
 msgid "Account Information"
 msgstr "Account gegevens"
 
@@ -107,11 +104,6 @@ msgstr "Nieuw paswoord:"
 #| msgid "Confirm new password:"
 msgid "Confirm new password:"
 msgstr "Bevestig nieuw paswoord:"
-
-#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
-#| msgid "Change Password"
-msgid "Change Password"
-msgstr "Wijzig paswoord"
 
 #: orchard.users.controllers.accountcontroller
 #| msgid "You must specify a current password."
@@ -176,7 +168,9 @@ msgstr "Aanmelden"
 #: ~/Modules/Orchard.Users/Views/LogOn.cshtml
 #| msgid "Login was unsuccessful. Please correct the errors and try again."
 msgid "Login was unsuccessful. Please correct the errors and try again."
-msgstr "Kon niet aanmelden. Gelieve onderstaande fouten te corrigeren en opnieuw te proberen."
+msgstr ""
+"Kon niet aanmelden. Gelieve onderstaande fouten te corrigeren en opnieuw te "
+"proberen."
 
 #: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
 #| msgid "Lost Password"
@@ -184,14 +178,15 @@ msgid "Lost Password"
 msgstr "Paswoord kwijt"
 
 #: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
-#| msgid "Please enter your username or email address. You will receive a link to create a new password via email."
-msgid "Please enter your username or email address. You will receive a link to create a new password via email."
-msgstr "Gelieve je email adres op te geven. Je zal een link ontvangen om een nieuw paswoord aan te maken."
-
-#: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
-#| msgid "Account Information"
-msgid "Account Information"
-msgstr "Account informatie"
+#| msgid ""
+#| "Please enter your username or email address. You will receive a link to "
+#| "create a new password via email."
+msgid ""
+"Please enter your username or email address. You will receive a link to "
+"create a new password via email."
+msgstr ""
+"Gelieve je email adres op te geven. Je zal een link ontvangen om een nieuw "
+"paswoord aan te maken."
 
 #: ~/Modules/Orchard.Users/Views/Account/RequestLostPassword.cshtml
 #| msgid "Username or E-mail:"
@@ -204,6 +199,8 @@ msgid "Send Request"
 msgstr "Versturen"
 
 #: ~/Modules/Orchard.Users/Views/Template.User.LostPassword.cshtml
-#| msgid "Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
-msgid "Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
+#| msgid ""
+#| "Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
+msgid ""
+"Dear {0}, please <a href=\"{1}\">click here</a> to change your password."
 msgstr "Beste {0}, <a href=\"{1}\">klik hier</a> om je paswoord te wijzigen."
