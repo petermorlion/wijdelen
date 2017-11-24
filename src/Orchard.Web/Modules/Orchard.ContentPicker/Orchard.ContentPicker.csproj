@@ -26,6 +26,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,7 +125,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_Data\Localization\fr-FR\orchard.module.po" />
+    <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Drivers\ContentPickerFieldDriver.cs" />

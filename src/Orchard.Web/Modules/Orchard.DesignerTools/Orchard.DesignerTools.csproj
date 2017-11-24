@@ -26,6 +26,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,7 +127,10 @@
   <ItemGroup>
     <Content Include="Views\ShapeTracingWrapper.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_Data\Localization\fr-FR\orchard.module.po" />
+    <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ShapeTracingMeta.cshtml" />
   </ItemGroup>

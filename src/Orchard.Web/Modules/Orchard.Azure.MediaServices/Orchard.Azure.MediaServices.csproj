@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -545,6 +546,8 @@
     <Content Include="Content\Strobe Media Playback Notice.docx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Localization\fr-FR\orchard.module.po" />
+    <Content Include="App_Data\Localization\nl-BE\orchard.module.po" />
     <None Include="Assets\JavaScript\Lib\MPEG Dash Notice.docx" />
     <Content Include="packages.config" />
   </ItemGroup>
