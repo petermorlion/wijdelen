@@ -1,0 +1,77 @@
+#. "Name"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "Migrations"
+msgstr "Migraties"
+
+#. "Author"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "Data migration commands."
+msgstr "Datamigratie commando's."
+
+#. "DatabaseUpdate.Name"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "Database Update"
+msgstr "Database update"
+
+#. "DatabaseUpdate.Description"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "Commands for updating the database schema according to the definition of the \"Record\" classes in code."
+msgstr "Commando's voor het updaten van het database schema volgens de definitie van de \"Record\" klasse in code."
+
+#. "DatabaseUpdate.Category"
+#: "~/Modules/Orchard.Migrations/Module.txt"
+msgctxt "~/Modules/Orchard.Migrations/Module.txt"
+msgid "Developer"
+msgstr "Ontwikkelaar"
+
+#: "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgctxt "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgid "An error occurred while updating the database."
+msgstr ""
+
+#: "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgctxt "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgid "Database updated"
+msgstr "Database geüpdated"
+
+#: "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgctxt "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgid "There are no tables to create for feature {0}."
+msgstr "Er zijn geen tabellen om aan te maken voor functie {0}."
+
+#: "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgctxt "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgid "An error occurred while creating the tables."
+msgstr ""
+
+#: "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgctxt "Orchard.Migrations.Commands.DatabaseUpdateCommands"
+msgid "Tables created"
+msgstr "Tabellen aangemaakt"
+
+#: "Orchard.Migrations.Commands.DataMigrationCommands"
+msgctxt "Orchard.Migrations.Commands.DataMigrationCommands"
+msgid "An error occurred while upgrading the database."
+msgstr ""
+
+#: "Orchard.Migrations.Commands.DataMigrationCommands"
+msgctxt "Orchard.Migrations.Commands.DataMigrationCommands"
+msgid "Database upgraded"
+msgstr "Database geüpgraded"
+

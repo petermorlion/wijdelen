@@ -1,0 +1,614 @@
+#. "Name"
+#: "~/Modules/Orchard.ContentTypes/Module.txt"
+msgctxt "~/Modules/Orchard.ContentTypes/Module.txt"
+msgid "ContentTypes"
+msgstr "Inhoudstypes"
+
+#. "Author"
+#: "~/Modules/Orchard.ContentTypes/Module.txt"
+msgctxt "~/Modules/Orchard.ContentTypes/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.ContentTypes/Module.txt"
+msgctxt "~/Modules/Orchard.ContentTypes/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#: "~/Modules/Orchard.ContentTypes/Module.txt"
+msgctxt "~/Modules/Orchard.ContentTypes/Module.txt"
+msgid "ContentTypes modules enables the creation and alteration of content types not based on code."
+msgstr "De ContentType module maakt het mogelijk om inhoudstypes te maken of aan te passen zonder het gebruik van code."
+
+#: "Orchard.ContentTypes.AdminMenu"
+msgctxt "Orchard.ContentTypes.AdminMenu"
+msgid "Content Definition"
+msgstr "Inhoud definitie"
+
+#: "Orchard.ContentTypes.AdminMenu"
+msgctxt "Orchard.ContentTypes.AdminMenu"
+msgid "Content Types"
+msgstr "Inhoudstypes"
+
+#: "Orchard.ContentTypes.AdminMenu"
+msgctxt "Orchard.ContentTypes.AdminMenu"
+msgid "Content Parts"
+msgstr "Inhoudsonderdelen"
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to view content types."
+msgstr "Niet toegestaan om inhoudstypes te bekijken."
+
+#. "Not allowed to create a content type."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to create a content type."
+msgstr "Niet gemachtigd om een inhoudstype te maken."
+
+#. "The Display Name name can't be empty."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The Display Name name can't be empty."
+msgstr "De weergavenaam mag niet leeg zijn."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The Content Type Id can't be empty."
+msgstr "Het inhoudstype Id mag niet leeg zijn"
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "A type with the same Id already exists."
+msgstr "Een type met dit Id bestaat al."
+
+#. "The technical name must start with a letter."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The technical name must start with a letter."
+msgstr "De technische naam moet starten met een letter."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "A type with the same Display Name already exists."
+msgstr "Een type met deze weergavenaam bestaat al."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" content type has been created."
+msgstr "Het \"{0}\" inhoudstype is aangemaakt."
+
+#. "Not allowed to edit a content type."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to edit a content type."
+msgstr "Niet gemachtigd om een inhoudstype te wijzigen."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The Content Type name can't be empty."
+msgstr "De naam van het inhoudstype mag niet leeg zijn."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "A type with the same name already exists."
+msgstr "Een type met deze naam bestaat al."
+
+#. "\"{0}\" settings have been saved."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "\"{0}\" settings have been saved."
+msgstr "\"{0}\" instellingen zijn opgeslagen."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to delete a content type."
+msgstr "Niet gemachtigd om een inhoudstype te verwijderen."
+
+#. "\"{0}\" has been removed."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "\"{0}\" has been removed."
+msgstr "\"{0}\" is verwijderd."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" part has been added."
+msgstr "Het \"{0}\" onderdeel is toegevoegd."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" part has been removed."
+msgstr "Het \"{0}\" onderdeel is verwijderd."
+
+#. "Not allowed to create a content part."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to create a content part."
+msgstr "Niet gemachtigd om een inhoudsonderdeel te maken."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Cannot add part named '{0}'. It already exists."
+msgstr "Kan het onderdeel genaamd '{0}' niet toevoegen. Het bestaat al."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The content part could not be created."
+msgstr "Het inhoudsonderdeel kan niet worden aangemaakt."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" content part has been created."
+msgstr "Het \"{0}\" inhoudsonderdeel is aangemaakt."
+
+#. "Not allowed to edit a content part."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to edit a content part."
+msgstr "Niet gemachtigd om een inhoudsonderdeel te wijzigen."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Not allowed to delete a content part."
+msgstr "Niet gemachtigd om een inhoudsonderdeel te verwijderen."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The Technical Name can't be empty."
+msgstr "De technische naam mag niet leeg zijn."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "A field with the same name already exists."
+msgstr "Een veld met dezelfde naam bestaat al."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The technical name contains invalid characters."
+msgstr "De technische naam bevat ongeldige karakters."
+
+#. "A field with the same Display Name already exists."
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "A field with the same Display Name already exists."
+msgstr "Een veld met deze weergavenaam bestaat al."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" field was not added. {1}"
+msgstr "Het \"{0}\" veld is niet toegevoegd. {1}"
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" field has been added."
+msgstr "Het \"{0}\" veld is toegevoegd."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "Display name changed to {0}."
+msgstr "Weergavenaam gewijzigd in {0}."
+
+#: "Orchard.ContentTypes.Controllers.AdminController"
+msgctxt "Orchard.ContentTypes.Controllers.AdminController"
+msgid "The \"{0}\" field has been removed."
+msgstr "Het \"{0}\" veld is verwijderd."
+
+#: "Orchard.ContentTypes.Services.ContentDefinitionService"
+msgctxt "Orchard.ContentTypes.Services.ContentDefinitionService"
+msgid "Cannot add part named '{0}'. It already exists."
+msgstr "Kan het onderdeel genaamd '{0}' niet toevoegen. Het bestaat al."
+
+#: "Orchard.ContentTypes.Services.ContentDefinitionService"
+msgctxt "Orchard.ContentTypes.Services.ContentDefinitionService"
+msgid "Fields must have a name containing no spaces or symbols."
+msgstr "Velden moeten een naam  hebben zonder spaties en speciale tekens."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Add New Field To \"{0}\""
+msgstr "Nieuw veld toevoegen aan \"{0}\""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Name of the field as it will be displayed in screens."
+msgstr "Naam van het veld zoals het op de schermen getoond gaat worden."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Technical Name"
+msgstr "Technische naam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Technical name of the field."
+msgstr "Technische naam van het veld."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Field Type"
+msgstr "Veldtype"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddFieldTo.cshtml"
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgid "Add Parts To \"{0}\""
+msgstr "Voeg onderdelen toe aan \"{0}\""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgid "Choose the Parts to add to this Content Type."
+msgstr "Kies de parts om toe te voegen aan dit inhoudstype."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/AddPartsTo.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "New Content Type"
+msgstr "Nieuw inhoudstype"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "Name of the type as it will be displayed in screens."
+msgstr "Naam van het type zoals het op de schermen getoond gaat worden."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "Content Type Id"
+msgstr "Inhoudstype Id"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "Technical name of the type."
+msgstr "Technische naam van het type."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Create.cshtml"
+msgid "Create"
+msgstr "Aanmaken"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgid "New Content Part"
+msgstr "Nieuw inhoudsonderdeel"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgid "Name"
+msgstr "Nieuw"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgid "Use no spaces or special characters. For example, \"MyCustomPart\""
+msgstr "Gebruik geen spaties of speciale karakters. Bijvoorbeeld \"MijnEigenVeld\"\"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/CreatePart.cshtml"
+msgid "Create"
+msgstr "Aanmaken"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Edit Content Type - {0}"
+msgstr "Wijzig inhoudstype - {0}"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Edit Placement"
+msgstr "Plaatsing Aanpassen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Content Type Id: {0}"
+msgstr "Inhoudstype Id: {0}"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Fields"
+msgstr "Velden"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Add Field"
+msgstr "Veld Toevoegen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Parts"
+msgstr "Onderdelen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Add Parts"
+msgstr "Onderdelen toevoegen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/Edit.cshtml"
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgid "Edit Field \"{0}\""
+msgstr "Wijzig veld \"{0}\""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgid "Name of the field as it will be displayed in screens."
+msgstr "Naam van het veld zoals het op de schermen getoond gaat worden."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditField.cshtml"
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Edit Part"
+msgstr "Wijzig onderdeel"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Fields"
+msgstr "Velden"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Add"
+msgstr "Toevoegen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPart.cshtml"
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgid "Edit Placement - {0}"
+msgstr "Plaatsing aanpassen - {0}"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgid "You need to hit \"Save\" in order to save your changes."
+msgstr "U moet op \"Opslaan\" drukken op uw wijzingen op te slaan."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgid "Are you sure you want to restore these placements?"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/EditPlacement.cshtml"
+msgid "Restore"
+msgstr "Herstellen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgid "Manage Content Types"
+msgstr "Inhoudstypes beheren"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgid "Create new type"
+msgstr "Nieuw type aanmaken"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/List.cshtml"
+msgid "Filter:"
+msgstr "Filter: "
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgid "Content Parts"
+msgstr "Inhoudsonderdelen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgid "Create new part"
+msgstr "Nieuw onderdeel aanmaken"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/ListParts.cshtml"
+msgid "Filter:"
+msgstr "Filter: "
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgid "Remove the \"{0}\" part from  \"{1}\""
+msgstr "Verwijder het \"{0}\" onderdeel van  \"{1}\""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgid "Looks like you couldn't use the fancy way to remove the field. Try hitting the button below to force the issue."
+msgstr "Kan niet op een goede manier dit veld verwijderen. Probeer met de knop hieronder het verwijderen te forceren."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemoveFieldFrom.cshtml"
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgid "Remove the \"{0}\" part from  \"{1}\""
+msgstr "Verwijder het \"{0}\" onderdeel van \"{1}\""
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgid "Looks like you couldn't use the fancy way to remove the part. Try hitting the button below to force the issue."
+msgstr "Kan niet op een goede manier dit onderdeel verwijderen. Probeer met de knop hieronder het verwijderen te forceren."
+
+#: "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/Admin/RemovePartFrom.cshtml"
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgid "Optionally provide a description for this part"
+msgstr "Geef een optionele omschrijving voor dit onderdeel"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgid "Attachable"
+msgstr "Toevoegbaar"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentPartSettings.cshtml"
+msgid "Check to allow this part to be attached to other content types."
+msgstr "Aanvinken om toe te staan dat dit onderdeel aan andere inhoudstypes kan worden toegevoegd"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Creatable"
+msgstr "Aanmaakbaar"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Determines if an instance of this content type can be created through the UI."
+msgstr "Bepaalt of een instantie van een inhoudstype kan worden aangemaakt via de gebruikersinterface."
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Listable"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Determines if an instance of this content type can be listed through the UI."
+msgstr ""
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Draftable"
+msgstr "Conceptversies"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Determines if this content type supports draft versions."
+msgstr "Bepaalt of dit inhoudstype conceptversies ondersteunt."
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Securable"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Determines if this content type can have custom permissions."
+msgstr ""
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "Stereotype"
+msgstr "Stereotype"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DefinitionTemplates/ContentTypeSettingsViewModel.cshtml"
+msgid "(Optional) The stereotype of the content type. e.g., Widget, MenuItem, ..."
+msgstr "(Optioneel) Het stereotype van het inhoudstype. Bijvoorbeeld: Widget, MenuItem, ..."
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditPartViewModel.cshtml"
+msgid "Edit"
+msgstr "Wijzig"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgid "Create New {0}"
+msgstr "Nieuw {0} Aanmaken"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgid "List Items"
+msgstr "Lijst Items"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgid " | "
+msgstr " | "
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/EditTypeViewModel.cshtml"
+msgid "Edit"
+msgstr "Wijzig"
+
+#: "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/Settings.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/DisplayTemplates/Settings.cshtml"
+msgid "Global Settings"
+msgstr "Algemene instellingen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/Field.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/Field.cshtml"
+msgid "Edit"
+msgstr "Wijzigen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/Field.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/Field.cshtml"
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/TypePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/TypePart.cshtml"
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/TypePart.cshtml"
+msgctxt "~/Modules/Orchard.ContentTypes/Views/EditorTemplates/TypePart.cshtml"
+msgid "{0} Settings:"
+msgstr "{0} Instellingen:"
+

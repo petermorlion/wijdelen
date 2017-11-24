@@ -1,0 +1,42 @@
+#. "Name"
+#. "Orchard.Conditions.Name"
+#: "~/Modules/Orchard.Conditions/Module.txt"
+msgctxt "~/Modules/Orchard.Conditions/Module.txt"
+msgid "Conditions"
+msgstr "Condities"
+
+#. "Author"
+#: "~/Modules/Orchard.Conditions/Module.txt"
+msgctxt "~/Modules/Orchard.Conditions/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Conditions/Module.txt"
+msgctxt "~/Modules/Orchard.Conditions/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#. "Orchard.Conditions.Description"
+#: "~/Modules/Orchard.Conditions/Module.txt"
+msgctxt "~/Modules/Orchard.Conditions/Module.txt"
+msgid "Provides a rules API that evaluate to true or false."
+msgstr ""
+
+#. "Orchard.Conditions.Category"
+#: "~/Modules/Orchard.Conditions/Module.txt"
+msgctxt "~/Modules/Orchard.Conditions/Module.txt"
+msgid "Scripting"
+msgstr "Scripting"
+
+#: "Orchard.Conditions.Services.ConditionManager"
+msgctxt "Orchard.Conditions.Services.ConditionManager"
+msgid "There are currently no scripting engines enabled"
+msgstr ""
+
+#: "Orchard.Conditions.Services.ConditionManager"
+msgctxt "Orchard.Conditions.Services.ConditionManager"
+msgid "Expression is not a boolean value"
+msgstr "Expressie is geen boolean waarde"
+

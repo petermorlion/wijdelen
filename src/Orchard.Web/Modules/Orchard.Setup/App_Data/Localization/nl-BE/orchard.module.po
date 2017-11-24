@@ -1,0 +1,232 @@
+#. "Name"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "Setup"
+msgstr "Installeren"
+
+#. "Author"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "The setup module is creating the application's setup experience."
+msgstr "De setup module maakt nu de setup schermen van deze applicatie."
+
+#. ".Name"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "Setup Services"
+msgstr ""
+
+#. ".Description"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "Provides programmatic APIs to the setup service."
+msgstr ""
+
+#. ".Category"
+#: "~/Modules/Orchard.Setup/Module.txt"
+msgctxt "~/Modules/Orchard.Setup/Module.txt"
+msgid "Core"
+msgstr "Core"
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Site name is required."
+msgstr "Site naam is verplicht."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Site name can be no longer than {0} characters."
+msgstr "De naam van de site mag niet langer zijn dan {0} tekens."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "User name is required."
+msgstr "Gebruikersnaam is verplicht."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "User name must be at least {0} characters."
+msgstr "Gebruikersnaam moet minstens {0} tekens bevatten."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "User name can be no longer than {0} characters."
+msgstr "Gebruikersnaam mag niet langer zijn als {0} tekens."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Password is required."
+msgstr "Wachtwoord is verplicht."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Password must be at least {0} characters."
+msgstr "Wachtwoord moet ten minste {0} tekens bevatten."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Password can be no longer than {0} characters."
+msgstr "Wachtwoord mag niet langer zijn als {0} tekens."
+
+#: "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgctxt "Orchard.Setup.Annotations.SiteNameValidAttribute"
+msgid "Password confirmation is required."
+msgstr "Bevestigen wachtwoord is verplicht."
+
+#: "Orchard.Setup.Commands.SetupCommand"
+msgctxt "Orchard.Setup.Commands.SetupCommand"
+msgid "Setup of site '{0}' was started with recipe execution ID {1}. Use the 'recipes result' command to check the result of the execution."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "A connection string is required."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "Password confirmation must match."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "The table prefix must begin with a letter."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "The table prefix must contain letters or digits."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "No recipes were found."
+msgstr ""
+
+#: "Orchard.Setup.Controllers.SetupController"
+msgctxt "Orchard.Setup.Controllers.SetupController"
+msgid "Setup failed: {0}"
+msgstr "Installatie mislukt: {0}"
+
+#: "Orchard.Setup.Services.SetupService"
+msgctxt "Orchard.Setup.Services.SetupService"
+msgid "A previous Orchard installation was detected in this database with this table prefix."
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Get Started"
+msgstr "Aan de slag"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Please answer a few questions to configure your site."
+msgstr "Beantwoord onderstaande vragen om uw site te configuren"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "What is the name of your site?"
+msgstr "Wat is de naam van uw site?"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Choose a user name:"
+msgstr "Kies een gebruikersnaam:"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Choose a password:"
+msgstr "Kies uw wachtwoord:"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Confirm the password:"
+msgstr "Bevestig uw wachtwoord:"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "How would you like to store your data?"
+msgstr "Hoe wilt u uw gegevens opslaan?"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Use built-in data storage (SQL Server Compact)"
+msgstr "Gebruik de ingebouwde data-opslag (SQL Server Compact)"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Use an existing SQL Server, SQL Express database"
+msgstr "Gebruik een bestaande SQL Server, SQL Express database"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Use an existing MySql database"
+msgstr "Gebruik een bestaande MySQL database"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Use an existing PostgreSQL database"
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Connection string"
+msgstr "Connectie string"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Data Source=sqlServerName;Initial Catalog=dbName;User ID=userName;Password=password"
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Data Source=serverName;Database=dbName;User Id=userName;Password=password"
+msgstr "Data Source=serverNaam;Database=dbNaam;User Id=userNaam;Password=wachtwoord"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Server=serverName;Port=5432;Database=dbName;User Id=userName;Password=password"
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Database Table Prefix"
+msgstr "Database Tabel voorvoegsel"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Choose an Orchard Recipe"
+msgstr "Kies een Orchard Recept:"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Orchard Recipes allow you to setup your site with additional pre-configured options, features and settings out of the box."
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Unspecified"
+msgstr ""
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Cooking Orchard Recipe ..."
+msgstr "Bereiden van het Orchard Recept"
+
+#: "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgctxt "~/Modules/Orchard.Setup/Views/Setup/Index.cshtml"
+msgid "Finish Setup"
+msgstr "Setup Klaar"
+

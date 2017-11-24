@@ -121,7 +121,7 @@ msgstr ""
 #: "Orchard.Data.Migration.DataMigrationNotificationProvider"
 msgctxt "Orchard.Data.Migration.DataMigrationNotificationProvider"
 msgid "Some features need to be upgraded: {0}"
-msgstr "Sommige functies moeten worden bijgewerkt: {0}"
+msgstr "Sommige functies dienen opgewaardeerd te worden: {0}"
 
 #: "Orchard.Data.Migration.Interpreters.DefaultDataMigrationInterpreter"
 msgctxt "Orchard.Data.Migration.Interpreters.DefaultDataMigrationInterpreter"
@@ -131,11 +131,11 @@ msgstr "Fout tijdens het uitvoeren van data migratie. Specifiëer het veld type 
 #: "Orchard.Data.Migration.Interpreters.MySqlCommandInterpreter"
 msgctxt "Orchard.Data.Migration.Interpreters.MySqlCommandInterpreter"
 msgid "Error while executing data migration: you need to specify the field's type in order to change its properties"
-msgstr "Fout tijdens het uitvoeren van datamigratie. Specificeer het veldtype om de eigenschappen te wijzigen"
+msgstr "Fout tijdens het uitvoeren van data migratie. Specifiëer het veld type om de eigenschappen te wijzigen."
 
 #: "Orchard.Data.Migration.Schema.SchemaBuilder"
 msgctxt "Orchard.Data.Migration.Schema.SchemaBuilder"
-msgid "An unexpected error occured while executing the SQL statement: {0}"
+msgid "An unexpected error occurred while executing the SQL statement: {0}"
 msgstr ""
 
 #: "Orchard.DisplayManagement.Implementation.DefaultDisplayManager"

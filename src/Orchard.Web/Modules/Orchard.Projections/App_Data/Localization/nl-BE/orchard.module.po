@@ -1,0 +1,2424 @@
+#. "Name"
+#: "~/Modules/Orchard.Projections/Module.txt"
+msgctxt "~/Modules/Orchard.Projections/Module.txt"
+msgid "Projector"
+msgstr "Projector"
+
+#. "Author"
+#: "~/Modules/Orchard.Projections/Module.txt"
+msgctxt "~/Modules/Orchard.Projections/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Projections/Module.txt"
+msgctxt "~/Modules/Orchard.Projections/Module.txt"
+msgid "https://github.com/OrchardCMS/Orchard"
+msgstr ""
+
+#. "Description"
+#: "~/Modules/Orchard.Projections/Module.txt"
+msgctxt "~/Modules/Orchard.Projections/Module.txt"
+msgid "Provides methods to control how lists of content items are filtered and displayed"
+msgstr "Verzorgd methoden om inhoudsitems te filteren en te tonen"
+
+#. "Queries"
+msgctxt "Orchard.Projections.AdminMenu"
+msgid "Queries"
+msgstr ""
+
+#: "Orchard.Projections.AdminMenu"
+msgctxt "Orchard.Projections.AdminMenu"
+msgid "Bindings"
+msgstr ""
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "Creation date"
+msgstr "Aanmaak datum"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "When the content item was created"
+msgstr "Wanneer het inhoudsitem is aangemaakt"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "Modification date"
+msgstr "Wijzigingsdatum"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "When the content item was modified"
+msgstr "Wanneer het inhoudsitem is gewijzigd"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "Publication date"
+msgstr "Publicatie datum"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "When the content item was published"
+msgstr "Wanneer het inhoudsitem is gepubliceerd"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "Title Part Title"
+msgstr "\"Titel Part\" titel"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "The title assigned using the Title part"
+msgstr "De titel toegewezen door het \"Titel Part\""
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "Body Part Text"
+msgstr "Body part tekst"
+
+#: "Orchard.Projections.Migrations"
+msgctxt "Orchard.Projections.Migrations"
+msgid "The text from the Body part"
+msgstr "De tekst van het Body part"
+
+#: "Orchard.Projections.Controllers.AdminController"
+msgctxt "Orchard.Projections.Controllers.AdminController"
+msgid "Not authorized to list queries"
+msgstr ""
+
+#. "Not authorized to manage queries"
+msgctxt "Orchard.Projections.Controllers.AdminController"
+msgid "Not authorized to manage queries"
+msgstr "Niet toegestaan om query's te beheren"
+
+#: "Orchard.Projections.Controllers.AdminController"
+msgctxt "Orchard.Projections.Controllers.AdminController"
+msgid "Not authorized to edit queries"
+msgstr "Niet toegestaan om query's te bewerken"
+
+#: "Orchard.Projections.Controllers.AdminController"
+msgctxt "Orchard.Projections.Controllers.AdminController"
+msgid "Query {0} deleted"
+msgstr "Query {0} verwijderd"
+
+#. "Not authorized to list bindings"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "Not authorized to list bindings"
+msgstr ""
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "Binding created successfully"
+msgstr "Binding succesvol aangemaakt"
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "The record for this binding is no longer available, please remove it."
+msgstr "Het record voor deze binding is niet meer beschikbaar, verwijder deze."
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "The member for this binding is no longer available, please remove it."
+msgstr "Het onderdeel van deze binding is niet meer beschikbaar, verwijder deze."
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "Binding updated successfully"
+msgstr "Binding succesvol bijgewerkt"
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "Not authorized to delete bindings"
+msgstr "Niet toegestaan om bindings te verwijderen"
+
+#: "Orchard.Projections.Controllers.BindingController"
+msgctxt "Orchard.Projections.Controllers.BindingController"
+msgid "Binding deleted"
+msgstr "Binding verwijdert"
+
+#. "Not authorized to manage queries"
+msgctxt "Orchard.Projections.Controllers.FilterController"
+msgid "Not authorized to manage queries"
+msgstr "Niet toegestaan om query's te beheren"
+
+#: "Orchard.Projections.Controllers.FilterController"
+msgctxt "Orchard.Projections.Controllers.FilterController"
+msgid "Filter deleted"
+msgstr "Filter verwijderd"
+
+#. "Not authorized to manage queries"
+msgctxt "Orchard.Projections.Controllers.LayoutController"
+msgid "Not authorized to manage queries"
+msgstr "Niet toegestaan om query's te beheren"
+
+#: "Orchard.Projections.Controllers.LayoutController"
+msgctxt "Orchard.Projections.Controllers.LayoutController"
+msgid "Layout deleted"
+msgstr "Layout verwijdert"
+
+#: "Orchard.Projections.Controllers.LayoutController"
+msgctxt "Orchard.Projections.Controllers.LayoutController"
+msgid "Layout Created"
+msgstr "Layout aangemaakt"
+
+#: "Orchard.Projections.Controllers.LayoutController"
+msgctxt "Orchard.Projections.Controllers.LayoutController"
+msgid "Layout Saved"
+msgstr "Layout opgeslagen"
+
+#. "Not authorized to manage queries"
+msgctxt "Orchard.Projections.Controllers.PropertyController"
+msgid "Not authorized to manage queries"
+msgstr "Niet toegestaan om query's te beheren"
+
+#: "Orchard.Projections.Controllers.PropertyController"
+msgctxt "Orchard.Projections.Controllers.PropertyController"
+msgid "Property deleted"
+msgstr "Eigenschap verwijderd"
+
+#. "Not authorized to manage queries"
+msgctxt "Orchard.Projections.Controllers.SortCriterionController"
+msgid "Not authorized to manage queries"
+msgstr "Niet toegestaan om query's te beheren"
+
+#: "Orchard.Projections.Controllers.SortCriterionController"
+msgctxt "Orchard.Projections.Controllers.SortCriterionController"
+msgid "Sort criteria deleted"
+msgstr "Sorteer criteria verwijderd"
+
+#: "Orchard.Projections.Drivers.ProjectionPartDriver"
+msgctxt "Orchard.Projections.Drivers.ProjectionPartDriver"
+msgid "Suffix should not contain special characters."
+msgstr ""
+
+#: "Orchard.Projections.Drivers.QueryPartTitleDriver"
+msgctxt "Orchard.Projections.Drivers.QueryPartTitleDriver"
+msgid "A query with the same title already exists"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "Undefined"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "Yes"
+msgstr "Ja"
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "No"
+msgstr "Nee"
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "Enter the value the string should be."
+msgstr "Geef de waarde op voor deze string."
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "{0} is undefined"
+msgstr "{0} is ongedefinieerd"
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "{0} is true"
+msgstr "{0} is waar"
+
+#: "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.BooleanFilterForm"
+msgid "{0} is false"
+msgstr "{0} is onwaar"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Operator"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "A date"
+msgstr "Een datum"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Please use this format: YYYY-MM-DD hh:mm:ss. e.g., 2010-04-12 would filter on the whole day. You can also use the Date token like this: {Date.Format:yyyy-MM-dd}"
+msgstr "Maak gebruik van dit formaat: JJJJ-MM-DD uu:mm:ss. b.v., 2010-04-12 filtert op de hele dag. Ook kan er een datum token gebruikt worden zoals dit: {Date.Format:yyyy-MM-dd} "
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "An offset from the current time"
+msgstr "Een verschuiving van de huidige tijd"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "You can provide time in the past by using negative values. e.g., -1 day"
+msgstr "Geef een tijd op in het verleden door een negatieve waarde te gebruiken. B.v. -1 dag"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Value"
+msgstr "Waarde"
+
+#. "Unit"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Unit"
+msgstr "Eenheid"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Min"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Max"
+msgstr "Max"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is less than"
+msgstr "is kleiner dan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is less than or equal to"
+msgstr "is kleiner dan of gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is equal to"
+msgstr "is gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is not equal to"
+msgstr "is niet gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is greater than or equal to"
+msgstr "is groter dan of gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is greater than"
+msgstr "is groter dan"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is between"
+msgstr "is tussen"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is not between"
+msgstr "is niet tussen"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is null"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Is not null"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Year"
+msgstr "Jaar"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Month"
+msgstr "Maand"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Day"
+msgstr "Dag"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Hour"
+msgstr "Uur"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Minute"
+msgstr "Minuut"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "Second"
+msgstr "Seconde"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is null"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is not null"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is less than {1}{2}"
+msgstr "{0} is kleiner dan {1}{2}"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is less than or equal to {1}{2}"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} equals {1}{2}"
+msgstr "{0} is gelijk aan {1}{2}"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is not equal to {1}{2}"
+msgstr "{0} is niet gelijk aan {1}{2}"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is greater than {1}{2}"
+msgstr "{0} is groter dan {1}{2}"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is greater than or equal to {1}{2}"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is between {1}{2} and {3}{4}"
+msgstr "{0} is tussen {1}{2} en {3}{4}"
+
+#: "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterForm"
+msgid "{0} is not between {1}{2} and {3}{4}"
+msgstr "{0} is niet tussen {1}{2} en {3}{4}"
+
+#. "The field {0} is required."
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "The field {0} is required."
+msgstr "Het veld {0} is verplicht."
+
+#. "Min"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "Min"
+msgstr ""
+
+#. "Max"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "Max"
+msgstr "Max"
+
+#. "Value"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "Value"
+msgstr "Waarde"
+
+#. "The field {0} should contain a valid date (YYYY-MM-DD hh:mm:ss)"
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "The field {0} should contain a valid date (YYYY-MM-DD hh:mm:ss)"
+msgstr "Het veld {0} moet een geldige datum bevatten (YYYY-MM-DD hh:mm:ss)"
+
+#. "The field {0} must be a valid number."
+msgctxt "Orchard.Projections.FilterEditors.Forms.DateTimeFilterFormValidation"
+msgid "The field {0} must be a valid number."
+msgstr "het veld {0} moet een geldig cijfer zijn."
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Operator"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Value"
+msgstr "Waarde"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Min"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Max"
+msgstr "Max"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is less than"
+msgstr "is kleiner dan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is less than or equal to"
+msgstr "is kleiner dan of gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is equal to"
+msgstr "is gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is not equal to"
+msgstr "is niet gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is greater than or equal to"
+msgstr "is groter dan of gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is greater than"
+msgstr "is groter dan"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is between"
+msgstr "is tussen"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "Is not between"
+msgstr "is niet tussen"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is less than {1}"
+msgstr "{0} is kleiner dan {1}"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is less than or equal to {1}"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} equals {1}"
+msgstr "{0} is gelijk aan {1}"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is not equal to {1}"
+msgstr "{0} is niet gelijk aan {1}"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is greater than {1}"
+msgstr "{0} is groter dan {1}"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is greater than or equal to {1}"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is between {1} and {2}"
+msgstr "{0} is tussen {1} en {2}"
+
+#: "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFilterForm"
+msgid "{0} is not between {1} and {2}"
+msgstr "{0} is niet tussen {1} en {2}"
+
+#. "The field {0} is required."
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFieldTypeEditorValidation"
+msgid "The field {0} is required."
+msgstr "Het veld {0} is verplicht."
+
+#. "Min"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFieldTypeEditorValidation"
+msgid "Min"
+msgstr ""
+
+#. "Max"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFieldTypeEditorValidation"
+msgid "Max"
+msgstr "Max"
+
+#. "Value"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFieldTypeEditorValidation"
+msgid "Value"
+msgstr "Waarde"
+
+#. "The field {0} should contain a valid number"
+msgctxt "Orchard.Projections.FilterEditors.Forms.NumericFieldTypeEditorValidation"
+msgid "The field {0} should contain a valid number"
+msgstr "Het veld {0} moet een geldig nummer bevatten"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Operator"
+msgstr ""
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Value"
+msgstr "Waarde"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Enter the value the string should be."
+msgstr "Geef de waarde op voor deze string."
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Is equal to"
+msgstr "is gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Is not equal to"
+msgstr "is niet gelijk aan"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Contains"
+msgstr "Bevat"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Contains any word"
+msgstr "Bevat een woord"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Contains all words"
+msgstr "Bevat alle woorden"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Starts with"
+msgstr "Begint met"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Does not start with"
+msgstr "Begint niet met"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Ends with"
+msgstr "Eindigt met"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Does not end with"
+msgstr "Eindigt niet met"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "Does not contain"
+msgstr "Bevat niet"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} is equal to '{1}'"
+msgstr "{0} is gelijk aan '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} is not equal to '{1}'"
+msgstr "{0} is niet gelijk aan '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} contains '{1}'"
+msgstr "{0} bevat '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} contains any of '{1}'"
+msgstr "{0} bevat iets uit '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} contains all '{1}'"
+msgstr "{0} bevat alle '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} starts with '{1}'"
+msgstr "{0} begint met  '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} does not start with '{1}'"
+msgstr "{0} begint niet met  '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} ends with '{1}'"
+msgstr "{0} eindigt met  '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} does not end with '{1}'"
+msgstr "{0} eindigt niet met  '{1}'"
+
+#: "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgctxt "Orchard.Projections.FilterEditors.Forms.StringFilterForm"
+msgid "{0} does not contain '{1}'"
+msgstr "{0} bevat niet '{1}'"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Date format"
+msgstr ""
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Short date pattern: 6/15/2009"
+msgstr "Kort datum patroon: 6/15/2009"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Long date pattern: Monday, June 15, 2009"
+msgstr "Lang datum patroon: Maandag, Juni 15, 2009"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Full date/time pattern (short time): Monday, June 15, 2009 1:45 PM"
+msgstr "Volledig datum/tijd patroon (korte tijd): Maandag, Juni 15, 2009 1:45 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Full date/time pattern (long time): Monday, June 15, 2009 1:45:30 PM"
+msgstr "Volledig datum/tijd patroon (lange tijd): Maandag, Juni 15, 2009 1:45:30 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "General date/time pattern (short time): 6/15/2009 1:45 PM"
+msgstr "Algemeen datum/tijd patroon (korte tijd): 6/15/2009 1:45 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "General date/time pattern (long time): 6/15/2009 1:45:30 PM"
+msgstr "Algemeen datum/tijd patroon (lange tijd): 6/15/2009 1:45:30 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Month/day pattern: June 15"
+msgstr "Maand/dag patroon: Juni 15"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Round-trip date/time pattern: 2009-06-15T13:45:30.0900000"
+msgstr "Round-trip datum/tijd pattroon: 2009-06-15T13:45:30.0900000"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "RFC1123 pattern: Mon, 15 Jun 2009 20:45:30 GMT"
+msgstr "RFC1123 patroon: Maa, 15 jun 2009 20:45:30 GMT"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Sortable date/time pattern: 2009-06-15T13:45:30"
+msgstr "Sorteerbaar datum/tijd patroon: 2009-06-15T13:45:30"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Short time pattern: 1:45 PM"
+msgstr "Kort tijd patroon: 1:45 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Long time pattern: 1:45:30 PM"
+msgstr "Lang tijd patroon: 1:45:30 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Universal sortable date/time pattern: 2009-06-15 20:45:30Z"
+msgstr "Universeel sorteerbaar datum/tijd patroon: 2009-06-15 20:45:30Z"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Universal full date/time pattern:  Monday, June 15, 2009 8:45:30 PM"
+msgstr "Universele volledige datum/tijd patroon: Maandag, Juni 15, 2009 8:45:30 PM"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Year month pattern: June, 2009"
+msgstr "Jaar maand patroon: Juni, 2009"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Day: 15"
+msgstr "Dag: 15"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Month: 6"
+msgstr "Maand: 6"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Year: 2009"
+msgstr "Jaar: 2009"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Day of year: 166"
+msgstr "Dag van het jaar: 166"
+
+#: "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.DateTimePropertyForm"
+msgid "Relative time: 1 minute ago"
+msgstr "Relatieve tijd: 1 minuut geleden"
+
+#: "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgid "Prefix"
+msgstr ""
+
+#: "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgid "Text to put before the number, such as currency symbol."
+msgstr "Tekst om voor het getal te plakken, zoals een valuta teken."
+
+#: "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgid "Suffix"
+msgstr ""
+
+#: "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgctxt "Orchard.Projections.PropertyEditors.Forms.NumericPropertyForm"
+msgid "Text to put after the number, such as currency symbol."
+msgstr "Tekst om achter het getal te plakken, zoals een valuta teken."
+
+#: "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgid "{0} Content Fields"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgid "Content Fields for {0}"
+msgstr "Inhoudsvelden voor {0}"
+
+#: "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgid "{0} property for {1}"
+msgstr "{0} eigenschap voor {1}"
+
+#: "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentFieldsFilter"
+msgid "Field {0} {1} \"{2}\""
+msgstr "Veld {0} {1} \"{2}\""
+
+#: "Orchard.Projections.Providers.Filters.ContentPartRecordsForm"
+msgctxt "Orchard.Projections.Providers.Filters.ContentPartRecordsForm"
+msgid "Content part records"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.ContentPartRecordsForm"
+msgctxt "Orchard.Projections.Providers.Filters.ContentPartRecordsForm"
+msgid "Select some content part records."
+msgstr ""
+
+#. "Content"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Content"
+msgstr "Inhoud"
+
+#. "Content types"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Content Types"
+msgstr "Inhoudstypes"
+
+#: "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Specific content types"
+msgstr "Specifieke inhouds types"
+
+#: "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Any content item"
+msgstr "Ieder inhoudsitem"
+
+#: "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Content with type {0}"
+msgstr "Inhoud met type {0}"
+
+#: "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Select some content types."
+msgstr "Selecteer enkele inhouds types."
+
+#: "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgctxt "Orchard.Projections.Providers.Filters.ContentTypesFilter"
+msgid "Any"
+msgstr "Ieder"
+
+#. "Content"
+msgctxt "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgid "Content"
+msgstr "Inhoud"
+
+#: "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgctxt "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgid "Eager fetch"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgctxt "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgid "Eager fetch content part records"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgctxt "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgid "No content part record"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgctxt "Orchard.Projections.Providers.Filters.EagerFectchFilter"
+msgid "Eager fetch part records {0}"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Filters.MemberBindingFilter"
+msgctxt "Orchard.Projections.Providers.Filters.MemberBindingFilter"
+msgid "Members for {0}"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "Html"
+msgstr "HTML"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "Html Layouts"
+msgstr "Html weergaven"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "Grid"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "Organizes content items in a grid."
+msgstr "Organiseert inhoudsitems in een grid."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "{0} columns grid"
+msgstr "{0} kolommen grid"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayout"
+msgid "{0} lines grid"
+msgstr "{0} regels grid"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Alignment"
+msgstr "Uitlijning"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Horizontal"
+msgstr "Horizontaal"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Horizontal alignment will place items starting in the upper left and moving right."
+msgstr "Horizontale uitlijning zal items plaatsen van links boven naar rechts."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Vertical"
+msgstr "Verticaal"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Vertical alignment will place items starting in the upper left and moving down."
+msgstr "Verticale uitlijning plaatst items van linksboven en dan naar beneden."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Number of columns/lines "
+msgstr "Aantal kolommen/regels"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "How many columns (in Horizontal mode) or lines (in Vertical mode) to display in the grid."
+msgstr "Hoeveel kolommen (in horizontale mode) of regels (in verticale mode) om te tonen in de grid."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Html properties"
+msgstr "HTML eigenschappen"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Grid tag"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The tag of the grid. Leave empty for no tag. (e.g., table)"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Grid id"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The id to provide on the grid element."
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Grid class"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The class to provide on the grid element."
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Row tag"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The tag of a row. Leave empty for no tag. (e.g., tr)"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Row class"
+msgstr "Rij class"
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The class to provide on each row."
+msgstr "De class voor elke rij."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Cell tag"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The tag of a cell. Leave empty for no tag. (e.g., td)"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Cell class"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The class to provide on each cell."
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "Empty Cell"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The HTML to render as empty cells to fill a row. (e.g., <td>&nbsp;</td>"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The field Alignment is required."
+msgstr "Het uitlijningsveld is verplicht."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The field Columns/Lines is required."
+msgstr "Het veld kolommen/regels is verplicht."
+
+#: "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.GridLayoutForms"
+msgid "The field Columns/Lines must be a valid number."
+msgstr "Het veld kolommen/regels moet een geldig nummer bevatten."
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Html"
+msgstr "HTML"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Html Layouts"
+msgstr "Html weergaven"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Html List"
+msgstr "HTML lijst"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Organizes content items inside a simple list."
+msgstr "Organiseer inhoudsitems in een eenvoudige lijst."
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Ordered Html List"
+msgstr "Gesorteerde HTML lijst"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayout"
+msgid "Unordered Html List"
+msgstr "Ongesorteerde HTML lijst"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "Order"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "Unordered list"
+msgstr "Ongesorteerde lijst"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "Ordered list"
+msgstr "Gesorteerde lijst"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "Html properties"
+msgstr "HTML eigenschappen"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "List id"
+msgstr "Lijst id"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "The id to provide on the list element."
+msgstr "Het id voor het list element."
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "List class"
+msgstr "Lijst class"
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "The class to provide on the list element."
+msgstr "De class voor het list element."
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "Item class"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "The class to provide on each list item."
+msgstr "De class voor elk list item."
+
+#: "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ListLayoutForms"
+msgid "You must provide an Order"
+msgstr "U moet een volgorde opgeven"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayout"
+msgid "Html"
+msgstr "HTML"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayout"
+msgid "Html Layouts"
+msgstr "Html weergaven"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayout"
+msgid "Raw"
+msgstr "Rauw"
+
+#. "Renders content with custom separators."
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayout"
+msgid "Renders content with custom separators."
+msgstr "Genereer inhoud met aangepaste scheidingstekens."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Html properties"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Container tag"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "The tag of the container. Leave empty for no container."
+msgstr "De tag van de container. Laat leeg voor geen container."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Container id"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "The id to provide on the container element."
+msgstr "Het id voor het container element."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Container class"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "The class to provide on the container element."
+msgstr "De class voor het container element."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Item tag"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "The tag of each item. Leave empty for no tag."
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Item class"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "The class to provide on each item."
+msgstr "De class voor elk item."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Prepend"
+msgstr "Voorvoegsel"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Some HTML to insert before the first element."
+msgstr "HTML dat voor het eerste element toegevoegd moet worden."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Separator"
+msgstr "Scheidingsteken"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Some HTML to insert between two items."
+msgstr "HTML dat tussen twee items toegevoegd moet worden."
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Append"
+msgstr "Toevoegen (achtervoegsel)"
+
+#: "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.RawLayoutForms"
+msgid "Some HTML to insert after the last element."
+msgstr "HTML dat na het laatste element toegevoegd moet worden."
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgid "Html"
+msgstr "HTML"
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgid "Html Layouts"
+msgstr "Html weergaven"
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgid "Shape"
+msgstr "Vorm"
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgid "Uses a specific shape name to render the layout."
+msgstr "Gebruik een specifieke shape naam om de weergave te genereren."
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayout"
+msgid "Renders content in a {0} layout"
+msgstr "Genereer content in een {0} layout"
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgid "Shape options"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgid "Shape type"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgctxt "Orchard.Projections.Providers.Layouts.ShapeLayoutForms"
+msgid "The type of the shape which is used for rendering content items."
+msgstr "De type van de shape die gebruikt wordt voor het genereren van content items."
+
+#: "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgid "{0} Content Fields"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgid "Content Fields for {0}"
+msgstr "Inhoudsvelden voor {0}"
+
+#: "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgid "{0} property for {1}"
+msgstr "{0} eigenschap voor {1}"
+
+#: "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgid "Field {0}: {1}"
+msgstr "Veld {0}: {1}"
+
+#: "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentFieldProperties"
+msgid "Default value"
+msgstr "Standaard waarde"
+
+#: "Orchard.Projections.Providers.Properties.ContentProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentProperties"
+msgid "Content"
+msgstr "Inhoud"
+
+#: "Orchard.Projections.Providers.Properties.ContentProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentProperties"
+msgid "Content properties"
+msgstr "Inhoud eigenschappen"
+
+#: "Orchard.Projections.Providers.Properties.ContentProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentProperties"
+msgid "Display Text"
+msgstr "Tekstweergave"
+
+#: "Orchard.Projections.Providers.Properties.ContentProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentProperties"
+msgid "The text representing the content, e.g. its Title."
+msgstr "De tekst die de inhoud weergeeft, bijv. de titel."
+
+#: "Orchard.Projections.Providers.Properties.ContentProperties"
+msgctxt "Orchard.Projections.Providers.Properties.ContentProperties"
+msgid "Content: Display Text"
+msgstr "Inhoud: Tekstweergave"
+
+#: "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgctxt "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgid "Content"
+msgstr "Inhoud"
+
+#: "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgctxt "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgid "Content properties"
+msgstr "Inhoud eigenschappen"
+
+#: "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgctxt "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgid "Custom Value"
+msgstr "Custom waarde"
+
+#: "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgctxt "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgid "A static text. Use it for custom tokens with Rewrite options."
+msgstr "Statische tekst. Gebruik deze voor aangepaste tokens met de Herschrijf opties."
+
+#: "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgctxt "Orchard.Projections.Providers.Properties.CustomValueProperty"
+msgid "Content: Custom Value"
+msgstr "Inhoud: Custom waarde"
+
+#: "Orchard.Projections.Providers.Properties.MemberBindingProperties"
+msgctxt "Orchard.Projections.Providers.Properties.MemberBindingProperties"
+msgid "Members for {0}"
+msgstr ""
+
+#: "Orchard.Projections.Providers.Properties.MemberBindingProperties"
+msgctxt "Orchard.Projections.Providers.Properties.MemberBindingProperties"
+msgid "{0} {1}"
+msgstr ""
+
+#: "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgid "{0} Content Fields"
+msgstr ""
+
+#: "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgid "Content Fields for {0}"
+msgstr "Inhoudsvelden voor {0}"
+
+#: "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgid "{0} property for {1}"
+msgstr "{0} eigenschap voor {1}"
+
+#: "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgid "Ordered by field {0}, ascending"
+msgstr "Gesorteerd op veld {0}, oplopend"
+
+#: "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.ContentFieldsSortCriterion"
+msgid "Ordered by field {0}, descending"
+msgstr "Gesorteerd op veld {0}, aflopend"
+
+#: "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgctxt "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgid "Members for {0}"
+msgstr ""
+
+#: "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgctxt "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgid "Ordered by {0}, ascending"
+msgstr "Gesorteerd op {0}, oplopend"
+
+#: "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgctxt "Orchard.Projections.Providers.SortCriteria.MemberBindingSortCriteria"
+msgid "Ordered by {0}, descending"
+msgstr "Gesorteerd op {0}, aflopend"
+
+#: "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgid "General"
+msgstr "Algemeen"
+
+#: "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgid "General sort criteria"
+msgstr "Algemene sorteer criteria"
+
+#: "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgid "Random"
+msgstr "Willekeurig"
+
+#: "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgid "Sorts the results randomly."
+msgstr "Sorteert de resultaten in willekeurige volgorde."
+
+#: "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgctxt "Orchard.Projections.Providers.SortCriteria.RandomSortCriterion"
+msgid "Random order"
+msgstr "Willekeurige volgorde"
+
+#: "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgctxt "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgid "Sort ascending"
+msgstr ""
+
+#: "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgctxt "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgid "Sort descending"
+msgstr "Sorteer aflopend"
+
+#: "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgctxt "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgid "The direction the field will be sorted by."
+msgstr "De richting waarop het veld gesorteerd zal worden."
+
+#: "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgctxt "Orchard.Projections.Providers.SortCriteria.SortCriterionFormProvider"
+msgid "The Sort field is required."
+msgstr "Het sorteer veld is verplicht."
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Edit Query - {0}"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Filters"
+msgstr "Filters"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Add a new Group"
+msgstr "Groep toevoegen"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Or"
+msgstr "Of"
+
+#. "Description"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "+ Add a new Filter"
+msgstr "+ Voeg nieuw filter toe"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Delete group"
+msgstr "Verwijder groep"
+
+#. "Edit"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Edit"
+msgstr "Bewerk"
+
+#. "Delete"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Delete"
+msgstr "Verwijder"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Sort Criteria"
+msgstr "Sorteer criteria"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "+ Add a new Sort Criteria"
+msgstr "+ Voeg nieuw sorteer criteria toe"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Up"
+msgstr "Omhoog"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Down"
+msgstr "Omlaag"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Layouts"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "+ Add a new Layout"
+msgstr "+ Voeg nieuwe layout toe"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Add a new Layout"
+msgstr "Nieuwe layout toevoegen"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Edit.cshtml"
+msgid "Close"
+msgstr "Sluiten"
+
+#. "Manage Queries"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Manage Queries"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Add a new Query"
+msgstr "Nieuwe query toevoegen"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Select all"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid " | "
+msgstr " | "
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Actions:"
+msgstr "Acties: "
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Choose action..."
+msgstr "Kies actie..."
+
+#. "Delete"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Delete"
+msgstr "Verwijder"
+
+#. "Apply"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Sort by:"
+msgstr "Sorteer op:"
+
+#. "Name"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Show:"
+msgstr "Toon:"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "All"
+msgstr "Alle"
+
+#. "Filter"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Filter"
+msgstr "Filter"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Properties"
+msgstr "Eigenschappen"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Edit"
+msgstr "Bewerk"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Index.cshtml"
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Preview.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Preview.cshtml"
+msgid "Manage Queries"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Admin/Preview.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Admin/Preview.cshtml"
+msgid "The query returned no results"
+msgstr "De query heeft geen resultaten"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Binding"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Content Part Record"
+msgstr "Contentpart record"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "The content part to add to the providers."
+msgstr "De content part die aan de providers wordt toegevoegd."
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Member"
+msgstr "Onderdeel"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "The name of the member."
+msgstr "De naam van dit onderdeel."
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Display"
+msgstr "Toon"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Text to display in lists for this property."
+msgstr "Tekst waarmee deze eigenschap in lijsten wordt weergegeven."
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Description to display in lists for this property."
+msgstr "Beschrijving van deze eigenschap die in de lijsten wordt weergegeven."
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Manage Bindings"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Add a new Binding"
+msgstr "Voeg een nieuwe binding toe"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Actions:"
+msgstr "Acties: "
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Choose action..."
+msgstr "Kies actie..."
+
+#. "Delete"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Delete"
+msgstr "Verwijder"
+
+#. "Apply"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Sort by:"
+msgstr "Sorteer op:"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Show:"
+msgstr "Toon:"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "All"
+msgstr "Alle"
+
+#. "Filter"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Filter"
+msgstr "Filter"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Type"
+msgstr "Type"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Member"
+msgstr "Onderdeel"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Display"
+msgstr "Toon"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Index.cshtml"
+msgid "Edit"
+msgstr "Bewerk"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgid "Add a Binding"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgid "There are no currently available bindings"
+msgstr "Er zijn momenteel geen beschikbare bindings"
+
+#: "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Binding/Select.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "For Query"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "Edit Query"
+msgstr "Bewerk query"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "The query to use to create menu items."
+msgstr "De query om te gebruiken om de menu items mee te maken."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "Items to display"
+msgstr "Aantal items om te tonen"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "The number of items to display. Enter 0 for no limit."
+msgstr "Het aantal items om te tonen. Voer 0 in voor alles."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "Offset"
+msgstr "Overslaan"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/NavigationQueryPart.cshtml"
+msgid "The number of items to skip (e.g., if 2 is entered, the first 2 items won't be diplayed)."
+msgstr "Het aantal items om over te slaan (b.v. bij 2, zullen de eerste 2 items niet getoond worden)."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "For Query"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "(Default Layout)"
+msgstr "(Standaard layout)"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "({0})"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Edit Query"
+msgstr "Bewerk query"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "The query to display."
+msgstr "De query om te tonen."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Items to display"
+msgstr "Aantal items om te tonen"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "The number of items to display. Enter 0 for no limit. When using pagination, this is the number of items per page."
+msgstr "Het aantal items om te tonen. Voer 0 in voor alles. Wanneer paginering aan staat, is dit het aantal items per pagina."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Offset"
+msgstr "Overslaan"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "The number of items to skip (e.g., if 2 is entered, the first 2 items won't be diplayed)."
+msgstr "Het aantal items om over te slaan (b.v., als 2 is ingevoerd, worden de eerste 2 items niet getoond)."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Maximum items"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Maximum number of items which can be queried at once. Use 0 for unlimited. This is only used as a failsafe when the number of items comes from a user-provided source such as the query string."
+msgstr "Maximum aantal items in een query. Gebruik 0 voor onbeperkt. Dit is alleen een veiligheidsmechanisme wanneer het aantal items afkomstig is van een gebruikers bron, zoals de query string uit de URL."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Suffix"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Optional. Provide a suffix to use when multiple pagers are displayed on the same page, e.g., when using multiple Projection Widgets, or to define alternates."
+msgstr "Optioneel. Geef een suffix op om te gebruiken als er meerdere pagers op dezelfde pagina getoond worden. B.v. bij het gebruik van meerdere Projection Widgets, of bij het definieren van alternates."
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Show pager"
+msgstr "Toon paginering"
+
+#: "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/EditorTemplates/Parts/ProjectionPart.cshtml"
+msgid "Check to add a pager to the list."
+msgstr "Aanvinken om een pager aan de lijst toe te voegen."
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgid "Add a Filter"
+msgstr "Voeg een filter toe"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgid "There are no currently available filters"
+msgstr "Er zijn momenteel geen beschikbare filters"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Add.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgid "Edit Filter - {0}"
+msgstr "Bewerk filter - {0}"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgid "You may optionally give a description to this filter, to be used in the dashboard screens."
+msgstr "Geef optioneel een omschrijving op voor dit filter, voor in de dashboard schermen."
+
+#: "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Filter/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgid "Add a Layout"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgid "There are no currently available layouts"
+msgstr "Er zijn momenteel geen beschikbare layouts"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Add.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Edit Layout - {0}"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "You may optionally give a description to this layout, to be used in the dashboard screens."
+msgstr "Geef optioneel een omschrijving op voor deze layout, voor in de dashboard schermen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Display mode"
+msgstr "Weergavemodus"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Content"
+msgstr "Inhoud"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Properties"
+msgstr "Eigenschappen"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "You can choose to display each content item using specific properties only."
+msgstr "Kies welke content item moet worden weergegeven met alleen bepaalde eigenschappen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Display Type"
+msgstr "Weergave type"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "The display type determines how the content item should be formatted. e.g., Summary, SummaryAdmin, Detail, ..."
+msgstr "Het weergave type bepaald hoe de inhoud geformatteerd word. B.v. Summary, SummaryAdmin, Detail, ..."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "You can only add properties when this layout is saved."
+msgstr "Je kan alleen eigenschappen toevoegen wanneer deze layout is opgeslagen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Create.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Edit Layout - {0}"
+msgstr ""
+
+#. "Description"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "You may optionally give a description to this layout, to be used in the dashboard screens."
+msgstr "Geef optioneel een omschrijving op voor deze layout, voor in de dashboard schermen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Display mode"
+msgstr "Weergavemodus"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Content"
+msgstr "Inhoud"
+
+#. "Properties"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Properties"
+msgstr "Eigenschappen"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "You can choose to display each content item using specific properties only."
+msgstr "Laat content item zien door gebruik te maken van bepaalde eigenschappen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Display Type"
+msgstr "Weergave type"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "The display type determines how the content item should be formatted. e.g., Summary, SummaryAdmin, Detail, ..."
+msgstr "Het weergave type bepaald hoe de inhoud geformatteerd word. B.v. Summary, SummaryAdmin, Detail, ..."
+
+#. "Add a new Property"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Add a new Property"
+msgstr "Voeg een nieuwe eigenschap toe"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Edit"
+msgstr "Bewerk"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Delete"
+msgstr "Verwijder"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Up"
+msgstr "Omhoog"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Down"
+msgstr "Omlaag"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Grouping property"
+msgstr "Eigenschap om te groeperen"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "None"
+msgstr "Geen"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Optionally, select a property which will be used to group content items."
+msgstr "Optioneel, selecteer een eigenschap om de content items te groeperen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "No properties are currently available in order to group this view."
+msgstr "Er zijn geen eigenschappen beschikbaar om deze weergave te groeperen."
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Layout/Edit.cshtml"
+msgid "Close"
+msgstr "Sluiten"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgid "Add a Property"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgid "There are no currently available properties"
+msgstr "Er zijn geen eigenschappen beschikbaar"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Add.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Edit Property - {0}"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "You may optionally give a description to this property, to be used in the dashboard screens."
+msgstr "Geef optioneel een omschrijving op, voor in de dashboard schermen."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Display"
+msgstr "Toon"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Link to original content item"
+msgstr "Link naar originele inhouds item"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to make this property a link to the original content item."
+msgstr "Aanvinken om deze eigenschap te linken naar het originele content item."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Exclude from display"
+msgstr "Verwijder van weergave"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check if this property should not be displayed, but only used by the layout for grouping for instance."
+msgstr "Aanvinken wanneer deze eigenschap niet getoond moet worden, maar alleen voor het groeperen gebruikt moet worden."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Label"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Create a label"
+msgstr "Maak een label"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The text to display as a label for this property."
+msgstr "De tekst van de label voor deze eigenschap."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Style"
+msgstr "Stijl"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Customize property HTML"
+msgstr "Wijzig HTML eigenschap"
+
+#. "HTML element"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "HTML element"
+msgstr "HTML-element"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The HTML element to wrap around this property (e.g., h1, p, etc.). Use - to prevent a tag from being rendered."
+msgstr "Het HTML element dat om deze eigenschap gewikkeld moet worden (h1, p, enz.). Gebruik - om te voorkomen dat er een tag wordt gegenereerd."
+
+#. "Css class"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Css class"
+msgstr ""
+
+#. "The Css class to apply to this element."
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The Css class to apply to this element."
+msgstr "De Css class voor dit element."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Customize label HTML"
+msgstr "Wijzig HTML label"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The HTML element to wrap around this label (e.g., h1, p, etc.). Use - to prevent a tag from being rendered."
+msgstr "Het HTML element dat om deze label gewikkeld moet worden (h1, p, enz.). gebruik - om te voorkomen dat een tag wordt gegenereerd."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Customize Wrapper HTML"
+msgstr "Wijzig HTML wrapper"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The HTML element to wrap around this wrapper (e.g., h1, p, etc.). Use - to prevent a tag from being rendered."
+msgstr "Het HTML element dat om deze wrapper gewikkeld moet worden (h1, p, enz.). Gebruik - om te voorkomen dat er een tag wordt gegenereerd."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "No Results"
+msgstr "Geen resultaten"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "No results text"
+msgstr "Geen resultaten tekst"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Text to display when the property is empty."
+msgstr "Tekst die weergegeven wordt wanneer de eigenschap geen waarde heeft."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Number 0 as empty"
+msgstr "Nummer 0 als leeg"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to simulate empty text when result is the number 0"
+msgstr "Aanvinken om lege tekst te tonen wanneer het resultaat het getal 0 is"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Hide if empty"
+msgstr "Verberg indien leeg"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to hide the whole property when the value is empty."
+msgstr "Aanvinken om niet gevulde eigenschappen te verbergen."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Rewrite Results"
+msgstr "Herschrijf resultaten"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Rewrite output"
+msgstr "Herschrijf uitvoer"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to override the output of this property."
+msgstr "Aanvinken om de waarde van deze eigenschap te overschrijven."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Rewrite text"
+msgstr "Herschrijf tekst"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The text to write for this field. It may include HTML. {Text} can be used to inject the current property text."
+msgstr "De tekst voor dit veld. Deze mag HTML bevatten. {Text} kan gebruikt worden om in de tekst van de huidige eigenschap te injecteren."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Trim"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to trim the result if it's longer that a specified amount of characters."
+msgstr "Aanvinken om het resultaat af te kappen na het aantal opgegeven karakters."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Maximum length"
+msgstr "Maximum lengte"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "The maximum number of characters this property can be."
+msgstr "Het maximum aantal karakters voor dit property."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Trim only on a word boundary"
+msgstr "Trim tekst alleen op een woordgrens"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Checked to trim the property only on a word boundary."
+msgstr "Aanvinken om de eigenschap passend te maken op een woord."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Add an Ellipsis"
+msgstr "Voeg een weglatingsteken toe"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to insert and ellipsis ({0}) if the property is trimmed."
+msgstr "Aanvinken om een weglatingsteken ({0}) te tonen als een veld getrimd is."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Strip HTML tags"
+msgstr "Verwijder HTML tags"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to remove any HTML tag from the property."
+msgstr "Aanvinken om alle HTML tags te verwijderen uit het veld."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Remove whitespace"
+msgstr "Verwijder witruimte"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to remove the spaces at both the beginning and the end of the property."
+msgstr "Aanvinken om spaties aan zowel het begin als aan het einde te verwijderen."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Preserve new lines"
+msgstr "Behoud regeleinden"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Check to convert a line break to a &lt;br /&gt; tag."
+msgstr "Aanvinken om regeleindes om te zetten naar &lt;br /&gt; tags."
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/Property/Edit.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgid "Add a Sort Criterion"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgid "There are no currently available sort criterias"
+msgstr "Er zijn momenteel geen beschikbare sorteer criteria"
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgid "Name"
+msgstr "Naam"
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Add.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgid "Edit Sort Criterion - {0}"
+msgstr ""
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgid "Description"
+msgstr "Omschrijving"
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgid "You may optionally give a description to this sort criterion, to be used in the dashboard screens."
+msgstr "Geef optioneel een omschrijving op voor dit sorteer criterium, om te gebruiken in dashboard schermen."
+
+#: "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgctxt "~/Modules/Orchard.Projections/Views/SortCriterion/Edit.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+

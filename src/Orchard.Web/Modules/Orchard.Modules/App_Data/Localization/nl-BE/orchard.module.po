@@ -1,0 +1,386 @@
+#. "Name"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "Modules"
+msgstr "Modules"
+
+#. "Author"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "The Modules module enables the administrator of the site to manage the installed modules as well as activate and de-activate features."
+msgstr "De Modules module maakt het de webmaster mogelijk om de geinstalleerde modules te beheren en om functies aan en uit te zetten."
+
+#. "Orchard.Modules.Description"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "Standard module and feature management."
+msgstr ""
+
+#. "Orchard.Modules.Category"
+#: "~/Modules/Orchard.Modules/Module.txt"
+msgctxt "~/Modules/Orchard.Modules/Module.txt"
+msgid "Core"
+msgstr "Core"
+
+#: "Orchard.Modules.AdminMenu"
+msgctxt "Orchard.Modules.AdminMenu"
+msgid "Modules"
+msgstr "Modules"
+
+#: "Orchard.Modules.AdminMenu"
+msgctxt "Orchard.Modules.AdminMenu"
+msgid "Features"
+msgstr "Functies"
+
+#: "Orchard.Modules.AdminMenu"
+msgctxt "Orchard.Modules.AdminMenu"
+msgid "Installed"
+msgstr "Geïnstalleerd"
+
+#: "Orchard.Modules.AdminMenu"
+msgctxt "Orchard.Modules.AdminMenu"
+msgid "Recipes"
+msgstr "Recepten"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "{0}, {1}"
+msgstr "{0}, {1}"
+
+#. "Enabled"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Enabled"
+msgstr "Aangezet"
+
+#. "Disabled"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Disabled"
+msgstr "Uitgezet"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "List of available features"
+msgstr "Lijst van beschikbare functies"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "--------------------------"
+msgstr "--------------------------"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Category: {0}"
+msgstr "Categorie: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "General"
+msgstr "Algemeen"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "  Name: {0}"
+msgstr " Naam: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "    State:         {0}"
+msgstr "    Staat:         {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "    Description:   {0}"
+msgstr "Omschrijving: {0}"
+
+#. "<none>"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "<none>"
+msgstr "<geen>"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "    Category:      {0}"
+msgstr "Categorie: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "    Module:        {0}"
+msgstr "Module: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "    Dependencies:  {0}"
+msgstr "Afhankelijkheden: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Enabling features {0}"
+msgstr "Functies aan het aanzetten {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Could not find feature {0}"
+msgstr "Kan de functie {0} niet vinden"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Could not enable features: {0}"
+msgstr "Kon de functie niet aanzetten: {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Available features are : {0}"
+msgstr "Beschikbare functies : {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Disabling features {0}"
+msgstr "Functies uit aan het zetten {0}"
+
+#: "Orchard.Modules.Commands.FeatureCommands"
+msgctxt "Orchard.Modules.Commands.FeatureCommands"
+msgid "Disabled features  {0}"
+msgstr "Uitgezette functies {0}"
+
+#. "Not allowed to manage modules"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "Not allowed to manage modules"
+msgstr "Geen rechten om modules te beheren"
+
+#: "Orchard.Modules.Controllers.AdminController"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "Recipes {0} contains  unsupported module installation steps."
+msgstr ""
+
+#: "Orchard.Modules.Controllers.AdminController"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "The recipe {0} was executed successfully."
+msgstr "Het recipe {0} is succesvol uitgevoerd."
+
+#. "Not allowed to manage features"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "Not allowed to manage features"
+msgstr "Geen rechten om functies te beheren"
+
+#: "Orchard.Modules.Controllers.AdminController"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "Please select one or more features."
+msgstr "Selecteer één of meerdere functies."
+
+#: "Orchard.Modules.Controllers.AdminController"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "The feature {0} was updated successfully"
+msgstr "De functie {0} is succesvol bijgewerkt"
+
+#: "Orchard.Modules.Controllers.AdminController"
+msgctxt "Orchard.Modules.Controllers.AdminController"
+msgid "An error occurred while updating the feature {0}: {1}"
+msgstr ""
+
+#: "Orchard.Modules.Data.Migration.DataMigrationNotificationProvider"
+msgctxt "Orchard.Modules.Data.Migration.DataMigrationNotificationProvider"
+msgid "Some features need to be upgraded: {0}"
+msgstr "Sommige functies dienen opgewaardeerd te worden: {0}"
+
+#: "Orchard.Modules.Recipes.Builders.FeatureStep"
+msgctxt "Orchard.Modules.Recipes.Builders.FeatureStep"
+msgid "Features"
+msgstr "Functies"
+
+#: "Orchard.Modules.Recipes.Builders.FeatureStep"
+msgctxt "Orchard.Modules.Recipes.Builders.FeatureStep"
+msgid "Exports enabled and disabled features."
+msgstr ""
+
+#: "Orchard.Modules.Services.ModuleService"
+msgctxt "Orchard.Modules.Services.ModuleService"
+msgid "{0} was enabled"
+msgstr "{0} is aangezet"
+
+#: "Orchard.Modules.Services.ModuleService"
+msgctxt "Orchard.Modules.Services.ModuleService"
+msgid "{0} was disabled"
+msgstr "{0} is uitgezet"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Version: {0}"
+msgstr "Versie: {0}"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "1.0"
+msgstr "1.0"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Uninstall"
+msgstr "Deïnstalleren"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Features: {0}"
+msgstr "Functies: {0}"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Author: {0}"
+msgstr "Auteur: {0}"
+
+#. "Unknown"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/ModuleEntry.cshtml"
+msgid "Website: "
+msgstr "Website: "
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Modules"
+msgstr "Modules"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Filter:"
+msgstr "Filter: "
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Actions:"
+msgstr "Acties:"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Choose action..."
+msgstr "Kies actie..."
+
+#. "Enable"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Enable"
+msgstr "Aanzetten"
+
+#. "Disable"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Disable"
+msgstr "Uitzetten"
+
+#. "Update"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Update"
+msgstr "Bijwerken"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Toggle"
+msgstr "Omwisselen"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Execute"
+msgstr "Uitvoeren"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Uncategorized"
+msgstr "Ongecategoriseerd"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Depends on:"
+msgstr "Afhankelijk van"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Missing:"
+msgstr "Ontbrekend:"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Features.cshtml"
+msgid "Disabling this feature will also disable the following dependent features. Are you sure you want to continue?"
+msgstr "Door deze functie uit te schakelen worden ook alle afhankelijke functies uitgeschakeld. Weet u zeker dat u door wilt gaan?"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgid "Modules"
+msgstr "Modules"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgid "Search"
+msgstr "Zoeken"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgid "Install a module from your computer"
+msgstr "Installeer een module vanaf uw computer"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Index.cshtml"
+msgid "No modules available"
+msgstr "Geen modules beschikbaar"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "Recipes"
+msgstr "Recepten"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "Version: {0}"
+msgstr "Versie: {0}"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "1.0"
+msgstr "1.0"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "Execute"
+msgstr "Uitvoeren"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "No description"
+msgstr "Geen omschrijving"
+
+#: "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/Admin/Recipes.cshtml"
+msgid "No modules available"
+msgstr "Geen modules beschikbaar"
+
+#: "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgid "Enabled Features"
+msgstr ""
+
+#: "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgid "Check this option to export the set of enabled features."
+msgstr ""
+
+#: "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgid "Disabled Features"
+msgstr ""
+
+#: "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgctxt "~/Modules/Orchard.Modules/Views/EditorTemplates/BuilderSteps/Feature.cshtml"
+msgid "Check this option to export the set of disabled features."
+msgstr ""
+

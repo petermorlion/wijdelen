@@ -1,0 +1,251 @@
+#. "Name"
+#: "~/Modules/Orchard.ImageEditor/Module.txt"
+msgctxt "~/Modules/Orchard.ImageEditor/Module.txt"
+msgid "Image Editor"
+msgstr "Image editor"
+
+#. "Author"
+#: "~/Modules/Orchard.ImageEditor/Module.txt"
+msgctxt "~/Modules/Orchard.ImageEditor/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.ImageEditor/Module.txt"
+msgctxt "~/Modules/Orchard.ImageEditor/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#. "Orchard.ImageEditor.Description"
+#: "~/Modules/Orchard.ImageEditor/Module.txt"
+msgctxt "~/Modules/Orchard.ImageEditor/Module.txt"
+msgid "Adds a client side image editor for Media Library"
+msgstr "Voegt een webbrowser gebasseerde afbeeldingenbewerker toe voor de Media Bibliotheek"
+
+#. "Orchard.ImageEditor.Category"
+#: "~/Modules/Orchard.ImageEditor/Module.txt"
+msgctxt "~/Modules/Orchard.ImageEditor/Module.txt"
+msgid "Media"
+msgstr "Media"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Content-ImageEditor.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Content-ImageEditor.cshtml"
+msgid "Save"
+msgstr "Opslaan"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Content-ImageEditor.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Content-ImageEditor.cshtml"
+msgid "Close"
+msgstr "Sluiten"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Crop.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Crop.cshtml"
+msgid "Crop"
+msgstr "Bijsnijden"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "Maintain proportions"
+msgstr "Handhaaf verhoudingen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "Width"
+msgstr "Breedte"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "The width of the selection in pixels."
+msgstr "De breedte van de selectie in pixels."
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "Height"
+msgstr "Hoogte"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "The height of the selection in pixels."
+msgstr "De hoogte van de selectie in pixels."
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.CropOptions.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.cshtml"
+msgid "Image Editor"
+msgstr "Image editor"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Effects.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Effects.cshtml"
+msgid "Preset"
+msgstr "Voorkeursinstelling"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.EffectsOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.EffectsOptions.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.EffectsOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.EffectsOptions.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Filter.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Filter.cshtml"
+msgid "Filters"
+msgstr "Filters"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "brightness"
+msgstr "helderheid"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "saturation"
+msgstr "saturation (verzadiging)"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "exposure"
+msgstr "exposure (belichting)"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "sepia"
+msgstr "sepia"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "noise"
+msgstr "ruis"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "contrast"
+msgstr "contrast"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "vibrance"
+msgstr "vibrance (levendigheid)"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "hue"
+msgstr "hue (tint)"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "gamma"
+msgstr "gamma"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "clip"
+msgstr "bijknippen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.FilterOptions.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Resize.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Resize.cshtml"
+msgid "Resize"
+msgstr "Formaat wijzigen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "Maintain proportions"
+msgstr "Handhaaf verhoudingen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "Width"
+msgstr "Breedte"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "The width of the new image in pixels."
+msgstr "De breedte van de nieuwe afbeelding in pixels."
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "Height"
+msgstr "Hoogte"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "The height of the new image in pixels."
+msgstr "De hoogte van de nieuwe afbeelding in pixels."
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.ResizeOptions.cshtml"
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Rotate.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.Rotate.cshtml"
+msgid "Rotate"
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "Angle"
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "None"
+msgstr "Geen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "90 deg. CW"
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "90 deg. CCW"
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "180 deg."
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "Rotation angle."
+msgstr ""
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "Apply"
+msgstr "Toepassen"
+
+#: "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgctxt "~/Modules/Orchard.ImageEditor/Views/Parts/Image.Editor.RotateOptions.cshtml"
+msgid "Cancel"
+msgstr "Annuleren"
+

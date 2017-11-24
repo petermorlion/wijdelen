@@ -1,0 +1,93 @@
+#. "Name"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "C# Scripting"
+msgstr "C# Scripting"
+
+#. "Author"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "The Orchard Team"
+msgstr "Het Orchard Team"
+
+#. "Website"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "Description for the module"
+msgstr "Omschrijving voor de module"
+
+#. "Orchard.Scripting.CSharp.Description"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "Provides C# compiler services."
+msgstr "Verzorgd C# compiler services."
+
+#. "Orchard.Scripting.CSharp.Category"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "Scripting"
+msgstr "Scripting"
+
+#. "Orchard.Scripting.CSharp.Description"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "Provides a Script Validation part."
+msgstr "Biedt een scriptvalidatieonderdeel."
+
+#. "Orchard.Scripting.CSharp.Name"
+#: "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Module.txt"
+msgid "Script Validation"
+msgstr "Script Validatie"
+
+#: "Orchard.Scripting.CSharp.Activities.DecisionActivity"
+msgctxt "Orchard.Scripting.CSharp.Activities.DecisionActivity"
+msgid "Misc"
+msgstr "Divers"
+
+#: "Orchard.Scripting.CSharp.Activities.DecisionActivity"
+msgctxt "Orchard.Scripting.CSharp.Activities.DecisionActivity"
+msgid "Evaluates an expression."
+msgstr "Evalueert een expressie."
+
+#: "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgctxt "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgid "Possible Outcomes."
+msgstr "Mogelijke uitkomsten."
+
+#: "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgctxt "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgid "A comma-separated list of possible outcomes."
+msgstr "Een komma gescheiden lijst met mogelijke uitkomsten."
+
+#: "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgctxt "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgid "Script"
+msgstr "Script"
+
+#: "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgctxt "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgid "The script to run every time the Decision Activity is invoked. You can use ContentItem, Services, WorkContext, Workflow and T(). Call SetOutcome(string outcome) to define the outcome of the activity."
+msgstr ""
+
+#: "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgctxt "Orchard.Scripting.CSharp.Forms.DecisionForms"
+msgid "You must provide a Script"
+msgstr "U moet een script opgeven"
+
+#: "~/Modules/Orchard.Scripting.CSharp/Views/DefinitionTemplates/ScriptValidationPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Views/DefinitionTemplates/ScriptValidationPartSettings.cshtml"
+msgid "Script"
+msgstr "Script"
+
+#: "~/Modules/Orchard.Scripting.CSharp/Views/DefinitionTemplates/ScriptValidationPartSettings.cshtml"
+msgctxt "~/Modules/Orchard.Scripting.CSharp/Views/DefinitionTemplates/ScriptValidationPartSettings.cshtml"
+msgid "The script to run everytime the content item is edited. You can use ContentItem, Services, WorkContext, T() and AddModelError()."
+msgstr "Het script wat iedere keer uitgevoerd wordt als een inhoudsitem bewerkt wordt. Er kan gebruik gemaakt worden van ContentItem, Services, WorkContext, T() en AddModelError()."
+

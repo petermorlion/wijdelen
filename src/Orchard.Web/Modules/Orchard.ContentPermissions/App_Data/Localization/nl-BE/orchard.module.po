@@ -1,0 +1,202 @@
+#. "Name"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "Orchard.ContentPermissions"
+msgstr "Orchard.ContentPermissions"
+
+#. "Author"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "Chris Pyle, S�bastien Ros"
+msgstr "Chris Pyle, Sébastien Ros"
+
+#. "Website"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "http://orchardproject.net"
+msgstr "http://orchardproject.net/"
+
+#. "Description"
+#. "Orchard.ContentPermissions.Description"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "Allows item-level front end view permissions."
+msgstr "Sta item-level bekijk permissies toe op de front-end."
+
+#. "Orchard.ContentPermissions.Name"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "Content Item Permissions"
+msgstr "Inhoudsitem permissies"
+
+#. "Orchard.ContentPermissions.Category"
+#: "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgctxt "~/Modules/Orchard.ContentPermissions/Module.txt"
+msgid "Security"
+msgstr "Beveiliging"
+
+#: "Orchard.ContentPermissions.Drivers.ContentPermissionsPartDriver"
+msgctxt "Orchard.ContentPermissions.Drivers.ContentPermissionsPartDriver"
+msgid "Could not update permissions"
+msgstr "Kon permissies niet wijzigen"
+
+#: "Orchard.ContentPermissions.Services.DynamicPermissions"
+msgctxt "Orchard.ContentPermissions.Services.DynamicPermissions"
+msgid "{0} - {1}"
+msgstr ""
+
+#. "Permissions applied"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/Parts.ContentPermissions.SummaryAdmin.cshtml"
+msgid "Permissions applied"
+msgstr "Toegepaste permissies"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/Parts.ContentPermissions.SummaryAdmin.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/Parts.ContentPermissions.SummaryAdmin.cshtml"
+msgid "Protected"
+msgstr "Beveiligd"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Those permissions will be applied by default to any content item of this type. Users with sufficient permissions can change them for each content item."
+msgstr "Deze permissies zullen als standaard toegepast worden op alle inhoudsitems van dit type. Gebruikers met voldoende rechten kunnen deze nog aanpassen per inhoudsitem."
+
+#. "Role"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Role"
+msgstr "Rol"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "View any content"
+msgstr "Bekijken van alle inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Edit any content"
+msgstr "Bewerken van alle inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Publish any content"
+msgstr "Publiceren van alle inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Delete any content"
+msgstr "Verwijderen van alle inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Preview any content"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "View own content"
+msgstr "Bekijken van eigen inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Edit own content"
+msgstr "Bewerken van eigen inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Publish own content"
+msgstr "Publiceren van eigen inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Delete own content"
+msgstr "Verwijderen van eigen inhoud"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Preview own content"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Only show those roles in the editor:"
+msgstr "Toon alleen deze rollen in de editor:"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/ContentPermissionsPartViewModel.cshtml"
+msgid "Uncheck the roles for which you don't want the editor to change the permissions for."
+msgstr "Deselecteer de rollen die niet gewijzigd mogen worden door een editor\\bewerker."
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/SecurableContentItemsSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/SecurableContentItemsSettingsViewModel.cshtml"
+msgid "Securable Content Items"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/SecurableContentItemsSettingsViewModel.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/DefinitionTemplates/SecurableContentItemsSettingsViewModel.cshtml"
+msgid "Determines if an instance of this content type can have custom permissions."
+msgstr ""
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Enable Content Item access control"
+msgstr "Per inhoudsitem toegangscontrole aanzetten"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Check to define custom permissions for this content item."
+msgstr "Aanvinken om custom permissies toe te passen op dit inhoudsitem."
+
+#. "Role"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Role"
+msgstr "Rol"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "View this item"
+msgstr "Bekijk dit item"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Edit this item"
+msgstr "Bewerk dit item"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Publish this item"
+msgstr "Publiceer dit item"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Delete this item"
+msgstr "Verwijder dit item"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Preview this item"
+msgstr ""
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "View own"
+msgstr "Bekijk eigen"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Edit own"
+msgstr "Bewerk eigen"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Publish own"
+msgstr "Publiceer eigen"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Delete own"
+msgstr "Verwijder eigen"
+
+#: "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgctxt "~/Modules/Orchard.ContentPermissions/Views/EditorTemplates/Parts.ContentPermissions.cshtml"
+msgid "Preview own"
+msgstr ""
+
