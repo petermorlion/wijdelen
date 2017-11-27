@@ -1,0 +1,593 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_BE\n"
+
+msgid "Make a request"
+msgstr "Publier une demande"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "I would like to borrow the following item"
+msgstr "Je voudrais emprunter l’article suivant"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "A nice story to convince the group members"
+msgstr "Une belle histoire a convaincre les membres de votre Group"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "Go ahead, don't be afraid!"
+msgstr "Allez y! N’ ayez pas peur!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "Well, it's a start"
+msgstr "Eh bien, c’est un début"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "Just a little more..."
+msgstr "Juste un petit peu plus…"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "Almost there!"
+msgstr "Presque là!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+msgid "Great story!"
+msgstr "Quelle belle histoire!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/NewObjectRequest.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+msgid "Submit"
+msgstr "Soumettre maintenant"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+msgid "Save"
+msgstr "Enregistrer"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+msgid "Synonym"
+msgstr "Synonyme"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Synonyms.cshtml
+#: wijdelen.objectsharing.adminmenu
+msgid "Synonyms"
+msgstr "Synonymes"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Index.cshtml
+msgid "Create archetype"
+msgstr "Créer un archétype"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Archetypes/Create.cshtml
+msgid "New archetype"
+msgstr "Créer un archétype"
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid "Please provide a description of the item you need."
+msgstr "Veuillez fournir une description de l’article dont vous avez besoin."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid "Please provide some extra info."
+msgstr "S’il vous plaît fournir des informations supplémentaires."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid "Please provide some more extra info (at least 30 characters)."
+msgstr ""
+"S’il vous plaît fournir quelques informations supplémentaires (au moins 30 "
+"caractères)."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid "Please limit your description to {0} characters."
+msgstr "Veuillez limiter votre description à {0} caractères."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid "Please limit the extra info to {0} characters."
+msgstr "Veuillez limiter les informations supplémentaires à {0} caractères."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid ""
+"This request was blocked because it contains words that may be considered "
+"offensive or inappropriate."
+msgstr ""
+"Cette demande a été bloquée car elle contient des mots pouvant être "
+"considérés comme offensants ou inappropriés."
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid ""
+"This request was blocked by the administrator:\n"
+"\n"
+"{0}"
+msgstr "Cette demande a été bloquée par l’administrateur:"
+
+#: wijdelen.objectsharing.controllers.objectrequestcontroller
+msgid ""
+"This request has been stopped. You can not add any more messages and other "
+"users can no longer respond to this request."
+msgstr ""
+"Cette demande a été arrêtée. Vous ne pouvez plus ajouter de messages et les "
+"autres utilisateurs ne peuvent plus répondre à cette demande."
+
+#: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
+msgid ""
+"Thank you for your request. We sent your request to the members of your "
+"group."
+msgstr ""
+"Merci pour votre demande. Nous avons envoyé votre demande aux membres de "
+"votre groupe."
+
+#: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
+msgid ""
+"Thank you for your request. We noticed some words that might be considered "
+"offensive. If our system flagged this incorrectly, we will send your request "
+"to the members of your group."
+msgstr ""
+"Merci pour votre demande. Nous avons remarqué quelques mots qui pourraient "
+"être considérés comme offensants. Si notre système ne l’a pas signalé "
+"correctement, nous enverrons votre demande aux membres de votre groupe."
+
+#: wijdelen.objectsharing.adminmenu
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+msgid "Requests"
+msgstr "Demande"
+
+#: wijdelen.objectsharing.controllers.archetypescontroller
+msgid "Please provide a name for the archetype."
+msgstr "Veuillez fournir un nom pour l’archétype."
+
+#: wijdelen.objectsharing.menuprovider
+msgid "New Request"
+msgstr "Nouvelle demande"
+
+#: wijdelen.objectsharing.menuprovider
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+msgid "Received Requests"
+msgstr "Demandes reçues"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+msgid "Do you have (a) {0}?"
+msgstr "Avez-vous @ {0}?"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+msgid "A request for (a) {0} was blocked"
+msgstr "Une demande pour @ {0} a été bloquée"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+msgid "A request for (a) {0} was made"
+msgstr "Une demande pour @ {0} a été faite"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+msgid "Your request has been blocked"
+msgstr "Votre demande a été bloquée"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
+msgid "Thank you!"
+msgstr "Je vous remercie!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
+msgid ""
+"Thank you for answering. We will take note of your answer and try not to "
+"bother you with similar requests in the future."
+msgstr ""
+"Merci d’avoir répondu. Nous allons prendre note de votre réponse et essayer "
+"de ne pas vous déranger avec des demandes similaires à l’avenir."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/YesFor.cshtml
+msgid "Nice!"
+msgstr "Sympa!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NotNowFor.cshtml
+msgid "No problem!"
+msgstr "Aucun problème!"
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+msgid "Please provide a message."
+msgstr "S’il vous plaît fournir un message."
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+msgid ""
+"This request is blocked. It is currently not possible to add new messages."
+msgstr ""
+"Cette demande est bloquée. Il n’est actuellement pas possible d’ajouter de "
+"nouveaux messages."
+
+#: wijdelen.objectsharing.controllers.chatcontroller
+msgid ""
+"This request has been stopped. It is currently not possible to add new "
+"messages."
+msgstr ""
+"Cette demande a été arrêtée. Il n’est actuellement pas possible d’ajouter de "
+"nouveaux messages."
+
+#: wijdelen.objectsharing.controllers.objectrequestresponsecontroller
+msgid "Thank you for your response. You can now chat with {0}."
+msgstr "Merci pour votre réponse. Vous pouvez maintenant discuter avec {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+msgid "{0} is looking for (a) {1}"
+msgstr "{0} recherche @ {1}"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+msgid "{0} has (a) {1} for you"
+msgstr "{0} a @ {1} pour vous"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+msgid "Your request for (a) {0}"
+msgstr "Votre demande pour @ {0}"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Chat/Index.cshtml
+msgid "Write a message here."
+msgstr "Écrivez un message ici."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+#: wijdelen.objectsharing.menuprovider
+msgid "My Requests"
+msgstr "Mes Demandes"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+msgid "ObjectRequestStatus.BlockedForForbiddenWords"
+msgstr "ObjectRequestStatus.BlockedForForbiddenWords"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+msgid "ObjectRequestStatus.BlockedByAdmin"
+msgstr "ObjectRequestStatus.BlockedByAdmin"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+msgid "ObjectRequestStatus.Stopped"
+msgstr "ObjectRequestStatus.Stopped"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
+msgid ""
+"You haven't made any requests yet. Fill in the form below and get started!"
+msgstr ""
+"Vous n’avez encore fait aucune demande. Remplissez le formulaire ci-dessous "
+"et commencez!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+msgid "Reactions"
+msgstr "Réactions"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+msgid "There are no reactions yet."
+msgstr "Il n’y a pas encore de réactions."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
+msgid "Stop request"
+msgstr "Demande d’arrêt"
+
+#: wijdelen.objectsharing.infrastructure.mailgunservice
+msgid "{0} reacted on your request for a {1}."
+msgstr "{0} a réagi à votre demande de {1}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/DenyForNow.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
+msgid "Thank you"
+msgstr "Je vous remercie"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/DenyForNow.cshtml
+msgid "Thanks for answering"
+msgstr "Merci de répondre"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+msgid ""
+"You don't have any open received requests. Why not send out a request in "
+"your group? Fill in the fields below to get started."
+msgstr ""
+"Vous n’avez aucune demande reçue ouverte. Pourquoi ne pas envoyer une "
+"demande dans votre groupe? Remplissez les champs ci-dessous pour commencer."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "{0} is looking for (a)"
+msgstr "{0} recherche @"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "Yes, I own this"
+msgstr "Oui, j’ai ça"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "Not right now"
+msgstr "Pas en ce moment"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "No, I do not own this"
+msgstr "Non, je n’ai pas ça"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+msgid "Let's get started"
+msgstr "Commençons"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+msgid "Welcome {0}!"
+msgstr "Bienvenue {0}!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
+msgid ""
+"Let's start by asking the members of your group if they can lend you "
+"something. Fill out the form below and we'll do the rest!"
+msgstr ""
+"Commençons par demander aux membres de votre groupe s’ils peuvent vous "
+"prêter quelque chose. Remplissez le formulaire ci-dessous et nous ferons le "
+"reste!"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Group"
+msgstr "Groupe"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Description"
+msgstr "La description"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Unblock"
+msgstr "Débloquer"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Created"
+msgstr "Créé"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
+msgid "There are currently no blocked requests"
+msgstr "Il n’y a actuellement aucune demande bloquée"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+msgid "Blocked"
+msgstr "Bloqué"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+msgid "Please select at least one request to unblock."
+msgstr "Veuillez sélectionner au moins une demande de déblocage."
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+msgid ""
+"The selected requests were unblocked and mails have been sent to the users."
+msgstr ""
+"Les requêtes sélectionnées ont été débloquées et des mails ont été envoyés "
+"aux utilisateurs."
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+msgid "OK"
+msgstr "OK"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+msgid "Blocked (forbidden words)"
+msgstr "Bloqué (mots interdits)"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+msgid "Blocked (by administrator)"
+msgstr "Bloqué (par l’administrateur)"
+
+#: wijdelen.objectsharing.controllers.objectrequestadmincontroller
+msgid "Stopped (by the user)"
+msgstr "Arrêté (par l’utilisateur)"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+msgid "Unsubscribe"
+msgstr "Se désabonner"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+msgid "Hello"
+msgstr "Bonjour"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+msgid "{0} reacted to your request for (a) {1}:"
+msgstr "{0} a réagi à votre demande pour @ {1}:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+msgid "Respond:"
+msgstr "Répondre:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "Unsubscribe:"
+msgstr "Se désabonner:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "{0} from the group {1} sent you a message:"
+msgstr "{0} du groupe {1} vous a envoyé un message:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "I'm looking for (a) {0}."
+msgstr "Je cherche (a) {0}."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "What do I need it for?"
+msgstr "De quoi ai-je besoin?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "Can you lend me this?"
+msgstr "Peux-tu me prêter ça?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+msgid "Yes, I own that"
+msgstr "Oui, j’ai ça"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
+msgid "No, I don't own that"
+msgstr "Non, je n’ai pas ça"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "Yes, I own that:"
+msgstr "Oui, j’ai ça:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "Not right now:"
+msgstr "Pas en ce moment:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
+msgid "No, I don't own that:"
+msgstr "Non, je n’ai pas ça:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+msgid "A request by {0} was blocked and requires your attention."
+msgstr "Une demande de {0} a été bloquée et requiert votre attention."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+msgid "Description:"
+msgstr "La description:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+msgid "Extra info:"
+msgstr "Informations supplémentaires:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+msgid "Forbidden words:"
+msgstr "Mots interdits:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
+msgid "You can see the blocked request here"
+msgstr "Vous pouvez voir la demande bloquée ici"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
+msgid "The following request was made by {0}."
+msgstr "La demande suivante a été faite par {0}."
+
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+msgid "The request was blocked and a mail was sent to the user."
+msgstr "La demande a été bloquée et un courrier a été envoyé à l’utilisateur."
+
+#: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
+msgid "The request was unblocked."
+msgstr "La demande a été débloquée."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "User"
+msgstr "Utilisateur"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Extra Info"
+msgstr "Informations supplémentaires"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Status"
+msgstr "Statut"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Forbidden Words"
+msgstr "Mots interdits"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Block"
+msgstr "Bloc"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
+msgid "Reason"
+msgstr "Raison"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+msgid "Your request for (a) {0} has been blocked."
+msgstr "Votre demande pour @ {0} a été bloquée."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+msgid "The reason given was this:"
+msgstr "La raison donnée était la suivante:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
+msgid "If you think this is a mistake, please reply to this email."
+msgstr ""
+"Si vous pensez qu’il s’agit d’une erreur, veuillez répondre à cet e-mail."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+msgid "Stop Request"
+msgstr "Demande d’arrêt"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+msgid "Are you sure you want to cancel your request for (a) {0}?"
+msgstr "Êtes-vous sûr de vouloir annuler votre demande pour @ {0}?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+msgid ""
+"You will no longer be able to receive answers to this request. This action "
+"cannot be undone."
+msgstr ""
+"Vous ne pourrez plus recevoir de réponses à cette demande. Cette action ne "
+"peut pas être annulée."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+msgid "Yes"
+msgstr "Oui"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
+msgid "No"
+msgstr "Non"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+msgid "Need inspiration?"
+msgstr "Besoin d’inspiration?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+msgid "These are some of the requests that have been made in your group:"
+msgstr "Voici quelques-unes des demandes qui ont été faites dans votre groupe:"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/GroupObjectRequest/Index.cshtml
+msgid "{0} requested (a) {1}"
+msgstr "{0} demandé @ {1}"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "My Feed"
+msgstr "Mon flux"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid ""
+"You don't have anything in your feed yet. Why not send out a request in your "
+"group? Fill in the fields below to get started."
+msgstr ""
+"Vous n’avez encore rien dans votre flux. Pourquoi ne pas envoyer une demande "
+"dans votre groupe? Remplissez les champs ci-dessous pour commencer."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "One person reacted to this request."
+msgstr "Une personne a réagi à cette demande."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "{0} people reacted to this request."
+msgstr "{0} personnes ont réagi à cette demande."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "{0} left you a message about (a) {1}"
+msgstr "{0} personnes ont réagi à cette demande."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "Reply"
+msgstr "Répondre"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "You have already replied to this request."
+msgstr "Vous avez déjà répondu à cette demande."
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
+msgid "See messages"
+msgstr "Voir les messages"
