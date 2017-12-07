@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,6 +127,7 @@
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
     <Compile Include="AutofacModule.cs" />
+    <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\Api\ArchetypesController.cs" />
     <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -248,7 +250,9 @@
     <Compile Include="ViewModels\IndexObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\NewObjectRequestViewModel.cs" />
     <Compile Include="ModelStateExtensions.cs" />
+    <Compile Include="ViewModels\ObjectRequestsIndexViewModel.cs" />
     <Compile Include="ViewModels\ObjectRequestViewModel.cs" />
+    <Compile Include="ViewModels\ReceivedObjectRequestsViewModel.cs" />
     <Compile Include="ViewModels\ReceivedObjectRequestViewModel.cs" />
     <Compile Include="ViewModels\SynonymsViewModel.cs" />
   </ItemGroup>

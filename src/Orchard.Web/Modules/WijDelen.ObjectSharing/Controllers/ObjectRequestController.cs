@@ -6,6 +6,7 @@ using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
 using Orchard.UI.Notify;
+using WijDelen.ObjectSharing;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -83,7 +84,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 ChatRecords = chatRecords
             };
 
-            return View(viewModel);
+            return this.ViewOrJson(viewModel);
         }
 
         public ActionResult Index() {
@@ -98,7 +99,9 @@ namespace WijDelen.ObjectSharing.Controllers {
                 BlockReason = x.BlockReason
             });
 
-            return View(viewModels);
+            var viewModel = new ObjectRequestsIndexViewModel {Data = viewModels};
+
+            return this.ViewOrJson(viewModel);
         }
 
         public ActionResult Stop(Guid id) {
@@ -112,7 +115,7 @@ namespace WijDelen.ObjectSharing.Controllers {
                 return new HttpUnauthorizedResult();
             }
 
-            return View(new ConfirmStopObjectRequestViewModel {Id = id, Description = record.Description});
+            return this.ViewOrJson(new ConfirmStopObjectRequestViewModel {Id = id, Description = record.Description});
         }
 
         [HttpPost]

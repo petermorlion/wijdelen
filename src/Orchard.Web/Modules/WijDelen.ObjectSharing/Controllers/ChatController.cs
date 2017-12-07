@@ -49,7 +49,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             var chatViewModel = GetChatViewModel(id, chat);
 
-            return View(chatViewModel);
+            return this.ViewOrJson(chatViewModel);
         }
 
         /// <summary>

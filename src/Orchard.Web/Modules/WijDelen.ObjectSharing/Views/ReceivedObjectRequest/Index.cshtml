@@ -1,13 +1,13 @@
 ﻿@using WijDelen.ObjectSharing.ViewModels
-@model IEnumerable<ReceivedObjectRequestViewModel>
+@model ReceivedObjectRequestsViewModel
 
 @{
     Layout.Title = T("Received Requests");
 }
 
-@if (Model.Any()) {
+@if (Model.Data.Any()) {
     <ul class="receivedobjectrequestlist">
-        @foreach (var viewModel in Model) {
+        @foreach (var viewModel in Model.Data) {
             <li class="receivedobjectrequestlist-item">
                 <div class="row">
                     <div class="column">

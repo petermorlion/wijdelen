@@ -1,15 +1,15 @@
 ﻿@using WijDelen.ObjectSharing.Domain.ValueTypes
 @using WijDelen.ObjectSharing.ViewModels
-@model IEnumerable<IndexObjectRequestViewModel>
+@model ObjectRequestsIndexViewModel
 
 @{
     Layout.Title = T("My Requests");
     Script.Include("https://use.fontawesome.com/9b21350ae6.js");
 }
 
-@if (Model.Any()) {
+@if (Model.Data.Any()) {
     <ul class="objectrequestlist">
-        @foreach (var objectRequest in Model) {
+        @foreach (var objectRequest in Model.Data) {
             <li class="objectrequestlist-item">
                 <a href="@Url.Action("Item", new {controller = "ObjectRequest", area = "WijDelen.ObjectSharing", id = objectRequest.AggregateId})"
                    class="objectrequestlist-link @if (objectRequest.Status != ObjectRequestStatus.None.ToString()) {<text>objectrequestlist-link-blocked</text>}"

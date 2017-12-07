@@ -44,7 +44,9 @@ namespace WijDelen.ObjectSharing.Controllers {
                 });
             }
 
-            return View(viewModels);
+            var viewModel = new ReceivedObjectRequestsViewModel {Data = viewModels};
+
+            return this.ViewOrJson(viewModel);
         }
 
         public Localizer T { get; set; }

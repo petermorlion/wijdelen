@@ -26,7 +26,7 @@ namespace WijDelen.ObjectSharing.Controllers {
             var currentUserId = _orchardServices.WorkContext.CurrentUser.Id;
             var feedItems = _feedItemRepository.Fetch(x => x.UserId == currentUserId).OrderByDescending(x => x.DateTime).Take(FeedLimit).ToList();
             var model = new FeedViewModel { Items = feedItems };
-            return View(model);
+            return this.ViewOrJson(model);
         }
     }
 }
