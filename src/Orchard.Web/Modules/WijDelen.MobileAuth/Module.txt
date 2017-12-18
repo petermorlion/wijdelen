@@ -1,0 +1,12 @@
+﻿Name: WijDelen.MobileAuth
+AntiForgery: enabled
+Author: Peter Morlion
+Website: http://www.redstar.be
+Version: 1.0.0
+OrchardVersion: 1.10
+Description: Auth services for mobile apps.
+Features:
+    WijDelen.MobileAuth:
+        Description: Allows authentication by a Mobile app
+		Category: Peergroups
+		Dependencies: Orchard.Users
