@@ -197,5 +197,5 @@ src/Rebracer.xml
 # WijDelen specifics
 # =========================
 
-src/Orchard.Web/Themes/WijDelen.Groups/node_modules
+src/Orchard.Web/Themes/Peergroups.Theme/node_modules
 src/Orchard.Web/Modules/WijDelen.Reports/node_modules
