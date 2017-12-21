@@ -5,6 +5,7 @@ using Orchard;
 using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
+using WijDelen.Mobile;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.ViewModels;

@@ -6,6 +6,8 @@ using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
 using Orchard.UI.Notify;
+using WijDelen.Mobile;
+using WijDelen.Mobile.Providers;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Models;
@@ -13,7 +15,7 @@ using WijDelen.ObjectSharing.ViewModels;
 
 namespace WijDelen.ObjectSharing.Controllers {
     [Themed]
-    [Authorize]
+    [HybridAuthorize]
     public class ObjectRequestController : Controller {
         public const int MaximumDescriptionLength = 50;
         public const int MaximumExtraInfoLength = 1000;

@@ -4,7 +4,7 @@ using System.Web.Http;
 using Autofac;
 using Newtonsoft.Json.Serialization;
 
-namespace WijDelen.MobileAuth {
+namespace WijDelen.Mobile {
     /// <summary>
     ///     This Autofac module ensures all WebApi results are returned using camelcasing.
     /// </summary>

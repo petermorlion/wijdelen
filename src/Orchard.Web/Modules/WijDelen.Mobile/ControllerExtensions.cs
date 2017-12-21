@@ -4,14 +4,14 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace WijDelen.ObjectSharing {
+namespace WijDelen.Mobile {
     public static class ControllerExtensions {
         /// <summary>
-        ///     Returns the MVC View or the given model as JSON, depending on the Accept header.
+        /// Returns the MVC View or the given model as JSON, depending on the Accept header.
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Either a ContentResult with JSON, or a ViewResult (HTML).</returns>
         public static ActionResult ViewOrJson(this Controller controller, object model) {
             if (controller.Request.AcceptTypes.Contains("application/json"))
                 return new ContentResult {

@@ -127,7 +127,6 @@
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
     <Compile Include="AutofacModule.cs" />
-    <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\Api\ArchetypesController.cs" />
     <Compile Include="Controllers\ArchetypesController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -298,6 +297,10 @@
     <ProjectReference Include="..\WijDelen.Mailgun\WijDelen.Mailgun.csproj">
       <Project>{e18e27ad-bfa5-43e0-8072-898388598751}</Project>
       <Name>WijDelen.Mailgun</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WijDelen.Mobile\WijDelen.Mobile.csproj">
+      <Project>{f2483bb7-0303-4a93-80fd-4204937048ba}</Project>
+      <Name>WijDelen.Mobile</Name>
     </ProjectReference>
     <ProjectReference Include="..\WijDelen.UserImport\WijDelen.UserImport.csproj">
       <Project>{93D162A5-1383-450D-9CAE-189607E7A285}</Project>

@@ -6,6 +6,7 @@ using Orchard.Data;
 using Orchard.Localization;
 using Orchard.Themes;
 using Orchard.UI.Notify;
+using WijDelen.Mobile;
 using WijDelen.ObjectSharing.Domain.Commands;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
