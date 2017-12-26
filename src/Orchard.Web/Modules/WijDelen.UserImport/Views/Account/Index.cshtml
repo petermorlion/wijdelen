@@ -15,6 +15,7 @@
         @Html.DropDownListFor(model => model.Culture, new List<SelectListItem> {
             new SelectListItem { Text = T("Nederlands").ToString(), Value = "nl-BE" },
             new SelectListItem { Text = T("English").ToString(), Value = "en-US" },
+            new SelectListItem { Text = T("Français").ToString(), Value = "fr-FR" },
         })
         @Html.ValidationMessageFor(m => m.Culture)
         

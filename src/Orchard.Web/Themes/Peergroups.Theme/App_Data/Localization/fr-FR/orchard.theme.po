@@ -1,0 +1,66 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_BE\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#| msgid "Name"
+msgid "Peergroups.Theme"
+msgstr "Peergroups.Theme"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Author"
+msgid "Peter Morlion"
+msgstr "Peter Morlion"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Website"
+msgid "http://www.redstar.be"
+msgstr "http://www.redstar.be"
+
+#: ~/Themes/Peergroups.Theme/Theme.txt
+#| msgid "Description"
+msgid "Theme for Peergroups"
+msgstr "Thema voor Peergroups"
+
+#: ~/Themes/Peergroups.Theme/Views/HomepageNavigation.cshtml
+#| msgid "Sign In"
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#: ~/Modules/Orchard.Users/Views/Account/ChangePassword.cshtml
+msgid "Change Password"
+msgstr "Changer le mot de passe"
+
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#| msgid "Account"
+msgid "Account"
+msgstr "Mon compte"
+
+#: ~/Themes/Peergroups.Theme/Views/User.cshtml
+#| msgid "Sign Out"
+msgid "Sign Out"
+msgstr "Se déconnecter"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+msgid "New Request"
+msgstr "Nouvelle demande"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+msgid "My Requests"
+msgstr "Mes demandes"
+
+#: ~/Themes/Peergroups.Theme/Views/Navigation.cshtml
+#: ~/Themes/Peergroups.Theme/Views/Navigation-mobile.cshtml
+msgid "Received Requests"
+msgstr "Demandes reçues"

@@ -391,6 +391,9 @@
   <ItemGroup>
     <Content Include="Views\FeedAdmin\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Localization\fr-FR\orchard.module.po" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
