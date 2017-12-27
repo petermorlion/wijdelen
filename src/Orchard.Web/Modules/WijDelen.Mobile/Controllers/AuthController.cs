@@ -29,7 +29,7 @@ namespace WijDelen.Mobile.Controllers {
             var payload = new Payload {
                 UserId = user.Id,
                 UserEmail = user.Email,
-                UserName = user.UserName
+                UserName = user.UserName,
             };
 
             var jwt = JwtEncoder.Encode(payload);

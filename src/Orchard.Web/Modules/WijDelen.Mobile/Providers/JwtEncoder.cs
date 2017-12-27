@@ -8,6 +8,8 @@ using WijDelen.Mobile.Models.Jwt;
 
 namespace WijDelen.Mobile.Providers {
     public static class JwtEncoder {
+        private const string Secret = "gBWWvP23N^sWDVxL3KXget3V";
+
         public static string Encode(Payload payload) {
             var jsonSerializerSettings = new JsonSerializerSettings {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
@@ -17,7 +19,7 @@ namespace WijDelen.Mobile.Providers {
             var headerPart = Base64UrlEncoder.Encode(JsonConvert.SerializeObject(header, Formatting.None, jsonSerializerSettings));
             var payloadPart = Base64UrlEncoder.Encode(JsonConvert.SerializeObject(payload, Formatting.None, jsonSerializerSettings));
 
-            var secret = "gBWWvP23N^sWDVxL3KXget3V";
+            var secret = Secret;
 
             var hashImplementation = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
             var hashBytes = hashImplementation.ComputeHash(Encoding.UTF8.GetBytes($"{headerPart}.{payloadPart}"));
@@ -37,7 +39,7 @@ namespace WijDelen.Mobile.Providers {
             var payloadPart = authTokenParts[1];
             var hash = authTokenParts[2];
 
-            var secret = "<?3:c!6/MH.kkW.DVF(RCO#:]/$`^A";
+            var secret = Secret;
             var hashImplementation = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
             var expectedHashBytes = hashImplementation.ComputeHash(Encoding.UTF8.GetBytes($"{headerPart}.{payloadPart}"));
             var expectedHash = Base64UrlEncoder.Encode(expectedHashBytes);
@@ -60,7 +62,7 @@ namespace WijDelen.Mobile.Providers {
             var payloadPart = authTokenParts[1];
             var hash = authTokenParts[2];
 
-            var secret = "<?3:c!6/MH.kkW.DVF(RCO#:]/$`^A";
+            var secret = Secret;
             var hashImplementation = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
             var expectedHashBytes = hashImplementation.ComputeHash(Encoding.UTF8.GetBytes($"{headerPart}.{payloadPart}"));
             var expectedHash = Base64UrlEncoder.Encode(expectedHashBytes);
