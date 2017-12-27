@@ -19,7 +19,12 @@ namespace WijDelen.Mobile.Providers {
                 return null;
             }
 
-            return new CultureSelectorResult { Priority = 1, CultureName = languageHeader };
+            var culture = languageHeader;
+            if (languageHeader.Contains(",")) {
+                culture = languageHeader.Substring(0, languageHeader.IndexOf(","));
+            }
+
+            return new CultureSelectorResult { Priority = 1, CultureName = culture };
         }
     }
 }
