@@ -56,7 +56,7 @@ namespace WijDelen.ObjectSharing.Controllers {
 
             if (!string.IsNullOrWhiteSpace(viewModel.ExtraInfo) && viewModel.ExtraInfo.Length < 30) ModelState.AddModelError<NewObjectRequestViewModel, string>(m => m.ExtraInfo, T("Please provide some more extra info (at least 30 characters)."));
 
-            if (!ModelState.IsValid) return View(viewModel);
+            if (!ModelState.IsValid) return this.ViewOrJson(viewModel);
 
             var currentUser = _orchardServices.WorkContext.CurrentUser;
 
