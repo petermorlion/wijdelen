@@ -1,0 +1,365 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#| msgid "You are not authorized to import users."
+msgid "You are not authorized to import users."
+msgstr "Vous n'êtes pas autorisé à importer des utilisateurs."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "{0} is an invalid email address."
+msgid "{0} is an invalid email address."
+msgstr "{0} est une adresse email invalide."
+
+#: wijdelen.userimport.services.userimportservice
+#| msgid "User {0} already exists."
+msgid "User {0} already exists."
+msgstr "L'utilisateur {0} existe déjà"
+
+#: wijdelen.userimport.services.mailgunservice
+#| msgid "Welcome to Peergroups"
+msgid "Welcome to Peergroups"
+msgstr "Bienvenue chez Peergroups"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Summary"
+msgid "Summary"
+msgstr "Résumé"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Import Complete"
+msgid "Import Complete"
+msgstr "Importation terminée"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Users supplied: {0}"
+msgid "Users supplied: {0}"
+msgstr "Utilisateurs fournis: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Imported: {0}"
+msgid "Imported: {0}"
+msgstr "Importé: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Failed to import: {0}"
+msgid "Failed to import: {0}"
+msgstr "Echec de l'importation: {0}"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "Details"
+msgid "Details"
+msgstr "D�tails"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "The following users were imported:"
+msgid "The following users were imported:"
+msgstr "Les utilisateurs suivants ont été importés:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
+#| msgid "The following users were not imported:"
+msgid "The following users were not imported:"
+msgstr "Les utilisateurs suivants n'ont pas été importés:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Import Users"
+msgid "Import Users"
+msgstr "Importer des utilisateurs"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Users"
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Send mails in"
+msgid "Send mails in"
+msgstr "Envoyer des mails en"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "The imported users will also use this language as default. They can change this on registration."
+msgid "The imported users will also use this language as default. They can change this on registration."
+msgstr "Les utilisateurs importés utiliseront également cette langue par défaut, ils peuvent la changer lors de l'enregistrement."
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Please use one line with exactly one valid email address per user to import."
+msgid "Please use one line with exactly one valid email address per user to import."
+msgstr ""
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#| msgid "Submit"
+msgid "Submit"
+msgstr "Soumettre"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Group"
+msgid "Group"
+msgstr "Groupe"
+
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "User invitation mail has been sent."
+msgid "User invitation mail has been sent."
+msgstr "Le message d'invitation de l'utilisateur a été envoyé."
+
+#: wijdelen.userimport.controllers.admincontroller
+#| msgid "The user needs to be part of a group first."
+msgid "The user needs to be part of a group first."
+msgstr "L'utilisateur doit d'abord faire partie d'un groupe."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a new password of {0} or more characters."
+msgid "You must specify a new password of {0} or more characters."
+msgstr "Vous devez sp�cifier un nouveau mot de passe de {0} ou plusieurs caract�res."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "The new password and confirmation password do not match."
+msgid "The new password and confirmation password do not match."
+msgstr "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a first name."
+msgid "You must specify a first name."
+msgstr "Vous devez spécifier un prénom."
+
+#: wijdelen.userimport.controllers.registercontroller
+#| msgid "You must specify a last name."
+msgid "You must specify a last name."
+msgstr "Vous devez spécifier un nom de famille."
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Just a few more details"
+msgid "Just a few more details"
+msgstr "Juste un peu plus de détails"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
+msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
+msgstr "Avant de pouvoir commencer avec Peergroups, veuillez cr�er un mot de passe et nous fournir quelques détails personnels."
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Password:"
+msgid "Password:"
+msgstr "Mot de passe:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Confirm the password:"
+msgid "Confirm the password:"
+msgstr "Confirmer le mot de passe:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Start with Peergroups"
+msgid "Start with Peergroups"
+msgstr "Commencer avec Peergroups"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "First name:"
+msgid "First name:"
+msgstr "Prénom:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Last name:"
+msgid "Last name:"
+msgstr "Nom de famille"
+
+#: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
+#| msgid "Language:"
+msgid "Language:"
+msgstr "Langue"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "First name"
+msgid "First name"
+msgstr "Prénom"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Last name"
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Language"
+msgid "Language"
+msgstr "Langue"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Receive Mails"
+msgid "Receive Mails"
+msgstr "Recevoir des mails"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Uncheck this if you do not want to receive mails from new requests, chat messages, etc."
+msgid "Uncheck this if you do not want to receive mails from new requests, chat messages, etc."
+msgstr "Décochez cette case si vous ne souhaitez pas recevoir de messages de nouvelles demandes, de messages de discussion, etc."
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Save"
+msgid "Save"
+msgstr "Enregistrer"
+
+#: ~/Modules/WijDelen.UserImport/Views/Account/Index.cshtml
+#| msgid "Subscribe to newsletter"
+msgid "Subscribe to newsletter"
+msgstr "S'inscrire au bulletin"
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a last name."
+msgid "You must specify a last name."
+msgstr ""
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a first name."
+msgid "You must specify a first name."
+msgstr "Vous devez spécifier un nom de famille."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You must specify a language."
+msgid "You must specify a language."
+msgstr "Vous devez spécifier une langue."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "Your details have been saved successfully."
+msgid "Your details have been saved successfully."
+msgstr "Vos informations ont été enregistrées avec succès."
+
+#: wijdelen.userimport.controllers.accountcontroller
+#| msgid "You will no longer receive mails regarding requests or chat messages."
+msgid "You will no longer receive mails regarding requests or chat messages."
+msgstr "Vous ne recevrez plus d'e-mails concernant les demandes ou les messages de discussion."
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
+#| msgid "Hello %recipient.username%!"
+msgid "Hello %recipient.username%!"
+msgstr "Bonjour %recipient.username%!"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
+#| msgid "Hello %recipient.username%!"
+msgid "Hello %recipient.username%!"
+msgstr "Bonjour %recipient.username%!"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
+#| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgstr "Bienvenue à Peergroups. Vous avez été invité à rejoindre le groupe de pairs de {0}. Pour commencer, veuillez activer votre compte en cliquant sur le lien ci-dessous:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
+#| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
+msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below"
+msgstr "Bienvenue à Peergroups. Vous avez été invité à rejoindre le groupe de pairs de {0}. Pour commencer, veuillez activer votre compte en cliquant sur le lien ci-dessous:"
+
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
+#| msgid "Thank you!"
+msgid "Thank you!"
+msgstr "Merci!"
+
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
+#| msgid "User invitation mail"
+msgid "User invitation mail"
+msgstr "Email d'invitation utilisateur"
+
+#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
+#| msgid "Resend"
+msgid "Resend"
+msgstr "Renvoyer"
+
+#: wijdelen.userimport.adminmenu
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Groups"
+msgid "Groups"
+msgstr "Groupes"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Actions"
+msgid "Actions"
+msgstr "Actions"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Last Login Time"
+msgid "Last Login Time"
+msgstr "Dernière connexion""
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Edit"
+msgid "Edit"
+msgstr "Modifier"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Delete"
+msgid "Delete"
+msgstr "Effacer"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Approve"
+msgid "Approve"
+msgstr "Approuver"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Disable"
+msgid "Disable"
+msgstr "Désactiver"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Active"
+msgid "Active"
+msgstr "Actif"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Account activated"
+msgid "Account activated"
+msgstr "Compte activé"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Pending"
+msgid "Pending"
+msgstr "En attendant"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Account pending"
+msgid "Account pending"
+msgstr "Compte en attente"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Resend invitation mails"
+msgid "Resend invitation mails"
+msgstr "Renvoyer les mails d'invitation"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Confirm"
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Are you sure you want to resend the invitation mail to the inactive users of the group {0}?"
+msgid "Are you sure you want to resend the invitation mail to the inactive users of the group {0}?"
+msgstr "Êtes-vous sûr de vouloir renvoyer le courrier d'invitation aux utilisateurs inactifs du groupe {0}?"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Yes"
+msgid "Yes"
+msgstr "Oui"
+
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "No"
+msgid "No"
+msgstr "Non"
+
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "The invitation mails have been sent."
+msgid "The invitation mails have been sent."
+msgstr "Les mails d'invitation ont été envoyés."
+
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "You must select a group. No mails were sent."
+msgid "You must select a group. No mails were sent."
+msgstr "Vous devez sélectionner un groupe. Aucun courrier n'a été envoyé."
+
