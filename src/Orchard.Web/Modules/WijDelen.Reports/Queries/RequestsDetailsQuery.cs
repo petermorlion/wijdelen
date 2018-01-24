@@ -27,16 +27,22 @@ namespace WijDelen.Reports.Queries {
             var objectRequestResponseRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestResponseRecord));
             var userPartRecord = _shellSettings.GetFullTableName(typeof(UserPartRecord));
 
-            var requestsQuery = session.CreateSQLQuery("SELECT r.AggregateId, r.CreatedDateTime, u.Email, r.Description, COUNT(y.Response) AS 'YesCount', COUNT(n.Response) AS 'NoCount', COUNT(nn.Response) AS 'NotNowCount', r.GroupName " +
-                                                       $"FROM {objectRequestRecord} r " +
-                                                       $"    INNER JOIN {userPartRecord} u ON u.Id = r.UserId " +
-                                                       $"    LEFT OUTER JOIN {objectRequestResponseRecord} y ON y.ObjectRequestId = r.AggregateId AND y.Response = 'Yes' " +
-                                                       $"    LEFT OUTER JOIN {objectRequestResponseRecord} n ON n.ObjectRequestId = r.AggregateId AND n.Response = 'No' " +
-                                                       $"    LEFT OUTER JOIN {objectRequestResponseRecord} nn ON nn.ObjectRequestId = r.AggregateId AND nn.Response = 'NotNow' " +
-                                                       "WHERE r.CreatedDateTime >= :startDate AND r.CreatedDateTime <= :stopDate " +
+            var requestsQuery = session.CreateSQLQuery("SELECT AggregateId, CreatedDateTime, Email, Description, Yes AS 'YesCount', No AS 'NoCount', NotNow AS 'NotNowCount', GroupName " +
+                                                       "FROM " +
+                                                       "( " +
+                                                       "    SELECT r.AggregateId, r.CreatedDateTime, u.Email, r.Description, y.Response, r.GroupName " +
+                                                       $"   FROM {objectRequestRecord} r " +
+                                                       $"       INNER JOIN {userPartRecord} u ON u.Id = r.UserId " +
+                                                       $"       LEFT OUTER JOIN {objectRequestResponseRecord} y ON y.ObjectRequestId = r.AggregateId " +
+                                                       "    WHERE r.CreatedDateTime >= :startDate AND r.CreatedDateTime <= :stopDate " +
                                                        (groupId.HasValue ? "AND r.GroupId = :groupId " : "") +
-                                                       "GROUP BY r.AggregateId, r.CreatedDateTime, u.Email, r.Description, y.Response, n.Response, nn.Response, r.GroupName " +
-                                                       "ORDER BY r.CreatedDateTime DESC")
+                                                       ") AS Src " +
+                                                       "PIVOT " +
+                                                       "(" +
+                                                       "    COUNT(Response) " +
+                                                       "    FOR Response IN (Yes, No, NotNow) " +
+                                                       ") AS Pvt " +
+                                                       "ORDER BY CreatedDateTime DESC")
                 .SetParameter("startDate", startDate)
                 .SetParameter("stopDate", stopDate);
 
