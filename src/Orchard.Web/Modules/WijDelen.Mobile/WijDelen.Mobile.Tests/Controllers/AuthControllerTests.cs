@@ -71,7 +71,9 @@ namespace WijDelen.Mobile.Tests.Controllers {
             var response = _controller.Post(loginModel);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Content.ReadAsStringAsync().Result.Should().Be("\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwidXNlck5hbWUiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.1wCBEksg0jAFAnMjhzWtHYyXMzO-kD8YFmKEi5TXdFI\"");
+            response.Content.ReadAsAsync<JwtModel>().Result.ShouldBeEquivalentTo(new JwtModel {
+                Jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwidXNlck5hbWUiOiJqb2huLmRvZUBleGFtcGxlLmNvbSJ9.dJiLDOcivgnX5Ldvzxsv8VDyVT7jacV0zFXTJHERfV0"
+            });
 
             _userEventHandlerMock.Verify(x => x.LoggingIn(_validEmail, _validPassword));
             _userEventHandlerMock.Verify(x => x.LoggedIn(_userMock.Object));

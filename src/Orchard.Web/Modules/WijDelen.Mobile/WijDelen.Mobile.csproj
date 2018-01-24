@@ -97,6 +97,7 @@
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ErrorsModel.cs" />
     <Compile Include="Models\InvalidJwtException.cs" />
+    <Compile Include="Models\JwtModel.cs" />
     <Compile Include="Models\Jwt\Header.cs" />
     <Compile Include="Models\Jwt\Payload.cs" />
     <Compile Include="Models\LoginModel.cs" />

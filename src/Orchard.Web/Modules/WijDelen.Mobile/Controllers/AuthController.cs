@@ -33,8 +33,9 @@ namespace WijDelen.Mobile.Controllers {
             };
 
             var jwt = JwtEncoder.Encode(payload);
+            var model = new JwtModel {Jwt = jwt};
 
-            return Request.CreateResponse(HttpStatusCode.OK, jwt);
+            return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 
         private IUser ValidateLogOn(string userNameOrEmail, string password) {

@@ -15,7 +15,7 @@ namespace WijDelen.Mobile {
         /// <param name="model"></param>
         /// <returns>Either a ContentResult with JSON, or a ViewResult (HTML).</returns>
         public static ActionResult ViewOrJson(this Controller controller, object model) {
-            if (controller.Request.AcceptTypes.Contains("application/json")) {
+            if (controller.Request.AcceptTypes != null && controller.Request.AcceptTypes.Contains("application/json")) {
                 if (!controller.ModelState.IsValid) {
                     controller.Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     var errorModel = new ErrorsModel {
