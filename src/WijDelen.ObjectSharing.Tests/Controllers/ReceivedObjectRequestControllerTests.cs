@@ -60,11 +60,11 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
 
             var actionResult = controller.Index();
 
-            var model = ((ViewResult)actionResult).Model as IEnumerable<ReceivedObjectRequestViewModel>;
+            var model = ((ViewResult)actionResult).Model as ReceivedObjectRequestsViewModel;
             model.Should().NotBeNull();
-            model.Count().Should().Be(2);
+            model.Data.Count().Should().Be(2);
 
-            model.ToList()[0].ShouldBeEquivalentTo(new ReceivedObjectRequestViewModel {
+            model.Data.ToList()[0].ShouldBeEquivalentTo(new ReceivedObjectRequestViewModel {
                 ObjectRequestId = persistentRecords[1].ObjectRequestId,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
@@ -72,7 +72,7 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
                 UserName = "John Doe"
             });
 
-            model.ToList()[1].ShouldBeEquivalentTo(new ReceivedObjectRequestViewModel
+            model.Data.ToList()[1].ShouldBeEquivalentTo(new ReceivedObjectRequestViewModel
             {
                 ObjectRequestId = persistentRecords[0].ObjectRequestId,
                 Description = "Flaming Moe",

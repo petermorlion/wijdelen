@@ -129,24 +129,24 @@ namespace WijDelen.ObjectSharing.Tests.Controllers {
         public void WhenGettingIndex_ShouldReturnView() {
             var actionResult = _controller.Index();
 
-            var model = ((ViewResult) actionResult).Model as IEnumerable<IndexObjectRequestViewModel>;
+            var model = ((ViewResult) actionResult).Model as ObjectRequestsIndexViewModel;
             model.Should().NotBeNull();
-            model.Count().Should().Be(3);
-            model.ToList()[0].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
+            model.Data.Count().Should().Be(3);
+            model.Data.ToList()[0].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
                 AggregateId = _persistentRecords[2].AggregateId,
                 Description = "Most recent request",
                 Status = "None",
                 BlockReason = null
             });
 
-            model.ToList()[1].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
+            model.Data.ToList()[1].ShouldBeEquivalentTo(new IndexObjectRequestViewModel {
                 AggregateId = _persistentRecords[1].AggregateId,
                 Description = "Sneakers",
                 Status = "Stopped",
                 BlockReason = null
             });
 
-            model.ToList()[2].ShouldBeEquivalentTo(new IndexObjectRequestViewModel
+            model.Data.ToList()[2].ShouldBeEquivalentTo(new IndexObjectRequestViewModel
             {
                 AggregateId = _persistentRecords[3].AggregateId,
                 Description = "Test",
