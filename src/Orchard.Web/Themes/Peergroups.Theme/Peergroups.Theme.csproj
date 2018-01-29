@@ -286,6 +286,9 @@
   <ItemGroup>
     <Content Include="App_Data\Localization\fr-FR\orchard.theme.po" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Layout-url-bienvenue.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,57 @@
+﻿@{
+    Script.Require("jQuery").AtFoot();
+}
+
+@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => {
+            ++zoneCounter;
+            return Model[zoneName] != null ? zoneCounter.ToString() : "";
+        }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+
+    SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
+
+#if DEBUG
+    Style.Include("Styles.css");
+    Style.Include("font-awesome.css");
+#else
+    Style.Include("Styles.min.css");
+    Style.Include("font-awesome.min.css");
+#endif
+
+    Script.Include("script.js");
+
+    /* Layout classification based on filled zones
+    ***************************************************************/
+
+    //Add classes to the wrapper div to toggle aside widget zones on and off
+    var asideClass = CalcuClassify(new[] {"AsideFirst", "AsideSecond"}, "aside-"); // for aside-1, aside-2 or aside-12 if any of the aside zones are filled
+    if (HasText(asideClass)) {
+        Model.Classes.Add(asideClass);
+    }
+}
+
+@Display(New.HomepageNavigation())
+
+
+<div class="container-homepage-fullwidth">
+    @if (Model.Content != null) {
+        @Display(Model.Content)
+    }
+</div>
+
+
+@using (Script.Foot()) {
+    <script type="text/javascript">
+        setTimeout(function() { $(".press-grid div.row").animate({ left: "-=50px" }, 1000); }, 1500);
+    </script>
+}
