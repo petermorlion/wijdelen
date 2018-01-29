@@ -120,7 +120,6 @@ msgid "Hello {0}"
 msgstr "Bonjour {0}"
 
 #: ~/Modules/WijDelen.Contact/Views/Template.ContactMail.cshtml
-#| msgid ""
-#| "We will reply to your message as quickly as possible. For your reference, these are the values you supplied in the contact form:"
+#| msgid "We will reply to your message as quickly as possible. For your reference, these are the values you supplied in the contact form:"
 msgid "We will reply to your message as quickly as possible. For your reference, these are the values you supplied in the contact form:"
 msgstr "Nous répondrons à votre message le plus rapidement possible. Pour votre référence, voici les valeurs que vous avez fournies dans le formulaire de contact:"

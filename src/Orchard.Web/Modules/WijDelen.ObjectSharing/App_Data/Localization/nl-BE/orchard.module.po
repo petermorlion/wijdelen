@@ -107,65 +107,29 @@ msgid "Please limit the extra info to {0} characters."
 msgstr "Gelieve de extra informatie te beperken tot {0} karakters."
 
 #: wijdelen.objectsharing.controllers.objectrequestcontroller
-#| msgid ""
-#| "This request was blocked because it contains words that may be considered "
-#| "offensive or inappropriate."
-msgid ""
-"This request was blocked because it contains words that may be considered "
-"offensive or inappropriate."
-msgstr ""
-"Deze oproep werd geblokkeerd omdat het woorden bevat die als beledigend of "
-"ongepast kunnen worden beschouwd."
+#| msgid "This request was blocked because it contains words that may be considered offensive or inappropriate."
+msgid "This request was blocked because it contains words that may be considered offensive or inappropriate."
+msgstr "Deze oproep werd geblokkeerd omdat het woorden bevat die als beledigend of ongepast kunnen worden beschouwd."
 
 #: wijdelen.objectsharing.controllers.objectrequestcontroller
-#| msgid ""
-#| "This request was blocked by the administrator:\n"
-#| "\n"
-#| "{0}"
-msgid ""
-"This request was blocked by the administrator:\n"
-"\n"
-"{0}"
-msgstr ""
-"Deze oproep werd geblokkeerd door de beheerder:\n"
-"\n"
-"{0}"
+#| msgid "This request was blocked by the administrator:\n\n{0}"
+msgid "This request was blocked by the administrator:\n\n{0}"
+msgstr "Deze oproep werd geblokkeerd door de beheerder:\n\n{0}"
 
 #: wijdelen.objectsharing.controllers.objectrequestcontroller
-#| msgid ""
-#| "This request has been stopped. You can not add any more messages and "
-#| "other users can no longer respond to this request."
-msgid ""
-"This request has been stopped. You can not add any more messages and other "
-"users can no longer respond to this request."
-msgstr ""
-"Deze oproep werd stopgezet. Je kan geen berichten meer toevoegen en andere "
-"gebruikers kunnen niet langer antwoorden op deze oproep."
+#| msgid This request has been stopped. You can not add any more messages and other users can no longer respond to this request."
+msgid "This request has been stopped. You can not add any more messages and other users can no longer respond to this request."
+msgstr "Deze oproep werd stopgezet. Je kan geen berichten meer toevoegen en andere gebruikers kunnen niet langer antwoorden op deze oproep."
 
 #: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
-#| msgid ""
-#| "Thank you for your request. We sent your request to the members of your "
-#| "group."
-msgid ""
-"Thank you for your request. We sent your request to the members of your "
-"group."
-msgstr ""
-"Bedankt voor je oproep. We hebben je oproep naar de leden van je groep "
-"gestuurd."
+#| msgid "Thank you for your request. We sent your request to the members of your group."
+msgid "Thank you for your request. We sent your request to the members of your group."
+msgstr "Bedankt voor je oproep. We hebben je oproep naar de leden van je groep gestuurd."
 
 #: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
-#| msgid ""
-#| "Thank you for your request. We noticed some words that might be "
-#| "considered offensive. If our system flagged this incorrectly, we will "
-#| "send your request to the members of your group."
-msgid ""
-"Thank you for your request. We noticed some words that might be considered "
-"offensive. If our system flagged this incorrectly, we will send your request "
-"to the members of your group."
-msgstr ""
-"Bedankt voor je oproep. We merkten enkele woorden op die als beledigend "
-"kunnen worden ervaren. Indien ons systeem dit onterecht deed, dan zullen we "
-"je oproep naar de leden van je groep sturen."
+#| msgid "Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."
+msgid "Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."
+msgstr "Bedankt voor je oproep. We merkten enkele woorden op die als beledigend kunnen worden ervaren. Indien ons systeem dit onterecht deed, dan zullen we je oproep naar de leden van je groep sturen."
 
 #: wijdelen.objectsharing.adminmenu
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
@@ -214,12 +178,8 @@ msgstr "Bedankt!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/NoFor.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestResponse/Deny.cshtml
-msgid ""
-"Thank you for answering. We will take note of your answer and try not to "
-"bother you with similar requests in the future."
-msgstr ""
-"Bedankt voor je antwoord. We zullen je antwoord noteren en proberen "
-"dergelijke vragen niet langer te stellen in de toekomst."
+msgid "Thank you for answering. We will take note of your answer and try not to bother you with similar requests in the future."
+msgstr "Bedankt voor je antwoord. We zullen je antwoord noteren en proberen dergelijke vragen niet langer te stellen in de toekomst."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/YesFor.cshtml
 #| msgid "Nice!"
@@ -237,24 +197,14 @@ msgid "Please provide a message."
 msgstr "Gelieve een boodschap op te geven."
 
 #: wijdelen.objectsharing.controllers.chatcontroller
-#| msgid ""
-#| "This request is blocked. It is currently not possible to add new messages."
-msgid ""
-"This request is blocked. It is currently not possible to add new messages."
-msgstr ""
-"Deze oproep is geblokkerd. Het is momenteel niet mogelijk om berichten toe "
-"te voegen."
+#| msgid "This request is blocked. It is currently not possible to add new messages."
+msgid "This request is blocked. It is currently not possible to add new messages."
+msgstr "Deze oproep is geblokkerd. Het is momenteel niet mogelijk om berichten toe te voegen."
 
 #: wijdelen.objectsharing.controllers.chatcontroller
-#| msgid ""
-#| "This request has been stopped. It is currently not possible to add new "
-#| "messages."
-msgid ""
-"This request has been stopped. It is currently not possible to add new "
-"messages."
-msgstr ""
-"Deze oproep is stopgezet. Het is momenteel niet mogelijk om berichten toe te "
-"voegen."
+#| msgid "This request has been stopped. It is currently not possible to add new messages."
+msgid "This request has been stopped. It is currently not possible to add new messages."
+msgstr "Deze oproep is stopgezet. Het is momenteel niet mogelijk om berichten toe te voegen."
 
 #: wijdelen.objectsharing.controllers.objectrequestresponsecontroller
 #| msgid "Thank you for your response. You can now chat with {0}."
@@ -294,10 +244,7 @@ msgstr "Deze oproep werd geblokkeerd."
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "ObjectRequestStatus.BlockedByAdmin"
 msgid "ObjectRequestStatus.BlockedByAdmin"
-msgstr ""
-"Deze oproep werd geblokkeerd door de beheerder:\n"
-"\n"
-"{0}."
+msgstr "Deze oproep werd geblokkeerd door de beheerder:\n\n{0}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
 #| msgid "ObjectRequestStatus.Stopped"
@@ -305,12 +252,9 @@ msgid "ObjectRequestStatus.Stopped"
 msgstr "Deze oproep werd stopgezet."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Index.cshtml
-#| msgid ""
-#| "You haven't made any requests yet. Fill in the form below and get started!"
-msgid ""
-"You haven't made any requests yet. Fill in the form below and get started!"
-msgstr ""
-"Je hebt nog geen oproepen gedaan. Vul de velden hieronder in en ga van start!"
+#| msgid "You haven't made any requests yet. Fill in the form below and get started!
+msgid "You haven't made any requests yet. Fill in the form below and get started!
+msgstr "Je hebt nog geen oproepen gedaan. Vul de velden hieronder in en ga van start!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Item.cshtml
 #| msgid "Reactions"
@@ -343,15 +287,9 @@ msgid "Thanks for answering"
 msgstr "Bedankt voor je antwoord"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
-#| msgid ""
-#| "You don't have any open received requests. Why not send out a request in "
-#| "your group? Fill in the fields below to get started."
-msgid ""
-"You don't have any open received requests. Why not send out a request in "
-"your group? Fill in the fields below to get started."
-msgstr ""
-"Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen "
-"in je groep? Vul de velden hieronder in om van start te gaan."
+#| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
+msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
+msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
@@ -385,15 +323,9 @@ msgid "Welcome {0}!"
 msgstr "Welkom {0}!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/GetStarted/Index.cshtml
-#| msgid ""
-#| "Let's start by asking the members of your group if they can lend you "
-#| "something. Fill out the form below and we'll do the rest!"
-msgid ""
-"Let's start by asking the members of your group if they can lend you "
-"something. Fill out the form below and we'll do the rest!"
-msgstr ""
-"Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand "
-"formulier in en wij doen de rest!"
+#| msgid "Let's start by asking the members of your group if they can lend you something. Fill out the form below and we'll do the rest!"
+msgid "Let's start by asking the members of your group if they can lend you something. Fill out the form below and we'll do the rest!"
+msgstr "Laten we de groepsleden vragen of ze je iets kunnen lenen. Vul onderstaand formulier in en wij doen de rest!"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestAdmin/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequestDetailsAdmin/Index.cshtml
@@ -431,14 +363,9 @@ msgid "Please select at least one request to unblock."
 msgstr "Gelieve minstens één oproep te selecteren."
 
 #: wijdelen.objectsharing.controllers.objectrequestadmincontroller
-#| msgid ""
-#| "The selected requests were unblocked and mails have been sent to the "
-#| "users."
-msgid ""
-"The selected requests were unblocked and mails have been sent to the users."
-msgstr ""
-"De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd "
-"naar de gebruikers."
+#| msgid "The selected requests were unblocked and mails have been sent to the users."
+msgid "The selected requests were unblocked and mails have been sent to the users.
+msgstr "De geselecteerde oproepen werden gedeblokkeerd en de mails zijn verstuurd naar de gebruikers."
 
 #: wijdelen.objectsharing.controllers.objectrequestadmincontroller
 #: wijdelen.objectsharing.controllers.objectrequestdetailsadmincontroller
@@ -635,15 +562,9 @@ msgid "Are you sure you want to cancel your request for (a) {0}?"
 msgstr "Weet je zeker dat je je oproep voor (een) {0} wil stopzetten?"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
-#| msgid ""
-#| "You will no longer be able to receive answers to this request. This "
-#| "action cannot be undone."
-msgid ""
-"You will no longer be able to receive answers to this request. This action "
-"cannot be undone."
-msgstr ""
-"Je zal niet langer antwoorden kunnen ontvangen op deze oproep. Deze actie "
-"kan niet ongedaan worden gemaakt."
+#| msgid "You will no longer be able to receive answers to this request. This action cannot be undone."
+msgid "You will no longer be able to receive answers to this request. This action cannot be undone."
+msgstr "Je zal niet langer antwoorden kunnen ontvangen op deze oproep. Deze actie kan niet ongedaan worden gemaakt."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ObjectRequest/Stop.cshtml
 #| msgid "Yes"
@@ -676,15 +597,9 @@ msgid "My Feed"
 msgstr "Mijn feed"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
-#| msgid ""
-#| "You don't have anything in your feed yet. Why not send out a request in "
-#| "your group? Fill in the fields below to get started."
-msgid ""
-"You don't have anything in your feed yet. Why not send out a request in your "
-"group? Fill in the fields below to get started."
-msgstr ""
-"Je hebt momenteel geen berichten in je feed. Waarom geen oproep uitsturen in "
-"je groep? Vul de velden hieronder in om van start te gaan."
+#| msgid "You don't have anything in your feed yet. Why not send out a request in your group? Fill in the fields below to get started."
+msgid "You don't have anything in your feed yet. Why not send out a request in your group? Fill in the fields below to get started."
+msgstr "Je hebt momenteel geen berichten in je feed. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
 #| msgid "One person reacted to this request."
