@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="column column-75">
-        @using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("New", "ObjectRequest", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data", id = "newRequestForm"})) {
             <fieldset>
                 <legend>@T("I would like to borrow the following item")</legend>
                 @Html.TextBoxFor(m => m.Description, new {data_auto_complete = "true", maxlength = ObjectRequestController.MaximumDescriptionLength})

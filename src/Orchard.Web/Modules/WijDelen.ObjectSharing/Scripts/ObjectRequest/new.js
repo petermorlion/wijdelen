@@ -22,9 +22,9 @@ new autoComplete({
     }
 });
 
-var element = document.getElementById('ExtraInfo');
-element.oninput = function() {
-    var characterCount = element.value.length;
+var extraInfoTextArea = document.getElementById('ExtraInfo');
+extraInfoTextArea.oninput = function() {
+    var characterCount = extraInfoTextArea.value.length;
     var noCharactersText = document.getElementById('noCharactersText');
     noCharactersText.style.display = 'none';
 
@@ -55,4 +55,17 @@ element.oninput = function() {
     var percentage = Math.min(element.textLength * 100 / 30, 100);
     var progressBar = document.getElementById('objectrequest-progressbar-fill');
     progressBar.style.width = percentage.toString() + '%';
+};
+
+extraInfoTextArea.onkeydown = function (event) {
+    if (event.ctrlKey && event.keyCode === 13) {
+        document.getElementById('newRequestForm').submit();
+    }
+};
+
+var descriptionInput = document.getElementById('Description');
+descriptionInput.onkeydown = function (event) {
+    if (event.ctrlKey && event.keyCode === 13) {
+        document.getElementById('newRequestForm').submit();
+    }
 };
