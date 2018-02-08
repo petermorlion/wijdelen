@@ -33,7 +33,10 @@
 }
 else {
     <p>
-        @T("You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started.")
+        @T("You don't have any open received requests. Why not send out a request in your group?")
+    </p>
+    <p>
+        @T("Fill in the fields below to get started.")
     </p>
 
     Html.RenderPartial("NewObjectRequest", new NewObjectRequestViewModel());

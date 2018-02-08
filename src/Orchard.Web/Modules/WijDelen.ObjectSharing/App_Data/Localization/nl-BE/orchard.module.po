@@ -287,9 +287,14 @@ msgid "Thanks for answering"
 msgstr "Bedankt voor je antwoord"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
-#| msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
-msgid "You don't have any open received requests. Why not send out a request in your group? Fill in the fields below to get started."
-msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep? Vul de velden hieronder in om van start te gaan."
+#| msgid "You don't have any open received requests. Why not send out a request in your group?"
+msgid "You don't have any open received requests. Why not send out a request in your group?"
+msgstr "Je hebt momenteel geen open ontvangen oproepen. Waarom geen oproep uitsturen in je groep?"
+
+#: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
+#| msgid "Fill in the fields below to get started."
+msgid "Fill in the fields below to get started."
+msgstr "Vul de velden hieronder in om van start te gaan."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/ReceivedObjectRequest/Index.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Feed/Index.cshtml
