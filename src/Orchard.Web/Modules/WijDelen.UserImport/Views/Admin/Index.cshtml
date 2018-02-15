@@ -15,7 +15,12 @@
     </fieldset>
 
     <fieldset>
-        @Html.LabelFor(m => m.CultureForMails, T("Send mails in"))
+        <legend>@T("Additional information to help the recipients")</legend>
+        @Display.Body_Editor(Text: Model.ExtraInfoHtml, EditorFlavor: "html")
+    </fieldset>
+
+    <fieldset>
+        <legend>@T("Send mails in")</legend>
         <p>@T("The imported users will also use this language as default. They can change this on registration.")</p>
         @Html.DropDownListFor(m => m.CultureForMails, new SelectList(Model.SiteCultures, Model.CultureForMails))
     </fieldset>

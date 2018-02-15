@@ -99,24 +99,25 @@ namespace WijDelen.UserImport.Controllers {
 
         public ActionResult ConfirmResendUserInvitationMails(string returnUrl, int selectedGroupId) {
             var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
-            return View(new ConfirmResendUserInvitationMailsViewModel { GroupId = selectedGroupId, GroupName = groupViewModel.Name, ReturnUrl = returnUrl });
+            var viewModel = new ConfirmResendUserInvitationMailsViewModel { GroupId = selectedGroupId, GroupName = groupViewModel.Name, ReturnUrl = returnUrl };
+            return View(viewModel);
         }
 
-        [HttpPost]
-        public ActionResult ConfirmResendUserInvitationMails(int selectedGroupId, string returnUrl) {
-            var users = _groupService.GetUsersInGroup(selectedGroupId).Where(x => x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Pending);
-            var groupViewModel = _groupService.GetGroups().Single(x => x.Id == selectedGroupId);
+        [HttpPost, ValidateInput(false)]
+        public ActionResult ConfirmResendUserInvitationMails(ConfirmResendUserInvitationMailsViewModel viewModel) {
+            var users = _groupService.GetUsersInGroup(viewModel.GroupId).Where(x => x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Pending);
+            var groupViewModel = _groupService.GetGroups().Single(x => x.Id == viewModel.GroupId);
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
             var usersByCulture = users.GroupBy(x => x.As<UserDetailsPart>()?.Culture);
 
             foreach (var group in usersByCulture) {
-                _mailService.SendUserInvitationMails(group.Key, group, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl);
+                _mailService.SendUserInvitationMails(group.Key, group, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce }), siteUrl), groupViewModel.Name, groupViewModel.LogoUrl, viewModel.Text);
             }
             
             _orchardServices.Notifier.Add(NotifyType.Success, T("The invitation mails have been sent."));
             
-            return Redirect(returnUrl);
+            return Redirect(viewModel.ReturnUrl);
         }
     }
 }

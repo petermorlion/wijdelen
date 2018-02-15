@@ -21,20 +21,8 @@ using WijDelen.UserImport.ViewModels;
 namespace WijDelen.UserImport.Tests.Controllers {
     [TestFixture]
     public class AdminControllerTests {
-        private AdminController _controller;
-        private Mock<IOrchardServices> _orchardServicesMock;
-        private Mock<IAuthorizer> _authorizerMock;
-        private Mock<IMembershipService> _membershipServiceMock;
-        private IContainer _container;
-        private Mock<IMailService> _mailServiceMock;
-        private Mock<IUserImportService> _userImportServiceMock;
-        private Mock<IGroupService> _groupServiceMock;
-        private Mock<INotifier> _notifierMock;
-        private Mock<ICultureManager> _cultureManagerMock;
-
         [SetUp]
-        public void Init()
-        {
+        public void Init() {
             var builder = new ContainerBuilder();
 
             _orchardServicesMock = new Mock<IOrchardServices>();
@@ -60,52 +48,66 @@ namespace WijDelen.UserImport.Tests.Controllers {
             _controller = _container.Resolve<AdminController>();
         }
 
-        /// <summary>
-        /// Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a runtime exception.
-        /// </summary>
-        [Test]
-        public void TestT() {
-            var localizer = NullLocalizer.Instance;
-
-            _controller.T = localizer;
-
-            Assert.AreEqual(localizer, _controller.T);
-        }
-
-        [Test]
-        public void TestIndexWithoutAuthorization() {
-            _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
-            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(false);
-
-            var result = _controller.Index();
-
-            Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
-        }
+        private AdminController _controller;
+        private Mock<IOrchardServices> _orchardServicesMock;
+        private Mock<IAuthorizer> _authorizerMock;
+        private Mock<IMembershipService> _membershipServiceMock;
+        private IContainer _container;
+        private Mock<IMailService> _mailServiceMock;
+        private Mock<IUserImportService> _userImportServiceMock;
+        private Mock<IGroupService> _groupServiceMock;
+        private Mock<INotifier> _notifierMock;
+        private Mock<ICultureManager> _cultureManagerMock;
 
         [Test]
-        public void TestIndexWithAuthorization() {
+        public void TestIndexPostWithAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
             _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(true);
-            var cultures = new List<string> {"en", "nl", "test"};
-            _cultureManagerMock.Setup(x => x.ListCultures()).Returns(cultures);
-            _cultureManagerMock.Setup(x => x.GetSiteCulture()).Returns("test");
-            var groupViewModels = new[] { new GroupViewModel { Id = 123456, Name = "The Group", LogoUrl = "" } };
-            _groupServiceMock.Setup(x => x.GetGroups()).Returns(groupViewModels);
 
-            var result = _controller.Index();
+            var site = new Mock<ISite>();
+            var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
+            _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
+            site.Setup(x => x.BaseUrl).Returns("baseUrl");
+
+            var userFactory = new UserMockFactory();
+            var john = userFactory.Create("john", "john.doe@example.com", "John", "Doe", "nl-BE", GroupMembershipStatus.Pending);
+
+            var userImportResults = new List<UserImportResult> {
+                new UserImportResult("john.doe@example.com") {User = john},
+                new UserImportResult("jane.doe@example.com")
+            };
+
+            IList<string> importedEmails = null;
+            _userImportServiceMock
+                .Setup(x => x.ImportUsers("test", It.IsAny<IList<string>>()))
+                .Callback((string culture, IList<string> e) => importedEmails = e)
+                .Returns(userImportResults);
+
+            IList<IUser> importedUsers = null;
+            _mailServiceMock
+                .Setup(x => x.SendUserInvitationMails("test", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "The Group", "", "<p>Extra info</p>"))
+                .Callback((string culture, IEnumerable<IUser> r, Func<string, string> f, string gn, string gu, string ei) => importedUsers = r.ToList());
+
+            var viewModel = new AdminIndexViewModel {
+                UserEmails = "john.doe@example.com" + Environment.NewLine + "jane.doe@example.com",
+                SelectedGroupId = 123456,
+                CultureForMails = "test",
+                ExtraInfoHtml = "<p>Extra info</p>"
+            };
+
+            _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] {new GroupViewModel {Id = 123456, Name = "The Group", LogoUrl = ""}});
+
+            var result = _controller.Index(viewModel);
 
             Assert.IsInstanceOf<ViewResult>(result);
+            Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult) result).Model);
+            Assert.AreEqual("ImportComplete", ((ViewResult) result).ViewName);
+            Assert.AreEqual(1, importedUsers.Count);
+            Assert.AreEqual("john", importedUsers.Single().UserName);
+            Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
+            importedEmails.ShouldBeEquivalentTo(new[] {"jane.doe@example.com", "john.doe@example.com"});
 
-            var viewResult = (ViewResult)result;
-            Assert.IsInstanceOf<AdminIndexViewModel>(viewResult.Model);
-
-            viewResult.ViewName.Should().Be("");
-
-
-            var viewModel = (AdminIndexViewModel) viewResult.Model;
-            viewModel.Groups.ShouldBeEquivalentTo(groupViewModels);
-            viewModel.SiteCultures.ShouldBeEquivalentTo(cultures);
-            viewModel.CultureForMails.ShouldBeEquivalentTo("test");
+            _groupServiceMock.Verify(x => x.AddUsersToGroup("The Group", It.IsAny<IEnumerable<IUser>>()));
         }
 
         [Test]
@@ -119,54 +121,39 @@ namespace WijDelen.UserImport.Tests.Controllers {
         }
 
         [Test]
-        public void TestIndexPostWithAuthorization() {
+        public void TestIndexWithAuthorization() {
             _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
             _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(true);
+            var cultures = new List<string> {"en", "nl", "test"};
+            _cultureManagerMock.Setup(x => x.ListCultures()).Returns(cultures);
+            _cultureManagerMock.Setup(x => x.GetSiteCulture()).Returns("test");
+            var groupViewModels = new[] {new GroupViewModel {Id = 123456, Name = "The Group", LogoUrl = ""}};
+            _groupServiceMock.Setup(x => x.GetGroups()).Returns(groupViewModels);
 
-            var site = new Mock<ISite>();
-            var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
-            _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            site.Setup(x => x.BaseUrl).Returns("baseUrl");
-
-            var userFactory = new UserMockFactory();
-            var john = userFactory.Create("john", "john.doe@example.com", "John", "Doe", "nl-BE", GroupMembershipStatus.Pending);
-
-            var userImportResults = new List<UserImportResult> {
-                    new UserImportResult("john.doe@example.com") { User = john },
-                    new UserImportResult("jane.doe@example.com")
-                };
-
-            IList<string> importedEmails = null;
-            _userImportServiceMock
-                .Setup(x => x.ImportUsers("test", It.IsAny<IList<string>>()))
-                .Callback((string culture, IList<string> e) => importedEmails = e)
-                .Returns(userImportResults);
-
-            IList<IUser> importedUsers = null;
-            _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails("test", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "The Group", ""))
-                .Callback((string culture, IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
-
-            var viewModel = new AdminIndexViewModel
-            {
-                UserEmails = "john.doe@example.com" + Environment.NewLine + "jane.doe@example.com",
-                SelectedGroupId = 123456,
-                CultureForMails = "test"
-            };
-
-            _groupServiceMock.Setup(x => x.GetGroups()).Returns(new[] { new GroupViewModel { Id = 123456, Name = "The Group", LogoUrl = "" } });
-
-            var result = _controller.Index(viewModel);
+            var result = _controller.Index();
 
             Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsInstanceOf<IList<UserImportResult>>(((ViewResult)result).Model);
-            Assert.AreEqual("ImportComplete", ((ViewResult)result).ViewName);
-            Assert.AreEqual(1, importedUsers.Count);
-            Assert.AreEqual("john", importedUsers.Single().UserName);
-            Assert.AreEqual("john.doe@example.com", importedUsers.Single().Email);
-            importedEmails.ShouldBeEquivalentTo(new[] { "jane.doe@example.com", "john.doe@example.com" });
 
-            _groupServiceMock.Verify(x => x.AddUsersToGroup("The Group", It.IsAny<IEnumerable<IUser>>()));
+            var viewResult = (ViewResult) result;
+            Assert.IsInstanceOf<AdminIndexViewModel>(viewResult.Model);
+
+            viewResult.ViewName.Should().Be("");
+
+
+            var viewModel = (AdminIndexViewModel) viewResult.Model;
+            viewModel.Groups.ShouldBeEquivalentTo(groupViewModels);
+            viewModel.SiteCultures.ShouldBeEquivalentTo(cultures);
+            viewModel.CultureForMails.ShouldBeEquivalentTo("test");
+        }
+
+        [Test]
+        public void TestIndexWithoutAuthorization() {
+            _orchardServicesMock.Setup(x => x.Authorizer).Returns(_authorizerMock.Object);
+            _authorizerMock.Setup(x => x.Authorize(Permissions.ImportUsers, It.IsAny<LocalizedString>())).Returns(false);
+
+            var result = _controller.Index();
+
+            Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
         }
 
         [Test]
@@ -174,27 +161,27 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var userMock = new UserMockFactory().Create("moe", "moe@example.com", "Moe", "Szyslak", "fr", GroupMembershipStatus.Approved);
 
             var site = new Mock<ISite>();
-            var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
+            var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
             _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
             site.Setup(x => x.BaseUrl).Returns("baseUrl");
             _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock);
 
-            var groupViewModel = new GroupViewModel { Name = "Existing group", LogoUrl = "url" };
+            var groupViewModel = new GroupViewModel {Name = "Existing group", LogoUrl = "url"};
             _groupServiceMock.Setup(x => x.GetGroupForUser(2)).Returns(groupViewModel);
 
             IList<IUser> importedUsers = null;
             _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url"))
-                .Callback((string culture, IEnumerable<IUser> r, Func<string, string> f, string gn, string gu) => importedUsers = r.ToList());
+                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url", ""))
+                .Callback((string culture, IEnumerable<IUser> r, Func<string, string> f, string gn, string gu, string ei) => importedUsers = r.ToList());
 
             var result = _controller.ResendUserInvitationMail("moe");
 
             Assert.AreEqual(userMock, importedUsers.Single());
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
-            Assert.AreEqual("Edit", ((RedirectToRouteResult)result).RouteValues["action"]);
-            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult)result).RouteValues["area"]);
-            Assert.AreEqual("Admin", ((RedirectToRouteResult)result).RouteValues["controller"]);
-            Assert.AreEqual(userMock.Id, ((RedirectToRouteResult)result).RouteValues["id"]);
+            Assert.AreEqual("Edit", ((RedirectToRouteResult) result).RouteValues["action"]);
+            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult) result).RouteValues["area"]);
+            Assert.AreEqual("Admin", ((RedirectToRouteResult) result).RouteValues["controller"]);
+            Assert.AreEqual(userMock.Id, ((RedirectToRouteResult) result).RouteValues["id"]);
 
             _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("User invitation mail has been sent.")));
         }
@@ -204,7 +191,7 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var userMock = new UserMockFactory().Create("moe", "moe@example.com", "Moe", "Szyslak", "fr", GroupMembershipStatus.Approved);
 
             var site = new Mock<ISite>();
-            var mockWorkContext = new MockWorkContext { CurrentSite = site.Object };
+            var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
             _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
             site.Setup(x => x.BaseUrl).Returns("baseUrl");
             _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock);
@@ -214,10 +201,10 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var result = _controller.ResendUserInvitationMail("moe");
 
             Assert.IsInstanceOf<RedirectToRouteResult>(result);
-            Assert.AreEqual("Edit", ((RedirectToRouteResult)result).RouteValues["action"]);
-            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult)result).RouteValues["area"]);
-            Assert.AreEqual("Admin", ((RedirectToRouteResult)result).RouteValues["controller"]);
-            Assert.AreEqual(2, ((RedirectToRouteResult)result).RouteValues["id"]);
+            Assert.AreEqual("Edit", ((RedirectToRouteResult) result).RouteValues["action"]);
+            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult) result).RouteValues["area"]);
+            Assert.AreEqual("Admin", ((RedirectToRouteResult) result).RouteValues["controller"]);
+            Assert.AreEqual(2, ((RedirectToRouteResult) result).RouteValues["id"]);
 
             _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("The user needs to be part of a group first.")));
 
@@ -227,7 +214,21 @@ namespace WijDelen.UserImport.Tests.Controllers {
                     It.IsAny<IEnumerable<IUser>>(),
                     It.IsAny<Func<string, string>>(),
                     It.IsAny<string>(),
+                    It.IsAny<string>(),
                     It.IsAny<string>()), Times.Never);
+        }
+
+        /// <summary>
+        ///     Verifies that T can be set (not having a setter will not cause a compile-time exception, but it will cause a
+        ///     runtime exception.
+        /// </summary>
+        [Test]
+        public void TestT() {
+            var localizer = NullLocalizer.Instance;
+
+            _controller.T = localizer;
+
+            Assert.AreEqual(localizer, _controller.T);
         }
     }
 }

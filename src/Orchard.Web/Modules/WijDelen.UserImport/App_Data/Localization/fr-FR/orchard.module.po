@@ -86,6 +86,12 @@ msgid "Send mails in"
 msgstr "Envoyer des mails en"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Additional information to help the recipients"
+msgid "Additional information to help the recipients"
+msgstr "Informations supplémentaires pour aider les destinataires"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "The imported users will also use this language as default. They can change this on registration."
 msgid "The imported users will also use this language as default. They can change this on registration."
 msgstr "Les utilisateurs importés utiliseront également cette langue par défaut, ils peuvent la changer lors de l'enregistrement."

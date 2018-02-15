@@ -72,7 +72,7 @@ namespace WijDelen.UserImport.Controllers {
             var importedUsers = userImportResults.Where(u => u.WasImported && u.User != null).Select(u => u.User);
             _groupService.AddUsersToGroup(groupName, importedUsers);
 
-            SendUserInvitationMails(viewModel.CultureForMails, importedUsers, groupName, groupLogoUrl);
+            SendUserInvitationMails(viewModel.CultureForMails, importedUsers, groupName, groupLogoUrl, viewModel.ExtraInfoHtml);
             
             return View("ImportComplete", userImportResults);
         }
@@ -84,21 +84,21 @@ namespace WijDelen.UserImport.Controllers {
                 _notifier.Add(NotifyType.Warning, T("The user needs to be part of a group first."));
             } else {
                 var culture = user.As<UserDetailsPart>()?.Culture;
-                SendUserInvitationMails(culture, new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl);
+                SendUserInvitationMails(culture, new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl, "");
                 _notifier.Add(NotifyType.Success, T("User invitation mail has been sent."));
             }
 
             return RedirectToAction("Edit", "Admin", new {area = "Orchard.Users", id = user.Id});
         }
 
-        private void SendUserInvitationMails(string culture, IEnumerable<IUser> users, string groupName, string groupLogoUrl) {
+        private void SendUserInvitationMails(string culture, IEnumerable<IUser> users, string groupName, string groupLogoUrl, string extraInfoHtml) {
             var siteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
 
             if (string.IsNullOrWhiteSpace(siteUrl)) {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
-            _mailService.SendUserInvitationMails(culture, users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl), groupName, groupLogoUrl);
+            _mailService.SendUserInvitationMails(culture, users, nonce => Url.MakeAbsolute(Url.Action("Index", "Register", new { Area = "WijDelen.UserImport", nonce = nonce }), siteUrl), groupName, groupLogoUrl, extraInfoHtml);
         }
     }
 }

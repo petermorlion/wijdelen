@@ -3,5 +3,6 @@
         public int GroupId { get; set; }
         public string GroupName { get; set; }
         public string ReturnUrl { get; set; }
+        public string Text { get; set; }
     }
 }

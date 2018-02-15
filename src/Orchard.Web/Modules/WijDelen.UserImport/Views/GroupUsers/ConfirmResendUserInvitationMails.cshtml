@@ -6,8 +6,16 @@
     Style.Include("WijDelen.UserImport.Styles.css");
 }
 
-@using (Html.BeginFormAntiForgeryPost()) { 
+@using (Html.BeginFormAntiForgeryPost()) {
     @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>@T("Additional information to help the recipients")</legend>
+        @Display.Body_Editor(Text: Model.Text, EditorFlavor: "html")
+    </fieldset>
+
+    @Html.HiddenFor(m => m.GroupId);
+    @Html.HiddenFor(m => m.ReturnUrl);
 
     @T("Are you sure you want to resend the invitation mail to the inactive users of the group {0}?", Model.GroupName)
 
@@ -15,4 +23,4 @@
         <button type="submit" value="@T("Yes")">@T("Yes")</button>
         <a href="@Model.ReturnUrl">@T("No")</a>
     </fieldset>
-} 
+}

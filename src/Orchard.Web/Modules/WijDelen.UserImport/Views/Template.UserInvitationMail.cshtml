@@ -7,6 +7,7 @@
 <div style="margin-top: 10px;">
     <p>@T("Hello %recipient.username%!")</p>
     <p>@T("Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:", Model.GroupName)</p>
+    @Html.Raw(Model.ExtraInfoHtml)
     <p style="margin-bottom: 20px; margin-top: 20px; text-align: center;">
         <a href="%recipient.loginlink%" style="background-color: #04b17b; border-bottom: 1px solid #216400; border-radius: 5px; border-right: 1px solid #216400; color: #fff; padding: 10px; text-decoration: none;">Starten met Peergroups</a>
     </p>

@@ -148,15 +148,21 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             IEnumerable<IUser> englishRecipients = null;
             _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails("en", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
-                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { englishRecipients = users; });
+                .Setup(x => x.SendUserInvitationMails("en", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc", "extra info"))
+                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl, string extraInfoHtml) => { englishRecipients = users; });
 
             IEnumerable<IUser> frenchRecipients = null;
             _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc"))
-                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl) => { frenchRecipients = users; });
+                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "TestGroup", "abc", "extra info"))
+                .Callback((string culture, IEnumerable<IUser> users, Func<string, string> createUrl, string groupName, string groupLogoUrl, string extraInfoHtml) => { frenchRecipients = users; });
 
-            var result = _controller.ConfirmResendUserInvitationMails(3, "returnUrl");
+            var viewModel = new ConfirmResendUserInvitationMailsViewModel {
+                GroupId = 3,
+                ReturnUrl = "returnUrl",
+                Text = "extra info"
+            };
+
+            var result = _controller.ConfirmResendUserInvitationMails(viewModel);
 
             result.Should().BeOfType<RedirectResult>();
 

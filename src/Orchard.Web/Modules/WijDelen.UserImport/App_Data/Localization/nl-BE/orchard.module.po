@@ -86,6 +86,12 @@ msgid "Send mails in"
 msgstr "Mails versturen in"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#| msgid "Additional information to help the recipients"
+msgid "Additional information to help the recipients"
+msgstr "Extra informatie om de bestemmelingen te helpen"
+
+#: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #| msgid "The imported users will also use this language as default. They can change this on registration."
 msgid "The imported users will also use this language as default. They can change this on registration."
 msgstr "De geïmporteerde gebruikers zullen deze taal gebruiken. Ze kunnen dit veranderen bij registratie."
@@ -262,10 +268,11 @@ msgstr "Welkom bij Peergroups. Je bent uitgenodigd tot de Peergroup van {0}. Om 
 msgid "Thank you!"
 msgstr "Bedankt en tot binnenkort!"
 
-#: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
-#| msgid "User invitation mail"
-msgid "User invitation mail"
-msgstr "Uitnodigingsmail"
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
+#| msgid "Thank you!"
+msgid "Thank you!"
+msgstr "Bedankt en tot binnenkort!"
 
 #: ~/Modules/WijDelen.UserImport/Views/EditorTemplates/Parts/ResendUserInvitationMail.cshtml
 #| msgid "Resend"
