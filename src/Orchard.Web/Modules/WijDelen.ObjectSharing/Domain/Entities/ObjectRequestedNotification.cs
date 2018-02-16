@@ -10,6 +10,8 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
     public class ObjectRequestedNotification : EventSourced {
         private ObjectRequestedNotification(Guid id) : base(id) {
             Handles<ObjectRequestedNotificationCreated>(OnObjectRequestedNotificationCreated);
+            Handles<SendObjectRequestedNotificationRequested>(OnSendObjectRequestedNotificationRequested);
+            Handles<ObjectRequestedNotificationSent>(OnObjectRequestedNotificationSent);
         }
 
         public ObjectRequestedNotification(Guid id, int requestingUserId, int receivingUserId, string description, string extraInfo, Guid objectRequestId) : this(id)
@@ -21,12 +23,26 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             LoadFrom(history);
         }
 
+        public void Send() {
+            Update(new SendObjectRequestedNotificationRequested { RequestingUserId = RequestingUserId, ReceivingUserId = ReceivingUserId, Description = Description, ExtraInfo = ExtraInfo, ObjectRequestId = ObjectRequestId });
+        }
+
+        public void MarkAsSent() {
+            Update(new ObjectRequestedNotificationSent());
+        }
+
         private void OnObjectRequestedNotificationCreated(ObjectRequestedNotificationCreated objectRequestedNotificationCreated) {
             ReceivingUserId = objectRequestedNotificationCreated.ReceivingUserId;
             RequestingUserId = objectRequestedNotificationCreated.RequestingUserId;
             Description = objectRequestedNotificationCreated.Description;
             ExtraInfo = objectRequestedNotificationCreated.ExtraInfo;
             ObjectRequestId = objectRequestedNotificationCreated.ObjectRequestId;
+        }
+
+        private void OnSendObjectRequestedNotificationRequested(SendObjectRequestedNotificationRequested sendObjectRequestedNotificationRequested) {
+        }
+
+        private void OnObjectRequestedNotificationSent(ObjectRequestedNotificationSent objectRequestedNotificationSent) {
         }
 
         /// <summary>
