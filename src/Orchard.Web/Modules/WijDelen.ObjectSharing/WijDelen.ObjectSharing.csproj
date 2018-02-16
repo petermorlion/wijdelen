@@ -153,7 +153,6 @@
     <Compile Include="Domain\Entities\Chat.cs" />
     <Compile Include="Domain\Entities\ChatMessage.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
-    <Compile Include="Domain\Entities\ObjectRequestedNotification.cs" />
     <Compile Include="Domain\Enums\ObjectRequestAnswer.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageMailer.cs" />
@@ -162,14 +161,15 @@
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
     <Compile Include="Domain\EventHandlers\FeedReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\IFeedReadModelGenerator.cs" />
-    <Compile Include="Domain\EventHandlers\ObjectRequestMailer.cs" />
+    <Compile Include="Domain\EventHandlers\Notifications\EmailNotificationService.cs" />
+    <Compile Include="Domain\EventHandlers\Notifications\IUserNotificationService.cs" />
+    <Compile Include="Domain\EventHandlers\UserNotifier.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\UserInventoryGenerator.cs" />
-    <Compile Include="Domain\EventHandlers\UserNotifier.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ChatMessageAdded.cs" />
     <Compile Include="Domain\Events\ObjectRequestBlocked.cs" />
@@ -178,8 +178,6 @@
     <Compile Include="Domain\Events\ObjectRequestDenied.cs" />
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
     <Compile Include="Domain\Events\ChatStarted.cs" />
-    <Compile Include="Domain\Events\ObjectRequestedNotificationSent.cs" />
-    <Compile Include="Domain\Events\SendObjectRequestedNotificationRequested.cs" />
     <Compile Include="Domain\Events\ObjectRequestedNotificationCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
     <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />

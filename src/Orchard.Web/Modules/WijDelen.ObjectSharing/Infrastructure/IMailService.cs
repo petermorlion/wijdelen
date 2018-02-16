@@ -6,7 +6,7 @@ using WijDelen.ObjectSharing.Domain.Entities;
 
 namespace WijDelen.ObjectSharing.Infrastructure {
     public interface IMailService : IDependency {
-        void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users);
+        void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, IEnumerable<IUser> users);
         void SendChatMessageAddedMail(string culture, string fromUserName, string description, string toEmailAddress, Guid chatId, string message);
         void SendAdminObjectRequestBlockedMail(Guid objectRequestId, string requestingUserName, string description, string extraInfo, IList<string> forbiddenWords);
         void SendAdminObjectRequestMail(string requestingUserName, string description, string extraInfo);

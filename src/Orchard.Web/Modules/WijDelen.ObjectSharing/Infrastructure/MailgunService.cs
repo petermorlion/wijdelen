@@ -32,7 +32,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
         public Localizer T { get; set; }
 
-        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, IEnumerable<IUser> users) {
             var usersByCulture = users.GroupBy(x => x.As<UserDetailsPart>()?.Culture);
             foreach (var usersByCultureGroup in usersByCulture)
                 SendLocalizedObjectRequestMail(usersByCultureGroup.Key, requestingUserName, groupName, objectRequestId, description, extraInfo, objectRequestMail, usersByCultureGroup.ToArray());
