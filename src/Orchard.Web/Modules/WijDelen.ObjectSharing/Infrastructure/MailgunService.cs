@@ -10,7 +10,6 @@ using Orchard.Roles.Models;
 using Orchard.Security;
 using Orchard.Users.Models;
 using WijDelen.Mailgun;
-using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.UserImport.Models;
 
@@ -32,10 +31,10 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
         public Localizer T { get; set; }
 
-        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, IEnumerable<IUser> users) {
+        public void SendObjectRequestMail(string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, IEnumerable<IUser> users) {
             var usersByCulture = users.GroupBy(x => x.As<UserDetailsPart>()?.Culture);
             foreach (var usersByCultureGroup in usersByCulture)
-                SendLocalizedObjectRequestMail(usersByCultureGroup.Key, requestingUserName, groupName, objectRequestId, description, extraInfo, objectRequestMail, usersByCultureGroup.ToArray());
+                SendLocalizedObjectRequestMail(usersByCultureGroup.Key, requestingUserName, groupName, objectRequestId, description, extraInfo, usersByCultureGroup.ToArray());
         }
 
         public void SendChatMessageAddedMail(string culture, string fromUserName, string description, string toEmailAddress, Guid chatId, string message) {
@@ -127,7 +126,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
             _mailgunClient.Send(adminEmails, "", subject, "", html);
         }
 
-        private void SendLocalizedObjectRequestMail(string culture, string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, ObjectRequestMail objectRequestMail, params IUser[] users) {
+        private void SendLocalizedObjectRequestMail(string culture, string requestingUserName, string groupName, Guid objectRequestId, string description, string extraInfo, params IUser[] users) {
             var originalCulture = _orchardServices.WorkContext.CurrentCulture;
 
             try {
@@ -187,8 +186,6 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                 var html = _shapeDisplay.Display(htmlShape);
 
                 _mailgunClient.Send(recipients, "", subject, text, html);
-
-                objectRequestMail.MarkAsSent(userEmails, html);
             }
             finally {
                 _orchardServices.WorkContext.CurrentCulture = originalCulture;

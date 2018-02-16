@@ -4,10 +4,8 @@ using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.UI.Notify;
-using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers.Notifications;
 using WijDelen.ObjectSharing.Domain.Events;
-using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Messaging;
 using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
@@ -24,11 +22,9 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
         private readonly IMailService _mailService;
         private readonly IOrchardServices _orchardServices;
         private readonly IRandomSampleService _randomSampleService;
-        private readonly IEventSourcedRepository<ObjectRequestMail> _repository;
         private readonly IEnumerable<IUserNotificationService> _userNotificationServices;
 
         public UserNotifier(
-            IEventSourcedRepository<ObjectRequestMail> repository,
             IGroupService groupService,
             IMailService mailService,
             IGetUserByIdQuery getUserByIdQuery,
@@ -36,7 +32,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             IFindOtherUsersInGroupThatPossiblyOwnObjectQuery findOtherUsersQuery,
             IOrchardServices orchardServices,
             IEnumerable<IUserNotificationService> userNotificationServices) {
-            _repository = repository;
             _groupService = groupService;
             _mailService = mailService;
             _getUserByIdQuery = getUserByIdQuery;

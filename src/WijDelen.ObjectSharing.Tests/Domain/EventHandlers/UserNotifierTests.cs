@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
-using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Orchard;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.UI.Notify;
-using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers;
 using WijDelen.ObjectSharing.Domain.EventHandlers.Notifications;
 using WijDelen.ObjectSharing.Domain.Events;
-using WijDelen.ObjectSharing.Domain.EventSourcing;
 using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
@@ -32,7 +29,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             var builder = new ContainerBuilder();
 
             _groupServiceMock = new Mock<IGroupService>();
-            _repositoryMock = new Mock<IEventSourcedRepository<ObjectRequestMail>>();
             _mailServiceMock = new Mock<IMailService>();
             _getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
             _findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
@@ -44,7 +40,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             services.Notifier = _notifierMock.Object;
 
             builder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
-            builder.RegisterInstance(_repositoryMock.Object).As<IEventSourcedRepository<ObjectRequestMail>>();
             builder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
             builder.RegisterInstance(_getUserByIdQueryMock.Object).As<IGetUserByIdQuery>();
             builder.RegisterInstance(_findOtherUsersQueryMock.Object).As<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
@@ -65,11 +60,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel {Name = "Group"});
 
-            _persistedMail = null;
-            _repositoryMock
-                .Setup(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()))
-                .Callback((ObjectRequestMail mail, string correlationId) => { _persistedMail = mail; });
-
             var container = builder.Build();
             _userNotifier = container.Resolve<UserNotifier>();
 
@@ -77,14 +67,12 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         private UserNotifier _userNotifier;
-        private Mock<IEventSourcedRepository<ObjectRequestMail>> _repositoryMock;
         private Mock<IGroupService> _groupServiceMock;
         private Mock<IMailService> _mailServiceMock;
         private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
         private Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery> _findOtherUsersQueryMock;
         private Mock<INotifier> _notifierMock;
         private IUser _otherUser;
-        private ObjectRequestMail _persistedMail;
         private IUser _unsubscribedUser;
         private IUser _pendingUser;
         private IUser _requestingUser;
@@ -151,10 +139,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 It.IsAny<Guid>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
-                It.IsAny<ObjectRequestMail>(),
                 It.IsAny<IEnumerable<IUser>>()), Times.Never);
 
-            _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
             _notifierMock.Verify(x => x.Add(It.IsAny<NotifyType>(), It.IsAny<LocalizedString>()), Times.Never);
 
             _notificationService1.Verify(x => x.Handle(It.IsAny<IEnumerable<IUser>>(), It.IsAny<ObjectRequested>()), Times.Never);

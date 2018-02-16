@@ -41,7 +41,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers.Notifications {
                 objectRequestId,
                 description,
                 extraInfo,
-                null,
                 subscribedUsers.ToArray());
         }
     }

@@ -57,8 +57,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
 
             IEnumerable<IUser> users = null;
             _mailServiceMock
-                .Setup(x => x.SendObjectRequestMail("Jos Joskens", "TestGroup", sourceId, "sneakers", "for sneaking", null, It.IsAny<IEnumerable<IUser>>()))
-                .Callback((string n, string g, Guid s, string d, string e, ObjectRequestMail m, IEnumerable<IUser> u) => {
+                .Setup(x => x.SendObjectRequestMail("Jos Joskens", "TestGroup", sourceId, "sneakers", "for sneaking", It.IsAny<IEnumerable<IUser>>()))
+                .Callback((string n, string g, Guid s, string d, string e, IEnumerable<IUser> u) => {
                     users = u;
                 });
 
@@ -73,8 +73,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
 
             IEnumerable<IUser> users = null;
             _mailServiceMock
-                .Setup(x => x.SendObjectRequestMail("Jos Joskens", "TestGroup", sourceId, "sneakers", "for sneaking", null, It.IsAny<IEnumerable<IUser>>()))
-                .Callback((string n, string g, Guid s, string d, string e, ObjectRequestMail m, IEnumerable<IUser> u) => {
+                .Setup(x => x.SendObjectRequestMail("Jos Joskens", "TestGroup", sourceId, "sneakers", "for sneaking", It.IsAny<IEnumerable<IUser>>()))
+                .Callback((string n, string g, Guid s, string d, string e, IEnumerable<IUser> u) => {
                     users = u;
                 });
 

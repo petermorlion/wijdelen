@@ -152,7 +152,6 @@
     <Compile Include="Domain\Commands\UnblockObjectRequests.cs" />
     <Compile Include="Domain\Entities\Chat.cs" />
     <Compile Include="Domain\Entities\ChatMessage.cs" />
-    <Compile Include="Domain\Entities\ObjectRequestMail.cs" />
     <Compile Include="Domain\Enums\ObjectRequestAnswer.cs" />
     <Compile Include="Domain\Enums\ObjectRequestMailStatus.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageMailer.cs" />
