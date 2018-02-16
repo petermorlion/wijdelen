@@ -129,6 +129,7 @@
     <Compile Include="Controllers\ReceivedObjectRequestControllerTests.cs" />
     <Compile Include="Domain\CommandHandlers\ChatCommandHandlerTests.cs" />
     <Compile Include="Domain\Entities\ChatTests.cs" />
+    <Compile Include="Domain\Entities\ObjectRequestedNotificationTests.cs" />
     <Compile Include="Domain\Entities\ObjectRequestMailTests.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageMailerTests.cs" />
     <Compile Include="Domain\EventHandlers\ChatMessageReadModelGeneratorTests.cs" />
