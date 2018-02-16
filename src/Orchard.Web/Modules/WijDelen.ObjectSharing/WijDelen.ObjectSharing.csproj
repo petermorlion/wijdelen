@@ -169,6 +169,7 @@
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\UserInventoryGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\UserNotifier.cs" />
     <Compile Include="Domain\EventSourcing\EventSourced.cs" />
     <Compile Include="Domain\Events\ChatMessageAdded.cs" />
     <Compile Include="Domain\Events\ObjectRequestBlocked.cs" />
