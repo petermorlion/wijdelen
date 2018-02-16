@@ -43,7 +43,6 @@ namespace WijDelen.ObjectSharing.Controllers {
         /// <remarks>
         ///     Warning: also referenced hard-coded in WijDelen.ObjectSharing.MailgunService
         /// </remarks>
-        /// >
         public ActionResult Index(Guid id) {
             var chat = _chatRepository.Fetch(x => x.ChatId == id).SingleOrDefault();
             if (chat == null) return new HttpNotFoundResult();

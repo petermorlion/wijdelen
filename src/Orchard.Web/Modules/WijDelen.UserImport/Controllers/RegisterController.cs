@@ -36,6 +36,7 @@ namespace WijDelen.UserImport.Controllers {
             }
 
             if (user.ContentItem.As<UserDetailsPart>().IsComplete()) {
+                user.As<GroupMembershipPart>().GroupMembershipStatus = GroupMembershipStatus.Approved;
                 return RedirectToAction("LogOn", "Account", new { area = "Orchard.Users" });
             }
 

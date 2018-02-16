@@ -258,6 +258,7 @@
   <ItemGroup>
     <Content Include="Scripts\auto-complete.js" />
     <Content Include="Scripts\auto-complete.min.js" />
+    <Content Include="Scripts\Chat\index.js" />
     <Content Include="Scripts\ObjectRequest\new.js" />
     <Content Include="Styles\images\menu.peergroups.png" />
     <Content Include="Styles\menu.peergroups-admin.css" />

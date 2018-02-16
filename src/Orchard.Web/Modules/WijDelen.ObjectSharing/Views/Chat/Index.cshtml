@@ -1,6 +1,10 @@
 ﻿@model WijDelen.ObjectSharing.ViewModels.ChatViewModel
 
 @{
+    Script.Include("Chat/index.js").AtFoot();
+}
+
+@{
     if (WorkContext.CurrentUser.Id == Model.RequestingUserId) {
         Layout.Title = T("Your request for (a) {0}", Model.ObjectDescription).ToString();
     }
@@ -31,7 +35,7 @@
 </div>
 
 @if (!Model.IsForBlockedObjectRequest && !Model.IsStopped) {
-    using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+    using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Chat", new {Area = "WijDelen.ObjectSharing"}), FormMethod.Post, new {enctype = "multipart/form-data", id = "newMessageForm"})) {
         @Html.HiddenFor(m => m.ChatId)
         <fieldset>
             @Html.TextAreaFor(m => m.NewMessage, new {placeholder = T("Write a message here.")})
