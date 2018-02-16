@@ -23,7 +23,7 @@ namespace WijDelen.Reports.Queries {
             if (stopDate.TimeOfDay == new TimeSpan(0, 0, 0)) stopDate = new DateTime(stopDate.Year, stopDate.Month, stopDate.Day, 23, 59, 59);
 
             var objectRequestRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestRecord));
-            var objectRequestMailRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestMailRecord));
+            var objectRequestNotificationRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestNotificationRecord));
             var objectRequestResponseRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestResponseRecord));
             var userPartRecord = _shellSettings.GetFullTableName(typeof(UserPartRecord));
 
@@ -55,7 +55,7 @@ namespace WijDelen.Reports.Queries {
 
             var mailsQuery = session.CreateSQLQuery("SELECT r.AggregateId, COUNT(m.ObjectRequestId) " +
                                                     $"FROM {objectRequestRecord} r " +
-                                                    $"    INNER JOIN {objectRequestMailRecord} m ON m.ObjectRequestId = r.AggregateId " +
+                                                    $"    INNER JOIN {objectRequestNotificationRecord} m ON m.ObjectRequestId = r.AggregateId " +
                                                     "WHERE r.CreatedDateTime >= :startDate AND r.CreatedDateTime <= :stopDate " +
                                                     (groupId.HasValue ? "AND r.GroupId = :groupId " : "") +
                                                     "GROUP BY r.AggregateId")

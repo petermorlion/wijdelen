@@ -5,17 +5,14 @@ using WijDelen.ObjectSharing.Models;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class ReceivedObjectRequestReadModelGenerator :
-        IEventHandler<ObjectRequestMailSent>,
         IEventHandler<ObjectRequestConfirmed>,
         IEventHandler<ObjectRequestDenied>,
         IEventHandler<ObjectRequestDeniedForNow>,
         IEventHandler<ObjectRequestStopped> {
-        private readonly IRepository<ObjectRequestRecord> _objectRequestRepository;
         private readonly IRepository<ReceivedObjectRequestRecord> _repository;
 
-        public ReceivedObjectRequestReadModelGenerator(IRepository<ReceivedObjectRequestRecord> repository, IRepository<ObjectRequestRecord> objectRequestRepository) {
+        public ReceivedObjectRequestReadModelGenerator(IRepository<ReceivedObjectRequestRecord> repository) {
             _repository = repository;
-            _objectRequestRepository = objectRequestRepository;
         }
 
         public void Handle(ObjectRequestConfirmed e) {
@@ -39,20 +36,6 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
                 return;
 
             _repository.Delete(record);
-        }
-
-        public void Handle(ObjectRequestMailSent e) {
-            var objectRequest = _objectRequestRepository.Get(x => x.AggregateId == e.ObjectRequestId);
-
-            foreach (var recipient in e.Recipients)
-                _repository.Create(new ReceivedObjectRequestRecord {
-                    UserId = recipient.UserId,
-                    ObjectRequestId = e.ObjectRequestId,
-                    Description = objectRequest.Description,
-                    ExtraInfo = objectRequest.ExtraInfo,
-                    ReceivedDateTime = e.SentDateTime,
-                    RequestingUserId = e.RequestingUserId
-                });
         }
 
         public void Handle(ObjectRequestStopped e) {

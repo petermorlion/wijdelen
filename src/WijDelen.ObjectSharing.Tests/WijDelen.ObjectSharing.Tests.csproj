@@ -134,9 +134,9 @@
     <Compile Include="Domain\EventHandlers\ChatReadModelGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ChatStarterTests.cs" />
     <Compile Include="Domain\EventHandlers\FeedReadModelGeneratorTests.cs" />
+    <Compile Include="Domain\EventHandlers\Notifications\DatabaseNotificationServiceTests.cs" />
     <Compile Include="Domain\EventHandlers\Notifications\EmailNotificationServiceTests.cs" />
     <Compile Include="Domain\EventHandlers\UserNotifierTests.cs" />
-    <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGeneratorTests.cs" />
     <Compile Include="Domain\EventHandlers\UserInventoryGeneratorTests.cs" />

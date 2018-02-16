@@ -69,7 +69,7 @@ namespace WijDelen.ObjectSharing {
                     .Creatable()
                     .Listable());
 
-            SchemaBuilder.CreateTable(typeof(ObjectRequestMailRecord).Name, table => table
+            SchemaBuilder.CreateTable("ObjectRequestMailRecord", table => table
                     .Column<int>("Id", column => column.PrimaryKey().Identity())
                     .Column<Guid>("AggregateId", column => column.NotNull())
                     .Column<string>("EmailAddress", column => column.NotNull().WithLength(255))
@@ -225,6 +225,21 @@ namespace WijDelen.ObjectSharing {
                     .Listable(false));
 
             return 20;
+        }
+
+        public int UpdateFrom20() {
+            SchemaBuilder.CreateTable(typeof(ObjectRequestNotificationRecord).Name, table => table
+                .Column<int>("Id", column => column.PrimaryKey().Identity())
+                .Column<int>("RequestingUserId", column => column.NotNull())
+                .Column<int>("ReceivingUserId", column => column.NotNull())
+                .Column<Guid>("ObjectRequestId", column => column.NotNull())
+                .Column<DateTime>("SentDateTime", column => column.NotNull())
+            );
+
+            //TODO: migrate old data
+            //SchemaBuilder.DropTable("ObjectRequestMailRecord");
+
+            return 21;
         }
     }
 }

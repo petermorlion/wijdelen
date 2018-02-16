@@ -5,11 +5,12 @@ using Autofac;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Orchard.Data;
 using Orchard.Security;
-using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.EventHandlers.Notifications;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
+using WijDelen.ObjectSharing.Models;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.UserImport.Services;
 using WijDelen.UserImport.ViewModels;
@@ -25,6 +26,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
         private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
         private Mock<IGroupService> _groupServiceMock;
         private EmailNotificationService _service;
+        private Mock<IRepository<ObjectRequestNotificationRecord>> _notificationRecordRepositoryMock;
+        private ObjectRequestNotificationRecord _persistedRecord;
 
         [SetUp]
         public void Init() {
@@ -41,10 +44,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
             _groupServiceMock = new Mock<IGroupService>();
             _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel {Name = "TestGroup"});
 
+            _notificationRecordRepositoryMock = new Mock<IRepository<ObjectRequestNotificationRecord>>();
+            _notificationRecordRepositoryMock
+                .Setup(x => x.Create(It.IsAny<ObjectRequestNotificationRecord>()))
+                .Callback((ObjectRequestNotificationRecord r) => _persistedRecord = r);
+
             var builder = new ContainerBuilder();
             builder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
             builder.RegisterInstance(_getUserByIdQueryMock.Object).As<IGetUserByIdQuery>();
             builder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
+            builder.RegisterInstance(_notificationRecordRepositoryMock.Object).As<IRepository<ObjectRequestNotificationRecord>>();
             builder.RegisterType<EmailNotificationService>();
             var container = builder.Build();
 
@@ -54,6 +63,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
         [Test]
         public void ObjectRequested_ShouldOnlySendToSubscribedUsers() {
             var sourceId = Guid.NewGuid();
+            var createdDateTime = DateTime.UtcNow;
 
             IEnumerable<IUser> users = null;
             _mailServiceMock
@@ -62,9 +72,19 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
                     users = u;
                 });
 
-            _service.Handle(new []{_otherUser, _unsubscribedUser}, new ObjectRequested{SourceId = sourceId, Description = "sneakers", ExtraInfo = "for sneaking", UserId = _requestingUser.Id});
+            _service.Handle(new []{_otherUser, _unsubscribedUser}, new ObjectRequested{SourceId = sourceId, Description = "sneakers", ExtraInfo = "for sneaking", UserId = _requestingUser.Id, CreatedDateTime = createdDateTime});
 
             users.Single().Should().Be(_otherUser);
+
+            _persistedRecord.ShouldBeEquivalentTo(new ObjectRequestNotificationRecord
+            {
+                ObjectRequestId = sourceId,
+                ReceivingUserId = _otherUser.Id,
+                RequestingUserId = _requestingUser.Id,
+                SentDateTime = DateTime.UtcNow
+            }, options => options
+                .Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation, 5000))
+                .When(info => info.SelectedMemberPath == "SentDateTime"));
         }
 
         [Test]
@@ -81,6 +101,16 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers.Notifications {
             _service.Handle(new []{_otherUser, _unsubscribedUser}, new ObjectRequestUnblocked{SourceId = sourceId, Description = "sneakers", ExtraInfo = "for sneaking", UserId = _requestingUser.Id});
 
             users.Single().Should().Be(_otherUser);
+
+            _persistedRecord.ShouldBeEquivalentTo(new ObjectRequestNotificationRecord
+            {
+                ObjectRequestId = sourceId,
+                ReceivingUserId = _otherUser.Id,
+                RequestingUserId = _requestingUser.Id,
+                SentDateTime = DateTime.UtcNow
+            }, options => options
+                .Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation, 5000))
+                .When(info => info.SelectedMemberPath == "SentDateTime"));
         }
     }
 }

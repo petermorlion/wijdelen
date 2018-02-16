@@ -35,7 +35,7 @@ namespace WijDelen.Reports.Queries {
             }
 
             var objectRequestRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestRecord));
-            var objectRequestMailRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestMailRecord));
+            var objectRequestNotificationRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestNotificationRecord));
             var objectRequestResponseRecord = _shellSettings.GetFullTableName(typeof(ObjectRequestResponseRecord));
 
             var requestsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(r.AggregateId) " +
@@ -52,9 +52,9 @@ namespace WijDelen.Reports.Queries {
 
             var requests = requestsQuery.List<object[]>();
 
-            var mailsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(m.EmailAddress) " +
+            var mailsQuery = session.CreateSQLQuery("SELECT r.GroupId, COUNT(m.ReceivingUserId) " +
                                                     $"FROM {objectRequestRecord} r " +
-                                                    $"    INNER JOIN {objectRequestMailRecord} m " +
+                                                    $"    INNER JOIN {objectRequestNotificationRecord} m " +
                                                     "        ON r.AggregateId = m.ObjectRequestId " +
                                                     "WHERE m.SentDateTime >= :startDate " +
                                                     "    AND m.SentDateTime <= :stopDate " +

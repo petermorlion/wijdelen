@@ -160,10 +160,10 @@
     <Compile Include="Domain\EventHandlers\ChatStarter.cs" />
     <Compile Include="Domain\EventHandlers\FeedReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\IFeedReadModelGenerator.cs" />
+    <Compile Include="Domain\EventHandlers\Notifications\DatabaseNotificationService.cs" />
     <Compile Include="Domain\EventHandlers\Notifications\EmailNotificationService.cs" />
     <Compile Include="Domain\EventHandlers\Notifications\IUserNotificationService.cs" />
     <Compile Include="Domain\EventHandlers\UserNotifier.cs" />
-    <Compile Include="Domain\EventHandlers\ObjectRequestMailReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ObjectRequestResponseReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\ReceivedObjectRequestReadModelGenerator.cs" />
     <Compile Include="Domain\EventHandlers\SynonymGenerator.cs" />
@@ -178,8 +178,6 @@
     <Compile Include="Domain\Events\ObjectRequestConfirmed.cs" />
     <Compile Include="Domain\Events\ChatStarted.cs" />
     <Compile Include="Domain\Events\ObjectRequestedNotificationCreated.cs" />
-    <Compile Include="Domain\Events\ObjectRequestMailCreated.cs" />
-    <Compile Include="Domain\Events\ObjectRequestMailSent.cs" />
     <Compile Include="Domain\Events\ObjectRequestStopped.cs" />
     <Compile Include="Domain\Events\ObjectRequestUnblocked.cs" />
     <Compile Include="Domain\Events\UserInventoryCreated.cs" />
@@ -223,13 +221,13 @@
     <Compile Include="Infrastructure\VersionedEventSerializerSettings.cs" />
     <Compile Include="Models\FeedItemRecord.cs" />
     <Compile Include="Models\FeedItemType.cs" />
+    <Compile Include="Models\ObjectRequestNotificationRecord.cs" />
     <Compile Include="Models\ReceivedObjectRequestRecord.cs" />
     <Compile Include="Models\UserInventoryRecord.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ChatMessageRecord.cs" />
     <Compile Include="Models\ChatRecord.cs" />
     <Compile Include="Models\EventRecord.cs" />
-    <Compile Include="Models\ObjectRequestMailRecord.cs" />
     <Compile Include="Models\ObjectRequestRecord.cs" />
     <Compile Include="MessageReceiverFilter.cs" />
     <Compile Include="Models\ObjectRequestResponseRecord.cs" />
