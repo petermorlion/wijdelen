@@ -17,7 +17,7 @@ using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
-    public class ObjectRequestMailer : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>, IEventHandler<ObjectRequestBlockedByAdmin>
+    public class ObjectRequestMailer : IEventHandler<SendObjectRequestedNotificationRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>, IEventHandler<ObjectRequestBlockedByAdmin>
     {
         private readonly IEventSourcedRepository<ObjectRequestMail> _repository;
         private readonly IGroupService _groupService;
@@ -48,18 +48,18 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
         public Localizer T { get; set; }
 
-        public void Handle(ObjectRequested objectRequested) {
-            if (objectRequested.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
+        public void Handle(SendObjectRequestedNotificationRequested e) {
+            if (e.Status == ObjectRequestStatus.BlockedForForbiddenWords) {
                 _orchardServices.Notifier.Add(NotifyType.Warning, T("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."));
                 return;
             }
 
-            var requestingUser = _getUserByIdQuery.GetResult(objectRequested.UserId);
+            var requestingUser = _getUserByIdQuery.GetResult(e.RequestingUserId);
 
-            SendObjectRequestMail(requestingUser, objectRequested.Description, objectRequested.ExtraInfo, objectRequested.SourceId);
+            SendObjectRequestMail(requestingUser, e.Description, e.ExtraInfo, e.SourceId);
             _orchardServices.Notifier.Add(NotifyType.Success, T("Thank you for your request. We sent your request to the members of your group."));
 
-            _mailService.SendAdminObjectRequestMail(requestingUser.GetUserDisplayName(), objectRequested.Description, objectRequested.ExtraInfo);
+            _mailService.SendAdminObjectRequestMail(requestingUser.GetUserDisplayName(), e.Description, e.ExtraInfo);
         }
 
         public void Handle(ObjectRequestUnblocked e) {

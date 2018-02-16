@@ -30,7 +30,7 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             var correlationId = Guid.NewGuid();
 
             foreach (var user in randomUsers) {
-                var notification = new ObjectRequestedNotification(Guid.NewGuid(), e.UserId, user.Id, e.Description, e.ExtraInfo, e.SourceId);
+                var notification = new ObjectRequestedNotification(Guid.NewGuid(), e.UserId, user.Id, e.Description, e.ExtraInfo, e.Status, e.SourceId);
                 notification.Send();
                 _repository.Save(notification, correlationId.ToString());
             }

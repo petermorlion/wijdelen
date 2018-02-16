@@ -25,19 +25,6 @@ using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
     [TestFixture]
     public class ObjectRequestMailerTests {
-        private ObjectRequestMailer _objectRequestMailer;
-        private Mock<IEventSourcedRepository<ObjectRequestMail>> _repositoryMock;
-        private Mock<IGroupService> _groupServiceMock;
-        private Mock<IMailService> _mailServiceMock;
-        private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
-        private Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery> _findOtherUsersQueryMock;
-        private Mock<INotifier> _notifierMock;
-        private IUser _otherUser;
-        private ObjectRequestMail _persistedMail;
-        private IUser _unsubscribedUser;
-        private IUser _pendingUser;
-        private IUser _requestingUser;
-
         [SetUp]
         public void Init() {
             var builder = new ContainerBuilder();
@@ -70,7 +57,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _getUserByIdQueryMock.Setup(x => x.GetResult(_requestingUser.Id)).Returns(_requestingUser);
 
-            _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel { Name = "Group" });
+            _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel {Name = "Group"});
 
             _persistedMail = null;
             _repositoryMock
@@ -83,82 +70,23 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _objectRequestMailer.T = NullLocalizer.Instance;
         }
 
-        [Test]
-        public void WhenObjectIsRequested() {
-            var objectRequestId = Guid.NewGuid();
-            var objectRequested = new ObjectRequested {
-                UserId = _requestingUser.Id,
-                Description = "Sneakers",
-                ExtraInfo = "For sneaking",
-                SourceId = objectRequestId
-            };
-
-            _findOtherUsersQueryMock
-                .Setup(x => x.GetResults(_requestingUser.Id, "Sneakers"))
-                .Returns(new[] { _otherUser, _unsubscribedUser, _pendingUser });
-
-            _objectRequestMailer.Handle(objectRequested);
-
-            _persistedMail.Should().NotBeNull();
-            _persistedMail.UserId.Should().Be(_requestingUser.Id);
-            _persistedMail.Description.Should().Be("Sneakers");
-            _persistedMail.ExtraInfo.Should().Be("For sneaking");
-            _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
-
-            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
-                "Jos Joskens", 
-                "Group",
-                objectRequestId,
-                "Sneakers", 
-                "For sneaking", 
-                _persistedMail, 
-                It.Is((IUser u) => u.Id == _otherUser.Id && u.Email == "peter.morlion@gmail.com")));
-
-            _mailServiceMock.Verify(x => x.SendAdminObjectRequestMail("Jos Joskens", "Sneakers", "For sneaking"));
-
-            _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
-
-            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
-        }
+        private ObjectRequestMailer _objectRequestMailer;
+        private Mock<IEventSourcedRepository<ObjectRequestMail>> _repositoryMock;
+        private Mock<IGroupService> _groupServiceMock;
+        private Mock<IMailService> _mailServiceMock;
+        private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
+        private Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery> _findOtherUsersQueryMock;
+        private Mock<INotifier> _notifierMock;
+        private IUser _otherUser;
+        private ObjectRequestMail _persistedMail;
+        private IUser _unsubscribedUser;
+        private IUser _pendingUser;
+        private IUser _requestingUser;
 
         [Test]
-        public void WhenForbiddenObjectIsRequested()
-        {
+        public void WhenBlockedObjectIsUnblocked() {
             var objectRequestId = Guid.NewGuid();
-            var objectRequested = new ObjectRequested
-            {
-                UserId = 3,
-                Description = "Sex",
-                ExtraInfo = "for sexing",
-                SourceId = objectRequestId,
-                Status = ObjectRequestStatus.BlockedForForbiddenWords
-            };
-
-            _objectRequestMailer.Handle(objectRequested);
-
-            _persistedMail.Should().BeNull();
-
-            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<Guid>(),
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<ObjectRequestMail>(),
-                It.IsAny<IUser[]>()), Times.Never);
-
-            _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
-
-            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
-            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
-        }
-
-        [Test]
-        public void WhenBlockedObjectIsUnblocked()
-        {
-            var objectRequestId = Guid.NewGuid();
-            var objectRequestUnblocked = new ObjectRequestUnblocked
-            {
+            var objectRequestUnblocked = new ObjectRequestUnblocked {
                 UserId = _requestingUser.Id,
                 Description = "Sextant",
                 ExtraInfo = "For sextanting",
@@ -167,7 +95,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _findOtherUsersQueryMock
                 .Setup(x => x.GetResults(_requestingUser.Id, "Sextant"))
-                .Returns(new[] { _otherUser });
+                .Returns(new[] {_otherUser});
 
             _objectRequestMailer.Handle(objectRequestUnblocked);
 
@@ -191,15 +119,43 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
-        public void WhenObjectBlockedByAdminIsUnblocked()
-        {
-            var objectRequestUnblocked = new ObjectRequestUnblocked
-            {
+        public void WhenForbiddenObjectIsRequested() {
+            var objectRequestId = Guid.NewGuid();
+            var sendObjectRequestedNotificationRequested = new SendObjectRequestedNotificationRequested {
+                RequestingUserId = 3,
+                Description = "Sex",
+                ExtraInfo = "for sexing",
+                SourceId = objectRequestId,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
+            };
+
+            _objectRequestMailer.Handle(sendObjectRequestedNotificationRequested);
+
+            _persistedMail.Should().BeNull();
+
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<Guid>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<ObjectRequestMail>(),
+                It.IsAny<IUser[]>()), Times.Never);
+
+            _repositoryMock.Verify(x => x.Save(It.IsAny<ObjectRequestMail>(), It.IsAny<string>()), Times.Never);
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group.")));
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")), Times.Never);
+        }
+
+        [Test]
+        public void WhenObjectBlockedByAdminIsUnblocked() {
+            var objectRequestUnblocked = new ObjectRequestUnblocked {
                 WasPreviouslyBlockedByAdmin = true
             };
 
             _objectRequestMailer.Handle(objectRequestUnblocked);
-            
+
             _mailServiceMock.Verify(x => x.SendObjectRequestMail(
                 It.IsAny<string>(),
                 It.IsAny<string>(),
@@ -214,8 +170,46 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         [Test]
+        public void WhenObjectIsRequested() {
+            var objectRequestId = Guid.NewGuid();
+            var sendObjectRequestedNotificationRequested = new SendObjectRequestedNotificationRequested {
+                RequestingUserId = _requestingUser.Id,
+                Description = "Sneakers",
+                ExtraInfo = "For sneaking",
+                SourceId = objectRequestId
+            };
+
+            _findOtherUsersQueryMock
+                .Setup(x => x.GetResults(_requestingUser.Id, "Sneakers"))
+                .Returns(new[] {_otherUser, _unsubscribedUser, _pendingUser});
+
+            _objectRequestMailer.Handle(sendObjectRequestedNotificationRequested);
+
+            _persistedMail.Should().NotBeNull();
+            _persistedMail.UserId.Should().Be(_requestingUser.Id);
+            _persistedMail.Description.Should().Be("Sneakers");
+            _persistedMail.ExtraInfo.Should().Be("For sneaking");
+            _persistedMail.ObjectRequestId.Should().Be(objectRequestId);
+
+            _mailServiceMock.Verify(x => x.SendObjectRequestMail(
+                "Jos Joskens",
+                "Group",
+                objectRequestId,
+                "Sneakers",
+                "For sneaking",
+                _persistedMail,
+                It.Is((IUser u) => u.Id == _otherUser.Id && u.Email == "peter.morlion@gmail.com")));
+
+            _mailServiceMock.Verify(x => x.SendAdminObjectRequestMail("Jos Joskens", "Sneakers", "For sneaking"));
+
+            _repositoryMock.Verify(x => x.Save(_persistedMail, It.IsAny<string>()));
+
+            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("Thank you for your request. We sent your request to the members of your group.")));
+        }
+
+        [Test]
         public void WhenObjectRequestBlocked() {
-            var forbiddenWords = new List<string> { "sex" };
+            var forbiddenWords = new List<string> {"sex"};
             var sourceId = Guid.NewGuid();
             var objectRequestBlocked = new ObjectRequestBlocked {
                 UserId = _requestingUser.Id,
@@ -225,7 +219,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 SourceId = sourceId
             };
 
-           _objectRequestMailer.Handle(objectRequestBlocked);
+            _objectRequestMailer.Handle(objectRequestBlocked);
 
             _mailServiceMock.Verify(x => x.SendAdminObjectRequestBlockedMail(sourceId, "Jos Joskens", "Sextant", "For sextanting", forbiddenWords));
         }
@@ -240,7 +234,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
                 Reason = "Reason"
             };
 
-           _objectRequestMailer.Handle(objectRequestBlocked);
+            _objectRequestMailer.Handle(objectRequestBlocked);
 
             _mailServiceMock.Verify(x => x.SendObjectRequestBlockedMail(_requestingUser, sourceId, "Sneakers", "Reason"));
         }

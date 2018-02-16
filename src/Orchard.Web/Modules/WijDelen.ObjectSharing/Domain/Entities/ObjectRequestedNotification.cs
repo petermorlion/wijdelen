@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WijDelen.ObjectSharing.Domain.Events;
 using WijDelen.ObjectSharing.Domain.EventSourcing;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Domain.Entities {
     /// <summary>
@@ -14,9 +15,9 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Handles<ObjectRequestedNotificationSent>(OnObjectRequestedNotificationSent);
         }
 
-        public ObjectRequestedNotification(Guid id, int requestingUserId, int receivingUserId, string description, string extraInfo, Guid objectRequestId) : this(id)
+        public ObjectRequestedNotification(Guid id, int requestingUserId, int receivingUserId, string description, string extraInfo, ObjectRequestStatus status, Guid objectRequestId) : this(id)
         {
-            Update(new ObjectRequestedNotificationCreated {RequestingUserId = requestingUserId, ReceivingUserId = receivingUserId, Description = description, ExtraInfo = extraInfo, ObjectRequestId = objectRequestId });
+            Update(new ObjectRequestedNotificationCreated {RequestingUserId = requestingUserId, ReceivingUserId = receivingUserId, Description = description, ExtraInfo = extraInfo, Status = status, ObjectRequestId = objectRequestId });
         }
 
         public ObjectRequestedNotification(Guid id, IEnumerable<IVersionedEvent> history) : this(id) {
@@ -24,7 +25,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         }
 
         public void Send() {
-            Update(new SendObjectRequestedNotificationRequested { RequestingUserId = RequestingUserId, ReceivingUserId = ReceivingUserId, Description = Description, ExtraInfo = ExtraInfo, ObjectRequestId = ObjectRequestId });
+            Update(new SendObjectRequestedNotificationRequested { RequestingUserId = RequestingUserId, ReceivingUserId = ReceivingUserId, Description = Description, ExtraInfo = ExtraInfo, ObjectRequestId = ObjectRequestId, Status = Status });
         }
 
         public void MarkAsSent() {
@@ -37,6 +38,7 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
             Description = objectRequestedNotificationCreated.Description;
             ExtraInfo = objectRequestedNotificationCreated.ExtraInfo;
             ObjectRequestId = objectRequestedNotificationCreated.ObjectRequestId;
+            Status = objectRequestedNotificationCreated.Status;
         }
 
         private void OnSendObjectRequestedNotificationRequested(SendObjectRequestedNotificationRequested sendObjectRequestedNotificationRequested) {
@@ -64,6 +66,11 @@ namespace WijDelen.ObjectSharing.Domain.Entities {
         /// Extra info as to why the user needs it, what he/she plans to do with it, etc.
         /// </summary>
         public string ExtraInfo { get; private set; }
+
+        /// <summary>
+        /// The status of the object request.
+        /// </summary>
+        public ObjectRequestStatus Status { get; set; }
 
         public Guid ObjectRequestId { get; private set; }
     }

@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using WijDelen.ObjectSharing.Domain.Entities;
 using WijDelen.ObjectSharing.Domain.Events;
+using WijDelen.ObjectSharing.Domain.ValueTypes;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
     [TestFixture]
@@ -18,6 +19,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 66,
                 "Sneakers",
                 "For sneaking",
+                ObjectRequestStatus.BlockedForForbiddenWords,
                 objectRequestId);
 
             objectRequestedNotification.Send();
@@ -30,7 +32,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
                 ObjectRequestId = objectRequestId,
-                Version = 1
+                Version = 1,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
             });
         }
 
@@ -43,7 +46,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 ReceivingUserId = 66,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
-                ObjectRequestId = objectRequestId
+                ObjectRequestId = objectRequestId,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
             };
 
             var objectRequestedNotification = new ObjectRequestedNotification(id, new[] {previousEvent});
@@ -56,6 +60,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
             objectRequestedNotification.Description.Should().Be("Sneakers");
             objectRequestedNotification.ExtraInfo.Should().Be("For sneaking");
             objectRequestedNotification.ObjectRequestId.Should().Be(objectRequestId);
+            objectRequestedNotification.Status.Should().Be(ObjectRequestStatus.BlockedForForbiddenWords);
         }
 
         [Test]
@@ -68,6 +73,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 66,
                 "Sneakers",
                 "For sneaking",
+                ObjectRequestStatus.BlockedForForbiddenWords,
                 objectRequestId);
 
             objectRequestedNotification.MarkAsSent();
@@ -91,6 +97,7 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 66,
                 "Sneakers",
                 "For sneaking",
+                ObjectRequestStatus.BlockedForForbiddenWords,
                 objectRequestId);
 
             objectRequestedNotification.Id.Should().Be(id);
@@ -104,7 +111,8 @@ namespace WijDelen.ObjectSharing.Tests.Domain.Entities {
                 ReceivingUserId = 66,
                 Description = "Sneakers",
                 ExtraInfo = "For sneaking",
-                ObjectRequestId = objectRequestId
+                ObjectRequestId = objectRequestId,
+                Status = ObjectRequestStatus.BlockedForForbiddenWords
             });
 
             objectRequestedNotification.Version.Should().Be(0);
