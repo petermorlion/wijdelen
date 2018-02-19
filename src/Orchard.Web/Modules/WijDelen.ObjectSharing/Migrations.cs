@@ -236,8 +236,13 @@ namespace WijDelen.ObjectSharing {
                 .Column<DateTime>("SentDateTime", column => column.NotNull())
             );
 
-            //TODO: migrate old data
-            //SchemaBuilder.DropTable("ObjectRequestMailRecord");
+            var objectRequestMailRecord = SchemaBuilder.TableDbName("ObjectRequestMailRecord");
+            var objectRequestNotificationRecord = SchemaBuilder.TableDbName(typeof(ObjectRequestNotificationRecord).Name);
+            SchemaBuilder.ExecuteSql($"INSERT INTO {objectRequestNotificationRecord} (RequestingUserId, ReceivingUserId, ObjectRequestId, SentDateTime) " +
+                                     "SELECT RequestingUserId, ReceivingUserId, ObjectRequestId, SentDateTime " +
+                                     $"FROM {objectRequestMailRecord}");
+
+            SchemaBuilder.DropTable("ObjectRequestMailRecord");
 
             return 21;
         }
