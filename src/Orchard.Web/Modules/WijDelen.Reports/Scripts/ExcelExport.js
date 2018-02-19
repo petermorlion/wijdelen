@@ -18,7 +18,7 @@ function exportToExcel(tableId, fileName) {
     var wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
     var fname = fileName + '.xlsx';
     try {
-        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), fname);
+        saveAs(new Blob([s2ab(wbout)], { type: "data:application/octet-stream" }), fname);
     } catch (e) {
         if (typeof console != 'undefined') console.log(e, wbout);
     }
