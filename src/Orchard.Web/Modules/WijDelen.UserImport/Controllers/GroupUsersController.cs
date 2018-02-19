@@ -57,7 +57,7 @@ namespace WijDelen.UserImport.Controllers {
                 .ToList();
 
             var groups = _groupService.GetGroups().OrderBy(x => x.Name).ToList();
-            groups.Insert(0, new GroupViewModel());
+            groups.Insert(0, new GroupViewModel { Id = 0, Name = T("All Groups").ToString() });
 
             var model = new GroupUsersIndexViewModel {
                 Users = results

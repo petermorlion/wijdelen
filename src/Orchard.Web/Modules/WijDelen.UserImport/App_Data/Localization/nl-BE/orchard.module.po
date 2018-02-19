@@ -378,3 +378,7 @@ msgstr "De uitnodigingsmails werden verstuurd."
 msgid "You must select a group. No mails were sent."
 msgstr "Je moet een groep selecteren. Er werden geen mails verstuurd."
 
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "All Groups"
+msgid "All Groups"
+msgstr "Alle groepen"
