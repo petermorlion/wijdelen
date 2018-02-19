@@ -276,6 +276,12 @@ msgstr "Groepen"
 
 #: wijdelen.userimport.adminmenu
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "User Import"
+msgid "User Import"
+msgstr "Gebruikers importeren"
+
+#: wijdelen.userimport.adminmenu
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
 #| msgid "Users"
 msgid "Users"
 msgstr "Gebruikers"
