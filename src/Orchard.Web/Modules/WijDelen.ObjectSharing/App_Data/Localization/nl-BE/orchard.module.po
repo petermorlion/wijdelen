@@ -121,12 +121,12 @@ msgstr "Deze oproep werd geblokkeerd door de beheerder:\n\n{0}"
 msgid "This request has been stopped. You can not add any more messages and other users can no longer respond to this request."
 msgstr "Deze oproep werd stopgezet. Je kan geen berichten meer toevoegen en andere gebruikers kunnen niet langer antwoorden op deze oproep."
 
-#: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
+#: wijdelen.objectsharing.domain.eventhandlers.usernotifier
 #| msgid "Thank you for your request. We sent your request to the members of your group."
 msgid "Thank you for your request. We sent your request to the members of your group."
 msgstr "Bedankt voor je oproep. We hebben je oproep naar de leden van je groep gestuurd."
 
-#: wijdelen.objectsharing.domain.eventhandlers.objectrequestmailer
+#: wijdelen.objectsharing.domain.eventhandlers.usernotifier
 #| msgid "Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."
 msgid "Thank you for your request. We noticed some words that might be considered offensive. If our system flagged this incorrectly, we will send your request to the members of your group."
 msgstr "Bedankt voor je oproep. We merkten enkele woorden op die als beledigend kunnen worden ervaren. Indien ons systeem dit onterecht deed, dan zullen we je oproep naar de leden van je groep sturen."
