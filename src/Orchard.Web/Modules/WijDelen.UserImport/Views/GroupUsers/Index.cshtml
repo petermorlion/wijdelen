@@ -19,7 +19,9 @@
 
     <fieldset class="bulk-actions">
         <label for="filterResults">@T("Filter:")</label>
+        @Html.TextBoxFor(m => m.UserNameSearch, new { @class = "text" })
         @Html.DropDownList("selectedGroupId", Model.Groups.Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name}))
+        @Html.DropDownList("selectedGroupMembershipStatus", Model.GroupMembershipStatusses.Select(x => new SelectListItem {Value = x.ToString(), Text = T(x.ToString()).ToString()}))
         <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
         <button type="submit" name="submit.ResendUserInvitationMails" value="@T("ResendUserInvitationMails")">@T("Resend invitation mails")</button>
     </fieldset>

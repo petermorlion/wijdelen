@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Orchard;
@@ -6,7 +7,6 @@ using Orchard.ContentManagement;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
-using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Admin;
 using Orchard.UI.Navigation;
@@ -37,7 +37,7 @@ namespace WijDelen.UserImport.Controllers {
         public Localizer T { get; set; }
         private dynamic Shape { get; }
 
-        public ActionResult Index(PagerParameters pagerParameters, int selectedGroupId = 0) {
+        public ActionResult Index(PagerParameters pagerParameters, int selectedGroupId = 0, string selectedGroupMembershipStatus = "", string userNameSearch = "") {
             if (!_orchardServices.Authorizer.Authorize(Permissions.ManageGroups, T("You are not authorized to view this page.")))
                 return new HttpUnauthorizedResult();
 
@@ -59,6 +59,9 @@ namespace WijDelen.UserImport.Controllers {
             var groups = _groupService.GetGroups().OrderBy(x => x.Name).ToList();
             groups.Insert(0, new GroupViewModel { Id = 0, Name = T("All Groups").ToString() });
 
+            var groupMembershipStatusses = Enum.GetValues(typeof(GroupMembershipStatus)).Cast<GroupMembershipStatus>().Select(x => x.ToString()).ToList();
+            groupMembershipStatusses.Insert(0, T("All Users").ToString());
+
             var model = new GroupUsersIndexViewModel {
                 Users = results
                     .Select(x => new GroupUserEntry {
@@ -68,7 +71,8 @@ namespace WijDelen.UserImport.Controllers {
                     })
                     .ToList(),
                 Pager = pagerShape,
-                Groups = groups
+                Groups = groups,
+                GroupMembershipStatusses = groupMembershipStatusses
             };
 
             var routeData = new RouteData();
@@ -81,17 +85,17 @@ namespace WijDelen.UserImport.Controllers {
 
         [HttpPost]
         [Orchard.Mvc.FormValueRequired("submit.Filter")]
-        public ActionResult Index(int selectedGroupId = 0) {
-            return RedirectToAction("Index", new {selectedGroupId});
+        public ActionResult Index(int selectedGroupId = 0, string selectedGroupMembershipStatus = "", string userNameSearch = "") {
+            return RedirectToAction("Index", new {selectedGroupId, selectedGroupMembershipStatus, userNameSearch });
         }
 
         [HttpPost]
         [Orchard.Mvc.FormValueRequired("submit.ResendUserInvitationMails")]
-        public ActionResult Index(string returnUrl, int selectedGroupId = 0)
+        public ActionResult Index(string returnUrl, int selectedGroupId = 0, string selectedGroupMembershipStatus = "", string userNameSearch = "")
         {
             if (selectedGroupId == 0) {
                 _orchardServices.Notifier.Add(NotifyType.Warning, T("You must select a group. No mails were sent."));
-                return RedirectToAction("Index", new { selectedGroupId });
+                return RedirectToAction("Index", new { selectedGroupId, selectedGroupMembershipStatus, userNameSearch });
             }
 
             return RedirectToAction("ConfirmResendUserInvitationMails", new { selectedGroupId, returnUrl });

@@ -384,3 +384,8 @@ msgstr "Vous devez sélectionner un groupe. Aucun courrier n'a été envoyé."
 msgid "All Groups"
 msgstr "Toutes groupes"
 
+#: wijdelen.userimport.controllers.groupuserscontroller
+#| msgid "All Users"
+msgid "All Users"
+msgstr "Tous utilisateurs"
+
