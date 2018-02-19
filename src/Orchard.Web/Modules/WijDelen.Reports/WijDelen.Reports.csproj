@@ -138,11 +138,9 @@
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
-    <Content Include="node_modules\file-saver\FileSaver.min.js" />
     <Content Include="node_modules\milligram-less\examples\index.html" />
     <Content Include="node_modules\normalize.css\normalize.css" />
     <Content Include="node_modules\xlsx\dist\xlsx.full.min.js" />
-    <Content Include="Scripts\FileSaver.min.js" />
     <Content Include="Scripts\ExcelExport.js" />
     <Content Include="Scripts\xlsx.full.min.js" />
     <Content Include="Styles\WijDelen.Reports.Styles.css" />
