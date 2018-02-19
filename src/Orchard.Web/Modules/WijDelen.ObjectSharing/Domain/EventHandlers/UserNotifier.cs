@@ -11,28 +11,24 @@ using WijDelen.ObjectSharing.Domain.Services;
 using WijDelen.ObjectSharing.Domain.ValueTypes;
 using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.UserImport.Models;
-using WijDelen.UserImport.Services;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Domain.EventHandlers {
     public class UserNotifier : IEventHandler<ObjectRequested>, IEventHandler<ObjectRequestUnblocked>, IEventHandler<ObjectRequestBlocked>, IEventHandler<ObjectRequestBlockedByAdmin> {
         private readonly IFindOtherUsersInGroupThatPossiblyOwnObjectQuery _findOtherUsersQuery;
         private readonly IGetUserByIdQuery _getUserByIdQuery;
-        private readonly IGroupService _groupService;
         private readonly IMailService _mailService;
         private readonly IOrchardServices _orchardServices;
         private readonly IRandomSampleService _randomSampleService;
         private readonly IEnumerable<IUserNotificationService> _userNotificationServices;
 
         public UserNotifier(
-            IGroupService groupService,
             IMailService mailService,
             IGetUserByIdQuery getUserByIdQuery,
             IRandomSampleService randomSampleService,
             IFindOtherUsersInGroupThatPossiblyOwnObjectQuery findOtherUsersQuery,
             IOrchardServices orchardServices,
             IEnumerable<IUserNotificationService> userNotificationServices) {
-            _groupService = groupService;
             _mailService = mailService;
             _getUserByIdQuery = getUserByIdQuery;
             _randomSampleService = randomSampleService;

@@ -17,8 +17,6 @@ using WijDelen.ObjectSharing.Infrastructure.Queries;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Factories;
 using WijDelen.ObjectSharing.Tests.TestInfrastructure.Fakes;
 using WijDelen.UserImport.Models;
-using WijDelen.UserImport.Services;
-using WijDelen.UserImport.ViewModels;
 using IMailService = WijDelen.ObjectSharing.Infrastructure.IMailService;
 
 namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
@@ -28,7 +26,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         public void Init() {
             var builder = new ContainerBuilder();
 
-            _groupServiceMock = new Mock<IGroupService>();
             _mailServiceMock = new Mock<IMailService>();
             _getUserByIdQueryMock = new Mock<IGetUserByIdQuery>();
             _findOtherUsersQueryMock = new Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
@@ -39,7 +36,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
             _notifierMock = new Mock<INotifier>();
             services.Notifier = _notifierMock.Object;
 
-            builder.RegisterInstance(_groupServiceMock.Object).As<IGroupService>();
             builder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
             builder.RegisterInstance(_getUserByIdQueryMock.Object).As<IGetUserByIdQuery>();
             builder.RegisterInstance(_findOtherUsersQueryMock.Object).As<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery>();
@@ -58,8 +54,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
 
             _getUserByIdQueryMock.Setup(x => x.GetResult(_requestingUser.Id)).Returns(_requestingUser);
 
-            _groupServiceMock.Setup(x => x.GetGroupForUser(_requestingUser.Id)).Returns(new GroupViewModel {Name = "Group"});
-
             var container = builder.Build();
             _userNotifier = container.Resolve<UserNotifier>();
 
@@ -67,7 +61,6 @@ namespace WijDelen.ObjectSharing.Tests.Domain.EventHandlers {
         }
 
         private UserNotifier _userNotifier;
-        private Mock<IGroupService> _groupServiceMock;
         private Mock<IMailService> _mailServiceMock;
         private Mock<IGetUserByIdQuery> _getUserByIdQueryMock;
         private Mock<IFindOtherUsersInGroupThatPossiblyOwnObjectQuery> _findOtherUsersQueryMock;
