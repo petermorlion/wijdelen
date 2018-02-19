@@ -228,9 +228,6 @@
     <Content Include="Views\Template.UserInvitationMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Template.UserInvitationMail.Text.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\ResendUserInvitationMail.cshtml" />
   </ItemGroup>
   <ItemGroup>

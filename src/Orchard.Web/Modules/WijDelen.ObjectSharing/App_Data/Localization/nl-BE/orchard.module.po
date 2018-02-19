@@ -399,9 +399,7 @@ msgid "Unsubscribe"
 msgstr "Uitschrijven"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
@@ -409,37 +407,22 @@ msgid "Hello"
 msgstr "Hallo"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
 msgid "{0} reacted to your request for (a) {1}:"
 msgstr "{0} reageerde op je oproep voor (een) {1}:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
-#| msgid "Respond:"
-msgid "Respond:"
-msgstr "Reageren:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-msgid "Unsubscribe:"
-msgstr "Uitschrijven:"
-
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "{0} from the group {1} sent you a message:"
 msgstr "{0} uit de groep {1} stuurde je een bericht:"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "I'm looking for (a) {0}."
 msgstr "Ik zoek (een) {0}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "What do I need it for?"
 msgstr "Waar heb ik het voor nodig?"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "Can you lend me this?"
 msgstr "Kan ik die van je lenen?"
 
@@ -452,21 +435,6 @@ msgstr "Ja, dat heb ik"
 #| msgid "No, I don't own that"
 msgid "No, I don't own that"
 msgstr "Nee, dat heb ik niet"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-#| msgid "Yes, I own that:"
-msgid "Yes, I own that:"
-msgstr "Ja, dat heb ik:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-#| msgid "Not right now:"
-msgid "Not right now:"
-msgstr "Nu even niet:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-#| msgid "No, I don't own that:"
-msgid "No, I don't own that:"
-msgstr "Nee, dat heb ik niet:"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #| msgid "A request by {0} was blocked and requires your attention."

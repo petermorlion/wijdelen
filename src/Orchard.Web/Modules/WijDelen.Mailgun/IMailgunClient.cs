@@ -11,9 +11,8 @@ namespace WijDelen.Mailgun {
         /// <param name="recipients">A list of recipients, usually in the form "Name &lt;Email&gt;".</param>
         /// <param name="recipientVariables">Recipient variables, as documented by Mailgun. Pass in an empty string if there are none.</param>
         /// <param name="subject">The subject of the email.</param>
-        /// <param name="textMail">A text version of the mail.</param>
         /// <param name="htmlMail">A html version of the mail.</param>
         /// <param name="replyTo">Specify a different reply address, if necessary.</param>
-        void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string textMail, string htmlMail, string replyTo = "");
+        void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string htmlMail, string replyTo = "");
     }
 }

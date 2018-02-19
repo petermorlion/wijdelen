@@ -339,9 +339,7 @@ msgid "Unsubscribe"
 msgstr "Se désabonner"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestMail.cshtml
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestBlockedMail.cshtml
@@ -349,36 +347,22 @@ msgid "Hello"
 msgstr "Bonjour"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
 msgid "{0} reacted to your request for (a) {1}:"
 msgstr "{0} a réagi à votre demande pour @ {1}:"
 
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
-msgid "Respond:"
-msgstr "Répondre:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ChatMessageAddedMail.Text.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-msgid "Unsubscribe:"
-msgstr "Se désabonner:"
-
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "{0} from the group {1} sent you a message:"
 msgstr "{0} du groupe {1} vous a envoyé un message:"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "I'm looking for (a) {0}."
 msgstr "Je cherche (a) {0}."
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "What do I need it for?"
 msgstr "De quoi ai-je besoin?"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
 msgid "Can you lend me this?"
 msgstr "Peux-tu me prêter ça?"
 
@@ -389,18 +373,6 @@ msgstr "Oui, j'ai ça"
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.cshtml
 msgid "No, I don't own that"
 msgstr "Non, je n'ai pas ça"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-msgid "Yes, I own that:"
-msgstr "Oui, j'ai ça:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-msgid "Not right now:"
-msgstr "Pas en ce moment:"
-
-#: ~/Modules/WijDelen.ObjectSharing/Views/Template.ObjectRequestMail.Text.cshtml
-msgid "No, I don't own that:"
-msgstr "Non, je n'ai pas ça:"
 
 #: ~/Modules/WijDelen.ObjectSharing/Views/Template.AdminObjectRequestBlockedMail.cshtml
 msgid "A request by {0} was blocked and requires your attention."

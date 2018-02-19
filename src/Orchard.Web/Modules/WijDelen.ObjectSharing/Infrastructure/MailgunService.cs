@@ -159,17 +159,6 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                     if (!string.IsNullOrEmpty(groupLogoField?.FirstMediaUrl)) groupLogoUrl = siteUrl + groupLogoField.FirstMediaUrl;
                 }
 
-                var textShape = _shapeFactory.Create("Template_ObjectRequestMail_Text", Arguments.From(new {
-                    RequestingUserName = requestingUserName,
-                    GroupName = groupName,
-                    Description = description,
-                    ExtraInfo = extraInfo,
-                    YesLink = yesLink,
-                    NotNowLink = notNowLink,
-                    NoLink = noLink,
-                    UnsubscribeUrl = unsubscribeUrl
-                }));
-
                 var htmlShape = _shapeFactory.Create("Template_ObjectRequestMail", Arguments.From(new {
                     GroupLogoUrl = groupLogoUrl,
                     RequestingUserName = requestingUserName,
@@ -182,10 +171,9 @@ namespace WijDelen.ObjectSharing.Infrastructure {
                     UnsubscribeUrl = unsubscribeUrl
                 }));
 
-                var text = _shapeDisplay.Display(textShape);
                 var html = _shapeDisplay.Display(htmlShape);
 
-                _mailgunClient.Send(recipients, "", subject, text, html);
+                _mailgunClient.Send(recipients, "", subject, html);
             }
             finally {
                 _orchardServices.WorkContext.CurrentCulture = originalCulture;
@@ -233,7 +221,7 @@ namespace WijDelen.ObjectSharing.Infrastructure {
 
                 var html = _shapeDisplay.Display(htmlShape);
 
-                _mailgunClient.Send(recipients, "", subject, "", html, "info@peergroups.be");
+                _mailgunClient.Send(recipients, "", subject, html, "info@peergroups.be");
             }
             finally
             {

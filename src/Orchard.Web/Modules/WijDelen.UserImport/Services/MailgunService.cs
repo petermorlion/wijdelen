@@ -56,11 +56,6 @@ namespace WijDelen.UserImport.Services {
                 var recipientVariablesJson = $"{{{string.Join(",", recipientVariables)}}}";
                 var subject = T("Welcome to Peergroups").ToString();
 
-                var textShape = _shapeFactory.Create("Template_UserInvitationMail_Text", Arguments.From(new
-                {
-                    GroupName = groupName
-                }));
-
                 var currentUrl = _orchardServices.WorkContext.HttpContext.Request.Url;
                 var applicationPath = _orchardServices.WorkContext.HttpContext.Request.ApplicationPath;
                 var baseUrl = currentUrl.Scheme + "://" + currentUrl.Authority + applicationPath.TrimEnd('/') + "/";
@@ -72,10 +67,9 @@ namespace WijDelen.UserImport.Services {
                     ExtraInfoHtml = extraInfoHtml
                 }));
 
-                var text = _shapeDisplay.Display(textShape);
                 var html = _shapeDisplay.Display(htmlShape);
 
-                _mailgunClient.Send(recipients, recipientVariablesJson, subject, text, html);
+                _mailgunClient.Send(recipients, recipientVariablesJson, subject, html);
             }
             finally {
                 _orchardServices.WorkContext.CurrentCulture = originalCulture;

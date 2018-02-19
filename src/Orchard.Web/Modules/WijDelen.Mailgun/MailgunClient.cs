@@ -36,10 +36,9 @@ namespace WijDelen.Mailgun {
         /// <param name="recipients">A list of recipients, usually in the form "Name &lt;Email&gt;".</param>
         /// <param name="recipientVariables">Recipient variables, as documented by Mailgun. Pass in an empty string if there are none.</param>
         /// <param name="subject">The subject of the email.</param>
-        /// <param name="textMail">A text version of the mail.</param>
         /// <param name="htmlMail">A html version of the mail.</param>
         /// <param name="replyTo">Specify a different reply address, if necessary.</param>
-        public void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string textMail, string htmlMail, string replyTo = "") {
+        public void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string htmlMail, string replyTo = "") {
             var client = new RestClient {
                 BaseUrl = _apiBaseUrl,
                 Authenticator = new HttpBasicAuthenticator("api", _apiKey)
@@ -50,7 +49,6 @@ namespace WijDelen.Mailgun {
             request.Resource = "{domain}/messages";
             request.AddParameter("from", _from);
             request.AddParameter("subject", subject);
-            request.AddParameter("text", textMail);
             request.AddParameter("html", htmlMail);
             request.AddParameter("to", _to);
 

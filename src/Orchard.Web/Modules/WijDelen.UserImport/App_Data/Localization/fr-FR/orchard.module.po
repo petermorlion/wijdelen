@@ -248,23 +248,12 @@ msgstr "Vous ne recevrez plus d'e-mails concernant les demandes ou les messages 
 msgid "Hello %recipient.username%!"
 msgstr "Bonjour %recipient.username%!"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
-#| msgid "Hello %recipient.username%!"
-msgid "Hello %recipient.username%!"
-msgstr "Bonjour %recipient.username%!"
-
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
 #| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
 msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
 msgstr "Bienvenue à Peergroups. Vous avez été invité à rejoindre le groupe de pairs de {0}. Pour commencer, veuillez activer votre compte en cliquant sur le lien ci-dessous:"
 
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
-#| msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below:"
-msgid "Welcome to Peergroups. You've been invited to join the Peergroup of {0}. To get started, please activate your account by clicking the link below"
-msgstr "Bienvenue à Peergroups. Vous avez été invité à rejoindre le groupe de pairs de {0}. Pour commencer, veuillez activer votre compte en cliquant sur le lien ci-dessous:"
-
 #: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.cshtml
-#: ~/Modules/WijDelen.UserImport/Views/Template.UserInvitationMail.Text.cshtml
 #| msgid "Thank you!"
 msgid "Thank you!"
 msgstr "Merci!"

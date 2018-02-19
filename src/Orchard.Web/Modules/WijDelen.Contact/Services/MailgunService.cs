@@ -63,7 +63,7 @@ namespace WijDelen.Contact.Services
             var admins = userParts.Where(x => x.As<UserRolesPart>().Roles.Contains("PeergroupsAdministrator")).ToList();
             var adminEmails = admins.Select(x => x.Email).ToList();
 
-            _mailgunClient.Send(adminEmails, "", mailSubject, "", html, email);
+            _mailgunClient.Send(adminEmails, "", mailSubject, html, email);
         }
     }
 }

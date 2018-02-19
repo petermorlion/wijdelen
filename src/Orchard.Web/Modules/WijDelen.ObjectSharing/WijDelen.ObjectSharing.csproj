@@ -354,16 +354,10 @@
     <Content Include="Views\GetStarted\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Template.ObjectRequestMail.Text.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Template.ObjectRequestMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Template.ChatMessageAddedMail.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Template.ChatMessageAddedMail.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ObjectRequestAdmin\Index.cshtml" />
