@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AdminControllerTests.cs" />
+    <Compile Include="Controllers\ConfirmResendUserInvitationMailControllerTests.cs" />
     <Compile Include="Controllers\GroupUsersControllerTests.cs" />
     <Compile Include="Controllers\RegisterControllerTests.cs" />
     <Compile Include="Mocks\MockWorkContext.cs" />

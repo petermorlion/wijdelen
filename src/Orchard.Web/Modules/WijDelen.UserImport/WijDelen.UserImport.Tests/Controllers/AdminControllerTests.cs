@@ -139,7 +139,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
 
             viewResult.ViewName.Should().Be("");
 
-
             var viewModel = (AdminIndexViewModel) viewResult.Model;
             viewModel.Groups.ShouldBeEquivalentTo(groupViewModels);
             viewModel.SiteCultures.ShouldBeEquivalentTo(cultures);
@@ -154,68 +153,6 @@ namespace WijDelen.UserImport.Tests.Controllers {
             var result = _controller.Index();
 
             Assert.IsInstanceOf<HttpUnauthorizedResult>(result);
-        }
-
-        [Test]
-        public void TestResendUserInvitationMail() {
-            var userMock = new UserMockFactory().Create("moe", "moe@example.com", "Moe", "Szyslak", "fr", GroupMembershipStatus.Approved);
-
-            var site = new Mock<ISite>();
-            var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
-            _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            site.Setup(x => x.BaseUrl).Returns("baseUrl");
-            _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock);
-
-            var groupViewModel = new GroupViewModel {Name = "Existing group", LogoUrl = "url"};
-            _groupServiceMock.Setup(x => x.GetGroupForUser(2)).Returns(groupViewModel);
-
-            IList<IUser> importedUsers = null;
-            _mailServiceMock
-                .Setup(x => x.SendUserInvitationMails("fr", It.IsAny<IEnumerable<IUser>>(), It.IsAny<Func<string, string>>(), "Existing group", "url", ""))
-                .Callback((string culture, IEnumerable<IUser> r, Func<string, string> f, string gn, string gu, string ei) => importedUsers = r.ToList());
-
-            var result = _controller.ResendUserInvitationMail("moe");
-
-            Assert.AreEqual(userMock, importedUsers.Single());
-            Assert.IsInstanceOf<RedirectToRouteResult>(result);
-            Assert.AreEqual("Edit", ((RedirectToRouteResult) result).RouteValues["action"]);
-            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult) result).RouteValues["area"]);
-            Assert.AreEqual("Admin", ((RedirectToRouteResult) result).RouteValues["controller"]);
-            Assert.AreEqual(userMock.Id, ((RedirectToRouteResult) result).RouteValues["id"]);
-
-            _notifierMock.Verify(x => x.Add(NotifyType.Success, new LocalizedString("User invitation mail has been sent.")));
-        }
-
-        [Test]
-        public void TestResendUserInvitationMailWithoutGroup() {
-            var userMock = new UserMockFactory().Create("moe", "moe@example.com", "Moe", "Szyslak", "fr", GroupMembershipStatus.Approved);
-
-            var site = new Mock<ISite>();
-            var mockWorkContext = new MockWorkContext {CurrentSite = site.Object};
-            _orchardServicesMock.Setup(x => x.WorkContext).Returns(mockWorkContext);
-            site.Setup(x => x.BaseUrl).Returns("baseUrl");
-            _membershipServiceMock.Setup(x => x.GetUser("moe")).Returns(userMock);
-
-            _groupServiceMock.Setup(x => x.GetGroupForUser(2)).Returns((GroupViewModel) null);
-
-            var result = _controller.ResendUserInvitationMail("moe");
-
-            Assert.IsInstanceOf<RedirectToRouteResult>(result);
-            Assert.AreEqual("Edit", ((RedirectToRouteResult) result).RouteValues["action"]);
-            Assert.AreEqual("Orchard.Users", ((RedirectToRouteResult) result).RouteValues["area"]);
-            Assert.AreEqual("Admin", ((RedirectToRouteResult) result).RouteValues["controller"]);
-            Assert.AreEqual(2, ((RedirectToRouteResult) result).RouteValues["id"]);
-
-            _notifierMock.Verify(x => x.Add(NotifyType.Warning, new LocalizedString("The user needs to be part of a group first.")));
-
-            _mailServiceMock
-                .Verify(x => x.SendUserInvitationMails(
-                    It.IsAny<string>(),
-                    It.IsAny<IEnumerable<IUser>>(),
-                    It.IsAny<Func<string, string>>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()), Times.Never);
         }
 
         /// <summary>

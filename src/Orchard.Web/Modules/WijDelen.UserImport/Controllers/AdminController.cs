@@ -9,9 +9,7 @@ using Orchard.Security;
 using Orchard.Utility.Extensions;
 using WijDelen.UserImport.Services;
 using Orchard;
-using Orchard.ContentManagement;
 using Orchard.UI.Notify;
-using WijDelen.UserImport.Models;
 using WijDelen.UserImport.ViewModels;
 
 namespace WijDelen.UserImport.Controllers {
@@ -75,20 +73,6 @@ namespace WijDelen.UserImport.Controllers {
             SendUserInvitationMails(viewModel.CultureForMails, importedUsers, groupName, groupLogoUrl, viewModel.ExtraInfoHtml);
             
             return View("ImportComplete", userImportResults);
-        }
-
-        public ActionResult ResendUserInvitationMail(string userName) {
-            var user = _membershipService.GetUser(userName);
-            var groupViewModel = _groupService.GetGroupForUser(user.Id);
-            if (groupViewModel == null) {
-                _notifier.Add(NotifyType.Warning, T("The user needs to be part of a group first."));
-            } else {
-                var culture = user.As<UserDetailsPart>()?.Culture;
-                SendUserInvitationMails(culture, new[] { user }, groupViewModel.Name, groupViewModel.LogoUrl, "");
-                _notifier.Add(NotifyType.Success, T("User invitation mail has been sent."));
-            }
-
-            return RedirectToAction("Edit", "Admin", new {area = "Orchard.Users", id = user.Id});
         }
 
         private void SendUserInvitationMails(string culture, IEnumerable<IUser> users, string groupName, string groupLogoUrl, string extraInfoHtml) {

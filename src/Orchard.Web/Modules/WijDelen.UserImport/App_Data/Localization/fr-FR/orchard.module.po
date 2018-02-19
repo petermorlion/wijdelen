@@ -58,7 +58,7 @@ msgstr "Echec de l'importation: {0}"
 #: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
 #| msgid "Details"
 msgid "Details"
-msgstr "D�tails"
+msgstr "Détails"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/ImportComplete.cshtml
 #| msgid "The following users were imported:"
@@ -87,6 +87,7 @@ msgstr "Envoyer des mails en"
 
 #: ~/Modules/WijDelen.UserImport/Views/Admin/Index.cshtml
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/ConfirmResendUserInvitationMail/Index.cshtml
 #| msgid "Additional information to help the recipients"
 msgid "Additional information to help the recipients"
 msgstr "Informations supplémentaires pour aider les destinataires"
@@ -112,12 +113,12 @@ msgstr "Soumettre"
 msgid "Group"
 msgstr "Groupe"
 
-#: wijdelen.userimport.controllers.admincontroller
+#: wijdelen.userimport.controllers.confirmresenduserinvitationmailcontroller
 #| msgid "User invitation mail has been sent."
 msgid "User invitation mail has been sent."
 msgstr "Le message d'invitation de l'utilisateur a été envoyé."
 
-#: wijdelen.userimport.controllers.admincontroller
+#: wijdelen.userimport.controllers.confirmresenduserinvitationmailcontroller
 #| msgid "The user needs to be part of a group first."
 msgid "The user needs to be part of a group first."
 msgstr "L'utilisateur doit d'abord faire partie d'un groupe."
@@ -125,7 +126,7 @@ msgstr "L'utilisateur doit d'abord faire partie d'un groupe."
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "You must specify a new password of {0} or more characters."
 msgid "You must specify a new password of {0} or more characters."
-msgstr "Vous devez sp�cifier un nouveau mot de passe de {0} ou plusieurs caract�res."
+msgstr "Vous devez spécifier un nouveau mot de passe de {0} ou plusieurs caractères."
 
 #: wijdelen.userimport.controllers.registercontroller
 #| msgid "The new password and confirmation password do not match."
@@ -150,7 +151,7 @@ msgstr "Juste un peu plus de détails"
 #: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
 #| msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
 msgid "Before you can start with Peergroups, please create a password and provide us with some personal details."
-msgstr "Avant de pouvoir commencer avec Peergroups, veuillez cr�er un mot de passe et nous fournir quelques détails personnels."
+msgstr "Avant de pouvoir commencer avec Peergroups, veuillez créer un mot de passe et nous fournir quelques détails personnels."
 
 #: ~/Modules/WijDelen.UserImport/Views/Register/Index.cshtml
 #| msgid "Password:"
@@ -284,6 +285,12 @@ msgstr "Renvoyer"
 msgid "Groups"
 msgstr "Groupes"
 
+#: wijdelen.userimport.adminmenu
+#: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
+#| msgid "Users"
+msgid "Users"
+msgstr "Utilisateurs"
+
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/Index.cshtml
 #| msgid "Actions"
 msgid "Actions"
@@ -340,6 +347,7 @@ msgid "Resend invitation mails"
 msgstr "Renvoyer les mails d'invitation"
 
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/ConfirmResendUserInvitationMail/Index.cshtml
 #| msgid "Confirm"
 msgid "Confirm"
 msgstr "Confirmer"
@@ -349,12 +357,19 @@ msgstr "Confirmer"
 msgid "Are you sure you want to resend the invitation mail to the inactive users of the group {0}?"
 msgstr "Êtes-vous sûr de vouloir renvoyer le courrier d'invitation aux utilisateurs inactifs du groupe {0}?"
 
+#: ~/Modules/WijDelen.UserImport/Views/ConfirmResendUserInvitationMail/Index.cshtml
+#| msgid "Are you sure you want to resend the invitation mail to {0}?"
+msgid "Are you sure you want to resend the invitation mail to {0}?"
+msgstr "Êtes-vous sûr de vouloir renvoyer le courrier d'invitation aux {0}?"
+
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/ConfirmResendUserInvitationMail/Index.cshtml
 #| msgid "Yes"
 msgid "Yes"
 msgstr "Oui"
 
 #: ~/Modules/WijDelen.UserImport/Views/GroupUsers/ConfirmResendUserInvitationMails.cshtml
+#: ~/Modules/WijDelen.UserImport/Views/ConfirmResendUserInvitationMail/Index.cshtml
 #| msgid "No"
 msgid "No"
 msgstr "Non"
