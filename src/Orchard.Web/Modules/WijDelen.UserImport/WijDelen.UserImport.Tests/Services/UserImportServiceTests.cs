@@ -44,6 +44,37 @@ namespace WijDelen.UserImport.Tests.Services {
         }
 
         [Test]
+        public void TestWithCapitalizedEmail()
+        {
+            var users = new List<string> {
+                "John.Doe@Example.Com"
+            };
+
+            CreateUserParams createUserParams = null;
+            var memberShipService = new Mock<IMembershipService>();
+            memberShipService
+                .Setup(x => x.CreateUser(It.IsAny<CreateUserParams>()))
+                .Callback((CreateUserParams x) => createUserParams = x)
+                .Returns(new UserMockFactory().Create("", "", "", "", "", GroupMembershipStatus.Pending));
+
+            var userService = new Mock<IUserService>();
+            userService.Setup(x => x.VerifyUserUnicity("John.Doe@Example.Com", "John.Doe@Example.Com")).Returns(true);
+
+            var service = new UserImportService(memberShipService.Object, userService.Object);
+
+            var result = service.ImportUsers("fr", users);
+
+            createUserParams.Username.Should().Be("John.Doe@Example.Com");
+            createUserParams.Email.Should().Be("John.Doe@Example.Com");
+            createUserParams.IsApproved.Should().BeTrue();
+
+            result.Count.Should().Be(1);
+            result[0].WasImported.Should().BeTrue();
+            result[0].Email.Should().Be("John.Doe@Example.Com");
+            result[0].User.As<UserDetailsPart>().Culture.Should().Be("fr");
+        }
+
+        [Test]
         public void TestWithInvalidEmail()
         {
             var users = new List<string> {
