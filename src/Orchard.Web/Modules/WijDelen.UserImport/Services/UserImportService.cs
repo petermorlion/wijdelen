@@ -28,7 +28,7 @@ namespace WijDelen.UserImport.Services {
                 var userImportResult = new UserImportResult(email);
                 var isValid = true;
 
-                if (!string.IsNullOrEmpty(email) && !Regex.IsMatch(email, UserPart.EmailPattern)) {
+                if (!string.IsNullOrEmpty(email) && !Regex.IsMatch(email, UserPart.EmailPattern, RegexOptions.IgnoreCase)) {
                     userImportResult.AddErrorMessage(T("{0} is an invalid email address.", email).ToString());
                     isValid = false;
                 }
