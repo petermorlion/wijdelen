@@ -90,6 +90,11 @@ msgid "Text is too long."
 msgstr "Tekst is te lang."
 
 #: wijdelen.contact.controllers.contactcontroller
+#| msgid "Please prove you are not a bot."
+msgid "Please prove you are not a bot."
+msgstr "Gelieve te bewijzen dat je geen robot bent."
+
+#: wijdelen.contact.controllers.contactcontroller
 #| msgid "Thank you for your message. We will contact you as soon as possible."
 msgid "Thank you for your message. We will contact you as soon as possible."
 msgstr "Bedankt voor uw bericht. We beantwoorden die zo snel mogelijk."

@@ -3,24 +3,31 @@
 
 @{
     Layout.Title = T("Contact").ToString();
+    Script.Include("https://www.google.com/recaptcha/api.js").AtHead();
 }
 
 <h1>@Layout.Title</h1>
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Contact", new {Area = "WijDelen.Contact"}), FormMethod.Post, new {enctype = "multipart/form-data"})) {
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Index", "Contact", new { Area = "WijDelen.Contact" }), FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     <fieldset>
-        @Html.TextBoxFor(m => m.Name, new {placeholder = T("Name"), maxlength = ContactController.MaximumInputLength})
+        @Html.TextBoxFor(m => m.Name, new { placeholder = T("Name"), maxlength = ContactController.MaximumInputLength })
         @Html.ValidationMessageFor(m => m.Name)
 
-        @Html.TextBoxFor(m => m.Email, new {placeholder = T("Email"), maxlength = ContactController.MaximumInputLength})
+        @Html.TextBoxFor(m => m.Email, new { placeholder = T("Email"), maxlength = ContactController.MaximumInputLength })
         @Html.ValidationMessageFor(m => m.Email)
 
-        @Html.TextBoxFor(m => m.Subject, new {placeholder = T("Subject"), maxlength = ContactController.MaximumInputLength})
+        @Html.TextBoxFor(m => m.Subject, new { placeholder = T("Subject"), maxlength = ContactController.MaximumInputLength })
         @Html.ValidationMessageFor(m => m.Subject)
 
-        @Html.TextAreaFor(m => m.Text, new {placeholder = T("Text"), maxlength = ContactController.MaximumTextAreaLength})
+        @Html.TextAreaFor(m => m.Text, new { placeholder = T("Text"), maxlength = ContactController.MaximumTextAreaLength })
         @Html.ValidationMessageFor(m => m.Text)
-        
+
+    </fieldset>
+
+    <fieldset>
+        <div class="g-recaptcha" data-sitekey="6LdSWYUUAAAAAJ3qycR88fDP5pWcA80Aw1yd1lI9"></div>
+        @Html.ValidationMessageFor(m => m.Recaptcha);
     </fieldset>
 
     <button>@T("Submit")</button>

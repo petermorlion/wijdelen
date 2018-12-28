@@ -17,16 +17,19 @@ namespace WijDelen.Contact.Tests.Controllers {
         private ContactController _controller;
         private Mock<IMailService> _mailServiceMock;
         private Mock<INotifier> _notifierMock;
+        private Mock<IRecaptchaService> _recaptchaServiceMock;
 
         [SetUp]
         public void Init() {
             _mailServiceMock = new Mock<IMailService>();
             _notifierMock = new Mock<INotifier>();
+            _recaptchaServiceMock = new Mock<IRecaptchaService>();
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<ContactController>();
             containerBuilder.RegisterInstance(_mailServiceMock.Object).As<IMailService>();
             containerBuilder.RegisterInstance(_notifierMock.Object).As<INotifier>();
+            containerBuilder.RegisterInstance(_recaptchaServiceMock.Object).As<IRecaptchaService>();
 
             var container = containerBuilder.Build();
 
@@ -41,6 +44,8 @@ namespace WijDelen.Contact.Tests.Controllers {
                 Subject = "A test",
                 Text = "This is just a test"
             };
+
+            _recaptchaServiceMock.Setup(x => x.Validates()).Returns(true);
 
             var result = _controller.Index(viewModel);
 
@@ -66,6 +71,7 @@ namespace WijDelen.Contact.Tests.Controllers {
             viewResult.ViewData.ModelState["Email"].Errors.Single().ErrorMessage.Should().Be("Email is required.");
             viewResult.ViewData.ModelState["Subject"].Errors.Single().ErrorMessage.Should().Be("Subject is required.");
             viewResult.ViewData.ModelState["Text"].Errors.Single().ErrorMessage.Should().Be("Text is required.");
+            viewResult.ViewData.ModelState["Recaptcha"].Errors.Single().ErrorMessage.Should().Be("Please prove you are not a bot.");
         }
 
         [Test]

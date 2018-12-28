@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using Orchard;
+using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Themes;
 using Orchard.UI.Notify;
@@ -11,15 +13,17 @@ namespace WijDelen.Contact.Controllers {
     public class ContactController : Controller {
         private readonly IMailService _mailService;
         private readonly INotifier _notifier;
+        private readonly IRecaptchaService _recaptchaService;
 
         private const string Pattern = @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$";
 
         public static int MaximumInputLength = 300;
         public static int MaximumTextAreaLength = 3000;
 
-        public ContactController(IMailService mailService, INotifier notifier) {
+        public ContactController(IMailService mailService, INotifier notifier, IRecaptchaService recaptchaService) {
             _mailService = mailService;
             _notifier = notifier;
+            _recaptchaService = recaptchaService;
 
             T = NullLocalizer.Instance;
         }
@@ -55,6 +59,9 @@ namespace WijDelen.Contact.Controllers {
                 ModelState.AddModelError<ContactViewModel, string>(m => m.Text, T("Text is required."));
             else if (viewModel.Text.Length > MaximumTextAreaLength)
                 ModelState.AddModelError<ContactViewModel, string>(m => m.Text, T("Text is too long."));
+
+            if (!_recaptchaService.Validates())
+                ModelState.AddModelError<ContactViewModel, string>(m => m.Recaptcha, T("Please prove you are not a bot."));
 
             if (!ModelState.IsValid) {
                 return View();
