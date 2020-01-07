@@ -19,11 +19,11 @@ namespace WijDelen.Mailgun {
             _to = "no-reply@peergroups.be";
 
 #if DEBUG
-            _apiBaseUrl = new Uri("https://api.eu.mailgun.net/v3");
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
             _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
             _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
 #else
-            _apiBaseUrl = new Uri("https://api.eu.mailgun.net/v3");
+            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
             _domain = "mg.peergroups.be";
             _from = "Peergroups <no-reply@peergroups.be>";
 #endif
