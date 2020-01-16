@@ -135,7 +135,7 @@ namespace WijDelen.ObjectSharing {
             SchemaBuilder.AlterTable(typeof(ObjectRequestResponseRecord).Name, table => table
                 .AddColumn<DateTime>("DateTimeResponded"));
 
-            SchemaBuilder.ExecuteSql($"UPDATE {SchemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name)} SET DateTimeResponded = SYSDATETIME()");
+            SchemaBuilder.ExecuteSql($"UPDATE {SchemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name)} SET DateTimeResponded = GETDATE()");
             SchemaBuilder.ExecuteSql($"ALTER TABLE {SchemaBuilder.TableDbName(typeof(ObjectRequestResponseRecord).Name)} ALTER COLUMN DateTimeResponded DATETIME NOT NULL");
 
             return 11;
