@@ -2,10 +2,10 @@
 AntiForgery: enabled 
 Author: Peter Morlion 
 Website: http://www.redstar.be 
-Version: 1.0.1
+Version: 1.0.3
 OrchardVersion: 1.0
 Description: A module containing code to communicate with MailChimp. 
 Features:
     WijDelen.MailChimp:
-        Description: Code to communicate with Mailchimp.
+        Description: Code to communicate with Mailchimp. Version 1.0.3
 		Category: Peergroups
