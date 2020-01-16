@@ -24,6 +24,12 @@ FOR %%b in (
     )
 )
 
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" (
+	echo "Using MSBuild from Visual Studio Community 2019"
+	set msbuild="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	goto build
+)
+
 echo "Unable to detect suitable environment. Build may not succeed."
 
 :build
