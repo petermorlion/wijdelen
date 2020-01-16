@@ -1,0 +1,40 @@
+﻿@model WijDelen.Mailgun.Models.MailgunSettingsPart
+<fieldset>
+    <legend>@T("API Key")</legend>
+    <div>
+        @Html.EditorFor(m => m.ApiKey)
+        @Html.ValidationMessageFor(m => m.ApiKey, "*")
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>@T("API Base URL")</legend>
+    <div>
+        @Html.EditorFor(m => m.ApiBaseUrl)
+        @Html.ValidationMessageFor(m => m.ApiBaseUrl, "*")
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>@T("Domain")</legend>
+    <div>
+        @Html.EditorFor(m => m.Domain)
+        @Html.ValidationMessageFor(m => m.Domain, "*")
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>@T("To")</legend>
+    <div>
+        @Html.EditorFor(m => m.To)
+        @Html.ValidationMessageFor(m => m.To, "*")
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>@T("From")</legend>
+    <div>
+        @Html.EditorFor(m => m.From)
+        @Html.ValidationMessageFor(m => m.From, "*")
+    </div>
+</fieldset>

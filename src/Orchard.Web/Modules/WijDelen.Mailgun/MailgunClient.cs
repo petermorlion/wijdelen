@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using Orchard;
+using Orchard.ContentManagement;
 using Orchard.Logging;
 using RestSharp;
 using RestSharp.Authenticators;
+using WijDelen.Mailgun.Models;
 
 namespace WijDelen.Mailgun {
     public class MailgunClient : IMailgunClient {
-        private readonly Uri _apiBaseUrl;
-        private readonly string _apiKey;
-        private readonly string _domain;
-        private readonly string _from;
-        private readonly string _to;
+        private readonly IOrchardServices _orchardServices;
 
-        public MailgunClient() {
+        public MailgunClient(IOrchardServices orchardServices) {
+            _orchardServices = orchardServices;
             Logger = NullLogger.Instance;
-
-            _apiKey = "key-9b8b2053d33de2583bfd3afb604dd820";
-            _to = "no-reply@peergroups.be";
-
-#if DEBUG
-           _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
-           _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
-           _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
-#else
-            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
-            _domain = "mg.peergroups.be";
-            _from = "Peergroups <no-reply@peergroups.be>";
-#endif
         }
 
         /// <summary>
@@ -39,18 +27,21 @@ namespace WijDelen.Mailgun {
         /// <param name="htmlMail">A html version of the mail.</param>
         /// <param name="replyTo">Specify a different reply address, if necessary.</param>
         public void Send(IEnumerable<string> recipients, string recipientVariables, string subject, string htmlMail, string replyTo = "") {
+            var settings = _orchardServices.WorkContext.CurrentSite.As<MailgunSettingsPart>();
             var client = new RestClient {
-                BaseUrl = _apiBaseUrl,
-                Authenticator = new HttpBasicAuthenticator("api", _apiKey)
+                BaseUrl = new Uri(settings.ApiBaseUrl),
+                Authenticator = new HttpBasicAuthenticator("api", settings.ApiKey)
             };
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             var request = new RestRequest();
-            request.AddParameter("domain", _domain, ParameterType.UrlSegment);
+            request.AddParameter("domain", settings.Domain, ParameterType.UrlSegment);
             request.Resource = "{domain}/messages";
-            request.AddParameter("from", _from);
+            request.AddParameter("from", settings.From);
             request.AddParameter("subject", subject);
             request.AddParameter("html", htmlMail);
-            request.AddParameter("to", _to);
+            request.AddParameter("to", settings.To);
 
             if (!string.IsNullOrEmpty(replyTo)) {
                 request.AddParameter("h:Reply-To", replyTo);
