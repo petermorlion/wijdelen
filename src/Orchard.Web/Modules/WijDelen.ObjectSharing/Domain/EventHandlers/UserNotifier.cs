@@ -3,6 +3,7 @@ using System.Linq;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.Localization;
+using Orchard.Logging;
 using Orchard.UI.Notify;
 using WijDelen.ObjectSharing.Domain.EventHandlers.Notifications;
 using WijDelen.ObjectSharing.Domain.Events;
@@ -37,9 +38,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
             _userNotificationServices = userNotificationServices;
 
             T = NullLocalizer.Instance;
+            Logger = NullLogger.Instance;
         }
 
         public Localizer T { get; set; }
+        public ILogger Logger { get; set; }
 
         public void Handle(ObjectRequestBlocked e) {
             var requestingUser = _getUserByIdQuery.GetResult(e.UserId);
@@ -59,7 +62,11 @@ namespace WijDelen.ObjectSharing.Domain.EventHandlers {
 
             var otherUsers = _findOtherUsersQuery.GetResults(e.UserId, e.Description).ToList();
             var approvedUsers = otherUsers.Where(x => x.As<GroupMembershipPart>().GroupMembershipStatus == GroupMembershipStatus.Approved).ToList();
-            var randomUsers = _randomSampleService.GetRandomSample(approvedUsers, 50);
+            var randomUsers = _randomSampleService.GetRandomSample(approvedUsers, 50).ToList();
+
+            if (!randomUsers.Any()) {
+                Logger.Error($"Couldn't find any users to send a mail to. {otherUsers.Count} other users in the group, of which {approvedUsers.Count} approved.");
+            }
 
             foreach (var notificationService in _userNotificationServices) notificationService.Handle(randomUsers, e);
 
