@@ -2,11 +2,11 @@
 AntiForgery: enabled
 Author: Peter Morlion
 Website: http://www.redstar.be
-Version: 3.10.1
+Version: 3.10.2
 OrchardVersion: 1.10
 Description: User import for Peergroups
 Features:
     WijDelen.UserImport:
-        Description: Allows importing users to Peergroups
+        Description: Allows importing users to Peergroups. Version 3.10.2
 		Category: Peergroups
 		Dependencies: WijDelen.Mailgun, WijDelen.MailChimp, Orchard.Users, Orchard.MediaLibrary, Orchard.Roles, Orchard.Localization

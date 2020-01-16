@@ -54,10 +54,6 @@
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -117,7 +113,6 @@
     <Compile Include="Models\UserDetailsPart.cs" />
     <Compile Include="Models\UserDetailsPartRecord.cs" />
     <Compile Include="Models\UserExtensions.cs" />
-    <Compile Include="Permissions.cs" />
     <Compile Include="Services\IUpdateUserDetailsService.cs" />
     <Compile Include="Services\UpdateUserDetailsService.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
@@ -133,7 +128,6 @@
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Services\IUserImportService.cs" />
     <Compile Include="Services\MailgunService.cs" />
-    <Compile Include="Migrations.cs" />
     <Compile Include="Services\UserImportService.cs" />
     <Compile Include="ViewModels\ConfirmResendUserInvitationMailsViewModel.cs" />
     <Compile Include="ViewModels\ConfirmResendUserInvitationMailViewModel.cs" />
