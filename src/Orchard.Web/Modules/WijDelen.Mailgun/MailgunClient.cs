@@ -19,9 +19,9 @@ namespace WijDelen.Mailgun {
             _to = "no-reply@peergroups.be";
 
 #if DEBUG
-            _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
-            _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
-            _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
+           _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
+           _domain = "sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org";
+           _from = "Mailgun Sandbox <postmaster@sandboxaa07be2124b6407f8b84a25c232b739c.mailgun.org>";
 #else
             _apiBaseUrl = new Uri("https://api.mailgun.net/v3");
             _domain = "mg.peergroups.be";
@@ -70,7 +70,7 @@ namespace WijDelen.Mailgun {
 
             var statusCodeNumber = (int) response.StatusCode;
             if (statusCodeNumber < 200 || statusCodeNumber > 399) {
-                Logger.Error("An error occurred when calling Mailgun. Received a {0} and the following content: {1}.", response.StatusCode, response.Content);
+                Logger.Error("An error occurred when calling Mailgun. Received a {0} and the following content: {1}. ErrorMessage: {2}. ErrorException: {3}", response.StatusCode, response.Content, response.ErrorMessage, response.ErrorException);
             }
         }
 
