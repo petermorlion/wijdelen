@@ -1,3 +1,25 @@
+WijDelen is a Belgian organization that aims to encourage sharing physical objects people have lying around, 
+like lawnmowers, bikes, drilling machines, etc. It is part of the Belgian
+sharing economy.
+
+This project contains the code for the old web application.
+It is based on OrchardCMS (the .NET Framework version) and
+includes several [custom modules (those starting with "WijDelen")](./src/Orchard.Web/Modules).
+
+The most interesting one is [WijDelen.ObjectSharing](./src/Orchard.Web/Modules/WijDelen.ObjectSharing).
+
+It contains "regular" entities that Orchard handles (like Chat and ChatMessage),
+but the interesting bit is the event sourcing system. Files to look at:
+
+- [ObjectRequest](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/Entities/ObjectRequest.cs): an event sourced entity
+- [The classes and interfaces in the EventSourcing folder](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/EventSourcing): base classes and interfaces the event sourcing system needs
+- [The event handlers](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/EventHandlers/): triggered when an event happened to an entity and that event was persisted
+- [The events](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/Events/): Events that can happend to entities.
+- [The messaging](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/Messaging/): A simple implementation of an event bus (synchronous and in memory, there was no immediate need for complexer solutions, but this allows for it)
+
+
+Below is the original OrchardCMS readme.
+
 # Orchard
 
 Orchard is a free, open source, community-focused Content Management System built on the ASP.NET MVC platform.
