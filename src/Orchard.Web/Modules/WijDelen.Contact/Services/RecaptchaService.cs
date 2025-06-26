@@ -19,7 +19,7 @@ namespace WijDelen.Contact.Services {
             var context = _workContextAccessor.GetContext().HttpContext;
             var recaptchaResponse = context.Request.Form["g-recaptcha-response"];
 
-            var privateKey = "6LdSWYUUAAAAALu3dZmVkpzlKOxMDpit-m6ghfsR";
+            var privateKey = "...";
             var remoteIp = context.Request.ServerVariables["REMOTE_ADDR"];
 
             var postData = string.Format(CultureInfo.InvariantCulture, "secret={0}&response={1}&remoteip={2}", privateKey, recaptchaResponse, remoteIp);

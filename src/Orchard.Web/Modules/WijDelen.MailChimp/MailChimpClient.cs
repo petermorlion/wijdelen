@@ -19,13 +19,13 @@ namespace WijDelen.MailChimp {
 
             Logger = NullLogger.Instance;
 
-            _apiKey = "43a96c957b782a875beca1b56d9c854a-us16";
+            _apiKey = "...-us16";
             _apiBaseUrl = new Uri("https://us16.api.mailchimp.com/3.0/");
 
 #if DEBUG
-            _listId = "59f3bbf435";
+            _listId = "...";
 #else
-            _listId = "1a8b1308c7"; 
+            _listId = "..."; 
 #endif
         }
 
