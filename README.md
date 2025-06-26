@@ -16,6 +16,7 @@ but the interesting bit is the event sourcing system. Files to look at:
 - [The event handlers](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/EventHandlers/): triggered when an event happened to an entity and that event was persisted
 - [The events](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/Events/): Events that can happend to entities.
 - [The messaging](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Domain/Messaging/): A simple implementation of an event bus (synchronous and in memory, there was no immediate need for complexer solutions, but this allows for it)
+- [The OrchardEventSourcedRepository](./src/Orchard.Web/Modules/WijDelen.ObjectSharing/Infrastructure/OrchardEventSourcedRepository.cs): the repository responsible for storing events and rehydrating entities.
 
 
 Below is the original OrchardCMS readme.
